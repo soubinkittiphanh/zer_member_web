@@ -1,0 +1,32 @@
+{
+  "DiaConfirm": {
+    "description": "Auto imported from components/DiaConfirm.vue"
+  },
+  "DiaImage": {
+    "description": "Auto imported from components/DiaImage.vue"
+  },
+  "DialogClassicMessage": {
+    "description": "Auto imported from components/DialogClassicMessage.vue"
+  },
+  "ImageDialog": {
+    "description": "Auto imported from components/ImageDialog.vue"
+  },
+  "LoadingIndicator": {
+    "description": "Auto imported from components/LoadingIndicator.vue"
+  },
+  "Notification": {
+    "description": "Auto imported from components/Notification.vue"
+  },
+  "NuxtLogo": {
+    "description": "Auto imported from components/NuxtLogo.vue"
+  },
+  "Tutorial": {
+    "description": "Auto imported from components/Tutorial.vue"
+  },
+  "VuetifyLogo": {
+    "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "Wallet": {
+    "description": "Auto imported from components/Wallet.vue"
+  }
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "name": "admin",
+    "path": "/admin",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/index.vue",
+    "chunkName": "pages/admin/index"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/login/index.vue",
+    "chunkName": "pages/login/index"
+  },
+  {
+    "name": "admin-advertise",
+    "path": "/admin/advertise",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/advertise/index.vue",
+    "chunkName": "pages/admin/advertise/index"
+  },
+  {
+    "name": "admin-bank",
+    "path": "/admin/bank",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/bank/index.vue",
+    "chunkName": "pages/admin/bank/index"
+  },
+  {
+    "name": "admin-category",
+    "path": "/admin/category",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/category/index.vue",
+    "chunkName": "pages/admin/category/index"
+  },
+  {
+    "name": "admin-customer",
+    "path": "/admin/customer",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/customer/index.vue",
+    "chunkName": "pages/admin/customer/index"
+  },
+  {
+    "name": "admin-customer_request",
+    "path": "/admin/customer_request",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/customer_request/index.vue",
+    "chunkName": "pages/admin/customer_request/index"
+  },
+  {
+    "name": "admin-logout",
+    "path": "/admin/logout",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/logout/index.vue",
+    "chunkName": "pages/admin/logout/index"
+  },
+  {
+    "name": "admin-member",
+    "path": "/admin/member",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/member/index.vue",
+    "chunkName": "pages/admin/member/index"
+  },
+  {
+    "name": "admin-orders",
+    "path": "/admin/orders",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/orders/index.vue",
+    "chunkName": "pages/admin/orders/index"
+  },
+  {
+    "name": "admin-product",
+    "path": "/admin/product",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/product/index.vue",
+    "chunkName": "pages/admin/product/index"
+  },
+  {
+    "name": "admin-productInuse",
+    "path": "/admin/productInuse",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/productInuse.vue",
+    "chunkName": "pages/admin/productInuse"
+  },
+  {
+    "name": "admin-report",
+    "path": "/admin/report",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/report/index.vue",
+    "chunkName": "pages/admin/report/index"
+  },
+  {
+    "name": "admin-report_card",
+    "path": "/admin/report_card",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/report_card/index.vue",
+    "chunkName": "pages/admin/report_card/index"
+  },
+  {
+    "name": "admin-txn",
+    "path": "/admin/txn",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/txn/index.vue",
+    "chunkName": "pages/admin/txn/index"
+  },
+  {
+    "name": "admin-txn_type",
+    "path": "/admin/txn_type",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/txn_type/index.vue",
+    "chunkName": "pages/admin/txn_type/index"
+  },
+  {
+    "name": "admin-walletin",
+    "path": "/admin/walletin",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/walletin/index.vue",
+    "chunkName": "pages/admin/walletin/index"
+  },
+  {
+    "name": "admin-walletout",
+    "path": "/admin/walletout",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/walletout/index.vue",
+    "chunkName": "pages/admin/walletout/index"
+  },
+  {
+    "name": "admin-customer_request-topup",
+    "path": "/admin/customer_request/topup",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/customer_request/topup.vue",
+    "chunkName": "pages/admin/customer_request/topup"
+  },
+  {
+    "name": "admin-customer_request-withdraw",
+    "path": "/admin/customer_request/withdraw",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/customer_request/withdraw.vue",
+    "chunkName": "pages/admin/customer_request/withdraw"
+  },
+  {
+    "name": "admin-product-productlist",
+    "path": "/admin/product/productlist",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/product/productlist.vue",
+    "chunkName": "pages/admin/product/productlist"
+  },
+  {
+    "name": "admin-advertise-mixins-ImagePreviewMixin",
+    "path": "/admin/advertise/mixins/ImagePreviewMixin",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/advertise/mixins/ImagePreviewMixin.vue",
+    "chunkName": "pages/admin/advertise/mixins/ImagePreviewMixin"
+  },
+  {
+    "name": "admin-product-mixins-ImagePreviewMixin",
+    "path": "/admin/product/mixins/ImagePreviewMixin",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/product/mixins/ImagePreviewMixin.vue",
+    "chunkName": "pages/admin/product/mixins/ImagePreviewMixin"
+  },
+  {
+    "name": "admin-product-id",
+    "path": "/admin/product/:id",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/product/_id/index.vue",
+    "chunkName": "pages/admin/product/_id/index"
+  },
+  {
+    "name": "admin-stock-id",
+    "path": "/admin/stock/:id",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/admin/stock/_id/index.vue",
+    "chunkName": "pages/admin/stock/_id/index"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_jfill/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
