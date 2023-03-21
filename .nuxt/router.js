@@ -4,32 +4,32 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _d92f0542 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
-const _e568de0e = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
-const _13393737 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
-const _f57ceefc = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
-const _9265b178 = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
-const _21fdd224 = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
-const _06142318 = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
-const _a7c320e0 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
-const _d6745ec0 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
-const _8895f1aa = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
-const _10aba982 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
-const _1574f316 = () => interopDefault(import('../pages/admin/productInuse.vue' /* webpackChunkName: "pages/admin/productInuse" */))
-const _4caea2ba = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
-const _2ddaec0b = () => interopDefault(import('../pages/admin/report_card/index.vue' /* webpackChunkName: "pages/admin/report_card/index" */))
-const _5be5f50c = () => interopDefault(import('../pages/admin/txn/index.vue' /* webpackChunkName: "pages/admin/txn/index" */))
-const _915eae16 = () => interopDefault(import('../pages/admin/txn_type/index.vue' /* webpackChunkName: "pages/admin/txn_type/index" */))
-const _97364db8 = () => interopDefault(import('../pages/admin/walletin/index.vue' /* webpackChunkName: "pages/admin/walletin/index" */))
-const _4639e245 = () => interopDefault(import('../pages/admin/walletout/index.vue' /* webpackChunkName: "pages/admin/walletout/index" */))
-const _596f7552 = () => interopDefault(import('../pages/admin/customer_request/topup.vue' /* webpackChunkName: "pages/admin/customer_request/topup" */))
-const _c0992f50 = () => interopDefault(import('../pages/admin/customer_request/withdraw.vue' /* webpackChunkName: "pages/admin/customer_request/withdraw" */))
-const _cee0b18c = () => interopDefault(import('../pages/admin/product/productlist.vue' /* webpackChunkName: "pages/admin/product/productlist" */))
-const _ad7f423c = () => interopDefault(import('../pages/admin/advertise/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/advertise/mixins/ImagePreviewMixin" */))
-const _e79cc44c = () => interopDefault(import('../pages/admin/product/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/product/mixins/ImagePreviewMixin" */))
-const _2a24e2ac = () => interopDefault(import('../pages/admin/product/_id/index.vue' /* webpackChunkName: "pages/admin/product/_id/index" */))
-const _51cec1d1 = () => interopDefault(import('../pages/admin/stock/_id/index.vue' /* webpackChunkName: "pages/admin/stock/_id/index" */))
-const _54b5f7df = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _dc33ff90 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
+const _e86dd85c = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
+const _3217bed0 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
+const _5530e549 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
+const _12a2c88b = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
+const _7dd3736b = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
+const _46d54e8a = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
+const _3da9b697 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
+const _265117a7 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
+const _4d404e32 = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
+const _d0f075d0 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
+const _b1ff8bc6 = () => interopDefault(import('../pages/admin/productInuse.vue' /* webpackChunkName: "pages/admin/productInuse" */))
+const _438c2c7e = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
+const _0f35f164 = () => interopDefault(import('../pages/admin/report_card/index.vue' /* webpackChunkName: "pages/admin/report_card/index" */))
+const _7deb73d3 = () => interopDefault(import('../pages/admin/txn/index.vue' /* webpackChunkName: "pages/admin/txn/index" */))
+const _13264a3c = () => interopDefault(import('../pages/admin/txn_type/index.vue' /* webpackChunkName: "pages/admin/txn_type/index" */))
+const _103a7a6b = () => interopDefault(import('../pages/admin/walletin/index.vue' /* webpackChunkName: "pages/admin/walletin/index" */))
+const _651869de = () => interopDefault(import('../pages/admin/walletout/index.vue' /* webpackChunkName: "pages/admin/walletout/index" */))
+const _390edf99 = () => interopDefault(import('../pages/admin/customer_request/topup.vue' /* webpackChunkName: "pages/admin/customer_request/topup" */))
+const _4ff7f69e = () => interopDefault(import('../pages/admin/customer_request/withdraw.vue' /* webpackChunkName: "pages/admin/customer_request/withdraw" */))
+const _e1828b5a = () => interopDefault(import('../pages/admin/product/productlist.vue' /* webpackChunkName: "pages/admin/product/productlist" */))
+const _796796a9 = () => interopDefault(import('../pages/admin/advertise/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/advertise/mixins/ImagePreviewMixin" */))
+const _a2fbc93e = () => interopDefault(import('../pages/admin/product/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/product/mixins/ImagePreviewMixin" */))
+const _676ed7fa = () => interopDefault(import('../pages/admin/product/_id/index.vue' /* webpackChunkName: "pages/admin/product/_id/index" */))
+const _70ad496a = () => interopDefault(import('../pages/admin/stock/_id/index.vue' /* webpackChunkName: "pages/admin/stock/_id/index" */))
+const _563e5d10 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -44,107 +44,107 @@ export const routerOptions = {
 
   routes: [{
     path: "/admin",
-    component: _d92f0542,
+    component: _dc33ff90,
     name: "admin"
   }, {
     path: "/login",
-    component: _e568de0e,
+    component: _e86dd85c,
     name: "login"
   }, {
     path: "/admin/advertise",
-    component: _13393737,
+    component: _3217bed0,
     name: "admin-advertise"
   }, {
     path: "/admin/bank",
-    component: _f57ceefc,
+    component: _5530e549,
     name: "admin-bank"
   }, {
     path: "/admin/category",
-    component: _9265b178,
+    component: _12a2c88b,
     name: "admin-category"
   }, {
     path: "/admin/customer",
-    component: _21fdd224,
+    component: _7dd3736b,
     name: "admin-customer"
   }, {
     path: "/admin/customer_request",
-    component: _06142318,
+    component: _46d54e8a,
     name: "admin-customer_request"
   }, {
     path: "/admin/logout",
-    component: _a7c320e0,
+    component: _3da9b697,
     name: "admin-logout"
   }, {
     path: "/admin/member",
-    component: _d6745ec0,
+    component: _265117a7,
     name: "admin-member"
   }, {
     path: "/admin/orders",
-    component: _8895f1aa,
+    component: _4d404e32,
     name: "admin-orders"
   }, {
     path: "/admin/product",
-    component: _10aba982,
+    component: _d0f075d0,
     name: "admin-product"
   }, {
     path: "/admin/productInuse",
-    component: _1574f316,
+    component: _b1ff8bc6,
     name: "admin-productInuse"
   }, {
     path: "/admin/report",
-    component: _4caea2ba,
+    component: _438c2c7e,
     name: "admin-report"
   }, {
     path: "/admin/report_card",
-    component: _2ddaec0b,
+    component: _0f35f164,
     name: "admin-report_card"
   }, {
     path: "/admin/txn",
-    component: _5be5f50c,
+    component: _7deb73d3,
     name: "admin-txn"
   }, {
     path: "/admin/txn_type",
-    component: _915eae16,
+    component: _13264a3c,
     name: "admin-txn_type"
   }, {
     path: "/admin/walletin",
-    component: _97364db8,
+    component: _103a7a6b,
     name: "admin-walletin"
   }, {
     path: "/admin/walletout",
-    component: _4639e245,
+    component: _651869de,
     name: "admin-walletout"
   }, {
     path: "/admin/customer_request/topup",
-    component: _596f7552,
+    component: _390edf99,
     name: "admin-customer_request-topup"
   }, {
     path: "/admin/customer_request/withdraw",
-    component: _c0992f50,
+    component: _4ff7f69e,
     name: "admin-customer_request-withdraw"
   }, {
     path: "/admin/product/productlist",
-    component: _cee0b18c,
+    component: _e1828b5a,
     name: "admin-product-productlist"
   }, {
     path: "/admin/advertise/mixins/ImagePreviewMixin",
-    component: _ad7f423c,
+    component: _796796a9,
     name: "admin-advertise-mixins-ImagePreviewMixin"
   }, {
     path: "/admin/product/mixins/ImagePreviewMixin",
-    component: _e79cc44c,
+    component: _a2fbc93e,
     name: "admin-product-mixins-ImagePreviewMixin"
   }, {
     path: "/admin/product/:id",
-    component: _2a24e2ac,
+    component: _676ed7fa,
     name: "admin-product-id"
   }, {
     path: "/admin/stock/:id",
-    component: _51cec1d1,
+    component: _70ad496a,
     name: "admin-stock-id"
   }, {
     path: "/",
-    component: _54b5f7df,
+    component: _563e5d10,
     name: "index"
   }],
 

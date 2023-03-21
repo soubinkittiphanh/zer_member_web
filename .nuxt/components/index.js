@@ -1,13 +1,13 @@
-export { default as DiaConfirm } from '../../components/DiaConfirm.vue'
-export { default as DiaImage } from '../../components/DiaImage.vue'
-export { default as DialogClassicMessage } from '../../components/DialogClassicMessage.vue'
-export { default as ImageDialog } from '../../components/ImageDialog.vue'
-export { default as LoadingIndicator } from '../../components/LoadingIndicator.vue'
-export { default as Notification } from '../../components/Notification.vue'
-export { default as NuxtLogo } from '../../components/NuxtLogo.vue'
-export { default as Tutorial } from '../../components/Tutorial.vue'
-export { default as VuetifyLogo } from '../../components/VuetifyLogo.vue'
-export { default as Wallet } from '../../components/Wallet.vue'
+export const DiaConfirm = () => import('../../components/DiaConfirm.vue' /* webpackChunkName: "components/dia-confirm" */).then(c => wrapFunctional(c.default || c))
+export const DiaImage = () => import('../../components/DiaImage.vue' /* webpackChunkName: "components/dia-image" */).then(c => wrapFunctional(c.default || c))
+export const DialogClassicMessage = () => import('../../components/DialogClassicMessage.vue' /* webpackChunkName: "components/dialog-classic-message" */).then(c => wrapFunctional(c.default || c))
+export const ImageDialog = () => import('../../components/ImageDialog.vue' /* webpackChunkName: "components/image-dialog" */).then(c => wrapFunctional(c.default || c))
+export const LoadingIndicator = () => import('../../components/LoadingIndicator.vue' /* webpackChunkName: "components/loading-indicator" */).then(c => wrapFunctional(c.default || c))
+export const Notification = () => import('../../components/Notification.vue' /* webpackChunkName: "components/notification" */).then(c => wrapFunctional(c.default || c))
+export const NuxtLogo = () => import('../../components/NuxtLogo.vue' /* webpackChunkName: "components/nuxt-logo" */).then(c => wrapFunctional(c.default || c))
+export const Tutorial = () => import('../../components/Tutorial.vue' /* webpackChunkName: "components/tutorial" */).then(c => wrapFunctional(c.default || c))
+export const VuetifyLogo = () => import('../../components/VuetifyLogo.vue' /* webpackChunkName: "components/vuetify-logo" */).then(c => wrapFunctional(c.default || c))
+export const Wallet = () => import('../../components/Wallet.vue' /* webpackChunkName: "components/wallet" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
