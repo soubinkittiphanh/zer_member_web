@@ -30,7 +30,7 @@ export default {
     },
     sizeValidate(z) {
       console.log('SIZE'+z);
-      const maxSize = 200000
+      const maxSize = 20000000
       if (z > maxSize) {
         return `Max size is ${maxSize/1000}Kb`
       }
