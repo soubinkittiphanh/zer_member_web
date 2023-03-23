@@ -21,6 +21,15 @@
 
     <v-form ref="formLocal" v-model="validLocal" lazy-validation>
       <v-select
+        v-model="formData.outlet"
+        :items="outlet"
+        :item-value="(item) => item.outlet_id"
+        :item-text="(item) => item.outlet_id + ' - ' + item.outlet_name"
+        :rules="[(v) => !!v || 'ກະລຸນາເລືອກຮ້ານ']"
+        label="ຮ້ານ"
+        required
+      ></v-select>
+      <v-select
         v-model="formData.pro_category"
         :items="category"
         :item-value="(item) => item.categ_id"
@@ -49,6 +58,14 @@
         :rules="rules.priceRule"
         label="ລາຄາ"
         type="number"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="formData.pro_cost_price"
+        :counter="10"
+        type="numbser"
+        :rules="rules.priceRule"
+        label="ຕົ້ນທຶນ"
         required
       ></v-text-field>
       <v-text-field
@@ -86,10 +103,10 @@
           <v-row justify="space-around">
             <v-list-item-avatar
               @click.prevent="
-                previewImg(`https://nodejsclusters-66380-0.cloudclusters.net/${img.name}`)
+                previewImg(`https://nodejsclusters-99563-0.cloudclusters.net/${img.name}`)
               "
             >
-              <v-img :src="`https://nodejsclusters-66380-0.cloudclusters.net/${img.name}`">
+              <v-img :src="`https://nodejsclusters-99563-0.cloudclusters.net/${img.name}`">
               </v-img>
             </v-list-item-avatar>
             <v-spacer></v-spacer>
@@ -215,6 +232,8 @@ export default {
             pro_desc: el.pro_desc,
             pro_status: el.pro_status === 1 || false,
             pro_retail_price: el.retail_cost_percent,
+            pro_cost_price: el.cost_price,
+            outlet: el.outlet,
             pro_image: image,
           }
           console.log('IMAGE COUNT: ' + this.formData.pro_image.length)

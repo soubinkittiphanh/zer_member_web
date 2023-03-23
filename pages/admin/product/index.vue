@@ -13,6 +13,15 @@
 
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-select
+        v-model="formData.outlet"
+        :items="outlet"
+        :item-value="(item) => item.outlet_id"
+        :item-text="(item) => item.outlet_id + ' - ' + item.outlet_name"
+        :rules="[(v) => !!v || 'ກະລຸນາເລືອກຮ້ານ']"
+        label="ຮ້ານ"
+        required
+      ></v-select>
+      <v-select
         v-model="formData.pro_category"
         :items="category"
         :item-value="(item) => item.categ_id"
@@ -41,6 +50,14 @@
         type="number"
         :rules="rules.priceRule"
         label="ລາຄາ"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="formData.pro_cost_price"
+        :counter="10"
+        :rules="rules.costPrice"
+        type="number"
+        label="ຕົ້ນທືນ"
         required
       ></v-text-field>
       <v-text-field
@@ -161,6 +178,10 @@ export default {
           (v) => +v > 0 || 'ກະລຸນ ໃສ່ລາຄາ > 0',
           (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ລາຄາ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
         ],
+        costPrice: [
+          (v) => !!v || 'ກະລຸນາໃສ່ລາຄາຕົ້ນທຶນ',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+        ],
         retailRule: [
           (v) => !!v || 'ກະລຸນາໃສ່ເປີເຊັນ ສ່ວນຫລຸດ ສຳລັບຂາຍສົ່ງ',
           (v) => +v > 0 || 'ກະລຸນ ໃສ່ເປີເຊັນ > 0',
@@ -200,11 +221,15 @@ export default {
         pro_retail_price: 0,
         pro_desc: '',
         pro_status: false,
+        pro_outlet:1,
+        pro_cost_price: 0,
       },
+      outlet:[],
     }
   },
   mounted() {
-    this.fetchCategory()
+    this.fetchCategory();
+    this.fetchOutlet();
   },
   watch: {
     message(val) {
@@ -239,6 +264,25 @@ export default {
               categ_id: el.categ_id,
               categ_name: el.categ_name,
               categ_desc: el.categ_desc,
+            }
+          })
+        })
+        .catch((er) => {
+          console.log('error: ' + er.response.data)
+        })
+      this.isloading = false
+    },
+    async fetchOutlet() {
+      this.isloading = true
+      await this.$axios
+        .get('outlet')
+        .then((res) => {
+          console.log('=>outlet' + res.data)
+          this.outlet = res.data.map((el) => {
+            return {
+              outlet_id: el.id,
+              outlet_name: el.name,
+              outlet_tel: el.tel,
             }
           })
         })

@@ -151,10 +151,12 @@ export default {
           value: 'pro_id',
         },
         { text: 'ຊື່ສິນຄ້າ', align: 'center', value: 'pro_name' },
+        { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
         { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },
         { text: 'ລາຄາ', align: 'center', value: 'pro_price' },
         { text: 'ສະຖານະ', align: 'center', value: 'pro_status' },
         { text: 'Stock', align: 'center', value: 'pro_card_count' },
+        { text: 'cost', align: 'center', value: 'pro_cost_price' },
         {
           text: 'ຟັງຊັ່ນ',
           align: 'end',
@@ -194,6 +196,9 @@ export default {
               pro_category: el.pro_category,
               pro_category_desc: el.pro_category + ' - ' + el.categ_name,
               pro_card_count: el.card_count,
+              pro_cost_price: el.cost_price,
+              pro_outlet: el.outlet,
+              pro_outlet_name: el.outlet_name,
               function: el.pro_id,
             }
           })
