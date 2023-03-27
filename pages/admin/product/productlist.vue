@@ -27,7 +27,7 @@
               label="ປະເພດສິນຄ້າ"
               required
             ></v-select>
-            <v-file-input
+            <!-- <v-file-input
               ref="filesfield"
               accept=".txt"
               placeholder="Pick an avatar"
@@ -35,10 +35,18 @@
               label="Stock file"
               @change="attachFile"
             ></v-file-input>
+             -->
+            <v-text-field
+              label="ຈຳນວນ"
+              :rules="[(v) => !!v || 'ກລນ ໃສ່ຈຳນວນ',(v) => v > 0 || 'ກລນ ໃສ່ຈຳນວນ ຫລາຍກ່ອນ 0']"
+              hide-details="auto"
+              v-model="stockQty"
+            ></v-text-field>
+            <!-- </spacer> -->
             <v-row>
-              <span>{{ this.carddata.length }} ລາຍການ</span>
+              <!-- <span>{{ this.carddata.length }} ລາຍການ</span> -->
               <v-spacer></v-spacer>
-              <v-btn @click="showlist = !showlist">{{
+              <v-btn @click="generateDynamicStock">{{
                 !showlist ? 'ສະແດງລາຍການ' : 'ບໍ່ສະແດງ'
               }}</v-btn>
             </v-row>
@@ -89,17 +97,8 @@
             >
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              dark
-              class="mb-2"
-              @click="
-                dialogForm = true
-                isedit = false
-              "
-            >
-              ສ້າງໃຫມ່
-            </v-btn>
+            <NuxtLink to="/admin/product">ສ້າງສິນຄ້າໃຫມ່</NuxtLink>
+   
           </v-toolbar>
         </template>
         <template v-slot:[`item.function`]="{ item }">
@@ -131,6 +130,7 @@ export default {
   middleware: 'auths',
   data() {
     return {
+      stockQty : 0,
       showlist: false,
       isstock: false,
       isloading: false,
@@ -180,6 +180,14 @@ export default {
     await this.loadCardCategory()
   },
   methods: {
+    generateDynamicStock(){
+      for (let index = 0; index < this.stockQty; index++) {
+        const dynamicStockRef = Date.now()+index;
+        console.log("Time now: "+dynamicStockRef);
+        // const element = array[index];
+        this.carddata.push(dynamicStockRef);
+      }
+    },
     async fetchData() {
       this.isloading = true
       await this.$axios
@@ -258,6 +266,12 @@ export default {
       // var file = FileReader.FileReader()
     },
     stockSubmit() {
+      if (!this.stockQty) {
+         this.dialogMessage = true
+         this.message = "ກະລຸນາ ໃສ່ຈຳນວນ ສະຕັອກ"
+         return
+      } 
+      this.generateDynamicStock();
       console.log('Submitting....')
       this.isloading = true
       const userId=this.$store.getters.loggedInUser.id
