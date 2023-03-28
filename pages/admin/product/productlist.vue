@@ -181,6 +181,7 @@ export default {
   },
   methods: {
     generateDynamicStock(){
+      this.carddata = [];
       for (let index = 0; index < this.stockQty; index++) {
         const dynamicStockRef = Date.now()+index;
         console.log("Time now: "+dynamicStockRef);
