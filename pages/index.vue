@@ -134,8 +134,8 @@ export default {
     return {
       notCodData: [],
       codData:[],
-      peeAirOutlet : 2,
-      greewoodOutlet : 1,
+      peeAirOutlet : "PEEAIR4",
+      greewoodOutlet : "Green",
       deletedCardData: [],
     }
   },
