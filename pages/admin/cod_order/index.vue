@@ -5,7 +5,7 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="payment" max-width="300px">
-      <settlement :user-id="formData.cusId" :amount="paymentAmount" :order-id="OrderIdSelected" @closewallet="payment = false"></settlement>
+      <settlement :user-id="formData.cusId" :amount="paymentAmount" :order-id="OrderIdSelected" @closewallet="payment = false" @reload="fetchData()"></settlement>
     </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
@@ -69,6 +69,7 @@
                 @input="menu2 = false"
               ></v-date-picker>
             </v-menu>
+            <div><span> ຈຳນວນ: {{ getFormatNum(countOrder) }} ອໍເດີ</span></div>
             <span> ລາຄາລວມ: {{ totalSale }}</span>
             <div>
               <span> ສ່ວນຫລຸດ: {{ totalSaleOriginal }}</span>
@@ -144,13 +145,19 @@ export default {
         cusBalance: 0,
       },
       headers: [
-        {
-          text: 'ອໍເດີໄອດີ',
+        // {
+        //   text: 'ອໍເດີໄອດີ',
+        //   align: 'center',
+        //   value: 'order_id',
+        // },
+        // { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
+                {
+          text: 'ວັນທີ',
           align: 'center',
-          value: 'order_id',
+          value: 'txn_date',
+          sortable: true,
         },
-        { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
-        { text: 'ຊື່', align: 'center', value: 'cus_name' },
+        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cus_name' },
         { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
         { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
         {
@@ -189,12 +196,7 @@ export default {
           value: 'outlet',
           sortable: false,
         },
-        {
-          text: 'ວັນທີ',
-          align: 'center',
-          value: 'txn_date',
-          sortable: true,
-        },
+
         {
           text: 'ກົດຊຳລະ',
           align: 'end',
@@ -270,6 +272,9 @@ export default {
       return this.getFormatNum(total)
       // return total
     },
+    countOrder(){
+      return this.loaddata.length;
+    }
   },
   methods: {
     getFormatNum(val) {
@@ -284,8 +289,8 @@ export default {
             return {
               order_id: el.order_id +' - '+el.locking_session_id,
               user_id: el.user_id,
-              product_id: el.product_id + ' - ' + el.pro_name,
-              cus_name: el.name,
+              product_id:  el.pro_name,
+              cus_name: el.name +' '+el.tel,
               cus_tel: el.tel,
               shipping: el.shipping,
               payment: el.payment_code,
@@ -295,7 +300,7 @@ export default {
               product_price: this.getFormatNum(el.product_price),
               order_price_total: this.getFormatNum((el.product_price * el.product_amount)-el.product_discount),
               product_discount: this.getFormatNum(el.product_discount),
-              txn_date: el.txn_date.replaceAll('T', ' '),
+              txn_date: el.txn_date.split('T')[0],
               function: el.order_id,
             }
     

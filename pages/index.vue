@@ -3,14 +3,14 @@
     <!-- <h1>HOME PAGE1</h1> -->
     <v-row>
       <v-col>
-        <v-card class="mx-auto" color="#26c6da" dark max-width="400">
+        <v-card class="mx-auto" color="#73c883" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-chat </v-icon>
             <span class="text-h6 font-weight-light">ຮ້ານ PEEAIR4</span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet1.totalAmount) }} 
+            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet1.total) }} ອໍເດີ
           </v-card-text>
 
           <v-card-actions>
@@ -24,7 +24,7 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{countCODByOutlet1.total}}</v-list-item-title>
+                <v-list-item-title>ຍອດລວມ {{this.getFormatNum(countCODByOutlet1.totalAmount)}}</v-list-item-title>
               </v-list-item-content>
 
             </v-list-item>
@@ -32,14 +32,14 @@
         </v-card>
       </v-col>
       <v-col>
-        <v-card class="mx-auto" color="#ff66ff" dark max-width="400">
+        <v-card class="mx-auto" color="#006633" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-chat </v-icon>
             <span class="text-h6 font-weight-light">ຮ້ານ GREENDWOOD</span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet2.totalAmount) }} 
+            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet2.total) }} ອໍເດີ
           </v-card-text>
 
           <v-card-actions>
@@ -53,7 +53,7 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{ countCODByOutlet2.total }} </v-list-item-title>
+                <v-list-item-title>ຍອດລວມ {{ this.getFormatNum(countCODByOutlet2.totalAmount) }} </v-list-item-title>
               </v-list-item-content>
 
        
@@ -64,14 +64,14 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-card class="mx-auto" color="#aa80ff" dark max-width="400">
+        <v-card class="mx-auto" color="#73c883" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-note-plus </v-icon>
-            <span class="text-h6 font-weight-light">ລາຍການສັ່ງຊື້ 1</span>
+            <span class="text-h6 font-weight-light">ຍອດຂາຍ </span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ this.getFormatNum(countByOutlet1.totalAmount) }} 
+            ຈຳນວນ {{ this.getFormatNum(countByOutlet1.total) }} ອໍເດີ
           </v-card-text>
 
           <v-card-actions>
@@ -85,7 +85,7 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{ countByOutlet1.total }}</v-list-item-title>
+                <v-list-item-title>ຍອດລວມ {{ this.getFormatNum(countByOutlet1.totalAmount) }}</v-list-item-title>
               </v-list-item-content>
 
 
@@ -94,14 +94,14 @@
         </v-card>
       </v-col>
       <v-col>
-        <v-card class="mx-auto" color="#FF9303" dark max-width="400">
+        <v-card class="mx-auto" color="#006633" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-note-plus </v-icon>
-            <span class="text-h6 font-weight-light">ລາຍການສັ່ງຊື້ 2</span>
+            <span class="text-h6 font-weight-light">ຍອດຂາຍ </span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ this.getFormatNum(countByOutlet2.totalAmount) }} 
+            ຈຳນວນ {{ this.getFormatNum(countByOutlet2.total) }} ອໍເດີ
           </v-card-text>
 
           <v-card-actions>
@@ -115,7 +115,7 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title> {{ countByOutlet2.total }} </v-list-item-title>
+                <v-list-item-title> ຍອດລວມ {{ this.getFormatNum(countByOutlet2.totalAmount) }} </v-list-item-title>
               </v-list-item-content>
 
   

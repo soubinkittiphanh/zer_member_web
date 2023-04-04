@@ -47,7 +47,7 @@
           <v-text-field
             v-model="codFee"
             :counter="10"
-            :rules="rule.amountRules"
+            :rules="rule.amountCODRules"
             :label="`ຄ່າທຳນຽມ COD: ` + formatNum(codFee)"
             required
           ></v-text-field>
@@ -57,7 +57,7 @@
       </v-container>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="error" class="mr-4" @click="reset"> ລ້າງຂໍ້ມູນ </v-btn>
+        <!-- <v-btn color="error" class="mr-4" @click="reset"> ລ້າງຂໍ້ມູນ </v-btn> -->
         <v-btn color="blue darken-1" text @click="$emit('closewallet')">
           ປິດ
         </v-btn>
@@ -110,6 +110,7 @@ export default {
         idRules: [(v) => !!v || 'ໄອດີ is required'],
         nameRules: [(v) => !!v || 'ຊຶ່ is required'],
         amountRules: [(v) => !!v || 'ກລນ ໃສ່ຈຳນວນ is required'],
+        amountCODRules: [(v) => !v || 'ກລນ ໃສ່ຈຳນວນ is required'],
         passRules: [
           (v) => !!v || 'ລະຫັດຜ່ານ is required',
           (v) => v.length <= 10 || 'ລະຫັດຜ່ານ ຈຳກັດແຕ່ 10',
@@ -170,7 +171,10 @@ export default {
           .post(urlpath, {...paymentPayload}, header)
           .then((res) => {
             this.message = res.data
-            // this.reset()
+            if(this.message.includes("completed")){
+              // ******* reload data if transaction completed ********
+              this.refreshData(true);
+            }
           })
           .catch((er) => {
             this.message = 'Error: ' + er
@@ -209,6 +213,9 @@ export default {
     formatNum(v) {
       return new Intl.NumberFormat().format(v)
     },
+    refreshData(v){
+      this.$emit('reload', v)
+    }
   },
 }
 </script>
