@@ -54,6 +54,11 @@ export default {
       items: [
         {
           icon: 'mdi-home',
+          title: 'ຫນ້າຫລັກ',
+          to: '/',
+        },
+        {
+          icon: 'mdi-home',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
         },
@@ -72,6 +77,11 @@ export default {
           icon: 'mdi-basket',
           title: 'ລາຍການສັ່ງຊື້',
           to: '/admin/orders',
+        },
+        {
+          icon: 'mdi-basket',
+          title: 'ຕິດຕາມ COD',
+          to: '/admin/cod_order',
         },
         {
           icon: 'mdi-account-key',

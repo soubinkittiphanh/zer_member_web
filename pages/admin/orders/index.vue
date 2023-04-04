@@ -68,12 +68,12 @@
                 @input="menu2 = false"
               ></v-date-picker>
             </v-menu>
-            <span> ລາຄາລວມ: {{ totalSale }}</span>
+             <span> ລາຄາລວມ: {{ totalSale }}</span>
             <div>
-              <span> ລາຄາລວມເຕັມ: {{ totalSaleOriginal }}</span>
+              <span> ສ່ວນຫລຸດ: {{ totalSaleOriginal }}</span>
             </div>
             <div>
-              <span> ສ່ວນຕ່າງ: {{getFormatNum( totalSaleOriginal.replaceAll(",","")-totalSale.replaceAll(",","")) }}</span>
+              <span> ຍອດເຫລືອ: {{getFormatNum( totalSale.replaceAll(",","")-totalSaleOriginal.replaceAll(",","")) }}</span>
             </div>
           </v-col>
           <v-col cols="12" lg="5">
@@ -96,7 +96,14 @@
         </v-row>
       </v-card-title>
 
-      <v-data-table
+      <!-- <v-data-table
+        v-if="loaddata"
+        :headers="headers"
+        :search="search"
+        :items="loaddata"
+      > -->
+      </v-data-table>
+            <v-data-table
         v-if="loaddata"
         :headers="headers"
         :search="search"
@@ -139,21 +146,33 @@ export default {
           sortable: true,
         },
         {
+          text: 'ສ່ວນຫລຸດ',
+          align: 'end',
+          value: 'product_discount',
+          sortable: true,
+        },
+        {
           text: 'ລວມ',
           align: 'end',
           value: 'order_price_total',
           sortable: false,
         },
         {
-          text: 'ລາຄາເຕັມ',
+          text: 'ຂົນສົ່ງ',
           align: 'end',
-          value: 'no_discount_price',
+          value: 'shipping',
           sortable: false,
         },
         {
-          text: 'ລວມລາຄາເຕັມ',
+          text: 'ການຊຳລະ',
           align: 'end',
-          value: 'total_no_discount_price',
+          value: 'payment',
+          sortable: false,
+        },
+        {
+          text: 'ຮ້ານ',
+          align: 'end',
+          value: 'outlet',
           sortable: false,
         },
         {
@@ -224,7 +243,7 @@ export default {
     totalSaleOriginal() {
       let total = 0
       this.loaddata.forEach((el) => {
-        total += parseInt(el.total_no_discount_price.replaceAll(',', ''))
+        total += parseInt(el.product_discount.replaceAll(',', ''))
       })
       console.log('Price total: ' + total)
       // return previousValue.order_price_total + currentValue.order_price_total
@@ -239,23 +258,27 @@ export default {
     async fetchData() {
       this.isloading = true
       await this.$axios
-        .get('order_date_f/?fromDate=' + this.date+'&toDate='+this.date2+'&userId='+this.userId)
+        .get('order_by_payment/?fromDate=' + this.date+'&toDate='+this.date2+'&paymentCode=ALL')
         .then((res) => {
           this.loaddata = res.data.map((el) => {
-            console.log(el.cus_id)
             return {
-              order_id: el.order_id,
+              order_id: el.order_id +' - '+el.locking_session_id,
               user_id: el.user_id,
               product_id: el.product_id + ' - ' + el.pro_name,
-              cus_name:el.cus_name,
+              cus_name: el.name,
+              cus_tel: el.tel,
+              shipping: el.shipping,
+              payment: el.payment_code,
               product_amount: el.product_amount,
+              outlet: el.shop_name,
+              shipping_fee: el.shipping_fee_by,
               product_price: this.getFormatNum(el.product_price),
-              order_price_total: this.getFormatNum(el.order_price_total),
-              no_discount_price: this.getFormatNum((el.product_price/(100-el.product_discount))*100),
-              total_no_discount_price: this.getFormatNum((el.order_price_total/(100-el.product_discount))*100),
+              order_price_total: this.getFormatNum((el.product_price * el.product_amount)-el.product_discount),
+              product_discount: this.getFormatNum(el.product_discount),
               txn_date: el.txn_date.replaceAll('T', ' '),
               function: el.order_id,
             }
+    
           })
         })
         .catch((er) => {

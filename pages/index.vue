@@ -6,11 +6,11 @@
         <v-card class="mx-auto" color="#26c6da" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-chat </v-icon>
-            <span class="text-h6 font-weight-light">ລາຍການແຈ້ງເຕີມ</span>
+            <span class="text-h6 font-weight-light">ຮ້ານ PEEAIR4</span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ topupCount }} ລາຍການ
+            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet1.totalAmount) }} 
           </v-card-text>
 
           <v-card-actions>
@@ -24,16 +24,9 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>Customer</v-list-item-title>
+                <v-list-item-title>{{countCODByOutlet1.total}}</v-list-item-title>
               </v-list-item-content>
 
-              <v-row align="center" justify="end">
-                <v-icon class="mr-1"> mdi-elevation-decline </v-icon>
-                <span class="subheading mr-2">{{ topupCountTotal }}</span>
-                <span class="mr-1">·</span>
-                <v-icon class="mr-1"> mdi-checkbox-marked-circle </v-icon>
-                <span class="subheading">{{ topupCountDone }}</span>
-              </v-row>
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -42,11 +35,11 @@
         <v-card class="mx-auto" color="#ff66ff" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-chat </v-icon>
-            <span class="text-h6 font-weight-light">ລາຍການແຈ້ງຖອນ</span>
+            <span class="text-h6 font-weight-light">ຮ້ານ GREENDWOOD</span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ withdrawCount }} ລາຍການ
+            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet2.totalAmount) }} 
           </v-card-text>
 
           <v-card-actions>
@@ -60,16 +53,10 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>Customer</v-list-item-title>
+                <v-list-item-title>{{ countCODByOutlet2.total }} </v-list-item-title>
               </v-list-item-content>
 
-              <v-row align="center" justify="end">
-                <v-icon class="mr-1"> mdi-elevation-decline </v-icon>
-                <span class="subheading mr-2">{{ withdrawCountTotal }}</span>
-                <span class="mr-1">·</span>
-                <v-icon class="mr-1"> mdi-checkbox-marked-circle </v-icon>
-                <span class="subheading">{{ withdrawCountDone }}</span>
-              </v-row>
+       
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -80,11 +67,11 @@
         <v-card class="mx-auto" color="#aa80ff" dark max-width="400">
           <v-card-title>
             <v-icon large left> mdi-note-plus </v-icon>
-            <span class="text-h6 font-weight-light">ລາຍການສັ່ງຊື້</span>
+            <span class="text-h6 font-weight-light">ລາຍການສັ່ງຊື້ 1</span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ loadData.length }} ລາຍການ
+            ຈຳນວນ {{ this.getFormatNum(countByOutlet1.totalAmount) }} 
           </v-card-text>
 
           <v-card-actions>
@@ -98,16 +85,10 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>Customer</v-list-item-title>
+                <v-list-item-title>{{ countByOutlet1.total }}</v-list-item-title>
               </v-list-item-content>
 
-              <v-row align="center" justify="end">
-                <v-icon class="mr-1"> mdi-elevation-decline </v-icon>
-                <span class="subheading mr-2">256</span>
-                <span class="mr-1">·</span>
-                <v-icon class="mr-1"> mdi-share-variant </v-icon>
-                <span class="subheading">45</span>
-              </v-row>
+
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -115,12 +96,12 @@
       <v-col>
         <v-card class="mx-auto" color="#FF9303" dark max-width="400">
           <v-card-title>
-            <v-icon large left> mdi-note-minus </v-icon>
-            <span class="text-h6 font-weight-light">ບັດຖືກລົບ</span>
+            <v-icon large left> mdi-note-plus </v-icon>
+            <span class="text-h6 font-weight-light">ລາຍການສັ່ງຊື້ 2</span>
           </v-card-title>
 
           <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ deletedCardData.length }} ລາຍການ
+            ຈຳນວນ {{ this.getFormatNum(countByOutlet2.totalAmount) }} 
           </v-card-text>
 
           <v-card-actions>
@@ -134,16 +115,10 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{totalDelete}}</v-list-item-title>
+                <v-list-item-title> {{ countByOutlet2.total }} </v-list-item-title>
               </v-list-item-content>
 
-              <v-row align="center" justify="end">
-                <!-- <v-icon class="mr-1"> mdi-elevation-decline </v-icon> -->
-                <!-- <span class="subheading mr-2">256</span>
-                <span class="mr-1">·</span>
-                <v-icon class="mr-1"> mdi-share-variant </v-icon>
-                <span class="subheading">45</span> -->
-              </v-row>
+  
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -157,138 +132,172 @@ export default {
   middleware: 'auths',
   data: () => {
     return {
-      loadData: [],
+      notCodData: [],
+      codData:[],
+      peeAirOutlet : 2,
+      greewoodOutlet : 1,
       deletedCardData: [],
     }
   },
   mounted() {
-    this.fetchData()
-    this.fetchDeletedCard()
+    this.codApi()
+    this.notCODApi()
   },
   computed: {
-    topupCount() {
+    countCODByOutlet1() {
       let total = 0
-      if (this.loadData) {
-        console.log('Len: ' + this.loadData.length)
-        total = this.loadData.filter(
-          (el) => el.chat_msg_type === 'topup' && el.chat_isread === 0
-        ).length
+      let totalAmount = 0
+      if (this.codData) {
+            console.log('Len countCODByOutlet1: ' + this.codData.length)
+        let filterData = this.codData.filter(
+          (el) => el.outlet.includes(this.peeAirOutlet)
+        )
+        filterData = [...filterData]
+        total =filterData.length
+        filterData.forEach(element => {
+          totalAmount+=element.order_price_total;
+        });
+
       }
-      return total
-    },
-    totalDelete() {
-      let total = 0
-      this.deletedCardData.forEach((el) => {
-        total += parseInt(el.amount.replaceAll(',', ''))
-      })
-      console.log('Price total: ' + total)
-      // return previousValue.order_price_total + currentValue.order_price_total
-      return this.getFormatNum(total)
-    },
-    topupCountDone() {
-      let total = 0
-      if (this.loadData) {
-        console.log('Len: ' + this.loadData.length)
-        total = this.loadData.filter(
-          (el) => el.chat_msg_type === 'topup' && el.chat_isread === 1
-        ).length
+      const finalData = {
+        total,
+        totalAmount,
       }
-      return total
+      return finalData
     },
-    topupCountTotal() {
+    countCODByOutlet2() {
       let total = 0
-      if (this.loadData) {
-        console.log('Len: ' + this.loadData.length)
-        total = this.loadData.filter(
-          (el) => el.chat_msg_type === 'topup'
-        ).length
+      let totalAmount = 0 
+      if (this.codData) {
+            console.log('Len countCODByOutlet2: ' + this.codData.length)
+        let filterData = this.codData.filter(
+          (el) => el.outlet.includes(this.greewoodOutlet)
+        )
+         filterData = [...filterData]
+        total =filterData.length
+        filterData.forEach(element => {
+          totalAmount+=element.order_price_total;
+        });
+
       }
-      return total
+      const finalData = {
+        total,
+        totalAmount,
+      }
+      return finalData
     },
-    withdrawCount() {
+    countByOutlet1() {
       let total = 0
-      if (this.loadData) {
-        console.log('Len: ' + this.loadData.length)
-        total = this.loadData.filter(
-          (el) => el.chat_msg_type === 'withdraw' && el.chat_isread === 0
-        ).length
+      let totalAmount = 0
+      if (this.notCodData) {
+        console.log('Len countByOutlet1: ' + this.notCodData.length)
+        let filterData = this.notCodData.filter(
+          (el) => el.outlet.includes(this.peeAirOutlet)
+        )
+         filterData = [...filterData]
+        total =filterData.length
+        filterData.forEach(element => {
+          totalAmount+=element.order_price_total;
+        });
+
       }
-      return total
-    },
-    withdrawCountTotal() {
+      const finalData = {
+        total,
+        totalAmount,
+      }
+      return finalData
+      },
+    countByOutlet2() {
       let total = 0
-      if (this.loadData) {
-        console.log('Len: ' + this.loadData.length)
-        total = this.loadData.filter(
-          (el) => el.chat_msg_type === 'withdraw'
-        ).length
+      let totalAmount = 0
+      if (this.notCodData) {
+        console.log('Len countByOutlet2: ' + this.notCodData.length)
+        let filterData = this.notCodData.filter(
+          (el) => el.outlet.includes(this.greewoodOutlet)
+        )
+         filterData = [...filterData]
+        total =filterData.length
+          console.log('Len countByOutlet2 later: ' + total)
+        filterData.forEach(element => {
+          totalAmount+=element.order_price_total;
+        });
+
       }
-      return total
-    },
-    withdrawCountDone() {
-      let total = 0
-      if (this.loadData) {
-        console.log('Len: ' + this.loadData.length)
-        total = this.loadData.filter(
-          (el) => el.chat_msg_type === 'withdraw' && el.chat_isread === 1
-        ).length
+      const finalData = {
+        total,
+        totalAmount,
       }
-      return total
+      return finalData
     },
+    dateNow(){
+        const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
+        const fdate=sqlDatetimeNow.substring(0,11);
+        // const tdate=sqlDatetimeNow.substring(0,11);
+        return fdate;
+    }
+
+
   },
   methods: {
-    async fetchData() {
+
+    async codApi() {
       this.isloading = true
       await this.$axios
-        .get('/chat_f')
+         .get('order_by_payment/?fromDate=' + this.dateNow+'&toDate='+this.dateNow+'&paymentCode=COD')
         .then((res) => {
-          console.log('Data: ' + res.data)
-          this.loadData = res.data.map((el) => {
-            console.log('EL: ' + el.id)
+          this.codData = res.data.map((el) => {
             return {
-              chat_id: el.id,
-              chat_msg_type: el.msg_type,
-              chat_message: el.chat_message,
-              chat_user_id: el.user_id,
-              chat_isread: el.chat_isread,
-              chat_chat_date_time: el.chat_date_time.replaceAll('T', ' '),
-              chat_bank_acc_id: el.bank_acc_id,
-              chat_bank_acc_name: el.bank_acc_name,
-              chat_bank_id: el.bank_id,
-              chat_bank_name: el.bank_name,
-              chat_cus_name: el.cus_name,
-              chat_cus_tel: el.cus_tel,
-              chat_function: el.id,
+              order_id: el.order_id +' - '+el.locking_session_id,
+              user_id: el.user_id,
+              product_id: el.product_id + ' - ' + el.pro_name,
+              cus_name: el.name,
+              cus_tel: el.tel,
+              shipping: el.shipping,
+              payment: el.payment_code,
+              product_amount: el.product_amount,
+              outlet: el.shop_name,
+              shipping_fee: el.shipping_fee_by,
+              product_price: this.getFormatNum(el.product_price),
+              order_price_total: (el.product_price * el.product_amount)-el.product_discount,
+              product_discount: this.getFormatNum(el.product_discount),
+              txn_date: el.txn_date.replaceAll('T', ' '),
+              function: el.order_id,
             }
+    
           })
-
-          console.log('AFTER MAP: ' + this.loadData[0].chat_id)
+          console.log("all data1: ",this.codData.length);
         })
         .catch((er) => {
           console.log('Data: ' + er)
         })
       this.isloading = false
     },
-    async fetchDeletedCard() {
+    async notCODApi() {
       this.isloading = true
       await this.$axios
-        .get('/card_his_today_f')
+           .get('order_by_payment/?fromDate=' + this.dateNow+'&toDate='+this.dateNow+'&paymentCode=ALL')
         .then((res) => {
-          console.log('Data: ' + res.data)
-          this.deletedCardData = res.data.map((el) => {
-            console.log('EL: ' + el.id)
+          this.notCodData = res.data.map((el) => {
             return {
-              txnHisId: el.product_id,
-              amount: this.getFormatNum(el.pro_price),
-              userId: el.update_user + ' ' + el.user_name,
-              inputter: el.product_id + ' ' + el.pro_name,
-              txnDate: el.update_time,
-              txnName: el.card_number,
-              txnId: el.product_id,
+              order_id: el.order_id +' - '+el.locking_session_id,
+              user_id: el.user_id,
+              product_id: el.product_id + ' - ' + el.pro_name,
+              cus_name: el.name,
+              cus_tel: el.tel,
+              shipping: el.shipping,
+              payment: el.payment_code,
+              product_amount: el.product_amount,
+              outlet: el.shop_name,
+              shipping_fee: el.shipping_fee_by,
+              product_price: this.getFormatNum(el.product_price),
+              order_price_total: (el.product_price * el.product_amount)-el.product_discount,
+              product_discount: this.getFormatNum(el.product_discount),
+              txn_date: el.txn_date.replaceAll('T', ' '),
+              function: el.order_id,
             }
+    
           })
-
-          console.log('AFTER MAP: ' + this.loadData[0].chat_id)
+            console.log("all data2: ",this.notCodData.length);
         })
         .catch((er) => {
           console.log('Data: ' + er)

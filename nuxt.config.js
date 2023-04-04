@@ -52,9 +52,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'http://localhost:8080'
+    baseURL: 'http://localhost:8080'
     // baseURL: 'https://sitapionlinestore.herokuapp.com'
-    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
+    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
   },
   auth: {
     strategies: {

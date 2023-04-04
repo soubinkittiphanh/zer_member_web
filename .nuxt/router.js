@@ -9,6 +9,7 @@ const _e86dd85c = () => interopDefault(import('../pages/login/index.vue' /* webp
 const _3217bed0 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
 const _5530e549 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
 const _12a2c88b = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
+const _1744ff20 = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
 const _7dd3736b = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
 const _46d54e8a = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
 const _3da9b697 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
@@ -62,6 +63,10 @@ export const routerOptions = {
     path: "/admin/category",
     component: _12a2c88b,
     name: "admin-category"
+  }, {
+    path: "/admin/cod_order",
+    component: _1744ff20,
+    name: "admin-cod_order"
   }, {
     path: "/admin/customer",
     component: _7dd3736b,
