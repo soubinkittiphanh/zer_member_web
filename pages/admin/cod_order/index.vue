@@ -159,6 +159,7 @@ export default {
         },
         { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cus_name' },
         { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
+        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cus_addr' },
         { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
         {
           text: 'ລາຄາ',
@@ -292,6 +293,7 @@ export default {
               product_id:  el.pro_name,
               cus_name: el.name +' '+el.tel,
               cus_tel: el.tel,
+              cus_addr: el.cus_address,
               shipping: el.shipping,
               payment: el.payment_code,
               product_amount: el.product_amount,
