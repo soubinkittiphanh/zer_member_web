@@ -20,6 +20,9 @@
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },
+  "ProductCard": {
+    "description": "Auto imported from components/ProductCard.vue"
+  },
   "Settlement": {
     "description": "Auto imported from components/Settlement.vue"
   },

@@ -5,13 +5,13 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _dc33ff90 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
-const _e86dd85c = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
 const _3217bed0 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
 const _5530e549 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
 const _12a2c88b = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
 const _1744ff20 = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
 const _7dd3736b = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
 const _46d54e8a = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
+const _873f9adc = () => interopDefault(import('../pages/admin/login/index.vue' /* webpackChunkName: "pages/admin/login/index" */))
 const _3da9b697 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
 const _265117a7 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
 const _4d404e32 = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
@@ -48,10 +48,6 @@ export const routerOptions = {
     component: _dc33ff90,
     name: "admin"
   }, {
-    path: "/login",
-    component: _e86dd85c,
-    name: "login"
-  }, {
     path: "/admin/advertise",
     component: _3217bed0,
     name: "admin-advertise"
@@ -75,6 +71,10 @@ export const routerOptions = {
     path: "/admin/customer_request",
     component: _46d54e8a,
     name: "admin-customer_request"
+  }, {
+    path: "/admin/login",
+    component: _873f9adc,
+    name: "admin-login"
   }, {
     path: "/admin/logout",
     component: _3da9b697,

@@ -10,7 +10,7 @@
     <v-dialog v-model="preview" hide-overlay width="400px">
       <dia-image :i-url="previewSrc" @closeDia="preview = false"> </dia-image>
     </v-dialog>
-
+    SELECTED OUTLET {{ formData.outlet }}
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-select
         v-model="formData.outlet"
@@ -295,7 +295,8 @@ export default {
       if (!this.$refs.form.validate()) {
         return
       }
-      console.log('Files length: ' + this.files.length)
+      console.log('Outlet: ' + this.formData.outlet)
+      
       this.isloading = true
       const formData = new FormData()
       formData.append('FORM', JSON.stringify(this.formData))

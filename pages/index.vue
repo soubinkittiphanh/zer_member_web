@@ -1,135 +1,13 @@
-<template>
+<!-- <template>
   <div>
-    <!-- <h1>HOME PAGE1</h1> -->
-    <v-row>
-      <v-col>
-        <v-card class="mx-auto" color="#73c883" dark max-width="400">
-          <v-card-title>
-            <v-icon large left> mdi-chat </v-icon>
-            <span class="text-h6 font-weight-light">ຮ້ານ PEEAIR4</span>
-          </v-card-title>
-
-          <v-card-text class="text-h5 font-weight-bold">
-            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet1.total) }} ອໍເດີ
-          </v-card-text>
-
-          <v-card-actions>
-            <v-list-item class="grow">
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>ຍອດລວມ {{this.getFormatNum(countCODByOutlet1.totalAmount)}}</v-list-item-title>
-              </v-list-item-content>
-
-            </v-list-item>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-card class="mx-auto" color="#006633" dark max-width="400">
-          <v-card-title>
-            <v-icon large left> mdi-chat </v-icon>
-            <span class="text-h6 font-weight-light">ຮ້ານ GREENDWOOD</span>
-          </v-card-title>
-
-          <v-card-text class="text-h5 font-weight-bold">
-            COD ຈຳນວນ {{ this.getFormatNum(countCODByOutlet2.total) }} ອໍເດີ
-          </v-card-text>
-
-          <v-card-actions>
-            <v-list-item class="grow">
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>ຍອດລວມ {{ this.getFormatNum(countCODByOutlet2.totalAmount) }} </v-list-item-title>
-              </v-list-item-content>
-
-       
-            </v-list-item>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-card class="mx-auto" color="#73c883" dark max-width="400">
-          <v-card-title>
-            <v-icon large left> mdi-note-plus </v-icon>
-            <span class="text-h6 font-weight-light">ຍອດຂາຍ </span>
-          </v-card-title>
-
-          <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ this.getFormatNum(countByOutlet1.total) }} ອໍເດີ
-          </v-card-text>
-
-          <v-card-actions>
-            <v-list-item class="grow">
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>ຍອດລວມ {{ this.getFormatNum(countByOutlet1.totalAmount) }}</v-list-item-title>
-              </v-list-item-content>
-
-
-            </v-list-item>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-card class="mx-auto" color="#006633" dark max-width="400">
-          <v-card-title>
-            <v-icon large left> mdi-note-plus </v-icon>
-            <span class="text-h6 font-weight-light">ຍອດຂາຍ </span>
-          </v-card-title>
-
-          <v-card-text class="text-h5 font-weight-bold">
-            ຈຳນວນ {{ this.getFormatNum(countByOutlet2.total) }} ອໍເດີ
-          </v-card-text>
-
-          <v-card-actions>
-            <v-list-item class="grow">
-              <v-list-item-avatar color="red darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title> ຍອດລວມ {{ this.getFormatNum(countByOutlet2.totalAmount) }} </v-list-item-title>
-              </v-list-item-content>
-
-  
-            </v-list-item>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+    <h1>HOME PAGE1</h1>
+    <product-card></product-card >
+   </div>
 </template>
 
 <script>
 export default {
-  middleware: 'auths',
+//   middleware: 'auths',
   data: () => {
     return {
       notCodData: [],
@@ -139,10 +17,7 @@ export default {
       deletedCardData: [],
     }
   },
-  mounted() {
-    this.codApi()
-    this.notCODApi()
-  },
+
   computed: {
     countCODByOutlet1() {
       let total = 0
@@ -239,74 +114,11 @@ export default {
 
   },
   methods: {
+    
+    getData(){
 
-    async codApi() {
-      this.isloading = true
-      await this.$axios
-         .get('order_by_payment/?fromDate=' + this.dateNow+'&toDate='+this.dateNow+'&paymentCode=COD')
-        .then((res) => {
-          this.codData = res.data.map((el) => {
-            return {
-              order_id: el.order_id +' - '+el.locking_session_id,
-              user_id: el.user_id,
-              product_id: el.product_id + ' - ' + el.pro_name,
-              cus_name: el.name,
-              cus_tel: el.tel,
-              shipping: el.shipping,
-              payment: el.payment_code,
-              product_amount: el.product_amount,
-              outlet: el.shop_name,
-              shipping_fee: el.shipping_fee_by,
-              product_price: this.getFormatNum(el.product_price),
-              order_price_total: (el.product_price * el.product_amount)-el.product_discount,
-              product_discount: this.getFormatNum(el.product_discount),
-              txn_date: el.txn_date.replaceAll('T', ' '),
-              function: el.order_id,
-            }
-    
-          })
-          console.log("all data1: ",this.codData.length);
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isloading = false
     },
-    async notCODApi() {
-      this.isloading = true
-      await this.$axios
-           .get('order_by_payment/?fromDate=' + this.dateNow+'&toDate='+this.dateNow+'&paymentCode=ALL')
-        .then((res) => {
-          this.notCodData = res.data.map((el) => {
-            return {
-              order_id: el.order_id +' - '+el.locking_session_id,
-              user_id: el.user_id,
-              product_id: el.product_id + ' - ' + el.pro_name,
-              cus_name: el.name,
-              cus_tel: el.tel,
-              shipping: el.shipping,
-              payment: el.payment_code,
-              product_amount: el.product_amount,
-              outlet: el.shop_name,
-              shipping_fee: el.shipping_fee_by,
-              product_price: this.getFormatNum(el.product_price),
-              order_price_total: (el.product_price * el.product_amount)-el.product_discount,
-              product_discount: this.getFormatNum(el.product_discount),
-              txn_date: el.txn_date.replaceAll('T', ' '),
-              function: el.order_id,
-            }
-    
-          })
-            console.log("all data2: ",this.notCodData.length);
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isloading = false
-    },
-    getFormatNum(val) {
-      return new Intl.NumberFormat().format(val)
-    },
+ 
   },
 }
 </script>
@@ -316,4 +128,4 @@ export default {
 .grey {
   font-family: 'Noto Sans Lao';
 }
-</style>
+</style> -->

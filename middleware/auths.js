@@ -5,7 +5,7 @@ export default function({store,redirect}){
 
     } else {
 
-        return redirect("/login");
+        return redirect("/admin/login");
     }
     console.log("Iam a middleware");
 }

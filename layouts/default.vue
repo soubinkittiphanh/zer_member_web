@@ -55,7 +55,7 @@ export default {
         {
           icon: 'mdi-home',
           title: 'ຫນ້າຫລັກ',
-          to: '/',
+          to: '/admin',
         },
         {
           icon: 'mdi-home',

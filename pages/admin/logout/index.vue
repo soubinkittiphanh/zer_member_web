@@ -8,7 +8,7 @@
 export default {
     mounted(){
         this.logout();
-        this.$router.push("/login");
+        this.$router.push("/admin/login");
     },
     methods:{
         logout(){

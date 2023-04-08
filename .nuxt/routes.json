@@ -7,13 +7,6 @@
     "_name": "_dc33ff90"
   },
   {
-    "name": "login",
-    "path": "/login",
-    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/login/index.vue",
-    "chunkName": "pages/login/index",
-    "_name": "_e86dd85c"
-  },
-  {
     "name": "admin-advertise",
     "path": "/admin/advertise",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/advertise/index.vue",
@@ -54,6 +47,13 @@
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/customer_request/index.vue",
     "chunkName": "pages/admin/customer_request/index",
     "_name": "_46d54e8a"
+  },
+  {
+    "name": "admin-login",
+    "path": "/admin/login",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/login/index.vue",
+    "chunkName": "pages/admin/login/index",
+    "_name": "_873f9adc"
   },
   {
     "name": "admin-logout",

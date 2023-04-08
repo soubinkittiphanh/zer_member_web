@@ -13,6 +13,7 @@ You can directly use them in pages and other components without the need to impo
 - `<LoadingIndicator>` | `<loading-indicator>` (components/LoadingIndicator.vue)
 - `<Notification>` | `<notification>` (components/Notification.vue)
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
+- `<ProductCard>` | `<product-card>` (components/ProductCard.vue)
 - `<Settlement>` | `<settlement>` (components/Settlement.vue)
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)

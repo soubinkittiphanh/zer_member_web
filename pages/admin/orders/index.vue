@@ -273,7 +273,7 @@ export default {
               outlet: el.shop_name,
               shipping_fee: el.shipping_fee_by,
               product_price: this.getFormatNum(el.product_price),
-              order_price_total: this.getFormatNum((el.product_price * el.product_amount)-el.product_discount),
+              order_price_total: this.getFormatNum(((el.product_price * el.product_amount)+el.rider_fee)-el.product_discount),
               product_discount: this.getFormatNum(el.product_discount),
               txn_date: el.txn_date.replaceAll('T', ' '),
               function: el.order_id,

@@ -52,7 +52,7 @@
   </v-app>
 </template>
 <script>
-import Notification from '../../components/Notification.vue'
+import Notification from '../../../components/Notification.vue'
 export default {
   layout: 'empty',
 
@@ -115,7 +115,7 @@ export default {
             }
             this.$store.dispatch('login', payload)
             console.log(this.$store.getters.oggedInUser)
-            this.$router.push('/')
+            this.$router.push('/admin')
           } else {
             console.log('No token')
             this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
