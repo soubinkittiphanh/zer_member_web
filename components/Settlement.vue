@@ -11,46 +11,18 @@
     <v-card>
       <v-card-title>
         ຊຳລະບິນ {{ this.orderId || 'null' }} ຍອດ:
-        {{ this.amount }}</v-card-title
-      >
+        {{ formatNum(this.amount) }} </v-card-title>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-text-field
-            v-model="form_data.user_id"
-            :counter="10"
-            :rules="rule.idRules"
-            label="ໄອດີ"
-            required
-            disabled
-          ></v-text-field>
-          <v-select
-            v-model="form_data.txn_type"
-            :items="loaddata"
-            :item-value="(item) => item.txn_id"
-            :item-text="(item) => item.txn_id + ' - ' + item.txn_name"
-            @change="selectChange"
-            append-outer-icon="mdi-map"
-            menu-props="auto"
-            hide-details
-            label="ປະເພດການຊຳລະ"
-            single-line
-            :rules="rule.txnRule"
-          ></v-select>
-          <v-text-field
-            v-model="paymentAmount"
-        
-            :counter="10"
-            :rules="rule.amountRules"
-            :label="`ຈຳນວນເງິນ: ` + formatNum(paymentAmount)"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="codFee"
-            :counter="10"
-            :rules="rule.amountCODRules"
-            :label="`ຄ່າທຳນຽມ COD: ` + formatNum(codFee)"
-            required
-          ></v-text-field>
+          <v-text-field v-model="form_data.user_id" :counter="10" :rules="rule.idRules" label="ໄອດີ" required
+            disabled></v-text-field>
+          <v-select v-model="form_data.txn_type" :items="loaddata" :item-value="(item) => item.txn_id"
+            :item-text="(item) => item.txn_id + ' - ' + item.txn_name" @change="selectChange" append-outer-icon="mdi-map"
+            menu-props="auto" hide-details label="ປະເພດການຊຳລະ" single-line :rules="rule.txnRule"></v-select>
+          <v-text-field v-model="paymentAmount" :counter="10" :rules="rule.amountRules"
+            :label="`ຈຳນວນເງິນ: ` + formatNum(paymentAmount)" required></v-text-field>
+          <v-text-field v-model="codFee" :counter="10" :rules="rule.amountCODRules"
+            :label="`ຄ່າທຳນຽມ COD: ` + formatNum(codFee)" required></v-text-field>
         </v-form>
         {{ userId }}
         <slot> </slot>
@@ -74,7 +46,7 @@ export default {
       type: Number,
       requiret: true,
       default: 0,
-      
+
     },
     amount: {
       type: Number,
@@ -86,7 +58,7 @@ export default {
       requiret: true,
     },
   },
-  //   props: ['userId'],
+
   data() {
     return {
       loaddata: [],
@@ -94,7 +66,7 @@ export default {
       valid: true,
       message: null,
       dialogMessage: false,
-      paymentAmount: this.amount,
+      paymentAmount: 0,
       codFee: 0,
       form_data: {
         txn_his_id: 1000,
@@ -123,6 +95,7 @@ export default {
   },
   async created() {
     await this.fetchData()
+    console.log("Assign amount: ",this.paymentAmount);
   },
 
   watch: {
@@ -136,6 +109,10 @@ export default {
       }
       this.dialogMessage = false
     },
+    amount(newAmount){
+      console.log("New amount: ",newAmount);
+      this.paymentAmount= newAmount;
+    }
   },
   methods: {
     selectChange(v) {
@@ -144,16 +121,13 @@ export default {
     },
     async submitDatas() {
       this.isloading = true
-      console.log('submitOut')
-      if (!this.$refs.form.validate()) {
+      console.log("AMOUNT: ", this.amount);
+      if (this.$refs.form.validate()) {
         this.isloading = false
         return
       }
-      console.log('submitIn')
-    //   const balance = this.form_data.user_balance
-    //   const txnAmount = this.form_data.txn_his_amount
+      //  if (1===1) return ;
       const token = this.$store.getters.loggedInUser.token
-
       const paymentPayload = {
         lockingSessionId: this.orderId.split("-")[1].trim(),
         paymentCode: this.form_data.txn_type,
@@ -167,19 +141,19 @@ export default {
           Authorization: 'Bearer ' + token,
         },
       }
-        await this.$axios
-          .post(urlpath, {...paymentPayload}, header)
-          .then((res) => {
-            this.message = res.data
-            if(this.message.includes("completed")){
-              // ******* reload data if transaction completed ********
-              this.refreshData(true);
-            }
-          })
-          .catch((er) => {
-            this.message = 'Error: ' + er
-          })
-        this.isloading = false
+      await this.$axios
+        .post(urlpath, { ...paymentPayload }, header)
+        .then((res) => {
+          this.message = res.data
+          if (this.message.includes("completed")) {
+            // ******* reload data if transaction completed ********
+            this.refreshData(true);
+          }
+        })
+        .catch((er) => {
+          this.message = 'Error: ' + er
+        })
+      this.isloading = false
 
       this.fetchData()
     },
@@ -213,7 +187,7 @@ export default {
     formatNum(v) {
       return new Intl.NumberFormat().format(v)
     },
-    refreshData(v){
+    refreshData(v) {
       this.$emit('reload', v)
     }
   },
