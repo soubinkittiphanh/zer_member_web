@@ -1,9 +1,11 @@
-
+// all sate variable [data]
 export const state = () => ({
     user: '',
     isAuth:true,
+    productDetail: null
 })
 
+// the function to update state variable should be called by setter [actions]
 export const mutations = {
     SetClass(state, bodyClass) {
         state.bodyClass = bodyClass
@@ -19,10 +21,13 @@ export const mutations = {
     setLogout(state){
         state.isAuth=false;
         state.user='';
+    },
+    setProductDetail(state,payload){
+        state.productDetail = payload;
     }
 
 }
-
+// action to get sate
 export const getters = {
     isAuthenticated(state) {
         return state.isAuth
@@ -33,10 +38,13 @@ export const getters = {
     },
     isAuth(state){
         return state.isAuth
+    },
+    findSelectedProductDetail(state){
+        return state.productDetail
     }
     
 }
-
+// action to set sate
 export const actions={
     login(state,payload){
         state.commit("setUser",payload)
@@ -44,5 +52,10 @@ export const actions={
     },
     logout(state){
         state.commit("setLogout");
+    },
+    assignProductDetail(state,payload){
+        state.commit("setProductDetail",payload)
     }
 }
+// this.$store.dispatch('assignProductDetail', payload)       => this to set sate
+// this.$store.getters.findSelectedProductDetail         => get data from sate

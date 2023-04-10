@@ -11,6 +11,7 @@ You can directly use them in pages and other components without the need to impo
 - `<DialogClassicMessage>` | `<dialog-classic-message>` (components/DialogClassicMessage.vue)
 - `<ImageDialog>` | `<image-dialog>` (components/ImageDialog.vue)
 - `<LoadingIndicator>` | `<loading-indicator>` (components/LoadingIndicator.vue)
+- `<NewComing>` | `<new-coming>` (components/NewComing.vue)
 - `<Notification>` | `<notification>` (components/Notification.vue)
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
 - `<ProductCard>` | `<product-card>` (components/ProductCard.vue)

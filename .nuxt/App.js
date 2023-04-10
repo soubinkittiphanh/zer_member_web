@@ -9,9 +9,10 @@ import NuxtBuildIndicator from './components/nuxt-build-indicator'
 import '../node_modules/vuetify/dist/vuetify.css'
 
 import _6f6c098b from '../layouts/default.vue'
-import _77430317 from '../layouts/empty.vue'
+import _77a66d33 from '../layouts/login.vue'
+import _1bda075a from '../layouts/products.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_empty": sanitizeComponent(_77430317) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_login": sanitizeComponent(_77a66d33),"_products": sanitizeComponent(_1bda075a) }
 
 export default {
   render (h, props) {

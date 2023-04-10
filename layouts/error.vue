@@ -21,13 +21,13 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {
       pageNotFound: '404 Not Found: ເກີດຂໍ້ຜິດພາດ',
       otherError: 'An error occurred: ເກີດຂໍ້ຜິດພາດ'
     }
   },
-  head () {
+  head() {
     const title =
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError
     return {

@@ -1,53 +1,48 @@
 <template>
-    <v-card
-      class="mx-auto"
-      max-width="344"
-    >
-      <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-        height="200px"
-        cover
-      ></v-img>
-  
-      <v-card-title>
-        Top western road trips
-      </v-card-title>
-  
-      <v-card-subtitle>
-        1,000 miles of wonder
-      </v-card-subtitle>
-  
-      <v-card-actions>
-        <v-btn
-          color="orange-lighten-2"
-          variant="text"
-        >
-          Explore
-        </v-btn>
-  
-        <v-spacer></v-spacer>
-  
-        <v-btn
-          :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-          @click="show = !show"
-        ></v-btn>
-      </v-card-actions>
-  
-      <v-expand-transition>
-        <div v-show="show">
-          <v-divider></v-divider>
-  
-          <v-card-text>
-            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-          </v-card-text>
-        </div>
-      </v-expand-transition>
-    </v-card>
-  </template>
-  <script>
-  export default {
-    data: () => ({
-      show: false,
-    }),
-  }
+    <v-hover v-slot="{ hover }" open-delay="400" >
+        <v-card :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="productDetail">
+            <!-- <v-img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + productItem.img_path" aspect-
+                ratio="2.75"></v-img> -->
+
+            <!-- <router-link :to="`/product/${productItem.id}`"> -->
+                <v-img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + productItem.img_path" alt="" class=""></v-img>
+            <!-- </router-link> -->
+            <v-card-title class="subtitle-2">{{ productItem.title }}</v-card-title>
+            <v-card-text>
+                <v-row align="center" class="mx-0">
+                    <v-rating :value="productItem.sale_count / 2" color="amber" dense half-increments readonly size="14">
+                    </v-rating>
+                    <div class="grey--text ml-4">
+                        {{ 10 * 10 }} % | {{ productItem.pro_name }}
+                    </div>
+                </v-row>
+                <!-- <div class="my-4 subtitle-2">
+                    <span v-for="(genre, index) in movie.genre_ids" :key="genre">
+                        {{ genreTypeName(genre, index) }}
+                    </span>
+                </div> -->
+            </v-card-text>
+        </v-card>
+    </v-hover>
+</template>
+<script>
+export default {
+    props: ["productItem"],
+    data() {
+        return {
+            show: false,
+        }
+    },
+    methods: {
+        getFormatNum(val) {
+            return new Intl.NumberFormat().format(val)
+        },
+        productDetail(){
+            // this.$router.push(`/admin/product/${idx.pro_id}`)
+            this.$router.push(`/product/${this.productItem.pro_id}`)
+            this.$store.dispatch('assignProductDetail', this.productItem)
+        }
+    }
+
+}
 </script>

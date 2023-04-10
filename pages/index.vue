@@ -1,131 +1,119 @@
-<!-- <template>
-  <div>
-    <h1>HOME PAGE1</h1>
-    <product-card></product-card >
-   </div>
+<template>
+    <!-- <div>
+        <h1>Products</h1>
+        <v-container class="my-5">
+            <v-layout row wrap>
+                <v-flex xs12 sm6 md4 v-for="productItem in productList" :key="productItem.img_path">
+                    <product-card :productItem="productItem" />
+                </v-flex>
+            </v-layout>
+        </v-container>
+
+        <product-card></product-card >
+    </div> -->
+    <div class="mx-3">
+        <h2 class="mt-2 grey--text"> ສິນຄ້າຂາຍດີ</h2>
+        <v-container fluid>
+            <v-row>
+                <v-col cols="12" sm="3" v-for="productItem in productList" :key="productItem.img_path">
+                    <product-card :productItem="productItem" />
+                </v-col>
+            </v-row>
+        </v-container>
+        <!-- <carousel-3d :controls-visible="true" :clickable="false" :key="upcomingMovies.length" :listData="upcomingMovies"
+            :height="500">
+            <slide :index="i" :key="i" v-for="(movie, i) in this.upcomingMovies">
+                <figure>
+                    <img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + productList[0].img_path" />
+                    <figcaption>
+                        <v-btn :to="`/product/${movie.id}`" text color="white"> {{ movie.title }}</v-btn>
+                    </figcaption>
+                </figure>
+            </slide>
+        </carousel-3d> -->
+
+    </div>
 </template>
 
 <script>
+// import { Carousel3d, Slide } from "vue-carousel-3d";
 export default {
-//   middleware: 'auths',
-  data: () => {
-    return {
-      notCodData: [],
-      codData:[],
-      peeAirOutlet : "PEEAIR4",
-      greewoodOutlet : "Green",
-      deletedCardData: [],
-    }
-  },
-
-  computed: {
-    countCODByOutlet1() {
-      let total = 0
-      let totalAmount = 0
-      if (this.codData) {
-            console.log('Len countCODByOutlet1: ' + this.codData.length)
-        let filterData = this.codData.filter(
-          (el) => el.outlet.includes(this.peeAirOutlet)
-        )
-        filterData = [...filterData]
-        total =filterData.length
-        filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
-        });
-
-      }
-      const finalData = {
-        total,
-        totalAmount,
-      }
-      return finalData
+    //   middleware: 'auths',
+    // components: {
+    //     Carousel3d,
+    //     Slide,
+    // },
+    layout: "products",
+    data: () => {
+        return {
+            notCodData: [],
+            productList: [],
+            peeAirOutlet: "PEEAIR4",
+            greewoodOutlet: "Green",
+            deletedCardData: [],
+            isLoading: false,
+        }
     },
-    countCODByOutlet2() {
-      let total = 0
-      let totalAmount = 0 
-      if (this.codData) {
-            console.log('Len countCODByOutlet2: ' + this.codData.length)
-        let filterData = this.codData.filter(
-          (el) => el.outlet.includes(this.greewoodOutlet)
-        )
-         filterData = [...filterData]
-        total =filterData.length
-        filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
-        });
-
-      }
-      const finalData = {
-        total,
-        totalAmount,
-      }
-      return finalData
+    async created() {
+        await this.getData()
     },
-    countByOutlet1() {
-      let total = 0
-      let totalAmount = 0
-      if (this.notCodData) {
-        console.log('Len countByOutlet1: ' + this.notCodData.length)
-        let filterData = this.notCodData.filter(
-          (el) => el.outlet.includes(this.peeAirOutlet)
-        )
-         filterData = [...filterData]
-        total =filterData.length
-        filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
-        });
+    computed: {
 
-      }
-      const finalData = {
-        total,
-        totalAmount,
-      }
-      return finalData
-      },
-    countByOutlet2() {
-      let total = 0
-      let totalAmount = 0
-      if (this.notCodData) {
-        console.log('Len countByOutlet2: ' + this.notCodData.length)
-        let filterData = this.notCodData.filter(
-          (el) => el.outlet.includes(this.greewoodOutlet)
-        )
-         filterData = [...filterData]
-        total =filterData.length
-          console.log('Len countByOutlet2 later: ' + total)
-        filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
-        });
+        dateNow() {
+            const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
+            const fdate = sqlDatetimeNow.substring(0, 11);
+            // const tdate=sqlDatetimeNow.substring(0,11);
+            return fdate;
+        }
 
-      }
-      const finalData = {
-        total,
-        totalAmount,
-      }
-      return finalData
-    },
-    dateNow(){
-        const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
-        const fdate=sqlDatetimeNow.substring(0,11);
-        // const tdate=sqlDatetimeNow.substring(0,11);
-        return fdate;
-    }
-
-
-  },
-  methods: {
-    
-    getData(){
 
     },
- 
-  },
+    methods: {
+
+        async getData() {
+            this.isLoading = true
+            await this.$axios
+                .get('product_mobile_f')
+                .then((res) => {
+                    // console.log("DATA LENG: ",res.length());
+                    // return;
+                    this.productList = res.data.map((el) => {
+                        return {
+                            card_count: el.card_count,
+                            categ_name: el.categ_name,
+                            cost_price: el.cost_price,
+                            id: el.id,
+                            img_name: el.img_name,
+                            img_path: el.img_path,
+                            outlet: el.outlet,
+                            outlet_name: el.outlet_name,
+                            pro_category: el.pro_category,
+                            pro_desc: el.pro_desc,
+                            pro_id: el.pro_id,
+                            pro_image_path: el.pro_image_path,
+                            pro_name: el.pro_name,
+                            pro_price: el.pro_price,
+                            pro_status: el.pro_status,
+                            retail_cost_percent: el.retail_cost_percent,
+                            sale_count: el.sale_count,
+                            stock_count: el.stock_count,
+                        }
+
+                    })
+                    console.log("all data1: ", this.productList[0].img_path);
+                })
+                .catch((er) => {
+                    console.log('Data: ' + er)
+                })
+        },
+
+    },
 }
 </script>
 
 <style scoped>
 .text-h5,
 .grey {
-  font-family: 'Noto Sans Lao';
+    font-family: 'Noto Sans Lao';
 }
-</style> -->
+</style>

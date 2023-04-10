@@ -130,14 +130,21 @@ export default {
       userId:null,
       loaddata: [],
       headers: [
-        {
-          text: 'ອໍເດີໄອດີ',
+        // {
+        //   text: 'ອໍເດີໄອດີ',
+        //   align: 'center',
+        //   value: 'order_id',
+        // },
+        // { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
+                {
+          text: 'ວັນທີ',
           align: 'center',
-          value: 'order_id',
+          value: 'txn_date',
+          sortable: true,
         },
-        { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
-        { text: 'ຊື່', align: 'center', value: 'cus_name' },
+        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cus_name' },
         { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
+        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cus_addr' },
         { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
         {
           text: 'ລາຄາ',
@@ -175,13 +182,67 @@ export default {
           value: 'outlet',
           sortable: false,
         },
-        {
-          text: 'ວັນທີ',
-          align: 'center',
-          value: 'txn_date',
-          sortable: true,
-        },
+
+        // {
+        //   text: 'ກົດຊຳລະ',
+        //   align: 'end',
+        //   value: 'function',
+        //   sortable: false,
+        // },
       ],
+      // headers: [
+      //   {
+      //     text: 'ອໍເດີໄອດີ',
+      //     align: 'center',
+      //     value: 'order_id',
+      //   },
+      //   { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
+      //   { text: 'ຊື່', align: 'center', value: 'cus_name' },
+      //   { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
+      //   { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
+      //   {
+      //     text: 'ລາຄາ',
+      //     align: 'end',
+      //     value: 'product_price',
+      //     sortable: true,
+      //   },
+      //   {
+      //     text: 'ສ່ວນຫລຸດ',
+      //     align: 'end',
+      //     value: 'product_discount',
+      //     sortable: true,
+      //   },
+      //   {
+      //     text: 'ລວມ',
+      //     align: 'end',
+      //     value: 'order_price_total',
+      //     sortable: false,
+      //   },
+      //   {
+      //     text: 'ຂົນສົ່ງ',
+      //     align: 'end',
+      //     value: 'shipping',
+      //     sortable: false,
+      //   },
+      //   {
+      //     text: 'ການຊຳລະ',
+      //     align: 'end',
+      //     value: 'payment',
+      //     sortable: false,
+      //   },
+      //   {
+      //     text: 'ຮ້ານ',
+      //     align: 'end',
+      //     value: 'outlet',
+      //     sortable: false,
+      //   },
+      //   {
+      //     text: 'ວັນທີ',
+      //     align: 'center',
+      //     value: 'txn_date',
+      //     sortable: true,
+      //   },
+      // ],
 
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -268,6 +329,7 @@ export default {
               cus_name: el.name,
               cus_tel: el.tel,
               shipping: el.shipping,
+              cus_addr: el.cus_address,
               payment: el.payment_code,
               product_amount: el.product_amount,
               outlet: el.shop_name,

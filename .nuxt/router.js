@@ -5,6 +5,7 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _dc33ff90 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
+const _303d5658 = () => interopDefault(import('../pages/product/index.vue' /* webpackChunkName: "pages/product/index" */))
 const _3217bed0 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
 const _5530e549 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
 const _12a2c88b = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
@@ -30,6 +31,7 @@ const _796796a9 = () => interopDefault(import('../pages/admin/advertise/mixins/I
 const _a2fbc93e = () => interopDefault(import('../pages/admin/product/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/product/mixins/ImagePreviewMixin" */))
 const _676ed7fa = () => interopDefault(import('../pages/admin/product/_id/index.vue' /* webpackChunkName: "pages/admin/product/_id/index" */))
 const _70ad496a = () => interopDefault(import('../pages/admin/stock/_id/index.vue' /* webpackChunkName: "pages/admin/stock/_id/index" */))
+const _01538543 = () => interopDefault(import('../pages/product/_id/index.vue' /* webpackChunkName: "pages/product/_id/index" */))
 const _563e5d10 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -47,6 +49,10 @@ export const routerOptions = {
     path: "/admin",
     component: _dc33ff90,
     name: "admin"
+  }, {
+    path: "/product",
+    component: _303d5658,
+    name: "product"
   }, {
     path: "/admin/advertise",
     component: _3217bed0,
@@ -147,6 +153,10 @@ export const routerOptions = {
     path: "/admin/stock/:id",
     component: _70ad496a,
     name: "admin-stock-id"
+  }, {
+    path: "/product/:id",
+    component: _01538543,
+    name: "product-id"
   }, {
     path: "/",
     component: _563e5d10,

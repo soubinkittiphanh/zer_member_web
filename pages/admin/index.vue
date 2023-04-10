@@ -16,15 +16,12 @@
           <v-card-actions>
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
+                <v-img class="elevation-6" alt=""
+                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>ຍອດລວມ {{this.getFormatNum(countCODByOutlet1.totalAmount)}}</v-list-item-title>
+                <v-list-item-title>ຍອດລວມ {{ this.getFormatNum(countCODByOutlet1.totalAmount) }}</v-list-item-title>
               </v-list-item-content>
 
             </v-list-item>
@@ -45,18 +42,15 @@
           <v-card-actions>
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
+                <v-img class="elevation-6" alt=""
+                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
                 <v-list-item-title>ຍອດລວມ {{ this.getFormatNum(countCODByOutlet2.totalAmount) }} </v-list-item-title>
               </v-list-item-content>
 
-       
+
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -77,11 +71,8 @@
           <v-card-actions>
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
+                <v-img class="elevation-6" alt=""
+                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -107,18 +98,15 @@
           <v-card-actions>
             <v-list-item class="grow">
               <v-list-item-avatar color="red darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
+                <v-img class="elevation-6" alt=""
+                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
                 <v-list-item-title> ຍອດລວມ {{ this.getFormatNum(countByOutlet2.totalAmount) }} </v-list-item-title>
               </v-list-item-content>
 
-  
+
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -133,9 +121,9 @@ export default {
   data: () => {
     return {
       notCodData: [],
-      codData:[],
-      peeAirOutlet : "PEEAIR4",
-      greewoodOutlet : "Green",
+      codData: [],
+      peeAirOutlet: "PEEAIR4",
+      greewoodOutlet: "Green",
       deletedCardData: [],
     }
   },
@@ -148,14 +136,14 @@ export default {
       let total = 0
       let totalAmount = 0
       if (this.codData) {
-            console.log('Len countCODByOutlet1: ' + this.codData.length)
+        console.log('Len countCODByOutlet1: ' + this.codData.length)
         let filterData = this.codData.filter(
           (el) => el.outlet.includes(this.peeAirOutlet)
         )
         filterData = [...filterData]
-        total =filterData.length
+        total = filterData.length
         filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
+          totalAmount += element.order_price_total;
         });
 
       }
@@ -167,16 +155,16 @@ export default {
     },
     countCODByOutlet2() {
       let total = 0
-      let totalAmount = 0 
+      let totalAmount = 0
       if (this.codData) {
-            console.log('Len countCODByOutlet2: ' + this.codData.length)
+        console.log('Len countCODByOutlet2: ' + this.codData.length)
         let filterData = this.codData.filter(
           (el) => el.outlet.includes(this.greewoodOutlet)
         )
-         filterData = [...filterData]
-        total =filterData.length
+        filterData = [...filterData]
+        total = filterData.length
         filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
+          totalAmount += element.order_price_total;
         });
 
       }
@@ -194,32 +182,10 @@ export default {
         let filterData = this.notCodData.filter(
           (el) => el.outlet.includes(this.peeAirOutlet)
         )
-         filterData = [...filterData]
-        total =filterData.length
+        filterData = [...filterData]
+        total = filterData.length
         filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
-        });
-
-      }
-      const finalData = {
-        total,
-        totalAmount,
-      }
-      return finalData
-      },
-    countByOutlet2() {
-      let total = 0
-      let totalAmount = 0
-      if (this.notCodData) {
-        console.log('Len countByOutlet2: ' + this.notCodData.length)
-        let filterData = this.notCodData.filter(
-          (el) => el.outlet.includes(this.greewoodOutlet)
-        )
-         filterData = [...filterData]
-        total =filterData.length
-          console.log('Len countByOutlet2 later: ' + total)
-        filterData.forEach(element => {
-          totalAmount+=element.order_price_total;
+          totalAmount += element.order_price_total;
         });
 
       }
@@ -229,11 +195,33 @@ export default {
       }
       return finalData
     },
-    dateNow(){
-        const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
-        const fdate=sqlDatetimeNow.substring(0,11);
-        // const tdate=sqlDatetimeNow.substring(0,11);
-        return fdate;
+    countByOutlet2() {
+      let total = 0
+      let totalAmount = 0
+      if (this.notCodData) {
+        console.log('Len countByOutlet2: ' + this.notCodData.length)
+        let filterData = this.notCodData.filter(
+          (el) => el.outlet.includes(this.greewoodOutlet)
+        )
+        filterData = [...filterData]
+        total = filterData.length
+        console.log('Len countByOutlet2 later: ' + total)
+        filterData.forEach(element => {
+          totalAmount += element.order_price_total;
+        });
+
+      }
+      const finalData = {
+        total,
+        totalAmount,
+      }
+      return finalData
+    },
+    dateNow() {
+      const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
+      const fdate = sqlDatetimeNow.substring(0, 11);
+      // const tdate=sqlDatetimeNow.substring(0,11);
+      return fdate;
     }
 
 
@@ -243,11 +231,11 @@ export default {
     async codApi() {
       this.isloading = true
       await this.$axios
-         .get('order_by_payment/?fromDate=' + this.dateNow+'&toDate='+this.dateNow+'&paymentCode=COD')
+        .get('order_by_payment/?fromDate=' + this.dateNow + '&toDate=' + this.dateNow + '&paymentCode=COD')
         .then((res) => {
           this.codData = res.data.map((el) => {
             return {
-              order_id: el.order_id +' - '+el.locking_session_id,
+              order_id: el.order_id + ' - ' + el.locking_session_id,
               user_id: el.user_id,
               product_id: el.product_id + ' - ' + el.pro_name,
               cus_name: el.name,
@@ -258,14 +246,14 @@ export default {
               outlet: el.shop_name,
               shipping_fee: el.shipping_fee_by,
               product_price: this.getFormatNum(el.product_price),
-              order_price_total: (el.product_price * el.product_amount)-el.product_discount,
+              order_price_total: (el.product_price * el.product_amount) - el.product_discount,
               product_discount: this.getFormatNum(el.product_discount),
               txn_date: el.txn_date.replaceAll('T', ' '),
               function: el.order_id,
             }
-    
+
           })
-          console.log("all data1: ",this.codData.length);
+          console.log("all data1: ", this.codData.length);
         })
         .catch((er) => {
           console.log('Data: ' + er)
@@ -275,11 +263,11 @@ export default {
     async notCODApi() {
       this.isloading = true
       await this.$axios
-           .get('order_by_payment/?fromDate=' + this.dateNow+'&toDate='+this.dateNow+'&paymentCode=ALL')
+        .get('order_by_payment/?fromDate=' + this.dateNow + '&toDate=' + this.dateNow + '&paymentCode=ALL')
         .then((res) => {
           this.notCodData = res.data.map((el) => {
             return {
-              order_id: el.order_id +' - '+el.locking_session_id,
+              order_id: el.order_id + ' - ' + el.locking_session_id,
               user_id: el.user_id,
               product_id: el.product_id + ' - ' + el.pro_name,
               cus_name: el.name,
@@ -290,14 +278,14 @@ export default {
               outlet: el.shop_name,
               shipping_fee: el.shipping_fee_by,
               product_price: this.getFormatNum(el.product_price),
-              order_price_total: (el.product_price * el.product_amount)-el.product_discount,
+              order_price_total: (el.product_price * el.product_amount) - el.product_discount,
               product_discount: this.getFormatNum(el.product_discount),
               txn_date: el.txn_date.replaceAll('T', ' '),
               function: el.order_id,
             }
-    
+
           })
-            console.log("all data2: ",this.notCodData.length);
+          console.log("all data2: ", this.notCodData.length);
         })
         .catch((er) => {
           console.log('Data: ' + er)

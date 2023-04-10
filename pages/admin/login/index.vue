@@ -54,7 +54,7 @@
 <script>
 import Notification from '../../../components/Notification.vue'
 export default {
-  layout: 'empty',
+  layout: "login",
 
   data() {
     return {

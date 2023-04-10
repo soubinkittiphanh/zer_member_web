@@ -7,6 +7,13 @@
     "_name": "_dc33ff90"
   },
   {
+    "name": "product",
+    "path": "/product",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/product/index.vue",
+    "chunkName": "pages/product/index",
+    "_name": "_303d5658"
+  },
+  {
     "name": "admin-advertise",
     "path": "/admin/advertise",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/advertise/index.vue",
@@ -180,6 +187,13 @@
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/stock/_id/index.vue",
     "chunkName": "pages/admin/stock/_id/index",
     "_name": "_70ad496a"
+  },
+  {
+    "name": "product-id",
+    "path": "/product/:id",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/product/_id/index.vue",
+    "chunkName": "pages/product/_id/index",
+    "_name": "_01538543"
   },
   {
     "name": "index",
