@@ -51,7 +51,7 @@
                 </v-col>
             </v-row>
             <v-divider class="mt-2"></v-divider>
-            <!-- <Cast :casts="product.credits.cast" /> -->
+            <!-- <Cast :casts="product.credits.cast"  ss /> -->
             <v-divider class="mt-2"></v-divider>
             <!-- <Images :images="'https://nodejsclusters-99563-0.cloudclusters.net/' +product.pro_image_path" /> -->
         </v-container>
