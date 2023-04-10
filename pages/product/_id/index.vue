@@ -25,18 +25,18 @@
                         </v-col>
                         <v-col cols="12" sm="3">
                             <span class="gray--text ml-n7">
-                                {{ product.sale_count * 10 }}% 
+                                {{ product.sale_count * 10 }}%
                             </span>
                         </v-col>
-       
+
                     </v-row>
                     <p class="mt-5 grey--text text--darken-3 subheader">{{ product.pro_name }}</p>
                     <div class="mt-5">
                         <!-- <h2 class="mt-5 grey--text text--darken-3">Featured Cast</h2> -->
-                            <div class="">
-                                <h3>{{ product.outlet_name }}</h3>
-                                <span class="grey--text">{{getFormatNum(product.pro_price)}}</span>
-                            </div>
+                        <div class="">
+                            <h3>{{ product.outlet_name }}</h3>
+                            <span class="grey--text">{{ getFormatNum(product.pro_price) }}</span>
+                        </div>
                     </div>
                     <v-dialog v-model="dialog" persistent max-width="800px">
                         <v-card>
