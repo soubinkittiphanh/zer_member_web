@@ -222,7 +222,17 @@ export default {
       const fdate = sqlDatetimeNow.substring(0, 11);
       // const tdate=sqlDatetimeNow.substring(0,11);
       return fdate;
-    }
+    },
+    // noCancelData() {
+    //   this.loaddata.forEach(element => {
+    //     console.log(element.recordStatus);
+    //     if (element.recordStatus === 1) {
+    //       console.log("Concept applied");
+    //       this.loadDataNoCancelOrder.push(element)
+    //     }
+    //   });
+    //   return this.loadDataNoCancelOrder;
+    // },
 
 
   },
