@@ -20,4 +20,3 @@ You can directly use them in pages and other components without the need to impo
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
 - `<Wallet>` | `<wallet>` (components/Wallet.vue)
-- `<Any>` | `<any>` (components/any.js)

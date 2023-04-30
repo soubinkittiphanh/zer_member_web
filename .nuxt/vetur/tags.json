@@ -40,8 +40,5 @@
   },
   "Wallet": {
     "description": "Auto imported from components/Wallet.vue"
-  },
-  "Any": {
-    "description": "Auto imported from components/any.js"
   }
 }
