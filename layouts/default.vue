@@ -84,6 +84,11 @@ export default {
           to: '/admin/cod_order',
         },
         {
+          icon: 'mdi-basket',
+          title: 'ລາຍການຍົກເລີກ ',
+          to: '/admin/cancel_order',
+        },
+        {
           icon: 'mdi-account-key',
           title: 'ຈັດການຜູ້ໃຊ້ງານ',
           to: '/admin/member',

@@ -20,13 +20,21 @@
                 </v-col>
             </v-row>
         </v-container>
-        <!-- <carousel-3d :controls-visible="true" :clickable="false" :key="upcomingMovies.length" :listData="upcomingMovies"
+        <!-- <carousel-3d>
+            <slide :index="0">
+                Slide 1 Content
+            </slide>
+            <slide :index="1">
+                Slide 2 Content
+            </slide>
+        </carousel-3d> -->
+        <!-- <carousel-3d :controls-visible="true" :clickable="false" :key="productList.length" :listData="productList"
             :height="500">
-            <slide :index="i" :key="i" v-for="(movie, i) in this.upcomingMovies">
+            <slide :index="i" :key="i" v-for="(pro, i) in this.productList">
                 <figure>
-                    <img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + productList[0].img_path" />
+                    <img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + pro.img_path" />
                     <figcaption>
-                        <v-btn :to="`/product/${movie.id}`" text color="white"> {{ movie.title }}</v-btn>
+                        <v-btn :to="`/product/${pro.id}`" text color="white"> {{ pro.pro_name }}</v-btn>
                     </figcaption>
                 </figure>
             </slide>
@@ -37,12 +45,13 @@
 
 <script>
 // import { Carousel3d, Slide } from "vue-carousel-3d";
+// import { Carousel3d,Slide } from "vue-carousel-3d";
 export default {
     //   middleware: 'auths',
-    // components: {
-    //     Carousel3d,
-    //     Slide,
-    // },
+    components: {
+        // Carousel3d,
+        // Slide,
+    },
     layout: "products",
     data: () => {
         return {

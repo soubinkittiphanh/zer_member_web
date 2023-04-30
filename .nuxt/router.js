@@ -8,6 +8,7 @@ const _dc33ff90 = () => interopDefault(import('../pages/admin/index.vue' /* webp
 const _303d5658 = () => interopDefault(import('../pages/product/index.vue' /* webpackChunkName: "pages/product/index" */))
 const _3217bed0 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
 const _5530e549 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
+const _792df616 = () => interopDefault(import('../pages/admin/cancel_order/index.vue' /* webpackChunkName: "pages/admin/cancel_order/index" */))
 const _12a2c88b = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
 const _1744ff20 = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
 const _7dd3736b = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
@@ -61,6 +62,10 @@ export const routerOptions = {
     path: "/admin/bank",
     component: _5530e549,
     name: "admin-bank"
+  }, {
+    path: "/admin/cancel_order",
+    component: _792df616,
+    name: "admin-cancel_order"
   }, {
     path: "/admin/category",
     component: _12a2c88b,

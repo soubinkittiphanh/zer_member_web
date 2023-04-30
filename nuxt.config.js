@@ -30,6 +30,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    // { src: '~/plugins/vue-carousel-3d', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,9 +53,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'http://localhost:8080'
+    baseURL: 'http://localhost:8080'
     // baseURL: 'https://sitapionlinestore.herokuapp.com'
-    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
+    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
   },
   auth: {
     strategies: {

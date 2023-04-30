@@ -9,8 +9,8 @@
     <v-app-bar app color="pink" light>
       <!-- <v-icon class="mr-2">fas fa-video</v-icon> -->
       <!-- <v-toolbar-title>AAE Movie</v-toolbar-title> -->
-      <v-btn text class="ml-2" to="/">Movies</v-btn>
-      <v-btn text class="ml-2" to="/actors">Actors</v-btn>
+      <v-btn text class="ml-2" to="/">Jackets</v-btn>
+      <v-btn text class="ml-2" to="/actors">Fashion bags</v-btn>
       <v-btn text class="ml-2">Profile</v-btn>
       <v-btn text class="ml-2">Contact</v-btn>
       <v-spacer></v-spacer>

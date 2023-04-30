@@ -28,6 +28,13 @@
     "_name": "_5530e549"
   },
   {
+    "name": "admin-cancel_order",
+    "path": "/admin/cancel_order",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/cancel_order/index.vue",
+    "chunkName": "pages/admin/cancel_order/index",
+    "_name": "_792df616"
+  },
+  {
     "name": "admin-category",
     "path": "/admin/category",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/category/index.vue",

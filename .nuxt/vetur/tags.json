@@ -1,4 +1,7 @@
 {
+  "Carousel3d": {
+    "description": "Auto imported from components/Carousel3d.vue"
+  },
   "DiaConfirm": {
     "description": "Auto imported from components/DiaConfirm.vue"
   },
@@ -37,5 +40,8 @@
   },
   "Wallet": {
     "description": "Auto imported from components/Wallet.vue"
+  },
+  "Any": {
+    "description": "Auto imported from components/any.js"
   }
 }

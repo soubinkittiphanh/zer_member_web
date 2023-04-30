@@ -96,12 +96,6 @@
         </v-row>
       </v-card-title>
 
-      <!-- <v-data-table
-        v-if="loaddata"
-        :headers="headers"
-        :search="search"
-        :items="loaddata"
-      > -->
       </v-data-table>
             <v-data-table
         v-if="loaddata"
@@ -129,6 +123,7 @@ export default {
       search: '',
       userId:null,
       loaddata: [],
+      loadDataNoCancelOrder: [],
       headers: [
         // {
         //   text: 'ອໍເດີໄອດີ',
@@ -183,67 +178,13 @@ export default {
           sortable: false,
         },
 
-        // {
-        //   text: 'ກົດຊຳລະ',
-        //   align: 'end',
-        //   value: 'function',
-        //   sortable: false,
-        // },
+        {
+          text: 'ສະຖານະ',
+          align: 'end',
+          value: 'recordStatusText',
+          sortable: false,
+        },
       ],
-      // headers: [
-      //   {
-      //     text: 'ອໍເດີໄອດີ',
-      //     align: 'center',
-      //     value: 'order_id',
-      //   },
-      //   { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
-      //   { text: 'ຊື່', align: 'center', value: 'cus_name' },
-      //   { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
-      //   { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
-      //   {
-      //     text: 'ລາຄາ',
-      //     align: 'end',
-      //     value: 'product_price',
-      //     sortable: true,
-      //   },
-      //   {
-      //     text: 'ສ່ວນຫລຸດ',
-      //     align: 'end',
-      //     value: 'product_discount',
-      //     sortable: true,
-      //   },
-      //   {
-      //     text: 'ລວມ',
-      //     align: 'end',
-      //     value: 'order_price_total',
-      //     sortable: false,
-      //   },
-      //   {
-      //     text: 'ຂົນສົ່ງ',
-      //     align: 'end',
-      //     value: 'shipping',
-      //     sortable: false,
-      //   },
-      //   {
-      //     text: 'ການຊຳລະ',
-      //     align: 'end',
-      //     value: 'payment',
-      //     sortable: false,
-      //   },
-      //   {
-      //     text: 'ຮ້ານ',
-      //     align: 'end',
-      //     value: 'outlet',
-      //     sortable: false,
-      //   },
-      //   {
-      //     text: 'ວັນທີ',
-      //     align: 'center',
-      //     value: 'txn_date',
-      //     sortable: true,
-      //   },
-      // ],
-
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -293,7 +234,7 @@ export default {
     },
     totalSale() {
       let total = 0
-      this.loaddata.forEach((el) => {
+      this.noCancelData.forEach((el) => {
         total += parseInt(el.order_price_total.replaceAll(',', ''))
       })
       console.log('Price total: ' + total)
@@ -303,13 +244,23 @@ export default {
     },
     totalSaleOriginal() {
       let total = 0
-      this.loaddata.forEach((el) => {
+      this.noCancelData.forEach((el) => {
         total += parseInt(el.product_discount.replaceAll(',', ''))
       })
       console.log('Price total: ' + total)
       // return previousValue.order_price_total + currentValue.order_price_total
       return this.getFormatNum(total)
       // return total
+    },
+    noCancelData() {
+      this.loaddata.forEach(element => {
+        console.log(element.recordStatus);
+        if (element.recordStatus === 1) {
+          console.log("Concept applied");
+          this.loadDataNoCancelOrder.push(element)
+        }
+      });
+      return this.loadDataNoCancelOrder;
     },
   },
   methods: {
@@ -339,6 +290,8 @@ export default {
               product_discount: this.getFormatNum(el.product_discount),
               txn_date: el.txn_date.replaceAll('T', ' '),
               function: el.order_id,
+              recordStatus: el.record_status,
+              recordStatusText: el.record_status===1?'Effeced':el.record_status===2?'Cancel':'Return',
             }
     
           })
