@@ -1,6 +1,5 @@
 <template>
   <div class="text-center">
-    {{ noCancelData.length }} 
     <v-dialog v-model="dialog" max-width="300px" persistent>
       <dialog-classic-message :message="message" @closedialog="message = null">
       </dialog-classic-message>

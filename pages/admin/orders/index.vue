@@ -11,98 +11,72 @@
 
     <v-card>
       <v-card-title>
-        <v-row>
-          <v-col cols="12" lg="5">
-            <v-menu
-              ref="menu1"
-              v-model="menu1"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="auto"
-            >
+        <v-layout row wrap>
+          <v-col cols="6">
+            <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
+              max-width="290px" min-width="auto">
               <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="dateFormatted"
-                  label="ຈາກວັນທີ:"
-                  hint="MM/DD/YYYY format"
-                  persistent-hint
-                  prepend-icon="mdi-calendar"
-                  v-bind="attrs"
-                  @blur="date = parseDate(dateFormatted)"
-                  v-on="on"
-                ></v-text-field>
+                <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
+                  prepend-icon="mdi-calendar" v-bind="attrs" @blur="date = parseDate(dateFormatted)"
+                  v-on="on"></v-text-field>
               </template>
-              <v-date-picker
-                v-model="date"
-                no-title
-                @input="menu1 = false"
-              ></v-date-picker>
+              <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
             </v-menu>
 
-            <v-menu
-              ref="menu2"
-              v-model="menu2"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="auto"
-            >
+            <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y
+              max-width="290px" min-width="auto">
               <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="dateFormatted2"
-                  label="ຫາວັນທີ:"
-                  hint="MM/DD/YYYY format"
-                  persistent-hint
-                  prepend-icon="mdi-calendar"
-                  v-bind="attrs"
-                  @blur="date2 = parseDate(dateFormatted2)"
-                  v-on="on"
-                ></v-text-field>
+                <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
+                  prepend-icon="mdi-calendar" v-bind="attrs" @blur="date2 = parseDate(dateFormatted2)"
+                  v-on="on"></v-text-field>
               </template>
-              <v-date-picker
-                v-model="date2"
-                no-title
-                @input="menu2 = false"
-              ></v-date-picker>
+              <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
             </v-menu>
-             <span> ລາຄາລວມ: {{ totalSale }}</span>
-            <div>
-              <span> ສ່ວນຫລຸດ: {{ totalSaleOriginal }}</span>
-            </div>
-            <div>
-              <span> ຍອດເຫລືອ: {{getFormatNum( totalSale.replaceAll(",","")-totalSaleOriginal.replaceAll(",","")) }}</span>
-            </div>
+
           </v-col>
-          <v-col cols="12" lg="5">
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="ຊອກຫາ"
-              single-line
-              hide-detailsx
-            />
-            <v-text-field
-              v-model="userId"
-              append-icon="mdi-magnify"
-              label="ລະຫັດຜູ້ຂາຍ"
-              single-line
-              hide-detailsx
-            />
+          <v-col cols="6">
+            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
+            <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
             <v-btn @click="fetchData"> ດຶງລາຍງານ </v-btn>
           </v-col>
-        </v-row>
+        </v-layout>
+
+        <v-layout row wrap>
+          <v-col cols="12" lg="12">
+            <v-card class="ml-4">
+              <v-table density="compact">
+                <tbody>
+                  <tr>
+                    <td class="text-right">ຈຳນວນ: </td>
+
+                    <td class="text-right">{{ getFormatNum(noCancelData.length) }} ອໍເດີ</td>
+                  </tr>
+                  <tr>
+                    <td class="text-right">ຍອດຂາຍ: </td>
+
+                    <td class="text-right">{{ totalSale }} </td>
+                  </tr>
+                  <tr>
+                    <td class="text-right">ສ່ວນຫລຸດ: </td>
+
+                    <td class="text-right">{{ totalSaleOriginal }} </td>
+                  </tr>
+                  <tr>
+                    <td class="text-right">ຍອດເຫລືອ: </td>
+
+                    <td class="text-right">{{ getFormatNum(totalSale.replaceAll(",", "") -
+                      totalSaleOriginal.replaceAll(",", "")) }} </td>
+                  </tr>
+                </tbody>
+              </v-table>
+            </v-card>
+          </v-col>
+
+        </v-layout>
+
       </v-card-title>
 
-      </v-data-table>
-            <v-data-table
-        v-if="loaddata"
-        :headers="headers"
-        :search="search"
-        :items="loaddata"
-      >
+      <v-data-table v-if="loaddata" :headers="headers" :search="search" :items="loaddata">
       </v-data-table>
     </v-card>
   </div>
@@ -121,7 +95,7 @@ export default {
       valid: true,
       name: '',
       search: '',
-      userId:null,
+      userId: null,
       loaddata: [],
       loadDataNoCancelOrder: [],
       headers: [
@@ -131,7 +105,7 @@ export default {
         //   value: 'order_id',
         // },
         // { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
-                {
+        {
           text: 'ວັນທີ',
           align: 'center',
           value: 'txn_date',
@@ -270,11 +244,11 @@ export default {
     async fetchData() {
       this.isloading = true
       await this.$axios
-        .get('order_by_payment/?fromDate=' + this.date+'&toDate='+this.date2+'&paymentCode=ALL')
+        .get('order_by_payment/?fromDate=' + this.date + '&toDate=' + this.date2 + '&paymentCode=ALL')
         .then((res) => {
           this.loaddata = res.data.map((el) => {
             return {
-              order_id: el.order_id +' - '+el.locking_session_id,
+              order_id: el.order_id + ' - ' + el.locking_session_id,
               user_id: el.user_id,
               product_id: el.product_id + ' - ' + el.pro_name,
               cus_name: el.name,
@@ -286,14 +260,14 @@ export default {
               outlet: el.shop_name,
               shipping_fee: el.shipping_fee_by,
               product_price: this.getFormatNum(el.product_price),
-              order_price_total: this.getFormatNum(((el.product_price * el.product_amount)+el.rider_fee)-el.product_discount),
+              order_price_total: this.getFormatNum(((el.product_price * el.product_amount) + el.rider_fee) - el.product_discount),
               product_discount: this.getFormatNum(el.product_discount),
               txn_date: el.txn_date.replaceAll('T', ' '),
               function: el.order_id,
               recordStatus: el.record_status,
-              recordStatusText: el.record_status===1?'Effeced':el.record_status===2?'Cancel':'Return',
+              recordStatusText: el.record_status === 1 ? 'Effeced' : el.record_status === 2 ? 'Cancel' : 'Return',
             }
-    
+
           })
         })
         .catch((er) => {
