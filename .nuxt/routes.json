@@ -3,210 +3,180 @@
     "name": "admin",
     "path": "/admin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/index.vue",
-    "chunkName": "pages/admin/index",
-    "_name": "_dc33ff90"
+    "chunkName": "pages/admin/index"
   },
   {
     "name": "product",
     "path": "/product",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/product/index.vue",
-    "chunkName": "pages/product/index",
-    "_name": "_303d5658"
+    "chunkName": "pages/product/index"
   },
   {
     "name": "admin-advertise",
     "path": "/admin/advertise",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/advertise/index.vue",
-    "chunkName": "pages/admin/advertise/index",
-    "_name": "_3217bed0"
+    "chunkName": "pages/admin/advertise/index"
   },
   {
     "name": "admin-bank",
     "path": "/admin/bank",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/bank/index.vue",
-    "chunkName": "pages/admin/bank/index",
-    "_name": "_5530e549"
+    "chunkName": "pages/admin/bank/index"
   },
   {
     "name": "admin-cancel_order",
     "path": "/admin/cancel_order",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/cancel_order/index.vue",
-    "chunkName": "pages/admin/cancel_order/index",
-    "_name": "_792df616"
+    "chunkName": "pages/admin/cancel_order/index"
   },
   {
     "name": "admin-category",
     "path": "/admin/category",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/category/index.vue",
-    "chunkName": "pages/admin/category/index",
-    "_name": "_12a2c88b"
+    "chunkName": "pages/admin/category/index"
   },
   {
     "name": "admin-cod_order",
     "path": "/admin/cod_order",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/cod_order/index.vue",
-    "chunkName": "pages/admin/cod_order/index",
-    "_name": "_1744ff20"
+    "chunkName": "pages/admin/cod_order/index"
   },
   {
     "name": "admin-customer",
     "path": "/admin/customer",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/customer/index.vue",
-    "chunkName": "pages/admin/customer/index",
-    "_name": "_7dd3736b"
+    "chunkName": "pages/admin/customer/index"
   },
   {
     "name": "admin-customer_request",
     "path": "/admin/customer_request",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/customer_request/index.vue",
-    "chunkName": "pages/admin/customer_request/index",
-    "_name": "_46d54e8a"
+    "chunkName": "pages/admin/customer_request/index"
   },
   {
     "name": "admin-login",
     "path": "/admin/login",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/login/index.vue",
-    "chunkName": "pages/admin/login/index",
-    "_name": "_873f9adc"
+    "chunkName": "pages/admin/login/index"
   },
   {
     "name": "admin-logout",
     "path": "/admin/logout",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/logout/index.vue",
-    "chunkName": "pages/admin/logout/index",
-    "_name": "_3da9b697"
+    "chunkName": "pages/admin/logout/index"
   },
   {
     "name": "admin-member",
     "path": "/admin/member",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/member/index.vue",
-    "chunkName": "pages/admin/member/index",
-    "_name": "_265117a7"
+    "chunkName": "pages/admin/member/index"
   },
   {
     "name": "admin-orders",
     "path": "/admin/orders",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/orders/index.vue",
-    "chunkName": "pages/admin/orders/index",
-    "_name": "_4d404e32"
+    "chunkName": "pages/admin/orders/index"
   },
   {
     "name": "admin-product",
     "path": "/admin/product",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/product/index.vue",
-    "chunkName": "pages/admin/product/index",
-    "_name": "_d0f075d0"
+    "chunkName": "pages/admin/product/index"
   },
   {
     "name": "admin-productInuse",
     "path": "/admin/productInuse",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/productInuse.vue",
-    "chunkName": "pages/admin/productInuse",
-    "_name": "_b1ff8bc6"
+    "chunkName": "pages/admin/productInuse"
   },
   {
     "name": "admin-report",
     "path": "/admin/report",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/report/index.vue",
-    "chunkName": "pages/admin/report/index",
-    "_name": "_438c2c7e"
+    "chunkName": "pages/admin/report/index"
   },
   {
     "name": "admin-report_card",
     "path": "/admin/report_card",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/report_card/index.vue",
-    "chunkName": "pages/admin/report_card/index",
-    "_name": "_0f35f164"
+    "chunkName": "pages/admin/report_card/index"
   },
   {
     "name": "admin-txn",
     "path": "/admin/txn",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/txn/index.vue",
-    "chunkName": "pages/admin/txn/index",
-    "_name": "_7deb73d3"
+    "chunkName": "pages/admin/txn/index"
   },
   {
     "name": "admin-txn_type",
     "path": "/admin/txn_type",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/txn_type/index.vue",
-    "chunkName": "pages/admin/txn_type/index",
-    "_name": "_13264a3c"
+    "chunkName": "pages/admin/txn_type/index"
   },
   {
     "name": "admin-walletin",
     "path": "/admin/walletin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/walletin/index.vue",
-    "chunkName": "pages/admin/walletin/index",
-    "_name": "_103a7a6b"
+    "chunkName": "pages/admin/walletin/index"
   },
   {
     "name": "admin-walletout",
     "path": "/admin/walletout",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/walletout/index.vue",
-    "chunkName": "pages/admin/walletout/index",
-    "_name": "_651869de"
+    "chunkName": "pages/admin/walletout/index"
   },
   {
     "name": "admin-customer_request-topup",
     "path": "/admin/customer_request/topup",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/customer_request/topup.vue",
-    "chunkName": "pages/admin/customer_request/topup",
-    "_name": "_390edf99"
+    "chunkName": "pages/admin/customer_request/topup"
   },
   {
     "name": "admin-customer_request-withdraw",
     "path": "/admin/customer_request/withdraw",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/customer_request/withdraw.vue",
-    "chunkName": "pages/admin/customer_request/withdraw",
-    "_name": "_4ff7f69e"
+    "chunkName": "pages/admin/customer_request/withdraw"
   },
   {
     "name": "admin-product-productlist",
     "path": "/admin/product/productlist",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/product/productlist.vue",
-    "chunkName": "pages/admin/product/productlist",
-    "_name": "_e1828b5a"
+    "chunkName": "pages/admin/product/productlist"
   },
   {
     "name": "admin-advertise-mixins-ImagePreviewMixin",
     "path": "/admin/advertise/mixins/ImagePreviewMixin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/advertise/mixins/ImagePreviewMixin.vue",
-    "chunkName": "pages/admin/advertise/mixins/ImagePreviewMixin",
-    "_name": "_796796a9"
+    "chunkName": "pages/admin/advertise/mixins/ImagePreviewMixin"
   },
   {
     "name": "admin-product-mixins-ImagePreviewMixin",
     "path": "/admin/product/mixins/ImagePreviewMixin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/product/mixins/ImagePreviewMixin.vue",
-    "chunkName": "pages/admin/product/mixins/ImagePreviewMixin",
-    "_name": "_a2fbc93e"
+    "chunkName": "pages/admin/product/mixins/ImagePreviewMixin"
   },
   {
     "name": "admin-product-id",
     "path": "/admin/product/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/product/_id/index.vue",
-    "chunkName": "pages/admin/product/_id/index",
-    "_name": "_676ed7fa"
+    "chunkName": "pages/admin/product/_id/index"
   },
   {
     "name": "admin-stock-id",
     "path": "/admin/stock/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/admin/stock/_id/index.vue",
-    "chunkName": "pages/admin/stock/_id/index",
-    "_name": "_70ad496a"
+    "chunkName": "pages/admin/stock/_id/index"
   },
   {
     "name": "product-id",
     "path": "/product/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/product/_id/index.vue",
-    "chunkName": "pages/product/_id/index",
-    "_name": "_01538543"
+    "chunkName": "pages/product/_id/index"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/online_store_web_bae/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_563e5d10"
+    "chunkName": "pages/index"
   }
 ]
