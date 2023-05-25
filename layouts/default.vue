@@ -5,7 +5,7 @@
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
-      color="#1E90FF"
+      color="#01532B"
       
       app
     >
@@ -22,16 +22,16 @@
           <v-list-item-action>
             <v-icon color="white">{{ item.icon }}</v-icon>
           </v-list-item-action>
-          <v-list-item-content  >
-            <v-list-item-title v-text="item.title" />
+          <v-list-item-content >
+            <v-list-item-title v-text="item.title" :style="{ color: 'white' }"/>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <!-- <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
   
-    </v-app-bar>
+    </v-app-bar> -->
     <v-main>
       <v-container>
         <Nuxt />
@@ -49,8 +49,8 @@ export default {
   data() {
     return {
       clipped: false,
-      drawer: false,
-      fixed: false,
+      drawer: true,
+      fixed: true,
       items: [
         {
           icon: 'mdi-home',
@@ -58,7 +58,7 @@ export default {
           to: '/admin',
         },
         {
-          icon: 'mdi-home',
+          icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
         },
@@ -74,18 +74,18 @@ export default {
         },
    
         {
-          icon: 'mdi-basket',
-          title: 'ລາຍການສັ່ງຊື້',
+          icon: 'mdi-cart-check',
+          title: 'ລາຍການບິນຂາຍ',
           to: '/admin/orders',
         },
         {
-          icon: 'mdi-basket',
+          icon: 'mdi-golf-cart',
           title: 'ຕິດຕາມ COD',
           to: '/admin/cod_order',
         },
         {
-          icon: 'mdi-basket',
-          title: 'ລາຍການຍົກເລີກ ',
+          icon: 'mdi-cart-remove',
+          title: 'ລາຍການໃບບິນຍົກເລີກ ',
           to: '/admin/cancel_order',
         },
         {
@@ -95,54 +95,54 @@ export default {
         },
         {
           icon: 'mdi-account',
-          title: 'ຈັດການສະມາຊິກ',
+          title: 'ຈັດການລູກຄ້າ',
           to: '/admin/customer',
         },
-        {
-          icon: 'mdi-chart-bar',
-          title: 'Transaction type',
-          to: '/admin/txn_type',
-        },
-        {
-          icon: 'mdi-chart-line',
-          title: 'Transaction',
-          to: '/admin/txn',
-        },
-        {
-          icon: 'mdi-cash',
-          title: 'ລາຍງານສະເຕດເມັ້ນ',
-          to: '/admin/report',
-        },
-        {
-          icon: 'mdi-cash',
-          title: 'ລາຍງານບັດທີ່ຍົກເລີກ',
-          to: '/admin/report_card',
-        },
-         {
-          icon: 'mdi-alarm-light',
-          title: 'ຈັດການໂຄສະນາ',
-          to: '/admin/advertise',
-        },
-         {
-          icon: 'mdi-bank',
-          title: 'ຈັດການທະນາຄານ',
-          to: '/admin/bank',
-        },
-         {
-          icon: 'mdi-qqchat',
-          title: 'ປະເພດຂໍ້ຄວາມຈາກລູກຄ້າ',
-          to: '/admin/customer_request',
-        },
-         {
-          icon: 'mdi-message-plus',
-          title: 'ລາຍການແຈ້ງເຕີມ',
-          to: '/admin/customer_request/topup',
-        },
-         {
-          icon: 'mdi-message-alert',
-          title: 'ລາຍການແຈ້ງຖອນ',
-          to: '/admin/customer_request/withdraw',
-        },
+        // {
+        //   icon: 'mdi-chart-bar',
+        //   title: 'Transaction type',
+        //   to: '/admin/txn_type',
+        // },
+        // {
+        //   icon: 'mdi-chart-line',
+        //   title: 'Transaction',
+        //   to: '/admin/txn',
+        // },
+        // {
+        //   icon: 'mdi-cash',
+        //   title: 'ລາຍງານສະເຕດເມັ້ນ',
+        //   to: '/admin/report',
+        // },
+        // {
+        //   icon: 'mdi-cash',
+        //   title: 'ລາຍງານບັດທີ່ຍົກເລີກ',
+        //   to: '/admin/report_card',
+        // },
+        //  {
+        //   icon: 'mdi-alarm-light',
+        //   title: 'ຈັດການໂຄສະນາ',
+        //   to: '/admin/advertise',
+        // },
+        //  {
+        //   icon: 'mdi-bank',
+        //   title: 'ຈັດການທະນາຄານ',
+        //   to: '/admin/bank',
+        // },
+        //  {
+        //   icon: 'mdi-qqchat',
+        //   title: 'ປະເພດຂໍ້ຄວາມຈາກລູກຄ້າ',
+        //   to: '/admin/customer_request',
+        // },
+        //  {
+        //   icon: 'mdi-message-plus',
+        //   title: 'ລາຍການແຈ້ງເຕີມ',
+        //   to: '/admin/customer_request/topup',
+        // },
+        //  {
+        //   icon: 'mdi-message-alert',
+        //   title: 'ລາຍການແຈ້ງຖອນ',
+        //   to: '/admin/customer_request/withdraw',
+        // },
         {
           icon: 'mdi-logout',
           title: 'ອອກຈາກລະບົບ',
@@ -159,6 +159,6 @@ export default {
 </script>
 <style scoped>
 * {
-  font-family: 'Noto Sans Lao';
+  font-family: 'noto sans lao';
 }
 </style>

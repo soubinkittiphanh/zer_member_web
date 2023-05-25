@@ -9,36 +9,15 @@
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card class="elevation-1">
               <notification v-if="errorMessage" :message="errorMessage" />
-              <p>{{ this.$store.getters.loggedInUser.name }}</p>
+              <!-- <p>{{ this.$store.getters.loggedInUser.name }}</p> -->
               <v-card-text>
-                <v-form >
-                  <v-text-field
-                    v-model="email"
-                    label="ກະລຸນາ ໃສ່ໄອດີ"
-                    name="email"
-                    prepend-inner-icon="mdi-account-tie-hat"
-                    class="rounded-10"
-                    outlined
-                  >
+                <v-form>
+                  <v-text-field v-model="login.mem_id" label="ກະລຸນາ ໃສ່ໄອດີ" name="email"
+                    prepend-inner-icon="mdi-account-tie-hat" class="rounded-10" outlined>
                   </v-text-field>
-                  <v-text-field
-                    v-model="password"
-                    label="ລະຫັດຜ່ານ"
-                    type="password"
-                    name="password"
-                    prepend-inner-icon="mdi-lock"
-                    class="rounded-10"
-                    outlined
-                  ></v-text-field>
-                  <v-btn
-                    class="rounded-0"
-                    color="primary"
-                    x-large
-                    block
-                    dark
-                    @click.prevent="login"
-                    type="submit"
-                  >
+                  <v-text-field v-model="login.mem_pwd" label="ລະຫັດຜ່ານ" type="password" name="password"
+                    prepend-inner-icon="mdi-lock" class="rounded-10" outlined></v-text-field>
+                  <v-btn class="rounded-0" color="primary" x-large block dark @click.prevent="userLogin" type="submit">
                     login
                     <v-icon> mdi mdi-login</v-icon>
                   </v-btn>
@@ -62,6 +41,10 @@ export default {
       password: '',
       errorMessage: '',
       isLoading: false,
+      login: {
+        mem_id: '',
+        mem_pwd: ''
+      }
     }
   },
   components: {
@@ -83,51 +66,74 @@ export default {
     //     this.$router.push('/login')
     //   }
     // },
-   async login() {
-      this.isLoading = true
-      this.errorMessage = ''
-      console.log('Hello login')
-      const payload = {
-        mem_id: this.email,
-        mem_pwd: this.password,
-      }
-      console.log("This .isloaing: "+this.isLoading);
-      await this.$axios
-        .post('mem_auth', payload)
-        .then((res) => {
-          console.log('RES: ' + res.data)
-          const resData = res.data
-          console.log('Status: ' + res.status)
-          if (res.status !== 200) {
-            this.isLoading = false
-            this.errorMessage = 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ'
-            return
-          }
+    async userLogin() {
+      try {
+        this.isLoading = true
+        this.errorMessage = ''
+        const response = await this.$auth.loginWith('local', { data: this.login })
 
-          console.log('Token: ' + resData.accessToken)
-          if (resData.accessToken) {
-            console.log('Get token')
-            const payload = {
-              name: resData.userName,
-              id: resData.userId,
-              phone: resData.userPhone,
-              token: resData.accessToken,
-            }
-            this.$store.dispatch('login', payload)
-            console.log(this.$store.getters.oggedInUser)
-            this.$router.push('/admin')
-          } else {
-            console.log('No token')
-            this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
-          }
-        })
-        .catch((er) => {
-          console.log('ERROR: ' + er)
-          this.errorMessage = er.data
-        })
+        if (response.status !== 200) {
+          this.isLoading = false
+          this.errorMessage = 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ'
+          return
+        }
+        if (response.data.accessToken) {
+          this.$router.push('/admin')
+        } else {
+          console.log('No token')
+          this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
+        }
+
+
+        console.log(response)
+      } catch (err) {
+        console.log(err)
+      }
       this.isLoading = false
-      console.log('payload: ' + payload)
     },
+    //  async login() {
+    //     this.isLoading = true
+    //     this.errorMessage = ''
+    //     const payload = {
+    //       mem_id: this.email,
+    //       mem_pwd: this.password,
+    //     }
+    //     console.log("Loading from server: "+this.isLoading);
+    //     await this.$axios
+    //       .post('mem_auth', payload)
+    //       .then((res) => {
+    //         console.log('RES: ' + res.data)
+    //         const resData = res.data
+    //         console.log('Status: ' + res.status)
+    //         if (res.status !== 200) {
+    //           this.isLoading = false
+    //           this.errorMessage = 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ'
+    //           return
+    //         }
+
+    //         console.log('Token: ' + resData.accessToken)
+    //         if (resData.accessToken) {
+    //           console.log('Get token')
+    //           const payload = {
+    //             name: resData.userName,
+    //             id: resData.userId,
+    //             phone: resData.userPhone,
+    //             token: resData.accessToken,
+    //           }
+    //           this.$store.dispatch('login', payload)
+    //           console.log(this.$store.getters.oggedInUser)
+    //           this.$router.push('/admin')
+    //         } else {
+    //           console.log('No token')
+    //           this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
+    //         }
+    //       })
+    //       .catch((er) => {
+    //         console.log('Server error: ' + er)
+    //         this.errorMessage = er.data
+    //       })
+    //     this.isLoading = false
+    //   },
   },
 }
 </script>

@@ -1,4 +1,10 @@
 {
+  "BasicAlert": {
+    "description": "Auto imported from components/BasicAlert.vue"
+  },
+  "CardDashBoard": {
+    "description": "Auto imported from components/CardDashBoard.vue"
+  },
   "Carousel3d": {
     "description": "Auto imported from components/Carousel3d.vue"
   },
@@ -17,6 +23,9 @@
   "LoadingIndicator": {
     "description": "Auto imported from components/LoadingIndicator.vue"
   },
+  "MyChart": {
+    "description": "Auto imported from components/MyChart.vue"
+  },
   "NewComing": {
     "description": "Auto imported from components/NewComing.vue"
   },
@@ -26,11 +35,17 @@
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },
+  "OrderDetail": {
+    "description": "Auto imported from components/OrderDetail.vue"
+  },
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
   "Settlement": {
     "description": "Auto imported from components/Settlement.vue"
+  },
+  "SusscessDialog": {
+    "description": "Auto imported from components/SusscessDialog.vue"
   },
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
@@ -40,5 +55,11 @@
   },
   "Wallet": {
     "description": "Auto imported from components/Wallet.vue"
+  },
+  "OrderSumaryCard": {
+    "description": "Auto imported from components/orderSumaryCard.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
   }
 }

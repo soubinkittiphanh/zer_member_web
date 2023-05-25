@@ -8,11 +8,12 @@
 export default {
     mounted(){
         this.logout();
-        this.$router.push("/admin/login");
     },
     methods:{
-        logout(){
-            this.$store.dispatch('logout');
+        async logout(){
+            await this.$auth.logout();
+            this.$router.push("/admin/login");
+            // this.$store.dispatch('logout');
         }
     }
 }

@@ -17,20 +17,27 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/app_logo.ico' }
     ],
-    script:[
-      {src:"https://kit.fontawesome.com/ca11dcec40.js",
-      rel:"stylesheet"
-    }
+    script: [
+      {
+        src: "https://kit.fontawesome.com/ca11dcec40.js",
+        rel: "stylesheet"
+      }
     ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/mycss.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+      // { src: '~/plugins/chart.js', ssr: false },
   plugins: [
-    // { src: '~/plugins/vue-carousel-3d', ssr: false }
+    { src: '~/plugins/vue-sweetalert2', ssr: false },
+    {
+      src: '@/plugins/apex-chart.js',
+      mode: 'client',
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,7 +46,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
@@ -53,20 +60,49 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'http://localhost:8080'
+    // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'
+    baseURL: 'http://localhost:8080',
+    // credentials: true,
+    // headers: {
+    //   common: {
+    //     'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
+    //   }
+    // },
+    // proxy: true
     // baseURL: 'https://sitapionlinestore.herokuapp.com'
-    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
+    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
   },
   auth: {
+    // strategies: {
+    //   local: {
+    //     endpoints: {
+    //       login: { url: 'mem_auth', method: 'post', propertyName: 'data.accessToken' },
+    //       user: { url: 'me', method: 'get', propertyName: 'data' },
+    //       logout: false,
+    //       tokenType: 'Bearer'
+    //     }
+    //   }
+    // },  
     strategies: {
       local: {
+        token: {
+          property: 'accessToken',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
         endpoints: {
-          login: { url: 'mem_auth', method: 'post', propertyName: 'data.accessToken' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
-          logout: false
+          login: { url: 'mem_auth', method: 'post' },
+          logout: { url: 'logout', method: 'get' },
+          user: { url: 'me', method: 'get' }
         }
       }
-    },  redirect: {
+    },
+    redirect: {
       login: '/admin/login'
     }
   },

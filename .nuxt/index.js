@@ -16,6 +16,8 @@ import { createStore } from './store.js'
 import nuxt_plugin_plugin_d3473fe0 from 'nuxt_plugin_plugin_d3473fe0' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_plugin_4cc55dde from 'nuxt_plugin_plugin_4cc55dde' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_axios_54fbb9b4 from 'nuxt_plugin_axios_54fbb9b4' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_vuesweetalert2_1def2d6e from 'nuxt_plugin_vuesweetalert2_1def2d6e' // Source: ../plugins/vue-sweetalert2 (mode: 'client')
+import nuxt_plugin_apexchart_56afe430 from 'nuxt_plugin_apexchart_56afe430' // Source: ../plugins/apex-chart.js (mode: 'client')
 import nuxt_plugin_auth_0a9d894a from 'nuxt_plugin_auth_0a9d894a' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -45,7 +47,7 @@ Vue.component(Nuxt.name, Nuxt)
 
 Object.defineProperty(Vue.prototype, '$nuxt', {
   get() {
-    const globalNuxt = this.$root.$options.$nuxt
+    const globalNuxt = this.$root ? this.$root.$options.$nuxt : null
     if (process.client && !globalNuxt && typeof window !== 'undefined') {
       return window.$nuxt
     }
@@ -70,9 +72,9 @@ function registerModule (path, rawModule, options = {}) {
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext, config)
-
   const store = createStore(ssrContext)
+  const router = await createRouter(ssrContext, config, { store })
+
   // Add this.$router into store actions/mutations
   store.$router = router
 
@@ -154,6 +156,7 @@ async function createApp(ssrContext, config = {}) {
     req: ssrContext ? ssrContext.req : undefined,
     res: ssrContext ? ssrContext.res : undefined,
     beforeRenderFns: ssrContext ? ssrContext.beforeRenderFns : undefined,
+    beforeSerializeFns: ssrContext ? ssrContext.beforeSerializeFns : undefined,
     ssrContext
   })
 
@@ -223,6 +226,14 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_axios_54fbb9b4 === 'function') {
     await nuxt_plugin_axios_54fbb9b4(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuesweetalert2_1def2d6e === 'function') {
+    await nuxt_plugin_vuesweetalert2_1def2d6e(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_apexchart_56afe430 === 'function') {
+    await nuxt_plugin_apexchart_56afe430(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_0a9d894a === 'function') {

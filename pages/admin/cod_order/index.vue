@@ -4,17 +4,18 @@
       <dialog-classic-message :message="message" @closedialog="message = null">
       </dialog-classic-message>
     </v-dialog>
-    <v-dialog v-model="payment" max-width="300px">
-      <settlement :user-id="formData.cusId" :amount="paymentAmount" :order-id="OrderIdSelected"
-        @closewallet="payment = false" @reload="fetchData()"></settlement>
+    <v-dialog v-model="payment" max-width="1024">
+      <settlement :amount="paymentAmount" :order-id="OrderIdSelected" :locking-session-id="orderLockingSessionId"
+        :key="componentSettlementKey" @close-dialog="payment = false" @reload="payment = false, loadData()"></settlement>
     </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
+
     <v-card>
       <v-card-title>
-        <v-row>
-          <v-col cols="12" lg="5">
+        <v-layout row wrap>
+          <v-col cols="6">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
               max-width="290px" min-width="auto">
               <template v-slot:activator="{ on, attrs }">
@@ -34,46 +35,90 @@
               </template>
               <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
             </v-menu>
-            <div><span> ຈຳນວນ: {{ getFormatNum(countOrder) }} ອໍເດີ</span></div>
-            <span> ລາຄາລວມ: {{ totalSale }}</span>
-            <div>
-              <span> ສ່ວນຫລຸດ: {{ totalSaleOriginal }}</span>
-            </div>
-            <div>
-              <span> ຍອດເຫລືອ: {{ getFormatNum(totalSale.replaceAll(",", "") - totalSaleOriginal.replaceAll(",", ""))
-              }}</span>
-            </div>
+
           </v-col>
-          <v-col cols="12" lg="5">
+          <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
-            <v-btn @click="fetchData"> ດຶງລາຍງານ </v-btn>
+            <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
           </v-col>
-        </v-row>
+        </v-layout>
+
+
+
       </v-card-title>
 
-      <v-data-table v-if="loaddata" :headers="headers" :search="search" :items="loaddata">
+      <v-card-text>
+        <v-layout row wrap>
+          <v-row>
+
+            <v-col cols="6" lg="6">
+              <order-sumary-card :orderDetail="{
+                'title': 'ຍອດບິນ',
+                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount, 'gross': getFormatNum(totalSale.replaceAll(',', '') -
+                  totalDiscount.replaceAll(',', ''))
+              }">
+
+              </order-sumary-card>
+            </v-col>
+            <v-col cols="6" lg="6">
+              <!-- <order-sumary-card :orderDetail="this.unpaidCodOrder">
+
+  </order-sumary-card> -->
+            </v-col>
+          </v-row>
+
+
+        </v-layout>
+      </v-card-text>
+
+      <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
         <template v-slot:[`item.function`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="editItem(item)
-                                                      wallet = true
-                                                    ">
+          wallet = true
+            ">
 
             <i class="fas fa-wallet"></i>
           </v-btn>
+        </template>
+        <template v-slot:[`item.cusTel`]="{ item }">
+
+          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
+
+            <!-- <i class="fas fa-whatsapp"></i> -->
+            {{ item.cusTel }}
+            <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
+          </v-btn>
+
         </template>
       </v-data-table>
     </v-card>
   </div>
 </template>
 <script>
+// import OrderDetail from '~/components/OrderDetail.vue'
+// swalError2 = (swal, title, message)
+import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
+  // components: { OrderDetail },
   middleware: 'auths',
   data() {
     return {
+      formData: {
+        cusId: 10000,
+        cusBalance: 0,
+      },
+      orderLockingSessionId: '',
+      componentSettlementKey: 1,
       payment: false,
       paymentAmount: 0,
       OrderIdSelected: "",
+      whatsappContactLink: '',
+      componentKey: 0,
+      dialogOrderDetail: false,
+      selectedOrderId: '',
+      wallet: false,
       isedit: false,
       dialog: false,
       isloading: false,
@@ -83,52 +128,40 @@ export default {
       name: '',
       search: '',
       userId: null,
-      loaddata: [],
+      orderHeaderList: [],
       loadDataNoCancelOrder: [],
-      formData: {
-        cusId: 10000,
-        cusBalance: 0,
-      },
       headers: [
-
         {
           text: 'ວັນທີ',
           align: 'center',
-          value: 'txn_date',
+          value: 'bookingDate',
           sortable: true,
         },
         {
-          text: 'ຈນ ວັນ',
+          text: 'ຈຳນວນ ວັນ',
           align: 'center',
-          value: 'dueDate',
+          value: 'codCount',
           sortable: true,
         },
-        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cus_name' },
-        { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
-        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cus_addr' },
-        { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
-        {
-          text: 'ລາຄາ',
-          align: 'end',
-          value: 'product_price',
-          sortable: true,
-        },
+        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cusName' },
+        { text: 'ເບີໂທ', align: 'center', value: 'cusTel' },
+        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cusAddress' },
         {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
-          value: 'product_discount',
+          value: 'discount',
           sortable: true,
         },
         {
           text: 'ລວມ',
           align: 'end',
-          value: 'order_price_total',
+          value: 'cartTotal',
           sortable: false,
         },
         {
           text: 'ຂົນສົ່ງ',
           align: 'end',
-          value: 'shipping',
+          value: 'shippingCompany',
           sortable: false,
         },
         {
@@ -140,13 +173,7 @@ export default {
         {
           text: 'ຮ້ານ',
           align: 'end',
-          value: 'outlet',
-          sortable: false,
-        },
-        {
-          text: 'ສະຖານະ',
-          align: 'end',
-          value: 'recordStatusText',
+          value: 'shopName',
           sortable: false,
         },
 
@@ -156,8 +183,8 @@ export default {
           value: 'function',
           sortable: false,
         },
-      ],
 
+      ],
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -179,7 +206,8 @@ export default {
     }
   },
   async created() {
-    await this.fetchData()
+    await this.loadData()
+    // this.alertSucceed();
   },
   watch: {
     message(val) {
@@ -190,23 +218,57 @@ export default {
       this.dialog = false
     },
     isedit(v) {
-      if (!v) this.formData.cusId = '1XXX'
+      if (!v) this.form_data.cus_id = '1XXX'
     },
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
-      this.fetchData()
+      this.loadData()
     },
     date2(val) {
       this.dateFormatted2 = this.formatDate(this.date2)
-      this.fetchData()
+      this.loadData()
     },
   },
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.date)
     },
+    totalSale() {
+      let total = 0
+      this.noCancelData.forEach((el) => {
+        console.log("====>", el.cartTotal);
+        total += parseInt(el.cartTotal)
+      })
+      console.log('Price total: ' + total)
+      // return previousValue.cartTotal + currentValue.cartTotal
+      return this.getFormatNum(total)
+      // return total
+    },
+    totalSaleOriginal() {
+      let total = 0
+      this.noCancelData.forEach((el) => {
+        console.log("====>", el.cartTotal);
+        total += parseInt(el.cartTotal)
+      })
+      console.log('Price total: ' + total)
+      // return previousValue.cartTotal + currentValue.cartTotal
+      return this.getFormatNum(total)
+      // return total
+    },
+    totalDiscount() {
+      let total = 0
+      this.noCancelData.forEach((el) => {
+        console.log("====>", el.discount);
+        total += parseInt(el.discount)
+      })
+      console.log('Price total: ' + total)
+      // return previousValue.cartTotal + currentValue.cartTotal
+      return this.getFormatNum(total)
+      // return total
+    },
     noCancelData() {
-      this.loaddata.forEach(element => {
+      this.loadDataNoCancelOrder = []
+      this.orderHeaderList.forEach(element => {
         console.log(element.recordStatus);
         if (element.recordStatus === 1) {
           console.log("Concept applied");
@@ -215,68 +277,80 @@ export default {
       });
       return this.loadDataNoCancelOrder;
     },
-
-    totalSale() {
-      let total = 0
-      this.noCancelData.forEach((el) => {
-        total += parseInt(el.order_price_total.replaceAll(',', ''))
-      })
-      return this.getFormatNum(total)
-      // return total
-    },
-    totalSaleOriginal() {
-      let total = 0
-      this.noCancelData.forEach((el) => {
-        total += parseInt(el.product_discount.replaceAll(',', ''))
-      })
-      return this.getFormatNum(total)
-    },
-    countOrder() {
-      return this.loadDataNoCancelOrder.length;
-    },
-
-
+  },
+  beforeEnter() {
+    console.log("Hook is being called");
+    this.refreshComponent();
   },
   methods: {
+    // alertSucceed() {
+    //   //  swalSuccess(this.$swal,'Succeed','Your transaction completed');
+    //   swalError2(this.$swal, "Error", 'message');
+    // },
+    whatsappLink(item) {
+      // const completeTel = tel.substring(tel.length-7);
+      const tel = item.cusTel.trim();
+
+      // console.log("Customer tel: ",tel);
+      const completeTel = tel.substring(tel.length - 8);
+      this.whatsappContactLink = `https://api.whatsapp.com/send?phone=+85620${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
+      // return `https://api.whatsapp.com/send?phone=${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
+    },
     getFormatNum(val) {
       return new Intl.NumberFormat().format(val)
+    },
+    editItem(payload) {
+      console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
+      console.log("Order id", payload.order_id);
+
+      this.componentSettlementKey += 1;
+      this.paymentAmount = +payload.order_price_total.replaceAll(",", "")
+      this.OrderIdSelected = payload.orderId
+      this.orderLockingSessionId = payload.lockingSessionId;
+      this.payment = true;
+    },
+    handleEvent() {
+      this.dialogOrderDetail = false;
     },
     codDayCount(fromDate) {
       const sqlTojsDate = fromDate.split('-')[1] + '/' + fromDate.split('-')[2] + '/' + fromDate.split('-')[0]
       const date1 = new Date(sqlTojsDate);
       const date2 = new Date();
-      const difference =   date2.getTime()-date1.getTime();
+      const difference = date2.getTime() - date1.getTime();
       const TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
       return TotalDays;
     },
-    async fetchData() {
+    async loadData() {
       this.isloading = true
+
       await this.$axios
-        .get('order_by_payment/?fromDate=' + this.date + '&toDate=' + this.date2 + '&paymentCode=COD')
+        .get('api/dynamicCustomer/findDymCustomerByCOD?fdate=' + this.date + '&tdate=' + this.date2)
         .then((res) => {
-          this.loaddata = res.data.map((el) => {
+          // return console.log('Data => ', res.data);
+          this.orderHeaderList = res.data.map((el) => {
             return {
-              order_id: el.order_id + ' - ' + el.locking_session_id,
-              user_id: el.user_id,
-              product_id: el.pro_name,
-              cus_name: el.name + ' ' + el.tel,
-              cus_tel: el.tel,
-              cus_addr: el.cus_address,
-              shipping: el.shipping,
-              payment: el.payment_code,
-              product_amount: el.product_amount,
-              outlet: el.shop_name,
-              shipping_fee: el.shipping_fee_by,
-              product_price: this.getFormatNum(el.product_price),
-              order_price_total: this.getFormatNum(((el.product_price * el.product_amount) + el.rider_fee) - el.product_discount),
-              product_discount: this.getFormatNum(el.product_discount),
-              txn_date: el.txn_date.split('T')[0],
-              dueDate: this.codDayCount(el.txn_date.split('T')[0]),
-              recordStatus: el.record_status,
-              recordStatusText: el.record_status===1?'Effeced':el.record_status===2?'Cancel':'Return',
+              'cartTotal': el.cart_total,
+              'codFee': el.cod_fee,
+              'cusAddress': el.dest_delivery_branch,
+              'discount': el.discount,
+              'id': el.id,
+              'lockingSessionId': el.locking_session_id,
+              'cusName': el.name,
+              'payment': el.payment_code,
+              'riderFee': el.rider_fee,
+              'shippingFeeBy': el.shipping_fee_by,
+              'shopName': el.outlet_name,
+              'shippingCompany': el.source_delivery_branch,
+              'cusTel': el.tel,
+              'bookingDate': el.txn_date.split('T')[0],
+              'recordStatus': 1,
+              'orderId': el.order_id,
+              'codCount': this.codDayCount(el.txn_date.split('T')[0]),
+              'order_price_total': this.getFormatNum(el.cart_total),
             }
 
           });
+          console.log(this.orderHeaderList.length);
         })
         .catch((er) => {
           this.message = er
@@ -296,12 +370,6 @@ export default {
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
-    editItem(payload) {
-      console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
-      this.paymentAmount = +payload.order_price_total.replaceAll(",", "")
-      this.OrderIdSelected = payload.order_id
-      this.payment = true;
-    }
   },
 }
 </script>
@@ -310,5 +378,9 @@ export default {
 .text-h5,
 .grey {
   font-family: 'Noto Sans Lao';
+}
+
+table {
+  border: 1px solid black;
 }
 </style>

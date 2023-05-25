@@ -121,8 +121,5 @@ export default {
 </script>
 
 <style scoped>
-.text-h5,
-.grey {
-    font-family: 'Noto Sans Lao';
-}
+
 </style>

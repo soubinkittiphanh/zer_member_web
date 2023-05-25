@@ -42,18 +42,26 @@ export default function (ctx, inject) {
   // Register strategies
   // local
   $auth.registerStrategy('local', new LocalScheme($auth, {
+  "token": {
+    "property": "accessToken",
+    "global": true
+  },
+  "user": {
+    "property": "user"
+  },
   "endpoints": {
     "login": {
       "url": "mem_auth",
-      "method": "post",
-      "propertyName": "data.accessToken"
+      "method": "post"
+    },
+    "logout": {
+      "url": "logout",
+      "method": "get"
     },
     "user": {
       "url": "me",
-      "method": "get",
-      "propertyName": "data"
-    },
-    "logout": false
+      "method": "get"
+    }
   },
   "name": "local"
 }))

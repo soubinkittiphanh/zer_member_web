@@ -1,21 +1,17 @@
 <template>
   <div class="text-center">
-    <!-- {{ cancelData.length }}  -->
-    <v-dialog v-model="dialog" max-width="300px" persistent>
-      <dialog-classic-message :message="message" @closedialog="message = null">
-      </dialog-classic-message>
-    </v-dialog>
-    <v-dialog v-model="payment" max-width="300px">
-      <settlement :user-id="formData.cusId" :amount="paymentAmount" :order-id="OrderIdSelected"
-        @closewallet="payment = false" @reload="fetchData()"></settlement>
-    </v-dialog>
+
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
+    <v-dialog v-model="dialogOrderDetail" max-width="1024" persistent>
+      <order-detail :key="componentOrderItemKey" :order-id="selectedOrderId" @close-dialog="handleEvent"></order-detail>
+    </v-dialog>
+
     <v-card>
       <v-card-title>
-        <v-row>
-          <v-col cols="12" lg="5">
+        <v-layout row wrap>
+          <v-col cols="6">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
               max-width="290px" min-width="auto">
               <template v-slot:activator="{ on, attrs }">
@@ -35,101 +31,105 @@
               </template>
               <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
             </v-menu>
-            <div><span> ຈຳນວນ: {{ getFormatNum(countOrder) }} ອໍເດີ</span></div>
-            <span> ລາຄາລວມ: {{ totalSale }}</span>
-            <div>
-              <span> ສ່ວນຫລຸດ: {{ totalSaleOriginal }}</span>
-            </div>
-            <div>
-              <span> ຍອດເຫລືອ: {{ getFormatNum(totalSale.replaceAll(",", "") - totalSaleOriginal.replaceAll(",", ""))
-              }}</span>
-            </div>
+
           </v-col>
-          <v-col cols="12" lg="5">
+          <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
-            <v-btn @click="fetchData"> ດຶງລາຍງານ </v-btn>
+            <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
           </v-col>
-        </v-row>
+        </v-layout>
       </v-card-title>
+      <v-divider></v-divider>
+      <v-card-text>
+        <v-layout row wrap>
+          <v-row>
 
-      <v-data-table v-if="cancelData" :headers="headers" :search="search" :items="cancelData">
+            <v-col cols="6" lg="6">
+              <order-sumary-card :orderDetail="this.orderDetailProp">
+
+              </order-sumary-card>
+            </v-col>
+            <v-col cols="6" lg="6">
+              <!-- <order-sumary-card :orderDetail="this.unpaidCodOrder">
+
+              </order-sumary-card> -->
+            </v-col>
+          </v-row>
+        </v-layout>
+      </v-card-text>
+
+      <v-data-table :headers="headers" :search="search" :items="orderHeaderList">
         <template v-slot:[`item.function`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="editItem(item)
-                                                      wallet = true
-                                                    ">
-
-            <i class="fas fa-wallet"></i>
+          wallet = true
+            ">
+            <i class="fas fa-eye"></i>
           </v-btn>
+
+        </template>
+        <template v-slot:[`item.cusTel`]="{ item }">
+
+          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
+            {{ item.cusTel }}
+            <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
+          </v-btn>
+
         </template>
       </v-data-table>
     </v-card>
   </div>
 </template>
 <script>
+import OrderDetail from '~/components/OrderDetail.vue'
 export default {
+  components: { OrderDetail },
   middleware: 'auths',
   data() {
     return {
-      payment: false,
-      paymentAmount: 0,
-      OrderIdSelected: "",
-      isedit: false,
+      whatsappContactLink: '',
+      componentOrderItemKey: 1,
+      dialogOrderDetail: false,
+      selectedOrderId: '',
+      wallet: false,
       dialog: false,
       isloading: false,
       dialogForm: false,
-      message: '',
       valid: true,
       name: '',
       search: '',
       userId: null,
-      loaddata: [],
-      loadDataCancelOrder: [],
-      formData: {
-        cusId: 10000,
-        cusBalance: 0,
-      },
+      orderHeaderList: [],
+      loadDataNoCancelOrder: [],
+      codPaid: [],
       headers: [
-
         {
           text: 'ວັນທີ',
           align: 'center',
-          value: 'txn_date',
+          value: 'bookingDate',
           sortable: true,
         },
-        {
-          text: 'ຈນ ວັນ',
-          align: 'center',
-          value: 'dueDate',
-          sortable: true,
-        },
-        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cus_name' },
-        { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
-        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cus_addr' },
-        { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
-        {
-          text: 'ລາຄາ',
-          align: 'end',
-          value: 'product_price',
-          sortable: true,
-        },
+        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cusName' },
+        { text: 'ເບີໂທ', align: 'center', value: 'cusTel' },
+        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cusAddress' },
+        { text: 'ສາເຫດຍົກເລີກ', align: 'center', value: 'cancelReason' },
         {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
-          value: 'product_discount',
+          value: 'discount',
           sortable: true,
         },
         {
           text: 'ລວມ',
           align: 'end',
-          value: 'order_price_total',
+          value: 'cartTotal',
           sortable: false,
         },
         {
           text: 'ຂົນສົ່ງ',
           align: 'end',
-          value: 'shipping',
+          value: 'shippingCompany',
           sortable: false,
         },
         {
@@ -141,25 +141,17 @@ export default {
         {
           text: 'ຮ້ານ',
           align: 'end',
-          value: 'outlet',
-          sortable: false,
-        },
-        {
-          text: 'ສະຖານະ',
-          align: 'end',
-          value: 'recordStatusText',
-          sortable: false,
-        },
-        {
-          text: 'ເຫດຜົນ',
-          align: 'end',
-          value: 'reason',
+          value: 'shopName',
           sortable: false,
         },
 
-
+        {
+          text: 'ລາຍລະອຽດ',
+          align: 'end',
+          value: 'function',
+          sortable: false,
+        },
       ],
-
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -181,113 +173,105 @@ export default {
     }
   },
   async created() {
-    await this.fetchData()
+    await this.loadData()
   },
   watch: {
-    message(val) {
-      if (val != null) {
-        this.dialog = true
-        return
-      }
-      this.dialog = false
-    },
-    isedit(v) {
-      if (!v) this.formData.cusId = '1XXX'
-    },
+
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
-      this.fetchData()
+      this.loadData()
     },
     date2(val) {
       this.dateFormatted2 = this.formatDate(this.date2)
-      this.fetchData()
+      this.loadData()
     },
   },
   computed: {
-    computedDateFormatted() {
-      return this.formatDate(this.date)
-    },
-    cancelData() {
-      this.loaddata.forEach(element => {
-        console.log('status: ',element.recordStatus);
+    orderDetailProp() {
 
-        if (element.recordStatus !== 1) {
-          console.log("Concept applied");
-          this.loadDataCancelOrder.push(element)
-        }
-      });
-      return this.loadDataCancelOrder;
-    },
+      let orderDetail = {}
 
-    totalSale() {
-      let total = 0
-      this.loadDataCancelOrder.forEach((el) => {
-        total += parseInt(el.order_price_total.replaceAll(',', ''))
-      })
-      return this.getFormatNum(total)
-      // return total
-    },
-    totalSaleOriginal() {
-      let total = 0
-      this.loadDataCancelOrder.forEach((el) => {
-        total += parseInt(el.product_discount.replaceAll(',', ''))
-      })
-      return this.getFormatNum(total)
-    },
-    countOrder() {
-      return this.loadDataCancelOrder.length;
-    },
+      const totalPrice = this.orderHeaderList.reduce((total, item) => {
+        console.log("cart_total: ",item.cartTotal);
+        return total + item.cartTotal;
+      }, 0);
+      const totalDiscount = this.orderHeaderList.reduce((total, item) => {
+        console.log("discount: ",item.discount);
+        return total + item.discount;
+      }, 0);
 
-
+      orderDetail.amount = this.orderHeaderList.length
+      orderDetail.sale = this.getFormatNum(totalPrice)
+      orderDetail.discount = this.getFormatNum(totalDiscount)
+      orderDetail.gross = this.getFormatNum(totalPrice - totalDiscount)
+      orderDetail.title = 'ຍອດບິນ ຍົກເລີກ'
+      return orderDetail;
+    }
+  },
+  beforeEnter() {
+    console.log("Hook is being called");
+    this.refreshComponent();
   },
   methods: {
+    whatsappLink(item) {
+      // const completeTel = tel.substring(tel.length-7);
+      const tel = item.cusTel.trim();
+
+      // console.log("Customer tel: ",tel);
+      const completeTel = tel.substring(tel.length - 8);
+      this.whatsappContactLink = `https://api.whatsapp.com/send?phone=+85620${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
+      // return `https://api.whatsapp.com/send?phone=${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
+    },
     getFormatNum(val) {
       return new Intl.NumberFormat().format(val)
     },
-    codDayCount(fromDate) {
-      const sqlTojsDate = fromDate.split('-')[1] + '/' + fromDate.split('-')[2] + '/' + fromDate.split('-')[0]
-      const date1 = new Date(sqlTojsDate);
-      const date2 = new Date();
-      const difference =   date2.getTime()-date1.getTime();
-      const TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-      return TotalDays;
+    editItem(item) {
+      this.componentOrderItemKey += 1;
+      this.selectedOrderId = item.orderId.toString()
+      this.dialogOrderDetail = !this.dialogOrderDetail;
     },
-    async fetchData() {
+    handleEvent() {
+      this.dialogOrderDetail = false;
+    },
+    async loadData() {
       this.isloading = true
+      // TODO: How to split data between cod order[not yet paid] and all order
       await this.$axios
-        .get('order_by_payment/?fromDate=' + this.date + '&toDate=' + this.date2 + '&paymentCode=ALL')
+        .get('/api/findCancelOrderByDate/?fDate=' + this.date + '&tDate=' + this.date2)
         .then((res) => {
-          this.loaddata = res.data.map((el) => {
+          // return console.log('Data => ', res.data);
+          this.orderHeaderList = res.data.map((el) => {
             return {
-              order_id: el.order_id + ' - ' + el.locking_session_id,
-              user_id: el.user_id,
-              product_id: el.pro_name,
-              cus_name: el.name + ' ' + el.tel,
-              cus_tel: el.tel,
-              cus_addr: el.cus_address,
-              shipping: el.shipping,
-              payment: el.payment_code,
-              product_amount: el.product_amount,
-              outlet: el.shop_name,
-              shipping_fee: el.shipping_fee_by,
-              product_price: this.getFormatNum(el.product_price),
-              order_price_total: this.getFormatNum(((el.product_price * el.product_amount) + el.rider_fee) - el.product_discount),
-              product_discount: this.getFormatNum(el.product_discount),
-              txn_date: el.txn_date.split('T')[0],
-              dueDate: this.codDayCount(el.txn_date.split('T')[0]),
-              function: el.order_id,
-              recordStatus: el.record_status,
-              recordStatusText: el.record_status===1?'Effeced':el.record_status===2?'Cancel':'Return',
-              reason: el.cancel_reason,
+              'cartTotal': el.cart_total,
+              'codFee': el.cod_fee,
+              'cusAddress': el.dest_delivery_branch,
+              'discount': el.discount,
+              'id': el.id,
+              'lockingSessionId': el.locking_session_id,
+              'cusName': el.name,
+              'payment': el.payment_code,
+              'riderFee': el.rider_fee,
+              'shippingFeeBy': el.shipping_fee_by,
+              'shopName': el.outlet_name,
+              'shippingCompany': el.source_delivery_branch,
+              'cusTel': el.tel,
+              'bookingDate': el.txn_date.split('T')[0],
+              'recordStatus': el.record_status,
+              'orderId': el.order_id,
+              'cancelReason': el.cancel_reason,
+              'paymentStatus': 'PENDING'
             }
 
           });
+
+          console.log(this.orderHeaderList.length);
+          this.isloading = false
         })
         .catch((er) => {
           this.message = er
           console.log('Error: ' + er)
+          this.isloading = false
         })
-      this.isloading = false
     },
     formatDate(date) {
       if (!date) return null
@@ -301,12 +285,6 @@ export default {
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
-    editItem(payload) {
-      console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
-      this.paymentAmount = +payload.order_price_total.replaceAll(",", "")
-      this.OrderIdSelected = payload.order_id
-      this.payment = true;
-    }
   },
 }
 </script>
@@ -316,4 +294,9 @@ export default {
 .grey {
   font-family: 'Noto Sans Lao';
 }
+
+table {
+  border: 1px solid black;
+}
 </style>
+

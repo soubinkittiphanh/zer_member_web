@@ -8,6 +8,9 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
+    <v-dialog v-model="dialogOrderDetail" max-width="1024" persistent>
+      <order-detail :key="componentKey" :order-id="selectedOrderId" @close-dialog="handleEvent"></order-detail>
+    </v-dialog>
 
     <v-card>
       <v-card-title>
@@ -37,55 +40,70 @@
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
-            <v-btn @click="fetchData"> ດຶງລາຍງານ </v-btn>
+            <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
           </v-col>
         </v-layout>
-
-        <v-layout row wrap>
-          <v-col cols="12" lg="12">
-            <v-card class="ml-4">
-              <v-table density="compact">
-                <tbody>
-                  <tr>
-                    <td class="text-right">ຈຳນວນ: </td>
-
-                    <td class="text-right">{{ getFormatNum(noCancelData.length) }} ອໍເດີ</td>
-                  </tr>
-                  <tr>
-                    <td class="text-right">ຍອດຂາຍ: </td>
-
-                    <td class="text-right">{{ totalSale }} </td>
-                  </tr>
-                  <tr>
-                    <td class="text-right">ສ່ວນຫລຸດ: </td>
-
-                    <td class="text-right">{{ totalSaleOriginal }} </td>
-                  </tr>
-                  <tr>
-                    <td class="text-right">ຍອດເຫລືອ: </td>
-
-                    <td class="text-right">{{ getFormatNum(totalSale.replaceAll(",", "") -
-                      totalSaleOriginal.replaceAll(",", "")) }} </td>
-                  </tr>
-                </tbody>
-              </v-table>
-            </v-card>
-          </v-col>
-
-        </v-layout>
-
       </v-card-title>
+      <v-divider></v-divider>
+      <v-card-text>
+        <v-layout row wrap>
+          <v-row>
 
-      <v-data-table v-if="loaddata" :headers="headers" :search="search" :items="loaddata">
+            <v-col cols="6" lg="6">
+              <order-sumary-card :orderDetail="{
+                'title': 'ຍອດບິນ',
+                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount, 'gross': getFormatNum(totalSale.replaceAll(',', '') -
+                  totalDiscount.replaceAll(',', ''))
+              }">
+
+              </order-sumary-card>
+            </v-col>
+            <v-col cols="6" lg="6">
+              <order-sumary-card :orderDetail="this.unpaidCodOrder">
+
+              </order-sumary-card>
+            </v-col>
+          </v-row>
+        </v-layout>
+      </v-card-text>
+
+      
+      <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
+        <template v-slot:[`item.function`]="{ item }">
+
+          <v-btn color="blue darken-1" text @click="editItem(item)
+          wallet = true
+            ">
+
+            <i class="fas fa-eye"></i>
+          </v-btn>
+
+        </template>
+        <template v-slot:[`item.cusTel`]="{ item }">
+
+          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
+
+            <!-- <i class="fas fa-whatsapp"></i> -->
+            {{ item.cusTel }}
+            <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
+          </v-btn>
+
+        </template>
       </v-data-table>
     </v-card>
   </div>
 </template>
 <script>
+import OrderDetail from '~/components/OrderDetail.vue'
 export default {
+  components: { OrderDetail },
   middleware: 'auths',
   data() {
     return {
+      whatsappContactLink: '',
+      componentKey: 0,
+      dialogOrderDetail: false,
+      selectedOrderId: '',
       wallet: false,
       isedit: false,
       dialog: false,
@@ -96,47 +114,35 @@ export default {
       name: '',
       search: '',
       userId: null,
-      loaddata: [],
+      orderHeaderList: [],
       loadDataNoCancelOrder: [],
+      codPaid: [],
       headers: [
-        // {
-        //   text: 'ອໍເດີໄອດີ',
-        //   align: 'center',
-        //   value: 'order_id',
-        // },
-        // { text: 'ລະຫັດຜູ້ຊື້', align: 'center', value: 'user_id' },
         {
           text: 'ວັນທີ',
           align: 'center',
-          value: 'txn_date',
+          value: 'bookingDate',
           sortable: true,
         },
-        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cus_name' },
-        { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'product_id' },
-        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cus_addr' },
-        { text: 'ຈຳນວນ', align: 'center', value: 'product_amount' },
-        {
-          text: 'ລາຄາ',
-          align: 'end',
-          value: 'product_price',
-          sortable: true,
-        },
+        { text: 'ຊື່ລູກຄ້າ', align: 'center', value: 'cusName' },
+        { text: 'ເບີໂທ', align: 'center', value: 'cusTel' },
+        { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cusAddress' },
         {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
-          value: 'product_discount',
+          value: 'discount',
           sortable: true,
         },
         {
           text: 'ລວມ',
           align: 'end',
-          value: 'order_price_total',
+          value: 'cartTotal',
           sortable: false,
         },
         {
           text: 'ຂົນສົ່ງ',
           align: 'end',
-          value: 'shipping',
+          value: 'shippingCompany',
           sortable: false,
         },
         {
@@ -148,14 +154,14 @@ export default {
         {
           text: 'ຮ້ານ',
           align: 'end',
-          value: 'outlet',
+          value: 'shopName',
           sortable: false,
         },
 
         {
-          text: 'ສະຖານະ',
+          text: 'ລາຍລະອຽດ',
           align: 'end',
-          value: 'recordStatusText',
+          value: 'function',
           sortable: false,
         },
       ],
@@ -180,7 +186,7 @@ export default {
     }
   },
   async created() {
-    await this.fetchData()
+    await this.loadData()
   },
   watch: {
     message(val) {
@@ -195,11 +201,11 @@ export default {
     },
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
-      this.fetchData()
+      this.loadData()
     },
     date2(val) {
       this.dateFormatted2 = this.formatDate(this.date2)
-      this.fetchData()
+      this.loadData()
     },
   },
   computed: {
@@ -209,25 +215,39 @@ export default {
     totalSale() {
       let total = 0
       this.noCancelData.forEach((el) => {
-        total += parseInt(el.order_price_total.replaceAll(',', ''))
+        console.log("====>", el.cartTotal);
+        total += parseInt(el.cartTotal)
       })
       console.log('Price total: ' + total)
-      // return previousValue.order_price_total + currentValue.order_price_total
+      // return previousValue.cartTotal + currentValue.cartTotal
       return this.getFormatNum(total)
       // return total
     },
     totalSaleOriginal() {
       let total = 0
       this.noCancelData.forEach((el) => {
-        total += parseInt(el.product_discount.replaceAll(',', ''))
+        console.log("====>", el.cartTotal);
+        total += parseInt(el.cartTotal)
       })
       console.log('Price total: ' + total)
-      // return previousValue.order_price_total + currentValue.order_price_total
+      // return previousValue.cartTotal + currentValue.cartTotal
+      return this.getFormatNum(total)
+      // return total
+    },
+    totalDiscount() {
+      let total = 0
+      this.noCancelData.forEach((el) => {
+        console.log("====>", el.discount);
+        total += parseInt(el.discount)
+      })
+      console.log('Price total: ' + total)
+      // return previousValue.cartTotal + currentValue.cartTotal
       return this.getFormatNum(total)
       // return total
     },
     noCancelData() {
-      this.loaddata.forEach(element => {
+      this.loadDataNoCancelOrder = []
+      this.orderHeaderList.forEach(element => {
         console.log(element.recordStatus);
         if (element.recordStatus === 1) {
           console.log("Concept applied");
@@ -236,39 +256,108 @@ export default {
       });
       return this.loadDataNoCancelOrder;
     },
+    unpaidCodOrder() {
+      let txnList = []
+      let orderDetail = {}
+      this.orderHeaderList.forEach(element => {
+        console.log(element.recordStatus);
+        if (element.paymentStatus === 'PENDING' && element.payment.includes('COD')) {
+          console.log("Concept applied");
+          txnList.push(element)
+        }
+      });
+      const totalPrice = txnList.reduce((total, item) => {
+        return total + item.cartTotal;
+      }, 0);
+      const totalDiscount = txnList.reduce((total, item) => {
+        return total + item.discount;
+      }, 0);
+
+      orderDetail.amount = txnList.length
+      orderDetail.sale = this.getFormatNum(totalPrice)
+      orderDetail.discount = this.getFormatNum(totalDiscount)
+      orderDetail.gross = this.getFormatNum(totalPrice-totalDiscount)
+      orderDetail.title = 'ຍອດບິນ COD'
+      return orderDetail;
+    }
   },
+
   methods: {
+    whatsappLink(item) {
+      // const completeTel = tel.substring(tel.length-7);
+      const tel = item.cusTel.trim();
+
+      // console.log("Customer tel: ",tel);
+      const completeTel = tel.substring(tel.length - 8);
+      this.whatsappContactLink = `https://api.whatsapp.com/send?phone=+85620${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
+      // return `https://api.whatsapp.com/send?phone=${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
+    },
     getFormatNum(val) {
       return new Intl.NumberFormat().format(val)
     },
-    async fetchData() {
+    editItem(item) {
+      this.componentKey += 1;
+      this.selectedOrderId = item.orderId.toString()
+      this.dialogOrderDetail = !this.dialogOrderDetail;
+    },
+    handleEvent() {
+      this.dialogOrderDetail = false;
+    },
+    async loadData() {
       this.isloading = true
+      // TODO: How to split data between cod order[not yet paid] and all order
       await this.$axios
-        .get('order_by_payment/?fromDate=' + this.date + '&toDate=' + this.date2 + '&paymentCode=ALL')
+        .get('api/dynamicCustomer/findDymCustomerByBookingDate/?fdate=' + this.date + '&tdate=' + this.date2)
         .then((res) => {
-          this.loaddata = res.data.map((el) => {
+          // ****** Clear Old Data
+          this.orderHeaderList = []
+          this.orderHeaderList = res.data.allOrder.map((el) => {
             return {
-              order_id: el.order_id + ' - ' + el.locking_session_id,
-              user_id: el.user_id,
-              product_id: el.product_id + ' - ' + el.pro_name,
-              cus_name: el.name,
-              cus_tel: el.tel,
-              shipping: el.shipping,
-              cus_addr: el.cus_address,
-              payment: el.payment_code,
-              product_amount: el.product_amount,
-              outlet: el.shop_name,
-              shipping_fee: el.shipping_fee_by,
-              product_price: this.getFormatNum(el.product_price),
-              order_price_total: this.getFormatNum(((el.product_price * el.product_amount) + el.rider_fee) - el.product_discount),
-              product_discount: this.getFormatNum(el.product_discount),
-              txn_date: el.txn_date.replaceAll('T', ' '),
-              function: el.order_id,
-              recordStatus: el.record_status,
-              recordStatusText: el.record_status === 1 ? 'Effeced' : el.record_status === 2 ? 'Cancel' : 'Return',
+              'cartTotal': el.cart_total,
+              'codFee': el.cod_fee,
+              'cusAddress': el.dest_delivery_branch,
+              'discount': el.discount,
+              'id': el.id,
+              'lockingSessionId': el.locking_session_id,
+              'cusName': el.name,
+              'payment': el.payment_code,
+              'riderFee': el.rider_fee,
+              'shippingFeeBy': el.shipping_fee_by,
+              'shopName': el.outlet_name,
+              'shippingCompany': el.source_delivery_branch,
+              'cusTel': el.tel,
+              'bookingDate': el.txn_date.split('T')[0],
+              'recordStatus': el.record_status,
+              'orderId': el.order_id,
+              'paymentStatus': 'PENDING'
             }
 
-          })
+          });
+          this.codPaid = res.data.codPaid.map((el) => {
+            return {
+              'cartTotal': el.cart_total,
+              'codFee': el.cod_fee,
+              'cusAddress': el.dest_delivery_branch,
+              'discount': el.discount,
+              'id': el.id,
+              'lockingSessionId': el.locking_session_id,
+              'cusName': el.name,
+              'payment': el.payment_code + ' [PAID]',
+              'riderFee': el.rider_fee,
+              'shippingFeeBy': el.shipping_fee_by,
+              'shopName': el.outlet_name,
+              'shippingCompany': el.source_delivery_branch,
+              'cusTel': el.tel,
+              'bookingDate': el.txn_date.split('T')[0],
+              'recordStatus': el.record_status,
+              'orderId': el.order_id,
+              'paymentStatus': 'PAID'
+            }
+
+          });
+
+          this.orderHeaderList.push(...this.codPaid);
+          console.log(this.orderHeaderList.length);
         })
         .catch((er) => {
           this.message = er
@@ -296,5 +385,9 @@ export default {
 .text-h5,
 .grey {
   font-family: 'Noto Sans Lao';
+}
+
+table {
+  border: 1px solid black;
 }
 </style>
