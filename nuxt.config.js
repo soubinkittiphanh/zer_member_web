@@ -62,7 +62,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'
-    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION
+    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION elee
     // baseURL: 'http://localhost:8080',
     // credentials: true,
     // headers: {
