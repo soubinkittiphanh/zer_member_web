@@ -94,9 +94,19 @@ export default {
           to: '/admin/member',
         },
         {
+          icon: 'mdi-bike-fast',
+          title: 'ຈັດການRider',
+          to: '/admin/rider',
+        },
+        {
           icon: 'mdi-account',
           title: 'ຈັດການລູກຄ້າ',
           to: '/admin/customer',
+        },
+        {
+          icon: 'mdi-account',
+          title: 'ບັນຊີ ລາຍຈ່າຍ',
+          to: '/admin/ap',
         },
         // {
         //   icon: 'mdi-chart-bar',

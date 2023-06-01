@@ -7,6 +7,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _dc33ff90 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _303d5658 = () => interopDefault(import('../pages/product/index.vue' /* webpackChunkName: "pages/product/index" */))
 const _3217bed0 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
+const _03626bfc = () => interopDefault(import('../pages/admin/ap/index.vue' /* webpackChunkName: "pages/admin/ap/index" */))
 const _5530e549 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
 const _792df616 = () => interopDefault(import('../pages/admin/cancel_order/index.vue' /* webpackChunkName: "pages/admin/cancel_order/index" */))
 const _12a2c88b = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
@@ -21,6 +22,7 @@ const _d0f075d0 = () => interopDefault(import('../pages/admin/product/index.vue'
 const _b1ff8bc6 = () => interopDefault(import('../pages/admin/productInuse.vue' /* webpackChunkName: "pages/admin/productInuse" */))
 const _438c2c7e = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
 const _0f35f164 = () => interopDefault(import('../pages/admin/report_card/index.vue' /* webpackChunkName: "pages/admin/report_card/index" */))
+const _14d5cf3a = () => interopDefault(import('../pages/admin/rider/index.vue' /* webpackChunkName: "pages/admin/rider/index" */))
 const _7deb73d3 = () => interopDefault(import('../pages/admin/txn/index.vue' /* webpackChunkName: "pages/admin/txn/index" */))
 const _13264a3c = () => interopDefault(import('../pages/admin/txn_type/index.vue' /* webpackChunkName: "pages/admin/txn_type/index" */))
 const _103a7a6b = () => interopDefault(import('../pages/admin/walletin/index.vue' /* webpackChunkName: "pages/admin/walletin/index" */))
@@ -58,6 +60,10 @@ export const routerOptions = {
     path: "/admin/advertise",
     component: _3217bed0,
     name: "admin-advertise"
+  }, {
+    path: "/admin/ap",
+    component: _03626bfc,
+    name: "admin-ap"
   }, {
     path: "/admin/bank",
     component: _5530e549,
@@ -114,6 +120,10 @@ export const routerOptions = {
     path: "/admin/report_card",
     component: _0f35f164,
     name: "admin-report_card"
+  }, {
+    path: "/admin/rider",
+    component: _14d5cf3a,
+    name: "admin-rider"
   }, {
     path: "/admin/txn",
     component: _7deb73d3,

@@ -80,9 +80,7 @@
 
         </template>
         <template v-slot:[`item.cusTel`]="{ item }">
-
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-
             <!-- <i class="fas fa-whatsapp"></i> -->
             {{ item.cusTel }}
             <a :href="whatsappContactLink" target="_blank">Whatsapp</a>

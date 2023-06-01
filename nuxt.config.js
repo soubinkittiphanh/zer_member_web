@@ -37,7 +37,8 @@ export default {
     {
       src: '@/plugins/apex-chart.js',
       mode: 'client',
-    }
+    },
+    // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -61,8 +62,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'
-    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
-    // baseURL: 'http://localhost:8080',
+    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION
+    baseURL: 'http://localhost:8080',
     // credentials: true,
     // headers: {
     //   common: {

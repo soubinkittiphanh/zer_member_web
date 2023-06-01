@@ -41,6 +41,12 @@
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
+  "RiderFormCopy": {
+    "description": "Auto imported from components/RiderForm-copy.vue"
+  },
+  "RiderForm": {
+    "description": "Auto imported from components/RiderForm.vue"
+  },
   "Settlement": {
     "description": "Auto imported from components/Settlement.vue"
   },
@@ -58,6 +64,9 @@
   },
   "OrderSumaryCard": {
     "description": "Auto imported from components/orderSumaryCard.vue"
+  },
+  "AccountingApPayment": {
+    "description": "Auto imported from components/accounting/ApPayment.vue"
   },
   "DashboardCardOnTop": {
     "description": "Auto imported from components/dashboard/CardOnTop.vue"
