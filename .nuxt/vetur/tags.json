@@ -68,10 +68,10 @@
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
   "DashboardCardOnTop": {
     "description": "Auto imported from components/dashboard/CardOnTop.vue"
+  },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
   }
 }
