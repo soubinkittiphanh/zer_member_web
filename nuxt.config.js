@@ -38,6 +38,7 @@ export default {
       src: '@/plugins/apex-chart.js',
       mode: 'client',
     },
+    // { src: '~/plugins/vuelidate.js', mode: 'client' }
     // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],
 
@@ -62,7 +63,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'
-    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION elee
+    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION BAE API
+    baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
     // baseURL: 'http://localhost:8080',
     // credentials: true,
     // headers: {

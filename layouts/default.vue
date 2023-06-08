@@ -99,6 +99,11 @@ export default {
           to: '/admin/rider',
         },
         {
+          icon: 'mdi-bike-fast',
+          title: 'Campaign manager',
+          to: '/admin/campaign',
+        },
+        {
           icon: 'mdi-account',
           title: 'ຈັດການລູກຄ້າ',
           to: '/admin/customer',

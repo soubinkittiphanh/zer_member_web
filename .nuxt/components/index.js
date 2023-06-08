@@ -21,6 +21,7 @@ export { default as VuetifyLogo } from '../../components/VuetifyLogo.vue'
 export { default as Wallet } from '../../components/Wallet.vue'
 export { default as OrderSumaryCard } from '../../components/orderSumaryCard.vue'
 export { default as AccountingApPayment } from '../../components/accounting/ApPayment.vue'
+export { default as CampaignForm } from '../../components/campaign/CampaignForm.vue'
 export { default as DashboardCardOnTop } from '../../components/dashboard/CardOnTop.vue'
 
 // nuxt/nuxt.js#8607

@@ -29,4 +29,5 @@ You can directly use them in pages and other components without the need to impo
 - `<Wallet>` | `<wallet>` (components/Wallet.vue)
 - `<OrderSumaryCard>` | `<order-sumary-card>` (components/orderSumaryCard.vue)
 - `<AccountingApPayment>` | `<accounting-ap-payment>` (components/accounting/ApPayment.vue)
+- `<CampaignForm>` | `<campaign-form>` (components/campaign/CampaignForm.vue)
 - `<DashboardCardOnTop>` | `<dashboard-card-on-top>` (components/dashboard/CardOnTop.vue)

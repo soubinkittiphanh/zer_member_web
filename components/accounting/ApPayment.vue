@@ -36,17 +36,10 @@
                         <v-col cols="12" sm="6">
                             <v-autocomplete item-text="desc" item-value="id" :items="account"
                                 label="ບັນຊີແຍກປະເພດ DR ACCOUNT*" v-model="paymentDr.accountNumber"></v-autocomplete>
-                            <!-- <v-select
-                    :items="account"
-                    label="ບັນຊີແຍກປະເພດ DR ACCOUNT*"
-                    required
-                  ></v-select> -->
                         </v-col>
                         <v-col cols="12" sm="6">
-
                             <v-autocomplete item-text="desc" item-value="id" :items="account"
                                 label="ບັນຊີແຍກປະເພດ CR ACCOUNT*" v-model="paymentCr.accountNumber"></v-autocomplete>
-                            <!-- multiple -->
                         </v-col>
                     </v-row>
                 </v-container>
