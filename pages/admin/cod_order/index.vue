@@ -8,6 +8,10 @@
       <settlement :amount="paymentAmount" :order-id="OrderIdSelected" :locking-session-id="orderLockingSessionId"
         :key="componentSettlementKey" @close-dialog="payment = false" @reload="payment = false, loadData()"></settlement>
     </v-dialog>
+    <v-dialog v-model="cancelForm" max-width="1024">
+      <cancel-ticket-form :id="OrderIdSelected" :key="componentSettlementKey" @close-dialog="cancelForm = false"
+        @reload="cancelForm = false, loadData()"></cancel-ticket-form>
+    </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -82,6 +86,14 @@
             <i class="fas fa-wallet"></i>
           </v-btn>
         </template>
+        <template v-slot:[`item.cancel`]="{ item }">
+
+          <v-btn color="blue darken-1" text @click="cancelItem(item)
+          wallet = true
+            "> 
+            <i class="fas fa-trash"></i>
+          </v-btn>
+        </template>
         <template v-slot:[`item.cusTel`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
@@ -97,18 +109,21 @@
   </div>
 </template>
 <script>
+import CancelTicketForm from '~/components/CancelTicketForm.vue'
 // import OrderDetail from '~/components/OrderDetail.vue'
 // swalError2 = (swal, title, message)
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
   // components: { OrderDetail },
-  middleware: 'auths',
+
+  // CancelTicketForm middleware: 'auths',
   data() {
     return {
       formData: {
         cusId: 10000,
         cusBalance: 0,
       },
+      cancelForm: false,
       orderLockingSessionId: '',
       componentSettlementKey: 1,
       payment: false,
@@ -181,6 +196,12 @@ export default {
           text: 'ກົດຊຳລະ',
           align: 'end',
           value: 'function',
+          sortable: false,
+        },
+        {
+          text: 'ຍົກເລີກບິນ',
+          align: 'end',
+          value: 'cancel',
           sortable: false,
         },
 
@@ -302,12 +323,19 @@ export default {
     editItem(payload) {
       console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
       console.log("Order id", payload.order_id);
-
       this.componentSettlementKey += 1;
       this.paymentAmount = +payload.order_price_total.replaceAll(",", "")
       this.OrderIdSelected = payload.orderId
       this.orderLockingSessionId = payload.lockingSessionId;
       this.payment = true;
+    },
+    cancelItem(payload) {
+      console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
+      console.log("Order id", payload.order_id);
+      this.componentSettlementKey += 1;
+      this.OrderIdSelected = payload.orderId
+      this.orderLockingSessionId = payload.lockingSessionId;
+      this.cancelForm = true;
     },
     handleEvent() {
       this.dialogOrderDetail = false;

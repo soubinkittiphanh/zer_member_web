@@ -38,7 +38,7 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>&copy; WHAT THE DEV {{ new Date().getFullYear() }}</span>
+      <span>&copy; WHAT THE DEV {{ new Date().getFullYear() }} user: {{ user.name }} id: {{ user.id }} </span>
     </v-footer>
   </v-app>
 </template>
@@ -170,6 +170,11 @@ export default {
       title: 'Vuetify.js',
     }
   },
+  computed:{
+    user(){
+      return  this.$auth.user||''
+    }
+  }
 }
 </script>
 <style scoped>

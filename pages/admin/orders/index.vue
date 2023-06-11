@@ -11,7 +11,10 @@
     <v-dialog v-model="dialogOrderDetail" max-width="1024" persistent>
       <order-detail :key="componentKey" :order-id="selectedOrderId" @close-dialog="handleEvent"></order-detail>
     </v-dialog>
-
+    <v-dialog v-model="cancelForm" max-width="1024">
+      <cancel-ticket-form :id="OrderIdSelected" :key="componentCancelFormKey" @close-dialog="cancelForm = false"
+        @reload="cancelForm = false, loadData()"></cancel-ticket-form>
+    </v-dialog>
     <v-card>
       <v-card-title>
         <v-layout row wrap>
@@ -67,7 +70,7 @@
         </v-layout>
       </v-card-text>
 
-      
+
       <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
         <template v-slot:[`item.function`]="{ item }">
 
@@ -78,6 +81,17 @@
             <i class="fas fa-eye"></i>
           </v-btn>
 
+        </template>
+        <template v-slot:[`item.cancel`]="{ item }">
+
+          <v-btn color="blue darken-1" text @click="cancelItem(item)
+          wallet = true
+            ">
+            <!-- <i class="fas fa-trash-can-xmark"></i> -->
+            <i class="fas fa-trash"></i>
+<!-- <i class="fas fa-ban"></i> -->
+            <!-- <i class="fas fa-wallet"></i> -->
+          </v-btn>
         </template>
         <template v-slot:[`item.cusTel`]="{ item }">
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
@@ -115,6 +129,9 @@ export default {
       orderHeaderList: [],
       loadDataNoCancelOrder: [],
       codPaid: [],
+      componentCancelFormKey:1,
+      cancelForm:false,
+      OrderIdSelected:'',
       headers: [
         {
           text: 'ວັນທີ',
@@ -160,6 +177,13 @@ export default {
           text: 'ລາຍລະອຽດ',
           align: 'end',
           value: 'function',
+          sortable: false,
+        },
+
+        {
+          text: 'ຍົກເລີກບິນ',
+          align: 'end',
+          value: 'cancel',
           sortable: false,
         },
       ],
@@ -274,7 +298,7 @@ export default {
       orderDetail.amount = txnList.length
       orderDetail.sale = this.getFormatNum(totalPrice)
       orderDetail.discount = this.getFormatNum(totalDiscount)
-      orderDetail.gross = this.getFormatNum(totalPrice-totalDiscount)
+      orderDetail.gross = this.getFormatNum(totalPrice - totalDiscount)
       orderDetail.title = 'ຍອດບິນ COD'
       return orderDetail;
     }
@@ -297,6 +321,13 @@ export default {
       this.componentKey += 1;
       this.selectedOrderId = item.orderId.toString()
       this.dialogOrderDetail = !this.dialogOrderDetail;
+    },
+    cancelItem(payload) {
+      console.log("Order id", payload.orderId);
+      this.componentCancelFormKey += 1;
+      this.OrderIdSelected = payload.orderId
+      // this.orderLockingSessionId = payload.lockingSessionId;
+      this.cancelForm = true;
     },
     handleEvent() {
       this.dialogOrderDetail = false;
