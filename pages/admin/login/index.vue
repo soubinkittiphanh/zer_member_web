@@ -12,6 +12,7 @@
               <!-- <p>{{ this.$store.getters.loggedInUser.name }}</p> -->
               <v-card-text>
                 <v-form>
+                  <!-- <font-awesome-icon icon="coffee" /> -->
                   <v-text-field v-model="login.mem_id" label="ກະລຸນາ ໃສ່ໄອດີ" name="email"
                     prepend-inner-icon="mdi-account-tie-hat" class="rounded-10" outlined>
                   </v-text-field>
@@ -32,6 +33,7 @@
 </template>
 <script>
 import Notification from '../../../components/Notification.vue'
+// import { fas } from '@fortawesome/free-solid-svg-icons';
 export default {
   layout: "login",
 
@@ -49,6 +51,7 @@ export default {
   },
   components: {
     Notification,
+    // FontAwesomeIcon,
   },
   methods: {
     // async loginAuto() {

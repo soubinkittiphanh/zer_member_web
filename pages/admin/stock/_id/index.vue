@@ -13,15 +13,6 @@
       <loading-indicator> </loading-indicator>
     </v-dialog>
     <v-card>
-      <!-- <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="ຊອກຫາ"
-          single-line
-          hide-detailsx
-        />
-      </v-card-title> -->
       <v-card-title>
         <v-row>
           <v-col cols="12" lg="5">
@@ -184,14 +175,14 @@ export default {
       headers: [
         { text: 'id', align: 'center', value: 'card_id' },
         { text: 'ລະຫັດສິນຄ້າ', align: 'center', value: 'pro_id' },
-        { text: 'ເລກບັດ', align: 'center', value: 'card_number' },
+        { text: 'card sequence', align: 'center', value: 'card_number' },
         { text: 'ວັນທີ', align: 'center', value: 'input_date_time' },
         { text: 'Admin', align: 'center', value: 'inputter' },
         { text: 'ສະຖານະ', align: 'center', value: 'status' },
         { text: 'ຜູ້ລົບ', align: 'center', value: 'updater' },
         { text: 'ເລລາລົບ', align: 'center', value: 'update_time' },
         {
-          text: 'ຟັງຊັ່ນ',
+          text: 'ລົບ',
           align: 'end',
           value: 'function',
           sortable: false,

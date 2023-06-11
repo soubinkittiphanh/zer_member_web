@@ -21,7 +21,8 @@ export default {
       {
         src: "https://kit.fontawesome.com/ca11dcec40.js",
         rel: "stylesheet"
-      }
+      },
+      { src: '/fontawesome.js', defer: true },
     ],
   },
 
@@ -38,6 +39,7 @@ export default {
       src: '@/plugins/apex-chart.js',
       mode: 'client',
     },
+    { src: '~/plugins/fontawesome.js', ssr: false },
     // { src: '~/plugins/vuelidate.js', mode: 'client' }
     // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],
@@ -57,7 +59,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/fontawesome',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -77,16 +80,7 @@ export default {
     // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
   },
   auth: {
-    // strategies: {
-    //   local: {
-    //     endpoints: {
-    //       login: { url: 'mem_auth', method: 'post', propertyName: 'data.accessToken' },
-    //       user: { url: 'me', method: 'get', propertyName: 'data' },
-    //       logout: false,
-    //       tokenType: 'Bearer'
-    //     }
-    //   }
-    // },  
+
     strategies: {
       local: {
         token: {

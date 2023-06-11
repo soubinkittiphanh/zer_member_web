@@ -9,66 +9,7 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <v-card>
-        <v-card-title>
-          <span class="text-h5">ເພີ່ມສະຕັອກສິນຄ້າ</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-select
-              v-model="selectedCardType"
-              :items="cardType"
-              :item-value="(cardType) => cardType.card_type_code"
-              :item-text="
-                (cardType) =>
-                  cardType.card_type_code + ' - ' + cardType.card_type_name
-              "
-              :rules="[(v) => !!v || 'ກະລຸນາເລືອກປະເພດສິນຄ້າ']"
-              label="ປະເພດສິນຄ້າ"
-              required
-            ></v-select>
-            <!-- <v-file-input
-              ref="filesfield"
-              accept=".txt"
-              placeholder="Pick an avatar"
-              prepend-icon="mdi-file"
-              label="Stock file"
-              @change="attachFile"
-            ></v-file-input>
-             -->
-            <v-text-field
-              label="ຈຳນວນ"
-              :rules="[(v) => !!v || 'ກລນ ໃສ່ຈຳນວນ',(v) => v > 0 || 'ກລນ ໃສ່ຈຳນວນ ຫລາຍກ່ອນ 0']"
-              hide-details="auto"
-              v-model="stockQty"
-            ></v-text-field>
-            <!-- </spacer> -->
-            <v-row>
-              <!-- <span>{{ this.carddata.length }} ລາຍການ</span> -->
-              <v-spacer></v-spacer>
-              <v-btn @click="generateDynamicStock">{{
-                !showlist ? 'ສະແດງລາຍການ' : 'ບໍ່ສະແດງ'
-              }}</v-btn>
-            </v-row>
-            <div class="text-center" v-if="showlist">
-              <h4 v-for="idx in this.carddata" :key="idx">
-                {{ carddata.indexOf(idx) + 1 }} | {{ idx }}
-              </h4>
-              <br />
-            </div>
-          </v-container>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="isstock = false">
-            ປິດ
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="stockSubmit">
-            ບັນທຶກ
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+      <card-form :product-id="selectedProductId" :product-name="selectedProductName" @close-dialog="isstock=false" @reload="fetchData"></card-form>
     </v-dialog>
 
     <v-card>
@@ -112,7 +53,7 @@
           >
             mdi-pencil
           </v-icon>
-          <v-btn @click="updateStock(item)">
+          <v-btn @click="triggerCardForm(item)">
             <i class="fas fa-cart-plus"></i>
             ເພີ່ມສະຕັອກ
           </v-btn>
@@ -130,9 +71,9 @@ export default {
   middleware: 'auths',
   data() {
     return {
-      stockQty : 0,
-      showlist: false,
       isstock: false,
+      selectedProductId:'',
+      selectedProductName:'',
       isloading: false,
       dialogMessage: false,
       message: '',
@@ -159,7 +100,7 @@ export default {
         { text: 'cost', align: 'center', value: 'pro_cost_price' },
         {
           text: 'ຟັງຊັ່ນ',
-          align: 'end',
+          align: 'center',
           value: 'function',
           sortable: false,
         },
@@ -179,15 +120,12 @@ export default {
     await this.fetchData()
     await this.loadCardCategory()
   },
+
   methods: {
-    generateDynamicStock(){
-      this.carddata = [];
-      for (let index = 0; index < this.stockQty; index++) {
-        const dynamicStockRef = Date.now()+index;
-        console.log("Time now: "+dynamicStockRef);
-        // const element = array[index];
-        this.carddata.push(dynamicStockRef);
-      }
+    triggerCardForm(payload){
+      this.selectedProductId = payload.pro_id;
+      this.selectedProductName = payload.pro_name;
+      this.isstock = true;
     },
     async fetchData() {
       this.isloading = true
@@ -232,10 +170,7 @@ export default {
       // const obj=JSON.stringify(idx)
       this.$router.push(`/admin/stock/${idx.pro_id}`)
     },
-    updateStock(proid) {
-      this.isstock = true
-      this.selectedStockProductId = proid.pro_id
-    },
+
     attachFile(payload) {
       this.carddata.length = 0
       const file = payload // in case vuetify file input
@@ -266,37 +201,7 @@ export default {
       }
       // var file = FileReader.FileReader()
     },
-    stockSubmit() {
-      if (!this.stockQty) {
-         this.dialogMessage = true
-         this.message = "ກະລຸນາ ໃສ່ຈຳນວນ ສະຕັອກ"
-         return
-      } 
-      this.generateDynamicStock();
-      console.log('Submitting....')
-      this.isloading = true
-      const userId=this.$store.getters.loggedInUser.id
-      const stockData = {
-        inputter_id: userId,
-        tranastion_data: this.carddata,
-        card_type: this.selectedCardType,
-        product_id: this.selectedStockProductId,
-      }
-      this.$axios
-        .post('stock_action_i', stockData)
-        .then((res) => {
-          console.log(res.data)
-          this.message = res.data
-          this.isloading = false
-          this.isstock = false
-          this.fetchData() // UPDATE PRODUCT UI
-        })
-        .catch((er) => {
-          console.log(er)
-          this.message = er
-          this.isloading = false
-        })
-    },
+
     loadCardCategory() {
       this.isloading = true
       this.$axios

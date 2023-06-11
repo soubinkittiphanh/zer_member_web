@@ -17,6 +17,8 @@
     </v-dialog>
     <v-card>
       <v-card-title>
+
+  
         <v-layout row wrap>
           <v-col cols="6">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
@@ -87,10 +89,10 @@
           <v-btn color="blue darken-1" text @click="cancelItem(item)
           wallet = true
             ">
-            <!-- <i class="fas fa-trash-can-xmark"></i> -->
-            <i class="fas fa-trash"></i>
-<!-- <i class="fas fa-ban"></i> -->
-            <!-- <i class="fas fa-wallet"></i> -->
+            <!-- <i class="fas fa-rotate-right"></i> -->
+            <i class="fas fa-sync"></i>
+            <!-- <i class="fa-solid fa-lock fa-shake"></i> -->
+            <!-- <i class="fas fa-trash"></i> -->
           </v-btn>
         </template>
         <template v-slot:[`item.cusTel`]="{ item }">

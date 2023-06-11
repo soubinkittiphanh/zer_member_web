@@ -91,7 +91,7 @@
           <v-btn color="blue darken-1" text @click="cancelItem(item)
           wallet = true
             "> 
-            <i class="fas fa-trash"></i>
+ <i class="fas fa-sync"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.cusTel`]="{ item }">
