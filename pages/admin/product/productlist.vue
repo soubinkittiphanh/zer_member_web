@@ -9,48 +9,42 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <card-form :product-id="selectedProductId" :product-name="selectedProductName" @close-dialog="isstock=false" @reload="fetchData"></card-form>
+      <card-form :product-id="selectedProductId" :product-name="selectedProductName" @close-dialog="isstock = false"
+        @reload="fetchData"></card-form>
     </v-dialog>
 
     <v-card>
       <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="ຊອກຫາ"
-          single-line
-          hide-detailsx
-        />
+        <v-row>
+          <v-col cols="6" sm="6" md="6">
+            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
+          </v-col>
+          <v-col cols="6" sm="6" md="6">
+            <v-btn class="mr-0" @click="rebuildStock()">
+              <i class="fas fa-sync"></i>
+              Rebuild stock
+            </v-btn>
+          </v-col>
+        </v-row>
+
+
       </v-card-title>
 
-      <v-data-table
-        v-if="loaddata"
-        :headers="headers"
-        :search="search"
-        :items="loaddata"
-        :items-per-page="pageLine"
-        
-      >
+      <v-data-table v-if="loaddata" :headers="headers" :search="search" :items="loaddata" :items-per-page="pageLine">
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title
-              >ສິນຄ້າທັງຫມົດ: {{ loaddata.length }}</v-toolbar-title
-            >
+            <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ loaddata.length }}</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <NuxtLink to="/admin/product">ສ້າງສິນຄ້າໃຫມ່</NuxtLink>
-   
+
           </v-toolbar>
         </template>
         <template v-slot:[`item.function`]="{ item }">
-          <v-icon
-            small
-            class="mr-2"
-            @click="
-              editItem(item)
-              isedit = true
-            "
-          >
+          <v-icon small class="mr-2" @click="
+            editItem(item)
+          isedit = true
+            ">
             mdi-pencil
           </v-icon>
           <v-btn @click="triggerCardForm(item)">
@@ -67,13 +61,14 @@
   </div>
 </template>
 <script>
+import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
   middleware: 'auths',
   data() {
     return {
       isstock: false,
-      selectedProductId:'',
-      selectedProductName:'',
+      selectedProductId: '',
+      selectedProductName: '',
       isloading: false,
       dialogMessage: false,
       message: '',
@@ -83,7 +78,7 @@ export default {
       cardType: [],
       content: null,
       selectedCardType: '',
-      pageLine:30,
+      pageLine: 30,
       search: '',
       headers: [
         {
@@ -122,7 +117,7 @@ export default {
   },
 
   methods: {
-    triggerCardForm(payload){
+    triggerCardForm(payload) {
       this.selectedProductId = payload.pro_id;
       this.selectedProductName = payload.pro_name;
       this.isstock = true;
@@ -223,6 +218,18 @@ export default {
           this.isloading = false
         })
     },
+    async rebuildStock() {
+      if (!this.isloading) {
+        this.isloading = true
+        await this.$axios.post("/api/card/rebuildStock").then(response => {
+          swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+          this.fetchData()
+        }).catch(error => {
+          swalError2(this.$swal, "Error", error.response.data)
+        })
+        this.isloading = false
+      }
+    }
   },
 }
 </script>

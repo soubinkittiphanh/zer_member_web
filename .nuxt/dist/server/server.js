@@ -12825,9 +12825,9 @@ __webpack_require__.d(components_namespaceObject, "Tutorial", function() { retur
 __webpack_require__.d(components_namespaceObject, "VuetifyLogo", function() { return VuetifyLogo; });
 __webpack_require__.d(components_namespaceObject, "Wallet", function() { return Wallet; });
 __webpack_require__.d(components_namespaceObject, "OrderSumaryCard", function() { return OrderSumaryCard; });
-__webpack_require__.d(components_namespaceObject, "CampaignForm", function() { return CampaignForm; });
 __webpack_require__.d(components_namespaceObject, "AccountingApPayment", function() { return AccountingApPayment; });
 __webpack_require__.d(components_namespaceObject, "AccountingGeneralLedgerForm", function() { return AccountingGeneralLedgerForm; });
+__webpack_require__.d(components_namespaceObject, "CampaignForm", function() { return CampaignForm; });
 __webpack_require__.d(components_namespaceObject, "DashboardCardOnTop", function() { return DashboardCardOnTop; });
 __webpack_require__.d(components_namespaceObject, "CardForm", function() { return CardForm; });
 
@@ -15917,9 +15917,9 @@ const Tutorial = () => __webpack_require__.e(/* import() | components/tutorial *
 const VuetifyLogo = () => __webpack_require__.e(/* import() | components/vuetify-logo */ 27).then(__webpack_require__.bind(null, 407)).then(c => wrapFunctional(c.default || c));
 const Wallet = () => __webpack_require__.e(/* import() | components/wallet */ 28).then(__webpack_require__.bind(null, 332)).then(c => wrapFunctional(c.default || c));
 const OrderSumaryCard = () => __webpack_require__.e(/* import() | components/order-sumary-card */ 20).then(__webpack_require__.bind(null, 293)).then(c => wrapFunctional(c.default || c));
-const CampaignForm = () => __webpack_require__.e(/* import() | components/campaign-form */ 4).then(__webpack_require__.bind(null, 310)).then(c => wrapFunctional(c.default || c));
 const AccountingApPayment = () => __webpack_require__.e(/* import() | components/accounting-ap-payment */ 1).then(__webpack_require__.bind(null, 330)).then(c => wrapFunctional(c.default || c));
 const AccountingGeneralLedgerForm = () => __webpack_require__.e(/* import() | components/accounting-general-ledger-form */ 2).then(__webpack_require__.bind(null, 402)).then(c => wrapFunctional(c.default || c));
+const CampaignForm = () => __webpack_require__.e(/* import() | components/campaign-form */ 4).then(__webpack_require__.bind(null, 310)).then(c => wrapFunctional(c.default || c));
 const DashboardCardOnTop = () => __webpack_require__.e(/* import() | components/dashboard-card-on-top */ 9).then(__webpack_require__.bind(null, 329)).then(c => wrapFunctional(c.default || c));
 const CardForm = () => __webpack_require__.e(/* import() | components/card-form */ 7).then(__webpack_require__.bind(null, 333)).then(c => wrapFunctional(c.default || c));
 
