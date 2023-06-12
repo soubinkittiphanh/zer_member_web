@@ -68,16 +68,19 @@
   "OrderSumaryCard": {
     "description": "Auto imported from components/orderSumaryCard.vue"
   },
-  "CardForm": {
-    "description": "Auto imported from components/card/cardForm.vue"
-  },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
-  },
   "CampaignForm": {
     "description": "Auto imported from components/campaign/CampaignForm.vue"
   },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
+  },
+  "AccountingGeneralLedgerForm": {
+    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
+  },
+  "CardForm": {
+    "description": "Auto imported from components/card/cardForm.vue"
   }
 }

@@ -1,26 +1,12 @@
-<!-- <template>
-    <div>
-        <v-dialog
-        v-model="dialog"
-        persistent
-        width="1024"
-      > 
-      <ap-payment @close="triggerDialog">
 
-      </ap-payment>
-        </v-dialog>
-        <v-btn block class="mt-2" @click="triggerDialog">ສ້າງອິນວອຍ</v-btn>
-    </div>
-</template> -->
+
 <template>
     <div class="text-center">
         <div>
             <v-dialog v-model="dialog" persistent width="1024">
-                <ap-payment @close="triggerDialog">
-
+                <ap-payment :is-edit="isEdit" :payment-head-id="selectedId" @close="triggerDialog" :key="apFormKey" @close-dialog="dialog = false" @reload="loadTxn">
                 </ap-payment>
             </v-dialog>
-            <v-btn block class="mt-2" @click="triggerDialog">ສ້າງອິນວອຍ</v-btn>
         </div>
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
@@ -49,7 +35,7 @@
                             </template>
                             <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
-
+                        <v-btn @click="triggerDialog"> ຊຳລະຕ່າງໆ </v-btn>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
@@ -59,6 +45,7 @@
                     </v-col>
                 </v-layout>
             </v-card-title>
+            <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
             <v-data-table v-if="txnList" :headers="headers" :search="search" :items="txnList">
                 <template v-slot:[`item.function`]="{ item }">
 
@@ -66,19 +53,10 @@
                     wallet = true
                         ">
 
-                        <i class="fas fa-wallet"></i>
+                        <i class="fa fa-pencil-square-o"></i>
                     </v-btn>
                 </template>
-                <template v-slot:[`item.cusTel`]="{ item }">
 
-                    <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-
-                        <!-- <i class="fas fa-whatsapp"></i> -->
-                        {{ item.cusTel }}
-                        <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
-                    </v-btn>
-
-                </template>
             </v-data-table>
         </v-card>
     </div>
@@ -88,18 +66,20 @@ import ApPayment from '~/components/accounting/ApPayment.vue'
 export default {
     components: { ApPayment },
     mounted() {
-        // this.loadAccount()
         this.loadTxn()
     },
     data() {
         return {
             userId: "",
             search: "",
+            isEdit:false,
             dialog: false,
+            apFormKey: 1,
             isloading: false,
             menu1: false,
             menu2: false,
             txnList: [],
+            selectedId:'',
             headers: [
                 {
                     text: 'ວັນທີ',
@@ -113,10 +93,14 @@ export default {
                     value: 'accountNumber',
                     sortable: true,
                 },
-                { text: 'ເລກອ້າງອີງ', align: 'center', value: 'postingReference' },
-                { text: 'ເບື້ອງຫນີ້', align: 'center', value: 'debit' },
-                { text: 'ເບື້ອງມີ', align: 'center', value: 'credit' },
-                { text: 'ເນື້ອໃນ', align: 'center', value: 'description' },
+                { text: 'ເລກອ້າງອີງ', align: 'center', value: 'paymentNumber' },
+                { text: 'ຍອດລວມ', align: 'center', value: 'totalAmount' },
+                { text: 'ສະກຸນ', align: 'center', value: 'currency' },
+                { text: 'ອັດຕາແລກປ່ຽນ', align: 'center', value: 'rate' },
+                { text: 'ຊຳລະດ້ວຍ', align: 'center', value: 'paymentMethod' },
+                { text: 'ເບື້ອງຫນີ້', align: 'center', value: 'drAccount' },
+                { text: 'ເບື້ອງມີ', align: 'center', value: 'crAccount' },
+                { text: 'ເນື້ອໃນ', align: 'center', value: 'notes' },
                 { text: 'ວັນເວລາສ້າງ', align: 'center', value: 'createdAt' },
                 {
                     text: 'ກົດຊຳລະ',
@@ -146,35 +130,32 @@ export default {
     },
     methods: {
         triggerDialog() {
-            this.dialog = !this.dialog
-        }, formatDate(date) {
+            this.apFormKey = +1;
+            this.dialog = true
+        },
+        editItem(item){
+            this.selectedId = item.id
+            this.isEdit = true;
+            this.apFormKey = +1;
+            this.dialog = true
+        },
+         formatDate(date) {
             if (!date) return null
-
             const [year, month, day] = date.split('-')
             return `${month}/${day}/${year}`
         },
         async loadTxn() {
-            this.$axios.get("/api/financial/find").then(response => {
-                this.txnList = response.data.map(element => {
-                    return {
-                        id: element["id"],
-                        accountNumber: element["accountNumber"],
-                        bookingDate: element["bookingDate"].split("T")[0],
-                        postingReference: element["postingReference"],
-                        debit: element["debit"],
-                        credit: element["credit"],
-                        description: element["description"],
-                        descriptionLL: element["descriptionLL"],
-                        currency: element["currency"],
-                        rate: element["rate"],
-                        source: element["source"],
-                        createdAt: element["createdAt"],
-                        updateTimestamp: element["updateTimestamp"]
-                    }
-                })
+            this.isloading = true
+            await this.$axios.get("/api/finanicial/ap/header/find").then(response => {
+                this.txnList = [];
+                for (const element in response.data) {
+                    this.txnList.push(response.data[element])
+                }
+                console.log("====> " + this.txnList[0]);
             }).catch(error => {
 
             })
+            this.isloading = false
         }
 
     }
