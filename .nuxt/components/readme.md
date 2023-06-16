@@ -32,5 +32,5 @@ You can directly use them in pages and other components without the need to impo
 - `<AccountingApPayment>` | `<accounting-ap-payment>` (components/accounting/ApPayment.vue)
 - `<AccountingGeneralLedgerForm>` | `<accounting-general-ledger-form>` (components/accounting/GeneralLedgerForm.vue)
 - `<CampaignForm>` | `<campaign-form>` (components/campaign/CampaignForm.vue)
-- `<DashboardCardOnTop>` | `<dashboard-card-on-top>` (components/dashboard/CardOnTop.vue)
 - `<CardForm>` | `<card-form>` (components/card/cardForm.vue)
+- `<DashboardCardOnTop>` | `<dashboard-card-on-top>` (components/dashboard/CardOnTop.vue)

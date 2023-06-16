@@ -25,7 +25,7 @@
           <v-text-field v-model="codFee" :counter="10" :rules="rule.amountCODRules"
             :label="`ຄ່າທຳນຽມ COD: ` + formatNum(codFee)" required></v-text-field>
         </v-form>
-        {{ userId }}
+        <!-- {{ userId }} -->
         <slot> </slot>
       </v-container>
       <v-card-actions>
@@ -87,12 +87,12 @@ export default {
       valid: true,
       message: null,
       dialogMessage: false,
-      paymentAmount: 0,
+      paymentAmount: this.amount,
       codFee: 0,
       form_data: {
         txn_his_id: 1000,
         txn_id: 1000,
-        txn_type: "CASH",
+        txn_type: "TRANSFER",
         txn_his_amount: 10000,
         user_id: this.userId,
         user_balance: this.cusBalance,
@@ -102,7 +102,7 @@ export default {
       rule: {
         idRules: [(v) => !!v || 'ໄອດີ is required'],
         amountRules: [(v) => !!v || 'ກລນ ໃສ່ຈຳນວນ is required'],
-        amountCODRules: [(v) => !v || 'ກລນ ໃສ່ຈຳນວນ is required'],
+        amountCODRules: [(v) => !!v || 'ກລນ ໃສ່ຈຳນວນ is required'],
         txnRule: [(v) => !!v || 'ກະລຸນາເລືອກ ລາຍການທຸລະກຳ is required'],
       },
 

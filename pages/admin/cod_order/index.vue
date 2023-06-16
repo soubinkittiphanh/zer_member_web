@@ -59,16 +59,14 @@
             <v-col cols="6" lg="6">
               <order-sumary-card :orderDetail="{
                 'title': 'ຍອດບິນ',
-                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount, 'gross': getFormatNum(totalSale.replaceAll(',', '') -
-                  totalDiscount.replaceAll(',', ''))
+                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount,
+                // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+                'gross': getFormatNum(codFeeTotal)
               }">
 
               </order-sumary-card>
             </v-col>
             <v-col cols="6" lg="6">
-              <!-- <order-sumary-card :orderDetail="this.unpaidCodOrder">
-
-  </order-sumary-card> -->
             </v-col>
           </v-row>
 
@@ -76,7 +74,19 @@
         </v-layout>
       </v-card-text>
 
-      <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
+      <v-data-table ref="myTable" v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
+        <template v-slot:[`item.cartTotal`]="{ item }">
+          {{ numberWithCommas(item.cartTotal) }}
+        </template>
+        <template v-slot:[`item.codFee`]="{ item }">
+          {{ numberWithCommas(item.codFee) }}
+        </template>
+        <template v-slot:[`item.net`]="{ item }">
+          {{ numberWithCommas(item.net) }}
+        </template>
+        <template v-slot:[`item.discount`]="{ item }">
+          {{ numberWithCommas(item.discount) }}
+        </template>
         <template v-slot:[`item.function`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="editItem(item)
@@ -90,8 +100,8 @@
 
           <v-btn color="blue darken-1" text @click="cancelItem(item)
           wallet = true
-            "> 
- <i class="fas fa-sync"></i>
+            ">
+            <i class="fas fa-sync"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.cusTel`]="{ item }">
@@ -110,13 +120,8 @@
 </template>
 <script>
 import CancelTicketForm from '~/components/CancelTicketForm.vue'
-// import OrderDetail from '~/components/OrderDetail.vue'
-// swalError2 = (swal, title, message)
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
-  // components: { OrderDetail },
-
-  // CancelTicketForm middleware: 'auths',
   data() {
     return {
       formData: {
@@ -162,13 +167,31 @@ export default {
         { text: 'ເບີໂທ', align: 'center', value: 'cusTel' },
         { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cusAddress' },
         {
+          text: 'ລາຄາເຕັມ',
+          align: 'end',
+          value: 'net',
+          sortable: true,
+        },
+        {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
           value: 'discount',
           sortable: true,
         },
         {
-          text: 'ລວມ',
+          text: 'ຄ່າຂົນສົ່ງ',
+          align: 'end',
+          value: 'riderFee',
+          sortable: true,
+        },
+        // {
+        //   text: 'COD/Rider Fee',
+        //   align: 'end',
+        //   value: 'codFee',
+        //   sortable: true,
+        // },
+        {
+          text: 'ລວມ(ຫັກສ່ວນຫລຸດ)',
           align: 'end',
           value: 'cartTotal',
           sortable: false,
@@ -231,6 +254,7 @@ export default {
     // this.alertSucceed();
   },
   watch: {
+
     message(val) {
       if (val != null) {
         this.dialog = true
@@ -251,19 +275,20 @@ export default {
     },
   },
   computed: {
+
+    codFeeTotal() {
+      let sum = this.orderHeaderList.reduce((total, current) => total + current['codFee'], 0);
+      return sum
+    },
     computedDateFormatted() {
       return this.formatDate(this.date)
     },
     totalSale() {
       let total = 0
       this.noCancelData.forEach((el) => {
-        console.log("====>", el.cartTotal);
         total += parseInt(el.cartTotal)
       })
-      console.log('Price total: ' + total)
-      // return previousValue.cartTotal + currentValue.cartTotal
       return this.getFormatNum(total)
-      // return total
     },
     totalSaleOriginal() {
       let total = 0
@@ -271,10 +296,7 @@ export default {
         console.log("====>", el.cartTotal);
         total += parseInt(el.cartTotal)
       })
-      console.log('Price total: ' + total)
-      // return previousValue.cartTotal + currentValue.cartTotal
       return this.getFormatNum(total)
-      // return total
     },
     totalDiscount() {
       let total = 0
@@ -283,9 +305,7 @@ export default {
         total += parseInt(el.discount)
       })
       console.log('Price total: ' + total)
-      // return previousValue.cartTotal + currentValue.cartTotal
       return this.getFormatNum(total)
-      // return total
     },
     noCancelData() {
       this.loadDataNoCancelOrder = []
@@ -299,39 +319,26 @@ export default {
       return this.loadDataNoCancelOrder;
     },
   },
-  beforeEnter() {
-    console.log("Hook is being called");
-    this.refreshComponent();
-  },
   methods: {
-    // alertSucceed() {
-    //   //  swalSuccess(this.$swal,'Succeed','Your transaction completed');
-    //   swalError2(this.$swal, "Error", 'message');
-    // },
+    numberWithCommas(value) {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
     whatsappLink(item) {
-      // const completeTel = tel.substring(tel.length-7);
       const tel = item.cusTel.trim();
-
-      // console.log("Customer tel: ",tel);
       const completeTel = tel.substring(tel.length - 8);
       this.whatsappContactLink = `https://api.whatsapp.com/send?phone=+85620${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
-      // return `https://api.whatsapp.com/send?phone=${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
     },
     getFormatNum(val) {
       return new Intl.NumberFormat().format(val)
     },
     editItem(payload) {
-      console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
-      console.log("Order id", payload.order_id);
       this.componentSettlementKey += 1;
-      this.paymentAmount = +payload.order_price_total.replaceAll(",", "")
+      this.paymentAmount = +payload.cartTotal
       this.OrderIdSelected = payload.orderId
       this.orderLockingSessionId = payload.lockingSessionId;
       this.payment = true;
     },
     cancelItem(payload) {
-      console.log("Edit test", payload.order_price_total.replaceAll(",", ""));
-      console.log("Order id", payload.order_id);
       this.componentSettlementKey += 1;
       this.OrderIdSelected = payload.orderId
       this.orderLockingSessionId = payload.lockingSessionId;
@@ -350,14 +357,13 @@ export default {
     },
     async loadData() {
       this.isloading = true
-
       await this.$axios
         .get('api/dynamicCustomer/findDymCustomerByCOD?fdate=' + this.date + '&tdate=' + this.date2)
         .then((res) => {
-          // return console.log('Data => ', res.data);
           this.orderHeaderList = res.data.map((el) => {
             return {
-              'cartTotal': el.cart_total,
+              'net': (el.cart_total),
+              'cartTotal': (el.cart_total + el.rider_fee) - (el.discount + el.cod_fee),
               'codFee': el.cod_fee,
               'cusAddress': el.dest_delivery_branch,
               'discount': el.discount,

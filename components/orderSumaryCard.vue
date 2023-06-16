@@ -18,7 +18,7 @@
         </v-row>
         <v-divider></v-divider>
         <v-row>
-            <v-col cols="6" lg="6">ຍອດເຫລືອ</v-col>
+            <v-col cols="6" lg="6">COD/RIDER FEE</v-col>
             <v-col cols="6" lg="6">{{ this.orderDetail.gross }}</v-col>
         </v-row>
     </v-card>

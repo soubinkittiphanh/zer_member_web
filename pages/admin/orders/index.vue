@@ -57,8 +57,10 @@
             <v-col cols="6" lg="6">
               <order-sumary-card :orderDetail="{
                 'title': 'ຍອດບິນ',
-                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount, 'gross': getFormatNum(totalSale.replaceAll(',', '') -
-                  totalDiscount.replaceAll(',', ''))
+                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount, 
+                // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+                'gross': getFormatNum(codFeeTotal)
+
               }">
 
               </order-sumary-card>
@@ -74,6 +76,18 @@
 
 
       <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
+        <template v-slot:[`item.cartTotal`]="{ item }">
+          {{ numberWithCommas(item.cartTotal) }}
+        </template>
+        <template v-slot:[`item.codFee`]="{ item }">
+          {{ numberWithCommas(item.codFee) }}
+        </template>
+        <template v-slot:[`item.net`]="{ item }">
+          {{ numberWithCommas(item.net) }}
+        </template>
+        <template v-slot:[`item.discount`]="{ item }">
+          {{ numberWithCommas(item.discount) }}
+        </template>
         <template v-slot:[`item.function`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="editItem(item)
@@ -145,9 +159,27 @@ export default {
         { text: 'ເບີໂທ', align: 'center', value: 'cusTel' },
         { text: 'ບ່ອນສົ່ງ', align: 'center', value: 'cusAddress' },
         {
+          text: 'ລາຄາເຕັມ',
+          align: 'end',
+          value: 'net',
+          sortable: true,
+        },
+        {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
           value: 'discount',
+          sortable: true,
+        },
+        {
+          text: 'ຄ່າຂົນສົ່ງ',
+          align: 'end',
+          value: 'riderFee',
+          sortable: true,
+        },
+        {
+          text: 'COD/Rider Fee',
+          align: 'end',
+          value: 'codFee',
           sortable: true,
         },
         {
@@ -303,10 +335,16 @@ export default {
       orderDetail.gross = this.getFormatNum(totalPrice - totalDiscount)
       orderDetail.title = 'ຍອດບິນ COD'
       return orderDetail;
+    },
+    codFeeTotal(){
+      let sum = this.orderHeaderList.reduce((total, current) => total + current['codFee'], 0);
+      return sum
     }
   },
 
-  methods: {
+  methods: {    numberWithCommas(value) {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
     whatsappLink(item) {
       // const completeTel = tel.substring(tel.length-7);
       const tel = item.cusTel.trim();
@@ -344,7 +382,8 @@ export default {
           this.orderHeaderList = []
           this.orderHeaderList = res.data.allOrder.map((el) => {
             return {
-              'cartTotal': el.cart_total,
+              'net': (el.cart_total),
+              'cartTotal': (el.cart_total+el.rider_fee)-(el.discount+el.cod_fee),
               'codFee': el.cod_fee,
               'cusAddress': el.dest_delivery_branch,
               'discount': el.discount,
@@ -366,7 +405,8 @@ export default {
           });
           this.codPaid = res.data.codPaid.map((el) => {
             return {
-              'cartTotal': el.cart_total,
+              'net': (el.cart_total),
+              'cartTotal': (el.cart_total+el.rider_fee)-(el.discount+el.cod_fee),
               'codFee': el.cod_fee,
               'cusAddress': el.dest_delivery_branch,
               'discount': el.discount,

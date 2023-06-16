@@ -77,10 +77,10 @@
   "CampaignForm": {
     "description": "Auto imported from components/campaign/CampaignForm.vue"
   },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
-  },
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
   }
 }
