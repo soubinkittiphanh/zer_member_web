@@ -18,7 +18,7 @@
     <v-card>
       <v-card-title>
 
-  
+
         <v-layout row wrap>
           <v-col cols="6">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
@@ -57,7 +57,7 @@
             <v-col cols="6" lg="6">
               <order-sumary-card :orderDetail="{
                 'title': 'ຍອດບິນ',
-                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount, 
+                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount,
                 // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                 'gross': getFormatNum(codFeeTotal)
 
@@ -145,9 +145,9 @@ export default {
       orderHeaderList: [],
       loadDataNoCancelOrder: [],
       codPaid: [],
-      componentCancelFormKey:1,
-      cancelForm:false,
-      OrderIdSelected:'',
+      componentCancelFormKey: 1,
+      cancelForm: false,
+      OrderIdSelected: '',
       headers: [
         {
           text: 'ວັນທີ',
@@ -336,13 +336,14 @@ export default {
       orderDetail.title = 'ຍອດບິນ COD'
       return orderDetail;
     },
-    codFeeTotal(){
+    codFeeTotal() {
       let sum = this.orderHeaderList.reduce((total, current) => total + current['codFee'], 0);
       return sum
     }
   },
 
-  methods: {    numberWithCommas(value) {
+  methods: {
+    numberWithCommas(value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
     whatsappLink(item) {
@@ -383,7 +384,7 @@ export default {
           this.orderHeaderList = res.data.allOrder.map((el) => {
             return {
               'net': (el.cart_total),
-              'cartTotal': (el.cart_total+el.rider_fee)-(el.discount+el.cod_fee),
+              'cartTotal': (el.cart_total + el.rider_fee) - (el.discount + el.cod_fee),
               'codFee': el.cod_fee,
               'cusAddress': el.dest_delivery_branch,
               'discount': el.discount,
@@ -406,7 +407,7 @@ export default {
           this.codPaid = res.data.codPaid.map((el) => {
             return {
               'net': (el.cart_total),
-              'cartTotal': (el.cart_total+el.rider_fee)-(el.discount+el.cod_fee),
+              'cartTotal': (el.cart_total + el.rider_fee) - (el.discount + el.cod_fee),
               'codFee': el.cod_fee,
               'cusAddress': el.dest_delivery_branch,
               'discount': el.discount,
