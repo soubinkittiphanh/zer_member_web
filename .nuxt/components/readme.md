@@ -30,7 +30,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Wallet>` | `<wallet>` (components/Wallet.vue)
 - `<OrderSumaryCard>` | `<order-sumary-card>` (components/orderSumaryCard.vue)
 - `<CampaignForm>` | `<campaign-form>` (components/campaign/CampaignForm.vue)
-- `<CardForm>` | `<card-form>` (components/card/cardForm.vue)
 - `<DashboardCardOnTop>` | `<dashboard-card-on-top>` (components/dashboard/CardOnTop.vue)
 - `<AccountingApPayment>` | `<accounting-ap-payment>` (components/accounting/ApPayment.vue)
 - `<AccountingGeneralLedgerForm>` | `<accounting-general-ledger-form>` (components/accounting/GeneralLedgerForm.vue)
+- `<CardForm>` | `<card-form>` (components/card/cardForm.vue)

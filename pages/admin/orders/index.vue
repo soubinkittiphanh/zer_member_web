@@ -88,6 +88,9 @@
         <template v-slot:[`item.discount`]="{ item }">
           {{ numberWithCommas(item.discount) }}
         </template>
+        <template v-slot:[`item.riderFee`]="{ item }">
+          {{ numberWithCommas(item.riderFee) }}
+        </template>
         <template v-slot:[`item.function`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="editItem(item)
