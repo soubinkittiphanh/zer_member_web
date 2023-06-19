@@ -6,7 +6,7 @@
         </v-dialog>
         <v-dialog v-model="showAddRowDialog" max-width="800">
             <v-card>
-                <v-card-title>Add New Row</v-card-title>
+                <v-card-title>ເພີ່ມລາຍການໃຫມ່</v-card-title>
                 <v-card-text>
                     <v-form ref="addRowForm">
                         <v-text-field type="date" label="ວັນທີ*" v-model="newRow.date" required hint="date"></v-text-field>
@@ -25,8 +25,8 @@
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn color="primary" @click="addRow">Add</v-btn>
-                    <v-btn color="secondary" @click="showAddRowDialog = false">Cancel</v-btn>
+                    <v-btn color="primary" @click="addRow">ເພີ່ມ</v-btn>
+                    <v-btn color="secondary" @click="showAddRowDialog = false">ປິດ</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -42,8 +42,12 @@
                             <v-form v-model="valid" @submit.prevent="submitForm">
                                 <v-text-field v-model="form.header.title" label="Title" :rules="[rules.required]"
                                     required></v-text-field>
-                                <v-text-field v-model="form.header.product" label="Product" :rules="[rules.required]"
+                                <v-text-field v-model="form.header.product" label="Remark" :rules="[rules.required]"
                                     required></v-text-field>
+
+                                <v-autocomplete item-text="pro_name" item-value="pro_id" :items="productList"
+                                    label="ເລືອກສິນຄ້າ *" v-model="form.header.productId"></v-autocomplete>
+
                             </v-form>
                         </v-col>
                         <v-col cols="12" sm="4" md="4">
@@ -67,35 +71,41 @@
                     </v-row>
                     <v-divider></v-divider>
 
-                    <v-btn color="primary" @click="showAddRowDialog = true">Add Row</v-btn>
-                    <v-data-table :headers="headers" :items="tableData">
+                    <v-btn color="primary" @click="showAddRowDialog = true">ເພີ່ມລາຍການ</v-btn>
+                    <v-data-table :headers="headers" :items="campaignEntry">
                         <template v-slot:item="{ item }">
                             <tr>
+                                <!-- <v-form ref="campaignEntry"> -->
                                 <td>
-                                    <v-text-field type="date" label="ວັນທີ*" v-model="bookingDate"
+                                    <v-text-field type="date" label="ວັນທີ*" v-model="item.date"
                                         hint="example of helper text only on focus"></v-text-field>
+                                </td>
+                                <td> <v-text-field v-model="item.reach" label="Reach" :rules="numberRule"></v-text-field>
+                                </td>
+                                <td><v-text-field v-model="item.comments" label="Comments"
+                                        :rules="numberRule"></v-text-field></td>
+                                <td> <v-text-field v-model="item.results" label="Results"
+                                        :rules="numberRule"></v-text-field>
+                                </td>
+                                <td>
+                                    <v-text-field v-model="item.purchaseQty" label="Purchase Quantity"
+                                        :rules="numberRule"></v-text-field>
+                                </td>
+                                <td>
 
-                                </td>
-                                <td> <v-text-field v-model="form.reach" label="Reach" :rules="reachRules"></v-text-field>
-                                </td>
-                                <td><v-text-field v-model="form.comments" label="Comments"
-                                        :rules="commentsRules"></v-text-field></td>
-                                <td> <v-text-field v-model="form.results" label="Results"
-                                        :rules="resultsRules"></v-text-field>
+                                    <v-text-field v-model="item.costPerCustomer" label="Cost Per Customer"
+                                        :rules="numberRule"></v-text-field>
                                 </td>
                                 <td>
-                                    <v-text-field v-model="form.purchaseQty" label="Purchase Quantity"
-                                        :rules="purchaseQtyRules"></v-text-field>
+                                    <v-text-field v-model="item.budgetSpend" label="Budget Spend"
+                                        :rules="numberRule"></v-text-field>
                                 </td>
                                 <td>
-
-                                    <v-text-field v-model="form.costPerCustomer" label="Cost Per Customer"
-                                        :rules="costPerCustomerRules"></v-text-field>
+                                    <v-btn color="blue-darken-1" variant="text" @click="deleteItem(item)">
+                                        ລົບ
+                                    </v-btn>
                                 </td>
-                                <td>
-                                    <v-text-field v-model="form.budgetSpend" label="Budget Spend"
-                                        :rules="budgetSpendRules"></v-text-field>
-                                </td>
+                                <!-- </v-form> -->
                             </tr>
                         </template>
                     </v-data-table>
@@ -104,7 +114,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" >
+                <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
                 <v-btn color="blue-darken-1" variant="text" @click="submit">
@@ -116,29 +126,34 @@
 </template>
   
 <script>
-import { swalSuccess, swalError2 } from '~/util/myUtil'
+import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
+import { mysqlDateToDateObject,parseDate } from '~/common'
 export default {
+    props: {
+        isEdit: {
+            type: Boolean,
+            default: false,
+        },
+        campaignId: {
+            type: Number,
+            default: null,
+        },
+    },
     data() {
         return {
+            productList: [],
             showAddRowDialog: false,
             dialog: false,
             title: 'ສ້າງ Campaign',
             valid: false,
             isLoading: false,
             form: {
-                date: '',
-                reach: '',
-                comments: '',
-                results: '',
-                purchaseQty: '',
-                costPerCustomer: '',
-                budgetSpend: '',
-                isActive: true,
                 header: {
                     title: "Summer Sale",
                     start: "",
                     end: "",
                     product: "T-shirts",
+                    productId: 1000,
                     budget: 5000.00,
                     isActive: true
                 }
@@ -161,34 +176,34 @@ export default {
                 { text: "Cost Per Customer", value: "costPerCustomer" },
                 { text: "Budget Spend", value: "budgetSpend" }
             ],
-            tableData: [
-                {
-                    date: "2021-07-01",
-                    reach: "1000",
-                    comments: "Lorem ipsum dolor sit amet",
-                    results: "Lorem ipsum dolor sit amet",
-                    purchaseQty: "",
-                    costPerCustomer: "",
-                    budgetSpend: ""
-                },
-                {
-                    date: "2021-07-02",
-                    reach: "2000",
-                    comments: "Lorem ipsum dolor sit amet",
-                    results: "Lorem ipsum dolor sit amet",
-                    purchaseQty: "",
-                    costPerCustomer: "",
-                    budgetSpend: ""
-                },
-                {
-                    date: "2021-07-03",
-                    reach: "3000",
-                    comments: "Lorem ipsum dolor sit amet",
-                    results: "Lorem ipsum dolor sit amet",
-                    purchaseQty: "",
-                    costPerCustomer: "",
-                    budgetSpend: ""
-                }
+            campaignEntry: [
+                // {
+                //     date: "2021-07-01",
+                //     reach: "1000",
+                //     comments: "Lorem ipsum dolor sit amet",
+                //     results: "Lorem ipsum dolor sit amet",
+                //     purchaseQty: "",
+                //     costPerCustomer: "",
+                //     budgetSpend: ""
+                // },
+                // {
+                //     date: "2021-07-02",
+                //     reach: "2000",
+                //     comments: "Lorem ipsum dolor sit amet",
+                //     results: "Lorem ipsum dolor sit amet",
+                //     purchaseQty: "",
+                //     costPerCustomer: "",
+                //     budgetSpend: ""
+                // },
+                // {
+                //     date: "2021-07-03",
+                //     reach: "3000",
+                //     comments: "Lorem ipsum dolor sit amet",
+                //     results: "Lorem ipsum dolor sit amet",
+                //     purchaseQty: "",
+                //     costPerCustomer: "",
+                //     budgetSpend: ""
+                // }
             ], newRow: {
                 date: "",
                 reach: "",
@@ -202,8 +217,13 @@ export default {
     },
     mounted() {
         // this.loadAccount()
+
         const today = new Date().toISOString().substr(0, 10);
-        this.bookingDate = today
+        this.form.header.start = today
+        this.form.header.end = today
+        this.newRow.date = today
+        this.loadCampaign();
+        this.loadProduct()
     },
     computed: {
         dateRules() {
@@ -212,73 +232,153 @@ export default {
                 value => /^(\d{4})-(\d{2})-(\d{2})$/.test(value) || 'Invalid date format (YYYY-MM-DD)'
             ];
         },
-        reachRules() {
+        numberRule() {
             return [
                 value => !!value || 'Field is required',
                 value => Number.isInteger(Number(value)) || 'Value must be an'
             ];
         },
-        commentsRules() {
-            return [
-                value => !!value || 'Field is required',
-                value => Number.isInteger(Number(value)) || 'Value must be an integer'
-            ];
-        },
-        resultsRules() {
-            return [
-                value => !!value || 'Field is required',
-                value => Number.isInteger(Number(value)) || 'Value must be an integer'
-            ];
-        },
-        purchaseQtyRules() {
-            return [
-                value => !!value || 'Field is required',
-                value => /^\d+(\.\d{1,2})?$/.test(value) || 'Invalid value'
-            ];
-        },
-        costPerCustomerRules() {
-            return [
-                value => !!value || 'Field is required',
-                value => /^\d+(\.\d{1,2})?$/.test(value) || 'Invalid value'
-            ];
-        },
-        budgetSpendRules() {
-            return [
-                value => !!value || 'Field is required',
-                value => /^\d+(\.\d{1,2})?$/.test(value) || 'Invalid value'
-            ];
-        }
+
     },
     methods: {
+        deleteItem(item) {
+            const index = this.campaignEntry.indexOf(item);
+            if (index > -1) {
+
+                if (this.isEdit && item.id) {
+                    confirmSwal(this.$swal, 'warning', async () => {
+                        console.log("Delete record function");
+                        this.isLoading = true
+                        await this.$axios.delete(`/api/campaignEntry/delete/${item.id}`)
+                            .then(response => {
+                                console.log("response=>", response.data);
+                                if (response.data.includes('successfully')) {
+                                    this.campaignEntry.splice(index, 1);
+                                }
+                            })
+                            .catch(error => {
+                                swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data)
+                            })
+                        this.isLoading = false
+                    })
+                } else {
+                    this.campaignEntry.splice(index, 1);
+
+                }
+
+            }
+        },
         open() {
             this.dialog = true;
         },
         close() {
             this.dialog = false;
         },
-        submit() {
+        validateObject(obj) {
+            const { date, reach, comments, results, purchaseQty, costPerCustomer, budgetSpend } = obj;
+            console.log("Result ===> ",results,' ',Number.isInteger(Number('0')), ' val ',!!results);
+
+            if (!date || !reach || !comments || !results || !purchaseQty || !costPerCustomer || !budgetSpend) {
+                return false; // All required properties must be present
+            }
+
+            if (Number.isInteger(Number(reach)) || Number(reach) < 0) {
+                return false; // Reach must be a positive number
+            }
+            if (Number.isInteger(Number(comments)) || Number(comments) < 0) {
+                return false; // Reach must be a positive number
+            }
+            if (Number.isInteger(Number(results)) || Number(results) < 0) {
+                return false; // Reach must be a positive number
+            }
+            if (Number.isInteger(Number(purchaseQty)) || Number(purchaseQty) < 0) {
+                return false; // Reach must be a positive number
+            }
+            if (Number.isInteger(Number(costPerCustomer)) || Number(costPerCustomer) < 0) {
+                return false; // Reach must be a positive number
+            }
+            if (Number.isInteger(Number(budgetSpend)) || Number(budgetSpend) < 0) {
+                return false; // Reach must be a positive number
+            }
+
+            return true;
+        },
+        validateCampaignEntry() {
+            for (const iterator of this.campaignEntry) {
+                if (!this.validateObject(iterator)) {
+                    return false;
+                }
+            }
+            return true
+        },
+        async loadCampaign() {
+            this.isLoading = true
+            if (this.isEdit) {
+                await this.$axios.get(`/api/campaign/find/${this.campaignId}`).then(response => {
+                    this.form.header = response.data
+                    this.form.header.start = response.data['start'].split('T')[0]
+                    this.form.header.end = response.data['end'].split('T')[0]
+                    this.campaignEntry.length = 0
+                    for (const iterator of response.data.entries) {
+                        let entry = iterator
+                        entry['date'] = iterator['date'].split('T')[0]
+                        // entry.purchaseQty = +iterator.purchaseQty
+                        // entry.costPerCustomer = +iterator.costPerCustomer
+                        // entry.budgetSpend = +iterator.budgetSpend
+                        this.campaignEntry.push(entry)
+                    }
+                }).catch(error => {
+                    console.log("Load cammpaign error", error);
+                })
+            }
+            this.isLoading = false;
+        },
+        async submit() {
             // handle form submission here
             if (!this.isLoading) {
                 this.isLoading = true;
-                this.$axios.post("/api/campaign/create", this.form.header).then(res => {
-                    //     swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-                    // } else {
-                    //     swalError2(this.$swal, "Error", responseErrorList[0].msg)
-                    if (res.status == 200) {
-                        swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-                    } else {
-                        swalError2(this.$swal, "Error", res.data)
-                    }
-                }).catch(error => {
-                    swalError2(this.$swal, "Error", error.response.data.errors[0]['msg'])
+                if (this.campaignEntry.length == 0) {
+                    this.isLoading = false
+                    return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ບໍ່ມີລາຍການກະລຸນາເພີ່ມຢ່າງນ້ອຍ 1 ລາຍການ")
+                }
+                if (!this.validateCampaignEntry()) {
+                    this.isLoading = false
+                    return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາກວດຂໍ້ມູນຄືນໃຫ້ຖືກຕ້ອງ")
+                }
+                this.form.header.entry = this.campaignEntry
+                // ********* update entry *********
+                if (this.isEdit && this.campaignId) {
+                    console.log("====> update campaign");
+                    await this.$axios.put(`/api/campaign/update/${this.campaignId}`, this.form.header).then(res => {
+                        if (res.status == 200) {
+                            swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+                        } else {
+                            swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data)
+                        }
+                    }).catch(error => {
+                        swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data)
 
-                })
+                    })
+                    // ********* create entry *********
+                } else {
+                    await this.$axios.post("/api/campaign/create", this.form.header).then(res => {
+                        if (res.status == 200) {
+                            swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+                        } else {
+                            swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data)
+                        }
+                    }).catch(error => {
+                        swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data.errors[0]['msg'])
+
+                    })
+                }
+
                 this.isLoading = false;
             }
             this.close();
         }, addRow() {
             if (this.$refs.addRowForm.validate()) {
-                this.tableData.push(this.newRow);
+                this.campaignEntry.push(this.newRow);
                 this.newRow = {
                     date: "",
                     reach: "",
@@ -290,6 +390,41 @@ export default {
                 };
                 this.showAddRowDialog = false;
             }
+        },
+        async loadProduct() {
+            this.isLoading = true
+            await this.$axios
+                .get('product_mobile_f')
+                .then((res) => {
+                    this.productList = res.data.map((el) => {
+                        return el
+                        // {
+                        //     card_count: el.card_count,
+                        //     categ_name: el.categ_name,
+                        //     cost_price: el.cost_price,
+                        //     id: el.id,
+                        //     img_name: el.img_name,
+                        //     outlet: el.outlet,
+                        //     outlet_name: el.outlet_name,
+                        //     pro_category: el.pro_category,
+                        //     pro_desc: el.pro_desc,
+                        //     pro_id: el.pro_id,
+                        //     pro_image_path: el.pro_image_path,
+                        //     pro_name: el.pro_name,
+                        //     pro_price: el.pro_price,
+                        //     pro_status: el.pro_status,
+                        //     retail_cost_percent: el.retail_cost_percent,
+                        //     sale_count: el.sale_count,
+                        //     stock_count: el.stock_count,
+                        // }
+
+                    })
+                    console.log("all data1: ", this.productList[0].img_path);
+                })
+                .catch((er) => {
+                    console.log('Data: ' + er)
+                })
+            this.isLoading = false
         }
     }
 }

@@ -158,7 +158,7 @@ export const swalWarning = (swal, title, message) => {
   })
 }
 
-export const swalWarningWithHTML = (swal, title, message,amountA,amountB) => {
+export const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
   swal({
     icon: 'warning',
     title: title,
@@ -226,27 +226,62 @@ export const toastNotification = (swal, icon, title, message, callbackFunc) => {
   })
 }
 
+export const confirmSwal = (swal, icon, callbackFunc) => {
+  swal({
+    icon: icon,
+    title: 'Are you sure?',
+    text: 'You won\'t be able to revert this!',
+    confirmButtonText: 'Yes, delete it!',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'Cancel',
+    cancelButtonColor: '#3085d6',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      callbackFunc()
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
+}
+
 export const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-    .toISOString()
-    .substr(0, 10)
+  .toISOString()
+  .substr(0, 10)
 
 export const formDate = (date) => {
-    if (!date) return null
+  if (!date) return null
 
-    const [year, month, day] = date.split('-')
-    return `${month}/${day}/${year}`
+  const [year, month, day] = date.split('-')
+  return `${month}/${day}/${year}`
 }
 export const parseDate = (date) => {
-    console.log("TEST DATE PARSER 1");
-    if (!date) return null
-    console.log("TEST DATE PARSER 2");
+  console.log("TEST DATE PARSER 1");
+  if (!date) return null
+  console.log("TEST DATE PARSER 2");
 
-    const [month, day, year] = date.split('/')
-    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  const [month, day, year] = date.split('/')
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
 }
 
-// module.exports = {
-//     today,
-//     formDate,
-//     parseDate
-// }
+export const mysqlDateToDateObject = (mysqlDate) => {
+  // *********** this fuction will return date object from mysq date *********** //
+  const dateObj = new Date(mysqlDate.split("T")[0]);
+  return dateObj;
+}
+
+export const  getFirstDayOfMonth = () =>{
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  console.log("Date found => ",firstDayOfMonth);
+  // const mysqlDate = firstDayOfMonth.toISOString().slice(0, 10);
+  const year = firstDayOfMonth.getFullYear();
+  const month = (firstDayOfMonth.getMonth() + 1).toString().padStart(2, '0');
+  const day = firstDayOfMonth.getDate().toString().padStart(2, '0');
+  const mysqlDate = `${year}-${month}-${day}`;
+return mysqlDate;
+}

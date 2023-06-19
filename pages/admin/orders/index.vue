@@ -75,7 +75,7 @@
       </v-card-text>
 
 
-      <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
+      <v-data-table  v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList">
         <template v-slot:[`item.cartTotal`]="{ item }">
           {{ numberWithCommas(item.cartTotal) }}
         </template>
@@ -106,15 +106,11 @@
           <v-btn color="blue darken-1" text @click="cancelItem(item)
           wallet = true
             ">
-            <!-- <i class="fas fa-rotate-right"></i> -->
             <i class="fas fa-sync"></i>
-            <!-- <i class="fa-solid fa-lock fa-shake"></i> -->
-            <!-- <i class="fas fa-trash"></i> -->
           </v-btn>
         </template>
         <template v-slot:[`item.cusTel`]="{ item }">
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-            <!-- <i class="fas fa-whatsapp"></i> -->
             {{ item.cusTel }}
             <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
           </v-btn>
@@ -151,6 +147,7 @@ export default {
       componentCancelFormKey: 1,
       cancelForm: false,
       OrderIdSelected: '',
+
       headers: [
         {
           text: 'ວັນທີ',
@@ -248,6 +245,7 @@ export default {
     await this.loadData()
   },
   watch: {
+
     message(val) {
       if (val != null) {
         this.dialog = true

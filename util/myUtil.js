@@ -18,6 +18,27 @@ export const swalError = (swal, title, message, trandId) => {
   })
 }
 
+export const confirmSwal = (swal, icon, callbackFunc) => {
+  swal({
+    icon: icon,
+    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
+    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
+    confirmButtonText: 'ຢືນຢັນ',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'ອອກ',
+    cancelButtonColor: '#3085d6',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      callbackFunc()
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
+}
 export const swalErrorNoTrace = (swal, title, message) => {
   swal({
     icon: 'error',
@@ -158,7 +179,7 @@ export const swalWarning = (swal, title, message) => {
   })
 }
 
-export const swalWarningWithHTML = (swal, title, message,amountA,amountB) => {
+export const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
   swal({
     icon: 'warning',
     title: title,
@@ -226,6 +247,12 @@ export const toastNotification = (swal, icon, title, message, callbackFunc) => {
   })
 }
 
+export const getFirstDayOfMonth = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  return firstDayOfMonth;
+}
 
 
 

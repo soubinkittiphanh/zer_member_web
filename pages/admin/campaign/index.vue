@@ -1,42 +1,33 @@
 <template>
     <div>
-        <v-dialog v-model="dialog" max-width="1200">
+        <v-dialog v-model="campaignFormDialog" max-width="1200">
             <v-card class="pa-4">
-                <campaign-form></campaign-form>
+                <campaign-form :isEdit="isEdit" :campaignId="selectedCampaignId" :key="campaignFormKey"
+                    @close-dialog="campaignFormDialog = false"></campaign-form>
             </v-card>
         </v-dialog>
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
-      <loading-indicator> </loading-indicator>
-    </v-dialog>
+            <loading-indicator> </loading-indicator>
+        </v-dialog>
         <v-card>
             <v-card-title>
                 <v-layout row wrap>
                     <v-col cols="6">
-                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format"
-                                    persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
-                                    @blur="date = parseDate(dateFormatted)" v-on="on"></v-text-field>
-                            </template>
-                            <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                        </v-menu>
-                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format"
-                                    persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
-                                    @blur="date2 = parseDate(dateFormatted2)" v-on="on"></v-text-field>
-                            </template>
-                            <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
-                        </v-menu>
+
+                        <v-text-field type="date" label="ວັນທີເລີ່ມ*" v-model="startDate"
+                            hint="example of helper text only on focus"></v-text-field>
+
+                        <v-text-field type="date" label="ວັນທີເລີ່ມ*" v-model="endDate"
+                            hint="example of helper text only on focus"></v-text-field>
+
+                        <v-btn @click="openCampaignForm"> ເພີ່ມແຄມເປນ </v-btn>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
                         <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line
                             hide-detailsx />
                         <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
-                        <v-btn @click="open"> open </v-btn>
+
                     </v-col>
                 </v-layout>
             </v-card-title>
@@ -58,12 +49,16 @@
                         <i class="fa fa-pencil-square-o"></i>
                     </v-btn>
                 </template>
-                <template v-slot:[`item.tel`]="{ item }">
-                    <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-                        {{ item.tel }}
-                        <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
+                <template v-slot:[`item.id`]="{ item }">
+                    <v-btn color="blue darken-1" text @click="editItem(item.id)
+                    wallet = true
+                        ">
+                        <i class="fas fa-eye"></i>
                     </v-btn>
-
+                </template>
+                <template v-slot:[`item.isActive`]="{ item }">
+                    <v-switch disabled v-model="item.isActive" label="Active" :true-value="true"
+                        :false-value="false"></v-switch>
                 </template>
             </v-data-table>
 
@@ -72,31 +67,44 @@
 </template>
 
 <script>
+import { mysqlDateToDateObject, parseDate, getFirstDayOfMonth } from '~/common'
 import CampaignForm from '~/components/campaign/CampaignForm.vue'
 export default {
     components: { CampaignForm },
     data() {
         return {
             campaignList: [],
+            selectedCampaignId: '',
+            startDate: null,
+            endDate: null,
+            isEdit: false,
+            campaignFormKey: 1,
             headers: [
                 {
-                    text: 'ຊື່',
+                    text: 'ຊື່ Campaign',
                     align: 'center',
                     value: 'name',
                     sortable: true,
                 },
-                { text: 'ເບີໂທ', align: 'center', value: 'tel' },
-                { text: 'Rating', align: 'center', value: 'rating' },
-                { text: 'active', align: 'center', value: 'isAtive' },
+                { text: 'ສິນຄ້າ', align: 'center', value: 'product' },
+                { text: 'ວັນທີເລີ່ມ', align: 'center', value: 'start' },
+                { text: 'ວັນທີສິ້ນສຸດ', align: 'center', value: 'end' },
+                { text: 'ສະຖານະ', align: 'center', value: 'isActive' },
                 {
                     text: 'ລາຍລະອຽດ',
+                    align: 'end',
+                    value: 'id',
+                    sortable: false,
+                },
+                {
+                    text: '',
                     align: 'end',
                     value: 'function',
                     sortable: false,
                 },
             ],
-            isloading:false,
-            dialog: false,
+            isloading: false,
+            campaignFormDialog: false,
             search: '',
             userId: '',
             date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -105,11 +113,12 @@ export default {
             date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
                 .toISOString()
                 .substr(0, 10),
-            dateFormatted: this.formatDate(
-                new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                    .toISOString()
-                    .substr(0, 10)
-            ),
+            // dateFormatted: this.formatDate(
+            //     getFirstDayOfMonth(new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+            //         .toISOString()
+            //         .substr(0, 10))
+
+            // ),
             dateFormatted2: this.formatDate(
                 new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
                     .toISOString()
@@ -120,34 +129,46 @@ export default {
 
         }
     },
-    mounted(){
+    mounted() {
         this.loadData();
+        const today = new Date().toISOString().substr(0, 10);
+        this.endDate =today;
+        this.startDate = getFirstDayOfMonth()
     },
     watch: {
-        date(val) {
-            this.dateFormatted = this.formatDate(this.date)
+        startDate(val) {
             this.loadData()
         },
-        date2(val) {
-            this.dateFormatted2 = this.formatDate(this.date2)
+        endDate(val) {
             this.loadData()
         },
     },
     methods: {
-        open() {
-            this.dialog = true;
-        }, async loadData() {
+        openCampaignForm() {
+            this.isEdit = false
+            this.selectedCampaignId = null;
+            this.campaignFormKey += 1
+            this.campaignFormDialog = true;
+        },
+        editItem(campaignId) {
+            this.campaignFormKey += 1
+            this.selectedCampaignId = campaignId;
+            this.isEdit = true
+            this.campaignFormDialog = true;
+        },
+        async loadData() {
+            this.isloading = true
             await this.$axios.get("/api/campaign/find").then(response => {
-                this.isloading = true
                 this.campaignList = response.data.map(el => {
                     return {
                         id: el["id"],
                         name: el["title"],
-                        tel: el["start"],
-                        rating: el["end"],
+                        start: el["start"].split("T")[0],
+                        end: el["end"].split("T")[0],
                         product: el["product"],
                         budget: el["budget"],
                         isActive: el["isActive"],
+                        entries: el["entries"],
                         function: el["id"],
                     }
                 })
@@ -155,9 +176,9 @@ export default {
                 console.log("Error ", error);
             })
             this.isloading = false
-        }, formatDate(date) {
+        },
+        formatDate(date) {
             if (!date) return null
-
             const [year, month, day] = date.split('-')
             return `${month}/${day}/${year}`
         },

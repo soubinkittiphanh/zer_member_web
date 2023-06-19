@@ -1,61 +1,64 @@
 
 <template>
-    <div v-if="isloading">
+    <div>
+        <v-dialog v-model="isloading" hide-overlay persistent width="300">
+            <loading-indicator> </loading-indicator>
+        </v-dialog>
         <h1>Dash board</h1>
         <v-card class="mb-3">
             <v-card-text>
                 <v-layout row wrap>
                     <v-row>
                         <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[0]" :value="numberFormatter(series[0])" ></card-on-top>
+                            <card-on-top :title="options.labels[0]" :value="numberFormatter(series[0])"></card-on-top>
                         </v-col>
                         <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[1]" :value="numberFormatter(series[1])" ></card-on-top>
+                            <card-on-top :title="options.labels[1]" :value="numberFormatter(series[1])"></card-on-top>
                         </v-col>
                         <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[2]" :value="numberFormatter(series[2])" ></card-on-top>
+                            <card-on-top :title="options.labels[2]" :value="numberFormatter(series[2])"></card-on-top>
                         </v-col>
                         <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[3]" :value="numberFormatter(series[3])" ></card-on-top>
+                            <card-on-top :title="options.labels[3]" :value="numberFormatter(series[3])"></card-on-top>
                         </v-col>
 
                     </v-row>
                 </v-layout>
             </v-card-text>
         </v-card>
-        <v-card>
+        <v-card class="mb-3">
             <v-card-text>
                 <v-layout row wrap>
                     <v-row>
-
-
                         <v-col cols="4" sm="6">
                             <apexchart :options="barOptions" :series="barSeries"></apexchart>
                         </v-col>
 
-                        <v-col cols="4" sm="6">
+                        <v-col cols="4" sm="6" v-if="dailyState">
                             <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
                         </v-col>
-
                     </v-row>
                 </v-layout>
             </v-card-text>
         </v-card>
-        <!-- <my-chart :chart-data="chartData" :chart-options="chartOptions"></my-chart> -->
+        <campaignCard />
+
     </div>
 </template>
   
 <script>
-// import MyChart from '~/components/MyChart.vue';
 import { getFormatNum } from '~/util/myUtil'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
+import CampaignCard from '~/components/card/campaignCard.vue'
+
 export default {
-    components: { CardOnTop },
+    components: { CardOnTop, CampaignCard },
     data() {
         return {
-            saleValue:0,
+            saleValue: 0,
             isloading: false,
-            series: [0,0],
+            dailyState:false,
+            series: [0, 0],
             options: {
                 chart: {
                     type: 'donut',
@@ -70,7 +73,7 @@ export default {
                         }
                     }
                 }],
-                labels: ['CASH','COD'],
+                labels: ['CASH', 'COD'],
                 title: {
                     text: 'ອໍເດີ ປະເພດ'
                 },
@@ -141,23 +144,18 @@ export default {
             }
         };
     },
-    computed: {
-
-    },
     async created() {
-        console.log("Created");
+        await this.loadDailySaleStatistic()
         this.init();
     }, async mounted() {
-
-        await this.loadDailySaleStatistic()
         await this.loadTopSale()
         await this.paymentGroup()
-        console.log("Mounted");
     },
     methods: {
-        numberFormatter(value){
+        numberFormatter(value) {
             return getFormatNum(value)
         },
+
         getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';
@@ -167,9 +165,9 @@ export default {
             return color;
         },
         async loadTopSale() {
-            this.isloading = false
+            this.isloading = true
             await this.$axios
-                .get('api/topsale/?top=' + 10)
+                .get('api/topsale/?top=' + 5)
                 .then((res) => {
                     console.log("Data ", res.data[0]);
                     res.data.map((el) => {
@@ -178,102 +176,42 @@ export default {
                     })
 
                 }).catch(err => {
-                    this.isloading = true
                     console.log('error', err);
                 });
+            this.isloading = false
         },
         async loadDailySaleStatistic() {
-            this.isloading = false
+            this.isloading = true
             await this.$axios
                 .get('api/dailySaleReport')
                 .then((res) => {
                     console.log("Data ", res.data[0]);
-                    for (let index = 0; index < res.data.length; index++) {
-                        const element = res.data[index];
-                        console.log("Color: ", this.getRandomColor);
+                    for (const iterator of res.data) {
                         this.barOptionsForDailyStat.colors.push(this.getRandomColor)
+                        this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
+                        this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)
                     }
-                    res.data.map((el) => {
-                        console.log("EL count ", el.sale_count);
-                        this.barSeriesForDailyStat[0].data.push(el.total_sale)
-                        this.barOptionsForDailyStat.xaxis.categories.push(el.txn_date_short)
-                        // this.barOptionsForDailyStat.yaxis.title.text('Sales (in thousands)')
-                        //                         yaxis: {
-                        //     title: {
-                        //       text: 'Sales (in thousands)'
-                        //     }
-                        //   },
-                    })
-                    // this.isloading = true
                 }).catch(err => {
-                    this.isloading = true
                     console.log('error', err);
                 });
+                this.dailyState=true
+            this.isloading = false
         },
         async paymentGroup() {
-            this.isloading = false
+            this.isloading = true
             await this.$axios
                 .get('api/cod_n_cash_report')
                 .then((res) => {
-                    this.series =res.data.series;
-                    this.options.labels=res.data.labels
-                    // res.data.map((el) => {
-                    //     if(!el.payment_status && el.payment_code.includes('COD')){
-                    //         this.series[1] ++
-                    //         this.series[0] ++
-                    //     } else {
-                    //         this.series[0] ++
-                    //     }
-                    //     this.saleValue+=el.cart_total
-                    // })
-                    this.isloading = true
+                    this.series = res.data.series;
+                    this.options.labels = res.data.labels
                 }).catch(err => {
-                    this.isloading = true
                     console.log('error', err);
                 });
+            this.isloading = false
         },
         init() {
             console.log("Init function");
-            // this.series = [100, 55, 99, 948, 5, 7, 9, 4, 7, 99];
-            // this.options = {
-            //     title: {
-            //         text: 'PeeAir 4',
-            //         align: 'center',
-            //         style: {
-            //             fontSize: '16px',
-            //         },
-            //     },
-
-            //     chart: {
-            //         height: 350,
-            //         type: 'line',
-            //     },
-            //     stroke: {
-            //         width: [0, 4]
-            //     }, title: {
-            //         text: 'Traffic Sources'
-            //     }, dataLabels: {
-            //         enabled: true,
-            //         enabledOnSeries: [1]
-            //     },
-            //     labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-            //     xaxis: {
-            //         type: 'datetime'
-            //     },
-            //     yaxis: [{
-            //         title: {
-            //             text: 'Website Blog',
-            //         },
-
-            //     }, {
-            //         opposite: true,
-            //         title: {
-            //             text: 'Social Media'
-            //         }
-            //     }]
-
-            // }
-            const series2 = [66, 33,]
+            const series2 = [66, 33]
             this.peeair.options = {
                 title: {
                     text: 'GreenWood',
@@ -300,8 +238,3 @@ export default {
 }
 </script>
   
-<!-- <style scoped>
-.myclass {
-    font-family: 'noto sans lao';
-}
-</style> -->
