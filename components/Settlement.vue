@@ -110,6 +110,7 @@ export default {
   },
   async created() {
     await this.fetchData()
+    this.codFee = +0;
     console.log("Assign amount: ",this.paymentAmount);
   },
 

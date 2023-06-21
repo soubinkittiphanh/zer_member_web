@@ -16151,7 +16151,7 @@ const setupProgress = axios => {
   // runtimeConfig
   const runtimeConfig = ctx.$config && ctx.$config.axios || {};
   // baseURL
-  const baseURL =  false ? undefined : runtimeConfig.baseURL || runtimeConfig.baseUrl || process.env._AXIOS_BASE_URL_ || 'https://nodejsclusters-99563-0.cloudclusters.net';
+  const baseURL =  false ? undefined : runtimeConfig.baseURL || runtimeConfig.baseUrl || process.env._AXIOS_BASE_URL_ || 'https://nodejsclusters-130797-0.cloudclusters.net';
 
   // Create fresh objects for all default header scopes
   // Axios creates only one which is shared across SSR requests!
@@ -18279,7 +18279,7 @@ async function createApp(ssrContext, config = {}) {
   const app = {
     head: {
       "titleTemplate": "%s - Website",
-      "title": "PeeAir4",
+      "title": "Jack42",
       "htmlAttrs": {
         "lang": "en"
       },
@@ -18299,7 +18299,7 @@ async function createApp(ssrContext, config = {}) {
       "link": [{
         "rel": "icon",
         "type": "image\u002Fx-icon",
-        "href": "\u002Fpeeair.jpeg"
+        "href": "\u002Fjack.jpeg"
       }, {
         "rel": "stylesheet",
         "type": "text\u002Fcss",

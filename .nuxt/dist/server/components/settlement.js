@@ -816,7 +816,7 @@ var VSpacer = __webpack_require__(225);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=template&id=075789d1&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=template&id=10988e8a&
 
 
 
@@ -828,7 +828,7 @@ var VTextField = __webpack_require__(23);
 
 
 
-var Settlementvue_type_template_id_075789d1_render = function render() {
+var Settlementvue_type_template_id_10988e8a_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -945,7 +945,7 @@ var Settlementvue_type_template_id_075789d1_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=075789d1&
+// CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=10988e8a&
 
 // EXTERNAL MODULE: ./util/myUtil.js
 var myUtil = __webpack_require__(251);
@@ -1018,6 +1018,7 @@ var myUtil = __webpack_require__(251);
   },
   async created() {
     await this.fetchData();
+    this.codFee = +0;
     console.log("Assign amount: ", this.paymentAmount);
   },
   watch: {
@@ -1121,7 +1122,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_Settlementvue_type_script_lang_js_,
-  Settlementvue_type_template_id_075789d1_render,
+  Settlementvue_type_template_id_10988e8a_render,
   staticRenderFns,
   false,
   null,

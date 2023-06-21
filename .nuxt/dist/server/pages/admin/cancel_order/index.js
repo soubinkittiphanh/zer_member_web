@@ -5186,14 +5186,14 @@ var VDivider = __webpack_require__(71);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(252);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCard.vue?vue&type=template&id=2f15b31a&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCard.vue?vue&type=template&id=143a1440&
 
 
 
 
 
 
-var orderSumaryCardvue_type_template_id_2f15b31a_render = function render() {
+var orderSumaryCardvue_type_template_id_143a1440_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VCard["a" /* default */], {
@@ -5238,11 +5238,21 @@ var orderSumaryCardvue_type_template_id_2f15b31a_render = function render() {
       "cols": "6",
       "lg": "6"
     }
-  }, [_vm._v(_vm._s(this.orderDetail.gross))])], 1)], 1);
+  }, [_vm._v(_vm._s(this.orderDetail.gross))])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _vm.showTotal ? _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v("ຈຳນວນເງິນທີ່ໄດ້ຮັບຈາກລູກຄ້າ")]), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v(_vm._s(_vm.gross))])], 1) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/orderSumaryCard.vue?vue&type=template&id=2f15b31a&
+// CONCATENATED MODULE: ./components/orderSumaryCard.vue?vue&type=template&id=143a1440&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCard.vue?vue&type=script&lang=js&
 /* harmony default export */ var orderSumaryCardvue_type_script_lang_js_ = ({
@@ -5250,6 +5260,14 @@ var staticRenderFns = [];
     orderDetail: {
       type: Object,
       default: ''
+    },
+    showTotal: {
+      type: Boolean,
+      default: false
+    },
+    gross: {
+      type: String,
+      default: '0'
     }
   }
 });
@@ -5268,7 +5286,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_orderSumaryCardvue_type_script_lang_js_,
-  orderSumaryCardvue_type_template_id_2f15b31a_render,
+  orderSumaryCardvue_type_template_id_143a1440_render,
   staticRenderFns,
   false,
   null,

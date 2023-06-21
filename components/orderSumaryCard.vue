@@ -21,6 +21,11 @@
             <v-col cols="6" lg="6">COD/RIDER FEE</v-col>
             <v-col cols="6" lg="6">{{ this.orderDetail.gross }}</v-col>
         </v-row>
+        <v-divider></v-divider>
+        <v-row v-if="showTotal">
+            <v-col cols="6" lg="6">ຈຳນວນເງິນທີ່ໄດ້ຮັບຈາກລູກຄ້າ</v-col>
+            <v-col cols="6" lg="6">{{ gross}}</v-col>
+        </v-row>
     </v-card>
 </template>
 <script>
@@ -30,6 +35,15 @@ export default {
             type: Object,
             default: '',
         },
+        showTotal: {
+            type: Boolean,
+            default: false,
+        },
+        gross:{
+            type: String,
+            default:'0'
+        }
+        
     },
 }
 </script>

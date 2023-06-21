@@ -53,20 +53,23 @@
       <v-card-text>
         <v-layout row wrap>
           <v-row>
-
             <v-col cols="6" lg="6">
-              <order-sumary-card :orderDetail="{
+              <order-sumary-card :showTotal="true" 
+              :gross="getFormatNum(totalSaleRaw-(+this.unpaidCodOrder.saleRawNumber))"
+              :orderDetail="{
                 'title': 'ຍອດບິນ',
-                'amount': getFormatNum(noCancelData.length), 'sale': totalSale, 'discount': totalDiscount,
+                'amount': getFormatNum(noCancelData.length), 
+                'sale': totalSale, 
+                'discount': totalDiscount,
                 // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                 'gross': getFormatNum(codFeeTotal)
 
-              }">
+              }" >
 
               </order-sumary-card>
             </v-col>
             <v-col cols="6" lg="6">
-              <order-sumary-card :orderDetail="this.unpaidCodOrder">
+              <order-sumary-card i :orderDetail="this.unpaidCodOrder">
 
               </order-sumary-card>
             </v-col>
@@ -280,6 +283,17 @@ export default {
       return this.getFormatNum(total)
       // return total
     },
+    totalSaleRaw() {
+      let total = 0
+      this.noCancelData.forEach((el) => {
+        console.log("====>", el.cartTotal);
+        total += parseInt(el.cartTotal)
+      })
+      console.log('Price total: ' + total)
+      // return previousValue.cartTotal + currentValue.cartTotal
+      return total
+      // return total
+    },
     totalSaleOriginal() {
       let total = 0
       this.noCancelData.forEach((el) => {
@@ -317,7 +331,6 @@ export default {
       let txnList = []
       let orderDetail = {}
       this.orderHeaderList.forEach(element => {
-        console.log(element.recordStatus);
         if (element.paymentStatus === 'PENDING' && element.payment.includes('COD')) {
           console.log("Concept applied");
           txnList.push(element)
@@ -331,9 +344,10 @@ export default {
       }, 0);
 
       orderDetail.amount = txnList.length
+      orderDetail.saleRawNumber = totalPrice;
       orderDetail.sale = this.getFormatNum(totalPrice)
       orderDetail.discount = this.getFormatNum(totalDiscount)
-      orderDetail.gross = this.getFormatNum(totalPrice - totalDiscount)
+      orderDetail.gross = this.getFormatNum(0)
       orderDetail.title = 'ຍອດບິນ COD'
       return orderDetail;
     },
