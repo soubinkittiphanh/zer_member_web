@@ -1,4 +1,4 @@
-exports.ids = [25,15];
+exports.ids = [27,16];
 exports.modules = {
 
 /***/ 228:
@@ -398,131 +398,6 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
-/* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
-// Mixins
-
-
-
-/* @vue/component */
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(_mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], Object(_mixins_registrable__WEBPACK_IMPORTED_MODULE_2__[/* provide */ "b"])('form')
-/* @vue/component */).extend({
-  name: 'v-form',
-  provide() {
-    return {
-      form: this
-    };
-  },
-  inheritAttrs: false,
-  props: {
-    disabled: Boolean,
-    lazyValidation: Boolean,
-    readonly: Boolean,
-    value: Boolean
-  },
-  data: () => ({
-    inputs: [],
-    watchers: [],
-    errorBag: {}
-  }),
-  watch: {
-    errorBag: {
-      handler(val) {
-        const errors = Object.values(val).includes(true);
-        this.$emit('input', !errors);
-      },
-      deep: true,
-      immediate: true
-    }
-  },
-  methods: {
-    watchInput(input) {
-      const watcher = input => {
-        return input.$watch('hasError', val => {
-          this.$set(this.errorBag, input._uid, val);
-        }, {
-          immediate: true
-        });
-      };
-      const watchers = {
-        _uid: input._uid,
-        valid: () => {},
-        shouldValidate: () => {}
-      };
-      if (this.lazyValidation) {
-        // Only start watching inputs if we need to
-        watchers.shouldValidate = input.$watch('shouldValidate', val => {
-          if (!val) return; // Only watch if we're not already doing it
-
-          if (this.errorBag.hasOwnProperty(input._uid)) return;
-          watchers.valid = watcher(input);
-        });
-      } else {
-        watchers.valid = watcher(input);
-      }
-      return watchers;
-    },
-    /** @public */
-    validate() {
-      return this.inputs.filter(input => !input.validate(true)).length === 0;
-    },
-    /** @public */
-    reset() {
-      this.inputs.forEach(input => input.reset());
-      this.resetErrorBag();
-    },
-    resetErrorBag() {
-      if (this.lazyValidation) {
-        // Account for timeout in validatable
-        setTimeout(() => {
-          this.errorBag = {};
-        }, 0);
-      }
-    },
-    /** @public */
-    resetValidation() {
-      this.inputs.forEach(input => input.resetValidation());
-      this.resetErrorBag();
-    },
-    register(input) {
-      this.inputs.push(input);
-      this.watchers.push(this.watchInput(input));
-    },
-    unregister(input) {
-      const found = this.inputs.find(i => i._uid === input._uid);
-      if (!found) return;
-      const unwatch = this.watchers.find(i => i._uid === found._uid);
-      if (unwatch) {
-        unwatch.valid();
-        unwatch.shouldValidate();
-      }
-      this.watchers = this.watchers.filter(i => i._uid !== found._uid);
-      this.inputs = this.inputs.filter(i => i._uid !== found._uid);
-      this.$delete(this.errorBag, found._uid);
-    }
-  },
-  render(h) {
-    return h('form', {
-      staticClass: 'v-form',
-      attrs: {
-        novalidate: true,
-        ...this.attrs$
-      },
-      on: {
-        submit: e => this.$emit('submit', e)
-      }
-    }, this.$slots.default);
-  }
-}));
-
-/***/ }),
-
-/***/ 251:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* unused harmony export swalError */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
 /* unused harmony export swalErrorNoTrace */
@@ -542,7 +417,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /* unused harmony export swalMsg */
 /* unused harmony export toastNotification */
 /* unused harmony export getFirstDayOfMonth */
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
 const swalError = (swal, title, message, trandId) => {
@@ -782,7 +657,132 @@ const getFirstDayOfMonth = () => {
 
 /***/ }),
 
-/***/ 333:
+/***/ 249:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
+/* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
+// Mixins
+
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(_mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], Object(_mixins_registrable__WEBPACK_IMPORTED_MODULE_2__[/* provide */ "b"])('form')
+/* @vue/component */).extend({
+  name: 'v-form',
+  provide() {
+    return {
+      form: this
+    };
+  },
+  inheritAttrs: false,
+  props: {
+    disabled: Boolean,
+    lazyValidation: Boolean,
+    readonly: Boolean,
+    value: Boolean
+  },
+  data: () => ({
+    inputs: [],
+    watchers: [],
+    errorBag: {}
+  }),
+  watch: {
+    errorBag: {
+      handler(val) {
+        const errors = Object.values(val).includes(true);
+        this.$emit('input', !errors);
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+  methods: {
+    watchInput(input) {
+      const watcher = input => {
+        return input.$watch('hasError', val => {
+          this.$set(this.errorBag, input._uid, val);
+        }, {
+          immediate: true
+        });
+      };
+      const watchers = {
+        _uid: input._uid,
+        valid: () => {},
+        shouldValidate: () => {}
+      };
+      if (this.lazyValidation) {
+        // Only start watching inputs if we need to
+        watchers.shouldValidate = input.$watch('shouldValidate', val => {
+          if (!val) return; // Only watch if we're not already doing it
+
+          if (this.errorBag.hasOwnProperty(input._uid)) return;
+          watchers.valid = watcher(input);
+        });
+      } else {
+        watchers.valid = watcher(input);
+      }
+      return watchers;
+    },
+    /** @public */
+    validate() {
+      return this.inputs.filter(input => !input.validate(true)).length === 0;
+    },
+    /** @public */
+    reset() {
+      this.inputs.forEach(input => input.reset());
+      this.resetErrorBag();
+    },
+    resetErrorBag() {
+      if (this.lazyValidation) {
+        // Account for timeout in validatable
+        setTimeout(() => {
+          this.errorBag = {};
+        }, 0);
+      }
+    },
+    /** @public */
+    resetValidation() {
+      this.inputs.forEach(input => input.resetValidation());
+      this.resetErrorBag();
+    },
+    register(input) {
+      this.inputs.push(input);
+      this.watchers.push(this.watchInput(input));
+    },
+    unregister(input) {
+      const found = this.inputs.find(i => i._uid === input._uid);
+      if (!found) return;
+      const unwatch = this.watchers.find(i => i._uid === found._uid);
+      if (unwatch) {
+        unwatch.valid();
+        unwatch.shouldValidate();
+      }
+      this.watchers = this.watchers.filter(i => i._uid !== found._uid);
+      this.inputs = this.inputs.filter(i => i._uid !== found._uid);
+      this.$delete(this.errorBag, found._uid);
+    }
+  },
+  render(h) {
+    return h('form', {
+      staticClass: 'v-form',
+      attrs: {
+        novalidate: true,
+        ...this.attrs$
+      },
+      on: {
+        submit: e => this.$emit('submit', e)
+      }
+    }, this.$slots.default);
+  }
+}));
+
+/***/ }),
+
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -805,7 +805,7 @@ var VContainer = __webpack_require__(224);
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -816,7 +816,7 @@ var VSpacer = __webpack_require__(225);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=template&id=10988e8a&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=template&id=967eb5b4&
 
 
 
@@ -828,7 +828,7 @@ var VTextField = __webpack_require__(23);
 
 
 
-var Settlementvue_type_template_id_10988e8a_render = function render() {
+var Settlementvue_type_template_id_967eb5b4_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -912,14 +912,14 @@ var Settlementvue_type_template_id_10988e8a_render = function render() {
   }), _vm._v(" "), _c(VTextField["a" /* default */], {
     attrs: {
       "counter": 10,
-      "rules": _vm.rule.amountCODRules,
+      "rules": _vm.numberRule,
       "label": `ຄ່າທຳນຽມ COD: ` + _vm.formatNum(_vm.codFee),
       "required": ""
     },
     model: {
       value: _vm.codFee,
       callback: function ($$v) {
-        _vm.codFee = $$v;
+        _vm.codFee = _vm._n($$v);
       },
       expression: "codFee"
     }
@@ -945,10 +945,10 @@ var Settlementvue_type_template_id_10988e8a_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=10988e8a&
+// CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=967eb5b4&
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
+var myUtil = __webpack_require__(248);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=script&lang=js&
 
@@ -987,6 +987,9 @@ var myUtil = __webpack_require__(251);
     },
     userName() {
       return this.$auth.user.name;
+    },
+    numberRule() {
+      return [value => value !== undefined && value !== null && value !== '' || 'Field is required', value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'];
     }
   },
   data() {
@@ -1122,7 +1125,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_Settlementvue_type_script_lang_js_,
-  Settlementvue_type_template_id_10988e8a_render,
+  Settlementvue_type_template_id_967eb5b4_render,
   staticRenderFns,
   false,
   null,

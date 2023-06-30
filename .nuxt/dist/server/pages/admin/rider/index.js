@@ -1,4 +1,4 @@
-exports.ids = [54,15,23];
+exports.ids = [58,16,25];
 exports.modules = {
 
 /***/ 209:
@@ -107,13 +107,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 233:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(234);
+var content = __webpack_require__(235);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -121,7 +121,7 @@ __webpack_require__(6).default("0f3c9f10", content, true)
 
 /***/ }),
 
-/***/ 234:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -136,13 +136,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 235:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(236);
+var content = __webpack_require__(237);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -150,7 +150,7 @@ __webpack_require__(6).default("7cf76dc8", content, true)
 
 /***/ }),
 
-/***/ 236:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -165,13 +165,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 237:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(239);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -179,7 +179,7 @@ __webpack_require__(6).default("6af7f350", content, true)
 
 /***/ }),
 
-/***/ 238:
+/***/ 239:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -194,13 +194,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(240);
+var content = __webpack_require__(241);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -208,7 +208,7 @@ __webpack_require__(6).default("2f710ab8", content, true)
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -525,6 +525,269 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export swalError */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
+/* unused harmony export swalErrorNoTrace */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
+/* unused harmony export swalCancle */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
+/* unused harmony export customSwalSuccess */
+/* unused harmony export closeSwal */
+/* unused harmony export swalLoading */
+/* unused harmony export swalConfirm */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
+/* unused harmony export swalSuccessBackToMenu */
+/* unused harmony export customSwalSuccessBackToMenu */
+/* unused harmony export swalWarning */
+/* unused harmony export swalWarningWithHTML */
+/* unused harmony export swalWarningTraceId */
+/* unused harmony export swalMsg */
+/* unused harmony export toastNotification */
+/* unused harmony export getFirstDayOfMonth */
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+
+const swalError = (swal, title, message, trandId) => {
+  swal({
+    icon: 'error',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const confirmSwal = (swal, icon, callbackFunc) => {
+  swal({
+    icon: icon,
+    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
+    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
+    confirmButtonText: 'ຢືນຢັນ',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'ອອກ',
+    cancelButtonColor: '#3085d6'
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
+};
+const swalErrorNoTrace = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalError2 = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalCancle = swal => {
+  swal({
+    icon: 'info',
+    title: 'ຍົກເລີກ!',
+    text: 'ການຍົເລີກສຳເລັດ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    text: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const customSwalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    html: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const closeSwal = swal => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
+};
+const swalLoading = (swal, title, text, icon) => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    // html: html,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    onBeforeOpen: () => {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
+    }
+  });
+};
+const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
+  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    showCancelButton: true,
+    cancelButtonText: cancelButtonText || 'ບໍ່',
+    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
+  });
+};
+const getFormatNum = val => {
+  return new Intl.NumberFormat().format(val);
+};
+const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: `<span>
+                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
+                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
+                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
+            </span>
+    `,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const customSwalSuccessBackToMenu = (swal, message) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: message,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const swalWarning = (swal, title, message) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
+                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
+                  </span>
+                `
+  });
+};
+const swalWarningTraceId = (swal, title, message, trandId) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const swalMsg = (swal, icon, title, message) => {
+  swal({
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const toastNotification = (swal, icon, title, message, callbackFunc) => {
+  swal({
+    toast: true,
+    position: 'bottom-end',
+    timerProgressBar: true,
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+    }
+  });
+};
+const getFirstDayOfMonth = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  return firstDayOfMonth;
+};
+
+/***/ }),
+
+/***/ 249:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 /* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
@@ -646,13 +909,13 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 250:
+/***/ 251:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTable.sass
-var VDataTable = __webpack_require__(233);
+var VDataTable = __webpack_require__(234);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/helpers.js
 var helpers = __webpack_require__(0);
@@ -1030,7 +1293,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataIterator/VDataFooter.sass
-var VDataFooter = __webpack_require__(235);
+var VDataFooter = __webpack_require__(236);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -1552,7 +1815,7 @@ var console = __webpack_require__(3);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTableHeader.sass
-var VDataTableHeader = __webpack_require__(237);
+var VDataTableHeader = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VChip/index.js
 var VChip = __webpack_require__(85);
@@ -1983,7 +2246,7 @@ function needsTd(slot) {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VSimpleTable.sass
-var VSimpleTable = __webpack_require__(239);
+var VSimpleTable = __webpack_require__(240);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VDataTable/VSimpleTable.js
 
@@ -2670,269 +2933,6 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 251:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export swalError */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
-/* unused harmony export swalErrorNoTrace */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
-/* unused harmony export swalCancle */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
-/* unused harmony export customSwalSuccess */
-/* unused harmony export closeSwal */
-/* unused harmony export swalLoading */
-/* unused harmony export swalConfirm */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
-/* unused harmony export swalSuccessBackToMenu */
-/* unused harmony export customSwalSuccessBackToMenu */
-/* unused harmony export swalWarning */
-/* unused harmony export swalWarningWithHTML */
-/* unused harmony export swalWarningTraceId */
-/* unused harmony export swalMsg */
-/* unused harmony export toastNotification */
-/* unused harmony export getFirstDayOfMonth */
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
-
-const swalError = (swal, title, message, trandId) => {
-  swal({
-    icon: 'error',
-    title: title,
-    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
-                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
-                  </span>
-                `
-  });
-};
-const confirmSwal = (swal, icon, callbackFunc) => {
-  swal({
-    icon: icon,
-    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
-    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
-    confirmButtonText: 'ຢືນຢັນ',
-    confirmButtonColor: '#d33',
-    showCancelButton: true,
-    cancelButtonText: 'ອອກ',
-    cancelButtonColor: '#3085d6'
-  }).then(result => {
-    if (result.isConfirmed) {
-      callbackFunc();
-      // User clicked the "Yes, delete it!" button
-      // Perform the deletion action here
-    } else {
-      // User clicked the "Cancel" button
-      // Do nothing or show a different message
-    }
-  });
-};
-const swalErrorNoTrace = (swal, title, message) => {
-  swal({
-    icon: 'error',
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalError2 = (swal, title, message) => {
-  swal({
-    icon: 'error',
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalCancle = swal => {
-  swal({
-    icon: 'info',
-    title: 'ຍົກເລີກ!',
-    text: 'ການຍົເລີກສຳເລັດ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalSuccess = (swal, title, text) => {
-  swal({
-    icon: 'success',
-    title: title,
-    text: text,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const customSwalSuccess = (swal, title, text) => {
-  swal({
-    icon: 'success',
-    title: title,
-    html: text,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const closeSwal = swal => {
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
-};
-const swalLoading = (swal, title, text, icon) => {
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    title: title,
-    text: text,
-    // html: html,
-    icon: icon,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    onBeforeOpen: () => {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
-    }
-  });
-};
-const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
-  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    title: title,
-    text: text,
-    icon: icon,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    showCancelButton: true,
-    cancelButtonText: cancelButtonText || 'ບໍ່',
-    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
-  });
-};
-const getFormatNum = val => {
-  return new Intl.NumberFormat().format(val);
-};
-const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
-  return swal({
-    title: 'ແຈ້ງເຕືອນ',
-    icon: 'success',
-    html: `<span>
-                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
-                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
-                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
-            </span>
-    `,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
-  });
-};
-const customSwalSuccessBackToMenu = (swal, message) => {
-  return swal({
-    title: 'ແຈ້ງເຕືອນ',
-    icon: 'success',
-    html: message,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
-  });
-};
-const swalWarning = (swal, title, message) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
-                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
-                  </span>
-                `
-  });
-};
-const swalWarningTraceId = (swal, title, message, trandId) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
-                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
-                  </span>
-                `
-  });
-};
-const swalMsg = (swal, icon, title, message) => {
-  swal({
-    icon: icon,
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const toastNotification = (swal, icon, title, message, callbackFunc) => {
-  swal({
-    toast: true,
-    position: 'bottom-end',
-    timerProgressBar: true,
-    icon: icon,
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  }).then(result => {
-    if (result.isConfirmed) {
-      callbackFunc();
-    }
-  });
-};
-const getFirstDayOfMonth = () => {
-  // Create a new Date object with the same year and month as the input date, but with day set to 1
-  const today = new Date();
-  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  return firstDayOfMonth;
-};
-
-/***/ }),
-
 /***/ 253:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3152,13 +3152,13 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 271:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(272);
+var content = __webpack_require__(270);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -3166,7 +3166,7 @@ __webpack_require__(6).default("ae7a972c", content, true)
 
 /***/ }),
 
-/***/ 272:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3181,14 +3181,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 273:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export prevent */
 /* harmony import */ var _components_VInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _rippleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(254);
-/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 // Components
  // Mixins
@@ -3336,13 +3336,26 @@ function prevent(e) {
 
 /***/ }),
 
-/***/ 283:
+/***/ 278:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(87);
+/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
+
+/***/ }),
+
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(284);
+var content = __webpack_require__(290);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -3350,7 +3363,7 @@ __webpack_require__(6).default("7b5d4dc6", content, true)
 
 /***/ }),
 
-/***/ 284:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3365,30 +3378,17 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 290:
+/***/ 310:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(87);
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
-
-/***/ }),
-
-/***/ 308:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(283);
+/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(289);
 /* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(271);
+/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(269);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
-/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(273);
+/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(271);
 // Styles
 
  // Components
@@ -3490,7 +3490,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 312:
+/***/ 315:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3507,13 +3507,13 @@ var VCard = __webpack_require__(73);
 var components_VCard = __webpack_require__(40);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCheckbox/VCheckbox.js
-var VCheckbox = __webpack_require__(308);
+var VCheckbox = __webpack_require__(310);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -3636,7 +3636,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/RiderForm.vue?vue&type=template&id=2084a0b4&
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
+var myUtil = __webpack_require__(248);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/RiderForm.vue?vue&type=script&lang=js&
 
@@ -3750,7 +3750,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(228).default
 
 /***/ }),
 
-/***/ 389:
+/***/ 393:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3770,7 +3770,7 @@ var components_VCard = __webpack_require__(40);
 var VCol = __webpack_require__(253);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(250);
+var VDataTable = __webpack_require__(251);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(244);
@@ -3779,7 +3779,7 @@ var VDialog = __webpack_require__(244);
 var VDivider = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(290);
+var VLayout = __webpack_require__(278);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
@@ -3925,7 +3925,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/rider/index.vue?vue&type=template&id=2b6d445c&
 
 // EXTERNAL MODULE: ./components/RiderForm.vue + 4 modules
-var RiderForm = __webpack_require__(312);
+var RiderForm = __webpack_require__(315);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/rider/index.vue?vue&type=script&lang=js&
 
@@ -4044,7 +4044,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var rider = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {RiderForm: __webpack_require__(312).default,LoadingIndicator: __webpack_require__(228).default})
+installComponents(component, {RiderForm: __webpack_require__(315).default,LoadingIndicator: __webpack_require__(228).default})
 
 
 /***/ })

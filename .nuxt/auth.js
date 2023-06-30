@@ -17,9 +17,9 @@ export default function (ctx, inject) {
   "watchLoggedIn": true,
   "redirect": {
     "login": "/admin/login",
-    "logout": "/",
-    "home": "/",
-    "callback": "/login"
+    "logout": false,
+    "home": "/admin/login",
+    "callback": "/admin/login"
   },
   "vuex": {
     "namespace": "auth"
@@ -44,7 +44,8 @@ export default function (ctx, inject) {
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "token": {
     "property": "accessToken",
-    "global": true
+    "global": true,
+    "expires_in": 60
   },
   "user": {
     "property": "user"

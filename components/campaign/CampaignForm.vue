@@ -10,18 +10,18 @@
                 <v-card-text>
                     <v-form ref="addRowForm">
                         <v-text-field type="date" label="ວັນທີ*" v-model="newRow.date" required hint="date"></v-text-field>
-                        <v-text-field v-model="newRow.reach" label="Reach" required
-                            :rules="[rules.required, rules.number]"></v-text-field>
-                        <v-text-field v-model="newRow.comments" label="Comments" required
-                            :rules="[rules.required, rules.number]"> </v-text-field>
-                        <v-text-field v-model="newRow.results" label="Results" required
-                            :rules="[rules.required, rules.number]"></v-text-field>
-                        <v-text-field v-model="newRow.purchaseQty" label="Purchase Qty"
-                            :rules="[rules.required, rules.number]" required></v-text-field>
-                        <v-text-field v-model="newRow.costPerCustomer" label="Cost Per Customer"
-                            :rules="[rules.required, rules.number]" required></v-text-field>
-                        <v-text-field v-model="newRow.budgetSpend" label="Budget Spend"
-                            :rules="[rules.required, rules.number]" required></v-text-field>
+                        <v-text-field v-model.number="newRow.reach" label="Reach" required
+                            :rules="numberRule"></v-text-field>
+                        <v-text-field v-model.number="newRow.comments" label="Comments" required :rules="numberRule">
+                        </v-text-field>
+                        <v-text-field v-model.number="newRow.results" label="Results" required
+                            :rules="numberRule"></v-text-field>
+                        <v-text-field v-mode.number="newRow.purchaseQty" label="Purchase Qty" :rules="numberRule"
+                            required></v-text-field>
+                        <v-text-field v-model.number="newRow.costPerCustomer" label="Cost Per Customer" :rules="numberRule"
+                            required></v-text-field>
+                        <v-text-field v-model.number="newRow.budgetSpend" label="Budget Spend" :rules="numberRule"
+                            required></v-text-field>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -54,8 +54,8 @@
                             <v-form v-model="valid" @submit.prevent="submitForm">
                                 <v-text-field type="date" label="ວັນທີເລີ່ມ*" v-model="form.header.start"
                                     hint="example of helper text only on focus"></v-text-field>
-                                <v-text-field v-model="form.header.budget" label="Budget" type="number"
-                                    :rules="[rules.required, rules.number]" required></v-text-field>
+                                <v-text-field v-model="form.header.budget" label="Budget" type="number" :rules="numberRule"
+                                    required></v-text-field>
 
                                 <!-- <v-btn color="primary" :disabled="!valid" type="submit">Submit</v-btn> -->
                             </v-form>
@@ -80,24 +80,25 @@
                                     <v-text-field type="date" label="ວັນທີ*" v-model="item.date"
                                         hint="example of helper text only on focus"></v-text-field>
                                 </td>
-                                <td> <v-text-field v-model="item.reach" label="Reach" :rules="numberRule"></v-text-field>
+                                <td> <v-text-field v-model.number="item.reach" label="Reach"
+                                        :rules="numberRule"></v-text-field>
                                 </td>
-                                <td><v-text-field v-model="item.comments" label="Comments"
+                                <td><v-text-field v-model.number="item.comments" label="Comments"
                                         :rules="numberRule"></v-text-field></td>
-                                <td> <v-text-field v-model="item.results" label="Results"
+                                <td> <v-text-field v-model.number="item.results" label="Results"
                                         :rules="numberRule"></v-text-field>
                                 </td>
                                 <td>
-                                    <v-text-field v-model="item.purchaseQty" label="Purchase Quantity"
+                                    <v-text-field v-model.number="item.purchaseQty" label="Purchase Quantity"
                                         :rules="numberRule"></v-text-field>
                                 </td>
                                 <td>
 
-                                    <v-text-field v-model="item.costPerCustomer" label="Cost Per Customer"
+                                    <v-text-field v-model.number="item.costPerCustomer" label="Cost Per Customer"
                                         :rules="numberRule"></v-text-field>
                                 </td>
                                 <td>
-                                    <v-text-field v-model="item.budgetSpend" label="Budget Spend"
+                                    <v-text-field v-model.number="item.budgetSpend" label="Budget Spend"
                                         :rules="numberRule"></v-text-field>
                                 </td>
                                 <td>
@@ -127,7 +128,7 @@
   
 <script>
 import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
-import { mysqlDateToDateObject,parseDate } from '~/common'
+import { mysqlDateToDateObject, parseDate } from '~/common'
 export default {
     props: {
         isEdit: {
@@ -177,47 +178,19 @@ export default {
                 { text: "Budget Spend", value: "budgetSpend" }
             ],
             campaignEntry: [
-                // {
-                //     date: "2021-07-01",
-                //     reach: "1000",
-                //     comments: "Lorem ipsum dolor sit amet",
-                //     results: "Lorem ipsum dolor sit amet",
-                //     purchaseQty: "",
-                //     costPerCustomer: "",
-                //     budgetSpend: ""
-                // },
-                // {
-                //     date: "2021-07-02",
-                //     reach: "2000",
-                //     comments: "Lorem ipsum dolor sit amet",
-                //     results: "Lorem ipsum dolor sit amet",
-                //     purchaseQty: "",
-                //     costPerCustomer: "",
-                //     budgetSpend: ""
-                // },
-                // {
-                //     date: "2021-07-03",
-                //     reach: "3000",
-                //     comments: "Lorem ipsum dolor sit amet",
-                //     results: "Lorem ipsum dolor sit amet",
-                //     purchaseQty: "",
-                //     costPerCustomer: "",
-                //     budgetSpend: ""
-                // }
             ], newRow: {
                 date: "",
-                reach: "",
-                comments: "",
-                results: "",
-                purchaseQty: "",
-                costPerCustomer: "",
-                budgetSpend: ""
+                reach: 0.01,
+                comments: 0,
+                results: 0,
+                purchaseQty:7,
+                costPerCustomer: 0,
+                budgetSpend: 0
             }
         };
     },
     mounted() {
         // this.loadAccount()
-
         const today = new Date().toISOString().substr(0, 10);
         this.form.header.start = today
         this.form.header.end = today
@@ -232,10 +205,12 @@ export default {
                 value => /^(\d{4})-(\d{2})-(\d{2})$/.test(value) || 'Invalid date format (YYYY-MM-DD)'
             ];
         },
+
+
         numberRule() {
             return [
-                value => !!value || 'Field is required',
-                value => Number.isInteger(Number(value)) || 'Value must be an'
+                value => value !== undefined && value !== null && value !== '' || 'Field is required',
+                value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'
             ];
         },
 
@@ -276,28 +251,35 @@ export default {
         },
         validateObject(obj) {
             const { date, reach, comments, results, purchaseQty, costPerCustomer, budgetSpend } = obj;
-            console.log("Result ===> ",results,' ',Number.isInteger(Number('0')), ' val ',!!results);
+            console.log("Result ===> ", results, ' ', Number.isInteger(Number('0')), ' val ', !!results);
 
-            if (!date || !reach || !comments || !results || !purchaseQty || !costPerCustomer || !budgetSpend) {
-                return false; // All required properties must be present
-            }
+            // if (!date || !reach || !comments || !results || !purchaseQty || !costPerCustomer || !budgetSpend) {
+            //     console.log("all checked false");
+            //     return false; // All required properties must be present
+            // }
 
-            if (Number.isInteger(Number(reach)) || Number(reach) < 0) {
+            if (!Number.isFinite(reach) || Number(reach) < 0) {
+                console.log("Reach", reach, ' IS NUMBER FINITE ', Number.isFinite(reach));
                 return false; // Reach must be a positive number
             }
-            if (Number.isInteger(Number(comments)) || Number(comments) < 0) {
+            if (!Number.isFinite(comments) || Number(comments) < 0) {
+                console.log("Comments");
                 return false; // Reach must be a positive number
             }
-            if (Number.isInteger(Number(results)) || Number(results) < 0) {
+            if (!Number.isFinite(results) || Number(results) < 0) {
+                console.log("Results");
                 return false; // Reach must be a positive number
             }
-            if (Number.isInteger(Number(purchaseQty)) || Number(purchaseQty) < 0) {
+            if (!Number.isFinite(purchaseQty) || Number(purchaseQty) < 0) {
+                console.log("Purchase");
                 return false; // Reach must be a positive number
             }
-            if (Number.isInteger(Number(costPerCustomer)) || Number(costPerCustomer) < 0) {
+            if (!Number.isFinite(costPerCustomer) || Number(costPerCustomer) < 0) {
+                console.log("CostCustomer");
                 return false; // Reach must be a positive number
             }
-            if (Number.isInteger(Number(budgetSpend)) || Number(budgetSpend) < 0) {
+            if (!Number.isFinite(budgetSpend) || Number(budgetSpend) < 0) {
+                console.log("Budgets");
                 return false; // Reach must be a positive number
             }
 
@@ -381,12 +363,12 @@ export default {
                 this.campaignEntry.push(this.newRow);
                 this.newRow = {
                     date: "",
-                    reach: "",
-                    comments: "",
-                    results: "",
-                    purchaseQty: "",
-                    costPerCustomer: "",
-                    budgetSpend: ""
+                    reach: 0,
+                    comments: 0,
+                    results: 0,
+                    purchaseQty: 0,
+                    costPerCustomer: 0,
+                    budgetSpend: 0
                 };
                 this.showAddRowDialog = false;
             }

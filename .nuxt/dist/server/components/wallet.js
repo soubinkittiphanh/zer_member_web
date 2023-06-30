@@ -1,4 +1,4 @@
-exports.ids = [29,13,15];
+exports.ids = [31,14,16];
 exports.modules = {
 
 /***/ 228:
@@ -96,7 +96,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 242:
+/***/ 243:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -486,7 +486,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 248:
+/***/ 249:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -611,7 +611,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 334:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -634,7 +634,7 @@ var VContainer = __webpack_require__(224);
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -965,7 +965,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var Wallet = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {DialogClassicMessage: __webpack_require__(242).default,LoadingIndicator: __webpack_require__(228).default})
+installComponents(component, {DialogClassicMessage: __webpack_require__(243).default,LoadingIndicator: __webpack_require__(228).default})
 
 
 /***/ })

@@ -209,6 +209,18 @@ export default {
           value: 'shopName',
           sortable: false,
         },
+        {
+          text: 'ໄຣເດີ',
+          align: 'end',
+          value: 'rider',
+          sortable: false,
+        },
+        {
+          text: 'ເຂດ',
+          align: 'end',
+          value: 'geoname',
+          sortable: false,
+        },
 
         {
           text: 'ລາຍລະອຽດ',
@@ -415,6 +427,8 @@ export default {
               'bookingDate': el.txn_date.split('T')[0],
               'recordStatus': el.record_status,
               'orderId': el.order_id,
+              'rider': el.rider,
+              'geoname': el.geoname+' - '+el.geodesc,
               'paymentStatus': 'PENDING'
             }
 
@@ -438,6 +452,8 @@ export default {
               'bookingDate': el.txn_date.split('T')[0],
               'recordStatus': el.record_status,
               'orderId': el.order_id,
+              'rider': el.rider,
+              'geoname': el.geoname+' - '+el.geodesc,
               'paymentStatus': 'PAID'
             }
 

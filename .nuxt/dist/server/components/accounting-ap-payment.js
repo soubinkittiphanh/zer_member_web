@@ -1,4 +1,4 @@
-exports.ids = [1,15];
+exports.ids = [1,16];
 exports.modules = {
 
 /***/ 228:
@@ -394,7 +394,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 251:
+/***/ 248:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -417,7 +417,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /* unused harmony export swalMsg */
 /* unused harmony export toastNotification */
 /* unused harmony export getFirstDayOfMonth */
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
 const swalError = (swal, title, message, trandId) => {
@@ -1010,7 +1010,7 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 294:
+/***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1030,7 +1030,7 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 332:
+/***/ 334:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1067,7 +1067,7 @@ var VSpacer = __webpack_require__(225);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/accounting/ApPayment.vue?vue&type=template&id=2e2f6a52&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/accounting/ApPayment.vue?vue&type=template&id=58aacef2&
 
 
 
@@ -1081,7 +1081,7 @@ var VTextField = __webpack_require__(23);
 
 
 
-var ApPaymentvue_type_template_id_2e2f6a52_render = function render() {
+var ApPaymentvue_type_template_id_58aacef2_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VRow["a" /* default */], {
@@ -1145,7 +1145,7 @@ var ApPaymentvue_type_template_id_2e2f6a52_render = function render() {
     attrs: {
       "type": "date",
       "label": "ວັນທີ*",
-      "hint": "example of helper text only on focus"
+      "hint": "ເດຶອນ/ວັນ/ປີ 12/31/2023"
     },
     model: {
       value: _vm.form.header.bookingDate,
@@ -1163,7 +1163,7 @@ var ApPaymentvue_type_template_id_2e2f6a52_render = function render() {
   }, [_c(VTextField["a" /* default */], {
     attrs: {
       "label": "ຊຶ ບໍ່ລິສັດ ຫລື ຜູ້ຮັບ ການຊຳລະ*",
-      "hint": "example of persistent helper text",
+      "hint": "ຊື່ບຸກຄົນ,ບໍລິສັດ ຫລື ຜູ້ຮັບການຊຳລະ",
       "persistent-hint": "",
       "required": ""
     },
@@ -1322,19 +1322,19 @@ var ApPaymentvue_type_template_id_2e2f6a52_render = function render() {
       "variant": "text"
     },
     on: {
-      "click": _vm.createPayment
+      "click": _vm.submitData
     }
   }, [_vm._v("\n                Save\n            ")])], 1)], 1)], 1);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/accounting/ApPayment.vue?vue&type=template&id=2e2f6a52&
+// CONCATENATED MODULE: ./components/accounting/ApPayment.vue?vue&type=template&id=58aacef2&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
-var comma_thousand = __webpack_require__(294);
+var comma_thousand = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
+var myUtil = __webpack_require__(248);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/accounting/ApPayment.vue?vue&type=script&lang=js&
 
@@ -1368,14 +1368,14 @@ var myUtil = __webpack_require__(251);
       form: {
         header: {
           bookingDate: '',
-          paymentNumber: '12345',
+          paymentNumber: 'REF12345',
           payee: 'ຮ້ານຄ້າທົ່ວໄປ',
           paymentMethod: 'Cash',
           currency: 'LAK',
           rate: 1,
           totalAmount: '1,000',
           notes: 'Payment for services rendered',
-          locking_session_id: 'abc123',
+          // locking_session_id: 'abc123',
           update_user: 1,
           drAccount: 15,
           crAccount: 1,
@@ -1388,8 +1388,14 @@ var myUtil = __webpack_require__(251);
   mounted() {
     this.loadAccount();
     const today = new Date().toISOString().substr(0, 10);
+    // const today = new Date().toISOString().substr(0, 10);
+    // const today = new Date().toLocaleDateString();
     this.bookingDate = today;
     this.form.header.bookingDate = today;
+    if (this.isEdit) {
+      console.log("Load payment header");
+      this.loadPaymentById();
+    }
   },
   computed: {
     today() {
@@ -1403,7 +1409,6 @@ var myUtil = __webpack_require__(251);
       this.isloading = true;
       const response = await this.$axios.get('/api/financial/chartAccount');
       response.data.forEach(element => {
-        console.log("Account number => ", element["accountNumber"]);
         this.account.push({
           id: element["id"],
           desc: element["accountName"] + " - " + element["accountNumber"]
@@ -1411,16 +1416,37 @@ var myUtil = __webpack_require__(251);
       });
       this.isloading = false;
     },
-    async createPayment() {
-      console.log("===> ", this.form.header);
+    getFormatNum(val) {
+      return new Intl.NumberFormat().format(val);
+    },
+    async loadPaymentById() {
+      this.isloading = true;
+      await this.$axios.get(`/api/finanicial/ap/header/find/${this.paymentHeadId}`).then(response => {
+        this.form.header = response.data;
+        this.form.header.bookingDate = response.data['bookingDate'].split('T')[0];
+        this.form.header.totalAmount = this.getFormatNum(this.form.header.totalAmount);
+      }).catch(error => {
+        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
+      });
+    },
+    async submitData() {
       if (this.isloading) return;
       this.isloading = true;
-      await this.$axios.post("/api/finanicial/ap/header/create", this.form.header).then(response => {
-        Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-        this.$emit('reload');
-      }).catch(error => {
-        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0].msg);
-      });
+      if (this.isEdit) {
+        await this.$axios.put(`/api/finanicial/ap/header/update/${this.paymentHeadId}`, this.form.header).then(response => {
+          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          this.$emit('reload');
+        }).catch(error => {
+          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
+        });
+      } else {
+        await this.$axios.post("/api/finanicial/ap/header/create", this.form.header).then(response => {
+          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          this.$emit('reload');
+        }).catch(error => {
+          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0].msg);
+        });
+      }
       this.isloading = false;
     }
   }
@@ -1443,7 +1469,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   accounting_ApPaymentvue_type_script_lang_js_,
-  ApPaymentvue_type_template_id_2e2f6a52_render,
+  ApPaymentvue_type_template_id_58aacef2_render,
   staticRenderFns,
   false,
   injectStyles,

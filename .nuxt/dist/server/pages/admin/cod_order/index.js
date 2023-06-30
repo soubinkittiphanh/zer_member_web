@@ -1,4 +1,4 @@
-exports.ids = [37,5,13,15,21,25];
+exports.ids = [40,6,14,16,22,27];
 exports.modules = {
 
 /***/ 209:
@@ -107,13 +107,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 233:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(234);
+var content = __webpack_require__(235);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -121,7 +121,7 @@ __webpack_require__(6).default("0f3c9f10", content, true)
 
 /***/ }),
 
-/***/ 234:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -136,13 +136,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 235:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(236);
+var content = __webpack_require__(237);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -150,7 +150,7 @@ __webpack_require__(6).default("7cf76dc8", content, true)
 
 /***/ }),
 
-/***/ 236:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -165,13 +165,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 237:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(239);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -179,7 +179,7 @@ __webpack_require__(6).default("6af7f350", content, true)
 
 /***/ }),
 
-/***/ 238:
+/***/ 239:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -194,13 +194,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(240);
+var content = __webpack_require__(241);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -208,7 +208,7 @@ __webpack_require__(6).default("2f710ab8", content, true)
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -223,7 +223,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 242:
+/***/ 243:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -617,6 +617,269 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export swalError */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
+/* unused harmony export swalErrorNoTrace */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
+/* unused harmony export swalCancle */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
+/* unused harmony export customSwalSuccess */
+/* unused harmony export closeSwal */
+/* unused harmony export swalLoading */
+/* unused harmony export swalConfirm */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
+/* unused harmony export swalSuccessBackToMenu */
+/* unused harmony export customSwalSuccessBackToMenu */
+/* unused harmony export swalWarning */
+/* unused harmony export swalWarningWithHTML */
+/* unused harmony export swalWarningTraceId */
+/* unused harmony export swalMsg */
+/* unused harmony export toastNotification */
+/* unused harmony export getFirstDayOfMonth */
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+
+const swalError = (swal, title, message, trandId) => {
+  swal({
+    icon: 'error',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const confirmSwal = (swal, icon, callbackFunc) => {
+  swal({
+    icon: icon,
+    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
+    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
+    confirmButtonText: 'ຢືນຢັນ',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'ອອກ',
+    cancelButtonColor: '#3085d6'
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
+};
+const swalErrorNoTrace = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalError2 = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalCancle = swal => {
+  swal({
+    icon: 'info',
+    title: 'ຍົກເລີກ!',
+    text: 'ການຍົເລີກສຳເລັດ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    text: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const customSwalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    html: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const closeSwal = swal => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
+};
+const swalLoading = (swal, title, text, icon) => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    // html: html,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    onBeforeOpen: () => {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
+    }
+  });
+};
+const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
+  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    showCancelButton: true,
+    cancelButtonText: cancelButtonText || 'ບໍ່',
+    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
+  });
+};
+const getFormatNum = val => {
+  return new Intl.NumberFormat().format(val);
+};
+const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: `<span>
+                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
+                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
+                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
+            </span>
+    `,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const customSwalSuccessBackToMenu = (swal, message) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: message,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const swalWarning = (swal, title, message) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
+                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
+                  </span>
+                `
+  });
+};
+const swalWarningTraceId = (swal, title, message, trandId) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const swalMsg = (swal, icon, title, message) => {
+  swal({
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const toastNotification = (swal, icon, title, message, callbackFunc) => {
+  swal({
+    toast: true,
+    position: 'bottom-end',
+    timerProgressBar: true,
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+    }
+  });
+};
+const getFirstDayOfMonth = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  return firstDayOfMonth;
+};
+
+/***/ }),
+
+/***/ 249:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 /* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
@@ -738,13 +1001,13 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 250:
+/***/ 251:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTable.sass
-var VDataTable = __webpack_require__(233);
+var VDataTable = __webpack_require__(234);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/helpers.js
 var helpers = __webpack_require__(0);
@@ -1122,7 +1385,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataIterator/VDataFooter.sass
-var VDataFooter = __webpack_require__(235);
+var VDataFooter = __webpack_require__(236);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -1644,7 +1907,7 @@ var console = __webpack_require__(3);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTableHeader.sass
-var VDataTableHeader = __webpack_require__(237);
+var VDataTableHeader = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VChip/index.js
 var VChip = __webpack_require__(85);
@@ -2075,7 +2338,7 @@ function needsTd(slot) {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VSimpleTable.sass
-var VSimpleTable = __webpack_require__(239);
+var VSimpleTable = __webpack_require__(240);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VDataTable/VSimpleTable.js
 
@@ -2762,269 +3025,6 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 251:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export swalError */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
-/* unused harmony export swalErrorNoTrace */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
-/* unused harmony export swalCancle */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
-/* unused harmony export customSwalSuccess */
-/* unused harmony export closeSwal */
-/* unused harmony export swalLoading */
-/* unused harmony export swalConfirm */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
-/* unused harmony export swalSuccessBackToMenu */
-/* unused harmony export customSwalSuccessBackToMenu */
-/* unused harmony export swalWarning */
-/* unused harmony export swalWarningWithHTML */
-/* unused harmony export swalWarningTraceId */
-/* unused harmony export swalMsg */
-/* unused harmony export toastNotification */
-/* unused harmony export getFirstDayOfMonth */
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
-
-const swalError = (swal, title, message, trandId) => {
-  swal({
-    icon: 'error',
-    title: title,
-    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
-                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
-                  </span>
-                `
-  });
-};
-const confirmSwal = (swal, icon, callbackFunc) => {
-  swal({
-    icon: icon,
-    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
-    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
-    confirmButtonText: 'ຢືນຢັນ',
-    confirmButtonColor: '#d33',
-    showCancelButton: true,
-    cancelButtonText: 'ອອກ',
-    cancelButtonColor: '#3085d6'
-  }).then(result => {
-    if (result.isConfirmed) {
-      callbackFunc();
-      // User clicked the "Yes, delete it!" button
-      // Perform the deletion action here
-    } else {
-      // User clicked the "Cancel" button
-      // Do nothing or show a different message
-    }
-  });
-};
-const swalErrorNoTrace = (swal, title, message) => {
-  swal({
-    icon: 'error',
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalError2 = (swal, title, message) => {
-  swal({
-    icon: 'error',
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalCancle = swal => {
-  swal({
-    icon: 'info',
-    title: 'ຍົກເລີກ!',
-    text: 'ການຍົເລີກສຳເລັດ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalSuccess = (swal, title, text) => {
-  swal({
-    icon: 'success',
-    title: title,
-    text: text,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const customSwalSuccess = (swal, title, text) => {
-  swal({
-    icon: 'success',
-    title: title,
-    html: text,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const closeSwal = swal => {
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
-};
-const swalLoading = (swal, title, text, icon) => {
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    title: title,
-    text: text,
-    // html: html,
-    icon: icon,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    onBeforeOpen: () => {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
-    }
-  });
-};
-const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
-  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    title: title,
-    text: text,
-    icon: icon,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    showCancelButton: true,
-    cancelButtonText: cancelButtonText || 'ບໍ່',
-    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
-  });
-};
-const getFormatNum = val => {
-  return new Intl.NumberFormat().format(val);
-};
-const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
-  return swal({
-    title: 'ແຈ້ງເຕືອນ',
-    icon: 'success',
-    html: `<span>
-                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
-                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
-                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
-            </span>
-    `,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
-  });
-};
-const customSwalSuccessBackToMenu = (swal, message) => {
-  return swal({
-    title: 'ແຈ້ງເຕືອນ',
-    icon: 'success',
-    html: message,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
-  });
-};
-const swalWarning = (swal, title, message) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
-                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
-                  </span>
-                `
-  });
-};
-const swalWarningTraceId = (swal, title, message, trandId) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
-                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
-                  </span>
-                `
-  });
-};
-const swalMsg = (swal, icon, title, message) => {
-  swal({
-    icon: icon,
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const toastNotification = (swal, icon, title, message, callbackFunc) => {
-  swal({
-    toast: true,
-    position: 'bottom-end',
-    timerProgressBar: true,
-    icon: icon,
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  }).then(result => {
-    if (result.isConfirmed) {
-      callbackFunc();
-    }
-  });
-};
-const getFirstDayOfMonth = () => {
-  // Create a new Date object with the same year and month as the input date, but with day set to 1
-  const today = new Date();
-  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  return firstDayOfMonth;
-};
-
-/***/ }),
-
 /***/ 252:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3378,7 +3378,7 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 259:
+/***/ 257:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3405,7 +3405,7 @@ const cache = new Map();
 /* unused harmony export parseDate */
 /* unused harmony export mysqlDateToDateObject */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getFirstDayOfMonth; });
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
 const swalError = (swal, title, message, trandId) => {
@@ -3669,6 +3669,35 @@ const getFirstDayOfMonth = () => {
 
 /***/ }),
 
+/***/ 258:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(259);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+__webpack_require__(6).default("265ccd52", content, true)
+
+/***/ }),
+
+/***/ 259:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-picker__title{background:#e0e0e0}.theme--dark.v-picker__title{background:#616161}.theme--light.v-picker__body{background:#fff}.theme--dark.v-picker__body{background:#424242}.v-picker{border-radius:4px;contain:layout style;display:inline-flex;flex-direction:column;font-size:1rem;position:relative;vertical-align:top}.v-picker--full-width{display:flex;width:100%}.v-picker--full-width>.v-picker__body{margin:initial}.v-picker__title{border-top-left-radius:4px;border-top-right-radius:4px;color:#fff;padding:16px}.v-picker__title__btn{transition:.3s cubic-bezier(.25,.8,.5,1)}.v-picker__title__btn:not(.v-picker__title__btn--active){cursor:pointer;opacity:.6}.v-picker__title__btn:not(.v-picker__title__btn--active):hover:not(:focus){opacity:1}.v-picker__title__btn--readonly{pointer-events:none}.v-picker__title__btn--active{opacity:1}.v-picker__body{align-items:center;display:flex;flex:1 0 auto;flex-direction:column;height:auto;margin:0 auto;overflow:hidden;position:relative;z-index:0}.v-picker__body>div{width:100%}.v-picker__body>div.fade-transition-leave-active{position:absolute}.v-picker--landscape .v-picker__title{border-bottom-right-radius:0;border-top-right-radius:0;height:100%;position:absolute;top:0;width:170px;z-index:1}.v-application--is-ltr .v-picker--landscape .v-picker__title{left:0}.v-application--is-rtl .v-picker--landscape .v-picker__title{right:0}.v-application--is-ltr .v-picker--landscape .v-picker__actions:not(.v-picker__actions--no-title),.v-application--is-ltr .v-picker--landscape .v-picker__body:not(.v-picker__body--no-title){margin-left:170px;margin-right:0}.v-application--is-rtl .v-picker--landscape .v-picker__actions:not(.v-picker__actions--no-title),.v-application--is-rtl .v-picker--landscape .v-picker__body:not(.v-picker__body--no-title){margin-left:0;margin-right:170px}.v-picker--flat{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rgba(0,0,0,.14),0 0 0 0 rgba(0,0,0,.12)}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
 /***/ 260:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3679,7 +3708,7 @@ var content = __webpack_require__(261);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
-__webpack_require__(6).default("265ccd52", content, true)
+__webpack_require__(6).default("ec842454", content, true)
 
 /***/ }),
 
@@ -3690,7 +3719,7 @@ __webpack_require__(6).default("265ccd52", content, true)
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-picker__title{background:#e0e0e0}.theme--dark.v-picker__title{background:#616161}.theme--light.v-picker__body{background:#fff}.theme--dark.v-picker__body{background:#424242}.v-picker{border-radius:4px;contain:layout style;display:inline-flex;flex-direction:column;font-size:1rem;position:relative;vertical-align:top}.v-picker--full-width{display:flex;width:100%}.v-picker--full-width>.v-picker__body{margin:initial}.v-picker__title{border-top-left-radius:4px;border-top-right-radius:4px;color:#fff;padding:16px}.v-picker__title__btn{transition:.3s cubic-bezier(.25,.8,.5,1)}.v-picker__title__btn:not(.v-picker__title__btn--active){cursor:pointer;opacity:.6}.v-picker__title__btn:not(.v-picker__title__btn--active):hover:not(:focus){opacity:1}.v-picker__title__btn--readonly{pointer-events:none}.v-picker__title__btn--active{opacity:1}.v-picker__body{align-items:center;display:flex;flex:1 0 auto;flex-direction:column;height:auto;margin:0 auto;overflow:hidden;position:relative;z-index:0}.v-picker__body>div{width:100%}.v-picker__body>div.fade-transition-leave-active{position:absolute}.v-picker--landscape .v-picker__title{border-bottom-right-radius:0;border-top-right-radius:0;height:100%;position:absolute;top:0;width:170px;z-index:1}.v-application--is-ltr .v-picker--landscape .v-picker__title{left:0}.v-application--is-rtl .v-picker--landscape .v-picker__title{right:0}.v-application--is-ltr .v-picker--landscape .v-picker__actions:not(.v-picker__actions--no-title),.v-application--is-ltr .v-picker--landscape .v-picker__body:not(.v-picker__body--no-title){margin-left:170px;margin-right:0}.v-application--is-rtl .v-picker--landscape .v-picker__actions:not(.v-picker__actions--no-title),.v-application--is-rtl .v-picker--landscape .v-picker__body:not(.v-picker__body--no-title){margin-left:0;margin-right:170px}.v-picker--flat{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rgba(0,0,0,.14),0 0 0 0 rgba(0,0,0,.12)}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".v-date-picker-title{display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;line-height:1}.v-application--is-ltr .v-date-picker-title .v-picker__title__btn{text-align:left}.v-application--is-rtl .v-date-picker-title .v-picker__title__btn{text-align:right}.v-date-picker-title__year{align-items:center;display:inline-flex;font-size:14px;font-weight:500;margin-bottom:8px}.v-date-picker-title__date{font-size:34px;font-weight:500;margin-bottom:-8px;overflow:hidden;padding-bottom:8px;position:relative;text-align:left}.v-date-picker-title__date>div{position:relative}.v-date-picker-title--disabled{pointer-events:none}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -3708,7 +3737,7 @@ var content = __webpack_require__(263);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
-__webpack_require__(6).default("ec842454", content, true)
+__webpack_require__(6).default("075924a4", content, true)
 
 /***/ }),
 
@@ -3719,7 +3748,7 @@ __webpack_require__(6).default("ec842454", content, true)
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".v-date-picker-title{display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;line-height:1}.v-application--is-ltr .v-date-picker-title .v-picker__title__btn{text-align:left}.v-application--is-rtl .v-date-picker-title .v-picker__title__btn{text-align:right}.v-date-picker-title__year{align-items:center;display:inline-flex;font-size:14px;font-weight:500;margin-bottom:8px}.v-date-picker-title__date{font-size:34px;font-weight:500;margin-bottom:-8px;overflow:hidden;padding-bottom:8px;position:relative;text-align:left}.v-date-picker-title__date>div{position:relative}.v-date-picker-title--disabled{pointer-events:none}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-date-picker-header .v-date-picker-header__value:not(.v-date-picker-header__value--disabled) button:not(:hover):not(:focus){color:rgba(0,0,0,.87)}.theme--light.v-date-picker-header .v-date-picker-header__value--disabled button{color:rgba(0,0,0,.38)}.theme--dark.v-date-picker-header .v-date-picker-header__value:not(.v-date-picker-header__value--disabled) button:not(:hover):not(:focus){color:#fff}.theme--dark.v-date-picker-header .v-date-picker-header__value--disabled button{color:hsla(0,0%,100%,.5)}.v-date-picker-header{align-items:center;display:flex;justify-content:space-between;padding:4px 16px;position:relative}.v-date-picker-header .v-btn{margin:0;z-index:auto}.v-date-picker-header .v-icon{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;user-select:none}.v-date-picker-header__value{flex:1;overflow:hidden;position:relative;text-align:center}.v-date-picker-header__value div{transition:.3s cubic-bezier(.25,.8,.5,1);width:100%}.v-date-picker-header__value button{cursor:pointer;font-weight:700;outline:none;padding:.5rem;transition:.3s cubic-bezier(.25,.8,.5,1)}.v-date-picker-header--disabled{pointer-events:none}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -3737,7 +3766,7 @@ var content = __webpack_require__(265);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
-__webpack_require__(6).default("075924a4", content, true)
+__webpack_require__(6).default("0f7d136a", content, true)
 
 /***/ }),
 
@@ -3748,7 +3777,7 @@ __webpack_require__(6).default("075924a4", content, true)
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-date-picker-header .v-date-picker-header__value:not(.v-date-picker-header__value--disabled) button:not(:hover):not(:focus){color:rgba(0,0,0,.87)}.theme--light.v-date-picker-header .v-date-picker-header__value--disabled button{color:rgba(0,0,0,.38)}.theme--dark.v-date-picker-header .v-date-picker-header__value:not(.v-date-picker-header__value--disabled) button:not(:hover):not(:focus){color:#fff}.theme--dark.v-date-picker-header .v-date-picker-header__value--disabled button{color:hsla(0,0%,100%,.5)}.v-date-picker-header{align-items:center;display:flex;justify-content:space-between;padding:4px 16px;position:relative}.v-date-picker-header .v-btn{margin:0;z-index:auto}.v-date-picker-header .v-icon{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;user-select:none}.v-date-picker-header__value{flex:1;overflow:hidden;position:relative;text-align:center}.v-date-picker-header__value div{transition:.3s cubic-bezier(.25,.8,.5,1);width:100%}.v-date-picker-header__value button{cursor:pointer;font-weight:700;outline:none;padding:.5rem;transition:.3s cubic-bezier(.25,.8,.5,1)}.v-date-picker-header--disabled{pointer-events:none}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-date-picker-table .v-date-picker-table--date__week,.theme--light.v-date-picker-table th{color:rgba(0,0,0,.38)}.theme--dark.v-date-picker-table .v-date-picker-table--date__week,.theme--dark.v-date-picker-table th{color:hsla(0,0%,100%,.5)}.v-date-picker-table{height:242px;padding:0 12px;position:relative}.v-date-picker-table table{table-layout:fixed;top:0;transition:.3s cubic-bezier(.25,.8,.5,1);width:100%}.v-date-picker-table td,.v-date-picker-table th{position:relative;text-align:center}.v-date-picker-table th{font-size:12px}.v-date-picker-table--date .v-btn{height:32px;width:32px}.v-date-picker-table .v-btn{font-size:12px;margin:0;z-index:auto}.v-date-picker-table .v-btn.v-btn--active{color:#fff}.v-date-picker-table--month td{height:56px;text-align:center;vertical-align:middle;width:33.333333%}.v-date-picker-table--month td .v-btn{margin:0 auto;max-width:140px;min-width:40px;width:100%}.v-date-picker-table--date th{font-weight:600;padding:8px 0}.v-date-picker-table--date td{width:45px}.v-date-picker-table__events{height:8px;left:0;position:absolute;text-align:center;white-space:pre;width:100%}.v-date-picker-table__events>div{border-radius:50%;display:inline-block;height:8px;margin:0 1px;width:8px}.v-date-picker-table--date .v-date-picker-table__events{bottom:6px}.v-date-picker-table--month .v-date-picker-table__events{bottom:8px}.v-date-picker-table__current .v-date-picker-table__events{margin-bottom:-1px}.v-date-picker-table--disabled{pointer-events:none}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -3766,40 +3795,11 @@ var content = __webpack_require__(267);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
-__webpack_require__(6).default("0f7d136a", content, true)
-
-/***/ }),
-
-/***/ 267:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-date-picker-table .v-date-picker-table--date__week,.theme--light.v-date-picker-table th{color:rgba(0,0,0,.38)}.theme--dark.v-date-picker-table .v-date-picker-table--date__week,.theme--dark.v-date-picker-table th{color:hsla(0,0%,100%,.5)}.v-date-picker-table{height:242px;padding:0 12px;position:relative}.v-date-picker-table table{table-layout:fixed;top:0;transition:.3s cubic-bezier(.25,.8,.5,1);width:100%}.v-date-picker-table td,.v-date-picker-table th{position:relative;text-align:center}.v-date-picker-table th{font-size:12px}.v-date-picker-table--date .v-btn{height:32px;width:32px}.v-date-picker-table .v-btn{font-size:12px;margin:0;z-index:auto}.v-date-picker-table .v-btn.v-btn--active{color:#fff}.v-date-picker-table--month td{height:56px;text-align:center;vertical-align:middle;width:33.333333%}.v-date-picker-table--month td .v-btn{margin:0 auto;max-width:140px;min-width:40px;width:100%}.v-date-picker-table--date th{font-weight:600;padding:8px 0}.v-date-picker-table--date td{width:45px}.v-date-picker-table__events{height:8px;left:0;position:absolute;text-align:center;white-space:pre;width:100%}.v-date-picker-table__events>div{border-radius:50%;display:inline-block;height:8px;margin:0 1px;width:8px}.v-date-picker-table--date .v-date-picker-table__events{bottom:6px}.v-date-picker-table--month .v-date-picker-table__events{bottom:8px}.v-date-picker-table__current .v-date-picker-table__events{margin-bottom:-1px}.v-date-picker-table--disabled{pointer-events:none}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 268:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(269);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
 __webpack_require__(6).default("4dc2915a", content, true)
 
 /***/ }),
 
-/***/ 269:
+/***/ 267:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3814,7 +3814,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 290:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3827,13 +3827,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 291:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerTitle.sass
-var VDatePickerTitle = __webpack_require__(262);
+var VDatePickerTitle = __webpack_require__(260);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/index.js
 var VIcon = __webpack_require__(19);
@@ -3956,7 +3956,7 @@ var helpers = __webpack_require__(0);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerHeader.sass
-var VDatePickerHeader = __webpack_require__(264);
+var VDatePickerHeader = __webpack_require__(262);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/index.js
 var VBtn = __webpack_require__(209);
@@ -4166,7 +4166,7 @@ function createNativeLocaleFormatter(locale, options, substrOptions = {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerTable.sass
-var VDatePickerTable = __webpack_require__(266);
+var VDatePickerTable = __webpack_require__(264);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/directives/touch/index.js
 var touch = __webpack_require__(86);
@@ -4626,7 +4626,7 @@ function isLeapYear(year) {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerYears.sass
-var VDatePickerYears = __webpack_require__(268);
+var VDatePickerYears = __webpack_require__(266);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePickerYears.js
  // Mixins
@@ -4710,7 +4710,7 @@ var VDatePickerYears = __webpack_require__(268);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VPicker/VPicker.sass
-var VPicker = __webpack_require__(260);
+var VPicker = __webpack_require__(258);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VCard/VCard.sass
 var VCard = __webpack_require__(114);
@@ -5745,7 +5745,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 293:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5880,7 +5880,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 297:
+/***/ 299:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5903,7 +5903,7 @@ var components_VCard = __webpack_require__(40);
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
 var VSpacer = __webpack_require__(225);
@@ -6012,7 +6012,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/CancelTicketForm.vue?vue&type=template&id=735971cb&
 
 // EXTERNAL MODULE: ./common/index.js
-var common = __webpack_require__(259);
+var common = __webpack_require__(257);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CancelTicketForm.vue?vue&type=script&lang=js&
 
@@ -6153,25 +6153,25 @@ installComponents(component, {LoadingIndicator: __webpack_require__(228).default
 
 /***/ }),
 
-/***/ 317:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(346);
+var content = __webpack_require__(348);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(6).default
 module.exports.__inject__ = function (context) {
-  add("3753e058", content, true, context)
+  add("c446a23a", content, true, context)
 };
 
 /***/ }),
 
-/***/ 333:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6194,7 +6194,7 @@ var VContainer = __webpack_require__(224);
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -6205,7 +6205,7 @@ var VSpacer = __webpack_require__(225);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=template&id=10988e8a&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=template&id=967eb5b4&
 
 
 
@@ -6217,7 +6217,7 @@ var VTextField = __webpack_require__(23);
 
 
 
-var Settlementvue_type_template_id_10988e8a_render = function render() {
+var Settlementvue_type_template_id_967eb5b4_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -6301,14 +6301,14 @@ var Settlementvue_type_template_id_10988e8a_render = function render() {
   }), _vm._v(" "), _c(VTextField["a" /* default */], {
     attrs: {
       "counter": 10,
-      "rules": _vm.rule.amountCODRules,
+      "rules": _vm.numberRule,
       "label": `ຄ່າທຳນຽມ COD: ` + _vm.formatNum(_vm.codFee),
       "required": ""
     },
     model: {
       value: _vm.codFee,
       callback: function ($$v) {
-        _vm.codFee = $$v;
+        _vm.codFee = _vm._n($$v);
       },
       expression: "codFee"
     }
@@ -6334,10 +6334,10 @@ var Settlementvue_type_template_id_10988e8a_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=10988e8a&
+// CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=967eb5b4&
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
+var myUtil = __webpack_require__(248);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=script&lang=js&
 
@@ -6376,6 +6376,9 @@ var myUtil = __webpack_require__(251);
     },
     userName() {
       return this.$auth.user.name;
+    },
+    numberRule() {
+      return [value => value !== undefined && value !== null && value !== '' || 'Field is required', value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'];
     }
   },
   data() {
@@ -6511,7 +6514,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_Settlementvue_type_script_lang_js_,
-  Settlementvue_type_template_id_10988e8a_render,
+  Settlementvue_type_template_id_967eb5b4_render,
   staticRenderFns,
   false,
   null,
@@ -6528,26 +6531,26 @@ installComponents(component, {LoadingIndicator: __webpack_require__(228).default
 
 /***/ }),
 
-/***/ 345:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5d71bd38_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(317);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5d71bd38_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5d71bd38_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5d71bd38_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5d71bd38_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(319);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 346:
+/***/ 348:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".grey[data-v-5d71bd38],.text-h5[data-v-5d71bd38]{font-family:\"Noto Sans Lao\"}table[data-v-5d71bd38]{border:1px solid #000}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".grey[data-v-12a4b4ba],.text-h5[data-v-12a4b4ba]{font-family:\"Noto Sans Lao\"}table[data-v-12a4b4ba]{border:1px solid #000}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -6555,7 +6558,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 379:
+/***/ 382:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6575,16 +6578,16 @@ var components_VCard = __webpack_require__(40);
 var VCol = __webpack_require__(253);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(250);
+var VDataTable = __webpack_require__(251);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePicker.js + 19 modules
-var VDatePicker = __webpack_require__(291);
+var VDatePicker = __webpack_require__(280);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(290);
+var VLayout = __webpack_require__(278);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VMenu/VMenu.js + 1 modules
 var VMenu = __webpack_require__(74);
@@ -6595,7 +6598,7 @@ var VRow = __webpack_require__(252);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/cod_order/index.vue?vue&type=template&id=5d71bd38&scoped=true&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/cod_order/index.vue?vue&type=template&id=12a4b4ba&scoped=true&
 
 
 
@@ -6609,7 +6612,7 @@ var VTextField = __webpack_require__(23);
 
 
 
-var cod_ordervue_type_template_id_5d71bd38_scoped_true_render = function render() {
+var cod_ordervue_type_template_id_12a4b4ba_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -6998,13 +7001,13 @@ var cod_ordervue_type_template_id_5d71bd38_scoped_true_render = function render(
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/cod_order/index.vue?vue&type=template&id=5d71bd38&scoped=true&
+// CONCATENATED MODULE: ./pages/admin/cod_order/index.vue?vue&type=template&id=12a4b4ba&scoped=true&
 
 // EXTERNAL MODULE: ./components/CancelTicketForm.vue + 4 modules
-var CancelTicketForm = __webpack_require__(297);
+var CancelTicketForm = __webpack_require__(299);
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
+var myUtil = __webpack_require__(248);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/cod_order/index.vue?vue&type=script&lang=js&
 
@@ -7101,6 +7104,16 @@ var myUtil = __webpack_require__(251);
         text: 'ຮ້ານ',
         align: 'end',
         value: 'shopName',
+        sortable: false
+      }, {
+        text: 'ໄຣເດີ',
+        align: 'end',
+        value: 'rider',
+        sortable: false
+      }, {
+        text: 'ເຂດ',
+        align: 'end',
+        value: 'geoname',
         sortable: false
       }, {
         text: 'ກົດຊຳລະ',
@@ -7248,6 +7261,8 @@ var myUtil = __webpack_require__(251);
             'bookingDate': el.txn_date.split('T')[0],
             'recordStatus': 1,
             'orderId': el.order_id,
+            'rider': el.rider,
+            'geoname': el.geoname + ' - ' + el.geodesc,
             'codCount': this.codDayCount(el.txn_date.split('T')[0]),
             'order_price_total': this.getFormatNum(el.cart_total)
           };
@@ -7282,7 +7297,7 @@ var componentNormalizer = __webpack_require__(18);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(345)
+  var style0 = __webpack_require__(347)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -7291,11 +7306,11 @@ if (style0.__inject__) style0.__inject__(context)
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_cod_ordervue_type_script_lang_js_,
-  cod_ordervue_type_template_id_5d71bd38_scoped_true_render,
+  cod_ordervue_type_template_id_12a4b4ba_scoped_true_render,
   staticRenderFns,
   false,
   injectStyles,
-  "5d71bd38",
+  "12a4b4ba",
   "5ab021ea"
   
 )
@@ -7303,7 +7318,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var cod_order = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {DialogClassicMessage: __webpack_require__(242).default,Settlement: __webpack_require__(333).default,CancelTicketForm: __webpack_require__(297).default,LoadingIndicator: __webpack_require__(228).default,OrderSumaryCard: __webpack_require__(293).default})
+installComponents(component, {DialogClassicMessage: __webpack_require__(243).default,Settlement: __webpack_require__(336).default,CancelTicketForm: __webpack_require__(299).default,LoadingIndicator: __webpack_require__(228).default,OrderSumaryCard: __webpack_require__(296).default})
 
 
 /***/ })

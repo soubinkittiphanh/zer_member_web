@@ -1,4 +1,4 @@
-exports.ids = [4,15];
+exports.ids = [5,16];
 exports.modules = {
 
 /***/ 209:
@@ -107,13 +107,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 233:
+/***/ 234:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(234);
+var content = __webpack_require__(235);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -121,7 +121,7 @@ __webpack_require__(6).default("0f3c9f10", content, true)
 
 /***/ }),
 
-/***/ 234:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -136,13 +136,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 235:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(236);
+var content = __webpack_require__(237);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -150,7 +150,7 @@ __webpack_require__(6).default("7cf76dc8", content, true)
 
 /***/ }),
 
-/***/ 236:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -165,13 +165,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 237:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(239);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -179,7 +179,7 @@ __webpack_require__(6).default("6af7f350", content, true)
 
 /***/ }),
 
-/***/ 238:
+/***/ 239:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -194,13 +194,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(240);
+var content = __webpack_require__(241);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -208,7 +208,7 @@ __webpack_require__(6).default("2f710ab8", content, true)
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -525,6 +525,269 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export swalError */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
+/* unused harmony export swalErrorNoTrace */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
+/* unused harmony export swalCancle */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
+/* unused harmony export customSwalSuccess */
+/* unused harmony export closeSwal */
+/* unused harmony export swalLoading */
+/* unused harmony export swalConfirm */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
+/* unused harmony export swalSuccessBackToMenu */
+/* unused harmony export customSwalSuccessBackToMenu */
+/* unused harmony export swalWarning */
+/* unused harmony export swalWarningWithHTML */
+/* unused harmony export swalWarningTraceId */
+/* unused harmony export swalMsg */
+/* unused harmony export toastNotification */
+/* unused harmony export getFirstDayOfMonth */
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+
+const swalError = (swal, title, message, trandId) => {
+  swal({
+    icon: 'error',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const confirmSwal = (swal, icon, callbackFunc) => {
+  swal({
+    icon: icon,
+    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
+    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
+    confirmButtonText: 'ຢືນຢັນ',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'ອອກ',
+    cancelButtonColor: '#3085d6'
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
+};
+const swalErrorNoTrace = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalError2 = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalCancle = swal => {
+  swal({
+    icon: 'info',
+    title: 'ຍົກເລີກ!',
+    text: 'ການຍົເລີກສຳເລັດ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    text: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const customSwalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    html: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const closeSwal = swal => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
+};
+const swalLoading = (swal, title, text, icon) => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    // html: html,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    onBeforeOpen: () => {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
+    }
+  });
+};
+const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
+  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    showCancelButton: true,
+    cancelButtonText: cancelButtonText || 'ບໍ່',
+    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
+  });
+};
+const getFormatNum = val => {
+  return new Intl.NumberFormat().format(val);
+};
+const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: `<span>
+                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
+                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
+                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
+            </span>
+    `,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const customSwalSuccessBackToMenu = (swal, message) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: message,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const swalWarning = (swal, title, message) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
+                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
+                  </span>
+                `
+  });
+};
+const swalWarningTraceId = (swal, title, message, trandId) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const swalMsg = (swal, icon, title, message) => {
+  swal({
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const toastNotification = (swal, icon, title, message, callbackFunc) => {
+  swal({
+    toast: true,
+    position: 'bottom-end',
+    timerProgressBar: true,
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+    }
+  });
+};
+const getFirstDayOfMonth = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  return firstDayOfMonth;
+};
+
+/***/ }),
+
+/***/ 249:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 /* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
@@ -646,13 +909,13 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 250:
+/***/ 251:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTable.sass
-var VDataTable = __webpack_require__(233);
+var VDataTable = __webpack_require__(234);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/helpers.js
 var helpers = __webpack_require__(0);
@@ -1030,7 +1293,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataIterator/VDataFooter.sass
-var VDataFooter = __webpack_require__(235);
+var VDataFooter = __webpack_require__(236);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -1552,7 +1815,7 @@ var console = __webpack_require__(3);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTableHeader.sass
-var VDataTableHeader = __webpack_require__(237);
+var VDataTableHeader = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VChip/index.js
 var VChip = __webpack_require__(85);
@@ -1983,7 +2246,7 @@ function needsTd(slot) {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VSimpleTable.sass
-var VSimpleTable = __webpack_require__(239);
+var VSimpleTable = __webpack_require__(240);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VDataTable/VSimpleTable.js
 
@@ -2670,269 +2933,6 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 251:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export swalError */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
-/* unused harmony export swalErrorNoTrace */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
-/* unused harmony export swalCancle */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
-/* unused harmony export customSwalSuccess */
-/* unused harmony export closeSwal */
-/* unused harmony export swalLoading */
-/* unused harmony export swalConfirm */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
-/* unused harmony export swalSuccessBackToMenu */
-/* unused harmony export customSwalSuccessBackToMenu */
-/* unused harmony export swalWarning */
-/* unused harmony export swalWarningWithHTML */
-/* unused harmony export swalWarningTraceId */
-/* unused harmony export swalMsg */
-/* unused harmony export toastNotification */
-/* unused harmony export getFirstDayOfMonth */
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
-
-const swalError = (swal, title, message, trandId) => {
-  swal({
-    icon: 'error',
-    title: title,
-    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
-                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
-                  </span>
-                `
-  });
-};
-const confirmSwal = (swal, icon, callbackFunc) => {
-  swal({
-    icon: icon,
-    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
-    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
-    confirmButtonText: 'ຢືນຢັນ',
-    confirmButtonColor: '#d33',
-    showCancelButton: true,
-    cancelButtonText: 'ອອກ',
-    cancelButtonColor: '#3085d6'
-  }).then(result => {
-    if (result.isConfirmed) {
-      callbackFunc();
-      // User clicked the "Yes, delete it!" button
-      // Perform the deletion action here
-    } else {
-      // User clicked the "Cancel" button
-      // Do nothing or show a different message
-    }
-  });
-};
-const swalErrorNoTrace = (swal, title, message) => {
-  swal({
-    icon: 'error',
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalError2 = (swal, title, message) => {
-  swal({
-    icon: 'error',
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalCancle = swal => {
-  swal({
-    icon: 'info',
-    title: 'ຍົກເລີກ!',
-    text: 'ການຍົເລີກສຳເລັດ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalSuccess = (swal, title, text) => {
-  swal({
-    icon: 'success',
-    title: title,
-    text: text,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const customSwalSuccess = (swal, title, text) => {
-  swal({
-    icon: 'success',
-    title: title,
-    html: text,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const closeSwal = swal => {
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
-};
-const swalLoading = (swal, title, text, icon) => {
-  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    title: title,
-    text: text,
-    // html: html,
-    icon: icon,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    onBeforeOpen: () => {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
-    }
-  });
-};
-const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
-  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-    title: title,
-    text: text,
-    icon: icon,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    showCancelButton: true,
-    cancelButtonText: cancelButtonText || 'ບໍ່',
-    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
-  });
-};
-const getFormatNum = val => {
-  return new Intl.NumberFormat().format(val);
-};
-const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
-  return swal({
-    title: 'ແຈ້ງເຕືອນ',
-    icon: 'success',
-    html: `<span>
-                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
-                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
-                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
-            </span>
-    `,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
-  });
-};
-const customSwalSuccessBackToMenu = (swal, message) => {
-  return swal({
-    title: 'ແຈ້ງເຕືອນ',
-    icon: 'success',
-    html: message,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
-  });
-};
-const swalWarning = (swal, title, message) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
-                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
-                  </span>
-                `
-  });
-};
-const swalWarningTraceId = (swal, title, message, trandId) => {
-  swal({
-    icon: 'warning',
-    title: title,
-    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false,
-    html: `
-                  <span>
-                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
-                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
-                  </span>
-                `
-  });
-};
-const swalMsg = (swal, icon, title, message) => {
-  swal({
-    icon: icon,
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  });
-};
-const toastNotification = (swal, icon, title, message, callbackFunc) => {
-  swal({
-    toast: true,
-    position: 'bottom-end',
-    timerProgressBar: true,
-    icon: icon,
-    title: title,
-    text: message,
-    showConfirmButton: true,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    allowEnterKey: false
-  }).then(result => {
-    if (result.isConfirmed) {
-      callbackFunc();
-    }
-  });
-};
-const getFirstDayOfMonth = () => {
-  // Create a new Date object with the same year and month as the input date, but with day set to 1
-  const today = new Date();
-  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  return firstDayOfMonth;
-};
-
-/***/ }),
-
 /***/ 252:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3326,7 +3326,7 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 259:
+/***/ 257:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3353,7 +3353,7 @@ const cache = new Map();
 /* unused harmony export parseDate */
 /* unused harmony export mysqlDateToDateObject */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getFirstDayOfMonth; });
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
 const swalError = (swal, title, message, trandId) => {
@@ -3617,13 +3617,13 @@ const getFirstDayOfMonth = () => {
 
 /***/ }),
 
-/***/ 271:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(272);
+var content = __webpack_require__(270);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -3631,7 +3631,7 @@ __webpack_require__(6).default("ae7a972c", content, true)
 
 /***/ }),
 
-/***/ 272:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3646,14 +3646,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 273:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export prevent */
 /* harmony import */ var _components_VInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _rippleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(254);
-/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 // Components
  // Mixins
@@ -3801,13 +3801,13 @@ function prevent(e) {
 
 /***/ }),
 
-/***/ 306:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(307);
+var content = __webpack_require__(288);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -3815,7 +3815,7 @@ __webpack_require__(6).default("59f225a8", content, true)
 
 /***/ }),
 
-/***/ 307:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3830,856 +3830,15 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 310:
+/***/ 309:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
-var VAutocomplete = __webpack_require__(226);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(210);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(73);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(40);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(253);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js
-var VContainer = __webpack_require__(224);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(250);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(244);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(71);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(252);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(225);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(342);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
-var VTextField = __webpack_require__(23);
-
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/campaign/CampaignForm.vue?vue&type=template&id=70df8c78&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var CampaignFormvue_type_template_id_70df8c78_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', [_c(VDialog["a" /* default */], {
-    attrs: {
-      "hide-overlay": "",
-      "persistent": "",
-      "width": "300"
-    },
-    model: {
-      value: _vm.isLoading,
-      callback: function ($$v) {
-        _vm.isLoading = $$v;
-      },
-      expression: "isLoading"
-    }
-  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VDialog["a" /* default */], {
-    attrs: {
-      "max-width": "800"
-    },
-    model: {
-      value: _vm.showAddRowDialog,
-      callback: function ($$v) {
-        _vm.showAddRowDialog = $$v;
-      },
-      expression: "showAddRowDialog"
-    }
-  }, [_c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_vm._v("ເພີ່ມລາຍການໃຫມ່")]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VForm["a" /* default */], {
-    ref: "addRowForm"
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "type": "date",
-      "label": "ວັນທີ*",
-      "required": "",
-      "hint": "date"
-    },
-    model: {
-      value: _vm.newRow.date,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "date", $$v);
-      },
-      expression: "newRow.date"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Reach",
-      "required": "",
-      "rules": [_vm.rules.required, _vm.rules.number]
-    },
-    model: {
-      value: _vm.newRow.reach,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "reach", $$v);
-      },
-      expression: "newRow.reach"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Comments",
-      "required": "",
-      "rules": [_vm.rules.required, _vm.rules.number]
-    },
-    model: {
-      value: _vm.newRow.comments,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "comments", $$v);
-      },
-      expression: "newRow.comments"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Results",
-      "required": "",
-      "rules": [_vm.rules.required, _vm.rules.number]
-    },
-    model: {
-      value: _vm.newRow.results,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "results", $$v);
-      },
-      expression: "newRow.results"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Purchase Qty",
-      "rules": [_vm.rules.required, _vm.rules.number],
-      "required": ""
-    },
-    model: {
-      value: _vm.newRow.purchaseQty,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "purchaseQty", $$v);
-      },
-      expression: "newRow.purchaseQty"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Cost Per Customer",
-      "rules": [_vm.rules.required, _vm.rules.number],
-      "required": ""
-    },
-    model: {
-      value: _vm.newRow.costPerCustomer,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "costPerCustomer", $$v);
-      },
-      expression: "newRow.costPerCustomer"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Budget Spend",
-      "rules": [_vm.rules.required, _vm.rules.number],
-      "required": ""
-    },
-    model: {
-      value: _vm.newRow.budgetSpend,
-      callback: function ($$v) {
-        _vm.$set(_vm.newRow, "budgetSpend", $$v);
-      },
-      expression: "newRow.budgetSpend"
-    }
-  })], 1)], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "primary"
-    },
-    on: {
-      "click": _vm.addRow
-    }
-  }, [_vm._v("ເພີ່ມ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "secondary"
-    },
-    on: {
-      "click": function ($event) {
-        _vm.showAddRowDialog = false;
-      }
-    }
-  }, [_vm._v("ປິດ")])], 1)], 1)], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_c('span', {
-    staticClass: "headline"
-  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VContainer["a" /* default */], [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12",
-      "sm": "4",
-      "md": "4"
-    }
-  }, [_c(VForm["a" /* default */], {
-    on: {
-      "submit": function ($event) {
-        $event.preventDefault();
-        return _vm.submitForm.apply(null, arguments);
-      }
-    },
-    model: {
-      value: _vm.valid,
-      callback: function ($$v) {
-        _vm.valid = $$v;
-      },
-      expression: "valid"
-    }
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Title",
-      "rules": [_vm.rules.required],
-      "required": ""
-    },
-    model: {
-      value: _vm.form.header.title,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "title", $$v);
-      },
-      expression: "form.header.title"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Remark",
-      "rules": [_vm.rules.required],
-      "required": ""
-    },
-    model: {
-      value: _vm.form.header.product,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "product", $$v);
-      },
-      expression: "form.header.product"
-    }
-  }), _vm._v(" "), _c(VAutocomplete["a" /* default */], {
-    attrs: {
-      "item-text": "pro_name",
-      "item-value": "pro_id",
-      "items": _vm.productList,
-      "label": "ເລືອກສິນຄ້າ *"
-    },
-    model: {
-      value: _vm.form.header.productId,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "productId", $$v);
-      },
-      expression: "form.header.productId"
-    }
-  })], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12",
-      "sm": "4",
-      "md": "4"
-    }
-  }, [_c(VForm["a" /* default */], {
-    on: {
-      "submit": function ($event) {
-        $event.preventDefault();
-        return _vm.submitForm.apply(null, arguments);
-      }
-    },
-    model: {
-      value: _vm.valid,
-      callback: function ($$v) {
-        _vm.valid = $$v;
-      },
-      expression: "valid"
-    }
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "type": "date",
-      "label": "ວັນທີເລີ່ມ*",
-      "hint": "example of helper text only on focus"
-    },
-    model: {
-      value: _vm.form.header.start,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "start", $$v);
-      },
-      expression: "form.header.start"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "Budget",
-      "type": "number",
-      "rules": [_vm.rules.required, _vm.rules.number],
-      "required": ""
-    },
-    model: {
-      value: _vm.form.header.budget,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "budget", $$v);
-      },
-      expression: "form.header.budget"
-    }
-  })], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12",
-      "sm": "4",
-      "md": "4"
-    }
-  }, [_c(VForm["a" /* default */], {
-    on: {
-      "submit": function ($event) {
-        $event.preventDefault();
-        return _vm.submit.apply(null, arguments);
-      }
-    }
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "type": "date",
-      "label": "ວັນທີສິ້ນສຸດ*",
-      "hint": "example of helper text only on focus"
-    },
-    model: {
-      value: _vm.form.header.end,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "end", $$v);
-      },
-      expression: "form.header.end"
-    }
-  }), _vm._v(" "), _c(VSwitch["a" /* default */], {
-    attrs: {
-      "label": "Active",
-      "true-value": true,
-      "false-value": false
-    },
-    model: {
-      value: _vm.form.header.isActive,
-      callback: function ($$v) {
-        _vm.$set(_vm.form.header, "isActive", $$v);
-      },
-      expression: "form.header.isActive"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "primary"
-    },
-    on: {
-      "click": function ($event) {
-        _vm.showAddRowDialog = true;
-      }
-    }
-  }, [_vm._v("ເພີ່ມລາຍການ")]), _vm._v(" "), _c(VDataTable["a" /* default */], {
-    attrs: {
-      "headers": _vm.headers,
-      "items": _vm.campaignEntry
-    },
-    scopedSlots: _vm._u([{
-      key: "item",
-      fn: function ({
-        item
-      }) {
-        return [_c('tr', [_c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "type": "date",
-            "label": "ວັນທີ*",
-            "hint": "example of helper text only on focus"
-          },
-          model: {
-            value: item.date,
-            callback: function ($$v) {
-              _vm.$set(item, "date", $$v);
-            },
-            expression: "item.date"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "label": "Reach",
-            "rules": _vm.numberRule
-          },
-          model: {
-            value: item.reach,
-            callback: function ($$v) {
-              _vm.$set(item, "reach", $$v);
-            },
-            expression: "item.reach"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "label": "Comments",
-            "rules": _vm.numberRule
-          },
-          model: {
-            value: item.comments,
-            callback: function ($$v) {
-              _vm.$set(item, "comments", $$v);
-            },
-            expression: "item.comments"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "label": "Results",
-            "rules": _vm.numberRule
-          },
-          model: {
-            value: item.results,
-            callback: function ($$v) {
-              _vm.$set(item, "results", $$v);
-            },
-            expression: "item.results"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "label": "Purchase Quantity",
-            "rules": _vm.numberRule
-          },
-          model: {
-            value: item.purchaseQty,
-            callback: function ($$v) {
-              _vm.$set(item, "purchaseQty", $$v);
-            },
-            expression: "item.purchaseQty"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "label": "Cost Per Customer",
-            "rules": _vm.numberRule
-          },
-          model: {
-            value: item.costPerCustomer,
-            callback: function ($$v) {
-              _vm.$set(item, "costPerCustomer", $$v);
-            },
-            expression: "item.costPerCustomer"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          attrs: {
-            "label": "Budget Spend",
-            "rules": _vm.numberRule
-          },
-          model: {
-            value: item.budgetSpend,
-            callback: function ($$v) {
-              _vm.$set(item, "budgetSpend", $$v);
-            },
-            expression: "item.budgetSpend"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VBtn["a" /* default */], {
-          attrs: {
-            "color": "blue-darken-1",
-            "variant": "text"
-          },
-          on: {
-            "click": function ($event) {
-              return _vm.deleteItem(item);
-            }
-          }
-        }, [_vm._v("\n                                    ລົບ\n                                ")])], 1)])];
-      }
-    }])
-  })], 1), _vm._v(" "), _c('small', [_vm._v("* ສະແດງເຖິງຟິວທີ່ຕ້ອງໃສ່ຂໍ້ມູນ")])], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "blue-darken-1",
-      "variant": "text"
-    },
-    on: {
-      "click": function ($event) {
-        return _vm.$emit('close-dialog');
-      }
-    }
-  }, [_vm._v("\n                Close\n            ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "blue-darken-1",
-      "variant": "text"
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v("\n                Save\n            ")])], 1)], 1)], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/campaign/CampaignForm.vue?vue&type=template&id=70df8c78&
-
-// EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
-
-// EXTERNAL MODULE: ./common/index.js
-var common = __webpack_require__(259);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/campaign/CampaignForm.vue?vue&type=script&lang=js&
-
-
-/* harmony default export */ var CampaignFormvue_type_script_lang_js_ = ({
-  props: {
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    campaignId: {
-      type: Number,
-      default: null
-    }
-  },
-  data() {
-    return {
-      productList: [],
-      showAddRowDialog: false,
-      dialog: false,
-      title: 'ສ້າງ Campaign',
-      valid: false,
-      isLoading: false,
-      form: {
-        header: {
-          title: "Summer Sale",
-          start: "",
-          end: "",
-          product: "T-shirts",
-          productId: 1000,
-          budget: 5000.00,
-          isActive: true
-        }
-      },
-      bookingDate: '',
-      rules: {
-        required: v => !!v || "This field is required",
-        dateAfter: date => v => date ? new Date(v) >= new Date(date) || "Date must be after start date" : true,
-        dateAfterToday: v => new Date(v) >= new Date() || "Date must be after today",
-        number: v => !isNaN(parseFloat(v)) && isFinite(v) || "Value must be a number"
-      },
-      headers: [{
-        text: "Date",
-        value: "date"
-      }, {
-        text: "Reach",
-        value: "reach"
-      }, {
-        text: "Comments",
-        value: "comments"
-      }, {
-        text: "Results",
-        value: "results"
-      }, {
-        text: "Purchase Qty",
-        value: "purchaseQty"
-      }, {
-        text: "Cost Per Customer",
-        value: "costPerCustomer"
-      }, {
-        text: "Budget Spend",
-        value: "budgetSpend"
-      }],
-      campaignEntry: [
-        // {
-        //     date: "2021-07-01",
-        //     reach: "1000",
-        //     comments: "Lorem ipsum dolor sit amet",
-        //     results: "Lorem ipsum dolor sit amet",
-        //     purchaseQty: "",
-        //     costPerCustomer: "",
-        //     budgetSpend: ""
-        // },
-        // {
-        //     date: "2021-07-02",
-        //     reach: "2000",
-        //     comments: "Lorem ipsum dolor sit amet",
-        //     results: "Lorem ipsum dolor sit amet",
-        //     purchaseQty: "",
-        //     costPerCustomer: "",
-        //     budgetSpend: ""
-        // },
-        // {
-        //     date: "2021-07-03",
-        //     reach: "3000",
-        //     comments: "Lorem ipsum dolor sit amet",
-        //     results: "Lorem ipsum dolor sit amet",
-        //     purchaseQty: "",
-        //     costPerCustomer: "",
-        //     budgetSpend: ""
-        // }
-      ],
-      newRow: {
-        date: "",
-        reach: "",
-        comments: "",
-        results: "",
-        purchaseQty: "",
-        costPerCustomer: "",
-        budgetSpend: ""
-      }
-    };
-  },
-  mounted() {
-    // this.loadAccount()
-
-    const today = new Date().toISOString().substr(0, 10);
-    this.form.header.start = today;
-    this.form.header.end = today;
-    this.newRow.date = today;
-    this.loadCampaign();
-    this.loadProduct();
-  },
-  computed: {
-    dateRules() {
-      return [value => !!value || 'Field is required', value => /^(\d{4})-(\d{2})-(\d{2})$/.test(value) || 'Invalid date format (YYYY-MM-DD)'];
-    },
-    numberRule() {
-      return [value => !!value || 'Field is required', value => Number.isInteger(Number(value)) || 'Value must be an'];
-    }
-  },
-  methods: {
-    deleteItem(item) {
-      const index = this.campaignEntry.indexOf(item);
-      if (index > -1) {
-        if (this.isEdit && item.id) {
-          Object(myUtil["a" /* confirmSwal */])(this.$swal, 'warning', async () => {
-            console.log("Delete record function");
-            this.isLoading = true;
-            await this.$axios.delete(`/api/campaignEntry/delete/${item.id}`).then(response => {
-              console.log("response=>", response.data);
-              if (response.data.includes('successfully')) {
-                this.campaignEntry.splice(index, 1);
-              }
-            }).catch(error => {
-              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
-            });
-            this.isLoading = false;
-          });
-        } else {
-          this.campaignEntry.splice(index, 1);
-        }
-      }
-    },
-    open() {
-      this.dialog = true;
-    },
-    close() {
-      this.dialog = false;
-    },
-    validateObject(obj) {
-      const {
-        date,
-        reach,
-        comments,
-        results,
-        purchaseQty,
-        costPerCustomer,
-        budgetSpend
-      } = obj;
-      console.log("Result ===> ", results, ' ', Number.isInteger(Number('0')), ' val ', !!results);
-      if (!date || !reach || !comments || !results || !purchaseQty || !costPerCustomer || !budgetSpend) {
-        return false; // All required properties must be present
-      }
-
-      if (Number.isInteger(Number(reach)) || Number(reach) < 0) {
-        return false; // Reach must be a positive number
-      }
-
-      if (Number.isInteger(Number(comments)) || Number(comments) < 0) {
-        return false; // Reach must be a positive number
-      }
-
-      if (Number.isInteger(Number(results)) || Number(results) < 0) {
-        return false; // Reach must be a positive number
-      }
-
-      if (Number.isInteger(Number(purchaseQty)) || Number(purchaseQty) < 0) {
-        return false; // Reach must be a positive number
-      }
-
-      if (Number.isInteger(Number(costPerCustomer)) || Number(costPerCustomer) < 0) {
-        return false; // Reach must be a positive number
-      }
-
-      if (Number.isInteger(Number(budgetSpend)) || Number(budgetSpend) < 0) {
-        return false; // Reach must be a positive number
-      }
-
-      return true;
-    },
-    validateCampaignEntry() {
-      for (const iterator of this.campaignEntry) {
-        if (!this.validateObject(iterator)) {
-          return false;
-        }
-      }
-      return true;
-    },
-    async loadCampaign() {
-      this.isLoading = true;
-      if (this.isEdit) {
-        await this.$axios.get(`/api/campaign/find/${this.campaignId}`).then(response => {
-          this.form.header = response.data;
-          this.form.header.start = response.data['start'].split('T')[0];
-          this.form.header.end = response.data['end'].split('T')[0];
-          this.campaignEntry.length = 0;
-          for (const iterator of response.data.entries) {
-            let entry = iterator;
-            entry['date'] = iterator['date'].split('T')[0];
-            // entry.purchaseQty = +iterator.purchaseQty
-            // entry.costPerCustomer = +iterator.costPerCustomer
-            // entry.budgetSpend = +iterator.budgetSpend
-            this.campaignEntry.push(entry);
-          }
-        }).catch(error => {
-          console.log("Load cammpaign error", error);
-        });
-      }
-      this.isLoading = false;
-    },
-    async submit() {
-      // handle form submission here
-      if (!this.isLoading) {
-        this.isLoading = true;
-        if (this.campaignEntry.length == 0) {
-          this.isLoading = false;
-          return Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ບໍ່ມີລາຍການກະລຸນາເພີ່ມຢ່າງນ້ອຍ 1 ລາຍການ");
-        }
-        if (!this.validateCampaignEntry()) {
-          this.isLoading = false;
-          return Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາກວດຂໍ້ມູນຄືນໃຫ້ຖືກຕ້ອງ");
-        }
-        this.form.header.entry = this.campaignEntry;
-        // ********* update entry *********
-        if (this.isEdit && this.campaignId) {
-          console.log("====> update campaign");
-          await this.$axios.put(`/api/campaign/update/${this.campaignId}`, this.form.header).then(res => {
-            if (res.status == 200) {
-              Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-            } else {
-              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
-            }
-          }).catch(error => {
-            Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
-          });
-          // ********* create entry *********
-        } else {
-          await this.$axios.post("/api/campaign/create", this.form.header).then(res => {
-            if (res.status == 200) {
-              Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-            } else {
-              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
-            }
-          }).catch(error => {
-            Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data.errors[0]['msg']);
-          });
-        }
-        this.isLoading = false;
-      }
-      this.close();
-    },
-    addRow() {
-      if (this.$refs.addRowForm.validate()) {
-        this.campaignEntry.push(this.newRow);
-        this.newRow = {
-          date: "",
-          reach: "",
-          comments: "",
-          results: "",
-          purchaseQty: "",
-          costPerCustomer: "",
-          budgetSpend: ""
-        };
-        this.showAddRowDialog = false;
-      }
-    },
-    async loadProduct() {
-      this.isLoading = true;
-      await this.$axios.get('product_mobile_f').then(res => {
-        this.productList = res.data.map(el => {
-          return el;
-          // {
-          //     card_count: el.card_count,
-          //     categ_name: el.categ_name,
-          //     cost_price: el.cost_price,
-          //     id: el.id,
-          //     img_name: el.img_name,
-          //     outlet: el.outlet,
-          //     outlet_name: el.outlet_name,
-          //     pro_category: el.pro_category,
-          //     pro_desc: el.pro_desc,
-          //     pro_id: el.pro_id,
-          //     pro_image_path: el.pro_image_path,
-          //     pro_name: el.pro_name,
-          //     pro_price: el.pro_price,
-          //     pro_status: el.pro_status,
-          //     retail_cost_percent: el.retail_cost_percent,
-          //     sale_count: el.sale_count,
-          //     stock_count: el.stock_count,
-          // }
-        });
-
-        console.log("all data1: ", this.productList[0].img_path);
-      }).catch(er => {
-        console.log('Data: ' + er);
-      });
-      this.isLoading = false;
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/campaign/CampaignForm.vue?vue&type=script&lang=js&
- /* harmony default export */ var campaign_CampaignFormvue_type_script_lang_js_ = (CampaignFormvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(18);
-
-// CONCATENATED MODULE: ./components/campaign/CampaignForm.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  campaign_CampaignFormvue_type_script_lang_js_,
-  CampaignFormvue_type_template_id_70df8c78_render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "608514df"
-  
-)
-
-/* harmony default export */ var CampaignForm = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(228).default})
-
-
-/***/ }),
-
-/***/ 342:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(271);
+/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(269);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(306);
+/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(287);
 /* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(273);
+/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(271);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
 /* harmony import */ var _directives_touch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(86);
 /* harmony import */ var _transitions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28);
@@ -4798,6 +3957,828 @@ installComponents(component, {LoadingIndicator: __webpack_require__(228).default
     }
   }
 }));
+
+/***/ }),
+
+/***/ 312:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
+var VAutocomplete = __webpack_require__(226);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
+var VBtn = __webpack_require__(210);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
+var VCard = __webpack_require__(73);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
+var components_VCard = __webpack_require__(40);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
+var VCol = __webpack_require__(253);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js
+var VContainer = __webpack_require__(224);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
+var VDataTable = __webpack_require__(251);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
+var VDialog = __webpack_require__(244);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
+var VDivider = __webpack_require__(71);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
+var VForm = __webpack_require__(249);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
+var VRow = __webpack_require__(252);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
+var VSpacer = __webpack_require__(225);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
+var VSwitch = __webpack_require__(309);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
+var VTextField = __webpack_require__(23);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/campaign/CampaignForm.vue?vue&type=template&id=0cb17a9b&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var CampaignFormvue_type_template_id_0cb17a9b_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', [_c(VDialog["a" /* default */], {
+    attrs: {
+      "hide-overlay": "",
+      "persistent": "",
+      "width": "300"
+    },
+    model: {
+      value: _vm.isLoading,
+      callback: function ($$v) {
+        _vm.isLoading = $$v;
+      },
+      expression: "isLoading"
+    }
+  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VDialog["a" /* default */], {
+    attrs: {
+      "max-width": "800"
+    },
+    model: {
+      value: _vm.showAddRowDialog,
+      callback: function ($$v) {
+        _vm.showAddRowDialog = $$v;
+      },
+      expression: "showAddRowDialog"
+    }
+  }, [_c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_vm._v("ເພີ່ມລາຍການໃຫມ່")]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VForm["a" /* default */], {
+    ref: "addRowForm"
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "type": "date",
+      "label": "ວັນທີ*",
+      "required": "",
+      "hint": "date"
+    },
+    model: {
+      value: _vm.newRow.date,
+      callback: function ($$v) {
+        _vm.$set(_vm.newRow, "date", $$v);
+      },
+      expression: "newRow.date"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Reach",
+      "required": "",
+      "rules": _vm.numberRule
+    },
+    model: {
+      value: _vm.newRow.reach,
+      callback: function ($$v) {
+        _vm.$set(_vm.newRow, "reach", _vm._n($$v));
+      },
+      expression: "newRow.reach"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Comments",
+      "required": "",
+      "rules": _vm.numberRule
+    },
+    model: {
+      value: _vm.newRow.comments,
+      callback: function ($$v) {
+        _vm.$set(_vm.newRow, "comments", _vm._n($$v));
+      },
+      expression: "newRow.comments"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Results",
+      "required": "",
+      "rules": _vm.numberRule
+    },
+    model: {
+      value: _vm.newRow.results,
+      callback: function ($$v) {
+        _vm.$set(_vm.newRow, "results", _vm._n($$v));
+      },
+      expression: "newRow.results"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    directives: [{
+      name: "mode",
+      rawName: "v-mode.number",
+      value: _vm.newRow.purchaseQty,
+      expression: "newRow.purchaseQty",
+      modifiers: {
+        "number": true
+      }
+    }],
+    attrs: {
+      "label": "Purchase Qty",
+      "rules": _vm.numberRule,
+      "required": ""
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Cost Per Customer",
+      "rules": _vm.numberRule,
+      "required": ""
+    },
+    model: {
+      value: _vm.newRow.costPerCustomer,
+      callback: function ($$v) {
+        _vm.$set(_vm.newRow, "costPerCustomer", _vm._n($$v));
+      },
+      expression: "newRow.costPerCustomer"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Budget Spend",
+      "rules": _vm.numberRule,
+      "required": ""
+    },
+    model: {
+      value: _vm.newRow.budgetSpend,
+      callback: function ($$v) {
+        _vm.$set(_vm.newRow, "budgetSpend", _vm._n($$v));
+      },
+      expression: "newRow.budgetSpend"
+    }
+  })], 1)], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "primary"
+    },
+    on: {
+      "click": _vm.addRow
+    }
+  }, [_vm._v("ເພີ່ມ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "secondary"
+    },
+    on: {
+      "click": function ($event) {
+        _vm.showAddRowDialog = false;
+      }
+    }
+  }, [_vm._v("ປິດ")])], 1)], 1)], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_c('span', {
+    staticClass: "headline"
+  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VContainer["a" /* default */], [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "sm": "4",
+      "md": "4"
+    }
+  }, [_c(VForm["a" /* default */], {
+    on: {
+      "submit": function ($event) {
+        $event.preventDefault();
+        return _vm.submitForm.apply(null, arguments);
+      }
+    },
+    model: {
+      value: _vm.valid,
+      callback: function ($$v) {
+        _vm.valid = $$v;
+      },
+      expression: "valid"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Title",
+      "rules": [_vm.rules.required],
+      "required": ""
+    },
+    model: {
+      value: _vm.form.header.title,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "title", $$v);
+      },
+      expression: "form.header.title"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Remark",
+      "rules": [_vm.rules.required],
+      "required": ""
+    },
+    model: {
+      value: _vm.form.header.product,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "product", $$v);
+      },
+      expression: "form.header.product"
+    }
+  }), _vm._v(" "), _c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "pro_name",
+      "item-value": "pro_id",
+      "items": _vm.productList,
+      "label": "ເລືອກສິນຄ້າ *"
+    },
+    model: {
+      value: _vm.form.header.productId,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "productId", $$v);
+      },
+      expression: "form.header.productId"
+    }
+  })], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "sm": "4",
+      "md": "4"
+    }
+  }, [_c(VForm["a" /* default */], {
+    on: {
+      "submit": function ($event) {
+        $event.preventDefault();
+        return _vm.submitForm.apply(null, arguments);
+      }
+    },
+    model: {
+      value: _vm.valid,
+      callback: function ($$v) {
+        _vm.valid = $$v;
+      },
+      expression: "valid"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "type": "date",
+      "label": "ວັນທີເລີ່ມ*",
+      "hint": "example of helper text only on focus"
+    },
+    model: {
+      value: _vm.form.header.start,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "start", $$v);
+      },
+      expression: "form.header.start"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "Budget",
+      "type": "number",
+      "rules": _vm.numberRule,
+      "required": ""
+    },
+    model: {
+      value: _vm.form.header.budget,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "budget", $$v);
+      },
+      expression: "form.header.budget"
+    }
+  })], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "sm": "4",
+      "md": "4"
+    }
+  }, [_c(VForm["a" /* default */], {
+    on: {
+      "submit": function ($event) {
+        $event.preventDefault();
+        return _vm.submit.apply(null, arguments);
+      }
+    }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "type": "date",
+      "label": "ວັນທີສິ້ນສຸດ*",
+      "hint": "example of helper text only on focus"
+    },
+    model: {
+      value: _vm.form.header.end,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "end", $$v);
+      },
+      expression: "form.header.end"
+    }
+  }), _vm._v(" "), _c(VSwitch["a" /* default */], {
+    attrs: {
+      "label": "Active",
+      "true-value": true,
+      "false-value": false
+    },
+    model: {
+      value: _vm.form.header.isActive,
+      callback: function ($$v) {
+        _vm.$set(_vm.form.header, "isActive", $$v);
+      },
+      expression: "form.header.isActive"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "primary"
+    },
+    on: {
+      "click": function ($event) {
+        _vm.showAddRowDialog = true;
+      }
+    }
+  }, [_vm._v("ເພີ່ມລາຍການ")]), _vm._v(" "), _c(VDataTable["a" /* default */], {
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.campaignEntry
+    },
+    scopedSlots: _vm._u([{
+      key: "item",
+      fn: function ({
+        item
+      }) {
+        return [_c('tr', [_c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "type": "date",
+            "label": "ວັນທີ*",
+            "hint": "example of helper text only on focus"
+          },
+          model: {
+            value: item.date,
+            callback: function ($$v) {
+              _vm.$set(item, "date", $$v);
+            },
+            expression: "item.date"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "label": "Reach",
+            "rules": _vm.numberRule
+          },
+          model: {
+            value: item.reach,
+            callback: function ($$v) {
+              _vm.$set(item, "reach", _vm._n($$v));
+            },
+            expression: "item.reach"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "label": "Comments",
+            "rules": _vm.numberRule
+          },
+          model: {
+            value: item.comments,
+            callback: function ($$v) {
+              _vm.$set(item, "comments", _vm._n($$v));
+            },
+            expression: "item.comments"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "label": "Results",
+            "rules": _vm.numberRule
+          },
+          model: {
+            value: item.results,
+            callback: function ($$v) {
+              _vm.$set(item, "results", _vm._n($$v));
+            },
+            expression: "item.results"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "label": "Purchase Quantity",
+            "rules": _vm.numberRule
+          },
+          model: {
+            value: item.purchaseQty,
+            callback: function ($$v) {
+              _vm.$set(item, "purchaseQty", _vm._n($$v));
+            },
+            expression: "item.purchaseQty"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "label": "Cost Per Customer",
+            "rules": _vm.numberRule
+          },
+          model: {
+            value: item.costPerCustomer,
+            callback: function ($$v) {
+              _vm.$set(item, "costPerCustomer", _vm._n($$v));
+            },
+            expression: "item.costPerCustomer"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          attrs: {
+            "label": "Budget Spend",
+            "rules": _vm.numberRule
+          },
+          model: {
+            value: item.budgetSpend,
+            callback: function ($$v) {
+              _vm.$set(item, "budgetSpend", _vm._n($$v));
+            },
+            expression: "item.budgetSpend"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VBtn["a" /* default */], {
+          attrs: {
+            "color": "blue-darken-1",
+            "variant": "text"
+          },
+          on: {
+            "click": function ($event) {
+              return _vm.deleteItem(item);
+            }
+          }
+        }, [_vm._v("\n                                    ລົບ\n                                ")])], 1)])];
+      }
+    }])
+  })], 1), _vm._v(" "), _c('small', [_vm._v("* ສະແດງເຖິງຟິວທີ່ຕ້ອງໃສ່ຂໍ້ມູນ")])], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "blue-darken-1",
+      "variant": "text"
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.$emit('close-dialog');
+      }
+    }
+  }, [_vm._v("\n                Close\n            ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "blue-darken-1",
+      "variant": "text"
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v("\n                Save\n            ")])], 1)], 1)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/campaign/CampaignForm.vue?vue&type=template&id=0cb17a9b&
+
+// EXTERNAL MODULE: ./util/myUtil.js
+var myUtil = __webpack_require__(248);
+
+// EXTERNAL MODULE: ./common/index.js
+var common = __webpack_require__(257);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/campaign/CampaignForm.vue?vue&type=script&lang=js&
+
+
+/* harmony default export */ var CampaignFormvue_type_script_lang_js_ = ({
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    campaignId: {
+      type: Number,
+      default: null
+    }
+  },
+  data() {
+    return {
+      productList: [],
+      showAddRowDialog: false,
+      dialog: false,
+      title: 'ສ້າງ Campaign',
+      valid: false,
+      isLoading: false,
+      form: {
+        header: {
+          title: "Summer Sale",
+          start: "",
+          end: "",
+          product: "T-shirts",
+          productId: 1000,
+          budget: 5000.00,
+          isActive: true
+        }
+      },
+      bookingDate: '',
+      rules: {
+        required: v => !!v || "This field is required",
+        dateAfter: date => v => date ? new Date(v) >= new Date(date) || "Date must be after start date" : true,
+        dateAfterToday: v => new Date(v) >= new Date() || "Date must be after today",
+        number: v => !isNaN(parseFloat(v)) && isFinite(v) || "Value must be a number"
+      },
+      headers: [{
+        text: "Date",
+        value: "date"
+      }, {
+        text: "Reach",
+        value: "reach"
+      }, {
+        text: "Comments",
+        value: "comments"
+      }, {
+        text: "Results",
+        value: "results"
+      }, {
+        text: "Purchase Qty",
+        value: "purchaseQty"
+      }, {
+        text: "Cost Per Customer",
+        value: "costPerCustomer"
+      }, {
+        text: "Budget Spend",
+        value: "budgetSpend"
+      }],
+      campaignEntry: [],
+      newRow: {
+        date: "",
+        reach: 0.01,
+        comments: 0,
+        results: 0,
+        purchaseQty: 7,
+        costPerCustomer: 0,
+        budgetSpend: 0
+      }
+    };
+  },
+  mounted() {
+    // this.loadAccount()
+    const today = new Date().toISOString().substr(0, 10);
+    this.form.header.start = today;
+    this.form.header.end = today;
+    this.newRow.date = today;
+    this.loadCampaign();
+    this.loadProduct();
+  },
+  computed: {
+    dateRules() {
+      return [value => !!value || 'Field is required', value => /^(\d{4})-(\d{2})-(\d{2})$/.test(value) || 'Invalid date format (YYYY-MM-DD)'];
+    },
+    numberRule() {
+      return [value => value !== undefined && value !== null && value !== '' || 'Field is required', value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'];
+    }
+  },
+  methods: {
+    deleteItem(item) {
+      const index = this.campaignEntry.indexOf(item);
+      if (index > -1) {
+        if (this.isEdit && item.id) {
+          Object(myUtil["a" /* confirmSwal */])(this.$swal, 'warning', async () => {
+            console.log("Delete record function");
+            this.isLoading = true;
+            await this.$axios.delete(`/api/campaignEntry/delete/${item.id}`).then(response => {
+              console.log("response=>", response.data);
+              if (response.data.includes('successfully')) {
+                this.campaignEntry.splice(index, 1);
+              }
+            }).catch(error => {
+              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
+            });
+            this.isLoading = false;
+          });
+        } else {
+          this.campaignEntry.splice(index, 1);
+        }
+      }
+    },
+    open() {
+      this.dialog = true;
+    },
+    close() {
+      this.dialog = false;
+    },
+    validateObject(obj) {
+      const {
+        date,
+        reach,
+        comments,
+        results,
+        purchaseQty,
+        costPerCustomer,
+        budgetSpend
+      } = obj;
+      console.log("Result ===> ", results, ' ', Number.isInteger(Number('0')), ' val ', !!results);
+
+      // if (!date || !reach || !comments || !results || !purchaseQty || !costPerCustomer || !budgetSpend) {
+      //     console.log("all checked false");
+      //     return false; // All required properties must be present
+      // }
+
+      if (!Number.isFinite(reach) || Number(reach) < 0) {
+        console.log("Reach", reach, ' IS NUMBER FINITE ', Number.isFinite(reach));
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(comments) || Number(comments) < 0) {
+        console.log("Comments");
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(results) || Number(results) < 0) {
+        console.log("Results");
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(purchaseQty) || Number(purchaseQty) < 0) {
+        console.log("Purchase");
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(costPerCustomer) || Number(costPerCustomer) < 0) {
+        console.log("CostCustomer");
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(budgetSpend) || Number(budgetSpend) < 0) {
+        console.log("Budgets");
+        return false; // Reach must be a positive number
+      }
+
+      return true;
+    },
+    validateCampaignEntry() {
+      for (const iterator of this.campaignEntry) {
+        if (!this.validateObject(iterator)) {
+          return false;
+        }
+      }
+      return true;
+    },
+    async loadCampaign() {
+      this.isLoading = true;
+      if (this.isEdit) {
+        await this.$axios.get(`/api/campaign/find/${this.campaignId}`).then(response => {
+          this.form.header = response.data;
+          this.form.header.start = response.data['start'].split('T')[0];
+          this.form.header.end = response.data['end'].split('T')[0];
+          this.campaignEntry.length = 0;
+          for (const iterator of response.data.entries) {
+            let entry = iterator;
+            entry['date'] = iterator['date'].split('T')[0];
+            // entry.purchaseQty = +iterator.purchaseQty
+            // entry.costPerCustomer = +iterator.costPerCustomer
+            // entry.budgetSpend = +iterator.budgetSpend
+            this.campaignEntry.push(entry);
+          }
+        }).catch(error => {
+          console.log("Load cammpaign error", error);
+        });
+      }
+      this.isLoading = false;
+    },
+    async submit() {
+      // handle form submission here
+      if (!this.isLoading) {
+        this.isLoading = true;
+        if (this.campaignEntry.length == 0) {
+          this.isLoading = false;
+          return Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ບໍ່ມີລາຍການກະລຸນາເພີ່ມຢ່າງນ້ອຍ 1 ລາຍການ");
+        }
+        if (!this.validateCampaignEntry()) {
+          this.isLoading = false;
+          return Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາກວດຂໍ້ມູນຄືນໃຫ້ຖືກຕ້ອງ");
+        }
+        this.form.header.entry = this.campaignEntry;
+        // ********* update entry *********
+        if (this.isEdit && this.campaignId) {
+          console.log("====> update campaign");
+          await this.$axios.put(`/api/campaign/update/${this.campaignId}`, this.form.header).then(res => {
+            if (res.status == 200) {
+              Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+            } else {
+              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
+            }
+          }).catch(error => {
+            Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
+          });
+          // ********* create entry *********
+        } else {
+          await this.$axios.post("/api/campaign/create", this.form.header).then(res => {
+            if (res.status == 200) {
+              Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+            } else {
+              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
+            }
+          }).catch(error => {
+            Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data.errors[0]['msg']);
+          });
+        }
+        this.isLoading = false;
+      }
+      this.close();
+    },
+    addRow() {
+      if (this.$refs.addRowForm.validate()) {
+        this.campaignEntry.push(this.newRow);
+        this.newRow = {
+          date: "",
+          reach: 0,
+          comments: 0,
+          results: 0,
+          purchaseQty: 0,
+          costPerCustomer: 0,
+          budgetSpend: 0
+        };
+        this.showAddRowDialog = false;
+      }
+    },
+    async loadProduct() {
+      this.isLoading = true;
+      await this.$axios.get('product_mobile_f').then(res => {
+        this.productList = res.data.map(el => {
+          return el;
+          // {
+          //     card_count: el.card_count,
+          //     categ_name: el.categ_name,
+          //     cost_price: el.cost_price,
+          //     id: el.id,
+          //     img_name: el.img_name,
+          //     outlet: el.outlet,
+          //     outlet_name: el.outlet_name,
+          //     pro_category: el.pro_category,
+          //     pro_desc: el.pro_desc,
+          //     pro_id: el.pro_id,
+          //     pro_image_path: el.pro_image_path,
+          //     pro_name: el.pro_name,
+          //     pro_price: el.pro_price,
+          //     pro_status: el.pro_status,
+          //     retail_cost_percent: el.retail_cost_percent,
+          //     sale_count: el.sale_count,
+          //     stock_count: el.stock_count,
+          // }
+        });
+
+        console.log("all data1: ", this.productList[0].img_path);
+      }).catch(er => {
+        console.log('Data: ' + er);
+      });
+      this.isLoading = false;
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/campaign/CampaignForm.vue?vue&type=script&lang=js&
+ /* harmony default export */ var campaign_CampaignFormvue_type_script_lang_js_ = (CampaignFormvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(18);
+
+// CONCATENATED MODULE: ./components/campaign/CampaignForm.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  campaign_CampaignFormvue_type_script_lang_js_,
+  CampaignFormvue_type_template_id_0cb17a9b_render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "608514df"
+  
+)
+
+/* harmony default export */ var CampaignForm = __webpack_exports__["default"] = (component.exports);
+
+/* nuxt-component-imports */
+installComponents(component, {LoadingIndicator: __webpack_require__(228).default})
+
 
 /***/ })
 

@@ -67,7 +67,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'
+    // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'// UAT API
     baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
     // baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
     // baseURL: 'http://localhost:8080',
@@ -82,12 +82,12 @@ export default {
     // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
   },
   auth: {
-
     strategies: {
       local: {
         token: {
           property: 'accessToken',
           global: true,
+          expires_in: 60,
           // required: true,
           // type: 'Bearer'
         },
@@ -98,12 +98,15 @@ export default {
         endpoints: {
           login: { url: 'mem_auth', method: 'post' },
           logout: { url: 'logout', method: 'get' },
-          user: { url: 'me', method: 'get' }
+          user: { url: 'me', method: 'get' },
         }
       }
     },
     redirect: {
-      login: '/admin/login'
+      login: '/admin/login',
+      logout: false,
+      callback: '/admin/login',
+      home: '/admin/login',
     }
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

@@ -1,7 +1,7 @@
-exports.ids = [59];
+exports.ids = [63];
 exports.modules = {
 
-/***/ 248:
+/***/ 249:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -256,7 +256,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 393:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -267,7 +267,7 @@ __webpack_require__.r(__webpack_exports__);
 var VBtn = __webpack_require__(210);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);

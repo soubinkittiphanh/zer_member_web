@@ -1,4 +1,4 @@
-exports.ids = [23,15];
+exports.ids = [25,16];
 exports.modules = {
 
 /***/ 228:
@@ -398,131 +398,6 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
-/* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
-// Mixins
-
-
-
-/* @vue/component */
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(_mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], Object(_mixins_registrable__WEBPACK_IMPORTED_MODULE_2__[/* provide */ "b"])('form')
-/* @vue/component */).extend({
-  name: 'v-form',
-  provide() {
-    return {
-      form: this
-    };
-  },
-  inheritAttrs: false,
-  props: {
-    disabled: Boolean,
-    lazyValidation: Boolean,
-    readonly: Boolean,
-    value: Boolean
-  },
-  data: () => ({
-    inputs: [],
-    watchers: [],
-    errorBag: {}
-  }),
-  watch: {
-    errorBag: {
-      handler(val) {
-        const errors = Object.values(val).includes(true);
-        this.$emit('input', !errors);
-      },
-      deep: true,
-      immediate: true
-    }
-  },
-  methods: {
-    watchInput(input) {
-      const watcher = input => {
-        return input.$watch('hasError', val => {
-          this.$set(this.errorBag, input._uid, val);
-        }, {
-          immediate: true
-        });
-      };
-      const watchers = {
-        _uid: input._uid,
-        valid: () => {},
-        shouldValidate: () => {}
-      };
-      if (this.lazyValidation) {
-        // Only start watching inputs if we need to
-        watchers.shouldValidate = input.$watch('shouldValidate', val => {
-          if (!val) return; // Only watch if we're not already doing it
-
-          if (this.errorBag.hasOwnProperty(input._uid)) return;
-          watchers.valid = watcher(input);
-        });
-      } else {
-        watchers.valid = watcher(input);
-      }
-      return watchers;
-    },
-    /** @public */
-    validate() {
-      return this.inputs.filter(input => !input.validate(true)).length === 0;
-    },
-    /** @public */
-    reset() {
-      this.inputs.forEach(input => input.reset());
-      this.resetErrorBag();
-    },
-    resetErrorBag() {
-      if (this.lazyValidation) {
-        // Account for timeout in validatable
-        setTimeout(() => {
-          this.errorBag = {};
-        }, 0);
-      }
-    },
-    /** @public */
-    resetValidation() {
-      this.inputs.forEach(input => input.resetValidation());
-      this.resetErrorBag();
-    },
-    register(input) {
-      this.inputs.push(input);
-      this.watchers.push(this.watchInput(input));
-    },
-    unregister(input) {
-      const found = this.inputs.find(i => i._uid === input._uid);
-      if (!found) return;
-      const unwatch = this.watchers.find(i => i._uid === found._uid);
-      if (unwatch) {
-        unwatch.valid();
-        unwatch.shouldValidate();
-      }
-      this.watchers = this.watchers.filter(i => i._uid !== found._uid);
-      this.inputs = this.inputs.filter(i => i._uid !== found._uid);
-      this.$delete(this.errorBag, found._uid);
-    }
-  },
-  render(h) {
-    return h('form', {
-      staticClass: 'v-form',
-      attrs: {
-        novalidate: true,
-        ...this.attrs$
-      },
-      on: {
-        submit: e => this.$emit('submit', e)
-      }
-    }, this.$slots.default);
-  }
-}));
-
-/***/ }),
-
-/***/ 251:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* unused harmony export swalError */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
 /* unused harmony export swalErrorNoTrace */
@@ -542,7 +417,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /* unused harmony export swalMsg */
 /* unused harmony export toastNotification */
 /* unused harmony export getFirstDayOfMonth */
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(213);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
 const swalError = (swal, title, message, trandId) => {
@@ -782,6 +657,131 @@ const getFirstDayOfMonth = () => {
 
 /***/ }),
 
+/***/ 249:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
+/* harmony import */ var _mixins_registrable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
+// Mixins
+
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(_mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], Object(_mixins_registrable__WEBPACK_IMPORTED_MODULE_2__[/* provide */ "b"])('form')
+/* @vue/component */).extend({
+  name: 'v-form',
+  provide() {
+    return {
+      form: this
+    };
+  },
+  inheritAttrs: false,
+  props: {
+    disabled: Boolean,
+    lazyValidation: Boolean,
+    readonly: Boolean,
+    value: Boolean
+  },
+  data: () => ({
+    inputs: [],
+    watchers: [],
+    errorBag: {}
+  }),
+  watch: {
+    errorBag: {
+      handler(val) {
+        const errors = Object.values(val).includes(true);
+        this.$emit('input', !errors);
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+  methods: {
+    watchInput(input) {
+      const watcher = input => {
+        return input.$watch('hasError', val => {
+          this.$set(this.errorBag, input._uid, val);
+        }, {
+          immediate: true
+        });
+      };
+      const watchers = {
+        _uid: input._uid,
+        valid: () => {},
+        shouldValidate: () => {}
+      };
+      if (this.lazyValidation) {
+        // Only start watching inputs if we need to
+        watchers.shouldValidate = input.$watch('shouldValidate', val => {
+          if (!val) return; // Only watch if we're not already doing it
+
+          if (this.errorBag.hasOwnProperty(input._uid)) return;
+          watchers.valid = watcher(input);
+        });
+      } else {
+        watchers.valid = watcher(input);
+      }
+      return watchers;
+    },
+    /** @public */
+    validate() {
+      return this.inputs.filter(input => !input.validate(true)).length === 0;
+    },
+    /** @public */
+    reset() {
+      this.inputs.forEach(input => input.reset());
+      this.resetErrorBag();
+    },
+    resetErrorBag() {
+      if (this.lazyValidation) {
+        // Account for timeout in validatable
+        setTimeout(() => {
+          this.errorBag = {};
+        }, 0);
+      }
+    },
+    /** @public */
+    resetValidation() {
+      this.inputs.forEach(input => input.resetValidation());
+      this.resetErrorBag();
+    },
+    register(input) {
+      this.inputs.push(input);
+      this.watchers.push(this.watchInput(input));
+    },
+    unregister(input) {
+      const found = this.inputs.find(i => i._uid === input._uid);
+      if (!found) return;
+      const unwatch = this.watchers.find(i => i._uid === found._uid);
+      if (unwatch) {
+        unwatch.valid();
+        unwatch.shouldValidate();
+      }
+      this.watchers = this.watchers.filter(i => i._uid !== found._uid);
+      this.inputs = this.inputs.filter(i => i._uid !== found._uid);
+      this.$delete(this.errorBag, found._uid);
+    }
+  },
+  render(h) {
+    return h('form', {
+      staticClass: 'v-form',
+      attrs: {
+        novalidate: true,
+        ...this.attrs$
+      },
+      on: {
+        submit: e => this.$emit('submit', e)
+      }
+    }, this.$slots.default);
+  }
+}));
+
+/***/ }),
+
 /***/ 254:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -822,13 +822,13 @@ const getFirstDayOfMonth = () => {
 
 /***/ }),
 
-/***/ 271:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(272);
+var content = __webpack_require__(270);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -836,7 +836,7 @@ __webpack_require__(6).default("ae7a972c", content, true)
 
 /***/ }),
 
-/***/ 272:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -851,14 +851,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 273:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export prevent */
 /* harmony import */ var _components_VInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _rippleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(254);
-/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 // Components
  // Mixins
@@ -1006,13 +1006,13 @@ function prevent(e) {
 
 /***/ }),
 
-/***/ 283:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(284);
+var content = __webpack_require__(290);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -1020,7 +1020,7 @@ __webpack_require__(6).default("7b5d4dc6", content, true)
 
 /***/ }),
 
-/***/ 284:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1035,17 +1035,17 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 308:
+/***/ 310:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(283);
+/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(289);
 /* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(271);
+/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(269);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
-/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(273);
+/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(271);
 // Styles
 
  // Components
@@ -1147,7 +1147,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 312:
+/***/ 315:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1164,13 +1164,13 @@ var VCard = __webpack_require__(73);
 var components_VCard = __webpack_require__(40);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCheckbox/VCheckbox.js
-var VCheckbox = __webpack_require__(308);
+var VCheckbox = __webpack_require__(310);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(244);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(248);
+var VForm = __webpack_require__(249);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -1293,7 +1293,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/RiderForm.vue?vue&type=template&id=2084a0b4&
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(251);
+var myUtil = __webpack_require__(248);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/RiderForm.vue?vue&type=script&lang=js&
 

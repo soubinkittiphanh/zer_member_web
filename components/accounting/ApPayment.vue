@@ -21,11 +21,11 @@
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field type="date" label="ວັນທີ*" v-model="form.header.bookingDate"
-                                hint="example of helper text only on focus"></v-text-field>
+                                hint="ເດຶອນ/ວັນ/ປີ 12/31/2023"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field label="ຊຶ ບໍ່ລິສັດ ຫລື ຜູ້ຮັບ ການຊຳລະ*" v-model="form.header.payee"
-                                hint="example of persistent helper text" persistent-hint required></v-text-field>
+                                hint="ຊື່ບຸກຄົນ,ບໍລິສັດ ຫລື ຜູ້ຮັບການຊຳລະ" persistent-hint required></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field label="ເນື້ອໃນການຊຳລະ*" required v-model="form.header.notes"></v-text-field>
@@ -64,7 +64,7 @@
                 <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="createPayment">
+                <v-btn color="blue-darken-1" variant="text" @click="submitData">
                     Save
                 </v-btn>
             </v-card-actions>
@@ -107,14 +107,14 @@ export default {
             form: {
                 header: {
                     bookingDate: '',
-                    paymentNumber: '12345',
+                    paymentNumber: 'REF12345',
                     payee: 'ຮ້ານຄ້າທົ່ວໄປ',
                     paymentMethod: 'Cash',
                     currency: 'LAK',
                     rate: 1,
                     totalAmount: '1,000',
                     notes: 'Payment for services rendered',
-                    locking_session_id: 'abc123',
+                    // locking_session_id: 'abc123',
                     update_user: 1,
                     drAccount: 15,
                     crAccount: 1,
@@ -129,8 +129,14 @@ export default {
     mounted() {
         this.loadAccount()
         const today = new Date().toISOString().substr(0, 10);
+        // const today = new Date().toISOString().substr(0, 10);
+        // const today = new Date().toLocaleDateString();
         this.bookingDate = today
         this.form.header.bookingDate = today
+        if (this.isEdit) {
+            console.log("Load payment header");
+            this.loadPaymentById()
+        }
     },
     computed: {
         today() {
@@ -144,7 +150,6 @@ export default {
             this.isloading = true;
             const response = await this.$axios.get('/api/financial/chartAccount')
             response.data.forEach(element => {
-                console.log("Account number => ", element["accountNumber"]);
                 this.account.push({
                     id: element["id"],
                     desc: element["accountName"] + " - " + element["accountNumber"]
@@ -152,20 +157,45 @@ export default {
             });
             this.isloading = false;
         },
-        async createPayment() {
-            console.log("===> ",this.form
-            .header
-            );
-            if (this.isloading) return
-            this.isloading = true
-            await this.$axios.post("/api/finanicial/ap/header/create", this.form.header)
+        getFormatNum(val) {
+            return new Intl.NumberFormat().format(val)
+        },
+        async loadPaymentById() {
+            this.isloading = true;
+            await this.$axios.get(`/api/finanicial/ap/header/find/${this.paymentHeadId}`)
                 .then(response => {
-                    swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-                    this.$emit('reload')
+                    this.form.header = response.data
+                    this.form.header.bookingDate = response.data['bookingDate'].split('T')[0]
+                    this.form.header.totalAmount = this.getFormatNum(this.form.header.totalAmount)
                 })
                 .catch(error => {
-                    swalError2(this.$swal, "Error", error.response.data.errors[0].msg)
+                    swalError2(this.$swal, "Error", error.response.data)
                 })
+        },
+        async submitData() {
+
+            if (this.isloading) return
+            this.isloading = true
+            if (this.isEdit) {
+                await this.$axios.put(`/api/finanicial/ap/header/update/${this.paymentHeadId}`, this.form.header)
+                    .then(response => {
+                        swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+                        this.$emit('reload')
+                    })
+                    .catch(error => {
+                        swalError2(this.$swal, "Error", error.response.data)
+                    })
+            } else {
+                await this.$axios.post("/api/finanicial/ap/header/create", this.form.header)
+                    .then(response => {
+                        swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+                        this.$emit('reload')
+                    })
+                    .catch(error => {
+                        swalError2(this.$swal, "Error", error.response.data.errors[0].msg)
+                    })
+            }
+
             this.isloading = false
 
 

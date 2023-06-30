@@ -35,7 +35,7 @@
                             </template>
                             <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
-                        <v-btn @click="triggerDialog"> ຊຳລະຕ່າງໆ </v-btn>
+                        <v-btn @click="triggerDialog"> ສ້າງລາຍຈ່າຍ </v-btn>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
@@ -87,12 +87,6 @@ export default {
                     value: 'bookingDate',
                     sortable: true,
                 },
-                {
-                    text: 'Account',
-                    align: 'center',
-                    value: 'accountNumber',
-                    sortable: true,
-                },
                 { text: 'ເລກອ້າງອີງ', align: 'center', value: 'paymentNumber' },
                 { text: 'ຍອດລວມ', align: 'center', value: 'totalAmount' },
                 { text: 'ສະກຸນ', align: 'center', value: 'currency' },
@@ -101,9 +95,9 @@ export default {
                 { text: 'ເບື້ອງຫນີ້', align: 'center', value: 'drAccount' },
                 { text: 'ເບື້ອງມີ', align: 'center', value: 'crAccount' },
                 { text: 'ເນື້ອໃນ', align: 'center', value: 'notes' },
-                { text: 'ວັນເວລາສ້າງ', align: 'center', value: 'createdAt' },
+                { text: 'ເວລາສ້າງ', align: 'center', value: 'createdAt' },
                 {
-                    text: 'ກົດຊຳລະ',
+                    text: 'ແກ້ໄຂ',
                     align: 'end',
                     value: 'function',
                     sortable: false,
@@ -130,13 +124,15 @@ export default {
     },
     methods: {
         triggerDialog() {
-            this.apFormKey = +1;
+            this.apFormKey += 1;
+            this.selectedId = null;
+            this.isEdit = false;
             this.dialog = true
         },
         editItem(item){
             this.selectedId = item.id
             this.isEdit = true;
-            this.apFormKey = +1;
+            this.apFormKey += 1;
             this.dialog = true
         },
          formatDate(date) {
@@ -148,9 +144,14 @@ export default {
             this.isloading = true
             await this.$axios.get("/api/finanicial/ap/header/find").then(response => {
                 this.txnList = [];
-                for (const element in response.data) {
-                    this.txnList.push(response.data[element])
+                for (const iterator of response.data) {
+                    iterator['bookingDate'] = iterator['bookingDate'].split('T')[0]
+                    this.txnList.push(iterator)
                 }
+                // for (let element in response.data) {
+                //     element['bookingDate'] = element['bookingDate'].split('T')[0]
+                //     this.txnList.push(response.data[element])
+                // }
                 console.log("====> " + this.txnList[0]);
             }).catch(error => {
 

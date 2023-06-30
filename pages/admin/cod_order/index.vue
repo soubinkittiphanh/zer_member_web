@@ -181,6 +181,7 @@ export default {
           value: 'discount',
           sortable: true,
         },
+        
         {
           text: 'ຄ່າຂົນສົ່ງ',
           align: 'end',
@@ -217,7 +218,18 @@ export default {
           value: 'shopName',
           sortable: false,
         },
-
+        {
+          text: 'ໄຣເດີ',
+          align: 'end',
+          value: 'rider',
+          sortable: false,
+        },
+        {
+          text: 'ເຂດ',
+          align: 'end',
+          value: 'geoname',
+          sortable: false,
+        },
         {
           text: 'ກົດຊຳລະ',
           align: 'end',
@@ -382,6 +394,8 @@ export default {
               'bookingDate': el.txn_date.split('T')[0],
               'recordStatus': 1,
               'orderId': el.order_id,
+              'rider': el.rider,
+              'geoname': el.geoname+' - '+el.geodesc,
               'codCount': this.codDayCount(el.txn_date.split('T')[0]),
               'order_price_total': this.getFormatNum(el.cart_total),
             }

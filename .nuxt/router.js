@@ -8,6 +8,7 @@ const _3f4190a6 = () => interopDefault(import('../pages/admin/index.vue' /* webp
 const _7572f6e6 = () => interopDefault(import('../pages/product/index.vue' /* webpackChunkName: "pages/product/index" */))
 const _a7842ff6 = () => interopDefault(import('../pages/admin/advertise/index.vue' /* webpackChunkName: "pages/admin/advertise/index" */))
 const _0f7f0467 = () => interopDefault(import('../pages/admin/ap/index.vue' /* webpackChunkName: "pages/admin/ap/index" */))
+const _394869e9 = () => interopDefault(import('../pages/admin/ar/index.vue' /* webpackChunkName: "pages/admin/ar/index" */))
 const _66ede218 = () => interopDefault(import('../pages/admin/bank/index.vue' /* webpackChunkName: "pages/admin/bank/index" */))
 const _7dddfa48 = () => interopDefault(import('../pages/admin/campaign/index.vue' /* webpackChunkName: "pages/admin/campaign/index" */))
 const _180344c1 = () => interopDefault(import('../pages/admin/cancel_order/index.vue' /* webpackChunkName: "pages/admin/cancel_order/index" */))
@@ -19,6 +20,7 @@ const _300d3e47 = () => interopDefault(import('../pages/admin/login/index.vue' /
 const _3f9e2182 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
 const _28458292 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
 const _4f34b91d = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
+const _23f9fb92 = () => interopDefault(import('../pages/admin/po/index.vue' /* webpackChunkName: "pages/admin/po/index" */))
 const _57be90e6 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
 const _ae16b5f0 = () => interopDefault(import('../pages/admin/productInuse.vue' /* webpackChunkName: "pages/admin/productInuse" */))
 const _3fa356a8 = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
@@ -66,6 +68,10 @@ export const routerOptions = {
     component: _0f7f0467,
     name: "admin-ap"
   }, {
+    path: "/admin/ar",
+    component: _394869e9,
+    name: "admin-ar"
+  }, {
     path: "/admin/bank",
     component: _66ede218,
     name: "admin-bank"
@@ -109,6 +115,10 @@ export const routerOptions = {
     path: "/admin/orders",
     component: _4f34b91d,
     name: "admin-orders"
+  }, {
+    path: "/admin/po",
+    component: _23f9fb92,
+    name: "admin-po"
   }, {
     path: "/admin/product",
     component: _57be90e6,

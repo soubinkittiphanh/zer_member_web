@@ -113,6 +113,16 @@ export default {
           title: 'ບັນຊີ ລາຍຈ່າຍ',
           to: '/admin/ap',
         },
+        {
+          icon: 'mdi-account',
+          title: 'ບັນຊີ ລາຍຮັບ',
+          to: '/admin/ar',
+        },
+        {
+          icon: 'mdi-account',
+          title: 'Procurement',
+          to: '/admin/po',
+        },
         // {
         //   icon: 'mdi-chart-bar',
         //   title: 'Transaction type',

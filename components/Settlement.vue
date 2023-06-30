@@ -22,7 +22,7 @@
             menu-props="auto" hide-details label="ປະເພດການຊຳລະ" single-line :rules="rule.txnRule"></v-select>
           <v-text-field v-model="paymentAmount" :counter="10" :rules="rule.amountRules"
             :label="`ຈຳນວນເງິນ: ` + formatNum(paymentAmount)" required></v-text-field>
-          <v-text-field v-model="codFee" :counter="10" :rules="rule.amountCODRules"
+          <v-text-field v-model.number="codFee" :counter="10" :rules="numberRule"
             :label="`ຄ່າທຳນຽມ COD: ` + formatNum(codFee)" required></v-text-field>
         </v-form>
         <!-- {{ userId }} -->
@@ -77,7 +77,13 @@ export default {
     },
     userName(){
       return this.$auth.user.name;
-    }
+    },
+    numberRule() {
+            return [
+                value => value !== undefined && value !== null && value !== '' || 'Field is required',
+                value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'
+            ];
+        },
   },
 
   data() {
