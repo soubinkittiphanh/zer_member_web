@@ -287,7 +287,7 @@ export const getFirstDayOfMonth = () => {
 }
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
-  //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
-    const  baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+   const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
+    // const  baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
   return baseURL;
 }

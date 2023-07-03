@@ -21,16 +21,16 @@ export const Tutorial = () => import('../../components/Tutorial.vue' /* webpackC
 export const VuetifyLogo = () => import('../../components/VuetifyLogo.vue' /* webpackChunkName: "components/vuetify-logo" */).then(c => wrapFunctional(c.default || c))
 export const Wallet = () => import('../../components/Wallet.vue' /* webpackChunkName: "components/wallet" */).then(c => wrapFunctional(c.default || c))
 export const OrderSumaryCard = () => import('../../components/orderSumaryCard.vue' /* webpackChunkName: "components/order-sumary-card" */).then(c => wrapFunctional(c.default || c))
-export const CampaignForm = () => import('../../components/campaign/CampaignForm.vue' /* webpackChunkName: "components/campaign-form" */).then(c => wrapFunctional(c.default || c))
 export const CardCampaignCard = () => import('../../components/card/campaignCard.vue' /* webpackChunkName: "components/card-campaign-card" */).then(c => wrapFunctional(c.default || c))
 export const CardForm = () => import('../../components/card/cardForm.vue' /* webpackChunkName: "components/card-form" */).then(c => wrapFunctional(c.default || c))
+export const CampaignForm = () => import('../../components/campaign/CampaignForm.vue' /* webpackChunkName: "components/campaign-form" */).then(c => wrapFunctional(c.default || c))
 export const AccountingApPayment = () => import('../../components/accounting/ApPayment.vue' /* webpackChunkName: "components/accounting-ap-payment" */).then(c => wrapFunctional(c.default || c))
 export const AccountingArReceivable = () => import('../../components/accounting/ArReceivable.vue' /* webpackChunkName: "components/accounting-ar-receivable" */).then(c => wrapFunctional(c.default || c))
 export const AccountingGeneralLedgerForm = () => import('../../components/accounting/GeneralLedgerForm.vue' /* webpackChunkName: "components/accounting-general-ledger-form" */).then(c => wrapFunctional(c.default || c))
+export const DashboardCardOnTop = () => import('../../components/dashboard/CardOnTop.vue' /* webpackChunkName: "components/dashboard-card-on-top" */).then(c => wrapFunctional(c.default || c))
+export const PoForm = () => import('../../components/po/PoForm.vue' /* webpackChunkName: "components/po-form" */).then(c => wrapFunctional(c.default || c))
 export const ProductForm = () => import('../../components/product/ProductForm.vue' /* webpackChunkName: "components/product-form" */).then(c => wrapFunctional(c.default || c))
 export const ProductFormCreate = () => import('../../components/product/ProductFormCreate.vue' /* webpackChunkName: "components/product-form-create" */).then(c => wrapFunctional(c.default || c))
-export const PoForm = () => import('../../components/po/PoForm.vue' /* webpackChunkName: "components/po-form" */).then(c => wrapFunctional(c.default || c))
-export const DashboardCardOnTop = () => import('../../components/dashboard/CardOnTop.vue' /* webpackChunkName: "components/dashboard-card-on-top" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

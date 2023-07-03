@@ -4,8 +4,8 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Website',
-    title: 'Jack42',
-    // title: 'PeeAir4',
+    // title: 'Jack42',
+    title: 'PeeAir4',
     htmlAttrs: {
       lang: 'en'
     },
@@ -16,8 +16,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/jack.jpeg' }
-      // { rel: 'icon', type: 'image/x-icon', href: '/peeair.jpeg' }
+      // { rel: 'icon', type: 'image/x-icon', href: '/jack.jpeg' }
+      { rel: 'icon', type: 'image/x-icon', href: '/peeair.jpeg' }
     ],
     script: [
       {
@@ -68,8 +68,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'// UAT API
-    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
-    baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+    baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
+    // baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
     // baseURL: 'http://localhost:8080',
     // credentials: true,
     // headers: {
