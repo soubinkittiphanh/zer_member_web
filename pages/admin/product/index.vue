@@ -205,11 +205,6 @@ export default {
             console.log('Total: ' + totalSize)
             return totalSize < 2000000||"ຂະຫນາດເກີນ"
           },
-
-          // (files) =>
-          //   !files ||
-          //   !files.some((file) => file.size > 2_097_152) ||
-          //   'Avatar size should be less than 2 MB!',
         ],
       },
       category: [],
@@ -223,6 +218,7 @@ export default {
         pro_status: false,
         pro_outlet:1,
         pro_cost_price: 0,
+        createdAt:null
       },
       outlet:[],
     }

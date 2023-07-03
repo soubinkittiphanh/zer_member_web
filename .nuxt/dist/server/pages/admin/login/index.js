@@ -1,4 +1,4 @@
-exports.ids = [46,16,19];
+exports.ids = [48,16,19];
 exports.modules = {
 
 /***/ 209:
@@ -530,7 +530,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 252:
+/***/ 250:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -704,7 +704,7 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 253:
+/***/ 254:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -883,13 +883,13 @@ const cache = new Map();
 
 /***/ }),
 
-/***/ 291:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(292);
+var content = __webpack_require__(295);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -897,7 +897,7 @@ __webpack_require__(6).default("1c8f4490", content, true)
 
 /***/ }),
 
-/***/ 292:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -912,11 +912,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 311:
+/***/ 317:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VAlert_VAlert_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(291);
+/* harmony import */ var _src_components_VAlert_VAlert_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(294);
 /* harmony import */ var _src_components_VAlert_VAlert_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VAlert_VAlert_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VSheet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(33);
 /* harmony import */ var _VBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(209);
@@ -1127,7 +1127,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 313:
+/***/ 321:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1135,7 +1135,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAlert/VAlert.js
-var VAlert = __webpack_require__(311);
+var VAlert = __webpack_require__(317);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Notification.vue?vue&type=template&id=35851136&
 
@@ -1190,7 +1190,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 385:
+/***/ 392:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1210,7 +1210,7 @@ var VCard = __webpack_require__(73);
 var components_VCard = __webpack_require__(40);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(253);
+var VCol = __webpack_require__(254);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js
 var VContainer = __webpack_require__(224);
@@ -1228,7 +1228,7 @@ var VIcon = __webpack_require__(38);
 var VMain = __webpack_require__(223);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(252);
+var VRow = __webpack_require__(250);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
@@ -1340,7 +1340,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/login/index.vue?vue&type=template&id=0daae10a&
 
 // EXTERNAL MODULE: ./components/Notification.vue + 4 modules
-var Notification = __webpack_require__(313);
+var Notification = __webpack_require__(321);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/login/index.vue?vue&type=script&lang=js&
 
@@ -1476,7 +1476,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var login = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(228).default,Notification: __webpack_require__(313).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(228).default,Notification: __webpack_require__(321).default})
 
 
 /***/ })

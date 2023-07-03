@@ -45,13 +45,17 @@ export default {
         isEdit:{
             type:Boolean,
             default:false,
+        },
+        cost:{
+            type:Number,
+            default: 0,
         }
 
     },
     data() {
         return {
             stockQty: 1,
-            stockCost: 0,
+            stockCost: this.cost,
             isSubmitting: false,
         }
     },
@@ -86,6 +90,7 @@ export default {
                         swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                         // this.fetchData() // UPDATE PRODUCT UI
                         this.$emit('reload')
+                        this.$emit('close-dialog')
                     })
                     .catch((error) => {
                         console.log(error)

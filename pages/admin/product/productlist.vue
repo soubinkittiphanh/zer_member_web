@@ -9,8 +9,17 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <card-form :product-id="selectedProductId" :product-name="selectedProductName" @close-dialog="isstock = false"
-        @reload="fetchData"></card-form>
+      <card-form :key="stockFormKey" :product-id="selectedProductId"
+        :cost="selectedProductCost" :product-name="selectedProductName" @close-dialog="isstock = false"
+        @reload="rebuildStock"></card-form>
+    </v-dialog>
+    <v-dialog v-model="editProductForm" max-width="1200px">
+      <product-form :key="productFormKey" @close-dialog="editProductForm = false" :header-id="selectedProductId"
+        @refresh="fetchData" :isEdit="editProductForm"></product-form>
+    </v-dialog>
+    <v-dialog v-model="productFormCreate" max-width="1200px">
+      <product-form-create @close-dialog="productFormCreate = false" @refresh="fetchData">
+      </product-form-create>
     </v-dialog>
 
     <v-card>
@@ -36,7 +45,11 @@
             <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ loaddata.length }}</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-            <NuxtLink to="/admin/product">ສ້າງສິນຄ້າໃຫມ່</NuxtLink>
+            <!-- <NuxtLink to="/admin/product">ສ້າງສິນຄ້າໃຫມ່</NuxtLink> -->
+            <v-btn class="mr-0" @click="productFormCreate = true">
+              <!-- <i class="fas fa-sync"></i> -->
+              ສ້າງສິນຄ້າໃຫມ່
+            </v-btn>
 
           </v-toolbar>
         </template>
@@ -61,13 +74,19 @@
   </div>
 </template>
 <script>
+import ProductForm from '~/components/product/ProductForm.vue'
+import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
+  components: { ProductForm, ProductFormCreate },
   middleware: 'auths',
   data() {
     return {
+      productFormCreate: false,
+      productFormKey: 1,
       isstock: false,
       selectedProductId: '',
+      selectedProductCost: 0,
       selectedProductName: '',
       isloading: false,
       dialogMessage: false,
@@ -80,6 +99,9 @@ export default {
       selectedCardType: '',
       pageLine: 30,
       search: '',
+      editProductForm: false,
+      selectedProductId: null,
+      stockFormKey: 1,
       headers: [
         {
           text: 'ໄອດີ',
@@ -118,7 +140,9 @@ export default {
 
   methods: {
     triggerCardForm(payload) {
+      this.stockFormKey += 1;
       this.selectedProductId = payload.pro_id;
+      this.selectedProductCost = payload.pro_cost_price;
       this.selectedProductName = payload.pro_name;
       this.isstock = true;
     },
@@ -151,12 +175,12 @@ export default {
         })
       this.isloading = false
     },
-    editItem(idx) {
-      console.log('ID ' + idx.pro_id)
-      console.log('NAME ' + idx.pro_name)
-      console.log('OBJ ' + Object.keys(idx))
+    editItem(item) {
+      this.productFormKey += 1
+      this.selectedProductId = item.pro_id
+      this.editProductForm = true;
       // const obj=JSON.stringify(idx)
-      this.$router.push(`/admin/product/${idx.pro_id}`)
+      // this.$router.push(`/admin/product/${idx.pro_id}`)
     },
     editStock(idx) {
       console.log('ID ' + idx.pro_id)

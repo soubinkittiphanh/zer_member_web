@@ -1,43 +1,28 @@
 <template>
   <div class="text-center">
-          <span class="text-h5">Product category </span>
-          <!-- <span class="text-h5">Product category {{this.$store.getters.loggedInUser}}</span> -->
+    <span class="text-h5">ລາຍການ ປະເພດສິນຄ້າ</span>
     <v-dialog v-model="dialogForm" max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="text-h5">Product category {{this.$store.getters.loggedInUser}}</span>
+          <span class="text-h5">ຈັດການປະເພດສິນຄ້າ</span>
         </v-card-title>
         <v-card-text>
           <v-container>
             <v-form ref="form" v-model="valid" lazy-validation>
-              <v-text-field
-                v-model="form_data.categ_id"
-                disabled
-                :rules="rule['cat_id']"
-                label="ໄອດີໝວດສິນຄ້າ"
-                required
-              ></v-text-field>
-              <v-text-field
-                v-model="form_data.categ_name"
-                :rules="rule['cat_name']"
-                label="ຊື່ປະເພດສິນຄ້າ"
-                required
-              ></v-text-field>
+              <v-text-field v-model="form_data.categ_id" disabled :rules="rule['cat_id']" label="ໄອດີໝວດສິນຄ້າ"
+                required></v-text-field>
+              <v-text-field v-model="form_data.categ_name" :rules="rule['cat_name']" label="ຊື່ປະເພດສິນຄ້າ*"
+                required></v-text-field>
 
-              <v-textarea
-                outlined
-                name="input-7-4"
-                counter="5"
-                label="ໝາຍເຫດ"
-                v-model="form_data.categ_desc"
-              ></v-textarea>
+              <v-textarea outlined name="input-7-4" counter="100" label="ໝາຍເຫດ"
+                v-model="form_data.categ_desc"></v-textarea>
             </v-form>
           </v-container>
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="error" class="mr-4" @click="reset"> ລ້າງຂໍ້ມູນ </v-btn>
+          <!-- <v-btn color="error" class="mr-4" @click="reset"> ລ້າງຂໍ້ມູນ </v-btn> -->
           <v-btn color="blue darken-1" text @click="dialogForm = false">
             ປິດ
           </v-btn>
@@ -56,61 +41,36 @@
     </v-dialog>
     <v-card>
       <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="ຊອກຫາ"
-          single-line
-          hide-details
-        ></v-text-field>
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-details></v-text-field>
       </v-card-title>
-      <v-data-table
-        v-if="loadData"
-        :headers="headers"
-        :items="loadData"
-        :items-per-page="5"
-        :search="search"
-        class="elevation-1"
-      >
+      <v-data-table v-if="loadData" :headers="headers" :items="loadData" :items-per-page="5" :search="search"
+        class="elevation-1">
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>ປະເພດສິນຄ້າ: {{loadData.length}}</v-toolbar-title>
+            <v-toolbar-title>ຈຳນວນ ປະເພດສິນຄ້າທັງຫມົດ: {{ loadData.length }}</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              dark
-              class="mb-2"
-              @click="
-                dialogForm = true
-                isedit = false
-              "
-            >
+            <v-btn color="primary" dark class="mb-2" @click="
+              dialogForm = true
+            isedit = false
+              ">
               ສ້າງໃຫມ່
             </v-btn>
           </v-toolbar>
         </template>
         <template v-slot:[`item.categ_function`]="{ item }">
-          <v-icon
-            small
-            class="mr-2"
-            @click="
-              editItem(item)
-              isedit = true
-            "
-          >
+          <v-icon small class="mr-2" @click="
+            editItem(item)
+          isedit = true
+            ">
             mdi-pencil
           </v-icon>
         </template>
         <template v-slot:[`item.categ_wallet`]="{ item }">
-          <v-icon
-            small
-            class="mr-2"
-            @click="
-              wallet(item)
-              isedit = true
-            "
-          >
+          <v-icon small class="mr-2" @click="
+            wallet(item)
+          isedit = true
+            ">
             mdi-pencil
           </v-icon>
         </template>
@@ -119,6 +79,7 @@
   </div>
 </template>
 <script>
+import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
   middleware: 'auths',
   data: () => ({
@@ -139,6 +100,7 @@ export default {
       categ_id: '1XXXX',
       categ_name: null,
       categ_desc: '',
+      createdAt: null,
     },
     headers: [
       {
@@ -167,6 +129,16 @@ export default {
       }
       this.dialog = false
     },
+    isedit(val) {
+      if (!val) {
+        this.form_data = {
+          categ_id: '1XXXX',
+          categ_name: null,
+          categ_desc: '',
+          createdAt: null,
+        }
+      }
+    }
   },
   created() {
     this.fetchData()
@@ -184,47 +156,47 @@ export default {
       this.$refs.form.resetValidation()
     },
     async submitDatas() {
-      this.isloading = true
-      console.log('submitOut')
-      if (!this.$refs.form.validate()) {
+      if (!this.$refs.form.validate() || this.isloading) {
         this.isloading = false
         return
       }
-      console.log('submitIn')
-      const submitData = {
-        cat_id: this.form_data.categ_id,
-        cat_name: this.form_data.categ_name,
-        cat_desc: this.form_data.categ_desc,
-      }
-      const urlpath = '/category_'
+      this.isloading = true
+      const urlpath = '/api/category/'
       if (this.isedit) {
         await this.$axios
-          .put(urlpath + 'e', submitData)
+          .put(urlpath + 'update/' + this.form_data.categ_id, this.form_data)
           .then((res) => {
-            this.message = res.data
+            this.dialogForm = false
+            swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+            // this.message = res.data
             // this.reset()
           })
           .catch((er) => {
-            this.message = 'Error: ' + er
+            swalError2(this.$swal, "Error", er)
+            // this.message = 'Error: ' + er
           })
-          this.isloading = false
+        this.isloading = false
       } else {
         await this.$axios
-          .post(urlpath + 'i', submitData)
+          .post(urlpath + 'create', this.form_data)
           .then((res) => {
-            this.message = res.data
+            // this.message = res.data
+            this.dialogForm = false
+            swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
             // this.reset()
+
           })
           .catch((er) => {
-            this.message = 'Error: ' + er
+            swalError2(this.$swal, "Error", er)
+            // this.message = 'Error: ' + er
           })
-          this.isloading = false
+        this.isloading = false
       }
       this.fetchData()
     },
     async fetchData() {
-      this.isloading=true;
-     await this.$axios
+      this.isloading = true;
+      await this.$axios
         .get('/category_f')
         .then((res) => {
           console.log('Data: ' + res.data)
@@ -237,12 +209,12 @@ export default {
               categ_function: el.categ_id,
             }
           })
-          console.log('AFTER MAP: ' + this.loadData[0].categ_id)
         })
         .catch((er) => {
-          console.log('Data: ' + er)
+          // console.log('Data: ' + er)
+          swalError2(this.$swal, "Error", er)
         })
-        this.isloading=false;
+      this.isloading = false;
     },
     editItem(val) {
       console.log('SHOULD BE ID: ' + val.categ_function)

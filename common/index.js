@@ -273,15 +273,21 @@ export const mysqlDateToDateObject = (mysqlDate) => {
   return dateObj;
 }
 
-export const  getFirstDayOfMonth = () =>{
+export const getFirstDayOfMonth = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   const today = new Date();
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  console.log("Date found => ",firstDayOfMonth);
+  console.log("Date found => ", firstDayOfMonth);
   // const mysqlDate = firstDayOfMonth.toISOString().slice(0, 10);
   const year = firstDayOfMonth.getFullYear();
   const month = (firstDayOfMonth.getMonth() + 1).toString().padStart(2, '0');
   const day = firstDayOfMonth.getDate().toString().padStart(2, '0');
   const mysqlDate = `${year}-${month}-${day}`;
-return mysqlDate;
+  return mysqlDate;
+}
+export const hostName = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
+    const  baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+  return baseURL;
 }

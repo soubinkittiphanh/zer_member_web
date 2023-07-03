@@ -1,4 +1,4 @@
-exports.ids = [55,12,13,14,16,51,52,53];
+exports.ids = [57,12,13,14,16,53,54,55];
 exports.modules = {
 
 /***/ 228:
@@ -622,7 +622,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 
 /***/ }),
 
-/***/ 252:
+/***/ 250:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -825,7 +825,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 272:
+/***/ 258:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -871,7 +871,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 274:
+/***/ 269:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -958,6 +958,35 @@ var component = Object(componentNormalizer["a" /* default */])(
 /***/ }),
 
 /***/ 275:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(276);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+__webpack_require__(6).default("735d40bc", content, true)
+
+/***/ }),
+
+/***/ 276:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-file-input .v-file-input__text{color:rgba(0,0,0,.87)}.theme--light.v-file-input .v-file-input__text--placeholder{color:rgba(0,0,0,.6)}.theme--light.v-file-input.v-input--is-disabled .v-file-input__text,.theme--light.v-file-input.v-input--is-disabled .v-file-input__text .v-file-input__text--placeholder{color:rgba(0,0,0,.38)}.theme--dark.v-file-input .v-file-input__text{color:#fff}.theme--dark.v-file-input .v-file-input__text--placeholder{color:hsla(0,0%,100%,.7)}.theme--dark.v-file-input.v-input--is-disabled .v-file-input__text,.theme--dark.v-file-input.v-input--is-disabled .v-file-input__text .v-file-input__text--placeholder{color:hsla(0,0%,100%,.5)}.v-file-input input[type=file]{left:0;max-width:0;opacity:0;pointer-events:none;position:absolute;width:0}.v-file-input .v-file-input__text{align-items:center;align-self:stretch;display:flex;flex-wrap:wrap;width:100%}.v-file-input .v-file-input__text.v-file-input__text--chips{flex-wrap:wrap}.v-file-input .v-file-input__text .v-chip{margin:4px}.v-file-input .v-text-field__slot{min-height:32px}.v-file-input.v-input--dense .v-text-field__slot{min-height:26px}.v-file-input.v-text-field--filled:not(.v-text-field--single-line) .v-file-input__text{padding-top:22px}.v-file-input.v-text-field--outlined .v-text-field__slot{padding:6px 0}.v-file-input.v-text-field--outlined.v-input--dense .v-text-field__slot{padding:3px 0}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1058,54 +1087,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 279:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(298);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(6).default
-module.exports.__inject__ = function (context) {
-  add("2d48012f", content, true, context)
-};
-
-/***/ }),
-
-/***/ 284:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(285);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-__webpack_require__(6).default("735d40bc", content, true)
-
-/***/ }),
-
-/***/ 285:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".theme--light.v-file-input .v-file-input__text{color:rgba(0,0,0,.87)}.theme--light.v-file-input .v-file-input__text--placeholder{color:rgba(0,0,0,.6)}.theme--light.v-file-input.v-input--is-disabled .v-file-input__text,.theme--light.v-file-input.v-input--is-disabled .v-file-input__text .v-file-input__text--placeholder{color:rgba(0,0,0,.38)}.theme--dark.v-file-input .v-file-input__text{color:#fff}.theme--dark.v-file-input .v-file-input__text--placeholder{color:hsla(0,0%,100%,.7)}.theme--dark.v-file-input.v-input--is-disabled .v-file-input__text,.theme--dark.v-file-input.v-input--is-disabled .v-file-input__text .v-file-input__text--placeholder{color:hsla(0,0%,100%,.5)}.v-file-input input[type=file]{left:0;max-width:0;opacity:0;pointer-events:none;position:absolute;width:0}.v-file-input .v-file-input__text{align-items:center;align-self:stretch;display:flex;flex-wrap:wrap;width:100%}.v-file-input .v-file-input__text.v-file-input__text--chips{flex-wrap:wrap}.v-file-input .v-file-input__text .v-chip{margin:4px}.v-file-input .v-text-field__slot{min-height:32px}.v-file-input.v-input--dense .v-text-field__slot{min-height:26px}.v-file-input.v-text-field--filled:not(.v-text-field--single-line) .v-file-input__text{padding-top:22px}.v-file-input.v-text-field--outlined .v-text-field__slot{padding:6px 0}.v-file-input.v-text-field--outlined.v-input--dense .v-text-field__slot{padding:3px 0}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 293:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1113,7 +1095,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/product/mixins/ImagePreviewMixin.vue?vue&type=script&lang=js&
-var ImagePreviewMixinvue_type_script_lang_js_ = __webpack_require__(272);
+var ImagePreviewMixinvue_type_script_lang_js_ = __webpack_require__(258);
 
 // CONCATENATED MODULE: ./pages/admin/product/mixins/ImagePreviewMixin.vue?vue&type=script&lang=js&
  /* harmony default export */ var mixins_ImagePreviewMixinvue_type_script_lang_js_ = (ImagePreviewMixinvue_type_script_lang_js_["a" /* default */]); 
@@ -1143,26 +1125,303 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
+/***/ 287:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(307);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(6).default
+module.exports.__inject__ = function (context) {
+  add("2d3d6e06", content, true, context)
+};
+
+/***/ }),
+
 /***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var _src_components_VFileInput_VFileInput_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(275);
+/* harmony import */ var _src_components_VFileInput_VFileInput_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VFileInput_VFileInput_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VTextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(231);
+/* harmony import */ var _VChip__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72);
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
+// Styles
+ // Extensions
+
+ // Components
+
+ // Utilities
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (_VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].extend({
+  name: 'v-file-input',
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+  props: {
+    chips: Boolean,
+    clearable: {
+      type: Boolean,
+      default: true
+    },
+    counterSizeString: {
+      type: String,
+      default: '$vuetify.fileInput.counterSize'
+    },
+    counterString: {
+      type: String,
+      default: '$vuetify.fileInput.counter'
+    },
+    hideInput: Boolean,
+    multiple: Boolean,
+    placeholder: String,
+    prependIcon: {
+      type: String,
+      default: '$file'
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    showSize: {
+      type: [Boolean, Number],
+      default: false,
+      validator: v => {
+        return typeof v === 'boolean' || [1000, 1024].includes(v);
+      }
+    },
+    smallChips: Boolean,
+    truncateLength: {
+      type: [Number, String],
+      default: 22
+    },
+    type: {
+      type: String,
+      default: 'file'
+    },
+    value: {
+      default: undefined,
+      validator: val => {
+        return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* wrapInArray */ "H"])(val).every(v => v != null && typeof v === 'object');
+      }
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        ..._VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.computed.classes.call(this),
+        'v-file-input': true
+      };
+    },
+    computedCounterValue() {
+      const fileCount = this.multiple && this.lazyValue ? this.lazyValue.length : this.lazyValue instanceof File ? 1 : 0;
+      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount);
+      const bytes = this.internalArrayValue.reduce((bytes, {
+        size = 0
+      }) => {
+        return bytes + size;
+      }, 0);
+      return this.$vuetify.lang.t(this.counterSizeString, fileCount, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* humanReadableFileSize */ "w"])(bytes, this.base === 1024));
+    },
+    internalArrayValue() {
+      return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* wrapInArray */ "H"])(this.internalValue);
+    },
+    internalValue: {
+      get() {
+        return this.lazyValue;
+      },
+      set(val) {
+        this.lazyValue = val;
+        this.$emit('change', this.lazyValue);
+      }
+    },
+    isDirty() {
+      return this.internalArrayValue.length > 0;
+    },
+    isLabelActive() {
+      return this.isDirty;
+    },
+    text() {
+      if (!this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel)) return [this.placeholder];
+      return this.internalArrayValue.map(file => {
+        const {
+          name = '',
+          size = 0
+        } = file;
+        const truncatedText = this.truncateText(name);
+        return !this.showSize ? truncatedText : `${truncatedText} (${Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* humanReadableFileSize */ "w"])(size, this.base === 1024)})`;
+      });
+    },
+    base() {
+      return typeof this.showSize !== 'boolean' ? this.showSize : undefined;
+    },
+    hasChips() {
+      return this.chips || this.smallChips;
+    }
+  },
+  watch: {
+    readonly: {
+      handler(v) {
+        if (v === true) Object(_util_console__WEBPACK_IMPORTED_MODULE_4__[/* consoleError */ "b"])('readonly is not supported on <v-file-input>', this);
+      },
+      immediate: true
+    },
+    value(v) {
+      const value = this.multiple ? v : v ? [v] : [];
+      if (!Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* deepEqual */ "k"])(value, this.$refs.input.files)) {
+        // When the input value is changed programatically, clear the
+        // internal input's value so that the `onInput` handler
+        // can be triggered again if the user re-selects the exact
+        // same file(s). Ideally, `input.files` should be
+        // manipulated directly but that property is readonly.
+        this.$refs.input.value = '';
+      }
+    }
+  },
+  methods: {
+    clearableCallback() {
+      this.internalValue = this.multiple ? [] : null;
+      this.$refs.input.value = '';
+    },
+    genChips() {
+      if (!this.isDirty) return [];
+      return this.text.map((text, index) => this.$createElement(_VChip__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"], {
+        props: {
+          small: this.smallChips
+        },
+        on: {
+          'click:close': () => {
+            const internalValue = this.internalValue;
+            internalValue.splice(index, 1);
+            this.internalValue = internalValue; // Trigger the watcher
+          }
+        }
+      }, [text]));
+    },
+    genControl() {
+      const render = _VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.genControl.call(this);
+      if (this.hideInput) {
+        render.data.style = Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_5__[/* mergeStyles */ "d"])(render.data.style, {
+          display: 'none'
+        });
+      }
+      return render;
+    },
+    genInput() {
+      const input = _VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.genInput.call(this);
+      input.data.attrs.multiple = this.multiple; // We should not be setting value
+      // programmatically on the input
+      // when it is using type="file"
+
+      delete input.data.domProps.value; // This solves an issue in Safari where
+      // nothing happens when adding a file
+      // due to the input event not firing
+      // https://github.com/vuetifyjs/vuetify/issues/7941
+
+      delete input.data.on.input;
+      input.data.on.change = this.onInput;
+      return [this.genSelections(), input];
+    },
+    genPrependSlot() {
+      if (!this.prependIcon) return null;
+      const icon = this.genIcon('prepend', () => {
+        this.$refs.input.click();
+      });
+      return this.genSlot('prepend', 'outer', [icon]);
+    },
+    genSelectionText() {
+      const length = this.text.length;
+      if (length < 2) return this.text;
+      if (this.showSize && !this.counter) return [this.computedCounterValue];
+      return [this.$vuetify.lang.t(this.counterString, length)];
+    },
+    genSelections() {
+      const children = [];
+      if (this.isDirty && this.$scopedSlots.selection) {
+        this.internalArrayValue.forEach((file, index) => {
+          if (!this.$scopedSlots.selection) return;
+          children.push(this.$scopedSlots.selection({
+            text: this.text[index],
+            file,
+            index
+          }));
+        });
+      } else {
+        children.push(this.hasChips && this.isDirty ? this.genChips() : this.genSelectionText());
+      }
+      return this.$createElement('div', {
+        staticClass: 'v-file-input__text',
+        class: {
+          'v-file-input__text--placeholder': this.placeholder && !this.isDirty,
+          'v-file-input__text--chips': this.hasChips && !this.$scopedSlots.selection
+        }
+      }, children);
+    },
+    genTextFieldSlot() {
+      const node = _VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.genTextFieldSlot.call(this);
+      node.data.on = {
+        ...(node.data.on || {}),
+        click: e => {
+          // Clicking the label already delegates to input element, so we shouldn't click it twice
+          if (e.target && e.target.nodeName === 'LABEL') return;
+          this.$refs.input.click();
+        }
+      };
+      return node;
+    },
+    onInput(e) {
+      const files = [...(e.target.files || [])];
+      this.internalValue = this.multiple ? files : files[0]; // Set initialValue here otherwise isFocused
+      // watcher in VTextField will emit a change
+      // event whenever the component is blurred
+
+      this.initialValue = this.internalValue;
+    },
+    onKeyDown(e) {
+      this.$emit('keydown', e);
+    },
+    truncateText(str) {
+      if (str.length < Number(this.truncateLength)) return str;
+      const charsKeepOneSide = Math.floor((Number(this.truncateLength) - 1) / 2);
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`;
+    }
+  }
+}));
+
+/***/ }),
+
+/***/ 306:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_451f5e72_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(279);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_451f5e72_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_451f5e72_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_451f5e72_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_451f5e72_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5ec57b85_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(287);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5ec57b85_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5ec57b85_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5ec57b85_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_5ec57b85_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 298:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".grey[data-v-451f5e72],.text-h5[data-v-451f5e72]{font-family:\"Noto Sans Lao\"}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".grey[data-v-5ec57b85],.text-h5[data-v-5ec57b85]{font-family:\"Noto Sans Lao\"}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -1170,7 +1429,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 301:
+/***/ 311:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1187,7 +1446,7 @@ var VDialog = __webpack_require__(244);
 var VDivider = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VFileInput/VFileInput.js
-var VFileInput = __webpack_require__(308);
+var VFileInput = __webpack_require__(297);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
 var VForm = __webpack_require__(249);
@@ -1217,11 +1476,9 @@ var VSpacer = __webpack_require__(225);
 var VTextField = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(275);
+var VTextarea = __webpack_require__(277);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/product/index.vue?vue&type=template&id=451f5e72&scoped=true&
-
-
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/product/index.vue?vue&type=template&id=5ec57b85&scoped=true&
 
 
 
@@ -1242,7 +1499,9 @@ var VTextarea = __webpack_require__(275);
 
 
 
-var productvue_type_template_id_451f5e72_scoped_true_render = function render() {
+
+
+var productvue_type_template_id_5ec57b85_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -1513,10 +1772,10 @@ var productvue_type_template_id_451f5e72_scoped_true_render = function render() 
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/product/index.vue?vue&type=template&id=451f5e72&scoped=true&
+// CONCATENATED MODULE: ./pages/admin/product/index.vue?vue&type=template&id=5ec57b85&scoped=true&
 
 // EXTERNAL MODULE: ./pages/admin/product/mixins/ImagePreviewMixin.vue + 1 modules
-var ImagePreviewMixin = __webpack_require__(293);
+var ImagePreviewMixin = __webpack_require__(280);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/product/index.vue?vue&type=script&lang=js&
 
@@ -1559,15 +1818,8 @@ var ImagePreviewMixin = __webpack_require__(293);
           }
           console.log('Total: ' + totalSize);
           return totalSize < 2000000 || "ຂະຫນາດເກີນ";
-        }
-
-        // (files) =>
-        //   !files ||
-        //   !files.some((file) => file.size > 2_097_152) ||
-        //   'Avatar size should be less than 2 MB!',
-        ]
+        }]
       },
-
       category: [],
       formData: {
         pro_category: 1001,
@@ -1578,7 +1830,8 @@ var ImagePreviewMixin = __webpack_require__(293);
         pro_desc: '',
         pro_status: false,
         pro_outlet: 1,
-        pro_cost_price: 0
+        pro_cost_price: 0,
+        createdAt: null
       },
       outlet: []
     };
@@ -1681,7 +1934,7 @@ var componentNormalizer = __webpack_require__(18);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(297)
+  var style0 = __webpack_require__(306)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1690,11 +1943,11 @@ if (style0.__inject__) style0.__inject__(context)
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_productvue_type_script_lang_js_,
-  productvue_type_template_id_451f5e72_scoped_true_render,
+  productvue_type_template_id_5ec57b85_scoped_true_render,
   staticRenderFns,
   false,
   injectStyles,
-  "451f5e72",
+  "5ec57b85",
   "63287d12"
   
 )
@@ -1702,12 +1955,12 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var product = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {DialogClassicMessage: __webpack_require__(243).default,LoadingIndicator: __webpack_require__(228).default,DiaImage: __webpack_require__(274).default})
+installComponents(component, {DialogClassicMessage: __webpack_require__(243).default,LoadingIndicator: __webpack_require__(228).default,DiaImage: __webpack_require__(269).default})
 
 
 /***/ }),
 
-/***/ 302:
+/***/ 312:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1808,272 +2061,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 308:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VFileInput_VFileInput_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(284);
-/* harmony import */ var _src_components_VFileInput_VFileInput_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VFileInput_VFileInput_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _VTextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(231);
-/* harmony import */ var _VChip__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72);
-/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
-/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8);
-// Styles
- // Extensions
-
- // Components
-
- // Utilities
-
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = (_VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].extend({
-  name: 'v-file-input',
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
-  props: {
-    chips: Boolean,
-    clearable: {
-      type: Boolean,
-      default: true
-    },
-    counterSizeString: {
-      type: String,
-      default: '$vuetify.fileInput.counterSize'
-    },
-    counterString: {
-      type: String,
-      default: '$vuetify.fileInput.counter'
-    },
-    hideInput: Boolean,
-    multiple: Boolean,
-    placeholder: String,
-    prependIcon: {
-      type: String,
-      default: '$file'
-    },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
-    showSize: {
-      type: [Boolean, Number],
-      default: false,
-      validator: v => {
-        return typeof v === 'boolean' || [1000, 1024].includes(v);
-      }
-    },
-    smallChips: Boolean,
-    truncateLength: {
-      type: [Number, String],
-      default: 22
-    },
-    type: {
-      type: String,
-      default: 'file'
-    },
-    value: {
-      default: undefined,
-      validator: val => {
-        return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* wrapInArray */ "H"])(val).every(v => v != null && typeof v === 'object');
-      }
-    }
-  },
-  computed: {
-    classes() {
-      return {
-        ..._VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.computed.classes.call(this),
-        'v-file-input': true
-      };
-    },
-    computedCounterValue() {
-      const fileCount = this.multiple && this.lazyValue ? this.lazyValue.length : this.lazyValue instanceof File ? 1 : 0;
-      if (!this.showSize) return this.$vuetify.lang.t(this.counterString, fileCount);
-      const bytes = this.internalArrayValue.reduce((bytes, {
-        size = 0
-      }) => {
-        return bytes + size;
-      }, 0);
-      return this.$vuetify.lang.t(this.counterSizeString, fileCount, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* humanReadableFileSize */ "w"])(bytes, this.base === 1024));
-    },
-    internalArrayValue() {
-      return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* wrapInArray */ "H"])(this.internalValue);
-    },
-    internalValue: {
-      get() {
-        return this.lazyValue;
-      },
-      set(val) {
-        this.lazyValue = val;
-        this.$emit('change', this.lazyValue);
-      }
-    },
-    isDirty() {
-      return this.internalArrayValue.length > 0;
-    },
-    isLabelActive() {
-      return this.isDirty;
-    },
-    text() {
-      if (!this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel)) return [this.placeholder];
-      return this.internalArrayValue.map(file => {
-        const {
-          name = '',
-          size = 0
-        } = file;
-        const truncatedText = this.truncateText(name);
-        return !this.showSize ? truncatedText : `${truncatedText} (${Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* humanReadableFileSize */ "w"])(size, this.base === 1024)})`;
-      });
-    },
-    base() {
-      return typeof this.showSize !== 'boolean' ? this.showSize : undefined;
-    },
-    hasChips() {
-      return this.chips || this.smallChips;
-    }
-  },
-  watch: {
-    readonly: {
-      handler(v) {
-        if (v === true) Object(_util_console__WEBPACK_IMPORTED_MODULE_4__[/* consoleError */ "b"])('readonly is not supported on <v-file-input>', this);
-      },
-      immediate: true
-    },
-    value(v) {
-      const value = this.multiple ? v : v ? [v] : [];
-      if (!Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* deepEqual */ "k"])(value, this.$refs.input.files)) {
-        // When the input value is changed programatically, clear the
-        // internal input's value so that the `onInput` handler
-        // can be triggered again if the user re-selects the exact
-        // same file(s). Ideally, `input.files` should be
-        // manipulated directly but that property is readonly.
-        this.$refs.input.value = '';
-      }
-    }
-  },
-  methods: {
-    clearableCallback() {
-      this.internalValue = this.multiple ? [] : null;
-      this.$refs.input.value = '';
-    },
-    genChips() {
-      if (!this.isDirty) return [];
-      return this.text.map((text, index) => this.$createElement(_VChip__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"], {
-        props: {
-          small: this.smallChips
-        },
-        on: {
-          'click:close': () => {
-            const internalValue = this.internalValue;
-            internalValue.splice(index, 1);
-            this.internalValue = internalValue; // Trigger the watcher
-          }
-        }
-      }, [text]));
-    },
-    genControl() {
-      const render = _VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.genControl.call(this);
-      if (this.hideInput) {
-        render.data.style = Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_5__[/* mergeStyles */ "d"])(render.data.style, {
-          display: 'none'
-        });
-      }
-      return render;
-    },
-    genInput() {
-      const input = _VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.genInput.call(this);
-      input.data.attrs.multiple = this.multiple; // We should not be setting value
-      // programmatically on the input
-      // when it is using type="file"
-
-      delete input.data.domProps.value; // This solves an issue in Safari where
-      // nothing happens when adding a file
-      // due to the input event not firing
-      // https://github.com/vuetifyjs/vuetify/issues/7941
-
-      delete input.data.on.input;
-      input.data.on.change = this.onInput;
-      return [this.genSelections(), input];
-    },
-    genPrependSlot() {
-      if (!this.prependIcon) return null;
-      const icon = this.genIcon('prepend', () => {
-        this.$refs.input.click();
-      });
-      return this.genSlot('prepend', 'outer', [icon]);
-    },
-    genSelectionText() {
-      const length = this.text.length;
-      if (length < 2) return this.text;
-      if (this.showSize && !this.counter) return [this.computedCounterValue];
-      return [this.$vuetify.lang.t(this.counterString, length)];
-    },
-    genSelections() {
-      const children = [];
-      if (this.isDirty && this.$scopedSlots.selection) {
-        this.internalArrayValue.forEach((file, index) => {
-          if (!this.$scopedSlots.selection) return;
-          children.push(this.$scopedSlots.selection({
-            text: this.text[index],
-            file,
-            index
-          }));
-        });
-      } else {
-        children.push(this.hasChips && this.isDirty ? this.genChips() : this.genSelectionText());
-      }
-      return this.$createElement('div', {
-        staticClass: 'v-file-input__text',
-        class: {
-          'v-file-input__text--placeholder': this.placeholder && !this.isDirty,
-          'v-file-input__text--chips': this.hasChips && !this.$scopedSlots.selection
-        }
-      }, children);
-    },
-    genTextFieldSlot() {
-      const node = _VTextField__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.genTextFieldSlot.call(this);
-      node.data.on = {
-        ...(node.data.on || {}),
-        click: e => {
-          // Clicking the label already delegates to input element, so we shouldn't click it twice
-          if (e.target && e.target.nodeName === 'LABEL') return;
-          this.$refs.input.click();
-        }
-      };
-      return node;
-    },
-    onInput(e) {
-      const files = [...(e.target.files || [])];
-      this.internalValue = this.multiple ? files : files[0]; // Set initialValue here otherwise isFocused
-      // watcher in VTextField will emit a change
-      // event whenever the component is blurred
-
-      this.initialValue = this.internalValue;
-    },
-    onKeyDown(e) {
-      this.$emit('keydown', e);
-    },
-    truncateText(str) {
-      if (str.length < Number(this.truncateLength)) return str;
-      const charsKeepOneSide = Math.floor((Number(this.truncateLength) - 1) / 2);
-      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`;
-    }
-  }
-}));
-
-/***/ }),
-
-/***/ 323:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(356);
+var content = __webpack_require__(363);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2085,7 +2079,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 331:
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2105,7 +2099,7 @@ var VDialog = __webpack_require__(244);
 var VDivider = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VFileInput/VFileInput.js
-var VFileInput = __webpack_require__(308);
+var VFileInput = __webpack_require__(297);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
 var VForm = __webpack_require__(249);
@@ -2126,7 +2120,7 @@ var VListItemAvatar = __webpack_require__(68);
 var components_VList = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(252);
+var VRow = __webpack_require__(250);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -2138,7 +2132,7 @@ var VSpacer = __webpack_require__(225);
 var VTextField = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(275);
+var VTextarea = __webpack_require__(277);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/product/_id/index.vue?vue&type=template&id=5cc388e6&
 
@@ -2490,7 +2484,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/product/_id/index.vue?vue&type=template&id=5cc388e6&
 
 // EXTERNAL MODULE: ./pages/admin/product/index.vue + 4 modules
-var product = __webpack_require__(301);
+var product = __webpack_require__(311);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/product/_id/index.vue?vue&type=script&lang=js&
 // import ImagePreviewMixin from '../mixins/ImagePreviewMixin.vue'
@@ -2649,24 +2643,24 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var _id = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {DialogClassicMessage: __webpack_require__(243).default,LoadingIndicator: __webpack_require__(228).default,DiaImage: __webpack_require__(274).default,DiaConfirm: __webpack_require__(302).default})
+installComponents(component, {DialogClassicMessage: __webpack_require__(243).default,LoadingIndicator: __webpack_require__(228).default,DiaImage: __webpack_require__(269).default,DiaConfirm: __webpack_require__(312).default})
 
 
 /***/ }),
 
-/***/ 355:
+/***/ 362:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productInuse_vue_vue_type_style_index_0_id_7f96be92_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(323);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productInuse_vue_vue_type_style_index_0_id_7f96be92_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(332);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productInuse_vue_vue_type_style_index_0_id_7f96be92_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productInuse_vue_vue_type_style_index_0_id_7f96be92_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productInuse_vue_vue_type_style_index_0_id_7f96be92_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_productInuse_vue_vue_type_style_index_0_id_7f96be92_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 356:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2681,7 +2675,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 390:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2698,7 +2692,7 @@ var VDialog = __webpack_require__(244);
 var VDivider = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VFileInput/VFileInput.js
-var VFileInput = __webpack_require__(308);
+var VFileInput = __webpack_require__(297);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
 var VForm = __webpack_require__(249);
@@ -2728,7 +2722,7 @@ var VSpacer = __webpack_require__(225);
 var VTextField = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(275);
+var VTextarea = __webpack_require__(277);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/productInuse.vue?vue&type=template&id=7f96be92&scoped=true&
 
@@ -2976,10 +2970,10 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/productInuse.vue?vue&type=template&id=7f96be92&scoped=true&
 
 // EXTERNAL MODULE: ./pages/admin/product/mixins/ImagePreviewMixin.vue + 1 modules
-var ImagePreviewMixin = __webpack_require__(293);
+var ImagePreviewMixin = __webpack_require__(280);
 
 // EXTERNAL MODULE: ./pages/admin/product/_id/index.vue + 4 modules
-var _id = __webpack_require__(331);
+var _id = __webpack_require__(340);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/productInuse.vue?vue&type=script&lang=js&
 
@@ -3113,7 +3107,7 @@ var componentNormalizer = __webpack_require__(18);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(355)
+  var style0 = __webpack_require__(362)
 if (style0.__inject__) style0.__inject__(context)
 
 }

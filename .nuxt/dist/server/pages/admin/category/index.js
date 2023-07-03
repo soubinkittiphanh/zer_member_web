@@ -1,4 +1,4 @@
-exports.ids = [39,14,16];
+exports.ids = [41,14,16];
 exports.modules = {
 
 /***/ 209:
@@ -107,13 +107,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 234:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(235);
+var content = __webpack_require__(236);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -121,7 +121,7 @@ __webpack_require__(6).default("0f3c9f10", content, true)
 
 /***/ }),
 
-/***/ 235:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -136,13 +136,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 236:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(237);
+var content = __webpack_require__(238);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -150,7 +150,7 @@ __webpack_require__(6).default("7cf76dc8", content, true)
 
 /***/ }),
 
-/***/ 237:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -165,13 +165,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 238:
+/***/ 239:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(239);
+var content = __webpack_require__(240);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -179,7 +179,7 @@ __webpack_require__(6).default("6af7f350", content, true)
 
 /***/ }),
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -194,13 +194,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(241);
+var content = __webpack_require__(242);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -208,7 +208,7 @@ __webpack_require__(6).default("2f710ab8", content, true)
 
 /***/ }),
 
-/***/ 241:
+/***/ 242:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -617,6 +617,269 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export swalError */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return confirmSwal; });
+/* unused harmony export swalErrorNoTrace */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
+/* unused harmony export swalCancle */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
+/* unused harmony export customSwalSuccess */
+/* unused harmony export closeSwal */
+/* unused harmony export swalLoading */
+/* unused harmony export swalConfirm */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFormatNum; });
+/* unused harmony export swalSuccessBackToMenu */
+/* unused harmony export customSwalSuccessBackToMenu */
+/* unused harmony export swalWarning */
+/* unused harmony export swalWarningWithHTML */
+/* unused harmony export swalWarningTraceId */
+/* unused harmony export swalMsg */
+/* unused harmony export toastNotification */
+/* unused harmony export getFirstDayOfMonth */
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+
+const swalError = (swal, title, message, trandId) => {
+  swal({
+    icon: 'error',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: red"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: red"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const confirmSwal = (swal, icon, callbackFunc) => {
+  swal({
+    icon: icon,
+    title: 'ທ່ານແນ່ໃຈທີ່ຈະລົບບໍ່ ?',
+    text: 'ລາຍການນີ້ຈະຖືກລົບ ອອກຈາກຖານຂໍ້ມູນ!',
+    confirmButtonText: 'ຢືນຢັນ',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'ອອກ',
+    cancelButtonColor: '#3085d6'
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
+};
+const swalErrorNoTrace = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalError2 = (swal, title, message) => {
+  swal({
+    icon: 'error',
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalCancle = swal => {
+  swal({
+    icon: 'info',
+    title: 'ຍົກເລີກ!',
+    text: 'ການຍົເລີກສຳເລັດ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    text: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const customSwalSuccess = (swal, title, text) => {
+  swal({
+    icon: 'success',
+    title: title,
+    html: text,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const closeSwal = swal => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hideLoading();
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
+};
+const swalLoading = (swal, title, text, icon) => {
+  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    // html: html,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    onBeforeOpen: () => {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.showLoading();
+    }
+  });
+};
+const swalConfirm = (swal, title, text, icon, cancelButtonText, confirmButtonText) => {
+  return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+    title: title,
+    text: text,
+    icon: icon,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    showCancelButton: true,
+    cancelButtonText: cancelButtonText || 'ບໍ່',
+    confirmButtonText: confirmButtonText || 'ຕົກລົງ'
+  });
+};
+const getFormatNum = val => {
+  return new Intl.NumberFormat().format(val);
+};
+const swalSuccessBackToMenu = (swal, message, transt24Id, status) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: `<span>
+                <span style="font-weight: bold;">ເລກທຸລະກຳ:</span><span style="color: orangered"> ${transt24Id}</span><br/>
+                <span style="font-weight: bold;">ສະຖານະທຸລະກຳ:</spn>
+                <span style="color: ${status === 'AUTHORISE' ? 'green' : 'red'}"> ${message}</span>
+            </span>
+    `,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const customSwalSuccessBackToMenu = (swal, message) => {
+  return swal({
+    title: 'ແຈ້ງເຕືອນ',
+    icon: 'success',
+    html: message,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    confirmButtonText: 'ກັບສູ່ເມນູຕ່າງໆ'
+  });
+};
+const swalWarning = (swal, title, message) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const swalWarningWithHTML = (swal, title, message, amountA, amountB) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    text: message || 'ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ',
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">ຈຳນວນຊຳລະຈາກກົມໂຍທາ:</span><span style="color: darkorange"> ${amountA} ບໍ່ກົງກັບ</span> <br />
+                    <span style="font-weight: bold;">ຍອດຊຳລະຈາກກົມອາກອນ:</spn><span style="color: darkorange"> ${amountB}</span>
+                  </span>
+                `
+  });
+};
+const swalWarningTraceId = (swal, title, message, trandId) => {
+  swal({
+    icon: 'warning',
+    title: title,
+    // text: message || "ມີບາງຢ່່າງຜິດພາດ ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false,
+    html: `
+                  <span>
+                    <span style="font-weight: bold;">Trace ID:</span><span style="color: darkorange"> ${trandId}</span> <br />
+                    <span style="font-weight: bold;">Message:</spn><span style="color: darkorange"> ${message}</span>
+                  </span>
+                `
+  });
+};
+const swalMsg = (swal, icon, title, message) => {
+  swal({
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  });
+};
+const toastNotification = (swal, icon, title, message, callbackFunc) => {
+  swal({
+    toast: true,
+    position: 'bottom-end',
+    timerProgressBar: true,
+    icon: icon,
+    title: title,
+    text: message,
+    showConfirmButton: true,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  }).then(result => {
+    if (result.isConfirmed) {
+      callbackFunc();
+    }
+  });
+};
+const getFirstDayOfMonth = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  return firstDayOfMonth;
+};
+
+/***/ }),
+
+/***/ 247:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* unused harmony export VToolbarItems */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VToolbarTitle; });
 /* harmony import */ var _VToolbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
@@ -763,13 +1026,13 @@ const VToolbarItems = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__[/* creat
 
 /***/ }),
 
-/***/ 251:
+/***/ 253:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTable.sass
-var VDataTable = __webpack_require__(234);
+var VDataTable = __webpack_require__(235);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/helpers.js
 var helpers = __webpack_require__(0);
@@ -1147,7 +1410,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataIterator/VDataFooter.sass
-var VDataFooter = __webpack_require__(236);
+var VDataFooter = __webpack_require__(237);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(10);
@@ -1669,7 +1932,7 @@ var console = __webpack_require__(3);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VDataTableHeader.sass
-var VDataTableHeader = __webpack_require__(238);
+var VDataTableHeader = __webpack_require__(239);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VChip/index.js
 var VChip = __webpack_require__(85);
@@ -2100,7 +2363,7 @@ function needsTd(slot) {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDataTable/VSimpleTable.sass
-var VSimpleTable = __webpack_require__(240);
+var VSimpleTable = __webpack_require__(241);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VDataTable/VSimpleTable.js
 
@@ -2816,7 +3079,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 275:
+/***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2917,7 +3180,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 381:
+/***/ 388:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2937,7 +3200,7 @@ var components_VCard = __webpack_require__(40);
 var VContainer = __webpack_require__(224);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(251);
+var VDataTable = __webpack_require__(253);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(244);
@@ -2958,17 +3221,15 @@ var VSpacer = __webpack_require__(225);
 var VTextField = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(275);
+var VTextarea = __webpack_require__(277);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/VToolbar.js
 var VToolbar = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/index.js
-var components_VToolbar = __webpack_require__(245);
+var components_VToolbar = __webpack_require__(247);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/category/index.vue?vue&type=template&id=3fb1b42b&
-
-
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/category/index.vue?vue&type=template&id=1aa187c4&
 
 
 
@@ -2984,12 +3245,14 @@ var components_VToolbar = __webpack_require__(245);
 
 
 
-var categoryvue_type_template_id_3fb1b42b_render = function render() {
+
+
+var categoryvue_type_template_id_1aa187c4_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "text-center"
-  }, [_vm._ssrNode("<span class=\"text-h5\">Product category </span> "), _c(VDialog["a" /* default */], {
+  }, [_vm._ssrNode("<span class=\"text-h5\">ລາຍການ ປະເພດສິນຄ້າ</span> "), _c(VDialog["a" /* default */], {
     attrs: {
       "max-width": "600px"
     },
@@ -3002,7 +3265,7 @@ var categoryvue_type_template_id_3fb1b42b_render = function render() {
     }
   }, [_c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_c('span', {
     staticClass: "text-h5"
-  }, [_vm._v("Product category " + _vm._s(this.$store.getters.loggedInUser))])]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VContainer["a" /* default */], [_c(VForm["a" /* default */], {
+  }, [_vm._v("ຈັດການປະເພດສິນຄ້າ")])]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VContainer["a" /* default */], [_c(VForm["a" /* default */], {
     ref: "form",
     attrs: {
       "lazy-validation": ""
@@ -3031,7 +3294,7 @@ var categoryvue_type_template_id_3fb1b42b_render = function render() {
   }), _vm._v(" "), _c(VTextField["a" /* default */], {
     attrs: {
       "rules": _vm.rule['cat_name'],
-      "label": "ຊື່ປະເພດສິນຄ້າ",
+      "label": "ຊື່ປະເພດສິນຄ້າ*",
       "required": ""
     },
     model: {
@@ -3045,7 +3308,7 @@ var categoryvue_type_template_id_3fb1b42b_render = function render() {
     attrs: {
       "outlined": "",
       "name": "input-7-4",
-      "counter": "5",
+      "counter": "100",
       "label": "ໝາຍເຫດ"
     },
     model: {
@@ -3056,14 +3319,6 @@ var categoryvue_type_template_id_3fb1b42b_render = function render() {
       expression: "form_data.categ_desc"
     }
   })], 1)], 1)], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    staticClass: "mr-4",
-    attrs: {
-      "color": "error"
-    },
-    on: {
-      "click": _vm.reset
-    }
-  }, [_vm._v(" ລ້າງຂໍ້ມູນ ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
     attrs: {
       "color": "blue darken-1",
       "text": ""
@@ -3144,7 +3399,7 @@ var categoryvue_type_template_id_3fb1b42b_render = function render() {
           attrs: {
             "flat": ""
           }
-        }, [_c(components_VToolbar["a" /* VToolbarTitle */], [_vm._v("ປະເພດສິນຄ້າ: " + _vm._s(_vm.loadData.length))]), _vm._v(" "), _c(VDivider["a" /* default */], {
+        }, [_c(components_VToolbar["a" /* VToolbarTitle */], [_vm._v("ຈຳນວນ ປະເພດສິນຄ້າທັງຫມົດ: " + _vm._s(_vm.loadData.length))]), _vm._v(" "), _c(VDivider["a" /* default */], {
           staticClass: "mx-4",
           attrs: {
             "inset": "",
@@ -3206,9 +3461,13 @@ var categoryvue_type_template_id_3fb1b42b_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/category/index.vue?vue&type=template&id=3fb1b42b&
+// CONCATENATED MODULE: ./pages/admin/category/index.vue?vue&type=template&id=1aa187c4&
+
+// EXTERNAL MODULE: ./util/myUtil.js
+var myUtil = __webpack_require__(245);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/category/index.vue?vue&type=script&lang=js&
+
 /* harmony default export */ var categoryvue_type_script_lang_js_ = ({
   middleware: 'auths',
   data: () => ({
@@ -3228,7 +3487,8 @@ var staticRenderFns = [];
     form_data: {
       categ_id: '1XXXX',
       categ_name: null,
-      categ_desc: ''
+      categ_desc: '',
+      createdAt: null
     },
     headers: [{
       text: 'ລະຫັດຫມວດຫມູ່',
@@ -3259,6 +3519,16 @@ var staticRenderFns = [];
         return;
       }
       this.dialog = false;
+    },
+    isedit(val) {
+      if (!val) {
+        this.form_data = {
+          categ_id: '1XXXX',
+          categ_name: null,
+          categ_desc: '',
+          createdAt: null
+        };
+      }
     }
   },
   created() {
@@ -3277,34 +3547,35 @@ var staticRenderFns = [];
       this.$refs.form.resetValidation();
     },
     async submitDatas() {
-      this.isloading = true;
-      console.log('submitOut');
-      if (!this.$refs.form.validate()) {
+      if (!this.$refs.form.validate() || this.isloading) {
         this.isloading = false;
         return;
       }
-      console.log('submitIn');
-      const submitData = {
-        cat_id: this.form_data.categ_id,
-        cat_name: this.form_data.categ_name,
-        cat_desc: this.form_data.categ_desc
-      };
-      const urlpath = '/category_';
+      this.isloading = true;
+      const urlpath = '/api/category/';
       if (this.isedit) {
-        await this.$axios.put(urlpath + 'e', submitData).then(res => {
-          this.message = res.data;
+        await this.$axios.put(urlpath + 'update/' + this.form_data.categ_id, this.form_data).then(res => {
+          this.dialogForm = false;
+          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          // this.message = res.data
           // this.reset()
         }).catch(er => {
-          this.message = 'Error: ' + er;
+          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", er);
+          // this.message = 'Error: ' + er
         });
+
         this.isloading = false;
       } else {
-        await this.$axios.post(urlpath + 'i', submitData).then(res => {
-          this.message = res.data;
+        await this.$axios.post(urlpath + 'create', this.form_data).then(res => {
+          // this.message = res.data
+          this.dialogForm = false;
+          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           // this.reset()
         }).catch(er => {
-          this.message = 'Error: ' + er;
+          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", er);
+          // this.message = 'Error: ' + er
         });
+
         this.isloading = false;
       }
       this.fetchData();
@@ -3322,9 +3593,9 @@ var staticRenderFns = [];
             categ_function: el.categ_id
           };
         });
-        console.log('AFTER MAP: ' + this.loadData[0].categ_id);
       }).catch(er => {
-        console.log('Data: ' + er);
+        // console.log('Data: ' + er)
+        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", er);
       });
       this.isloading = false;
     },
@@ -3351,7 +3622,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_categoryvue_type_script_lang_js_,
-  categoryvue_type_template_id_3fb1b42b_render,
+  categoryvue_type_template_id_1aa187c4_render,
   staticRenderFns,
   false,
   null,

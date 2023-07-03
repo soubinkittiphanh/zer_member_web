@@ -525,9 +525,9 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 "use strict";
 /* unused harmony export swalError */
 /* unused harmony export swalErrorNoTrace */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return swalError2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
 /* unused harmony export swalCancle */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
 /* unused harmony export customSwalSuccess */
 /* unused harmony export closeSwal */
 /* unused harmony export swalLoading */
@@ -546,6 +546,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /* unused harmony export parseDate */
 /* unused harmony export mysqlDateToDateObject */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getFirstDayOfMonth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hostName; });
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -807,10 +808,16 @@ const getFirstDayOfMonth = () => {
   const mysqlDate = `${year}-${month}-${day}`;
   return mysqlDate;
 };
+const hostName = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
+  const baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net'; //PRODUCTION JACK42 API
+  return baseURL;
+};
 
 /***/ }),
 
-/***/ 338:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -841,7 +848,7 @@ var VSpacer = __webpack_require__(225);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(23);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=template&id=7ec7f8ba&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=template&id=7132c242&
 
 
 
@@ -853,7 +860,7 @@ var VTextField = __webpack_require__(23);
 
 
 
-var cardFormvue_type_template_id_7ec7f8ba_render = function render() {
+var cardFormvue_type_template_id_7132c242_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -927,7 +934,7 @@ var cardFormvue_type_template_id_7ec7f8ba_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=7ec7f8ba&
+// CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=7132c242&
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(257);
@@ -947,12 +954,16 @@ var common = __webpack_require__(257);
     isEdit: {
       type: Boolean,
       default: false
+    },
+    cost: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
       stockQty: 1,
-      stockCost: 0,
+      stockCost: this.cost,
       isSubmitting: false
     };
   },
@@ -978,12 +989,13 @@ var common = __webpack_require__(257);
         // return
         await this.$axios.post('/api/card/bulkCreate', stockData).then(res => {
           console.log(res.data);
-          Object(common["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(common["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           // this.fetchData() // UPDATE PRODUCT UI
           this.$emit('reload');
+          this.$emit('close-dialog');
         }).catch(error => {
           console.log(error);
-          Object(common["b" /* swalError2 */])(this.$swal, "Error", error.response.data);
+          Object(common["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
         });
         this.isSubmitting = false;
       }
@@ -1008,7 +1020,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   card_cardFormvue_type_script_lang_js_,
-  cardFormvue_type_template_id_7ec7f8ba_render,
+  cardFormvue_type_template_id_7132c242_render,
   staticRenderFns,
   false,
   injectStyles,

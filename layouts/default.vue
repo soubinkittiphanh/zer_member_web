@@ -99,7 +99,7 @@ export default {
           to: '/admin/rider',
         },
         {
-          icon: 'mdi-bike-fast',
+          icon: 'mdi-seal',
           title: 'Campaign manager',
           to: '/admin/campaign',
         },
@@ -109,18 +109,19 @@ export default {
           to: '/admin/customer',
         },
         {
-          icon: 'mdi-account',
+          // <i class="fas fa-money-check-edit-alt"></i>
+          icon: 'mdi-receipt-text-arrow-right-outline',
           title: 'ບັນຊີ ລາຍຈ່າຍ',
           to: '/admin/ap',
         },
         {
-          icon: 'mdi-account',
+          icon: 'mdi-receipt-text-arrow-left-outline',
           title: 'ບັນຊີ ລາຍຮັບ',
           to: '/admin/ar',
         },
         {
-          icon: 'mdi-account',
-          title: 'Procurement',
+          icon: 'mdi-truck-cargo-container',
+          title: 'ຈັດຊື້',
           to: '/admin/po',
         },
         // {

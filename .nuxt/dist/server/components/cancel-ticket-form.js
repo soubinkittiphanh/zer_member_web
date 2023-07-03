@@ -525,9 +525,9 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 "use strict";
 /* unused harmony export swalError */
 /* unused harmony export swalErrorNoTrace */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return swalError2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalError2; });
 /* unused harmony export swalCancle */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return swalSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return swalSuccess; });
 /* unused harmony export customSwalSuccess */
 /* unused harmony export closeSwal */
 /* unused harmony export swalLoading */
@@ -546,6 +546,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_9__[/* default *
 /* unused harmony export parseDate */
 /* unused harmony export mysqlDateToDateObject */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getFirstDayOfMonth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hostName; });
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(212);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -807,10 +808,16 @@ const getFirstDayOfMonth = () => {
   const mysqlDate = `${year}-${month}-${day}`;
   return mysqlDate;
 };
+const hostName = () => {
+  // Create a new Date object with the same year and month as the input date, but with day set to 1
+  //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
+  const baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net'; //PRODUCTION JACK42 API
+  return baseURL;
+};
 
 /***/ }),
 
-/***/ 299:
+/***/ 309:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1002,14 +1009,14 @@ var common = __webpack_require__(257);
         if (this.isEdit) {
           await this.$axios.put(`branch/update/${this.id}`, this.form).then(response => {
             if (response.status == 200) {
-              Object(common["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              Object(common["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
               // Reload data
               this.refreshData();
             } else {
-              Object(common["b" /* swalError2 */])(this.$swal, "Error", response.data);
+              Object(common["c" /* swalError2 */])(this.$swal, "Error", response.data);
             }
           }).catch(error => {
-            Object(common["b" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+            Object(common["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
           });
         } else {
           // orderId, status, userId, reason
@@ -1018,14 +1025,14 @@ var common = __webpack_require__(257);
           // return;
           await this.$axios.put("/api/changeOrderStatus", this.form).then(response => {
             if (response.status == 200) {
-              Object(common["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              Object(common["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
               // Reload data
               this.refreshData();
             } else {
-              Object(common["b" /* swalError2 */])(this.$swal, "Error", response.data);
+              Object(common["c" /* swalError2 */])(this.$swal, "Error", response.data);
             }
           }).catch(error => {
-            Object(common["b" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+            Object(common["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
           });
         }
       } else {
@@ -1041,7 +1048,7 @@ var common = __webpack_require__(257);
           // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
           this.form = response.data;
         }).catch(error => {
-          Object(common["b" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+          Object(common["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
         });
         this.isSubmitting = false;
       }
