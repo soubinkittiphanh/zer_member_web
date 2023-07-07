@@ -1,16 +1,5 @@
 <template>
-    <!-- <div>
-        <h1>Products</h1>
-        <v-container class="my-5">
-            <v-layout row wrap>
-                <v-flex xs12 sm6 md4 v-for="productItem in productList" :key="productItem.img_path">
-                    <product-card :productItem="productItem" />
-                </v-flex>
-            </v-layout>
-        </v-container>
 
-        <product-card></product-card >
-    </div> -->
     <div class="mx-3">
         <h2 class="mt-2 grey--text"> ສິນຄ້າຂາຍດີ</h2>
         <v-container fluid>
@@ -20,32 +9,12 @@
                 </v-col>
             </v-row>
         </v-container>
-        <!-- <carousel-3d>
-            <slide :index="0">
-                Slide 1 Content
-            </slide>
-            <slide :index="1">
-                Slide 2 Content
-            </slide>
-        </carousel-3d> -->
-        <!-- <carousel-3d :controls-visible="true" :clickable="false" :key="productList.length" :listData="productList"
-            :height="500">
-            <slide :index="i" :key="i" v-for="(pro, i) in this.productList">
-                <figure>
-                    <img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + pro.img_path" />
-                    <figcaption>
-                        <v-btn :to="`/product/${pro.id}`" text color="white"> {{ pro.pro_name }}</v-btn>
-                    </figcaption>
-                </figure>
-            </slide>
-        </carousel-3d> -->
-
     </div>
 </template>
 
 <script>
 // import { Carousel3d, Slide } from "vue-carousel-3d";
-// import { Carousel3d,Slide } from "vue-carousel-3d";
+import { generateColorShades } from "~/common";
 export default {
     //   middleware: 'auths',
     components: {

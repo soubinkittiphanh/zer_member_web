@@ -48,6 +48,7 @@
   
 <script>
 import { getFormatNum } from '~/util/myUtil'
+import { generateColorShades } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
 
@@ -109,6 +110,7 @@ export default {
             barSeriesForDailyStat: [{
                 data: []
             }],
+            //ກາບຍອດຂາຍແຕ່ລະມື ເປັນ ຮູບທຽນ
             barOptionsForDailyStat: {
                 colors: [],
                 chart: {
@@ -187,7 +189,9 @@ export default {
                 .then((res) => {
                     console.log("Data ", res.data[0]);
                     for (const iterator of res.data) {
-                        this.barOptionsForDailyStat.colors.push(this.getRandomColor)
+                        this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
+                        // let shadeColors = generateColorShades("#FFA500")
+                        // this.barOptionsForDailyStat.colors = shadeColors // ****** Shade style 
                         this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
                         this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)
                     }

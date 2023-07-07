@@ -287,7 +287,50 @@ export const getFirstDayOfMonth = () => {
 }
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
-   const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
-    // const  baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+  //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
+    const  baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+    // const  baseURL = 'https://nodejsclusters-124154-0.cloudclusters.net' // ***UAT*** JACK42 API
   return baseURL;
+}
+
+
+export const generateColorShades=(baseColor) =>{
+  // Convert the base color to an RGB array
+  let rgbBase = hexToRgb(baseColor);
+
+  // Calculate the step size for each shade
+  let step = Math.floor(255 / 4);
+
+  // Initialize an empty array to store the shades
+  let shades = [];
+
+  // Generate 5 shades, starting with the lightest
+  for (let i = 0; i < 5; i++) {
+    // Calculate the RGB values for this shade
+    let r = Math.max(0, rgbBase[0] - i * step);
+    let g = Math.max(0, rgbBase[1] - i * step);
+    let b = Math.max(0, rgbBase[2] - i * step);
+
+    // Convert the RGB values back to a hex color code and add it to the array
+    shades.push(rgbToHex(r, g, b));
+  }
+
+  return shades;
+}
+
+// Helper functions to convert between RGB and hex color codes
+function hexToRgb(hex) {
+  let r = parseInt(hex.substring(1, 3), 16);
+  let g = parseInt(hex.substring(3, 5), 16);
+  let b = parseInt(hex.substring(5, 7), 16);
+  return [r, g, b];
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function componentToHex(c) {
+  let hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex
 }

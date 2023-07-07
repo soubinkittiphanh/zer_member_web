@@ -68,14 +68,14 @@
   "OrderSumaryCard": {
     "description": "Auto imported from components/orderSumaryCard.vue"
   },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
   "CardCampaignCard": {
     "description": "Auto imported from components/card/campaignCard.vue"
   },
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
-  },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
   },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
@@ -91,6 +91,9 @@
   },
   "PoForm": {
     "description": "Auto imported from components/po/PoForm.vue"
+  },
+  "ProductItem": {
+    "description": "Auto imported from components/product/Item.vue"
   },
   "ProductForm": {
     "description": "Auto imported from components/product/ProductForm.vue"

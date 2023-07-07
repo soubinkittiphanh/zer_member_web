@@ -1,7 +1,7 @@
-exports.ids = [31];
+exports.ids = [32];
 exports.modules = {
 
-/***/ 418:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21,7 +21,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/Tutorial.vue?vue&type=template&id=6d877d3c&
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(18);
+var componentNormalizer = __webpack_require__(16);
 
 // CONCATENATED MODULE: ./components/Tutorial.vue
 
