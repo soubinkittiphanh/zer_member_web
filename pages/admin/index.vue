@@ -1,46 +1,89 @@
 
 <template>
-    <div>
+    <div class="container">
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
         <h1>Dash board</h1>
-        <v-card class="mb-3">
-            <v-card-text>
-                <v-layout row wrap>
-                    <v-row>
-                        <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[0]" :value="numberFormatter(series[0])"></card-on-top>
-                        </v-col>
-                        <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[1]" :value="numberFormatter(series[1])"></card-on-top>
-                        </v-col>
-                        <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[2]" :value="numberFormatter(series[2])"></card-on-top>
-                        </v-col>
-                        <v-col cols="3" sm="3">
-                            <card-on-top :title="options.labels[3]" :value="numberFormatter(series[3])"></card-on-top>
-                        </v-col>
+        <div class="mb-2 pa-0">
+            <!-- <v-card  >
+                <v-card-text class="m-0"> -->
+            <v-row class="p-0">
+                <v-col cols="6">
+                    <card-grouping>
+                        <template v-slot:slot1>
+                            <card-on-top :title="options.labels[0]" :value="numberFormatter(series[0])" color="#E6F7FF">
+                                <template v-slot:icon>
+                                    <v-icon color="#51A5EB">mdi-receipt-text</v-icon>
+                                </template>
+                            </card-on-top>
+                        </template>
+                        <template v-slot:slot2>
+                            <card-on-top :title="options.labels[1]" :value="numberFormatter(series[1])" color="#FEF0ED">
+                                <template v-slot:icon>
+                                    <v-icon color="#F7C3B8">mdi mdi-truck-cargo-container</v-icon>
+                                </template>
+                            </card-on-top>
+                        </template>
+                        <template v-slot:slot3>
+                            <card-on-top :title="options.labels[2]" :value="numberFormatter(series[2])" color="#E7F1F2">
+                                <template v-slot:icon>
+                                    <v-icon color="#518F8A">mdi mdi-currency-usd</v-icon>
+                                </template>
+                            </card-on-top>
+                        </template>
+                        <template v-slot:slot4>
+                            <card-on-top :title="options.labels[3]" :value="numberFormatter(series[3])" color="#FBE8EA">
+                                <template v-slot:icon>
+                                    <v-icon color="#C37D85">mdi mdi-file-document-refresh</v-icon>
+                                </template>
 
-                    </v-row>
-                </v-layout>
-            </v-card-text>
-        </v-card>
-        <v-card class="mb-3">
-            <v-card-text>
-                <v-layout row wrap>
-                    <v-row>
-                        <v-col cols="4" sm="6">
-                            <apexchart :options="barOptions" :series="barSeries"></apexchart>
-                        </v-col>
+                            </card-on-top>
+                        </template>
+                    </card-grouping>
+                </v-col>
+                <v-col cols="3">
+                    <v-card>
+                        <v-card-title>ສິນຄ້າຂາດສະຕັອກ</v-card-title>
+                        <v-card-text>
+                            <v-chip v-for="item in minProductList" :key="item.pro_id" class="ma-2" color="red"  text-color="white">
+                                {{ item.pro_name }} - 
+                                <span class="mdi mdi-tag-multiple-outline"></span>
+                                <v-icon start icon="mdi-label" style="font-weight: bold;"> {{ item.pro_card_count }}</v-icon>
+                                
+                                
+                                
+                            </v-chip>
+                        </v-card-text>
+                    </v-card>
+                    <!-- <v-card class="mx-auto" max-width="300">
+                        <v-list :items="items" item-title="name" item-value="id"></v-list>
+                    </v-card> -->
+                    <!-- <v-card class="mx-auto" max-width="300">
+                        <v-list :items="minProductList" item-title="pro_name" item-value="pro_id"></v-list>
+                    </v-card> -->
+                </v-col>
+                <v-col cols="3">
 
-                        <v-col cols="4" sm="6" v-if="dailyState">
-                            <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
-                        </v-col>
-                    </v-row>
-                </v-layout>
-            </v-card-text>
-        </v-card>
+                </v-col>
+            </v-row>
+            <!-- </v-card-text>
+            </v-card> -->
+        </div>
+        <div class="mb-1">
+            <v-row>
+                <v-col cols="4" md="6" sm="12" xl="12">
+                    <v-card>
+                        <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart>
+                    </v-card>
+                </v-col>
+                <v-col cols="8" md="6" sm="12" xl="12" v-if="dailyState">
+                    <v-card>
+                        <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </div>
         <campaignCard />
 
     </div>
@@ -50,15 +93,35 @@
 import { getFormatNum } from '~/util/myUtil'
 import { generateColorShades } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
+import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
 
 export default {
-    components: { CardOnTop, CampaignCard },
+    components: { CardOnTop, CampaignCard, CardGrouping },
     data() {
         return {
             saleValue: 0,
+            // minProductList: [{
+            //     pro_name:'',
+            //     pro_id:1
+            // }],
+            items: [
+                {
+                    name: 'Item #1',
+                    id: 1,
+                },
+                {
+                    name: 'Item #2',
+                    id: 2,
+                },
+                {
+                    name: 'Item #3',
+                    id: 3,
+                },
+            ],
+            minProductList: [],
             isloading: false,
-            dailyState:false,
+            dailyState: false,
             series: [0, 0],
             options: {
                 chart: {
@@ -90,8 +153,13 @@ export default {
                     colors: ['#FF4560', '#775DD0'],
                 },
             },
-            barSeries: [],
-            barOptions: {
+
+            pieChartOption: {
+                // plotOptions: {
+                //     pie: {
+                //         customScale: 0.9
+                //     }
+                // },
                 title: {
                     text: 'ສິນຄ້າຂາຍດີ',
                     align: 'center',
@@ -101,6 +169,14 @@ export default {
                 },
                 labels: [
                 ],
+
+                barSeries: [],
+                theme: {
+                    monochrome: {
+                        enabled: true,
+                        color: '#01532B',
+                    }
+                },
                 chart: {
                     type: 'pie',
                     width: '100%',
@@ -149,6 +225,7 @@ export default {
     async created() {
         await this.loadDailySaleStatistic()
         this.init();
+        await this.minStockProduct()
     }, async mounted() {
         await this.loadTopSale()
         await this.paymentGroup()
@@ -156,6 +233,38 @@ export default {
     methods: {
         numberFormatter(value) {
             return getFormatNum(value)
+        },
+        async minStockProduct() {
+            this.isloading = true
+            await this.$axios
+                .get('product_f')
+                .then((res) => {
+                    this.minProductList = []
+                    for (const iterator of res.data) {
+                        if (iterator['minStock'] > iterator['card_count']) {
+                            this.minProductList.push({
+                                pro_id: iterator.pro_id,
+                                pro_name: iterator.pro_name,
+                                pro_price: iterator.pro_price,
+                                pro_desc: iterator.pro_desc,
+                                pro_status: iterator.pro_status,
+                                pro_category: iterator.pro_category,
+                                pro_category_desc: iterator.pro_category + ' - ' + iterator.categ_name,
+                                pro_card_count: iterator.card_count,
+                                pro_cost_price: iterator.cost_price,
+                                pro_outlet: iterator.outlet,
+                                pro_outlet_name: iterator.outlet_name,
+                                minStock: iterator.minStock,
+                                function: iterator.pro_id,
+                            })
+                        }
+                    }
+                })
+                .catch((er) => {
+                    this.message = er
+                    console.log('Error: ' + er)
+                })
+            this.isloading = false
         },
 
         getRandomColor() {
@@ -173,8 +282,8 @@ export default {
                 .then((res) => {
                     console.log("Data ", res.data[0]);
                     res.data.map((el) => {
-                        this.barSeries.push(+el.sale_count)
-                        this.barOptions.labels.push(el.pro_name + ' ' + getFormatNum(el.total_sale))
+                        this.pieChartOption.barSeries.push(+el.sale_count)
+                        this.pieChartOption.labels.push(el.categ_name + ' ' + getFormatNum(el.total_sale))
                     })
 
                 }).catch(err => {
@@ -189,16 +298,16 @@ export default {
                 .then((res) => {
                     console.log("Data ", res.data[0]);
                     for (const iterator of res.data) {
-                        this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
-                        // let shadeColors = generateColorShades("#FFA500")
-                        // this.barOptionsForDailyStat.colors = shadeColors // ****** Shade style 
+                        // this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
+                        this.barOptionsForDailyStat.colors.push('#01532B') // ******* Original
+
                         this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
                         this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)
                     }
                 }).catch(err => {
                     console.log('error', err);
                 });
-                this.dailyState=true
+            this.dailyState = true
             this.isloading = false
         },
         async paymentGroup() {

@@ -9,9 +9,8 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <card-form :key="stockFormKey" :product-id="selectedProductId"
-        :cost="selectedProductCost" :product-name="selectedProductName" @close-dialog="isstock = false"
-        @reload="rebuildStock"></card-form>
+      <card-form :key="stockFormKey" :product-id="selectedProductId" :cost="selectedProductCost"
+        :product-name="selectedProductName" @close-dialog="isstock = false" @reload="rebuildStock"></card-form>
     </v-dialog>
     <v-dialog v-model="editProductForm" max-width="1200px">
       <product-form :key="productFormKey" @close-dialog="editProductForm = false" :header-id="selectedProductId"
@@ -69,12 +68,32 @@
             ເບິ່ງສະຕັອກ
           </v-btn>
         </template>
+        <template v-slot:[`item.pro_cost_price`]="{ item }">
+          {{ formatNumber(item.pro_cost_price) }}
+
+        </template>
+        <template v-slot:[`item.pro_price`]="{ item }">
+          {{ formatNumber(item.pro_price) }}
+
+        </template>
+        <template v-slot:[`item.pro_card_count`]="{ item }">
+          <v-chip v-if="item['pro_card_count'] < item['minStock']" class="ma-2" color="red" text-color="white">
+            <v-icon start icon="mdi-label" style="font-weight: bold;"> {{ item.pro_card_count }}</v-icon>
+          </v-chip>
+          <p v-else>{{ item.pro_card_count }}</p>
+
+        </template>
+        <template v-slot:[`item.minStock`]="{ item }">
+          {{ formatNumber(item.minStock) }}
+
+        </template>
       </v-data-table>
     </v-card>
   </div>
 </template>
 <script>
 import ProductForm from '~/components/product/ProductForm.vue'
+import { getFormatNum } from '~/common'
 import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
@@ -112,9 +131,10 @@ export default {
         { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
         { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },
         { text: 'ລາຄາ', align: 'center', value: 'pro_price' },
-        { text: 'ສະຖານະ', align: 'center', value: 'pro_status' },
+        // { text: 'ສະຖານະ', align: 'center', value: 'pro_status' },
         { text: 'Stock', align: 'center', value: 'pro_card_count' },
         { text: 'cost', align: 'center', value: 'pro_cost_price' },
+        { text: 'minStock', align: 'center', value: 'minStock' },
         {
           text: 'ຟັງຊັ່ນ',
           align: 'center',
@@ -139,6 +159,9 @@ export default {
   },
 
   methods: {
+    formatNumber(value) {
+      return getFormatNum(value)
+    },
     triggerCardForm(payload) {
       this.stockFormKey += 1;
       this.selectedProductId = payload.pro_id;
@@ -165,6 +188,7 @@ export default {
               pro_cost_price: el.cost_price,
               pro_outlet: el.outlet,
               pro_outlet_name: el.outlet_name,
+              minStock: el.minStock,
               function: el.pro_id,
             }
           })

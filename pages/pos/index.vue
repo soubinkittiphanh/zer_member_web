@@ -1,99 +1,127 @@
 
 <template>
-    <v-app>
-        <v-main>
-            <v-container class="fill-height" fluid>
-                <v-dialog v-model="isloading" hide-overlay persistent width="300">
-                    <loading-indicator> </loading-indicator>
-                </v-dialog>
-                <v-row justify="center">
-                    <v-col cols="8" class="text-center">
-                        <v-card>
-                            <div class="text-center">
-                                <v-col cols="12">
-                                    <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line
-                                        hide-detailsx />
-                                </v-col>
-                            </div>
-                            <v-data-table v-if="productList" :headers="headers" :search="search" :items="productList"
-                                :items-per-page="pageLine">
-                                <template v-slot:top>
-                                    <v-toolbar flat>
-                                        <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ productList.length }}</v-toolbar-title>
-                                        <v-divider class="mx-4" inset vertical></v-divider>
-                                        <v-spacer></v-spacer>
-                                    </v-toolbar>
-                                </template>
-                                <template v-slot:[`item.function`]="{ item }">
-                                    <v-btn rounded fab @click="addProduct(item)">
-                                        <v-icon>mdi-cash-register</v-icon>
-                                    </v-btn>
-                                </template>
-                                <template v-slot:[`item.img_path`]="{ item }">
-                                    <v-avatar>
-                                        <!-- <v-img :src="`${host}${item.img_path}`" alt="John"></v-img> -->
-                                        <v-img :src="`${host}/${item.img_path}`" alt="John"></v-img>
-                                        <!-- <v-img src="https://cdn.vuetifyjs.com/images/john.jp" alt="John"></v-img> -->
-                                    </v-avatar>
-                                </template>
-                            </v-data-table>
+    <div>
+
+
+        <v-dialog v-model="isloading" hide-overlay persistent width="300">
+            <loading-indicator> </loading-indicator>
+        </v-dialog>
+        <v-row>
+            {{ categoryList.length }}
+            <v-col cols="12">
+
+                <v-card>
+                    <v-tabs v-model="tab" color="deep-purple-accent-4" align-tabs="center">
+                        <v-tab v-for="item in categoryList" :key="item.categ_id" :value="item.categ_id">{{ item.categ_name }}</v-tab>
+                        <!-- <v-tab :value="2">City</v-tab>
+                        <v-tab :value="3">Abstract</v-tab> -->
+                    </v-tabs>
+                    <v-window v-model="tab">
+                        <v-window-item v-for="n in 3" :key="n" :value="n">
+                            <v-container fluid>
+                                <v-row>
+                                    <v-card>
+                    <div class="text-center">
+                        <v-col cols="12">
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line
+                                hide-detailsx />
+                        </v-col>
+                    </div>
+                    <v-data-table v-if="productList" :headers="headers" :search="search" :items="productList"
+                        :items-per-page="pageLine">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ productList.length }}</v-toolbar-title>
+                                <v-divider class="mx-4" inset vertical></v-divider>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.function`]="{ item }">
+                            <v-btn rounded fab @click="addProduct(item)">
+                                <v-icon>mdi-cash-register</v-icon>
+                            </v-btn>
+                        </template>
+                        <template v-slot:[`item.img_path`]="{ item }">
+                            <v-avatar>
+                                <!-- <v-img :src="`${host}${item.img_path}`" alt="John"></v-img> -->
+                                <v-img :src="`${host}/${item.img_path}`" alt="John"></v-img>
+                                <!-- <v-img src="https://cdn.vuetifyjs.com/images/john.jp" alt="John"></v-img> -->
+                            </v-avatar>
+                        </template>
+                    </v-data-table>
+                </v-card>
+                                </v-row>
+                            </v-container>
+                        </v-window-item>
+                    </v-window>
+                </v-card>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="4">
+                <!-- <v-card class="mx-auto" max-width="300">
+                    <v-list :items="myCategory"></v-list>
+                </v-card> -->
+
+            </v-col>
+            <v-col cols="8" class="text-center">
+                <v-card>
+                    <div class="text-center">
+                        <v-col cols="12">
+                            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line
+                                hide-detailsx />
+                        </v-col>
+                    </div>
+                    <v-data-table v-if="productList" :headers="headers" :search="search" :items="productList"
+                        :items-per-page="pageLine">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ productList.length }}</v-toolbar-title>
+                                <v-divider class="mx-4" inset vertical></v-divider>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.function`]="{ item }">
+                            <v-btn rounded fab @click="addProduct(item)">
+                                <v-icon>mdi-cash-register</v-icon>
+                            </v-btn>
+                        </template>
+                        <template v-slot:[`item.img_path`]="{ item }">
+                            <v-avatar>
+                                <!-- <v-img :src="`${host}${item.img_path}`" alt="John"></v-img> -->
+                                <v-img :src="`${host}/${item.img_path}`" alt="John"></v-img>
+                                <!-- <v-img src="https://cdn.vuetifyjs.com/images/john.jp" alt="John"></v-img> -->
+                            </v-avatar>
+                        </template>
+                    </v-data-table>
+                </v-card>
+            </v-col>
+            <!-- <v-col cols="3" class="text-center">
+                <v-row dense>
+                    <v-col v-for="item in productSelectedList" :key="item.pro_id" cols="12">
+                        <v-card theme="dark">
+                            <v-card-text class="text-right">
+                                {{ item.pro_name }} X {{ item.qty }} {{ formatNumber(item.qty * item.pro_price) }}
+                            </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col cols="4" class="text-center">
-                        <v-row dense>
-                            <v-col v-for="item in productSelectedList" :key="item.pro_id" cols="12">
-                                <v-card theme="dark">
-                                    <v-card-text class="text-right">
-                                        {{ item.pro_name }} X {{ item.qty }} {{ formatNumber(item.qty * item.pro_price) }}
-                                    </v-card-text>
-                                </v-card>
-                            </v-col>
-                        </v-row>
-                    </v-col>
                 </v-row>
-            </v-container>
-        </v-main>
-    </v-app>
+            </v-col> -->
+        </v-row>
+    </div>
 </template>
 <script>
 import { hostName, getFormatNum } from '~/common/index'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
+// import CategoryList from '~/components/pos/CateogoryList.vue'
 export default {
     layout: "home",
+    // components: {
+    //     CategoryList
+    // },
     data() {
         return {
-            items: [
-                {
-                    name: 'Item 1',
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                    image: 'https://picsum.photos/300/200?random=1'
-                },
-                {
-                    name: 'Item 2',
-                    description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    image: 'https://picsum.photos/300/200?random=2'
-                },
-                {
-                    name: 'Item 3',
-                    description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-                    image: 'https://picsum.photos300/200?random=3'
-                },
-                {
-                    name: 'Item 4',
-                    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.',
-                    image: 'https://picsum.photos/300/?random=4'
-                },
-                {
-                    name: 'Item 5',
-                    description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.',
-                    image: 'httpspicsum.photos/300/200?random=5'
-                },
-                {
-                    name: 'Item 6',
-                    description: 'Mollit anim id est laborum.',
-                    image: 'https://picsum.photos/300/200?random=6'
-                }
-            ],
+            tab: null,
             productSelectedList: [],
             isloading: false,
             productList: [],
@@ -135,6 +163,7 @@ export default {
     },
     async mounted() {
         await this.fetchData()
+        await this.loadCategory()
     },
     methods: {
         formatNumber(val) {
@@ -184,11 +213,13 @@ export default {
         },
         async loadCategory() {
             this.isloading = true;
+            this.categoryList =[]
             await this.$axios
                 .get('/category_f')
                 .then((res) => {
                     console.log('Data: ' + res.data)
                     for (const iterator of res.data) {
+                        console.log("CATEGOR",iterator);
                         this.categoryList.push(iterator);
                     }
                 })

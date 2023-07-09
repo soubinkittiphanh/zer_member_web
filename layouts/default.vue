@@ -1,44 +1,24 @@
 <template>
   <v-app light>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      color="#01532B"
-      
-      app
-    >
-      <v-list >
-        
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-       
-        >
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed color="#01532B" app>
+      <v-list>
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
             <v-icon color="white">{{ item.icon }}</v-icon>
           </v-list-item-action>
-          <v-list-item-content >
-            <v-list-item-title v-text="item.title" :style="{ color: 'white' }"/>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" :style="{ color: 'white' }" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <!-- <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-  
-    </v-app-bar> -->
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1  user: {{ user.name }} id: {{ user.id }} </span>
+      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1 user: {{ user.name }} id: {{ user.id }} </span>
     </v-footer>
   </v-app>
 </template>
@@ -62,17 +42,17 @@ export default {
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
         },
-        {
-          icon: 'mdi-barcode-scan',
-          title: 'ຈັດການສິນຄ້າ',
-          to: '/admin/product',
-        },
+
         {
           icon: 'mdi-barcode',
           title: 'ລາຍການສິນຄ້າ',
           to: '/admin/product/productlist',
         },
-   
+        {
+          icon: 'mdi-arrow-bottom-right',
+          title: 'ສິນຄ້າໃກ້ໝົດ',
+          to: '/admin/minstock',
+        },
         {
           icon: 'mdi-cart-check',
           title: 'ລາຍການບິນຂາຍ',
@@ -181,9 +161,9 @@ export default {
       title: 'Vuetify.js',
     }
   },
-  computed:{
-    user(){
-      return  this.$auth.user||''
+  computed: {
+    user() {
+      return this.$auth.user || ''
     }
   }
 }

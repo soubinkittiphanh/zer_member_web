@@ -21,6 +21,7 @@ const _5d7d59e6 = () => interopDefault(import('../pages/admin/customer_request/i
 const _300d3e47 = () => interopDefault(import('../pages/admin/login/index.vue' /* webpackChunkName: "pages/admin/login/index" */))
 const _3f9e2182 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
 const _28458292 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
+const _1d174c3c = () => interopDefault(import('../pages/admin/minstock/index.vue' /* webpackChunkName: "pages/admin/minstock/index" */))
 const _4f34b91d = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
 const _23f9fb92 = () => interopDefault(import('../pages/admin/po/index.vue' /* webpackChunkName: "pages/admin/po/index" */))
 const _57be90e6 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
@@ -121,6 +122,10 @@ export const routerOptions = {
     path: "/admin/member",
     component: _28458292,
     name: "admin-member"
+  }, {
+    path: "/admin/minstock",
+    component: _1d174c3c,
+    name: "admin-minstock"
   }, {
     path: "/admin/orders",
     component: _4f34b91d,

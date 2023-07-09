@@ -55,9 +55,14 @@
                                     prepend-icon="mdi-camera" label="ຮູບພາບຫລາຍພາບ" @change="onFilesChange"></v-file-input>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="formData.minStock" :counter="10" type="number"
+                                    :rules="rules.minRule" label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
                                 <v-textarea outlined name="input-7-4" counter="100" label="ຄຳອະທິບາຍ" value="abc"
                                     v-model="formData.pro_desc"></v-textarea>
                             </v-col>
+
                         </v-row>
                         <div>
                             <v-card class="pa-md-6 mx-lg-auto" v-for="(img, idx) in formData.pro_image" :key="idx">
@@ -164,8 +169,13 @@ export default {
                 ],
                 priceRule: [
                     // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
-                    (v) => +v >= 0 || 'ກະລຸນ ໃສ່ລາຄາ > 0',
-                    (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ລາຄາ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+                    (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວນ > 0',
+                    (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+                ],
+                minRule: [
+                    // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
+                    // (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວ > 0',
+                    (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
                 ],
                 costPrice: [
                     // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາຕົ້ນທຶນ',
@@ -211,6 +221,7 @@ export default {
                 pro_status: false,
                 pro_outlet: 1,
                 pro_cost_price: 0,
+                minStock: 0,
             },
             outlet: [],
             isLoading: false,
@@ -220,7 +231,7 @@ export default {
             pro_id: null,
             dia_confirm: false,
             tempImgId: null,
-            formData: {}
+            // formData: {}
         }
     },
     methods: {
@@ -306,6 +317,7 @@ export default {
                 .then((res) => {
                     console.log('Product ID ' + res.data)
                     const el = res.data[0]
+                    console.log("===> Min stock",el.minStock);
                     const image =
                         res.data[0].img_name == null
                             ? []
@@ -325,6 +337,7 @@ export default {
                         pro_retail_price: el.retail_cost_percent,
                         pro_cost_price: el.cost_price,
                         outlet: el.outlet,
+                        minStock: el.minStock,
                         pro_image: image,
                     }
                     console.log('IMAGE COUNT: ' + this.formData.pro_image.length)

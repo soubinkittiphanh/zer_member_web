@@ -1,25 +1,34 @@
 <template>
   <v-app>
-    <v-main>
-      <v-container class="fill-height" fluid>
+    <!-- <v-main> -->
+      <v-container class="fill-height ma-0" fluid>
         <v-dialog v-model="isLoading" hide-overlay persistent width="300">
           <loading-indicator> </loading-indicator>
         </v-dialog>
+        <v-row>
+          <v-col cols="12">
+            <h1 class="text-center" style="color: #01532B;">DCOMMERCE </h1>
+            <h2 class="text-center" style="color: #01532B;">ຍິນດີຕ້ອນຮັບ ເຂົ້າສູ່ລະບົບການຂາຍ </h2>
+          </v-col>
+        </v-row>
         <v-row align="center" justify="center" dense>
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card class="elevation-1">
               <notification v-if="errorMessage" :message="errorMessage" />
               <!-- <p>{{ this.$store.getters.loggedInUser.name }}</p> -->
+              <v-card-title class="my-text-center">
+                ເຂົ້າສູ່ລະບົບ
+              </v-card-title>
               <v-card-text>
                 <v-form>
                   <!-- <font-awesome-icon icon="coffee" /> -->
                   <v-text-field v-model="login.mem_id" label="ກະລຸນາ ໃສ່ໄອດີ" name="email"
-                    prepend-inner-icon="mdi-account-tie-hat" class="rounded-10" outlined>
+                    prepend-inner-icon="mdi-account-tie-hat" class="rounded-10 my-text-center" outlined>
                   </v-text-field>
-                  <v-text-field v-model="login.mem_pwd" label="ລະຫັດຜ່ານ" type="password" name="password"
-                    prepend-inner-icon="mdi-lock" class="rounded-10" outlined></v-text-field>
-                  <v-btn class="rounded-0" color="primary" x-large block dark @click.prevent="userLogin" type="submit">
-                    login
+                  <v-text-field  v-model="login.mem_pwd" label="ລະຫັດຜ່ານ" type="password" name="password"
+                    prepend-inner-icon="mdi-lock" class="rounded-10 my-text-center" outlined></v-text-field>
+                  <v-btn class="rounded-0 my-text-center" color="#01532B" x-large block dark @click.prevent="userLogin" type="submit">
+                    ເຂົ້າສູ່ລະບົບ
                     <v-icon> mdi mdi-login</v-icon>
                   </v-btn>
                 </v-form>
@@ -28,7 +37,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-main>
+    <!-- </v-main> -->
   </v-app>
 </template>
 <script>
@@ -140,3 +149,19 @@ export default {
   },
 }
 </script>
+<style scoped>
+h2 {
+  font-family: 'noto sans lao';
+  text-align: center;
+}
+
+.my-text-center {
+  font-family: 'noto sans lao';
+  text-align: center;
+}
+
+/* *:not(h1) { */
+/* CSS styles here */
+/* font-family: 'noto sans lao'; */
+/* } */
+</style>

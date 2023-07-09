@@ -34,7 +34,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-      // { src: '~/plugins/chart.js', ssr: false },
+  // { src: '~/plugins/chart.js', ssr: false },
   plugins: [
     { src: '~/plugins/vue-sweetalert2', ssr: false },
     {
@@ -70,6 +70,7 @@ export default {
     baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'// UAT API
     // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
     // baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+    // baseURL: 'http://localhost:8080',
     // baseURL: 'http://localhost:8080',
     // credentials: true,
     // headers: {

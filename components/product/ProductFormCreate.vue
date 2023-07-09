@@ -58,9 +58,14 @@
                 @change="onFilesChange"></v-file-input>
             </v-col>
             <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="formData.minStock" :counter="10" type="number" :rules="rules.minRule"
+                label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
               <v-textarea outlined name="input-7-4" counter="100" label="ຄຳອະທິບາຍ" value="abc"
                 v-model="formData.pro_desc"></v-textarea>
             </v-col>
+
 
 
           </v-row>
@@ -141,16 +146,16 @@
             ບັນທຶກ
           </v-btn> -->
         </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
-            Close
-          </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="uploadFiles">
-            Save
-          </v-btn>
-        </v-card-actions>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
+          Close
+        </v-btn>
+        <v-btn color="blue-darken-1" variant="text" @click="uploadFiles">
+          Save
+        </v-btn>
+      </v-card-actions>
     </v-card>
     <nuxt-child />
   </div>
@@ -180,8 +185,13 @@ export default {
         ],
         priceRule: [
           // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
-          (v) => +v >= 0 || 'ກະລຸນ ໃສ່ລາຄາ > 0',
-          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ລາຄາ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+          (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວ > 0',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+        ],
+        minRule: [
+          // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
+          // (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວ > 0',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
         ],
         costPrice: [
           // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາຕົ້ນທຶນ',
@@ -223,7 +233,8 @@ export default {
         pro_status: false,
         pro_outlet: 1,
         pro_cost_price: 0,
-        createdAt: null
+        createdAt: null,
+        minStock: 0,
       },
       outlet: [],
     }
