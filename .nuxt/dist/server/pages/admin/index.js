@@ -3925,7 +3925,7 @@ var VIcon = __webpack_require__(38);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(254);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/index.vue?vue&type=template&id=1d6aba90&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/index.vue?vue&type=template&id=3438be7c&
 
 
 
@@ -3935,7 +3935,7 @@ var VRow = __webpack_require__(254);
 
 
 
-var adminvue_type_template_id_1d6aba90_render = function render() {
+var adminvue_type_template_id_3438be7c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -4057,7 +4057,13 @@ var adminvue_type_template_id_1d6aba90_render = function render() {
     attrs: {
       "cols": "3"
     }
-  }, [_c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_vm._v("ສິນຄ້າຂາດສະຕັອກ")]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], _vm._l(_vm.minProductList, function (item) {
+  }, [_c(VCard["a" /* default */], {
+    on: {
+      "click": function ($event) {
+        return _vm.$router.push('/admin/minstock');
+      }
+    }
+  }, [_c(components_VCard["d" /* VCardTitle */], [_vm._v("ສິນຄ້າຂາດສະຕັອກ")]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], _vm._l(_vm.minProductList, function (item) {
     return _c(VChip["a" /* default */], {
       key: item.pro_id,
       staticClass: "ma-2",
@@ -4108,7 +4114,7 @@ var adminvue_type_template_id_1d6aba90_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/index.vue?vue&type=template&id=1d6aba90&
+// CONCATENATED MODULE: ./pages/admin/index.vue?vue&type=template&id=3438be7c&
 
 // EXTERNAL MODULE: ./util/myUtil.js
 var myUtil = __webpack_require__(248);
@@ -4381,7 +4387,7 @@ var componentNormalizer = __webpack_require__(16);
 
 var component = Object(componentNormalizer["a" /* default */])(
   pages_adminvue_type_script_lang_js_,
-  adminvue_type_template_id_1d6aba90_render,
+  adminvue_type_template_id_3438be7c_render,
   staticRenderFns,
   false,
   null,

@@ -43,7 +43,7 @@
                     </card-grouping>
                 </v-col>
                 <v-col cols="3">
-                    <v-card>
+                    <v-card @click="$router.push('/admin/minstock')">
                         <v-card-title>ສິນຄ້າຂາດສະຕັອກ</v-card-title>
                         <v-card-text>
                             <v-chip v-for="item in minProductList" :key="item.pro_id" class="ma-2" color="red"  text-color="white">
