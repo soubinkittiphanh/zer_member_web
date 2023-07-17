@@ -61,7 +61,7 @@
               <order-sumary-card :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                   'title': 'ຍອດບິນ',
-                  'amount': getFormatNum(orderHeaderList.length),
+                  'amount': getFormatNum(creditOrder.length),
                   'sale': getFormatNum(totalSale),
                   'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
@@ -94,7 +94,8 @@
           <!-- </v-chip> -->
         </template>
         <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()" class="ma-2" color="red" text-color="white">
+          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
+            class="ma-2" color="red" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
           <v-chip v-else class="ma-2" color="green" text-color="white">
@@ -295,30 +296,15 @@ export default {
     },
   },
   computed: {
-    computedDateFormatted() {
-      return this.formatDate(this.date)
-    },
     totalSale() {
       let total = 0
-      this.orderHeaderList.forEach((el) => {
+      this.creditOrder.forEach((el) => {
         total += el.total
       })
       return total
       // return total
     },
     totalSaleRaw() {
-      let total = 0
-      this.noCancelData.forEach((el) => {
-        console.log("====>", el.cartTotal);
-        total += parseInt(el.cartTotal)
-      })
-      console.log('Price total: ' + total)
-      // return previousValue.cartTotal + currentValue.cartTotal
-      return total
-      // return total
-    },
-
-    totalSaleOriginal() {
       let total = 0
       this.noCancelData.forEach((el) => {
         console.log("====>", el.cartTotal);
@@ -372,12 +358,9 @@ export default {
       orderDetail.title = 'ຍອດບິນ COD'
       return orderDetail;
     },
-    codFeeTotal() {
-      let sum = this.orderHeaderList.reduce((total, current) => total + current['codFee'], 0);
-      return sum
-    },
-    creditOrder(){
-      return this.orderHeaderList.filter(el=>el['paymentId']==4)
+
+    creditOrder() {
+      return this.orderHeaderList.filter(el => el['paymentId'] == 4)
     }
   },
 

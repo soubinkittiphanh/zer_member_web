@@ -365,7 +365,7 @@ export default {
             if (this.isloading) return;
             const today = new Date();
             this.isloading = true;
-            this.saleHeader.isActive = false
+            this.saleHeader.isActive = true
             this.saleHeader.discount = this.discount
             this.saleHeader.total = this.grandTotal
             this.saleHeader.clientId = this.currenctCustomer.id

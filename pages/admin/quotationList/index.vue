@@ -59,12 +59,10 @@
               <order-sumary-card :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                   'title': 'ຍອດບິນ',
-                  'amount': getFormatNum(orderHeaderList.length),
+                  'amount': getFormatNum(quotationList.length),
                   'sale': getFormatNum(totalSale),
                   'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                   'gross': getFormatNum(totalSale - totalDiscount)
-
                 }">
 
               </order-sumary-card>
