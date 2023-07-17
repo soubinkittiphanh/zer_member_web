@@ -18,7 +18,7 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1 user: {{ user.name }} id: {{ user.id }} </span>
+      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1 user: {{ user.cus_name }} id: {{ user.id }} </span>
     </v-footer>
   </v-app>
 </template>
@@ -38,6 +38,11 @@ export default {
           to: '/admin',
         },
         {
+          icon: 'mdi-finance',
+          title: 'Dashboard',
+          to: '/admin/dashboard',
+        },
+        {
           icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
@@ -55,16 +60,38 @@ export default {
         },
         {
           icon: 'mdi-cart-check',
-          title: 'ລາຍການບິນຂາຍ',
-          to: '/admin/orders',
+          title: 'ຈັດການລູກຄ້າ',
+          to: '/admin/client',
         },
         {
-          icon: 'mdi-golf-cart',
-          title: 'ຕິດຕາມ COD',
-          to: '/admin/cod_order',
+          icon: 'mdi-receipt-text-check-outline',
+          title: 'ລາຍການບິນຂາຍ ',
+          to: '/admin/ordersFromPos',
         },
         {
-          icon: 'mdi-cart-remove',
+          icon: 'mdi-receipt-text-clock-outline',
+          title: 'ລູກຄ້າຕິດຫນີ້',
+          to: '/admin/ordersFromPosCredit',
+        },
+        {
+          icon: 'mdi-receipt-text-arrow-right',
+          title: 'ໃບສະເຫນີລາຄາ',
+          to: '/admin/quotationList',
+        },
+        // **************** This menu to check sale from Mobile App and this is Facebook COD sale model *************//
+        // {
+        //   icon: 'mdi-cart-check',
+        //   title: 'ລາຍການບິນຂາຍ - Mobile',
+        //   to: '/admin/orders',
+        // },
+        // {
+        //   icon: 'mdi-golf-cart',
+        //   title: 'ຕິດຕາມ COD',
+        //   to: '/admin/cod_order',
+        // },
+        // **************** This menu to check sale from Mobile App and this is Facebook COD sale model *************//
+        {
+          icon: 'mdi-receipt-text-remove-outline',
           title: 'ລາຍການໃບບິນຍົກເລີກ ',
           to: '/admin/cancel_order',
         },
@@ -73,16 +100,16 @@ export default {
           title: 'ຈັດການຜູ້ໃຊ້ງານ',
           to: '/admin/member',
         },
-        {
-          icon: 'mdi-bike-fast',
-          title: 'ຈັດການRider',
-          to: '/admin/rider',
-        },
-        {
-          icon: 'mdi-seal',
-          title: 'Campaign manager',
-          to: '/admin/campaign',
-        },
+        // {
+        //   icon: 'mdi-bike-fast',
+        //   title: 'ຈັດການRider',
+        //   to: '/admin/rider',
+        // },
+        // {
+        //   icon: 'mdi-seal',
+        //   title: 'Campaign manager',
+        //   to: '/admin/campaign',
+        // },
         {
           icon: 'mdi-account',
           title: 'ຈັດການລູກຄ້າ',
@@ -99,11 +126,11 @@ export default {
           title: 'ບັນຊີ ລາຍຮັບ',
           to: '/admin/ar',
         },
-        {
-          icon: 'mdi-truck-cargo-container',
-          title: 'ຈັດຊື້',
-          to: '/admin/po',
-        },
+        // {
+        //   icon: 'mdi-truck-cargo-container',
+        //   title: 'ຈັດຊື້',
+        //   to: '/admin/po',
+        // },
         // {
         //   icon: 'mdi-chart-bar',
         //   title: 'Transaction type',

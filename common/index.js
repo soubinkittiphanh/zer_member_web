@@ -226,27 +226,7 @@ export const toastNotification = (swal, icon, title, message, callbackFunc) => {
   })
 }
 
-export const confirmSwal = (swal, icon, callbackFunc) => {
-  swal({
-    icon: icon,
-    title: 'Are you sure?',
-    text: 'You won\'t be able to revert this!',
-    confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: '#d33',
-    showCancelButton: true,
-    cancelButtonText: 'Cancel',
-    cancelButtonColor: '#3085d6',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      callbackFunc()
-      // User clicked the "Yes, delete it!" button
-      // Perform the deletion action here
-    } else {
-      // User clicked the "Cancel" button
-      // Do nothing or show a different message
-    }
-  });
-}
+
 
 export const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
   .toISOString()
@@ -259,12 +239,39 @@ export const formDate = (date) => {
   return `${month}/${day}/${year}`
 }
 export const parseDate = (date) => {
-  console.log("TEST DATE PARSER 1");
+  console.log("TEST DATE PARSER 1", date);
   if (!date) return null
   console.log("TEST DATE PARSER 2");
 
   const [month, day, year] = date.split('/')
   return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+}
+export const jsDateToMysqlDate = (jsDate) => {
+  let year = jsDate.getFullYear();
+  let month = jsDate.getMonth() + 1;
+  let day = jsDate.getDate();
+  let hour = jsDate.getHours();
+  let minute = jsDate.getMinutes();
+  let second = jsDate.getSeconds();
+
+  if (month < 10) {
+    month = '0' + month;
+  }
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (hour < 10) {
+    hour = '0' + hour;
+  }
+  if (minute < 10) {
+    minute = '0' + minute;
+  }
+  if (second < 10) {
+    second = '0' + second;
+  }
+
+  // return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+  return `${year}-${month}-${day}`;
 }
 
 export const mysqlDateToDateObject = (mysqlDate) => {
@@ -288,13 +295,28 @@ export const getFirstDayOfMonth = () => {
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
-    const  baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
-    // const  baseURL = 'https://nodejsclusters-124154-0.cloudclusters.net' // ***UAT*** JACK42 API
+  // const baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+  // const  baseURL = 'https://nodejsclusters-124154-0.cloudclusters.net' // ***UAT*** JACK42 API
+  const baseURL = 'http://localhost:8080' // ***UAT*** 
   return baseURL;
 }
+export const dayCount = (fromDate) => {
+  const sqlTojsDate = fromDate.split('-')[1] + '/' + fromDate.split('-')[2] + '/' + fromDate.split('-')[0]
+  const date1 = new Date(sqlTojsDate);
+  const date2 = new Date();
+  const difference = date2.getTime() - date1.getTime();
+  const TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+  return TotalDays;
+}
+export const getNextDate = (startDate, days) => {
+  console.log("DATE =>",startDate," to=> ",days);
+  const startDateObject = new Date(startDate.split("T")[0])
+  const nextDate = new Date(startDate.split("T")[0]);
+  nextDate.setDate(startDateObject.getDate() + days);
+  return nextDate;
+}
 
-
-export const generateColorShades=(baseColor) =>{
+export const generateColorShades = (baseColor) => {
   // Convert the base color to an RGB array
   let rgbBase = hexToRgb(baseColor);
 
@@ -333,4 +355,25 @@ function rgbToHex(r, g, b) {
 function componentToHex(c) {
   let hex = c.toString(16);
   return hex.length == 1 ? "0" + hex : hex
+}
+export const confirmSwal = (swal, message, callbackFunc) => {
+  swal({
+    // icon: icon,
+    title: 'ກະລຸນາຢືນຢັນ',
+    text: message,
+    confirmButtonText: 'ຢືນຢັນ',
+    confirmButtonColor: '#d33',
+    showCancelButton: true,
+    cancelButtonText: 'ອອກ',
+    cancelButtonColor: '#3085d6',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      callbackFunc()
+      // User clicked the "Yes, delete it!" button
+      // Perform the deletion action here
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or show a different message
+    }
+  });
 }

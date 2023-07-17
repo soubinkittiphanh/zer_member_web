@@ -41,6 +41,9 @@
   "OrderDetail": {
     "description": "Auto imported from components/OrderDetail.vue"
   },
+  "OrderDetailPos": {
+    "description": "Auto imported from components/OrderDetailPos.vue"
+  },
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
@@ -68,11 +71,8 @@
   "OrderSumaryCard": {
     "description": "Auto imported from components/orderSumaryCard.vue"
   },
-  "DashboardCardGrouping": {
-    "description": "Auto imported from components/dashboard/CardGrouping.vue"
-  },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
   },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
@@ -89,22 +89,40 @@
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  "DashboardCardGrouping": {
+    "description": "Auto imported from components/dashboard/CardGrouping.vue"
   },
-  "PosCateogoryList": {
-    "description": "Auto imported from components/pos/CateogoryList.vue"
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
+  },
+  "Menu": {
+    "description": "Auto imported from components/menu/index.vue"
+  },
+  "CustomerForm": {
+    "description": "Auto imported from components/customer/CustomerForm.vue"
+  },
+  "CustomerList": {
+    "description": "Auto imported from components/customer/CustomerList.vue"
   },
   "PoForm": {
     "description": "Auto imported from components/po/PoForm.vue"
   },
+  "PosCateogoryList": {
+    "description": "Auto imported from components/pos/CateogoryList.vue"
+  },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"
+  },
+  "ProductCardPos": {
+    "description": "Auto imported from components/product/ProductCardPos.vue"
   },
   "ProductForm": {
     "description": "Auto imported from components/product/ProductForm.vue"
   },
   "ProductFormCreate": {
     "description": "Auto imported from components/product/ProductFormCreate.vue"
+  },
+  "Quotation": {
+    "description": "Auto imported from components/quotation/index.vue"
   }
 }

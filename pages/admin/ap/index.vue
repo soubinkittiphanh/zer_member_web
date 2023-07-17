@@ -4,7 +4,8 @@
     <div class="text-center">
         <div>
             <v-dialog v-model="dialog" persistent width="1024">
-                <ap-payment :is-edit="isEdit" :payment-head-id="selectedId" @close="triggerDialog" :key="apFormKey" @close-dialog="dialog = false" @reload="loadTxn">
+                <ap-payment :is-edit="isEdit" :payment-head-id="selectedId" @close="triggerDialog" :key="apFormKey"
+                    @close-dialog="dialog = false" @reload="loadTxn">
                 </ap-payment>
             </v-dialog>
         </div>
@@ -56,6 +57,12 @@
                         <i class="fa fa-pencil-square-o"></i>
                     </v-btn>
                 </template>
+                <template v-slot:[`item.totalAmount`]="{ item }">
+
+                    {{ numberWithFormat(item.totalAmount) }}
+
+
+                </template>
 
             </v-data-table>
         </v-card>
@@ -63,6 +70,7 @@
 </template>
 <script>
 import ApPayment from '~/components/accounting/ApPayment.vue'
+import { getFormatNum } from '~/common'
 export default {
     components: { ApPayment },
     mounted() {
@@ -72,14 +80,14 @@ export default {
         return {
             userId: "",
             search: "",
-            isEdit:false,
+            isEdit: false,
             dialog: false,
             apFormKey: 1,
             isloading: false,
             menu1: false,
             menu2: false,
             txnList: [],
-            selectedId:'',
+            selectedId: '',
             headers: [
                 {
                     text: 'ວັນທີ',
@@ -129,13 +137,16 @@ export default {
             this.isEdit = false;
             this.dialog = true
         },
-        editItem(item){
+        numberWithFormat(val) {
+            return getFormatNum(val)
+        },
+        editItem(item) {
             this.selectedId = item.id
             this.isEdit = true;
             this.apFormKey += 1;
             this.dialog = true
         },
-         formatDate(date) {
+        formatDate(date) {
             if (!date) return null
             const [year, month, day] = date.split('-')
             return `${month}/${day}/${year}`

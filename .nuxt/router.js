@@ -15,17 +15,23 @@ const _66ede218 = () => interopDefault(import('../pages/admin/bank/index.vue' /*
 const _7dddfa48 = () => interopDefault(import('../pages/admin/campaign/index.vue' /* webpackChunkName: "pages/admin/campaign/index" */))
 const _180344c1 = () => interopDefault(import('../pages/admin/cancel_order/index.vue' /* webpackChunkName: "pages/admin/cancel_order/index" */))
 const _692824b6 = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
+const _fea63afa = () => interopDefault(import('../pages/admin/client/index.vue' /* webpackChunkName: "pages/admin/client/index" */))
 const _6e83a9a5 = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
 const _574e60d4 = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
 const _5d7d59e6 = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
+const _62854632 = () => interopDefault(import('../pages/admin/dashboard/index.vue' /* webpackChunkName: "pages/admin/dashboard/index" */))
 const _300d3e47 = () => interopDefault(import('../pages/admin/login/index.vue' /* webpackChunkName: "pages/admin/login/index" */))
 const _3f9e2182 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
 const _28458292 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
 const _1d174c3c = () => interopDefault(import('../pages/admin/minstock/index.vue' /* webpackChunkName: "pages/admin/minstock/index" */))
 const _4f34b91d = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
+const _ff84b6fa = () => interopDefault(import('../pages/admin/ordersFromPos/index.vue' /* webpackChunkName: "pages/admin/ordersFromPos/index" */))
+const _36d97b48 = () => interopDefault(import('../pages/admin/ordersFromPosCredit/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCredit/index" */))
 const _23f9fb92 = () => interopDefault(import('../pages/admin/po/index.vue' /* webpackChunkName: "pages/admin/po/index" */))
 const _57be90e6 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
 const _ae16b5f0 = () => interopDefault(import('../pages/admin/productInuse.vue' /* webpackChunkName: "pages/admin/productInuse" */))
+const _85a6c9ac = () => interopDefault(import('../pages/admin/quotation/index.vue' /* webpackChunkName: "pages/admin/quotation/index" */))
+const _69ec6a30 = () => interopDefault(import('../pages/admin/quotationList/index.vue' /* webpackChunkName: "pages/admin/quotationList/index" */))
 const _3fa356a8 = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
 const _cf12bd4e = () => interopDefault(import('../pages/admin/report_card/index.vue' /* webpackChunkName: "pages/admin/report_card/index" */))
 const _69422418 = () => interopDefault(import('../pages/admin/rider/index.vue' /* webpackChunkName: "pages/admin/rider/index" */))
@@ -99,6 +105,10 @@ export const routerOptions = {
     component: _692824b6,
     name: "admin-category"
   }, {
+    path: "/admin/client",
+    component: _fea63afa,
+    name: "admin-client"
+  }, {
     path: "/admin/cod_order",
     component: _6e83a9a5,
     name: "admin-cod_order"
@@ -110,6 +120,10 @@ export const routerOptions = {
     path: "/admin/customer_request",
     component: _5d7d59e6,
     name: "admin-customer_request"
+  }, {
+    path: "/admin/dashboard",
+    component: _62854632,
+    name: "admin-dashboard"
   }, {
     path: "/admin/login",
     component: _300d3e47,
@@ -131,6 +145,14 @@ export const routerOptions = {
     component: _4f34b91d,
     name: "admin-orders"
   }, {
+    path: "/admin/ordersFromPos",
+    component: _ff84b6fa,
+    name: "admin-ordersFromPos"
+  }, {
+    path: "/admin/ordersFromPosCredit",
+    component: _36d97b48,
+    name: "admin-ordersFromPosCredit"
+  }, {
     path: "/admin/po",
     component: _23f9fb92,
     name: "admin-po"
@@ -142,6 +164,14 @@ export const routerOptions = {
     path: "/admin/productInuse",
     component: _ae16b5f0,
     name: "admin-productInuse"
+  }, {
+    path: "/admin/quotation",
+    component: _85a6c9ac,
+    name: "admin-quotation"
+  }, {
+    path: "/admin/quotationList",
+    component: _69ec6a30,
+    name: "admin-quotationList"
   }, {
     path: "/admin/report",
     component: _3fa356a8,

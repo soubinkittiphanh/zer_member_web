@@ -9,12 +9,15 @@ import '../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
 
 import '../assets/css/mycss.css'
 
+import '../assets/css/style.css'
+
 import _6f6c098b from '../layouts/default.vue'
 import _2d2495d5 from '../layouts/home.vue'
 import _77a66d33 from '../layouts/login.vue'
+import _1a3b1a9e from '../layouts/pos.vue'
 import _1bda075a from '../layouts/products.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_home": sanitizeComponent(_2d2495d5),"_login": sanitizeComponent(_77a66d33),"_products": sanitizeComponent(_1bda075a) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_home": sanitizeComponent(_2d2495d5),"_login": sanitizeComponent(_77a66d33),"_pos": sanitizeComponent(_1a3b1a9e),"_products": sanitizeComponent(_1bda075a) }
 
 export default {
   render (h, props) {

@@ -52,7 +52,7 @@ export default function (ctx, inject) {
   },
   "endpoints": {
     "login": {
-      "url": "mem_auth",
+      "url": "userLogin",
       "method": "post"
     },
     "logout": {

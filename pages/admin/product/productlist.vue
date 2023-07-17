@@ -132,9 +132,9 @@ export default {
         { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },
         { text: 'ລາຄາ', align: 'center', value: 'pro_price' },
         // { text: 'ສະຖານະ', align: 'center', value: 'pro_status' },
+        { text: 'minStock', align: 'center', value: 'minStock' },
         { text: 'Stock', align: 'center', value: 'pro_card_count' },
         { text: 'cost', align: 'center', value: 'pro_cost_price' },
-        { text: 'minStock', align: 'center', value: 'minStock' },
         {
           text: 'ຟັງຊັ່ນ',
           align: 'center',
@@ -171,6 +171,7 @@ export default {
     },
     async fetchData() {
       this.isloading = true
+      // https://nodejsclusters-124154-0.cloudclusters.net/product_f
       await this.$axios
         .get('product_f')
         .then((res) => {

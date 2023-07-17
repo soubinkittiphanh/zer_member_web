@@ -57,12 +57,19 @@
                         <i class="fa fa-pencil-square-o"></i>
                     </v-btn>
                 </template>
+                <template v-slot:[`item.totalAmount`]="{ item }">
+
+                    {{ numberWithFormat(item.totalAmount) }}
+
+
+                </template>
 
             </v-data-table>
         </v-card>
     </div>
 </template>
 <script>
+import { getFormatNum } from '~/common'
 import ArReceivable from '~/components/accounting/ArReceivable.vue'
 export default {
     components: { ArReceivable },
@@ -129,6 +136,9 @@ export default {
             this.selectedId = null;
             this.isEdit = false;
             this.dialog = true
+        },
+        numberWithFormat(val) {
+            return getFormatNum(val)
         },
         editItem(item) {
             this.selectedId = item.id

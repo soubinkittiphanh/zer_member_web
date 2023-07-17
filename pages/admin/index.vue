@@ -4,71 +4,23 @@
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
-        <h1>Dash board</h1>
-        <div class="mb-2 pa-0">
-            <!-- <v-card  >
-                <v-card-text class="m-0"> -->
-            <v-row class="p-0">
-                <v-col cols="6">
-                    <card-grouping>
-                        <template v-slot:slot1>
-                            <card-on-top :title="options.labels[0]" :value="numberFormatter(series[0])" color="#E6F7FF">
-                                <template v-slot:icon>
-                                    <v-icon color="#51A5EB">mdi-receipt-text</v-icon>
-                                </template>
-                            </card-on-top>
-                        </template>
-                        <template v-slot:slot2>
-                            <card-on-top :title="options.labels[1]" :value="numberFormatter(series[1])" color="#FEF0ED">
-                                <template v-slot:icon>
-                                    <v-icon color="#F7C3B8">mdi mdi-truck-cargo-container</v-icon>
-                                </template>
-                            </card-on-top>
-                        </template>
-                        <template v-slot:slot3>
-                            <card-on-top :title="options.labels[2]" :value="numberFormatter(series[2])" color="#E7F1F2">
-                                <template v-slot:icon>
-                                    <v-icon color="#518F8A">mdi mdi-currency-usd</v-icon>
-                                </template>
-                            </card-on-top>
-                        </template>
-                        <template v-slot:slot4>
-                            <card-on-top :title="options.labels[3]" :value="numberFormatter(series[3])" color="#FBE8EA">
-                                <template v-slot:icon>
-                                    <v-icon color="#C37D85">mdi mdi-file-document-refresh</v-icon>
-                                </template>
-
-                            </card-on-top>
-                        </template>
-                    </card-grouping>
-                </v-col>
-                <v-col cols="3">
-                    <v-card @click="$router.push('/admin/minstock')">
-                        <v-card-title>ສິນຄ້າຂາດສະຕັອກ</v-card-title>
-                        <v-card-text>
-                            <v-chip v-for="item in minProductList" :key="item.pro_id" class="ma-2" color="red"  text-color="white">
-                                {{ item.pro_name }} - 
-                                <span class="mdi mdi-tag-multiple-outline"></span>
-                                <v-icon start icon="mdi-label" style="font-weight: bold;"> {{ item.pro_card_count }}</v-icon>
-                                
-                                
-                                
-                            </v-chip>
-                        </v-card-text>
-                    </v-card>
-                    <!-- <v-card class="mx-auto" max-width="300">
-                        <v-list :items="items" item-title="name" item-value="id"></v-list>
-                    </v-card> -->
-                    <!-- <v-card class="mx-auto" max-width="300">
-                        <v-list :items="minProductList" item-title="pro_name" item-value="pro_id"></v-list>
-                    </v-card> -->
-                </v-col>
-                <v-col cols="3">
-
-                </v-col>
-            </v-row>
-            <!-- </v-card-text>
-            </v-card> -->
+       
+        <div class="mb-1">
+            <v-card class="pa-4">
+                <v-card-title>
+                   Menu
+                </v-card-title>
+                <v-row>
+                    <v-col :cols="12">
+                        <div class="row">
+                            <div v-for="(item, index) in menus" :key="index"
+                                class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
+                                <Menu :title="item.title" :icon="item.icon" :path="item.path"></Menu>
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-card>
         </div>
         <div class="mb-1">
             <v-row>
@@ -84,7 +36,6 @@
                 </v-col>
             </v-row>
         </div>
-        <campaignCard />
 
     </div>
 </template>
@@ -95,16 +46,22 @@ import { generateColorShades } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
 import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
+import Menu from '~/components/menu'
 
 export default {
-    components: { CardOnTop, CampaignCard, CardGrouping },
+    components: { CardOnTop, CampaignCard, CardGrouping, Menu },
+    middleware: 'auths',
     data() {
         return {
             saleValue: 0,
-            // minProductList: [{
-            //     pro_name:'',
-            //     pro_id:1
-            // }],
+            menuKey: 1,
+            menus: [
+                {
+                    title: 'POS',
+                    icon: 'mdi-network-pos',
+                    path: '/pos'
+                }
+            ],
             items: [
                 {
                     name: 'Item #1',
@@ -234,6 +191,7 @@ export default {
         numberFormatter(value) {
             return getFormatNum(value)
         },
+
         async minStockProduct() {
             this.isloading = true
             await this.$axios

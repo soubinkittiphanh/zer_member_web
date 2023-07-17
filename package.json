@@ -23,6 +23,7 @@
     "apexcharts": "^3.40.0",
     "chart.js": "^4.3.0",
     "core-js": "^3.20.0",
+    "jspdf-invoice-template": "^1.4.3",
     "nuxt": "^2.15.8",
     "vue-apexcharts": "^1.6.2",
     "vue-carousel-3d": "^1.0.1",

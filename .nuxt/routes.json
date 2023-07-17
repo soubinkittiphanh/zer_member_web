@@ -77,6 +77,13 @@
     "_name": "_692824b6"
   },
   {
+    "name": "admin-client",
+    "path": "/admin/client",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/client/index.vue",
+    "chunkName": "pages/admin/client/index",
+    "_name": "_fea63afa"
+  },
+  {
     "name": "admin-cod_order",
     "path": "/admin/cod_order",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/cod_order/index.vue",
@@ -96,6 +103,13 @@
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/customer_request/index.vue",
     "chunkName": "pages/admin/customer_request/index",
     "_name": "_5d7d59e6"
+  },
+  {
+    "name": "admin-dashboard",
+    "path": "/admin/dashboard",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/dashboard/index.vue",
+    "chunkName": "pages/admin/dashboard/index",
+    "_name": "_62854632"
   },
   {
     "name": "admin-login",
@@ -133,6 +147,20 @@
     "_name": "_4f34b91d"
   },
   {
+    "name": "admin-ordersFromPos",
+    "path": "/admin/ordersFromPos",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPos/index.vue",
+    "chunkName": "pages/admin/ordersFromPos/index",
+    "_name": "_ff84b6fa"
+  },
+  {
+    "name": "admin-ordersFromPosCredit",
+    "path": "/admin/ordersFromPosCredit",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPosCredit/index.vue",
+    "chunkName": "pages/admin/ordersFromPosCredit/index",
+    "_name": "_36d97b48"
+  },
+  {
     "name": "admin-po",
     "path": "/admin/po",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/po/index.vue",
@@ -152,6 +180,20 @@
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/productInuse.vue",
     "chunkName": "pages/admin/productInuse",
     "_name": "_ae16b5f0"
+  },
+  {
+    "name": "admin-quotation",
+    "path": "/admin/quotation",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/quotation/index.vue",
+    "chunkName": "pages/admin/quotation/index",
+    "_name": "_85a6c9ac"
+  },
+  {
+    "name": "admin-quotationList",
+    "path": "/admin/quotationList",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/quotationList/index.vue",
+    "chunkName": "pages/admin/quotationList/index",
+    "_name": "_69ec6a30"
   },
   {
     "name": "admin-report",

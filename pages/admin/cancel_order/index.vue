@@ -77,12 +77,25 @@
           </v-btn>
 
         </template>
+        <template v-slot:[`item.discount`]="{ item }">
+
+
+          {{numberWithFormat(item.discount) }}
+
+        </template>
+        <template v-slot:[`item.cartTotal`]="{ item }">
+
+            {{numberWithFormat(item.cartTotal) }}
+            
+
+        </template>
       </v-data-table>
     </v-card>
   </div>
 </template>
 <script>
 import OrderDetail from '~/components/OrderDetail.vue'
+import { getFormatNum } from '~/common'
 export default {
   components: { OrderDetail },
   middleware: 'auths',
@@ -213,6 +226,9 @@ export default {
     this.refreshComponent();
   },
   methods: {
+    numberWithFormat(val){
+      return getFormatNum(val)
+    },
     whatsappLink(item) {
       // const completeTel = tel.substring(tel.length-7);
       const tel = item.cusTel.trim();
