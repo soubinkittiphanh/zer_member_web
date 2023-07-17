@@ -31,7 +31,7 @@
                             <v-text-field v-model="client.telephone" label="ເບີໂທປະສານສຳພັນ*" required></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="client.credit" label="Credit *" required v-comma-thousand></v-text-field>
+                            <v-text-field v-model="client.credit" label="Credit *" required></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field v-model="client.lateChargePercent" label="ອັດຕາເປີເຊັນປັບໃຫມ ການຈ່າຍຊ້າ*" required

@@ -43,8 +43,16 @@
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
-            <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
+            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
+
+          <v-col cols="12" class="text-right">
+            <v-btn size="large" variant="outlined" @click="loadData" class="primary">
+              ດຶງລາຍງານ<span class="mdi mdi-cloud-download"></span>
+            </v-btn>
+            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
+          </v-col>
+
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
@@ -88,7 +96,8 @@
           <!-- </v-chip> -->
         </template>
         <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()" class="ma-2" color="red" text-color="white">
+          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
+            class="ma-2" color="red" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
           <v-chip v-else class="ma-2" color="green" text-color="white">
@@ -289,8 +298,8 @@ export default {
     },
   },
   computed: {
-    activeOrderHeaderList(){
-      return this.orderHeaderList.filter(el=>el['isActive']==true)
+    activeOrderHeaderList() {
+      return this.orderHeaderList.filter(el => el['isActive'] == true)
     },
     computedDateFormatted() {
       return this.formatDate(this.date)

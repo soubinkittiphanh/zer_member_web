@@ -27,10 +27,9 @@
           <v-col cols="6" sm="6" md="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
           </v-col>
-          <v-col cols="6" sm="6" md="6">
-            <v-btn class="mr-0" @click="rebuildStock()">
-              <i class="fas fa-sync"></i>
-              Rebuild stock
+          <v-col cols="6" class="text-right">
+            <v-btn size="large" variant="outlined" @click="rebuildStock" class="primary">
+              Rebuild stock<span class="mdi mdi-update"></span>
             </v-btn>
           </v-col>
         </v-row>
@@ -44,10 +43,8 @@
             <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ loaddata.length }}</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-            <!-- <NuxtLink to="/admin/product">ສ້າງສິນຄ້າໃຫມ່</NuxtLink> -->
-            <v-btn class="mr-0" @click="productFormCreate = true">
-              <!-- <i class="fas fa-sync"></i> -->
-              ສ້າງສິນຄ້າໃຫມ່
+            <v-btn size="large" variant="outlined" @click="productFormCreate = true" class="primary">
+              ສ້າງສິນຄ້າໃຫມ່<span class="mdi mdi-note-plus-outline"></span>
             </v-btn>
 
           </v-toolbar>

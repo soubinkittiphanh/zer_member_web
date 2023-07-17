@@ -2,60 +2,71 @@
 <template>
   <div>
     <v-dialog v-model="dialogCustomer" max-width="1024">
-      <CustomerForm :isEdit="!isEdit" :customerId="selectedCustomerId" @close-dialog="handleEvent" @reload-data="loadData" :key="componentKey"/>
+      <CustomerForm :isEdit="!isEdit" :customerId="selectedCustomerId" @close-dialog="handleEvent" @reload-data="loadData"
+        :key="componentKey" />
     </v-dialog>
-    <h1>ລູກຄ້າ</h1>
-    <!-- <v-dialog v-model="dialog" max-width="300px" persistent>
-      <dialog-classic-message :message="message" @closedialog="message = null">
-      </dialog-classic-message>
-    </v-dialog> -->
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
 
 
     <v-card>
-      <v-card-title>
-        <v-layout row wrap>
+      <div class="pa-2">
+        <v-row class="text-center">
+          <v-col cols="12" align-self="center">
+            <h4>
+              ລາຍການ ລູກຄ້າ ທັງໝົດ
+            </h4>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="6">
-            <v-btn @click="createItem"> ເພີ່ມລູກຄ້າ </v-btn>
-
+            <v-btn block size="large" variant="outlined" @click="createItem" class="primary">
+              ເພີ່ມລູກຄ້າ<span class="mdi mdi-account-box"></span>
+            </v-btn>
+            <!-- <v-btn @click="createItem"> ເພີ່ມລູກຄ້າ </v-btn> -->
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
-            <!-- <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx /> -->
-            <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
+         </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="text-right">
+            <v-btn size="large" variant="outlined" @click="loadData" class="primary">
+              ດຶງລາຍງານ<span class="mdi mdi-account-box"></span>
+            </v-btn>
+            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
-        </v-layout>
-      </v-card-title>
+        </v-row>
+      </div>
       <v-divider></v-divider>
+
       <v-card-text>
 
+
+        <v-data-table v-if="customerList" :headers="headers" :search="search" :items="customerList">
+          <template v-slot:[`item.function`]="{ item }">
+
+            <v-btn color="primary" text @click="editItem(item.id)
+            wallet = true
+              ">
+
+              <i class="fa fa-pencil-square-o"></i>
+            </v-btn>
+
+          </template>
+          <template v-slot:[`item.telephone`]="{ item }">
+
+            <v-btn color="primary" text @click="whatsappLink(item)">
+
+              <!-- <i class="fas fa-whatsapp"></i> -->
+              {{ item.telephone }}
+              <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
+            </v-btn>
+
+          </template>
+        </v-data-table>
       </v-card-text>
-
-
-      <v-data-table v-if="customerList" :headers="headers" :search="search" :items="customerList">
-        <template v-slot:[`item.function`]="{ item }">
-
-          <v-btn color="blue darken-1" text @click="editItem(item.id)
-          wallet = true
-            ">
-
-            <i class="fa fa-pencil-square-o"></i>
-          </v-btn>
-
-        </template>
-        <template v-slot:[`item.telephone`]="{ item }">
-
-          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-
-            <!-- <i class="fas fa-whatsapp"></i> -->
-            {{ item.telephone }}
-            <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
-          </v-btn>
-
-        </template>
-      </v-data-table>
     </v-card>
   </div>
 </template>
@@ -70,12 +81,12 @@ export default {
   data() {
     return {
       userId: "",
-      componentKey:1,
-      selectedCustomerId:0,
+      componentKey: 1,
+      selectedCustomerId: 0,
       dialogCustomer: false,
       customerList: [],
       search: '',
-      isEdit:false,
+      isEdit: false,
       isloading: false,
       whatsappContactLink: "",
       headers: [
@@ -115,13 +126,13 @@ export default {
       this.dialogCustomer = false;
 
     },
-    editItem(clientId){
+    editItem(clientId) {
       this.componentKey += 1;
       this.selectedCustomerId = clientId;
       this.dialogCustomer = true;
       this.isEdit = false;
     },
-    createItem(){
+    createItem() {
       this.componentKey += 1;
       this.dialogCustomer = true;
       this.isEdit = true;

@@ -36,7 +36,13 @@
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
-            <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
+            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
+          </v-col>
+          <v-col cols="12" class="text-right">
+            <v-btn size="large" variant="outlined" @click="loadData" class="primary">
+              ດຶງລາຍງານ<span class="mdi mdi-cloud-download"></span>
+            </v-btn>
+            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
         </v-layout>
       </v-card-title>

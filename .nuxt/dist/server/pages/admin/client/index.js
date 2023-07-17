@@ -246,25 +246,12 @@ function prevent(e) {
 /***/ }),
 
 /***/ 306:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(115);
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(116);
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
-
-/***/ }),
-
-/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(308);
+var content = __webpack_require__(307);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -272,7 +259,7 @@ __webpack_require__(5).default("59f225a8", content, true)
 
 /***/ }),
 
-/***/ 308:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -293,7 +280,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 "use strict";
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(290);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(307);
+/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(306);
 /* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(292);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
@@ -457,7 +444,7 @@ var VSwitch = __webpack_require__(336);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/customer/CustomerForm.vue?vue&type=template&id=7edb2eb7&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/customer/CustomerForm.vue?vue&type=template&id=75c741a4&
 
 
 
@@ -472,7 +459,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var CustomerFormvue_type_template_id_7edb2eb7_render = function render() {
+var CustomerFormvue_type_template_id_75c741a4_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VRow["a" /* default */], {
@@ -592,10 +579,6 @@ var CustomerFormvue_type_template_id_7edb2eb7_render = function render() {
       "md": "4"
     }
   }, [_c(VTextField["a" /* default */], {
-    directives: [{
-      name: "comma-thousand",
-      rawName: "v-comma-thousand"
-    }],
     attrs: {
       "label": "Credit *",
       "required": ""
@@ -680,7 +663,7 @@ var CustomerFormvue_type_template_id_7edb2eb7_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/customer/CustomerForm.vue?vue&type=template&id=7edb2eb7&
+// CONCATENATED MODULE: ./components/customer/CustomerForm.vue?vue&type=template&id=75c741a4&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(300);
@@ -779,7 +762,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   customer_CustomerFormvue_type_script_lang_js_,
-  CustomerFormvue_type_template_id_7edb2eb7_render,
+  CustomerFormvue_type_template_id_75c741a4_render,
   staticRenderFns,
   false,
   injectStyles,
@@ -824,13 +807,13 @@ var VDialog = __webpack_require__(265);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
 var VDivider = __webpack_require__(101);
 
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(306);
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
+var VRow = __webpack_require__(267);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=template&id=46acf39e&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=template&id=e69e3906&
 
 
 
@@ -841,8 +824,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-
-var clientvue_type_template_id_46acf39e_render = function render() {
+var clientvue_type_template_id_e69e3906_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -866,7 +848,7 @@ var clientvue_type_template_id_46acf39e_render = function render() {
       "close-dialog": _vm.handleEvent,
       "reload-data": _vm.loadData
     }
-  })], 1), _vm._ssrNode(" <h1>ລູກຄ້າ</h1> "), _c(VDialog["a" /* default */], {
+  })], 1), _vm._ssrNode(" "), _c(VDialog["a" /* default */], {
     attrs: {
       "hide-overlay": "",
       "persistent": "",
@@ -879,20 +861,32 @@ var clientvue_type_template_id_46acf39e_render = function render() {
       },
       expression: "isloading"
     }
-  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_c(VLayout["a" /* default */], {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
+  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], [_c('div', {
+    staticClass: "pa-2"
+  }, [_c(VRow["a" /* default */], {
+    staticClass: "text-center"
   }, [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "align-self": "center"
+    }
+  }, [_c('h4', [_vm._v("\n            ລາຍການ ລູກຄ້າ ທັງໝົດ\n          ")])])], 1), _vm._v(" "), _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
     attrs: {
       "cols": "6"
     }
   }, [_c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "block": "",
+      "size": "large",
+      "variant": "outlined"
+    },
     on: {
       "click": _vm.createItem
     }
-  }, [_vm._v(" ເພີ່ມລູກຄ້າ ")])], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+  }, [_vm._v("\n            ເພີ່ມລູກຄ້າ"), _c('span', {
+    staticClass: "mdi mdi-account-box"
+  })])], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     attrs: {
       "cols": "6"
     }
@@ -910,11 +904,20 @@ var clientvue_type_template_id_46acf39e_render = function render() {
       },
       expression: "search"
     }
-  }), _vm._v(" "), _c(VBtn["a" /* default */], {
+  })], 1)], 1), _vm._v(" "), _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    staticClass: "text-right"
+  }, [_c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined"
+    },
     on: {
       "click": _vm.loadData
     }
-  }, [_vm._v(" ດຶງລາຍງານ ")])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */]), _vm._v(" "), _vm.customerList ? _c(VDataTable["a" /* default */], {
+  }, [_vm._v("\n            ດຶງລາຍງານ"), _c('span', {
+    staticClass: "mdi mdi-account-box"
+  })])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_vm.customerList ? _c(VDataTable["a" /* default */], {
     attrs: {
       "headers": _vm.headers,
       "search": _vm.search,
@@ -927,7 +930,7 @@ var clientvue_type_template_id_46acf39e_render = function render() {
       }) {
         return [_c(VBtn["a" /* default */], {
           attrs: {
-            "color": "blue darken-1",
+            "color": "primary",
             "text": ""
           },
           on: {
@@ -947,7 +950,7 @@ var clientvue_type_template_id_46acf39e_render = function render() {
       }) {
         return [_c(VBtn["a" /* default */], {
           attrs: {
-            "color": "blue darken-1",
+            "color": "primary",
             "text": ""
           },
           on: {
@@ -955,7 +958,7 @@ var clientvue_type_template_id_46acf39e_render = function render() {
               return _vm.whatsappLink(item);
             }
           }
-        }, [_vm._v("\n          " + _vm._s(item.telephone) + "\n          "), _c('a', {
+        }, [_vm._v("\n            " + _vm._s(item.telephone) + "\n            "), _c('a', {
           attrs: {
             "href": _vm.whatsappContactLink,
             "target": "_blank"
@@ -963,11 +966,11 @@ var clientvue_type_template_id_46acf39e_render = function render() {
         }, [_vm._v("Whatsapp")])])];
       }
     }], null, true)
-  }) : _vm._e()], 1)], 2);
+  }) : _vm._e()], 1)], 1)], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=46acf39e&
+// CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=e69e3906&
 
 // EXTERNAL MODULE: ./components/customer/CustomerForm.vue + 4 modules
 var CustomerForm = __webpack_require__(353);
@@ -1073,7 +1076,7 @@ var componentNormalizer = __webpack_require__(10);
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_clientvue_type_script_lang_js_,
-  clientvue_type_template_id_46acf39e_render,
+  clientvue_type_template_id_e69e3906_render,
   staticRenderFns,
   false,
   null,
