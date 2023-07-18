@@ -1,4 +1,4 @@
-exports.ids = [35];
+exports.ids = [37];
 exports.modules = {
 
 /***/ 275:
@@ -126,7 +126,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 381:
+/***/ 387:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -134,7 +134,7 @@ exports.modules = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(53);
+var VBtn = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
 var VCard = __webpack_require__(100);
@@ -292,7 +292,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/Settlement.vue?vue&type=template&id=967eb5b4&
 
 // EXTERNAL MODULE: ./util/myUtil.js
-var myUtil = __webpack_require__(113);
+var myUtil = __webpack_require__(112);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/Settlement.vue?vue&type=script&lang=js&
 

@@ -6,7 +6,7 @@
       <loading-indicator> </loading-indicator>
     </v-dialog>
     <v-dialog v-model="dialogOrderDetail" max-width="1024" persistent>
-      <OrderDetailPos :key="componentKey" :entry="selectedOrderId" @close-dialog="dialogOrderDetail = false">
+      <OrderDetailPos :key="componentKey" :header="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPos>
     </v-dialog>
     <v-dialog v-model="cancelForm" max-width="1024">
@@ -114,7 +114,7 @@
         </template>
         <template v-slot:[`item.id`]="{ item }">
 
-          <v-btn color="blue darken-1" text @click="viewItem(item.lines)
+          <v-btn color="blue darken-1" text @click="viewItem(item)
           wallet = true
             ">
 
@@ -153,7 +153,7 @@ export default {
       whatsappContactLink: '',
       componentKey: 0,
       dialogOrderDetail: false,
-      selectedOrderId: '',
+      selectedOrder: '',
       wallet: false,
       isedit: false,
       dialog: false,
@@ -394,7 +394,7 @@ export default {
     },
     viewItem(item) {
       this.componentKey += 1;
-      this.selectedOrderId = item
+      this.selectedOrder = item
       this.dialogOrderDetail = true;
     },
     cancelItem(payload) {

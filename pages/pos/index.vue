@@ -7,7 +7,7 @@
                         <div v-for="(item, index) in filterProduct" :key="index"
                             class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
                             <product-card-pos :product="item" :productName="item.pro_name"
-                                :imagePath="item.img_name"></product-card-pos>
+                                :imagePath="item.img_name" :stock="item.stock_count"></product-card-pos>
                         </div>
                     </div>
                 </v-col>
@@ -46,7 +46,6 @@ export default {
 
     },
     computed: {
-
         ...mapGetters({
             searchKeyword: 'searchKeyword',
             currenctSelectedCategoryId: 'currenctSelectedCategoryId',
@@ -75,8 +74,6 @@ export default {
         }
     },
     methods: {
-
-
         async fetchData() {
             this.isloading = true
             this.productList = []
@@ -92,7 +89,8 @@ export default {
                     swalError2(this.$swal, "Error", er)
                 })
             this.isloading = false
-        }, async loadCategory() {
+        },
+        async loadCategory() {
             this.isloading = true;
             this.categoryList = []
             await this.$axios

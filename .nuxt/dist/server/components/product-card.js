@@ -1,4 +1,4 @@
-exports.ids = [28];
+exports.ids = [30];
 exports.modules = {
 
 /***/ 274:
@@ -70,7 +70,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 313:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -138,7 +138,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 329:
+/***/ 326:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -357,7 +357,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 383:
+/***/ 389:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -365,7 +365,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(53);
+var VBtn = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
 var VCard = __webpack_require__(100);
@@ -374,18 +374,18 @@ var VCard = __webpack_require__(100);
 var components_VCard = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VHover/VHover.js
-var VHover = __webpack_require__(313);
+var VHover = __webpack_require__(308);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VImg/VImg.js + 2 modules
 var VImg = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VRating/VRating.js
-var VRating = __webpack_require__(329);
+var VRating = __webpack_require__(326);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(267);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ProductCard.vue?vue&type=template&id=7f6db615&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ProductCard.vue?vue&type=template&id=2b144a15&
 
 
 
@@ -396,7 +396,7 @@ var VRow = __webpack_require__(267);
 
 
 
-var ProductCardvue_type_template_id_7f6db615_render = function render() {
+var ProductCardvue_type_template_id_2b144a15_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VHover["a" /* default */], {
@@ -459,7 +459,7 @@ var ProductCardvue_type_template_id_7f6db615_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/ProductCard.vue?vue&type=template&id=7f6db615&
+// CONCATENATED MODULE: ./components/ProductCard.vue?vue&type=template&id=2b144a15&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ProductCard.vue?vue&type=script&lang=js&
 /* harmony default export */ var ProductCardvue_type_script_lang_js_ = ({
@@ -495,7 +495,7 @@ var componentNormalizer = __webpack_require__(10);
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_ProductCardvue_type_script_lang_js_,
-  ProductCardvue_type_template_id_7f6db615_render,
+  ProductCardvue_type_template_id_2b144a15_render,
   staticRenderFns,
   false,
   null,

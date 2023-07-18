@@ -18,7 +18,7 @@
                     </div>
                 </v-row>
             </v-card-text>
-        
+
             <v-card-actions>
                 <v-btn color="#FFA500">
                     Add to cart

@@ -2,15 +2,17 @@
     <div>
         <v-hover v-slot:default="{ hover }" open-delay="100">
             <v-card :elevation="hover ? 16 : 0" outlined  @click="addProduct(product)">
-                <v-img max-width="250" max-height="100"
+                <!-- max-width="250" max-height="100" -->
+                <v-img   max-height="200px"
                     :src="`${host}/uploads/${imagePath}`" :lazy-src="`${host}/uploads/${imagePath}`">
                 </v-img>
 
                 <v-card-text class="text-start">
                     <div class="font-weight-meduim primary--text">
-                        {{ productName }}
+                        {{ productName }} 
                     </div>
-                    <div class="font-weight-meduim primary--text">ລາຄາ: {{ formatNumber(product.pro_price) }}</div>
+                    <div class="font-weight-meduim primary--text"> Stock: {{ stock }} </div>
+                    <div class="font-weight-meduim primary--text"> ລາຄາ: {{ formatNumber(product.pro_price) }}</div>
                 </v-card-text>
             </v-card>
         </v-hover>
@@ -35,6 +37,10 @@ export default {
             type: Object,
             default: null,
         },
+        stock: {
+            type: Number,
+            default: 0,
+        },
 
     },
      
@@ -52,4 +58,19 @@ export default {
 }
 </script>
   
-<style></style>
+<style scoped>
+
+/* .v-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* .v-card v-img {
+  max-width: 100;
+  height: auto;
+  margin: 0 auto;
+} */
+
+</style>

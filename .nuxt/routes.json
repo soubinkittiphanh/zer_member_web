@@ -90,12 +90,6 @@
     "chunkName": "pages/admin/customer_request/index"
   },
   {
-    "name": "admin-dashboard",
-    "path": "/admin/dashboard",
-    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/dashboard/index.vue",
-    "chunkName": "pages/admin/dashboard/index"
-  },
-  {
     "name": "admin-login",
     "path": "/admin/login",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/login/index.vue",

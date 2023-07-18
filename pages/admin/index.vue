@@ -1,14 +1,14 @@
 
 <template>
-    <div class="container">
+    <div style="background: #EFF2F9" class="ma-0">
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
-       
+        <!-- <h1>Dash board</h1> -->
         <div class="mb-1">
             <v-card class="pa-4">
                 <v-card-title>
-                   Menu
+                    Shortcut
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
@@ -23,19 +23,115 @@
             </v-card>
         </div>
         <div class="mb-1">
+            <v-card class="pa-4">
+                <v-card-title>
+                    Overveiew
+                </v-card-title>
+                <v-row>
+                    <v-col :cols="12">
+                        <div class="row">
+                            <div v-for="(item, index) in menusOverview" :key="index"
+                                class="col-12 col-md-4 col-sm-6 col-xs-6">
+                                <MenuOverview :title="item.title" :icon="item.icon" :path="item.path"></MenuOverview>
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-card>
+        </div>
+        <div class="mb-2 pa-0">
+            <!-- <v-card  >
+                <v-card-text class="m-0"> -->
+            <v-row class="p-0">
+                <v-col cols="6">
+                    <!-- <card-grouping>
+                        <template v-slot:slot1>
+                            <card-on-top :title="options.labels[0]" :value="numberFormatter(series[0])" color="#E6F7FF">
+                                <template v-slot:icon>
+                                    <v-icon color="#51A5EB">mdi-receipt-text</v-icon>
+                                </template>
+                            </card-on-top>
+                        </template>
+                        <template v-slot:slot2>
+                            <card-on-top :title="options.labels[1]" :value="numberFormatter(series[1])" color="#FEF0ED">
+                                <template v-slot:icon>
+                                    <v-icon color="#F7C3B8">mdi mdi-truck-cargo-container</v-icon>
+                                </template>
+                            </card-on-top>
+                        </template>
+                        <template v-slot:slot3>
+                            <card-on-top :title="options.labels[2]" :value="numberFormatter(series[2])" color="#E7F1F2">
+                                <template v-slot:icon>
+                                    <v-icon color="#518F8A">mdi mdi-currency-usd</v-icon>
+                                </template>
+                            </card-on-top>
+                        </template>
+                        <template v-slot:slot4>
+                            <card-on-top :title="options.labels[3]" :value="numberFormatter(series[3])" color="#FBE8EA">
+                                <template v-slot:icon>
+                                    <v-icon color="#C37D85">mdi mdi-file-document-refresh</v-icon>
+                                </template>
+
+                            </card-on-top>
+                        </template>
+                    </card-grouping> -->
+                </v-col>
+                <v-col cols="3">
+                    <!-- <v-card @click="$router.push('/admin/minstock')">
+
+                        <v-card-title>ລາຍການສິນຄ້າ ໃຫ້ໝົດ</v-card-title>
+                        <v-card-text>
+                            <v-chip v-for="item in minProductList" :key="item.pro_id" class="ma-2" color="red"
+                                text-color="white">
+                                {{ item.pro_name }} -
+                                <span class="mdi mdi-tag-multiple-outline"></span>
+                                <v-icon start icon="mdi-label" style="font-weight: bold;"> {{ item.pro_card_count
+                                }}</v-icon>
+
+
+
+                            </v-chip>
+                        </v-card-text>
+                    </v-card> -->
+                    <!-- <v-card class="mx-auto" max-width="300">
+                        <v-list :items="items" item-title="name" item-value="id"></v-list>
+                    </v-card> -->
+                    <!-- <v-card class="mx-auto" max-width="300">
+                        <v-list :items="minProductList" item-title="pro_name" item-value="pro_id"></v-list>
+                    </v-card> -->
+                </v-col>
+                <v-col cols="3">
+
+                </v-col>
+            </v-row>
+            <!-- </v-card-text>
+            </v-card> -->
+        </div>
+        <div>
             <v-row>
-                <v-col cols="4" md="6" sm="12" xl="12">
+                <v-col :cols="6">
+                    ....
+                </v-col>
+                <v-col :cols="6">
+                    ....
+                </v-col>
+            </v-row>
+        </div>
+        <div class="mb-1">
+            <v-row>
+                <v-col cols="4" md="6" sm="12" xl="6">
                     <v-card>
                         <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart>
                     </v-card>
                 </v-col>
-                <v-col cols="8" md="6" sm="12" xl="12" v-if="dailyState">
+                <v-col cols="8" md="6" sm="12" xl="6" v-if="dailyState">
                     <v-card>
                         <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
                     </v-card>
                 </v-col>
             </v-row>
         </div>
+        <MinStockCard />
 
     </div>
 </template>
@@ -46,22 +142,60 @@ import { generateColorShades } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
 import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
-import Menu from '~/components/menu'
+import MinStockCard from '~/components/minStockCard'
+import MenuOverview from '~/components/menuOverview'
 
 export default {
-    components: { CardOnTop, CampaignCard, CardGrouping, Menu },
+    components: { CardOnTop, CampaignCard, CardGrouping, MenuOverview, MinStockCard },
     middleware: 'auths',
     data() {
         return {
-            saleValue: 0,
-            menuKey: 1,
+            // imageSrc: require('@/assets/images/icon/pos-terminal.png'),
             menus: [
                 {
                     title: 'POS',
                     icon: 'mdi-network-pos',
                     path: '/pos'
-                }
+                },
+                {
+                    title: 'Invoice',
+                    icon: 'mdi-file-document-multiple',
+                    path: '/admin/ordersFromPos'
+                },
+                {
+                    title: 'ລູກຫນີ້',
+                    icon: 'mdi-credit-card-refresh-outline',
+                    path: '/admin/ordersFromPosCredit'
+                },
+                {
+                    title: 'Stock',
+                    icon: 'mdi-warehouse',
+                    path: '/admin/ordersFromPosCredit'
+                },
             ],
+            menusOverview: [
+                {
+                    title: 'ຍອດຂາຍມື້ນິ (KIP)',
+                    icon: 'mdi-calendar',
+                    path: '/pos'
+                },
+                {
+                    title: 'ຍອດຂາຍເດືອນນີ້ - ' + '( ' + new Date().toDateString().split(" ")[1] + '/' + new Date().toDateString().split(" ")[3] + ' ) KIP',
+                    icon: 'mdi-calendar',
+                    path: '/admin/ordersFromPos'
+                },
+                {
+                    title: 'ຍອດຂາຍໝົດປີ - ' + new Date().toDateString().split(" ")[3] + ' KIP',
+                    icon: 'mdi-calendar',
+                    path: '/admin/ordersFromPosCredit'
+                },
+
+            ],
+            saleValue: 0,
+            // minProductList: [{
+            //     pro_name:'',
+            //     pro_id:1
+            // }],
             items: [
                 {
                     name: 'Item #1',
@@ -118,7 +252,7 @@ export default {
                 //     }
                 // },
                 title: {
-                    text: 'ສິນຄ້າຂາຍດີ',
+                    text: 'ໝວດສິນຄ້າຂາຍດີ',
                     align: 'center',
                     style: {
                         fontSize: '16px',
@@ -191,7 +325,6 @@ export default {
         numberFormatter(value) {
             return getFormatNum(value)
         },
-
         async minStockProduct() {
             this.isloading = true
             await this.$axios

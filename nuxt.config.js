@@ -121,6 +121,7 @@ export default {
       themes: {
         light: {
           primary: '#01532B',
+          // primary: '#99EFA8',
           secondary: '#CCDDD5',
           lightprimary: '#C0FFEC',
         },

@@ -49,12 +49,35 @@
 
           </v-toolbar>
         </template>
-        <template v-slot:[`item.function`]="{ item }">
+        <!-- <template v-slot:[`item.function`]="{ item }">
           <v-btn @click="triggerCardForm(item)">
             <i class="fas fa-cart-plus"></i>
             ເພີ່ມສະຕັອກ
           </v-btn>
           <v-btn @click="editStock(item)">
+            <i class="fas fa-dolly"></i>
+            ເບິ່ງສະຕັອກ
+          </v-btn>
+        </template> -->
+        <template v-slot:[`item.functionEdit`]="{ item }">
+          <v-btn class="primary" variant="outlined" @click="editItem(item)
+          isedit = true">
+            <v-icon small class="mr-2">
+              mdi-pencil
+            </v-icon>
+            ແກ້ໄຂ
+          </v-btn>
+        </template>
+        <template v-slot:[`item.functionStock`]="{ item }">
+
+          <v-btn class="primary" variant="outlined" @click="triggerCardForm(item)">
+            <i class="fas fa-cart-plus"></i>
+            ເພີ່ມສະຕັອກ
+          </v-btn>
+
+        </template>
+        <template v-slot:[`item.functionStockView`]="{ item }">
+          <v-btn class="primary" variant="outlined" @click="editStock(item)">
             <i class="fas fa-dolly"></i>
             ເບິ່ງສະຕັອກ
           </v-btn>
@@ -68,7 +91,16 @@
 
         </template>
         <template v-slot:[`item.pro_card_count`]="{ item }">
-         <p style="color: red;font-weight: bold;">{{ formatNumber(item.pro_card_count) }}</p> 
+          <!-- <p style="color: red;font-weight: bold;">{{ formatNumber(item.pro_card_count) }}</p> -->
+          {{ formatNumber(item.pro_card_count) }}
+
+        </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-chip class="ma-2"
+            :color="verifyStockStatus(item.minStock, item.pro_card_count).includes(`In`) ? `green` : verifyStockStatus(item.minStock, item.pro_card_count).includes(`Out`) ? `red` : `orange`"
+            text-color="white">
+            {{ verifyStockStatus(item.minStock, item.pro_card_count) }}
+          </v-chip>
 
         </template>
       </v-data-table>
@@ -112,17 +144,30 @@ export default {
           value: 'pro_id',
         },
         { text: 'ຊື່ສິນຄ້າ', align: 'center', value: 'pro_name' },
-        { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
+        // { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
         { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },
         { text: 'ລາຄາ', align: 'center', value: 'pro_price' },
         // { text: 'ສະຖານະ', align: 'center', value: 'pro_status' },
-        { text: 'Stock', align: 'center', value: 'pro_card_count' },
         { text: 'ສະຕັອກຂັ້ນຕ່ຳ', align: 'center', value: 'minStock' },
+        { text: 'Stock', align: 'center', value: 'pro_card_count' },
+        { text: 'Status', align: 'center', value: 'status' },
         { text: 'cost', align: 'center', value: 'pro_cost_price' },
         {
-          text: 'ຟັງຊັ່ນ',
+          text: 'ສະຕັອກ',
           align: 'center',
-          value: 'function',
+          value: 'functionStock',
+          sortable: false,
+        },
+        {
+          text: 'ເບິ່ງສະຕັອກ',
+          align: 'center',
+          value: 'functionStockView',
+          sortable: false,
+        },
+        {
+          text: 'ແກ້ໄຂ',
+          align: 'center',
+          value: 'functionEdit',
           sortable: false,
         },
       ],
@@ -146,6 +191,11 @@ export default {
     formatNumber(value) {
       return getFormatNum(value)
     },
+    verifyStockStatus(minStock, CurStock) {
+      let statusStock = '';
+      CurStock == 0 ? statusStock = 'Out of stock' : minStock < CurStock ? statusStock = 'In stock' : statusStock = 'Low stock'
+      return statusStock;
+    },
     triggerCardForm(payload) {
       this.stockFormKey += 1;
       this.selectedProductId = payload.pro_id;
@@ -158,7 +208,7 @@ export default {
       await this.$axios
         .get('product_f')
         .then((res) => {
-          this.loaddata =[]
+          this.loaddata = []
           for (const iterator of res.data) {
             if (iterator['minStock'] > iterator['card_count']) {
               this.loaddata.push({
@@ -174,7 +224,11 @@ export default {
                 pro_outlet: iterator.outlet,
                 pro_outlet_name: iterator.outlet_name,
                 minStock: iterator.minStock,
-                function: iterator.pro_id,
+                // function: iterator.pro_id,
+                functionEdit: iterator.pro_id,
+                functionStock: iterator.pro_id,
+                functionStockView: iterator.pro_id,
+                status: iterator.pro_id,
               })
             }
           }

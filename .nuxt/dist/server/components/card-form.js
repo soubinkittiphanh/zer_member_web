@@ -126,7 +126,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 345:
+/***/ 342:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -134,7 +134,7 @@ exports.modules = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(53);
+var VBtn = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
 var VCard = __webpack_require__(100);
@@ -246,7 +246,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=7132c242&
 
 // EXTERNAL MODULE: ./common/index.js
-var common = __webpack_require__(17);
+var common = __webpack_require__(21);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=script&lang=js&
 

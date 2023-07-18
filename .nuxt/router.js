@@ -19,7 +19,6 @@ const _fea63afa = () => interopDefault(import('../pages/admin/client/index.vue' 
 const _6e83a9a5 = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
 const _574e60d4 = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
 const _5d7d59e6 = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
-const _62854632 = () => interopDefault(import('../pages/admin/dashboard/index.vue' /* webpackChunkName: "pages/admin/dashboard/index" */))
 const _300d3e47 = () => interopDefault(import('../pages/admin/login/index.vue' /* webpackChunkName: "pages/admin/login/index" */))
 const _3f9e2182 = () => interopDefault(import('../pages/admin/logout/index.vue' /* webpackChunkName: "pages/admin/logout/index" */))
 const _28458292 = () => interopDefault(import('../pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
@@ -120,10 +119,6 @@ export const routerOptions = {
     path: "/admin/customer_request",
     component: _5d7d59e6,
     name: "admin-customer_request"
-  }, {
-    path: "/admin/dashboard",
-    component: _62854632,
-    name: "admin-dashboard"
   }, {
     path: "/admin/login",
     component: _300d3e47,

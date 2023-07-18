@@ -1,7 +1,7 @@
 <template>
 
     <div class="mx-3">
-        <h2 class="mt-2 grey--text"> ສິນຄ້າຂາຍດີ</h2>
+        <h2 class="mt-2 grey--text"> ໝວດສິນຄ້າຂາຍດີ</h2>
         <v-container fluid>
             <v-row>
                 <v-col cols="12" sm="3" v-for="productItem in productList" :key="productItem.img_path">

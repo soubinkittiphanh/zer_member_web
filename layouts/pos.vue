@@ -16,7 +16,8 @@
             <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
                 prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted />
             <v-spacer />
-            <v-btn class="flexcol ml-2 mr-2" icon v-for="item in menuItems" :key="item.title" :to="item.path" @click="item.method">
+            <v-btn class="flexcol ml-2 mr-2" icon v-for="item in menuItems" :key="item.title" :to="item.path"
+                @click="item.method">
                 <v-icon> {{ item.icon }} </v-icon>
                 <span class="mt-2">{{ item.title }}</span>
             </v-btn>
@@ -42,7 +43,7 @@
         </v-main>
 
         <v-navigation-drawer app right clipped width="450" fixed>
-            <div style=" height: 100%; position: relative;">
+            <div style=" height: 100%; position: relative;" >
                 <!-- <v-card> -->
                 <div>
                     <v-row align="center">
@@ -113,7 +114,7 @@
                         </template>
                     </v-simple-table>
                 </v-card>
-                <div style="position: absolute; bottom: 0px;">
+                <div style="position: absolute; bottom: 0px;width: 100%;">
                     <v-divider></v-divider>
                     <div>
                         <v-list-item>
@@ -127,13 +128,6 @@
                         </v-list-item>
                     </div>
                     <v-divider></v-divider>
-                    <!-- <div>
-                        <v-row align="center" no-gutters>
-                            <v-col cols="12" class="de-flext">
-                                <span v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </span>
-                            </v-col>
-                        </v-row>
-                    </div> -->
                     <div class="d-flex  align-center pa-4">
                         <span class="pr-4">ສ່ວນຫລຸດ:</span>
                         <v-text-field :rules="priceRule" type="number" v-model="discount" clearable clear-icon="mdi-close"
@@ -153,7 +147,7 @@
                     </v-row>
                     <v-card-actions>
                         <v-btn rounded color="primary" block large @click="postTransaction">
-                            <v-icon size="25" left> mdi-cash-100 </v-icon> POST
+                            <v-icon size="25" left> mdi-cash-100 </v-icon> PAY
                         </v-btn>
                     </v-card-actions>
                 </div>
@@ -206,7 +200,7 @@ export default {
                     title: 'Home',
                     path: '/admin',
                     icon: 'mdi-home-circle-outline',
-                    method:()=>{},
+                    method: () => { },
                 },
 
                 {
@@ -214,32 +208,32 @@ export default {
                     path: '/admin/ordersFromPos',
                     // $router.push('/admin/ordersFromPos')
                     icon: 'mdi-reorder-horizontal',
-                    method:()=>{},
+                    method: () => { },
                 },
                 {
                     title: 'Quotation',
                     path: '',
                     icon: 'mdi-receipt-text-clock-outline',
-                    method:this.setQuotation
+                    method: this.setQuotation
                 },
                 {
                     title: 'history',
                     path: '',
                     icon: 'mdi-history',
-                    method:()=>{},
+                    method: () => { },
                 },
                 {
                     title: 'Help',
                     path: '',
                     icon: 'mdi-help-circle-outline',
-                    method:()=>{},
+                    method: () => { },
                 },
 
                 {
                     title: 'Logout',
                     path: '/admin/logout',
                     icon: 'mdi-logout',
-                    method:()=>{},
+                    method: () => { },
                 },
             ],
             currencyList: [],
@@ -322,8 +316,6 @@ export default {
     },
     methods: {
         async setQuotation() {
-
-
             if (this.isloading) return;
             const today = new Date();
             this.isloading = true;
@@ -351,9 +343,6 @@ export default {
                     swalError2(this.$swal, "Error", er)
                 })
             this.isloading = false;
-
-
-
         },
         openCustomerDialog() {
             this.customerDialog = true;
@@ -379,7 +368,8 @@ export default {
                 .post('/api/sale/create', this.saleHeader)
                 .then((res) => {
                     this.lastTransactionSaleHeaderId = res.data.split('-')[1]
-                    swalSuccess(this.$swal, "Succeed", res.data)
+                    this.newOrder()
+                    swalSuccess(this.$swal, "Succeed", res.data.split('-')[0])
                 })
                 .catch((er) => {
                     swalError2(this.$swal, "Error", er)
@@ -448,7 +438,6 @@ export default {
                 .get('/api/currency/find')
                 .then((res) => {
                     for (const iterator of res.data) {
-                        console.log("Currency", iterator);
                         this.currencyList.push(iterator);
                     }
                 })
@@ -475,8 +464,9 @@ export default {
             this.isloading = false
         },
         newOrder() {
-            confirmSwal(this.$swal, 'ທ່ານ ກຳລັງຈະຂື້ນບິນໃໝ່', this.clearCart)
-
+            //  ********** Enable below line to confirm before clear ***********//
+            // confirmSwal(this.$swal, 'ທ່ານ ກຳລັງຈະຂື້ນບິນໃໝ່', this.clearCart)
+            this.clearCart()
         }
     }
 }

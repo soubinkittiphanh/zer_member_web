@@ -28,7 +28,7 @@
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
           </v-col>
           <v-col cols="6" class="text-right">
-            <v-btn size="large" variant="outlined" @click="rebuildStock" class="primary">
+            <v-btn class="primary" size="large" variant="outlined" @click="rebuildStock">
               Rebuild stock<span class="mdi mdi-update"></span>
             </v-btn>
           </v-col>
@@ -52,18 +52,25 @@
 
           </v-toolbar>
         </template>
-        <template v-slot:[`item.function`]="{ item }">
-          <v-icon small class="mr-2" @click="
-            editItem(item)
-          isedit = true
-            ">
-            mdi-pencil
-          </v-icon>
-          <v-btn @click="triggerCardForm(item)">
+        <template v-slot:[`item.functionEdit`]="{ item }">
+          <v-btn class="primary" variant="outlined" @click="editItem(item)
+          isedit = true">
+            <v-icon small class="mr-2">
+              mdi-pencil
+            </v-icon>
+            ແກ້ໄຂ
+          </v-btn>
+        </template>
+        <template v-slot:[`item.functionStock`]="{ item }">
+
+          <v-btn class="primary" variant="outlined" @click="triggerCardForm(item)">
             <i class="fas fa-cart-plus"></i>
             ເພີ່ມສະຕັອກ
           </v-btn>
-          <v-btn @click="editStock(item)">
+
+        </template>
+        <template v-slot:[`item.functionStockView`]="{ item }">
+          <v-btn class="primary" variant="outlined" @click="editStock(item)">
             <i class="fas fa-dolly"></i>
             ເບິ່ງສະຕັອກ
           </v-btn>
@@ -77,14 +84,23 @@
 
         </template>
         <template v-slot:[`item.pro_card_count`]="{ item }">
-          <v-chip v-if="item['pro_card_count'] < item['minStock']" class="ma-2" color="red" text-color="white">
+          <!-- <v-chip v-if="item['pro_card_count'] < item['minStock']" class="ma-2" color="red" text-color="white">
             <v-icon start icon="mdi-label" style="font-weight: bold;"> {{ item.pro_card_count }}</v-icon>
-          </v-chip>
-          <p v-else>{{ item.pro_card_count }}</p>
+          </v-chip> -->
+
+          {{ item.pro_card_count }}
+
 
         </template>
         <template v-slot:[`item.minStock`]="{ item }">
           {{ formatNumber(item.minStock) }}
+        </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-chip class="ma-2"
+            :color="verifyStockStatus(item.minStock, item.pro_card_count).includes(`In`) ? `green` : verifyStockStatus(item.minStock, item.pro_card_count).includes(`Out`) ? `red` : `orange`"
+            text-color="white">
+            {{ verifyStockStatus(item.minStock, item.pro_card_count) }}
+          </v-chip>
 
         </template>
       </v-data-table>
@@ -128,17 +144,30 @@ export default {
           value: 'pro_id',
         },
         { text: 'ຊື່ສິນຄ້າ', align: 'center', value: 'pro_name' },
-        { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
+        // { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
         { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },
         { text: 'ລາຄາ', align: 'center', value: 'pro_price' },
         // { text: 'ສະຖານະ', align: 'center', value: 'pro_status' },
         { text: 'minStock', align: 'center', value: 'minStock' },
         { text: 'Stock', align: 'center', value: 'pro_card_count' },
+        { text: 'Status', align: 'center', value: 'status' },
         { text: 'cost', align: 'center', value: 'pro_cost_price' },
         {
-          text: 'ຟັງຊັ່ນ',
+          text: 'ສະຕັອກ',
           align: 'center',
-          value: 'function',
+          value: 'functionStock',
+          sortable: false,
+        },
+        {
+          text: 'ເບິ່ງສະຕັອກ',
+          align: 'center',
+          value: 'functionStockView',
+          sortable: false,
+        },
+        {
+          text: 'ແກ້ໄຂ',
+          align: 'center',
+          value: 'functionEdit',
           sortable: false,
         },
       ],
@@ -161,6 +190,11 @@ export default {
   methods: {
     formatNumber(value) {
       return getFormatNum(value)
+    },
+    verifyStockStatus(minStock, CurStock) {
+      let statusStock = '';
+      CurStock == 0 ? statusStock = 'Out of stock' : minStock < CurStock ? statusStock = 'In stock' : statusStock = 'Low stock'
+      return statusStock;
     },
     triggerCardForm(payload) {
       this.stockFormKey += 1;
@@ -190,7 +224,10 @@ export default {
               pro_outlet: el.outlet,
               pro_outlet_name: el.outlet_name,
               minStock: el.minStock,
-              function: el.pro_id,
+              functionEdit: el.pro_id,
+              functionStock: el.pro_id,
+              functionStockView: el.pro_id,
+              status: el.pro_id,
             }
           })
         })

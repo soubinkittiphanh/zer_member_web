@@ -37,11 +37,11 @@ export default {
           title: 'ຫນ້າຫລັກ',
           to: '/admin',
         },
-        {
-          icon: 'mdi-finance',
-          title: 'Dashboard',
-          to: '/admin/dashboard',
-        },
+        // {
+        //   icon: 'mdi-finance',
+        //   title: 'Dashboard',
+        //   to: '/admin/dashboard',
+        // },
         {
           icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
@@ -95,11 +95,11 @@ export default {
           title: 'ລາຍການໃບບິນຍົກເລີກ ',
           to: '/admin/cancel_order',
         },
-        {
-          icon: 'mdi-account-key',
-          title: 'ຈັດການຜູ້ໃຊ້ງານ',
-          to: '/admin/member',
-        },
+        // {
+        //   icon: 'mdi-account-key',
+        //   title: 'ຈັດການຜູ້ໃຊ້ງານ',
+        //   to: '/admin/member',
+        // },
         // {
         //   icon: 'mdi-bike-fast',
         //   title: 'ຈັດການRider',
@@ -110,11 +110,11 @@ export default {
         //   title: 'Campaign manager',
         //   to: '/admin/campaign',
         // },
-        {
-          icon: 'mdi-account',
-          title: 'ຈັດການລູກຄ້າ',
-          to: '/admin/customer',
-        },
+        // {
+        //   icon: 'mdi-account',
+        //   title: 'ຈັດການລູກຄ້າ',
+        //   to: '/admin/customer',
+        // },
         {
           // <i class="fas fa-money-check-edit-alt"></i>
           icon: 'mdi-receipt-text-arrow-right-outline',

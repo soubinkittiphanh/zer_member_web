@@ -1,7 +1,7 @@
 exports.ids = [18];
 exports.modules = {
 
-/***/ 313:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69,12 +69,22 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 351:
+/***/ 334:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "img/pos-terminal.e54d71e.png";
+
+/***/ }),
+
+/***/ 383:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAvatar/VAvatar.js
+var VAvatar = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
 var VCard = __webpack_require__(100);
@@ -83,18 +93,19 @@ var VCard = __webpack_require__(100);
 var components_VCard = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VHover/VHover.js
-var VHover = __webpack_require__(313);
+var VHover = __webpack_require__(308);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/VIcon.js
 var VIcon = __webpack_require__(46);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=template&id=693974c4&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=template&id=061d2fcf&
 
 
 
 
 
-var menuvue_type_template_id_693974c4_render = function render() {
+
+var menuvue_type_template_id_061d2fcf_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VHover["a" /* default */], {
@@ -116,7 +127,17 @@ var menuvue_type_template_id_693974c4_render = function render() {
           }
         }, [_c(components_VCard["c" /* VCardText */], {
           staticClass: "text-center"
-        }, [_c('div', [_c(VIcon["a" /* default */], [_vm._v(" " + _vm._s(_vm.icon) + " ")])], 1), _vm._v(" "), _c('div', {
+        }, [_c('div', [_c(VAvatar["a" /* default */], {
+          attrs: {
+            "color": "primary",
+            "size": "70"
+          }
+        }, [_c(VIcon["a" /* default */], {
+          attrs: {
+            "dark": "",
+            "size": "50"
+          }
+        }, [_vm._v("\n                            " + _vm._s(_vm.icon) + "\n                        ")])], 1)], 1), _vm._v(" "), _c('div', {
           staticClass: "font-weight-meduim primary--text"
         }, [_vm._v("\n                    " + _vm._s(_vm.title) + "\n                ")])])], 1)];
       }
@@ -125,7 +146,7 @@ var menuvue_type_template_id_693974c4_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/menu/index.vue?vue&type=template&id=693974c4&
+// CONCATENATED MODULE: ./components/menu/index.vue?vue&type=template&id=061d2fcf&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=script&lang=js&
 /* harmony default export */ var menuvue_type_script_lang_js_ = ({
@@ -143,6 +164,11 @@ var staticRenderFns = [];
       type: String,
       default: ''
     }
+  },
+  data() {
+    return {
+      imageSrc: __webpack_require__(334)
+    };
   },
   methods: {
     takeMeTo() {
@@ -168,7 +194,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_menuvue_type_script_lang_js_,
-  menuvue_type_template_id_693974c4_render,
+  menuvue_type_template_id_061d2fcf_render,
   staticRenderFns,
   false,
   injectStyles,

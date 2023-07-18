@@ -1,14 +1,22 @@
 <template>
     <div>
-        <v-hover v-slot:default="{ hover }" open-delay="100" >
-            <v-card :elevation="hover ? 16 : 0" outlined  @click="takeMeTo">
-                <!-- <v-img max-width="250" max-height="100"
-                    :src="`${host}/uploads/${imagePath}`" :lazy-src="`${host}/uploads/${imagePath}`">
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+            <v-card :elevation="hover ? 16 : 0" outlined @click="takeMeTo">
+                <!-- <v-img 
+                    :src="imageSrc"  height="80">
                 </v-img> -->
 
                 <v-card-text class="text-center">
+
+
                     <div>
-                        <v-icon> {{ icon }} </v-icon>
+                        <!-- <v-icon> {{ icon }} </v-icon> -->
+                        <v-avatar color="primary" size="70">
+                            <v-icon dark size="50">
+                                {{icon}}
+                            </v-icon>
+                        </v-avatar>
+                        <!-- <v-btn class="ma-2" color="indigo" :icon="icon"></v-btn> -->
                     </div>
                     <div class="font-weight-meduim primary--text ">
                         {{ title }}
@@ -22,7 +30,7 @@
 <script>
 
 export default {
-    name: 'menu-card', 
+    name: 'menu-card',
     props: {
 
         title: {
@@ -39,9 +47,15 @@ export default {
         },
 
     },
-     
-    methods:{
-        takeMeTo(){
+    data() {
+        return {
+            imageSrc: require('@/assets/image/pos-terminal.png'),
+        };
+    },
+
+    methods: {
+
+        takeMeTo() {
             this.$router.push(this.path)
         },
     }

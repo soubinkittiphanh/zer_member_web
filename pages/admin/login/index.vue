@@ -91,7 +91,7 @@ export default {
           return
         }
         if (response.data.accessToken) {
-          this.$router.push('/pos')
+          this.$router.push('/admin')
         } else {
           console.log('No token')
           this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
