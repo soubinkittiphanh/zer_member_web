@@ -170,7 +170,7 @@ export default {
                 {
                     title: 'Stock',
                     icon: 'mdi-warehouse',
-                    path: '/admin/ordersFromPosCredit'
+                    path: '/admin/product/productlist'
                 },
             ],
             menusOverview: [

@@ -16,7 +16,7 @@
             <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
                 prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted />
             <v-spacer />
-            <v-btn class="flexcol ml-2 mr-2" icon v-for="item in menuItems" :key="item.title" :to="item.path"
+            <v-btn class="flexcol ml-10" icon v-for="item in menuItems" :key="item.title" :to="item.path"
                 @click="item.method">
                 <v-icon> {{ item.icon }} </v-icon>
                 <span class="mt-2">{{ item.title }}</span>
@@ -216,18 +216,18 @@ export default {
                     icon: 'mdi-receipt-text-clock-outline',
                     method: this.setQuotation
                 },
-                {
-                    title: 'history',
-                    path: '',
-                    icon: 'mdi-history',
-                    method: () => { },
-                },
-                {
-                    title: 'Help',
-                    path: '',
-                    icon: 'mdi-help-circle-outline',
-                    method: () => { },
-                },
+                // {
+                //     title: 'history',
+                //     path: '',
+                //     icon: 'mdi-history',
+                //     method: () => { },
+                // },
+                // {
+                //     title: 'Help',
+                //     path: '',
+                //     icon: 'mdi-help-circle-outline',
+                //     method: () => { },
+                // },
 
                 {
                     title: 'Logout',
@@ -255,7 +255,8 @@ export default {
                 return this.stateValue;
             },
             set(value) {
-                this.SetSearchKeyword(value);
+                const lowerCaseSearchValue = value.toLowerCase();
+                this.SetSearchKeyword(lowerCaseSearchValue);
             }
         },
 

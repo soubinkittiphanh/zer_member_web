@@ -71,8 +71,14 @@
   "OrderSumaryCard": {
     "description": "Auto imported from components/orderSumaryCard.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  "OrderSumaryCardPos": {
+    "description": "Auto imported from components/orderSumaryCardPos.vue"
+  },
+  "CardCampaignCard": {
+    "description": "Auto imported from components/card/campaignCard.vue"
+  },
+  "CardForm": {
+    "description": "Auto imported from components/card/cardForm.vue"
   },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
@@ -83,17 +89,14 @@
   "AccountingGeneralLedgerForm": {
     "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
-  "CardCampaignCard": {
-    "description": "Auto imported from components/card/campaignCard.vue"
-  },
-  "CardForm": {
-    "description": "Auto imported from components/card/cardForm.vue"
-  },
   "CustomerForm": {
     "description": "Auto imported from components/customer/CustomerForm.vue"
   },
   "CustomerList": {
     "description": "Auto imported from components/customer/CustomerList.vue"
+  },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
   },
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
@@ -110,11 +113,11 @@
   "MinStockCard": {
     "description": "Auto imported from components/minStockCard/index.vue"
   },
-  "PoForm": {
-    "description": "Auto imported from components/po/PoForm.vue"
-  },
   "PosCateogoryList": {
     "description": "Auto imported from components/pos/CateogoryList.vue"
+  },
+  "PoForm": {
+    "description": "Auto imported from components/po/PoForm.vue"
   },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"

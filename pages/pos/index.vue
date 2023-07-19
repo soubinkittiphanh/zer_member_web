@@ -64,14 +64,14 @@ export default {
             }
             // element.age > 25 || element.name.includes("a")
             if (this.currenctSelectedCategoryId == 9999) {
-                return this.productList.filter(item => item.pro_name.includes(this.searchKeyword));
+                return this.productList.filter(item => item.pro_name.toLowerCase().includes(this.searchKeyword));
             }
-            return this.productList.filter(item => item.pro_category === this.currenctSelectedCategoryId && item.pro_name.includes(this.searchKeyword));
+            return this.productList.filter(item => item.pro_category === this.currenctSelectedCategoryId && item.pro_name.toLowerCase().includes(this.searchKeyword));
 
         },
-        setSearchKeyWorkdZ() {
-            return this.setSearchKeyWorkd
-        }
+        // setSearchKeyWorkdZ() {
+        //     return this.setSearchKeyWorkd
+        // }
     },
     methods: {
         async fetchData() {

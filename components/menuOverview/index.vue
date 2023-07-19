@@ -1,6 +1,7 @@
 <template>
     <div>
-        <v-hover v-slot:default="{ hover }" open-delay="100">
+        <!-- <v-hover v-slot:default="{ hover }" open-delay="100">  Bae request to disable hove-->
+            <!-- <v-card :elevation="hover ? 16 : 0" outlined @click="takeMeTo"> -->
             <v-card :elevation="hover ? 16 : 0" outlined @click="takeMeTo">
                 <!-- <v-img 
                     :src="imageSrc"  height="80">
@@ -33,7 +34,7 @@
                     </div> -->
                 </v-card-text>
             </v-card>
-        </v-hover>
+        <!-- </v-hover> -->
     </div>
 </template>
   

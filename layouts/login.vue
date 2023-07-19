@@ -1,6 +1,6 @@
 <template>
-    <v-main>
-        <v-container>
+    <v-main style="background-color: #EFF2F9;">
+        <v-container >
             <Nuxt />
         </v-container>
     </v-main>
@@ -15,5 +15,6 @@
 /* h1 {
     font-size: 20px;
 } */
+
 </style>
   

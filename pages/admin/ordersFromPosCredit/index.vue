@@ -5,7 +5,7 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <v-dialog v-model="dialogOrderDetail" max-width="1024" persistent>
+    <v-dialog v-model="dialogOrderDetail" max-width="1024" >
       <OrderDetailPos :key="componentKey" :header="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPos>
     </v-dialog>
@@ -58,9 +58,9 @@
         <v-layout row wrap>
           <v-row>
             <v-col cols="6" lg="6">
-              <order-sumary-card :showTotal="true"
+              <order-sumary-card-pos :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ',
+                  'title': 'ຍອດບິນ ຕິດຫນີ້',
                   'amount': getFormatNum(creditOrder.length),
                   'sale': getFormatNum(totalSale),
                   'discount': getFormatNum(totalDiscount),
@@ -69,13 +69,13 @@
 
                 }">
 
-              </order-sumary-card>
+              </order-sumary-card-pos>
             </v-col>
-            <v-col cols="6" lg="6">
+            <!-- <v-col cols="6" lg="6">
               <order-sumary-card i :orderDetail="this.unpaidCodOrder">
 
               </order-sumary-card>
-            </v-col>
+            </v-col> -->
           </v-row>
         </v-layout>
       </v-card-text>
@@ -143,10 +143,11 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate,getFirstDayOfMonth } from '~/common'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
+import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 export default {
-  components: { OrderDetailPos },
+  components: { OrderDetailPos, OrderSumaryCardPos },
   middleware: 'auths',
   data() {
     return {
@@ -266,9 +267,10 @@ export default {
         .toISOString()
         .substr(0, 10),
       dateFormatted: this.formatDate(
-        new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-          .toISOString()
-          .substr(0, 10)
+        // new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        //   .toISOString()
+        //   .substr(0, 10)
+        getFirstDayOfMonth() // this will get first date of current month
       ),
       dateFormatted2: this.formatDate(
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000)

@@ -60,26 +60,27 @@
           </v-btn>
         </template> -->
         <template v-slot:[`item.functionEdit`]="{ item }">
-          <v-btn class="primary" variant="outlined" @click="editItem(item)
+          <v-btn  variant="outlined" @click="editItem(item)
           isedit = true">
             <v-icon small class="mr-2">
-              mdi-pencil
+              <!-- mdi-pencil -->
             </v-icon>
             ແກ້ໄຂ
           </v-btn>
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
 
-          <v-btn class="primary" variant="outlined" @click="triggerCardForm(item)">
+          <v-btn   variant="outlined" @click="triggerCardForm(item)">
             <i class="fas fa-cart-plus"></i>
-            ເພີ່ມສະຕັອກ
+            <!-- ເພີ່ມສະຕັອກ -->
           </v-btn>
 
         </template>
         <template v-slot:[`item.functionStockView`]="{ item }">
-          <v-btn class="primary" variant="outlined" @click="editStock(item)">
-            <i class="fas fa-dolly"></i>
-            ເບິ່ງສະຕັອກ
+          <v-btn  variant="outlined" @click="editStock(item)">
+            <!-- <i class="fas fa-dolly"></i> -->
+            <i class="fas fa-eye"></i>
+            <!-- ເບິ່ງສະຕັອກ -->
           </v-btn>
         </template>
         <template v-slot:[`item.pro_cost_price`]="{ item }">
@@ -153,7 +154,7 @@ export default {
         { text: 'Status', align: 'center', value: 'status' },
         { text: 'cost', align: 'center', value: 'pro_cost_price' },
         {
-          text: 'ສະຕັອກ',
+          text: 'ເພີ່ມສະຕັອກ',
           align: 'center',
           value: 'functionStock',
           sortable: false,
