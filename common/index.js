@@ -298,7 +298,7 @@ export const hostName = () => {
   const baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
   // const  baseURL = 'https://nodejsclusters-124154-0.cloudclusters.net' // ***UAT*** JACK42 API
   // const baseURL = 'http://localhost:8080' // ***UAT*** 
-  // return baseURL;
+  return baseURL;
 }
 export const dayCount = (fromDate) => {
   const sqlTojsDate = fromDate.split('-')[1] + '/' + fromDate.split('-')[2] + '/' + fromDate.split('-')[0]
