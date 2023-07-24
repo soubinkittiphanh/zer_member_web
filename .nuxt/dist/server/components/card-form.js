@@ -1,7 +1,7 @@
 exports.ids = [9];
 exports.modules = {
 
-/***/ 275:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -126,7 +126,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 343:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -134,30 +134,30 @@ exports.modules = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(54);
+var VBtn = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(100);
+var VCard = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(11);
+var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js
-var VContainer = __webpack_require__(264);
+var VContainer = __webpack_require__(270);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(265);
+var VDialog = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(275);
+var VForm = __webpack_require__(282);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(266);
+var VSpacer = __webpack_require__(272);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=template&id=7132c242&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=template&id=6d8690f6&
 
 
 
@@ -169,7 +169,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var cardFormvue_type_template_id_7132c242_render = function render() {
+var cardFormvue_type_template_id_6d8690f6_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -243,15 +243,19 @@ var cardFormvue_type_template_id_7132c242_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=7132c242&
+// CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=6d8690f6&
 
 // EXTERNAL MODULE: ./common/index.js
-var common = __webpack_require__(21);
+var common = __webpack_require__(17);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=script&lang=js&
 
 /* harmony default export */ var cardFormvue_type_script_lang_js_ = ({
   props: {
+    id: {
+      type: Number,
+      default: 0
+    },
     productId: {
       type: Number,
       default: ''
@@ -292,7 +296,8 @@ var common = __webpack_require__(21);
           inputter: this.user.id,
           product_id: this.productId,
           stocCardkQty: this.stockQty,
-          totalCost: this.stockCost
+          totalCost: this.stockCost,
+          productId: this.id
         };
         console.log("Pre fly ", stockData);
         // return
@@ -314,7 +319,7 @@ var common = __webpack_require__(21);
 // CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=script&lang=js&
  /* harmony default export */ var card_cardFormvue_type_script_lang_js_ = (cardFormvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./components/card/cardForm.vue
 
@@ -329,7 +334,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   card_cardFormvue_type_script_lang_js_,
-  cardFormvue_type_template_id_7132c242_render,
+  cardFormvue_type_template_id_6d8690f6_render,
   staticRenderFns,
   false,
   injectStyles,

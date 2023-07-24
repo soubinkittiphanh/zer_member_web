@@ -9,7 +9,7 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <card-form :key="stockFormKey" :product-id="selectedProductId" :cost="selectedProductCost"
+      <card-form :key="stockFormKey" :product-id="selectedProductId" :id="selectedId" :cost="selectedProductCost"
         :product-name="selectedProductName" @close-dialog="isstock = false" @reload="rebuildStock"></card-form>
     </v-dialog>
     <v-dialog v-model="editProductForm" max-width="1200px">
@@ -122,7 +122,7 @@ export default {
       productFormCreate: false,
       productFormKey: 1,
       isstock: false,
-      selectedProductId: '',
+      selectedId: 0,
       selectedProductCost: 0,
       selectedProductName: '',
       isloading: false,
@@ -140,6 +140,11 @@ export default {
       selectedProductId: null,
       stockFormKey: 1,
       headers: [
+        {
+          text: 'key',
+          align: 'center',
+          value: 'id',
+        },
         {
           text: 'ໄອດີ',
           align: 'center',
@@ -201,6 +206,7 @@ export default {
     triggerCardForm(payload) {
       this.stockFormKey += 1;
       this.selectedProductId = payload.pro_id;
+      this.selectedId = payload.id;
       this.selectedProductCost = payload.pro_cost_price;
       this.selectedProductName = payload.pro_name;
       this.isstock = true;
@@ -214,6 +220,7 @@ export default {
           this.loaddata = res.data.map((el) => {
             console.log(el.pro_id)
             return {
+              id: el.id,
               pro_id: el.pro_id,
               pro_name: el.pro_name,
               pro_price: el.pro_price,

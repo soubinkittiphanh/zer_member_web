@@ -25,12 +25,16 @@
 
         <v-navigation-drawer app v-model="drawer" clipped width="180">
             <v-list dense>
-                <v-subheader>Catagories {{ selectedCategoryId }}</v-subheader>
+                <v-subheader style="font-size: larger; font-weight: bold;">ຮ້ານຈີ່ທັນ </v-subheader>
                 <v-list-item-group v-model="selectedItem" color="primary">
+                    <v-divider></v-divider>
                     <v-list-item v-for="(item, i) in categoryList" :key="i">
+                        <!-- <v-chip class="ma-2" style="background-color: transparent; outline: 1px solid gray;" variant="outlined" > -->
                         <v-list-item-content>
-                            <v-list-item-title>{{ item.categ_name }}</v-list-item-title>
+                            <v-list-item-title style="font-size: large;">{{ item.categ_name }}</v-list-item-title>
+                            <v-divider></v-divider>
                         </v-list-item-content>
+                        <!-- </v-chip> -->
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -43,28 +47,48 @@
         </v-main>
 
         <v-navigation-drawer app right clipped width="450" fixed>
-            <div style=" height: 100%; position: relative;" >
+            <div style=" height: 100%; position: relative;">
                 <!-- <v-card> -->
-                <div>
-                    <v-row align="center">
-                        <v-col cols="4">
-                            <v-btn block size="x-large" variant="outlined" @click="openCustomerDialog" class="primary">
-                                ເລືອກລູກຄ້າ<span class="mdi mdi-account-box"></span>
-                            </v-btn>
-                        </v-col>
-                        <v-col cols="4">
-                            <v-chip class="ma-2" color="success" variant="outlined">
-                                {{ currenctCustomer == null ? '' : currenctCustomer.name }}
-                            </v-chip>
+                <div style="width: 100%;">
+                    <div>
 
-                        </v-col>
-                        <v-col cols="4">
-                            <v-btn block size="x-large" variant="outlined" @click="newOrder" class="primary">
-                                ອອກບິນໃໝ່<span class="mdi mdi-receipt-text-check"></span>
-                            </v-btn>
-                        </v-col>
 
-                    </v-row>
+                        <v-row align="center" class="pa-2">
+                            <v-col cols="2">
+                                <!-- <v-btn block size="x-large" variant="outlined" @click="openCustomerDialog" class="primary"> -->
+                                <v-btn @click="openCustomerDialog" style="background-color: #F5F5F5;">
+                                    <!-- <span class="mdi mdi-plus"></span> ເລືອກລູກຄ້າ -->
+                                    <v-icon class="mdi mdi-account-plus-outline"></v-icon>
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="4" style="text-align: left;">
+                                <v-chip class="ma-2" color="success" variant="outlined">
+                                    {{ currenctCustomer == null ? '' : currenctCustomer.name }}
+                                </v-chip>
+
+
+                            </v-col>
+                            <v-col cols="2">
+                                <!-- <v-btn block size="x-large" variant="outlined" @click="newOrder" class="primary"> -->
+                                <v-btn @click="() => { }" style="background-color: #F5F5F5;text-align: right;">
+                                    <!-- <span  class="mdi mdi-file-document-refresh-outline" ></span> -->
+                                    <!-- <v-icon class="mdi mdi-file-document-refresh-outline" hidden></v-icon> -->
+                                    <!-- <v-img width="10"></v-img> -->
+                                    <v-icon class="mdi mdi-bike-fast"></v-icon>
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="2" style="text-align: right;">
+                                <!-- <v-btn block size="x-large" variant="outlined" @click="newOrder" class="primary"> -->
+                                <v-btn @click="newOrder" style="background-color: #F5F5F5;text-align: right;">
+                                    <!-- <span  class="mdi mdi-file-document-refresh-outline" ></span> -->
+                                    <!-- <v-icon class="mdi mdi-file-document-refresh-outline" hidden></v-icon> -->
+                                    <!-- <v-img width="10"></v-img> -->
+                                    <v-icon color="" class="mdi mdi-file-document-refresh-outline"></v-icon>
+                                </v-btn>
+                            </v-col>
+
+                        </v-row>
+                    </div>
                 </div>
                 <!-- amount list -->
                 <v-simple-table class="pa-0 ma-0">
@@ -115,10 +139,19 @@
                     </v-simple-table>
                 </v-card>
                 <div style="position: absolute; bottom: 0px;width: 100%;">
-                    <v-divider></v-divider>
+
+                    <v-divider class="mb-1"></v-divider>
                     <div>
+                        <!-- <div class="d-flex  align-center pa-4"> -->
+                        <!-- <span class="pr-4">ສ່ວນຫລຸດ:</span> -->
+                        <!-- <v-text-field :rules="priceRule" type="number" v-model="discount" clearable clear-icon="mdi-close"
+                            prepend-inner-icon="mdi-sale-outline" dense outlined label="ສ່ວນຫລຸດ"
+                            :placeholder="discount.toString()" solo-inverted hide-details /> -->
+                        <v-text-field :rules="priceRule" v-model.number="discount" label="ສ່ວນຫລຸດ" filled rounded
+                            dense></v-text-field>
+                        <!-- </div> -->
                         <v-list-item>
-                            <h5>ລວມລາຄາ:</h5>
+                            <h3>ລວມ:</h3>
                             <v-spacer></v-spacer>
                             <v-chip v-for="item in currencyList" :key="item.id" class="ma-2" color="green"
                                 text-color="white">
@@ -127,24 +160,38 @@
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
-                    <v-divider></v-divider>
-                    <div class="d-flex  align-center pa-4">
-                        <span class="pr-4">ສ່ວນຫລຸດ:</span>
-                        <v-text-field :rules="priceRule" type="number" v-model="discount" clearable clear-icon="mdi-close"
-                            prepend-inner-icon="mdi-sale-outline" dense outlined label="ສ່ວນຫລຸດ"
-                            :placeholder="discount.toString()" solo-inverted hide-details />
-                    </div>
-                    <v-row class="ml-2" no-gutters>
-                        <v-col v-for="(item, index) in paymentList" :key="index" cols="auto" class="pa-1">
-                            <v-btn v-if="item.id == currentPayment" depressed color="primary"
+                    <v-divider class="mb-1"></v-divider>
+                    <v-row>
+                        <v-col :cols="12">
+                            <div class="row" >
+                                <div v-for="(item, index) in paymentList" :key="index"
+                                    class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
+                                    <PaymentCard :id="item.id" :title="item.payment_code" :icon="item.icon" :path="item.path">
+                                        <template v-slot:iconSlot>
+                                            <img :src="svgIcon" height="30">
+                                        </template>
+                                    </PaymentCard>
+                                </div>
+                            </div>
+                        </v-col>
+                    </v-row>
+                    <!-- <v-row class="ml-2" no-gutters>
+                        <v-col v-for="(item, index) in paymentList" :key="index" cols="auto" class="pa-1"> -->
+                    <!-- <v-btn v-if="item.id == currentPayment" depressed color="primary"
                                 @click="selectePaymentMethod(item.id)">
                                 {{ item.payment_code }}
                             </v-btn>
                             <v-btn v-else outlined depressed @click="selectePaymentMethod(item.id)">
                                 {{ item.payment_code }}
-                            </v-btn>
+                            </v-btn> -->
+
+                    <!-- <PaymentCard :title="item.payment_code" :icon="item.icon" :path="item.path">
+                                <template v-slot:iconSlot>
+                                    <img :src="svgIcon" height="40">
+                                </template>
+                            </PaymentCard>
                         </v-col>
-                    </v-row>
+                    </v-row> -->
                     <v-card-actions>
                         <v-btn rounded color="primary" block large @click="postTransaction">
                             <v-icon size="25" left> mdi-cash-100 </v-icon> PAY
@@ -160,6 +207,7 @@
 <script>
 import CustomerList from '~/components/customer/CustomerList.vue'
 import Quotation from '~/components/quotation'
+import html2canvas from 'html2canvas'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 import { getFormatNum, jsDateToMysqlDate } from '~/common'
 // import { jsPDF } from 'jspdf-invoice-template'
@@ -172,6 +220,7 @@ export default {
     data() {
         return {
             search: '',
+            svgIcon: require('~/assets/icons/cash.svg'),
             lastTransactionSaleHeaderId: 0,
             drawer: true,
             isloading: false,
@@ -277,6 +326,7 @@ export default {
                         price: iterator.pro_price,
                         discount: 0,
                         productId: iterator.id,
+                        productKey: iterator.id,
                         unitId: 1,
                         total: iterator.qty * iterator.pro_price,
                         isActive: true
@@ -317,7 +367,13 @@ export default {
     },
     methods: {
         async setQuotation() {
-            if (this.isloading) return;
+            if (this.isloading || this.generateSaleLine == 0) {
+                if (this.generateSaleLine == 0) {
+                    swalError2(this.$swal, "Error", 'ກະລຸນາເລືອກສິນຄ້າ 1 ຢ່າງຂື້ນໄປ')
+                }
+                return;
+            }
+
             const today = new Date();
             this.isloading = true;
             this.saleHeader.discount = this.discount
@@ -352,7 +408,12 @@ export default {
             SetSearchKeyword: 'SetSearchKeyword',
         }),
         async postTransaction() {
-            if (this.isloading) return;
+            if (this.isloading || this.generateSaleLine == 0) {
+                if (this.generateSaleLine == 0) {
+                    swalError2(this.$swal, "Error", 'ກະລຸນາເລືອກສິນຄ້າ 1 ຢ່າງຂື້ນໄປ')
+                }
+                return;
+            }
             const today = new Date();
             this.isloading = true;
             this.saleHeader.isActive = true
@@ -373,7 +434,7 @@ export default {
                     swalSuccess(this.$swal, "Succeed", res.data.split('-')[0])
                 })
                 .catch((er) => {
-                    swalError2(this.$swal, "Error", er)
+                    swalError2(this.$swal, "Error", er.response.data)
                 })
             this.isloading = false;
         },
@@ -468,7 +529,42 @@ export default {
             //  ********** Enable below line to confirm before clear ***********//
             // confirmSwal(this.$swal, 'ທ່ານ ກຳລັງຈະຂື້ນບິນໃໝ່', this.clearCart)
             this.clearCart()
-        }
+        },
+        generatePrintView() {
+            html2canvas(document.querySelector('#body-print')).then((canvas) => {
+                const ctx = canvas.getContext('2d')
+                ctx.font = '30px NotoSans, sans-serif'
+                ctx.webkitImageSmoothingEnabled = true
+                ctx.mozImageSmoothingEnabled = true
+                ctx.imageSmoothingEnabled = true
+                const dataURL = canvas.toDataURL()
+
+                const windowContent = `
+          <!DOCTYPE html>
+          <html>
+          <head
+          <title></title>
+          </head>
+          <body>
+            <img width="100%" src="${dataURL}"/>
+          </body>
+          </html>
+        `
+
+                const printWin = window.open(
+                    '',
+                    '',
+                    'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+                )
+                printWin.document.open()
+                printWin.document.write(windowContent)
+
+                setTimeout(() => {
+                    printWin.print()
+                    printWin.close()
+                }, 1000)
+            })
+        },
     }
 }
 </script>

@@ -9,7 +9,7 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <card-form :key="stockFormKey" :product-id="selectedProductId" :cost="selectedProductCost"
+      <card-form :key="stockFormKey" :product-id="selectedProductId" :id="selectedId" :cost="selectedProductCost"
         :product-name="selectedProductName" @close-dialog="isstock = false" @reload="rebuildStock"></card-form>
     </v-dialog>
     <v-dialog v-model="editProductForm" max-width="1200px">
@@ -121,7 +121,7 @@ export default {
       productFormCreate: false,
       productFormKey: 1,
       isstock: false,
-      selectedProductId: '',
+      selectedId:'',
       selectedProductCost: 0,
       selectedProductName: '',
       isloading: false,
@@ -139,6 +139,11 @@ export default {
       selectedProductId: null,
       stockFormKey: 1,
       headers: [
+        {
+          text: 'key',
+          align: 'center',
+          value: 'id',
+        },
         {
           text: 'ໄອດີ',
           align: 'center',
@@ -200,6 +205,7 @@ export default {
     triggerCardForm(payload) {
       this.stockFormKey += 1;
       this.selectedProductId = payload.pro_id;
+      this.selectedId = payload.id;
       this.selectedProductCost = payload.pro_cost_price;
       this.selectedProductName = payload.pro_name;
       this.isstock = true;
@@ -213,6 +219,7 @@ export default {
           for (const iterator of res.data) {
             if (iterator['minStock'] > iterator['card_count']) {
               this.loaddata.push({
+                id: iterator.id,
                 pro_id: iterator.pro_id,
                 pro_name: iterator.pro_name,
                 pro_price: iterator.pro_price,

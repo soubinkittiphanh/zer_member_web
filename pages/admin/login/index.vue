@@ -186,7 +186,8 @@ h2 {
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  background: #EFF2F9;
+  /* background: #EFF2F9; */
+  background: #CCDDD5;
   /* color: red; */
 
 }

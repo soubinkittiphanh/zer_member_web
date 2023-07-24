@@ -6,16 +6,20 @@
         </v-dialog>
         <!-- <h1>Dash board</h1> -->
         <div class="mb-1">
-            <v-card class="pa-4">
-                <v-card-title>
-                    Shortcut
+            <v-card class="pa-4" style="background-color: transparent;">
+                <v-card-title style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
+                    SHORTCUT
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
                         <div class="row">
                             <div v-for="(item, index) in menus" :key="index"
-                                class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
-                                <Menu :title="item.title" :icon="item.icon" :path="item.path"></Menu>
+                                class="col-12 col-md-4 col-sm-6 col-xs-6 text-center">
+                                <Menu :title="item.title" :icon="item.icon" :path="item.path">
+                                    <template v-slot:iconSlot>
+                                             <img :src="item.svgIcon" height="80">
+                                    </template>
+                                </Menu>
                             </div>
                         </div>
                     </v-col>
@@ -23,16 +27,17 @@
             </v-card>
         </div>
         <div class="mb-1">
-            <v-card class="pa-4">
-                <v-card-title>
-                    Overveiew
+            <v-card class="pa-1" style="background-color: transparent;">
+                <v-card-title  style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
+                    OVERVIEW
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
                         <div class="row">
                             <div v-for="(item, index) in menusOverview" :key="index"
                                 class="col-12 col-md-4 col-sm-6 col-xs-6">
-                                <MenuOverview :title="item.title" :icon="item.icon" :path="item.path"></MenuOverview>
+                                <MenuOverview :title="item.title" :icon="item.icon" :path="item.path" :total="item.total">
+                                </MenuOverview>
                             </div>
                         </div>
                     </v-col>
@@ -154,40 +159,59 @@ export default {
             menus: [
                 {
                     title: 'POS',
-                    icon: 'mdi-network-pos',
-                    path: '/pos'
+                    // icon: 'mdi-network-pos',
+                    svgIcon: require('~/assets/icons/cashier_2.svg'),
+                    path: '/pos',
                 },
                 {
                     title: 'Invoice',
-                    icon: 'mdi-file-document-multiple',
+                    // icon: 'mdi-file-document-multiple',
+                    svgIcon: require('~/assets/icons/invoice.svg'),
                     path: '/admin/ordersFromPos'
                 },
                 {
                     title: 'ລູກຫນີ້',
-                    icon: 'mdi-credit-card-refresh-outline',
+                    // icon: 'mdi-credit-card-refresh-outline',
+                    svgIcon: require('~/assets/icons/pay-card.svg'),
                     path: '/admin/ordersFromPosCredit'
                 },
                 {
                     title: 'Stock',
-                    icon: 'mdi-warehouse',
+                    // icon: 'mdi-warehouse',
+                    svgIcon: require('~/assets/icons/stock.svg'),
                     path: '/admin/product/productlist'
+                },
+                {
+                    title: 'ລາຍການ ການຂາຍ',
+                    // icon: 'mdi-warehouse',
+                    svgIcon: require('~/assets/icons/responsive.svg'),
+                    path: '/admin/product/ordersFromPos'
+                },
+                {
+                    title: 'Customer',
+                    // icon: 'mdi-warehouse',
+                    svgIcon: require('~/assets/icons/patient.svg'),
+                    path: '/admin/client'
                 },
             ],
             menusOverview: [
                 {
                     title: 'ຍອດຂາຍມື້ນິ (KIP)',
                     icon: 'mdi-calendar',
-                    path: '/pos'
+                    path: '',
+                    total: '590,000',
                 },
                 {
                     title: 'ຍອດຂາຍເດືອນນີ້ - ' + '( ' + new Date().toDateString().split(" ")[1] + '/' + new Date().toDateString().split(" ")[3] + ' ) KIP',
                     icon: 'mdi-calendar',
-                    path: '/admin/ordersFromPos'
+                    path: '',
+                    total: '1,300,000',
                 },
                 {
                     title: 'ຍອດຂາຍໝົດປີ - ' + new Date().toDateString().split(" ")[3] + ' KIP',
                     icon: 'mdi-calendar',
-                    path: '/admin/ordersFromPosCredit'
+                    path: '',
+                    total: '5,000,000',
                 },
 
             ],
@@ -262,12 +286,12 @@ export default {
                 ],
 
                 barSeries: [],
-                theme: {
-                    monochrome: {
-                        enabled: true,
-                        color: '#01532B',
-                    }
-                },
+                // theme: {
+                //     monochrome: {
+                //         enabled: true,
+                //         color: '#01532B',
+                //     }
+                // },
                 chart: {
                     type: 'pie',
                     width: '100%',
@@ -389,8 +413,8 @@ export default {
                 .then((res) => {
                     console.log("Data ", res.data[0]);
                     for (const iterator of res.data) {
-                        // this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
-                        this.barOptionsForDailyStat.colors.push('#01532B') // ******* Original
+                        this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
+                        // this.barOptionsForDailyStat.colors.push('#01532B') // ******* Original
 
                         this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
                         this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)

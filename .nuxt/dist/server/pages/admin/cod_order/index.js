@@ -1,7 +1,7 @@
-exports.ids = [52,6,16,27,38];
+exports.ids = [53,6,16,28,39];
 exports.modules = {
 
-/***/ 272:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9,19 +9,19 @@ exports.modules = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(54);
+var VBtn = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(100);
+var VCard = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(11);
+var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(101);
+var VDivider = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(266);
+var VSpacer = __webpack_require__(272);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/DialogClassicMessage.vue?vue&type=template&id=3accbb34&
 
@@ -68,7 +68,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/DialogClassicMessage.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_DialogClassicMessagevue_type_script_lang_js_ = (DialogClassicMessagevue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./components/DialogClassicMessage.vue
 
@@ -93,7 +93,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 275:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -218,13 +218,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 280:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(281);
+var content = __webpack_require__(288);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -232,7 +232,7 @@ __webpack_require__(5).default("265ccd52", content, true)
 
 /***/ }),
 
-/***/ 281:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -247,13 +247,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 282:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(283);
+var content = __webpack_require__(290);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -261,7 +261,7 @@ __webpack_require__(5).default("ec842454", content, true)
 
 /***/ }),
 
-/***/ 283:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -276,13 +276,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 284:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(285);
+var content = __webpack_require__(292);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -290,7 +290,7 @@ __webpack_require__(5).default("075924a4", content, true)
 
 /***/ }),
 
-/***/ 285:
+/***/ 292:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -305,13 +305,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 286:
+/***/ 293:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(287);
+var content = __webpack_require__(294);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -319,7 +319,7 @@ __webpack_require__(5).default("0f7d136a", content, true)
 
 /***/ }),
 
-/***/ 287:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -334,13 +334,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 288:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(289);
+var content = __webpack_require__(296);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -348,7 +348,7 @@ __webpack_require__(5).default("4dc2915a", content, true)
 
 /***/ }),
 
-/***/ 289:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -363,16 +363,289 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 314:
+/***/ 313:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
+var VAutocomplete = __webpack_require__(276);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
+var VBtn = __webpack_require__(55);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
+var VCard = __webpack_require__(102);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
+var components_VCard = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
+var VDialog = __webpack_require__(271);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
+var VForm = __webpack_require__(282);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
+var VSpacer = __webpack_require__(272);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
+var VTextField = __webpack_require__(28);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CancelTicketForm.vue?vue&type=template&id=735971cb&
+
+
+
+
+
+
+
+
+
+var CancelTicketFormvue_type_template_id_735971cb_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', [_c(VDialog["a" /* default */], {
+    attrs: {
+      "hide-overlay": "",
+      "persistent": "",
+      "width": "300"
+    },
+    model: {
+      value: _vm.isSubmitting,
+      callback: function ($$v) {
+        _vm.isSubmitting = $$v;
+      },
+      expression: "isSubmitting"
+    }
+  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], {
+    staticClass: "pa-4"
+  }, [_vm._v("\n        ຍົກເລີກບິນ\n        "), _c(VForm["a" /* default */], {
+    ref: "myform",
+    on: {
+      "submit": function ($event) {
+        $event.preventDefault();
+        return _vm.submitForm.apply(null, arguments);
+      }
+    }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "disabled": "",
+      "label": "ເລກທີອໍເດີ ",
+      "required": ""
+    },
+    model: {
+      value: _vm.form.orderId,
+      callback: function ($$v) {
+        _vm.$set(_vm.form, "orderId", $$v);
+      },
+      expression: "form.orderId"
+    }
+  }), _vm._v(" "), _c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "name",
+      "item-value": "id",
+      "items": _vm.cancelList,
+      "label": "ເລືອກການຍົກເລີກ *"
+    },
+    model: {
+      value: _vm.form.status,
+      callback: function ($$v) {
+        _vm.$set(_vm.form, "status", $$v);
+      },
+      expression: "form.status"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "ເຫດຜົນການຍົກເລີກ"
+    },
+    model: {
+      value: _vm.form.reason,
+      callback: function ($$v) {
+        _vm.$set(_vm.form, "reason", $$v);
+      },
+      expression: "form.reason"
+    }
+  })], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "primary",
+      "text": ""
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.$emit('close-dialog');
+      }
+    }
+  }, [_vm._v("\n                ຍົກເລີກ\n            ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "primary",
+      "text": ""
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.submitForm(true);
+      }
+    }
+  }, [_vm._v("\n                ບັນທຶກ\n            ")])], 1)], 1)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/CancelTicketForm.vue?vue&type=template&id=735971cb&
+
+// EXTERNAL MODULE: ./common/index.js
+var common = __webpack_require__(17);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CancelTicketForm.vue?vue&type=script&lang=js&
+
+/* harmony default export */ var CancelTicketFormvue_type_script_lang_js_ = ({
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    id: {
+      type: Number,
+      require: false
+    }
+  },
+  data() {
+    return {
+      isSubmitting: false,
+      form: {
+        orderId: this.id,
+        status: 2,
+        userId: '',
+        reason: ''
+      },
+      cancelList: [{
+        id: 2,
+        name: 'cancel'
+      }, {
+        id: 3,
+        name: 'return'
+      }]
+    };
+  },
+  computed: {
+    codeRule() {
+      return [v => !!v || 'ກະລຸນາ ໃສ່ຕົວຫຍໍ້ ສາຂາ ', v => v && v.length >= 2 || 'ຕົວຫຍໍ້ສາຂາຕ້ອງ 3 ຕົວຂື້ນໄປ'];
+    },
+    nameRule() {
+      return [v => !!v || 'ກະລຸນາ ຊື່ ສາຂາ '];
+    },
+    numberRule() {
+      return [v => /^[0-9]*$/.test(v) || !v || 'ໃສ່ໄດ້ສະເພາະ ຕົວເລກ'];
+    }
+  },
+  mounted() {
+    this.loadBranch();
+  },
+  computed: {
+    user() {
+      return this.$auth.user || '';
+    }
+  },
+  methods: {
+    async submitForm() {
+      if (this.$refs.myform.validate() && !this.isSubmitting) {
+        this.isSubmitting = true;
+        // Form is valid, submit it
+        if (this.isEdit) {
+          await this.$axios.put(`branch/update/${this.id}`, this.form).then(response => {
+            if (response.status == 200) {
+              Object(common["i" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              // Reload data
+              this.refreshData();
+            } else {
+              Object(common["h" /* swalError2 */])(this.$swal, "Error", response.data);
+            }
+          }).catch(error => {
+            Object(common["h" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+          });
+        } else {
+          // orderId, status, userId, reason
+          this.form.userId = this.user.id;
+          console.log("Form: ", this.form);
+          // return;
+          await this.$axios.put("/api/changeOrderStatus", this.form).then(response => {
+            if (response.status == 200) {
+              Object(common["i" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              // Reload data
+              this.refreshData();
+            } else {
+              Object(common["h" /* swalError2 */])(this.$swal, "Error", response.data);
+            }
+          }).catch(error => {
+            Object(common["h" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+          });
+        }
+      } else {
+        // Form is invalid, do not submit
+        return;
+      }
+      this.isSubmitting = false;
+    },
+    async loadBranch() {
+      if (this.id && this.isEdit) {
+        this.isSubmitting = true;
+        await this.$axios.get(`branch/find/${this.id}`).then(response => {
+          // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+          this.form = response.data;
+        }).catch(error => {
+          Object(common["h" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+        });
+        this.isSubmitting = false;
+      }
+    },
+    refreshData() {
+      this.$emit('refresh');
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/CancelTicketForm.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_CancelTicketFormvue_type_script_lang_js_ = (CancelTicketFormvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(9);
+
+// CONCATENATED MODULE: ./components/CancelTicketForm.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_CancelTicketFormvue_type_script_lang_js_,
+  CancelTicketFormvue_type_template_id_735971cb_render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "05b4ba2e"
+  
+)
+
+/* harmony default export */ var CancelTicketForm = __webpack_exports__["default"] = (component.exports);
+
+/* nuxt-component-imports */
+installComponents(component, {LoadingIndicator: __webpack_require__(111).default})
+
+
+/***/ }),
+
+/***/ 316:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerTitle.sass
-var VDatePickerTitle = __webpack_require__(282);
+var VDatePickerTitle = __webpack_require__(289);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/index.js
-var VIcon = __webpack_require__(9);
+var VIcon = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/colorable/index.js
 var colorable = __webpack_require__(7);
@@ -492,7 +765,7 @@ var helpers = __webpack_require__(0);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerHeader.sass
-var VDatePickerHeader = __webpack_require__(284);
+var VDatePickerHeader = __webpack_require__(291);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/index.js
 var VBtn = __webpack_require__(30);
@@ -702,7 +975,7 @@ function createNativeLocaleFormatter(locale, options, substrOptions = {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerTable.sass
-var VDatePickerTable = __webpack_require__(286);
+var VDatePickerTable = __webpack_require__(293);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/directives/touch/index.js
 var touch = __webpack_require__(114);
@@ -1162,7 +1435,7 @@ function isLeapYear(year) {
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VDatePicker/VDatePickerYears.sass
-var VDatePickerYears = __webpack_require__(288);
+var VDatePickerYears = __webpack_require__(295);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePickerYears.js
  // Mixins
@@ -1246,13 +1519,13 @@ var VDatePickerYears = __webpack_require__(288);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VPicker/VPicker.sass
-var VPicker = __webpack_require__(280);
+var VPicker = __webpack_require__(287);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VCard/VCard.sass
-var VCard = __webpack_require__(138);
+var VCard = __webpack_require__(139);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/elevatable/index.js
-var elevatable = __webpack_require__(60);
+var elevatable = __webpack_require__(61);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VPicker/VPicker.js
 
@@ -2281,280 +2554,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 315:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
-var VAutocomplete = __webpack_require__(269);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(54);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(100);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(11);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(265);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(275);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(266);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
-var VTextField = __webpack_require__(28);
-
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CancelTicketForm.vue?vue&type=template&id=735971cb&
-
-
-
-
-
-
-
-
-
-var CancelTicketFormvue_type_template_id_735971cb_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', [_c(VDialog["a" /* default */], {
-    attrs: {
-      "hide-overlay": "",
-      "persistent": "",
-      "width": "300"
-    },
-    model: {
-      value: _vm.isSubmitting,
-      callback: function ($$v) {
-        _vm.isSubmitting = $$v;
-      },
-      expression: "isSubmitting"
-    }
-  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], {
-    staticClass: "pa-4"
-  }, [_vm._v("\n        ຍົກເລີກບິນ\n        "), _c(VForm["a" /* default */], {
-    ref: "myform",
-    on: {
-      "submit": function ($event) {
-        $event.preventDefault();
-        return _vm.submitForm.apply(null, arguments);
-      }
-    }
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "disabled": "",
-      "label": "ເລກທີອໍເດີ ",
-      "required": ""
-    },
-    model: {
-      value: _vm.form.orderId,
-      callback: function ($$v) {
-        _vm.$set(_vm.form, "orderId", $$v);
-      },
-      expression: "form.orderId"
-    }
-  }), _vm._v(" "), _c(VAutocomplete["a" /* default */], {
-    attrs: {
-      "item-text": "name",
-      "item-value": "id",
-      "items": _vm.cancelList,
-      "label": "ເລືອກການຍົກເລີກ *"
-    },
-    model: {
-      value: _vm.form.status,
-      callback: function ($$v) {
-        _vm.$set(_vm.form, "status", $$v);
-      },
-      expression: "form.status"
-    }
-  }), _vm._v(" "), _c(VTextField["a" /* default */], {
-    attrs: {
-      "label": "ເຫດຜົນການຍົກເລີກ"
-    },
-    model: {
-      value: _vm.form.reason,
-      callback: function ($$v) {
-        _vm.$set(_vm.form, "reason", $$v);
-      },
-      expression: "form.reason"
-    }
-  })], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "primary",
-      "text": ""
-    },
-    on: {
-      "click": function ($event) {
-        return _vm.$emit('close-dialog');
-      }
-    }
-  }, [_vm._v("\n                ຍົກເລີກ\n            ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "primary",
-      "text": ""
-    },
-    on: {
-      "click": function ($event) {
-        return _vm.submitForm(true);
-      }
-    }
-  }, [_vm._v("\n                ບັນທຶກ\n            ")])], 1)], 1)], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/CancelTicketForm.vue?vue&type=template&id=735971cb&
-
-// EXTERNAL MODULE: ./common/index.js
-var common = __webpack_require__(21);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CancelTicketForm.vue?vue&type=script&lang=js&
-
-/* harmony default export */ var CancelTicketFormvue_type_script_lang_js_ = ({
-  props: {
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    id: {
-      type: Number,
-      require: false
-    }
-  },
-  data() {
-    return {
-      isSubmitting: false,
-      form: {
-        orderId: this.id,
-        status: 2,
-        userId: '',
-        reason: ''
-      },
-      cancelList: [{
-        id: 2,
-        name: 'cancel'
-      }, {
-        id: 3,
-        name: 'return'
-      }]
-    };
-  },
-  computed: {
-    codeRule() {
-      return [v => !!v || 'ກະລຸນາ ໃສ່ຕົວຫຍໍ້ ສາຂາ ', v => v && v.length >= 2 || 'ຕົວຫຍໍ້ສາຂາຕ້ອງ 3 ຕົວຂື້ນໄປ'];
-    },
-    nameRule() {
-      return [v => !!v || 'ກະລຸນາ ຊື່ ສາຂາ '];
-    },
-    numberRule() {
-      return [v => /^[0-9]*$/.test(v) || !v || 'ໃສ່ໄດ້ສະເພາະ ຕົວເລກ'];
-    }
-  },
-  mounted() {
-    this.loadBranch();
-  },
-  computed: {
-    user() {
-      return this.$auth.user || '';
-    }
-  },
-  methods: {
-    async submitForm() {
-      if (this.$refs.myform.validate() && !this.isSubmitting) {
-        this.isSubmitting = true;
-        // Form is valid, submit it
-        if (this.isEdit) {
-          await this.$axios.put(`branch/update/${this.id}`, this.form).then(response => {
-            if (response.status == 200) {
-              Object(common["i" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-              // Reload data
-              this.refreshData();
-            } else {
-              Object(common["h" /* swalError2 */])(this.$swal, "Error", response.data);
-            }
-          }).catch(error => {
-            Object(common["h" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
-          });
-        } else {
-          // orderId, status, userId, reason
-          this.form.userId = this.user.id;
-          console.log("Form: ", this.form);
-          // return;
-          await this.$axios.put("/api/changeOrderStatus", this.form).then(response => {
-            if (response.status == 200) {
-              Object(common["i" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-              // Reload data
-              this.refreshData();
-            } else {
-              Object(common["h" /* swalError2 */])(this.$swal, "Error", response.data);
-            }
-          }).catch(error => {
-            Object(common["h" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
-          });
-        }
-      } else {
-        // Form is invalid, do not submit
-        return;
-      }
-      this.isSubmitting = false;
-    },
-    async loadBranch() {
-      if (this.id && this.isEdit) {
-        this.isSubmitting = true;
-        await this.$axios.get(`branch/find/${this.id}`).then(response => {
-          // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-          this.form = response.data;
-        }).catch(error => {
-          Object(common["h" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
-        });
-        this.isSubmitting = false;
-      }
-    },
-    refreshData() {
-      this.$emit('refresh');
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/CancelTicketForm.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_CancelTicketFormvue_type_script_lang_js_ = (CancelTicketFormvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
-
-// CONCATENATED MODULE: ./components/CancelTicketForm.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_CancelTicketFormvue_type_script_lang_js_,
-  CancelTicketFormvue_type_template_id_735971cb_render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "05b4ba2e"
-  
-)
-
-/* harmony default export */ var CancelTicketForm = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(111).default})
-
-
-/***/ }),
-
-/***/ 316:
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2567,7 +2567,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(111).default
 
 /***/ }),
 
-/***/ 336:
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2575,19 +2575,19 @@ installComponents(component, {LoadingIndicator: __webpack_require__(111).default
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(100);
+var VCard = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(11);
+var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(268);
+var VCol = __webpack_require__(274);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(101);
+var VDivider = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(267);
+var VRow = __webpack_require__(273);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCard.vue?vue&type=template&id=143a1440&
 
@@ -2677,7 +2677,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/orderSumaryCard.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_orderSumaryCardvue_type_script_lang_js_ = (orderSumaryCardvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./components/orderSumaryCard.vue
 
@@ -2702,13 +2702,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 363:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(399);
+var content = __webpack_require__(411);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2720,7 +2720,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 388:
+/***/ 394:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2728,28 +2728,28 @@ module.exports.__inject__ = function (context) {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(54);
+var VBtn = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(100);
+var VCard = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(11);
+var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js
-var VContainer = __webpack_require__(264);
+var VContainer = __webpack_require__(270);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(265);
+var VDialog = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(275);
+var VForm = __webpack_require__(282);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 2 modules
-var VSelect = __webpack_require__(12);
+var VSelect = __webpack_require__(14);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(266);
+var VSpacer = __webpack_require__(272);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
@@ -3051,7 +3051,7 @@ var myUtil = __webpack_require__(112);
 // CONCATENATED MODULE: ./components/Settlement.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Settlementvue_type_script_lang_js_ = (Settlementvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./components/Settlement.vue
 
@@ -3080,19 +3080,19 @@ installComponents(component, {LoadingIndicator: __webpack_require__(111).default
 
 /***/ }),
 
-/***/ 398:
+/***/ 410:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(363);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(368);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_12a4b4ba_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 399:
+/***/ 411:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3107,7 +3107,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 446:
+/***/ 460:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3115,34 +3115,34 @@ module.exports = ___CSS_LOADER_EXPORT___;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(54);
+var VBtn = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(100);
+var VCard = __webpack_require__(102);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(11);
+var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(268);
+var VCol = __webpack_require__(274);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 12 modules
-var VDataTable = __webpack_require__(270);
+var VDataTable = __webpack_require__(277);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePicker.js + 19 modules
-var VDatePicker = __webpack_require__(314);
+var VDatePicker = __webpack_require__(316);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(265);
+var VDialog = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(316);
+var VLayout = __webpack_require__(320);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VMenu/VMenu.js + 1 modules
 var VMenu = __webpack_require__(106);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(267);
+var VRow = __webpack_require__(273);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
@@ -3553,7 +3553,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/cod_order/index.vue?vue&type=template&id=12a4b4ba&scoped=true&
 
 // EXTERNAL MODULE: ./components/CancelTicketForm.vue + 4 modules
-var CancelTicketForm = __webpack_require__(315);
+var CancelTicketForm = __webpack_require__(313);
 
 // EXTERNAL MODULE: ./util/myUtil.js
 var myUtil = __webpack_require__(112);
@@ -3838,7 +3838,7 @@ var myUtil = __webpack_require__(112);
 // CONCATENATED MODULE: ./pages/admin/cod_order/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var admin_cod_ordervue_type_script_lang_js_ = (cod_ordervue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./pages/admin/cod_order/index.vue
 
@@ -3846,7 +3846,7 @@ var componentNormalizer = __webpack_require__(10);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(398)
+  var style0 = __webpack_require__(410)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -3867,7 +3867,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var cod_order = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {DialogClassicMessage: __webpack_require__(272).default,Settlement: __webpack_require__(388).default,CancelTicketForm: __webpack_require__(315).default,LoadingIndicator: __webpack_require__(111).default,OrderSumaryCard: __webpack_require__(336).default})
+installComponents(component, {DialogClassicMessage: __webpack_require__(279).default,Settlement: __webpack_require__(394).default,CancelTicketForm: __webpack_require__(313).default,LoadingIndicator: __webpack_require__(111).default,OrderSumaryCard: __webpack_require__(340).default})
 
 
 /***/ })

@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 import { hostName } from './common'
 export default {
+  server: {
+    host: '0.0.0.0'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Website',
@@ -73,6 +76,7 @@ export default {
     baseURL: 'https://nodejsclusters-124154-0.cloudclusters.net'// UAT API
     // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
     // baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+    // baseURL: 'http://10.0.28.46:8080',
     // baseURL: 'http://localhost:8080',
     // baseURL: hostName(),
     // credentials: true,

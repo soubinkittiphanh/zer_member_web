@@ -34,6 +34,10 @@
 import { swalSuccess, swalError2 } from '~/common/index'
 export default {
     props: {
+        id: {
+            type: Number,
+            default: 0,
+        },
         productId: {
             type: Number,
             default: '',
@@ -79,7 +83,8 @@ export default {
                     inputter: this.user.id,
                     product_id: this.productId,
                     stocCardkQty: this.stockQty,
-                    totalCost: this.stockCost
+                    totalCost: this.stockCost,
+                    productId: this.id
                 }
                 console.log("Pre fly ",stockData);
                 // return

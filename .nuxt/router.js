@@ -25,6 +25,7 @@ const _28458292 = () => interopDefault(import('../pages/admin/member/index.vue' 
 const _1d174c3c = () => interopDefault(import('../pages/admin/minstock/index.vue' /* webpackChunkName: "pages/admin/minstock/index" */))
 const _4f34b91d = () => interopDefault(import('../pages/admin/orders/index.vue' /* webpackChunkName: "pages/admin/orders/index" */))
 const _ff84b6fa = () => interopDefault(import('../pages/admin/ordersFromPos/index.vue' /* webpackChunkName: "pages/admin/ordersFromPos/index" */))
+const _295e189d = () => interopDefault(import('../pages/admin/ordersFromPosCancel/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCancel/index" */))
 const _36d97b48 = () => interopDefault(import('../pages/admin/ordersFromPosCredit/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCredit/index" */))
 const _23f9fb92 = () => interopDefault(import('../pages/admin/po/index.vue' /* webpackChunkName: "pages/admin/po/index" */))
 const _57be90e6 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
@@ -143,6 +144,10 @@ export const routerOptions = {
     path: "/admin/ordersFromPos",
     component: _ff84b6fa,
     name: "admin-ordersFromPos"
+  }, {
+    path: "/admin/ordersFromPosCancel",
+    component: _295e189d,
+    name: "admin-ordersFromPosCancel"
   }, {
     path: "/admin/ordersFromPosCredit",
     component: _36d97b48,

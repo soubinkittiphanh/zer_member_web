@@ -78,6 +78,11 @@ export default {
           title: 'ໃບສະເຫນີລາຄາ',
           to: '/admin/quotationList',
         },
+        {
+          icon: 'mdi-receipt-text-arrow-right',
+          title: 'ລາຍງານຍົກເລີກ',
+          to: '/admin/ordersFromPosCancel',
+        },
         // **************** This menu to check sale from Mobile App and this is Facebook COD sale model *************//
         // {
         //   icon: 'mdi-cart-check',

@@ -147,6 +147,13 @@
     "_name": "_ff84b6fa"
   },
   {
+    "name": "admin-ordersFromPosCancel",
+    "path": "/admin/ordersFromPosCancel",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPosCancel/index.vue",
+    "chunkName": "pages/admin/ordersFromPosCancel/index",
+    "_name": "_295e189d"
+  },
+  {
     "name": "admin-ordersFromPosCredit",
     "path": "/admin/ordersFromPosCredit",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPosCredit/index.vue",
