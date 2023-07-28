@@ -7,8 +7,8 @@
     </v-dialog>
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="true" :key="componentKey" :header="selectedOrder"
-        @close-dialog="dialogOrderDetail = false">
+      dialogOrderDetail = false" :is-quotation="true" :key="componentKey" :is-update="viewTransaction"
+        :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPosCRUD>
     </v-dialog>
     <v-dialog v-model="cancelForm" max-width="1024">
@@ -45,11 +45,15 @@
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
-          <v-col cols="12" class="text-right">
+          <v-col cols="6" class="text-left">
+            <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
+              <span class="mdi mdi-plus"></span>Create
+            </v-btn>
+          </v-col>
+          <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary">
               ດຶງລາຍງານ<span class="mdi mdi-cloud-download"></span>
             </v-btn>
-            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
         </v-layout>
       </v-card-title>
@@ -81,7 +85,7 @@
       <!-- <v-divider></v-divider> -->
 
 
-
+      <!-- ************* DATA TABLE ************* -->
       <v-data-table v-if="quotationList" :headers="headers" :search="search" :items="quotationList">
         <template v-slot:[`item.bookingDate`]="{ item }">
           {{ item.bookingDate.split('T')[0] }}
@@ -111,30 +115,14 @@
           {{ item.createdAt.split('.')[0] }}
         </template>
         <template v-slot:[`item.id`]="{ item }">
-
-          <v-btn color="blue darken-1" text @click="viewItem(item)
+          <v-btn color="primary" text @click="viewItem(item)
           wallet = true
             ">
-
-            <i class="fas fa-eye"></i>
+            <i class="fa fa-pencil-square-o"></i>
           </v-btn>
 
         </template>
-        <template v-slot:[`item.cancel`]="{ item }">
 
-          <v-btn color="blue darken-1" text @click="cancelItem(item)
-          wallet = true
-            ">
-            <i class="fas fa-sync"></i>
-          </v-btn>
-        </template>
-        <template v-slot:[`item.cusTel`]="{ item }">
-          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-            {{ item.cusTel }}
-            <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
-          </v-btn>
-
-        </template>
       </v-data-table>
 
     </v-card>
@@ -153,13 +141,12 @@ export default {
       whatsappContactLink: '',
       componentKey: 0,
       dialogOrderDetail: false,
-      selectedOrder: '',
-      wallet: false,
+      selectedOrder: 0,
       isedit: false,
       dialog: false,
       isloading: false,
       dialogForm: false,
-
+      viewTransaction: false,
       valid: true,
       name: '',
       search: '',
@@ -169,9 +156,15 @@ export default {
       codPaid: [],
       componentCancelFormKey: 1,
       cancelForm: false,
-      OrderIdSelected: '',
+      OrderIdSelected: 0,
 
       headers: [
+        // {
+        //   text: '#',
+        //   align: 'center',
+        //   value: 'id',
+        //   sortable: true,
+        // },
         {
           text: 'ວັນທີ',
           align: 'center',
@@ -241,7 +234,7 @@ export default {
           sortable: false,
         },
         {
-          text: '',
+          text: 'View/Update',
           align: 'end',
           value: 'id',
           sortable: false,
@@ -287,7 +280,8 @@ export default {
   computed: {
 
     quotationList() {
-      return this.orderHeaderList.filter(el => el['isActive'] != true)
+      // return this.orderHeaderList.filter(el => el['isActive'] != true)
+      return this.orderHeaderList.filter(el => el['isActive'] == true)
 
     },
     computedDateFormatted() {
@@ -383,8 +377,14 @@ export default {
     },
     viewItem(item) {
       this.componentKey += 1;
-      console.log("===> ITEM: ", item);
-      this.selectedOrder = item
+      this.viewTransaction = true
+      this.selectedOrder = item.id
+      this.dialogOrderDetail = true;
+    },
+    createSale() {
+      this.componentKey += 1;
+      this.selectedOrder = 0
+      this.viewTransaction = false;
       this.dialogOrderDetail = true;
     },
     cancelItem(payload) {

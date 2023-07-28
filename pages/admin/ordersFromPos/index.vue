@@ -5,10 +5,18 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <v-dialog v-model="dialogOrderDetail" max-width="1024" >
+    <!-- <v-dialog v-model="dialogOrderDetail" max-width="1024" >
       <OrderDetailPos :key="componentKey" :header="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPos>
+    </v-dialog> -->
+    <v-dialog v-model="dialogOrderDetail" max-width="1024">
+      <OrderDetailPosCRUD @reload="loadData()
+      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
+        :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
+      </OrderDetailPosCRUD>
     </v-dialog>
+
+
     <v-dialog v-model="cancelForm" max-width="1024">
       <cancel-ticket-form :id="OrderIdSelected" :key="componentCancelFormKey" @close-dialog="cancelForm = false"
         @reload="cancelForm = false, loadData()"></cancel-ticket-form>
@@ -43,14 +51,16 @@
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
-
-          <v-col cols="12" class="text-right">
+          <v-col cols="6" class="text-left">
+            <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
+              <span class="mdi mdi-plus"></span>Create
+            </v-btn>
+          </v-col>
+          <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary">
               ດຶງລາຍງານ<span class="mdi mdi-cloud-download"></span>
             </v-btn>
-            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
-
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
@@ -113,14 +123,11 @@
           {{ item.createdAt.split('.')[0] }}
         </template>
         <template v-slot:[`item.id`]="{ item }">
-
-          <v-btn color="blue darken-1" text @click="viewItem(item)
+          <v-btn color="primary" text @click="viewItem(item)
           wallet = true
             ">
-
-            <i class="fas fa-eye"></i>
+            <i class="fa fa-pencil-square-o"></i>
           </v-btn>
-
         </template>
         <template v-slot:[`item.cancel`]="{ item }">
 
@@ -143,18 +150,20 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate,getFirstDayOfMonth } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth } from '~/common'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
+import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 export default {
-  components: { OrderDetailPos, OrderSumaryCardPos },
+  components: { OrderDetailPos, OrderSumaryCardPos, OrderDetailPosCRUD },
   middleware: 'auths',
   data() {
     return {
+      viewTransaction: false,
       whatsappContactLink: '',
       componentKey: 0,
       dialogOrderDetail: false,
-      selectedOrder: '',
+      selectedOrder: 0,
       wallet: false,
       isedit: false,
       dialog: false,
@@ -254,7 +263,7 @@ export default {
           sortable: false,
         },
         {
-          text: '',
+          text: 'View/Update',
           align: 'end',
           value: 'id',
           sortable: false,
@@ -361,6 +370,12 @@ export default {
   },
 
   methods: {
+    createSale() {
+      this.componentKey += 1;
+      this.selectedOrder = 0
+      this.viewTransaction = false;
+      this.dialogOrderDetail = true;
+    },
     countDay(startDate) {
       return dayCount(startDate)
     },
@@ -389,9 +404,9 @@ export default {
       this.dialogOrderDetail = !this.dialogOrderDetail;
     },
     viewItem(item) {
-      console.log(item);
       this.componentKey += 1;
-      this.selectedOrder = item
+      this.viewTransaction = true
+      this.selectedOrder = item.id
       this.dialogOrderDetail = true;
     },
     cancelItem(payload) {

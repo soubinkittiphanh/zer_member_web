@@ -3,53 +3,55 @@
     <!-- <v-main> -->
     <!-- <v-container class="fill-height"> -->
     <!-- <v-container> -->
-    <div class="container" >
+    <div class="container">
 
       <v-dialog v-model="isLoading" hide-overlay persistent width="300">
         <loading-indicator> </loading-indicator>
       </v-dialog>
       <!-- <v-row align="center">
         <v-col cols="12" align-self="center"> -->
-      <v-card >
+      <v-card>
         <div class="pa-16">
 
 
           <v-row>
             <v-col cols="12">
-              <p class="text-center" style="color: #01532B; font-weight:900;font-family: Arial, Helvetica, sans-serif; font-size: xx-large;">DCOMMERCE </p>
+              <p class="text-center"
+                style="color: #01532B; font-weight:900;font-family: Arial, Helvetica, sans-serif; font-size: xx-large;">
+                DCOMMERCE </p>
               <h2 class="text-center" style="color: #01532B;">ຍິນດີຕ້ອນຮັບ ເຂົ້າສູ່ລະບົບການຂາຍ </h2>
             </v-col>
           </v-row>
           <v-card-text>
 
-      
-          <!-- <v-row align="center" justify="center" dense>
+
+            <!-- <v-row align="center" justify="center" dense>
             <v-col cols="12" sm="8" md="4" lg="4"> -->
-              <!-- <v-card class="elevation-1"> -->
-                <notification v-if="errorMessage" :message="errorMessage" />
-                <!-- <p>{{ this.$store.getters.loggedInUser.name }}</p> -->
-                <v-card-title class="my-text-center">
-                  ເຂົ້າສູ່ລະບົບ
-                </v-card-title>
-                <!-- <v-card-text> -->
-                  <v-form>
-                    <!-- <font-awesome-icon icon="coffee" /> -->
-                    <v-text-field v-model="login.mem_id" label="ກະລຸນາ ໃສ່ໄອດີ" name="email"
-                      prepend-inner-icon="mdi-account-tie-hat" class="rounded-10 my-text-center" outlined>
-                    </v-text-field>
-                    <v-text-field v-model="login.mem_pwd" label="ລະຫັດຜ່ານ" type="password" name="password"
-                      prepend-inner-icon="mdi-lock" class="rounded-10 my-text-center" outlined></v-text-field>
-                    <v-btn class="rounded-0 my-text-center" color="#01532B" x-large block dark @click.prevent="userLogin"
-                      type="submit">
-                      ເຂົ້າສູ່ລະບົບ
-                      <v-icon> mdi mdi-login</v-icon>
-                    </v-btn>
-                  </v-form>
-                <!-- </v-card-text> -->
-              <!-- </v-card>
+            <!-- <v-card class="elevation-1"> -->
+            <notification v-if="errorMessage" :message="errorMessage" />
+            <!-- <p>{{ this.$store.getters.loggedInUser.name }}</p> -->
+            <v-card-title class="my-text-center">
+              ເຂົ້າສູ່ລະບົບ
+            </v-card-title>
+            <!-- <v-card-text> -->
+            <v-form>
+              <!-- <font-awesome-icon icon="coffee" /> -->
+              <v-text-field v-model="login.mem_id" label="ກະລຸນາ ໃສ່ໄອດີ" name="email"
+                prepend-inner-icon="mdi-account-tie-hat" class="rounded-10 my-text-center" outlined>
+              </v-text-field>
+              <v-text-field v-model="login.mem_pwd" label="ລະຫັດຜ່ານ" type="password" name="password"
+                prepend-inner-icon="mdi-lock" class="rounded-10 my-text-center" outlined></v-text-field>
+              <v-btn class="rounded-0 my-text-center" color="#01532B" x-large block dark @click.prevent="userLogin"
+                type="submit">
+                ເຂົ້າສູ່ລະບົບ
+                <v-icon> mdi mdi-login</v-icon>
+              </v-btn>
+            </v-form>
+            <!-- </v-card-text> -->
+            <!-- </v-card>
             </v-col> -->
-          <!-- </v-row> -->
-        </v-card-text>
+            <!-- </v-row> -->
+          </v-card-text>
         </div>
       </v-card>
       <!-- </v-col>
@@ -61,7 +63,7 @@
 </template>
 <script>
 import Notification from '../../../components/Notification.vue'
-// import { fas } from '@fortawesome/free-solid-svg-icons';
+import { mapActions } from 'vuex'
 export default {
   layout: "login",
 
@@ -97,6 +99,7 @@ export default {
     //     this.$router.push('/login')
     //   }
     // },
+    ...mapActions(['initProduct', 'initPayment', 'initCurrency', 'initClient', 'initUnit']),
     async userLogin() {
       try {
         this.isLoading = true
@@ -110,6 +113,11 @@ export default {
         }
         if (response.data.accessToken) {
           this.$router.push('/admin')
+          this.loadProduct()
+          this.loadPayment()
+          this.loadCustomer()
+          this.loadUnit()
+          this.loadCurrency()
         } else {
           console.log('No token')
           this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
@@ -120,6 +128,72 @@ export default {
       } catch (err) {
         console.log(err)
       }
+      this.isLoading = false
+    },
+
+    async loadProduct() {
+      this.isLoading = true
+      this.productList = [];
+      await this.$axios
+        .get('product_f')
+        .then((res) => {
+          this.initProduct(res.data)
+        })
+        .catch((er) => {
+          console.log('Data: ' + er)
+        })
+      this.isLoading = false
+    },
+    async loadUnit() {
+      this.isLoading = true
+      this.unitList = [];
+      await this.$axios
+        .get('api/unit/find')
+        .then((res) => {
+          this.initUnit(res.data)
+        })
+        .catch((er) => {
+          console.log('Data: ' + er)
+        })
+      this.isLoading = false
+    },
+    async loadCustomer() {
+      this.isLoading = true
+      this.customerList = [];
+      await this.$axios
+        .get('api/client/find')
+        .then((res) => {
+          this.initClient(res.data)
+        })
+        .catch((er) => {
+          console.log('Data: ' + er)
+        })
+      this.isLoading = false
+    },
+    async loadPayment() {
+      this.isLoading = true
+      this.paymentList = [];
+      await this.$axios
+        .get('api/paymentMethod/find')
+        .then((res) => {
+          this.initPayment(res.data)
+        })
+        .catch((er) => {
+          console.log('Data: ' + er)
+        })
+      this.isLoading = false
+    },
+    async loadCurrency() {
+      this.isLoading = true
+      this.currencyList = [];
+      await this.$axios
+        .get('api/currency/find')
+        .then((res) => {
+          this.initCurrency(res.data)
+        })
+        .catch((er) => {
+          console.log('Data: ' + er)
+        })
       this.isLoading = false
     },
     //  async login() {

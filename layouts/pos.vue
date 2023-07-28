@@ -382,7 +382,7 @@ export default {
             this.saleHeader.clientId = this.currenctCustomer.id
             this.saleHeader.paymentId = this.currentPayment
             this.saleHeader.currencyId = 1 // DEFAULT CURRENCY I FOR LAK
-            this.saleHeader.line = this.generateSaleLine
+            this.saleHeader.lines = this.generateSaleLine
             this.saleHeader.userId = this.user.id
             this.saleHeader.bookingDate = jsDateToMysqlDate(today)
             this.saleHeader.isActive = false
@@ -422,7 +422,7 @@ export default {
             this.saleHeader.clientId = this.currenctCustomer.id
             this.saleHeader.paymentId = this.currentPayment
             this.saleHeader.currencyId = 1 // DEFAULT CURRENCY I FOR LAK
-            this.saleHeader.line = this.generateSaleLine
+            this.saleHeader.lines = this.generateSaleLine
             this.saleHeader.userId = this.user.id
             this.saleHeader.bookingDate = jsDateToMysqlDate(today)
             console.log(this.saleHeader);

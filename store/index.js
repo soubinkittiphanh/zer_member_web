@@ -8,10 +8,30 @@ export const state = () => ({
     selectedCategoryId: 9999,
     selectedCustomer: null,
     selectedPayment: 3,
+    currencyList:[],
+    productList:[],
+    paymentList:[],
+    clientList:[],
+    unitList:[],
 })
 
 // the function to update state variable should be called by setter [actions]
 export const mutations = {
+    SetCurrencyList(state, currency) {
+        state.currencyList = currency
+    },
+    SetUnitList(state, unit) {
+        state.unitList = unit
+    },
+    SetClientList(state, client) {
+        state.clientList = client
+    },
+    SetPaymentList(state, payment) {
+        state.paymentList = payment
+    },
+    SetProductList(state, product) {
+        state.productList = product
+    },
     SetClass(state, bodyClass) {
         state.bodyClass = bodyClass
     },
@@ -84,7 +104,22 @@ export const mutations = {
 }
 // action to get sate
 export const getters = {
-
+    
+    findAllProduct(state) {
+        return state.productList
+    },
+    findAllPayment(state) {
+        return state.paymentList
+    },
+    findAllClient(state) {
+        return state.clientList
+    },
+    findAllCurrency(state) {
+        return state.currencyList
+    },
+    findAllUnit(state) {
+        return state.unitList
+    },
     isAuth(state) {
         return state.isAuth
     },
@@ -147,7 +182,22 @@ export const actions = {
     },
     addSelectedPayment(state, paymentId) {
         state.commit("setSelectedPayment", paymentId)
-    }
+    },
+    initProduct(state, product) {
+        state.commit("SetProductList", product)
+    },
+    initPayment(state, payment) {
+        state.commit("SetPaymentList", payment)
+    },
+    initCurrency(state, currency) {
+        state.commit("SetCurrencyList", currency)
+    },
+    initClient(state, client) {
+        state.commit("SetClientList", client)
+    },
+    initUnit(state, unit) {
+        state.commit("SetUnitList", unit)
+    },
 }
 // this.$store.dispatch('assignProductDetail', payload)       => this to set sate
 // this.$store.getters.findSelectedProductDetail         => get data from sate

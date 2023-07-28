@@ -5,10 +5,16 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <v-dialog v-model="dialogOrderDetail" max-width="1024" >
+    <!-- <v-dialog v-model="dialogOrderDetail" max-width="1024" >
       <OrderDetailPos @reload="loadData()
       dialogOrderDetail=false" :is-quotation="true" :key="componentKey" :header="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPos>
+    </v-dialog> -->
+    <v-dialog v-model="dialogOrderDetail" max-width="1024">
+      <OrderDetailPosCRUD @reload="loadData()
+      dialogOrderDetail = false" :is-quotation="true" :key="componentKey" :is-update="viewTransaction"
+        :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
+      </OrderDetailPosCRUD>
     </v-dialog>
     <v-dialog v-model="cancelForm" max-width="1024">
       <cancel-ticket-form :id="OrderIdSelected" :key="componentCancelFormKey" @close-dialog="cancelForm = false"
@@ -43,12 +49,16 @@
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
+          </v-col>   
+          <v-col cols="6" class="text-left">
+            <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
+              <span class="mdi mdi-plus"></span>Create
+            </v-btn>
           </v-col>
-          <v-col cols="12" class="text-right">
+          <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary">
               ດຶງລາຍງານ<span class="mdi mdi-cloud-download"></span>
             </v-btn>
-            <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
         </v-layout>
       </v-card-title>
@@ -110,13 +120,20 @@
           {{ item.createdAt.split('.')[0] }}
         </template>
         <template v-slot:[`item.id`]="{ item }">
-
+          <!-- 
           <v-btn color="blue darken-1" text @click="viewItem(item)
           wallet = true
             ">
 
             <i class="fas fa-eye"></i>
+          </v-btn> -->
+          <v-btn color="primary" text @click="viewItem(item)
+          wallet = true
+            ">
+
+            <i class="fa fa-pencil-square-o"></i>
           </v-btn>
+
 
         </template>
         <template v-slot:[`item.cancel`]="{ item }">
@@ -140,14 +157,16 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate,getFirstDayOfMonth } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth } from '~/common'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
+import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 export default {
-  components: { OrderDetailPos, OrderSumaryCardPos },
+  components: { OrderDetailPos, OrderSumaryCardPos, OrderDetailPosCRUD },
   middleware: 'auths',
   data() {
     return {
+      viewTransaction: false,
       whatsappContactLink: '',
       componentKey: 0,
       dialogOrderDetail: false,
@@ -239,7 +258,7 @@ export default {
           sortable: false,
         },
         {
-          text: '',
+          text: 'View/Update',
           align: 'end',
           value: 'id',
           sortable: false,
@@ -285,7 +304,7 @@ export default {
   computed: {
 
     quotationList() {
-      return this.orderHeaderList.filter(el => el['isActive'] != true)
+      return this.orderHeaderList.filter(el => el['isActive'] == true)
 
     },
     computedDateFormatted() {
@@ -352,6 +371,12 @@ export default {
   },
 
   methods: {
+    createSale() {
+      this.componentKey += 1;
+      this.selectedOrder = 0
+      this.viewTransaction = false;
+      this.dialogOrderDetail = true;
+    },
     countDay(startDate) {
       return dayCount(startDate)
     },
@@ -380,8 +405,12 @@ export default {
       this.dialogOrderDetail = !this.dialogOrderDetail;
     },
     viewItem(item) {
+      // this.componentKey += 1;
+      // this.selectedOrder = item
+      // this.dialogOrderDetail = true;
       this.componentKey += 1;
-      this.selectedOrder = item
+      this.viewTransaction = true
+      this.selectedOrder = item.id
       this.dialogOrderDetail = true;
     },
     cancelItem(payload) {
@@ -402,7 +431,7 @@ export default {
         endDate: this.date2
       }
       await this.$axios
-        .get(`api/sale/findByDate`, { params: { date } })
+        .get(`api/quotation/findByDate`, { params: { date } })
         .then((res) => {
           // ****** Clear Old Data
           this.orderHeaderList = []

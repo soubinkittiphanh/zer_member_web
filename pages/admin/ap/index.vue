@@ -50,7 +50,7 @@
             <v-data-table v-if="txnList" :headers="headers" :search="search" :items="txnList">
                 <template v-slot:[`item.function`]="{ item }">
 
-                    <v-btn color="blue darken-1" text @click="editItem(item)
+                    <v-btn color="primary" text @click="editItem(item)
                     wallet = true
                         ">
 
