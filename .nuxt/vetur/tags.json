@@ -86,21 +86,6 @@
   "AccountingGeneralLedgerForm": {
     "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
-  "CustomerForm": {
-    "description": "Auto imported from components/customer/CustomerForm.vue"
-  },
-  "CustomerList": {
-    "description": "Auto imported from components/customer/CustomerList.vue"
-  },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
-  "DialogsBottomAlert": {
-    "description": "Auto imported from components/dialogs/bottomAlert.vue"
-  },
-  "Menu": {
-    "description": "Auto imported from components/menu/index.vue"
-  },
   "CardCampaignCard": {
     "description": "Auto imported from components/card/campaignCard.vue"
   },
@@ -113,23 +98,32 @@
   "DashboardCardOnTop": {
     "description": "Auto imported from components/dashboard/CardOnTop.vue"
   },
+  "Menu": {
+    "description": "Auto imported from components/menu/index.vue"
+  },
+  "DialogsBottomAlert": {
+    "description": "Auto imported from components/dialogs/bottomAlert.vue"
+  },
+  "CustomerForm": {
+    "description": "Auto imported from components/customer/CustomerForm.vue"
+  },
+  "CustomerList": {
+    "description": "Auto imported from components/customer/CustomerList.vue"
+  },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"
+  },
+  "MinStockCard": {
+    "description": "Auto imported from components/minStockCard/index.vue"
   },
   "PaymentCard": {
     "description": "Auto imported from components/paymentCard/index.vue"
   },
   "PoForm": {
     "description": "Auto imported from components/po/PoForm.vue"
-  },
-  "PosCateogoryList": {
-    "description": "Auto imported from components/pos/CateogoryList.vue"
-  },
-  "MinStockCard": {
-    "description": "Auto imported from components/minStockCard/index.vue"
-  },
-  "Quotation": {
-    "description": "Auto imported from components/quotation/index.vue"
   },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"
@@ -142,5 +136,11 @@
   },
   "ProductFormCreate": {
     "description": "Auto imported from components/product/ProductFormCreate.vue"
+  },
+  "PosCateogoryList": {
+    "description": "Auto imported from components/pos/CateogoryList.vue"
+  },
+  "Quotation": {
+    "description": "Auto imported from components/quotation/index.vue"
   }
 }

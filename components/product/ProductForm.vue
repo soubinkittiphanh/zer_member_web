@@ -55,8 +55,23 @@
                                     prepend-icon="mdi-camera" label="ຮູບພາບຫລາຍພາບ" @change="onFilesChange"></v-file-input>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="formData.minStock" :counter="10" type="number"
-                                    :rules="rules.minRule" label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
+                                <v-text-field v-model="formData.minStock" :counter="10" type="number" :rules="rules.minRule"
+                                    label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="formData.barCode" label="barcode" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-autocomplete item-text="name" item-value="id" :items="unitList"
+                                    label="ຫົວຫນ່ວຍຮັບເຄື່ອງ*" v-model="formData.receiveUnitId"></v-autocomplete>
+                                <!-- <v-text-field v-model="formData.receiveUnitId" :counter="10" type="number" :rules="rules.minRule"
+                label="ຫົວຫນ່ວຍຮັບເຄື່ອງ" required></v-text-field> -->
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-autocomplete item-text="name" item-value="id" :items="unitList" label="ຫົວຫນ່ວຍນັບສາງ*"
+                                    v-model="formData.stockUnitId"></v-autocomplete>
+                                <!-- <v-text-field v-model="formData.stockUnitId" :counter="10" type="number" :rules="rules.minRule"
+                label="ຫົວຫນ່ວຍນັບສາງ" required></v-text-field> -->
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                                 <v-textarea outlined name="input-7-4" counter="100" label="ຄຳອະທິບາຍ" value="abc"
@@ -123,6 +138,7 @@ import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/
 import { mysqlDateToDateObject, parseDate } from '~/common'
 import ImagePreviewMixin from '../../pages/product/index.vue'
 import { hostName } from '../../common/index'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     props: {
         isEdit: {
@@ -136,11 +152,15 @@ export default {
     },
     middleware: 'auths',
     mixins: [ImagePreviewMixin],
-    computed: {
-        host() {
+
+    computed:{
+    ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
+    unitList() {
+            return this.findAllUnit
+        },        host() {
             return hostName()
         }
-    },
+  },
     mounted() {
         console.log('FORMDATA ID: ' + this.formData.pro_id)
         this.pro_id = this.headerId
@@ -222,6 +242,9 @@ export default {
                 pro_outlet: 1,
                 pro_cost_price: 0,
                 minStock: 0,
+                barCode: '',
+                receiveUnitId: 1,
+                stockUnitId: 1,
             },
             outlet: [],
             isLoading: false,
@@ -317,7 +340,7 @@ export default {
                 .then((res) => {
                     console.log('Product ID ' + res.data)
                     const el = res.data[0]
-                    console.log("===> Min stock",el.minStock);
+                    console.log("===> Min stock", el.minStock);
                     const image =
                         res.data[0].img_name == null
                             ? []
@@ -338,6 +361,9 @@ export default {
                         pro_cost_price: el.cost_price,
                         outlet: el.outlet,
                         minStock: el.minStock,
+                        barCode: el.barCode,
+                        receiveUnitId: el.receiveUnitId,
+                        stockUnitId: el.stockUnitId,
                         pro_image: image,
                     }
                     console.log('IMAGE COUNT: ' + this.formData.pro_image.length)

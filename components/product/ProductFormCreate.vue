@@ -62,6 +62,22 @@
                 label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="formData.barCode" 
+                label="barcode" required></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-autocomplete item-text="name" item-value="id" :items="unitList" label="ຫົວຫນ່ວຍຮັບເຄື່ອງ*"
+                v-model="formData.receiveUnitId"></v-autocomplete>
+              <!-- <v-text-field v-model="formData.receiveUnitId" :counter="10" type="number" :rules="rules.minRule"
+                label="ຫົວຫນ່ວຍຮັບເຄື່ອງ" required></v-text-field> -->
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-autocomplete item-text="name" item-value="id" :items="unitList" label="ຫົວຫນ່ວຍນັບສາງ*"
+                v-model="formData.stockUnitId"></v-autocomplete>
+              <!-- <v-text-field v-model="formData.stockUnitId" :counter="10" type="number" :rules="rules.minRule"
+                label="ຫົວຫນ່ວຍນັບສາງ" required></v-text-field> -->
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
               <v-textarea outlined name="input-7-4" counter="100" label="ຄຳອະທິບາຍ" value="abc"
                 v-model="formData.pro_desc"></v-textarea>
             </v-col>
@@ -164,6 +180,7 @@
 // import ImagePreviewMixin from '../m/mixins/ImagePreviewMixin.vue'
 import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
 import ImagePreviewMixin from '../../pages/admin/product/mixins/ImagePreviewMixin.vue'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   middleware: 'auths',
   mixins: [ImagePreviewMixin],
@@ -235,6 +252,9 @@ export default {
         pro_cost_price: 0,
         createdAt: null,
         minStock: 0,
+        barCode: '',
+        receiveUnitId: 1,
+        stockUnitId: 1,
       },
       outlet: [],
     }
@@ -254,6 +274,12 @@ export default {
     formData(obj) {
       console.log('Watch fromData' + obj)
     },
+  },
+  computed:{
+    ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
+    unitList() {
+            return this.findAllUnit
+        },
   },
   methods: {
     validate() {

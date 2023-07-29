@@ -23,8 +23,8 @@
                 <v-row>
                     <v-col cols="6">
                     </v-col>
-                    <v-col v-if="isQuotation" cols="6" style="text-align: right;">
-                        <v-btn size="large" variant="outlined" @click="post" class="primary" rounded>
+                    <v-col cols="6" style="text-align: right;">
+                        <v-btn v-if="isQuotation" size="large" variant="outlined" @click="post" class="primary" rounded>
                             <span class="mdi mdi-transfer-right"></span>Make to invoice
                         </v-btn>
                         <v-btn size="large" variant="outlined" @click="post" class="primary" rounded>
@@ -445,13 +445,15 @@ export default {
                     this.isloading = false
                     return
                 }
-                iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
+                iterator.quantity = parseInt(replaceAll(iterator.quantity, ',', ''))
+                iterator.unitRate = parseInt(replaceAll(iterator.unitRate, ',', ''))
+                // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
             }
             console.log("******** No error found process posting ********");
             this.errorLineNumber = null
-            const apiLine = this.isQuotation ? 'quotation' : 'sale'
             this.transaction.userId = this.user.id
             this.transaction.total = this.grandTotal
+            console.log(`Amount total ${this.transaction.total}`);
             if (this.isUpdate) {
                 // ********** If header has data, that means we go for update API ********** //
                 await this.$axios

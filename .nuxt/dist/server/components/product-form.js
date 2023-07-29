@@ -429,6 +429,9 @@ module.exports = ___CSS_LOADER_EXPORT___;
 /* WEBPACK VAR INJECTION */(function(URL) {/* harmony import */ var _util_myUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(112);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
 /* harmony import */ var _pages_product_index_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(328);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -447,6 +450,10 @@ module.exports = ___CSS_LOADER_EXPORT___;
   middleware: 'auths',
   mixins: [_pages_product_index_vue__WEBPACK_IMPORTED_MODULE_2__["default"]],
   computed: {
+    ...Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
+    unitList() {
+      return this.findAllUnit;
+    },
     host() {
       return Object(_common__WEBPACK_IMPORTED_MODULE_1__[/* hostName */ "f"])();
     }
@@ -519,7 +526,10 @@ module.exports = ___CSS_LOADER_EXPORT___;
         pro_status: false,
         pro_outlet: 1,
         pro_cost_price: 0,
-        minStock: 0
+        minStock: 0,
+        barCode: '',
+        receiveUnitId: 1,
+        stockUnitId: 1
       },
       outlet: [],
       isLoading: false,
@@ -628,6 +638,9 @@ module.exports = ___CSS_LOADER_EXPORT___;
           pro_cost_price: el.cost_price,
           outlet: el.outlet,
           minStock: el.minStock,
+          barCode: el.barCode,
+          receiveUnitId: el.receiveUnitId,
+          stockUnitId: el.stockUnitId,
           pro_image: image
         };
         console.log('IMAGE COUNT: ' + this.formData.pro_image.length);
@@ -827,7 +840,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(299);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/product/ProductForm.vue?vue&type=template&id=18ac8a04&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/product/ProductForm.vue?vue&type=template&id=11073358&
 
 
 
@@ -852,7 +865,7 @@ var VTextarea = __webpack_require__(299);
 
 
 
-var ProductFormvue_type_template_id_18ac8a04_render = function render() {
+var ProductFormvue_type_template_id_11073358_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -1092,6 +1105,64 @@ var ProductFormvue_type_template_id_18ac8a04_render = function render() {
       "sm": "6",
       "md": "4"
     }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "label": "barcode",
+      "required": ""
+    },
+    model: {
+      value: _vm.formData.barCode,
+      callback: function ($$v) {
+        _vm.$set(_vm.formData, "barCode", $$v);
+      },
+      expression: "formData.barCode"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "sm": "6",
+      "md": "4"
+    }
+  }, [_c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "name",
+      "item-value": "id",
+      "items": _vm.unitList,
+      "label": "ຫົວຫນ່ວຍຮັບເຄື່ອງ*"
+    },
+    model: {
+      value: _vm.formData.receiveUnitId,
+      callback: function ($$v) {
+        _vm.$set(_vm.formData, "receiveUnitId", $$v);
+      },
+      expression: "formData.receiveUnitId"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "sm": "6",
+      "md": "4"
+    }
+  }, [_c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "name",
+      "item-value": "id",
+      "items": _vm.unitList,
+      "label": "ຫົວຫນ່ວຍນັບສາງ*"
+    },
+    model: {
+      value: _vm.formData.stockUnitId,
+      callback: function ($$v) {
+        _vm.$set(_vm.formData, "stockUnitId", $$v);
+      },
+      expression: "formData.stockUnitId"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12",
+      "sm": "6",
+      "md": "4"
+    }
   }, [_c(VTextarea["a" /* default */], {
     attrs: {
       "outlined": "",
@@ -1204,7 +1275,7 @@ var ProductFormvue_type_template_id_18ac8a04_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/product/ProductForm.vue?vue&type=template&id=18ac8a04&
+// CONCATENATED MODULE: ./components/product/ProductForm.vue?vue&type=template&id=11073358&
 
 // EXTERNAL MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/product/ProductForm.vue?vue&type=script&lang=js&
 var ProductFormvue_type_script_lang_js_ = __webpack_require__(302);
@@ -1224,7 +1295,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   product_ProductFormvue_type_script_lang_js_,
-  ProductFormvue_type_template_id_18ac8a04_render,
+  ProductFormvue_type_template_id_11073358_render,
   staticRenderFns,
   false,
   null,

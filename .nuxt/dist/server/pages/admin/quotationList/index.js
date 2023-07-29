@@ -2661,7 +2661,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(299);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=185e0ec2&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
 
 
 
@@ -2679,7 +2679,7 @@ var VTextarea = __webpack_require__(299);
 
 
 
-var OrderDetailPosCRUDvue_type_template_id_185e0ec2_render = function render() {
+var OrderDetailPosCRUDvue_type_template_id_a4b59596_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -2745,14 +2745,14 @@ var OrderDetailPosCRUDvue_type_template_id_185e0ec2_render = function render() {
     attrs: {
       "cols": "6"
     }
-  }), _vm._v(" "), _vm.isQuotation ? _c(VCol["a" /* default */], {
+  }), _vm._v(" "), _c(VCol["a" /* default */], {
     staticStyle: {
       "text-align": "right"
     },
     attrs: {
       "cols": "6"
     }
-  }, [_c(VBtn["a" /* default */], {
+  }, [_vm.isQuotation ? _c(VBtn["a" /* default */], {
     staticClass: "primary",
     attrs: {
       "size": "large",
@@ -2764,7 +2764,7 @@ var OrderDetailPosCRUDvue_type_template_id_185e0ec2_render = function render() {
     }
   }, [_c('span', {
     staticClass: "mdi mdi-transfer-right"
-  }), _vm._v("Make to invoice\n                    ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
+  }), _vm._v("Make to invoice\n                    ")]) : _vm._e(), _vm._v(" "), _c(VBtn["a" /* default */], {
     staticClass: "primary",
     attrs: {
       "size": "large",
@@ -2776,7 +2776,7 @@ var OrderDetailPosCRUDvue_type_template_id_185e0ec2_render = function render() {
     }
   }, [_c('span', {
     staticClass: "mdi mdi-printer-outline"
-  }), _vm._v("Print\n                    ")])], 1) : _vm._e()], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VCard["a" /* default */], {
+  }), _vm._v("Print\n                    ")])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VCard["a" /* default */], {
     style: _vm.headerError ? `outline:1px solid red` : ``
   }, [_vm._v("\n                " + _vm._s(_vm.isQuotation ? `Quotation #` : `Invoice #`) + "\n                " + _vm._s(_vm.transaction.id) + "\n                "), _c(components_VCard["c" /* VCardText */], [_c('div', [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
     attrs: {
@@ -3107,7 +3107,7 @@ var OrderDetailPosCRUDvue_type_template_id_185e0ec2_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=185e0ec2&
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(298);
@@ -3395,13 +3395,16 @@ var common = __webpack_require__(17);
           this.isloading = false;
           return;
         }
-        iterator['total'] = iterator['quantity'] * iterator['unitRate'] * iterator['price'] - iterator['discount'];
+        iterator.quantity = parseInt(Object(common["h" /* replaceAll */])(iterator.quantity, ',', ''));
+        iterator.unitRate = parseInt(Object(common["h" /* replaceAll */])(iterator.unitRate, ',', ''));
+        // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
       }
+
       console.log("******** No error found process posting ********");
       this.errorLineNumber = null;
-      const apiLine = this.isQuotation ? 'quotation' : 'sale';
       this.transaction.userId = this.user.id;
       this.transaction.total = this.grandTotal;
+      console.log(`Amount total ${this.transaction.total}`);
       if (this.isUpdate) {
         // ********** If header has data, that means we go for update API ********** //
         await this.$axios.put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction).then(res => {
@@ -3553,7 +3556,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_OrderDetailPosCRUDvue_type_script_lang_js_,
-  OrderDetailPosCRUDvue_type_template_id_185e0ec2_render,
+  OrderDetailPosCRUDvue_type_template_id_a4b59596_render,
   staticRenderFns,
   false,
   injectStyles,

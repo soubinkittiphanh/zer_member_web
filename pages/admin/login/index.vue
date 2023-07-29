@@ -112,12 +112,12 @@ export default {
           return
         }
         if (response.data.accessToken) {
+         await this.loadProduct()
+         await    this.loadPayment()
+         await  this.loadCustomer()
+         await  this.loadUnit()
+         await   this.loadCurrency()
           this.$router.push('/admin')
-          this.loadProduct()
-          this.loadPayment()
-          this.loadCustomer()
-          this.loadUnit()
-          this.loadCurrency()
         } else {
           console.log('No token')
           this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
