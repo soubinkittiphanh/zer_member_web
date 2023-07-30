@@ -7,7 +7,7 @@
                         <div v-for="(item, index) in filterProduct" :key="index"
                             class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
                             <product-card-pos :product="item" :productName="item.pro_name"
-                                :imagePath="item.img_name" :stock="item.stock_count"></product-card-pos>
+                                :imagePath="item.img_name" :stock="item.card_count"></product-card-pos>
                         </div>
                     </div>
                 </v-col>

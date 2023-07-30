@@ -292,6 +292,16 @@ export const getFirstDayOfMonth = () => {
   const mysqlDate = `${year}-${month}-${day}`;
   return mysqlDate;
 }
+export const firstAndLastDateOfCurrentYear = () => {
+
+    const today = new Date();
+    const year = today.getFullYear();
+    console.log(`THIS YEAR IS ${year} ${today}`);
+    const startDate = new Date(year, 0, 1).toISOString().slice(0, 10);
+    const endDate = new Date(year, 11, 31).toISOString().slice(0, 10);
+    console.log(`THIS YEAR IS ${startDate} ${endDate}`);
+    return { startDate, endDate };
+}
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API

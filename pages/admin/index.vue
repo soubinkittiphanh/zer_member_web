@@ -17,7 +17,7 @@
                                 class="col-12 col-md-4 col-sm-6 col-xs-6 text-center">
                                 <Menu :title="item.title" :icon="item.icon" :path="item.path">
                                     <template v-slot:iconSlot>
-                                             <img :src="item.svgIcon" height="80">
+                                        <img :src="item.svgIcon" height="80">
                                     </template>
                                 </Menu>
                             </div>
@@ -28,7 +28,7 @@
         </div>
         <div class="mb-1">
             <v-card class="pa-1" style="background-color: transparent;">
-                <v-card-title  style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
+                <v-card-title style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
                     OVERVIEW
                 </v-card-title>
                 <v-row>
@@ -143,7 +143,7 @@
   
 <script>
 import { getFormatNum } from '~/util/myUtil'
-import { generateColorShades } from '~/common'
+import { generateColorShades, firstAndLastDateOfCurrentYear, getFirstDayOfMonth, today } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
 import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
@@ -194,24 +194,25 @@ export default {
                     path: '/admin/client'
                 },
             ],
+            yearlySale: [],
             menusOverview: [
                 {
                     title: 'ຍອດຂາຍມື້ນິ (KIP)',
                     icon: 'mdi-calendar',
                     path: '',
-                    total: '590,000',
+                    total: '0',
                 },
                 {
                     title: 'ຍອດຂາຍເດືອນນີ້ - ' + '( ' + new Date().toDateString().split(" ")[1] + '/' + new Date().toDateString().split(" ")[3] + ' ) KIP',
                     icon: 'mdi-calendar',
                     path: '',
-                    total: '1,300,000',
+                    total: '0',
                 },
                 {
                     title: 'ຍອດຂາຍໝົດປີ - ' + new Date().toDateString().split(" ")[3] + ' KIP',
                     icon: 'mdi-calendar',
                     path: '',
-                    total: '5,000,000',
+                    total: '0',
                 },
 
             ],
@@ -338,12 +339,59 @@ export default {
         };
     },
     async created() {
-        await this.loadDailySaleStatistic()
+        // await this.loadDailySaleStatistic()
+        await this.loadSaleStatistic()
+        this.generateDailyStatisticSale()
         this.init();
         await this.minStockProduct()
     }, async mounted() {
         await this.loadTopSale()
         await this.paymentGroup()
+    },
+    computed: {
+        totalSaleYTD() {
+            const totalPrice = this.yearlySale.reduce((total, item) => {
+                // discountTotal+=item.discount
+                return total + item.total - item.discount;
+            }, 0);
+            console.log(`YTD SALE ${totalPrice}`);
+            return getFormatNum(totalPrice)
+        },
+        totalSaleMTD() {
+            console.log(`====> TD ${today.split('-')[1]}`);
+            const monthSaleList = this.yearlySale.filter(el => el.bookingDate.split('-')[1] == today.split('-')[1])
+            const totalPrice = monthSaleList.reduce((total, item) => {
+                // discountTotal+=item.discount
+                return total + item.total - item.discount;
+            }, 0);
+            console.log(`MTD SALE ${totalPrice}`);
+            return getFormatNum(totalPrice)
+        },
+        txnSaleMTD() {
+            const monthSaleList = this.yearlySale.filter(el => el.bookingDate.split('-')[1] == today.split('-')[1])
+            const dailyTransactions = monthSaleList.reduce((acc, transaction) => {
+                const date = transaction.bookingDate;
+                const index = acc.findIndex((item) => item.date === date);
+                if (index === -1) {
+                    acc.push({ date, transactions: [transaction], totalSale: transaction.total-transaction.discount });
+                } else {
+                    acc[index].transactions.push(transaction);
+                    acc[index].totalSale += transaction.total-transaction.discount;
+                }
+                return acc;
+            }, []);
+
+            return dailyTransactions;
+        },
+        totalSaleTD() {
+            const todaySaleList = this.yearlySale.filter(el => el.bookingDate == today)
+            const totalPrice = todaySaleList.reduce((total, item) => {
+                // discountTotal+=item.discount
+                return total + item.total - item.discount;
+            }, 0);
+            console.log(`TD SALE ${totalPrice}`);
+            return getFormatNum(totalPrice)
+        },
     },
     methods: {
         numberFormatter(value) {
@@ -406,22 +454,52 @@ export default {
                 });
             this.isloading = false
         },
-        async loadDailySaleStatistic() {
+        // http://localhost:8080/api/sale/sumsaleYearly?date={"startDate":"2023-01-01","endDate":"2023-12-31"}
+
+        async loadSaleStatistic() {
+            const date = firstAndLastDateOfCurrentYear()
             this.isloading = true
             await this.$axios
-                .get('api/dailySaleReport')
+                .get('api/sale/sumsaleYearly', { params: { date } })
                 .then((res) => {
-                    console.log("Data ", res.data[0]);
+                    this.yearlySale = []
                     for (const iterator of res.data) {
-                        this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
-                        // this.barOptionsForDailyStat.colors.push('#01532B') // ******* Original
-
-                        this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
-                        this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)
+                        this.yearlySale.push(iterator)
                     }
+                    this.menusOverview[2]['total'] = this.totalSaleYTD
+                    this.menusOverview[1]['total'] = this.totalSaleMTD
+                    this.menusOverview[0]['total'] = this.totalSaleTD
+                    console.log("Lend of sale yearly " + this.yearlySale.length);
                 }).catch(err => {
                     console.log('error', err);
                 });
+            this.isloading = false
+        },
+        async generateDailyStatisticSale() {
+            this.isloading = true
+
+            //****************** Deprecated (old use for delivery sale model) ***************** */
+            // await this.$axios
+            //     .get('api/dailySaleReport')
+            //     .then((res) => {
+            //         console.log("Data ", res.data[0]);
+            //         for (const iterator of res.data) {
+            //             this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
+            //             // this.barOptionsForDailyStat.colors.push('#01532B') // ******* Original
+            //             this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
+            //             this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)
+            //         }
+            //     }).catch(err => {
+            //         console.log('error', err);
+            //     });
+            //****************** Deprecated  ***************** */
+
+            for (const iterator of this.txnSaleMTD) {
+                this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
+                this.barSeriesForDailyStat[0].data.push(iterator['totalSale'])
+                this.barOptionsForDailyStat.xaxis.categories.push(iterator['date'])
+            }
+
             this.dailyState = true
             this.isloading = false
         },

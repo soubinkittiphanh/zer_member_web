@@ -106,14 +106,6 @@
               </v-row>
             </div>
           </div>
-
-
-
-
-
-
-
-
           <!-- title 12 -->
           <v-row no-gutters class="title-space">
             <v-col>
@@ -189,115 +181,13 @@ export default {
   async created() {
     this.id = parseInt(this.$route.query.id)
     if (this.id) {
-      const empId = Number.isInteger(this.id) ? this.id : null
-      if (empId) {
-        try {
-          let res = await this.$axios.get(`${process.env.url}/get/img/${empId}`, { responseType: 'blob' })
-          if (res.data && res.data.size > 0) this.image = URL.createObjectURL(res.data);
-        } catch (e) {
-          console.log(e)
-        }
-        await this.getAllEmpInfo(empId)
-      }
+   
+        // await this.getQuotation(empId)
+
     }
   },
 
   methods: {
-    formatNumber(val) {
-      return getFormatNum(val)
-    },
-    async getAllEmpInfo(empId) {
-      await this.$store.dispatch('employeeInfo/fetch', empId)
-      this.info = this.empInfoList.employeeInfo
-      // this.belong.position = this.empInfoList.employeeInfoBelong ? this.empInfoList.employeeInfoBelong.position.posName : ''
-
-      this.partyList = this.empInfoList.employeeInfoParty
-      this.organizeList = this.empInfoList.employeeInfoOrganize
-      this.degreeHis = this.empInfoList.employeeInfoDegreeHis
-      this.awardList = this.empInfoList.employeeInfoAward
-      this.expWorkTillNow = this.empInfoList.employeeExpWorkTillNow
-      this.movementList = this.empInfoList.employeeInfoMovement
-      this.employeeWorkExpList = this.empInfoList.employeeInfoWorkExp
-      this.extendCourseList = this.empInfoList.employeeInfoExtendedCourse
-      this.relationshipList = this.empInfoList.employeeInfoRelationship
-      this.salCat = this.empInfoList.employeeInfoSalCat ? this.empInfoList.employeeInfoSalCat[0] : ""
-
-      // relationshipList
-      // if(this.info.status.marId === 2 && (this.relationshipList && this.relationshipList.length > 0)) {
-      //   this.relationshipList = this.relationshipList.filter(e => {
-      //     return (e.famMemId.famMemId === 6 || e.famMemId.famMemId === 7)
-      //   })
-      // }
-
-      // ຕຳແໜ່ງສາຍລັດ (ປະຈຸບັນ)
-      let mostRecentDate = new Date(Math.max.apply(null, this.movementList.map(e => {
-        return new Date(e.moveDate);
-      })));
-      let mostRecentObject = this.movementList.filter(e => {
-        let d = new Date(e.moveDate);
-        return d.getTime() === mostRecentDate.getTime();
-      })[0];
-      this.currentPosition = mostRecentObject ? mostRecentObject.position.posName : ''
-      // console.log(this.currentPosition)
-
-      // console.log(this.movementList)
-      // ວັນ, ເດືອນ, ປີ ເຂົ້າສັງກັດລັດ
-      this.movementList.forEach(e => {
-        // ພະນັກງານ 95%
-        // if (e.moveDate < this.minDate && e.position.posId === 69) {
-        //   this.hireDate = e.moveDate
-        // }
-        // if (e.moveDate < this.minDate && e.moveStatus === 1) {
-        //   this.hireDate = e.moveDate
-        // }
-        // if (e.moveDate < this.minDate && e.position.posId === 70) {
-        //   this.trainDate = e.moveDate
-        // }
-        // if (e.moveDate < this.minDate && e.position.posId === 122) {
-        //   this.partTimeDate = e.moveDate
-        // }
-        if (e.currentWorkStatus === 1) {
-          this.currentWork = e
-          if (e.position.posId === 161) this.movementContactA = e // ທົດລອງວຽກ
-          if ((e.position.posId === 71 || e.position.posId === 72 || e.position.posId === 122)) this.movementContactC = e // ສັນຍາຈ້າງ
-        }
-        // ມື້ເຂົ້າສົມບູນ  ຕ້ອງຄ່າງຈາກ 70, 71, 72, 122, 161
-        if (e.position.posId !== 70 && e.position.posId !== 71 && e.position.posId !== 72 && e.position.posId !== 122 && e.position.posId !== 161)
-          this.movementContactB = e
-
-      })
-
-      console.log(this.currentWork)
-
-
-
-      if (this.hireDate) {
-        // console.log(this.hireDate)
-        // this.yearParty = _calculateAge(this.hireDate)
-        // this.monthParty = _getMonthDiff(this.hireDate)
-      }
-
-      this.degreeHis && this.degreeHis.forEach(e => {
-        if (e.edu.eduType.eduTypeId === 1) this.education.general.push(e)
-        if (e.edu.eduType.eduTypeId === 2) this.education.degree.push(e)
-        if (e.edu.eduType.eduTypeId === 3) this.education.politic.push(e)
-        if (e.edu.eduType.eduTypeId === 4) this.education.train.push(e)
-      })
-
-      // console.log(this.partyList)
-      this.partyList && this.partyList.forEach(e => {
-        if (e.orgType.orgTypeId === 2) this.parties.party_a = e
-        if (e.orgType.orgTypeId === 3) this.parties.party_b = e
-      })
-
-      this.organizeList && this.organizeList.forEach(e => {
-        if (e.orgType.orgTypeId === 4) this.organizes.trade_union = e
-        if (e.orgType.orgTypeId === 5) this.organizes.women_union = e
-        if (e.orgType.orgTypeId === 6) this.organizes.youth_union = e
-      })
-
-      this.age = _calculateAge(this.info.dob)
-    },
 
   }
 

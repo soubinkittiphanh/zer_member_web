@@ -387,7 +387,7 @@ export default {
             this.saleHeader.bookingDate = jsDateToMysqlDate(today)
             this.saleHeader.isActive = false
             await this.$axios
-                .post('/api/sale/create', this.saleHeader)
+                .post('/api/quotation/create', this.saleHeader)
                 .then((res) => {
                     this.lastTransactionSaleHeaderId = res.data.split('-')[1]
                     localStorage.setItem('customer', JSON.stringify(this.currenctCustomer));

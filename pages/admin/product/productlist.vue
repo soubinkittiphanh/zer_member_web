@@ -63,9 +63,9 @@
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
 
-          <v-btn  variant="outlined" @click="triggerCardForm(item)">
+          <v-btn variant="outlined" @click="triggerCardForm(item)">
             <i class="fas fa-cart-plus"></i>
-         
+
             <!-- ເພີ່ມສະຕັອກ -->
           </v-btn>
 
@@ -73,7 +73,7 @@
         <template v-slot:[`item.functionStockView`]="{ item }">
           <v-btn variant="outlined" @click="editStock(item)">
             <!-- <i class="fas fa-dolly"></i> -->
-               <i class="fas fa-eye"></i>
+            <i class="fas fa-eye"></i>
             <!-- ເບິ່ງສະຕັອກ -->
           </v-btn>
         </template>
@@ -316,7 +316,7 @@ export default {
     async rebuildStock() {
       if (!this.isloading) {
         this.isloading = true
-        await this.$axios.post("/api/card/rebuildStock").then(response => {
+        await this.$axios.put("/api/product/stockcount").then(response => {
           swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
           this.fetchData()
         }).catch(error => {

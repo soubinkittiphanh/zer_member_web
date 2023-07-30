@@ -1,7 +1,7 @@
 exports.ids = [6];
 exports.modules = {
 
-/***/ 284:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -126,7 +126,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 313:
+/***/ 312:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -134,25 +134,25 @@ exports.modules = {
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
-var VAutocomplete = __webpack_require__(276);
+var VAutocomplete = __webpack_require__(275);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
 var VBtn = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(102);
+var VCard = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
 var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(263);
+var VDialog = __webpack_require__(262);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(284);
+var VForm = __webpack_require__(283);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(272);
+var VSpacer = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
@@ -318,14 +318,14 @@ var common = __webpack_require__(17);
         if (this.isEdit) {
           await this.$axios.put(`branch/update/${this.id}`, this.form).then(response => {
             if (response.status == 200) {
-              Object(common["j" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
               // Reload data
               this.refreshData();
             } else {
-              Object(common["i" /* swalError2 */])(this.$swal, "Error", response.data);
+              Object(common["j" /* swalError2 */])(this.$swal, "Error", response.data);
             }
           }).catch(error => {
-            Object(common["i" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+            Object(common["j" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
           });
         } else {
           // orderId, status, userId, reason
@@ -334,14 +334,14 @@ var common = __webpack_require__(17);
           // return;
           await this.$axios.put("/api/changeOrderStatus", this.form).then(response => {
             if (response.status == 200) {
-              Object(common["j" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
               // Reload data
               this.refreshData();
             } else {
-              Object(common["i" /* swalError2 */])(this.$swal, "Error", response.data);
+              Object(common["j" /* swalError2 */])(this.$swal, "Error", response.data);
             }
           }).catch(error => {
-            Object(common["i" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+            Object(common["j" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
           });
         }
       } else {
@@ -357,7 +357,7 @@ var common = __webpack_require__(17);
           // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
           this.form = response.data;
         }).catch(error => {
-          Object(common["i" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
+          Object(common["j" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0]['msg']);
         });
         this.isSubmitting = false;
       }
@@ -394,7 +394,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var CancelTicketForm = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(111).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default})
 
 
 /***/ })

@@ -1,13 +1,13 @@
 exports.ids = [28];
 exports.modules = {
 
-/***/ 281:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(282);
+var content = __webpack_require__(281);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -15,7 +15,7 @@ __webpack_require__(5).default("c54b7bb4", content, true)
 
 /***/ }),
 
-/***/ 282:
+/***/ 281:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -30,7 +30,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 298:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50,11 +50,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 299:
+/***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(281);
+/* harmony import */ var _src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(280);
 /* harmony import */ var _src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VTextField_VTextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(28);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
@@ -151,7 +151,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 317:
+/***/ 316:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -159,46 +159,46 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
-var VAutocomplete = __webpack_require__(276);
+var VAutocomplete = __webpack_require__(275);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBottomSheet/VBottomSheet.js
-var VBottomSheet = __webpack_require__(348);
+var VBottomSheet = __webpack_require__(347);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
 var VBtn = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(102);
+var VCard = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
 var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(274);
+var VCol = __webpack_require__(273);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 12 modules
-var VDataTable = __webpack_require__(277);
+var VDataTable = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(263);
+var VDialog = __webpack_require__(262);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(100);
+var VDivider = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(273);
+var VRow = __webpack_require__(272);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSheet/VSheet.js
 var VSheet = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(272);
+var VSpacer = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(299);
+var VTextarea = __webpack_require__(298);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
 
@@ -649,7 +649,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
-var comma_thousand = __webpack_require__(298);
+var comma_thousand = __webpack_require__(297);
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(12);
@@ -714,7 +714,7 @@ var common = __webpack_require__(17);
         await this.$axios.delete(`api/${this.apiLine}Line/find/${item.id}`).then(res => {
           this.transaction.lines.splice(this.transaction.lines.indexOf(item), 1);
         }).catch(er => {
-          Object(common["i" /* swalError2 */])(this.$swal, 'Error', 'Operation fail ' + er.Error);
+          Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Operation fail ' + er.Error);
         });
         this.isloading = false;
       } else {
@@ -725,28 +725,28 @@ var common = __webpack_require__(17);
     quantityChange(data) {
       console.log("Qty change");
       let index = this.transaction.lines.indexOf(data);
-      const qty = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const unitRate = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      const discount = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
       this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
     },
     unitRateChange(data) {
       console.log("Unit rate change");
       let index = this.transaction.lines.indexOf(data);
-      const qty = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const unitRate = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      const discount = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
       this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
     },
     discountChange(data) {
       console.log("Discount change");
       let index = this.transaction.lines.indexOf(data);
-      const qty = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const unitRate = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      const discount = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
       this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
     },
     unitChange(data) {
@@ -755,9 +755,9 @@ var common = __webpack_require__(17);
       if (unit == undefined) return;
       let index = this.transaction.lines.indexOf(data);
       this.transaction.lines[index]['unitRate'] = unit['unitRate'];
-      const qty = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const discount = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
       this.transaction.lines[index]['total'] = unit['unitRate'] * qty * price - discount;
     },
     productChange(data) {
@@ -769,10 +769,10 @@ var common = __webpack_require__(17);
       }
       let index = this.transaction.lines.indexOf(data);
       this.transaction.lines[index]['price'] = product['pro_price'];
-      const qty = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const discount = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
-      const unitRate = Object(common["h" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
       this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
     },
     newRow() {
@@ -798,7 +798,7 @@ var common = __webpack_require__(17);
         console.log("Data ", res.data);
         // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
       }).catch(er => {
-        Object(common["i" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
       });
     },
     post() {
@@ -916,9 +916,9 @@ var common = __webpack_require__(17);
       };
       await this.$axios.put(`api/sale/postToInvoice/${this.id}`).then(res => {
         this.$emit('reload');
-        Object(common["j" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+        Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
       }).catch(er => {
-        Object(common["i" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
         console.log('Error ===>: ' + er);
       });
       this.isloading = false;
@@ -934,8 +934,8 @@ var common = __webpack_require__(17);
           this.isloading = false;
           return;
         }
-        iterator.quantity = parseInt(Object(common["h" /* replaceAll */])(iterator.quantity, ',', ''));
-        iterator.unitRate = parseInt(Object(common["h" /* replaceAll */])(iterator.unitRate, ',', ''));
+        iterator.quantity = parseInt(Object(common["i" /* replaceAll */])(iterator.quantity, ',', ''));
+        iterator.unitRate = parseInt(Object(common["i" /* replaceAll */])(iterator.unitRate, ',', ''));
         // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
       }
 
@@ -948,10 +948,10 @@ var common = __webpack_require__(17);
         // ********** If header has data, that means we go for update API ********** //
         await this.$axios.put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction).then(res => {
           this.$emit('reload');
-          Object(common["j" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
         }).catch(er => {
           console.error(er);
-          Object(common["i" /* swalError2 */])(this.$swal, 'Error', er.response.data);
+          Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
           const outOfStockProductId = er.response.data.split("#")[1];
           if (outOfStockProductId != undefined) {
             const pronductOutStock = this.productList.find(el => el.id == outOfStockProductId);
@@ -965,10 +965,10 @@ var common = __webpack_require__(17);
         // ********** If header has data, that means we go for update API ********** //
         await this.$axios.post(`api/${this.apiLine}/create`, this.transaction).then(res => {
           this.$emit('reload');
-          Object(common["j" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
         }).catch(er => {
           console.error(er);
-          Object(common["i" /* swalError2 */])(this.$swal, 'Error', er.response.data);
+          Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
           const outOfStockProductId = er.response.data.split("#")[1];
           if (outOfStockProductId != undefined) {
             this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`;
@@ -1011,7 +1011,7 @@ var common = __webpack_require__(17);
       let total = this.transaction.lines.reduce((total, item) => {
         return total + item.total;
       }, 0);
-      const discount = Object(common["h" /* replaceAll */])(this.transaction.discount, ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.discount, ',', '');
       return total - discount;
     }
   },
@@ -1107,18 +1107,18 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var OrderDetailPosCRUD = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(111).default,CustomerList: __webpack_require__(78).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,CustomerList: __webpack_require__(77).default})
 
 
 /***/ }),
 
-/***/ 324:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(325);
+var content = __webpack_require__(324);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -1126,7 +1126,7 @@ __webpack_require__(5).default("73bba828", content, true)
 
 /***/ }),
 
-/***/ 325:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1141,13 +1141,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 348:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(324);
+/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(323);
 /* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(263);
+/* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(262);
  // Extensions
 
 
