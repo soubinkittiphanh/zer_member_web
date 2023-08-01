@@ -1,4 +1,4 @@
-exports.ids = [50,5];
+exports.ids = [53,5];
 exports.modules = {
 
 /***/ 282:
@@ -166,13 +166,13 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 302:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(303);
+var content = __webpack_require__(299);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -180,7 +180,7 @@ __webpack_require__(5).default("ae7a972c", content, true)
 
 /***/ }),
 
-/***/ 303:
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -195,7 +195,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 304:
+/***/ 300:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -350,26 +350,26 @@ function prevent(e) {
 
 /***/ }),
 
-/***/ 320:
+/***/ 319:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
 /* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(116);
+/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(115);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
 
 /***/ }),
 
-/***/ 321:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(322);
+var content = __webpack_require__(324);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -377,7 +377,7 @@ __webpack_require__(5).default("59f225a8", content, true)
 
 /***/ }),
 
-/***/ 322:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -392,15 +392,15 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 346:
+/***/ 348:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(302);
+/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(298);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(321);
+/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(323);
 /* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(304);
+/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(300);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
 /* harmony import */ var _directives_touch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(113);
 /* harmony import */ var _transitions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36);
@@ -522,7 +522,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 363:
+/***/ 364:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -566,7 +566,7 @@ var VRow = __webpack_require__(272);
 var VSpacer = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(346);
+var VSwitch = __webpack_require__(348);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
@@ -1128,7 +1128,7 @@ var common = __webpack_require__(17);
                 this.campaignEntry.splice(index, 1);
               }
             }).catch(error => {
-              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
+              Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
             });
             this.isLoading = false;
           });
@@ -1228,11 +1228,11 @@ var common = __webpack_require__(17);
         this.isLoading = true;
         if (this.campaignEntry.length == 0) {
           this.isLoading = false;
-          return Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ບໍ່ມີລາຍການກະລຸນາເພີ່ມຢ່າງນ້ອຍ 1 ລາຍການ");
+          return Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ບໍ່ມີລາຍການກະລຸນາເພີ່ມຢ່າງນ້ອຍ 1 ລາຍການ");
         }
         if (!this.validateCampaignEntry()) {
           this.isLoading = false;
-          return Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາກວດຂໍ້ມູນຄືນໃຫ້ຖືກຕ້ອງ");
+          return Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາກວດຂໍ້ມູນຄືນໃຫ້ຖືກຕ້ອງ");
         }
         this.form.header.entry = this.campaignEntry;
         // ********* update entry *********
@@ -1240,23 +1240,23 @@ var common = __webpack_require__(17);
           console.log("====> update campaign");
           await this.$axios.put(`/api/campaign/update/${this.campaignId}`, this.form.header).then(res => {
             if (res.status == 200) {
-              Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
             } else {
-              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
+              Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
             }
           }).catch(error => {
-            Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
+            Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data);
           });
           // ********* create entry *********
         } else {
           await this.$axios.post("/api/campaign/create", this.form.header).then(res => {
             if (res.status == 200) {
-              Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+              Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
             } else {
-              Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
+              Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", res.data);
             }
           }).catch(error => {
-            Object(myUtil["c" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data.errors[0]['msg']);
+            Object(myUtil["b" /* swalError2 */])(this.$swal, "ເກີດຂໍ້ຜິດພາດ", error.response.data.errors[0]['msg']);
           });
         }
         this.isLoading = false;
@@ -1344,7 +1344,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 459:
+/***/ 470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1370,18 +1370,18 @@ var VDataTable = __webpack_require__(276);
 var VDialog = __webpack_require__(262);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(320);
+var VLayout = __webpack_require__(319);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(272);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(346);
+var VSwitch = __webpack_require__(348);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/campaign/index.vue?vue&type=template&id=26321a0a&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/campaign/index.vue?vue&type=template&id=93a5b3ac&
 
 
 
@@ -1394,7 +1394,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var campaignvue_type_template_id_26321a0a_render = function render() {
+var campaignvue_type_template_id_93a5b3ac_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -1470,6 +1470,12 @@ var campaignvue_type_template_id_26321a0a_render = function render() {
       expression: "endDate"
     }
   }), _vm._v(" "), _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
     on: {
       "click": _vm.openCampaignForm
     }
@@ -1506,6 +1512,12 @@ var campaignvue_type_template_id_26321a0a_render = function render() {
       expression: "userId"
     }
   }), _vm._v(" "), _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
     on: {
       "click": _vm.loadData
     }
@@ -1596,13 +1608,13 @@ var campaignvue_type_template_id_26321a0a_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/campaign/index.vue?vue&type=template&id=26321a0a&
+// CONCATENATED MODULE: ./pages/admin/campaign/index.vue?vue&type=template&id=93a5b3ac&
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./components/campaign/CampaignForm.vue + 4 modules
-var CampaignForm = __webpack_require__(363);
+var CampaignForm = __webpack_require__(364);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/campaign/index.vue?vue&type=script&lang=js&
 
@@ -1741,7 +1753,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_campaignvue_type_script_lang_js_,
-  campaignvue_type_template_id_26321a0a_render,
+  campaignvue_type_template_id_93a5b3ac_render,
   staticRenderFns,
   false,
   injectStyles,
@@ -1753,7 +1765,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var campaign = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {CampaignForm: __webpack_require__(363).default,LoadingIndicator: __webpack_require__(110).default})
+installComponents(component, {CampaignForm: __webpack_require__(364).default,LoadingIndicator: __webpack_require__(110).default})
 
 
 /***/ })

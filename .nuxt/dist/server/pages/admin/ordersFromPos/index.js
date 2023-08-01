@@ -1,4 +1,4 @@
-exports.ids = [65,6,27,28,30];
+exports.ids = [69,6,28,29,31];
 exports.modules = {
 
 /***/ 280:
@@ -320,7 +320,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 298:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -422,6 +422,1127 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 /***/ }),
 
 /***/ 312:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
+var VAutocomplete = __webpack_require__(275);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBottomSheet/VBottomSheet.js
+var VBottomSheet = __webpack_require__(342);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
+var VBtn = __webpack_require__(55);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
+var VCard = __webpack_require__(101);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
+var components_VCard = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
+var VCol = __webpack_require__(273);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 12 modules
+var VDataTable = __webpack_require__(276);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
+var VDialog = __webpack_require__(262);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
+var VDivider = __webpack_require__(99);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
+var VRow = __webpack_require__(272);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSheet/VSheet.js
+var VSheet = __webpack_require__(22);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
+var VSpacer = __webpack_require__(271);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
+var VTextField = __webpack_require__(28);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
+var VTextarea = __webpack_require__(301);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', [_c(VDialog["a" /* default */], {
+    attrs: {
+      "hide-overlay": "",
+      "persistent": "",
+      "width": "300"
+    },
+    model: {
+      value: _vm.isloading,
+      callback: function ($$v) {
+        _vm.isloading = $$v;
+      },
+      expression: "isloading"
+    }
+  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VDialog["a" /* default */], {
+    attrs: {
+      "max-width": "1024"
+    },
+    model: {
+      value: _vm.customerDialog,
+      callback: function ($$v) {
+        _vm.customerDialog = $$v;
+      },
+      expression: "customerDialog"
+    }
+  }, [_c('customer-list', {
+    on: {
+      "close-dialog": function ($event) {
+        _vm.customerDialog = false;
+      }
+    }
+  })], 1), _vm._ssrNode(" "), _c(VBottomSheet["a" /* default */], {
+    attrs: {
+      "inset": ""
+    },
+    model: {
+      value: _vm.sheet,
+      callback: function ($$v) {
+        _vm.sheet = $$v;
+      },
+      expression: "sheet"
+    }
+  }, [_c(VSheet["a" /* default */], {
+    staticClass: "text-center",
+    attrs: {
+      "height": "200px"
+    }
+  }, [_c(VBtn["a" /* default */], {
+    staticClass: "mt-6",
+    attrs: {
+      "text": "",
+      "color": "error"
+    },
+    on: {
+      "click": function ($event) {
+        _vm.sheet = !_vm.sheet;
+      }
+    }
+  }, [_vm._v("\n                close\n            ")]), _vm._v(" "), _c('div', {
+    staticClass: "my-3"
+  }, [_vm._v("\n                " + _vm._s(_vm.validateErrorMessage) + "\n            ")])], 1)], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], [_c(components_VCard["b" /* VCardSubtitle */], [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "6"
+    }
+  }), _vm._v(" "), _c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "cols": "6"
+    }
+  }, [_vm.isQuotation ? _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
+    on: {
+      "click": _vm.post
+    }
+  }, [_c('span', {
+    staticClass: "mdi mdi-transfer-right"
+  }), _vm._v("Make to invoice\n                    ")]) : _vm._e(), _vm._v(" "), _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
+    on: {
+      "click": _vm.quotationPreview
+    }
+  }, [_c('span', {
+    staticClass: "mdi mdi-printer-outline"
+  }), _vm._v("Print\n                    ")])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VCard["a" /* default */], {
+    style: _vm.headerError ? `outline:1px solid red` : ``
+  }, [_vm._v("\n                " + _vm._s(_vm.isQuotation ? `Quotation #` : `Invoice #`) + "\n                " + _vm._s(_vm.transaction.id) + "\n                "), _c(components_VCard["c" /* VCardText */], [_c('div', [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "4"
+    }
+  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "type": "date",
+      "label": "ວັນທີ*",
+      "hint": "ເດຶອນ/ວັນ/ປີ 12/31/2023"
+    },
+    model: {
+      value: _vm.transaction.bookingDate,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "bookingDate", $$v);
+      },
+      expression: "transaction.bookingDate"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "payment_code",
+      "item-value": "id",
+      "items": _vm.paymentList,
+      "label": "ການຊຳລະ*"
+    },
+    model: {
+      value: _vm.transaction.paymentId,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "paymentId", $$v);
+      },
+      expression: "transaction.paymentId"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    directives: [{
+      name: "comma-thousand",
+      rawName: "v-comma-thousand"
+    }],
+    attrs: {
+      "label": "ສ່ວນຫລຸດ*",
+      "required": ""
+    },
+    model: {
+      value: _vm.transaction.discount,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "discount", $$v);
+      },
+      expression: "transaction.discount"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "4"
+    }
+  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "company",
+      "item-value": "id",
+      "items": _vm.clientList,
+      "label": "ລູກຄ້າ*"
+    },
+    model: {
+      value: _vm.transaction.clientId,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "clientId", $$v);
+      },
+      expression: "transaction.clientId"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "code",
+      "item-value": "id",
+      "items": _vm.currencyList,
+      "label": "ສະກຸນເງິນ*"
+    },
+    on: {
+      "input": _vm.currencyChange
+    },
+    model: {
+      value: _vm.transaction.currencyId,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "currencyId", $$v);
+      },
+      expression: "transaction.currencyId"
+    }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_vm._v("ຍອດລວມທັງໝົດ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "end"
+    },
+    attrs: {
+      "cols": "4"
+    }
+  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VTextarea["a" /* default */], {
+    attrs: {
+      "label": "Notes"
+    },
+    model: {
+      value: _vm.transaction.remark,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "remark", $$v);
+      },
+      expression: "transaction.remark"
+    }
+  })], 1), _vm._v(" "), _vm.transaction.user ? _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_vm._v("ຜູ້ລົງ: " + _vm._s(_vm.transaction.user.cus_id) + "\n                                    ")]) : _vm._e(), _vm._v(" "), _vm.transaction.user ? _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_vm._v("ຊື່: " + _vm._s(_vm.transaction.user.cus_name))]) : _vm._e(), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    attrs: {
+      "disabled": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "label",
+      fn: function () {
+        return [_c('span', {
+          staticStyle: {
+            "color": "black",
+            "font-weight": "bold"
+          }
+        }, [_vm._v(_vm._s(`Total Amount:
+                                                    ${_vm.getFormatNum(_vm.grandTotal)}`))])];
+      },
+      proxy: true
+    }])
+  })], 1)], 1)], 1)], 1)], 1)])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _vm.transaction.lines ? _c(VDataTable["a" /* default */], {
+    attrs: {
+      "headers": _vm.headers,
+      "search": _vm.search,
+      "items": _vm.transaction.lines
+    },
+    scopedSlots: _vm._u([{
+      key: "item",
+      fn: function ({
+        item
+      }) {
+        return [_c('tr', {
+          style: _vm.errorLineNumber == _vm.transaction.lines.indexOf(item) ? `outline: 1px solid red` : ``
+        }, [_c('td', {
+          class: _vm.errorLineNumber == _vm.transaction.lines.indexOf(item) ? `error` : ``
+        }, [_vm._v("\n                            " + _vm._s(_vm.transaction.lines.indexOf(item) + 1) + "\n                        ")]), _vm._v(" "), _c('td', [_c(VAutocomplete["a" /* default */], {
+          attrs: {
+            "item-text": "pro_name",
+            "item-value": "id",
+            "items": _vm.productList,
+            "label": "ສິນຄ້າ*"
+          },
+          on: {
+            "input": function ($event) {
+              return _vm.productChange(item);
+            }
+          },
+          model: {
+            value: item.productId,
+            callback: function ($$v) {
+              _vm.$set(item, "productId", $$v);
+            },
+            expression: "item.productId"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          directives: [{
+            name: "comma-thousand",
+            rawName: "v-comma-thousand"
+          }],
+          attrs: {
+            "label": "ຈຳນວນ",
+            "rules": [_vm.numberCommaRule]
+          },
+          on: {
+            "input": function ($event) {
+              return _vm.quantityChange(item);
+            }
+          },
+          model: {
+            value: item.quantity,
+            callback: function ($$v) {
+              _vm.$set(item, "quantity", $$v);
+            },
+            expression: "item.quantity"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VAutocomplete["a" /* default */], {
+          attrs: {
+            "item-text": "name",
+            "item-value": "id",
+            "items": _vm.unitList,
+            "label": "ຫົວຫນ່ວຍ*"
+          },
+          on: {
+            "input": function ($event) {
+              return _vm.unitChange(item);
+            }
+          },
+          model: {
+            value: item.unitId,
+            callback: function ($$v) {
+              _vm.$set(item, "unitId", $$v);
+            },
+            expression: "item.unitId"
+          }
+        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          directives: [{
+            name: "comma-thousand",
+            rawName: "v-comma-thousand"
+          }],
+          attrs: {
+            "label": "ຈນ ຕໍ່ ຫົວຫນ່ວຍ",
+            "rules": [_vm.numberCommaRule]
+          },
+          on: {
+            "input": function ($event) {
+              return _vm.unitRateChange(item);
+            }
+          },
+          model: {
+            value: item.unitRate,
+            callback: function ($$v) {
+              _vm.$set(item, "unitRate", $$v);
+            },
+            expression: "item.unitRate"
+          }
+        })], 1), _vm._v(" "), _c('td', {
+          staticStyle: {
+            "text-align": "right"
+          }
+        }, [_vm._v("\n                            " + _vm._s(_vm.getFormatNum(item.price)) + "\n                        ")]), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
+          directives: [{
+            name: "comma-thousand",
+            rawName: "v-comma-thousand"
+          }],
+          attrs: {
+            "rules": [_vm.numberCommaRule],
+            "label": "ສ່ວນຫລຸດ"
+          },
+          on: {
+            "input": function ($event) {
+              return _vm.discountChange(item);
+            }
+          },
+          model: {
+            value: item.discount,
+            callback: function ($$v) {
+              _vm.$set(item, "discount", $$v);
+            },
+            expression: "item.discount"
+          }
+        })], 1), _vm._v(" "), _c('td', {
+          staticStyle: {
+            "text-align": "right"
+          }
+        }, [_vm._v("\n                            " + _vm._s(_vm.getFormatNum(item.total)) + "\n                        ")]), _vm._v(" "), _c('td', [_c(VBtn["a" /* default */], {
+          attrs: {
+            "color": "error",
+            "text": ""
+          },
+          on: {
+            "click": function ($event) {
+              return _vm.deleteItem(item);
+            },
+            "keydown": _vm.handleKeyDown
+          }
+        }, [_c('i', {
+          staticClass: "fas fa-trash"
+        })])], 1)])];
+      }
+    }], null, false, 2946179411)
+  }) : _vm._e(), _vm._v(" "), _vm.transaction.lines.length == 0 ? _c('tr', [_c('td', [_c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
+    on: {
+      "click": _vm.newRow
+    }
+  }, [_c('span', {
+    staticClass: "mdi mdi-plus"
+  })])], 1)]) : _vm._e()], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "blue-darken-1",
+      "variant": "text"
+    },
+    on: {
+      "click": _vm.toggleDialog
+    }
+  }, [_vm._v("\n                Close\n            ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "blue-darken-1",
+      "variant": "text"
+    },
+    on: {
+      "click": _vm.postTransaction
+    }
+  }, [_vm._v("\n                Save\n            ")])], 1)], 1)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
+
+// EXTERNAL MODULE: ./plugins/comma-thousand.js
+var comma_thousand = __webpack_require__(297);
+
+// EXTERNAL MODULE: external "vuex"
+var external_vuex_ = __webpack_require__(12);
+
+// EXTERNAL MODULE: ./common/index.js
+var common = __webpack_require__(17);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=script&lang=js&
+
+
+
+/* harmony default export */ var OrderDetailPosCRUDvue_type_script_lang_js_ = ({
+  props: {
+    headerId: {
+      type: Number,
+      default: 0
+    },
+    isQuotation: {
+      type: Boolean,
+      default: false
+    },
+    isUpdate: {
+      type: Boolean,
+      default: false
+    }
+  },
+  directives: {
+    commaThousand: comma_thousand["a" /* default */]
+  },
+  async created() {
+    if (this.isUpdate) {
+      console.log("View old record");
+      this.isloading = true;
+      await this.loadTransaction();
+      this.isloading = false;
+    } else {
+      const today = new Date().toISOString().substr(0, 10);
+      this.transaction.bookingDate = today;
+      this.transaction.clientId = 1;
+      this.transaction.paymentId = 1;
+      this.transaction.currencyId = 1;
+      this.transaction.discount = 0;
+      this.newRow();
+    }
+  },
+  methods: {
+    quotationPreview() {
+      const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice';
+      window.open(`/admin/${path}/${this.headerId}`, '_blank');
+    },
+    handleKeyDown(event) {
+      if (event.key === 'Tab') {
+        // Handle tab key press
+        console.log('Tab key pressed');
+        this.newRow();
+      }
+    },
+    currencyChange() {
+      const currency = this.currencyList.find(el => el['id'] == this.transaction.currencyId);
+      if (!currency) return;
+      this.transaction.exchangeRate = currency['rate'];
+      console.log(`Rate exchange ${currency['rate']} real value ${this.transaction.exchangeRate}`);
+    },
+    async deleteItem(item) {
+      if (item.id) {
+        console.log("Line has id");
+        this.isloading = true;
+        await this.$axios.delete(`api/${this.apiLine}Line/find/${item.id}`).then(res => {
+          this.transaction.lines.splice(this.transaction.lines.indexOf(item), 1);
+        }).catch(er => {
+          Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Operation fail ' + er.Error);
+        });
+        this.isloading = false;
+      } else {
+        this.transaction.lines.splice(this.transaction.lines.indexOf(item), 1);
+        console.log("Line has no id");
+      }
+    },
+    quantityChange(data) {
+      console.log("Qty change");
+      let index = this.transaction.lines.indexOf(data);
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
+    },
+    unitRateChange(data) {
+      console.log("Unit rate change");
+      let index = this.transaction.lines.indexOf(data);
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
+    },
+    discountChange(data) {
+      console.log("Discount change");
+      let index = this.transaction.lines.indexOf(data);
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
+    },
+    unitChange(data) {
+      console.log("Unit change");
+      const unit = this.unitList.find(el => el['id'] == data['unitId']);
+      if (unit == undefined) return;
+      let index = this.transaction.lines.indexOf(data);
+      this.transaction.lines[index]['unitRate'] = unit['unitRate'];
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      this.transaction.lines[index]['total'] = unit['unitRate'] * qty * price - discount;
+    },
+    productChange(data) {
+      console.log("Product change");
+      const product = this.productList.find(el => el['id'] == data['productId']);
+      if (product == undefined) {
+        console.log("Product is not define");
+        return;
+      }
+      let index = this.transaction.lines.indexOf(data);
+      this.transaction.lines[index]['price'] = product['pro_price'];
+      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
+      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
+      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
+      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
+    },
+    newRow() {
+      const defaultLine = {
+        // "id":null,
+        "quantity": 0,
+        "unitRate": 1,
+        "price": 0,
+        "discount": 0,
+        "total": 0,
+        "isActive": true,
+        "productId": 0,
+        "unitId": 1
+      };
+      this.transaction.lines.push(defaultLine);
+    },
+    openCustomerDialog() {
+      this.customerDialog = true;
+    },
+    async loadTransaction() {
+      await this.$axios.get(`api/${this.apiLine}/find/${this.headerId}`).then(res => {
+        this.transaction = res.data;
+        console.log("Data ", res.data);
+        // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+      }).catch(er => {
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
+      });
+    },
+    post() {
+      this.errorLineNumber = null;
+      for (const iterator of this.transaction.lines) {
+        this.errorLineNumber = this.transaction.lines.indexOf(iterator);
+        if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
+          this.sheet = true;
+          return;
+        }
+        iterator['total'] = iterator['quantity'] * iterator['unitRate'] * iterator['price'] - iterator['discount'];
+      }
+      console.log("******** No error found process posting ********");
+      this.errorLineNumber = null;
+      //  ********** Enable below line to confirm before clear ***********//
+      // confirmSwal(this.$swal, 'You are posting to invoice ?', this.postToInvoice)
+      // this.clearCart()
+    },
+
+    validateLine(obj, errorLineNumber) {
+      // Check if the object has all required properties
+      let {
+        quantity,
+        unitRate,
+        price,
+        discount,
+        total,
+        productId,
+        unitId
+      } = obj;
+      discount = parseInt(discount);
+      unitRate = parseInt(unitRate);
+      quantity = parseInt(quantity);
+      if (!Number.isFinite(quantity) || Number(quantity) <= 0) {
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຈຳນວນ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${quantity}********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(unitRate) || Number(unitRate) <= 0) {
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ອັດຕາຫົວຫນ່ວຍ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${unitRate}********`;
+        return false; // Reach must be a positive number
+      }
+
+      console.log("Type of price ", typeof price, ' [price] ', price);
+      if (!Number.isFinite(price) || Number(price) <= 0) {
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ລາຄາ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${price}********`;
+        return false; // Reach must be a positive number
+      }
+
+      console.log("Type of discount1 ", typeof discount);
+      if (!Number.isFinite(discount)) {
+        console.log("Type of discount2 ", typeof discount);
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ສ່ວນລົດ ຕ້ອງເປັນຕົວເລກ  current value is ${discount}********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(total) || Number(total) <= 0) {
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຍອດລວມ ຕ້ອງໃຫຍ່ກ່ອນ 0 current value is ${total}********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(productId)) {
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ສິນຄ້າບໍ່ຖືກຕ້ອງ  current value is ${productId}********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (!Number.isFinite(unitId)) {
+        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຫົວຫນ່ວຍບໍ່ຖືກຕ້ອງ  current value is ${unitId}********`;
+        return false; // Reach must be a positive number
+      }
+
+      return true;
+    },
+    validateHeader() {
+      this.headerError = true;
+      this.sheet = true;
+      console.log('=== currency id ', this.transaction.currencyId);
+      if (!this.transaction.currencyId) {
+        this.validateErrorMessage = `******** Error Currency in Header #${this.transaction.currencyId} ບໍ່ສາມາດເປັນຄ່າວ່າງ ********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (!this.transaction.paymentId) {
+        this.validateErrorMessage = `******** Error Payment in Header #${this.transaction.paymentId} ບໍ່ສາມາດເປັນຄ່າວ່າງ ********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (!this.transaction.clientId) {
+        this.validateErrorMessage = `******** Error Customer in Header #${this.transaction.clientId} ບໍ່ສາມາດເປັນຄ່າວ່າງ ********`;
+        return false; // Reach must be a positive number
+      }
+
+      if (this.transaction.lines.length == 0) {
+        this.validateErrorMessage = `******** Error Header ບໍ່ມີລາຍການສິນຄ້າ ********`;
+        return false; // Reach must be a positive number
+      }
+
+      this.sheet = false;
+      this.headerError = false;
+      return true;
+    },
+    getFormatNum(val) {
+      return new Intl.NumberFormat().format(val);
+    },
+    toggleDialog() {
+      this.$emit('close-dialog');
+    },
+    async postToInvoice() {
+      if (this.isloading) return;
+      this.isloading = true;
+      // TODO: How to split data between cod order[not yet paid] and all order
+      const date = {
+        startDate: this.date,
+        endDate: this.date2
+      };
+      await this.$axios.put(`api/sale/postToInvoice/${this.id}`).then(res => {
+        this.$emit('reload');
+        Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+      }).catch(er => {
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
+        console.log('Error ===>: ' + er);
+      });
+      this.isloading = false;
+    },
+    async postTransaction() {
+      if (this.isloading || !this.validateHeader()) return;
+      this.isloading = true;
+      this.errorLineNumber = null;
+      for (const iterator of this.transaction.lines) {
+        this.errorLineNumber = this.transaction.lines.indexOf(iterator);
+        if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
+          this.sheet = true;
+          this.isloading = false;
+          return;
+        }
+        iterator.discount = parseInt(Object(common["i" /* replaceAll */])(iterator.discount, ',', ''));
+        iterator.quantity = parseInt(Object(common["i" /* replaceAll */])(iterator.quantity, ',', ''));
+        iterator.unitRate = parseInt(Object(common["i" /* replaceAll */])(iterator.unitRate, ',', ''));
+        // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
+      }
+
+      console.log("******** No error found process posting ********");
+      this.errorLineNumber = null;
+      this.transaction.userId = this.user.id;
+      this.transaction.total = this.grandTotal;
+      console.log(`Amount total ${this.transaction.total}`);
+      if (this.isUpdate) {
+        // ********** If header has data, that means we go for update API ********** //
+        await this.$axios.put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction).then(res => {
+          this.$emit('reload');
+          Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+        }).catch(er => {
+          console.error(er);
+          Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
+          const outOfStockProductId = er.response.data.split("#")[1];
+          if (outOfStockProductId != undefined) {
+            const pronductOutStock = this.productList.find(el => el.id == outOfStockProductId);
+            this.validateErrorMessage = `********  ສິນຄ້າ ${pronductOutStock['pro_name']} ໃນສ້າງບໍ່ພຽງພໍ ********`;
+            this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId));
+            this.sheet = true;
+          }
+          console.log('Error ===>: ' + er);
+        });
+      } else {
+        // ********** If header has data, that means we go for update API ********** //
+        await this.$axios.post(`api/${this.apiLine}/create`, this.transaction).then(res => {
+          this.$emit('reload');
+          Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+        }).catch(er => {
+          console.error(er);
+          Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
+          const outOfStockProductId = er.response.data.split("#")[1];
+          if (outOfStockProductId != undefined) {
+            this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`;
+            this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId));
+            this.sheet = true;
+          }
+          console.log('Error ===>: ' + er);
+        });
+      }
+      this.isloading = false;
+    }
+  },
+  computed: {
+    ...Object(external_vuex_["mapGetters"])(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
+    clientList() {
+      return this.findAllClient;
+    },
+    user() {
+      return this.$auth.user || '';
+    },
+    apiLine() {
+      return this.isQuotation ? 'quotation' : 'sale';
+    },
+    productList() {
+      return this.findAllProduct;
+    },
+    paymentList() {
+      return this.findAllPayment;
+    },
+    unitList() {
+      return this.findAllUnit;
+    },
+    currencyList() {
+      return this.findAllCurrency;
+    },
+    numberRule() {
+      return [value => value !== undefined && value !== null && value !== '' || 'Field is required', value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'];
+    },
+    grandTotal() {
+      let total = this.transaction.lines.reduce((total, item) => {
+        return total + item.total;
+      }, 0);
+      const discount = Object(common["i" /* replaceAll */])(this.transaction.discount, ',', '');
+      return total - discount;
+    }
+  },
+  data() {
+    return {
+      search: '',
+      numberCommaRule: value => {
+        const regex = /^[0-9,]*$/;
+        return regex.test(value) || 'Only numbers and commas are allowed';
+      },
+      headerError: false,
+      customerDialog: false,
+      validateErrorMessage: '',
+      sheet: false,
+      errorLineNumber: null,
+      isloading: false,
+      transaction: {
+        exchangeRate: 1,
+        lines: []
+      },
+      headers: [{
+        text: '#',
+        align: 'start',
+        value: ''
+      }, {
+        text: 'ສິນຄ້າ',
+        align: 'start',
+        value: 'product.pro_name'
+      }, {
+        text: 'ຈຳນວນ',
+        align: 'end',
+        value: 'quantity'
+      }, {
+        text: 'ຫົວຫນ່ວຍ',
+        align: 'end',
+        value: 'unitId',
+        sortable: true
+      }, {
+        text: 'unit rate',
+        align: 'end',
+        value: 'unitRate',
+        sortable: true
+      }, {
+        text: 'ລາຄາ',
+        align: 'end',
+        value: 'price',
+        sortable: true
+      }, {
+        text: 'ສ່ວນຫລຸດ',
+        align: 'end',
+        value: 'discount',
+        sortable: true
+      }, {
+        text: 'ລວມ',
+        align: 'end',
+        value: 'total',
+        sortable: false
+      }, {
+        text: 'delete',
+        align: 'end',
+        value: 'id',
+        sortable: false
+      }]
+    };
+  }
+});
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_OrderDetailPosCRUDvue_type_script_lang_js_ = (OrderDetailPosCRUDvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(9);
+
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue
+
+
+
+function injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_OrderDetailPosCRUDvue_type_script_lang_js_,
+  OrderDetailPosCRUDvue_type_template_id_3c2ed934_render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  null,
+  "05abfff7"
+  
+)
+
+/* harmony default export */ var OrderDetailPosCRUD = __webpack_exports__["default"] = (component.exports);
+
+/* nuxt-component-imports */
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,CustomerList: __webpack_require__(77).default})
+
+
+/***/ }),
+
+/***/ 313:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
+var VCard = __webpack_require__(101);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
+var components_VCard = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
+var VCol = __webpack_require__(273);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
+var VDivider = __webpack_require__(99);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
+var VRow = __webpack_require__(272);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
+var VSpacer = __webpack_require__(271);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
+
+
+
+
+
+
+
+var orderSumaryCardPosvue_type_template_id_3b45c91c_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c(VCard["a" /* default */], {
+    staticClass: "ml-4"
+  }, [_c(components_VCard["d" /* VCardTitle */], [_vm._v(_vm._s(this.orderDetail.title))]), _vm._v(" "), _c('div', {
+    staticClass: "pa-4"
+  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "left"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v("ຈຳນວນ")]), _vm._v(" "), _c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v(_vm._s(this.orderDetail.amount) + " ອໍເດີ")])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "left"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v("ມູນຄ່າ")]), _vm._v(" "), _c(VSpacer["a" /* default */]), _vm._v(" "), _c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v(_vm._s(this.orderDetail.sale))])], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */])], 1);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
+/* harmony default export */ var orderSumaryCardPosvue_type_script_lang_js_ = ({
+  props: {
+    orderDetail: {
+      type: Object,
+      default: ''
+    },
+    showTotal: {
+      type: Boolean,
+      default: false
+    },
+    gross: {
+      type: String,
+      default: '0'
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_orderSumaryCardPosvue_type_script_lang_js_ = (orderSumaryCardPosvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(9);
+
+// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_orderSumaryCardPosvue_type_script_lang_js_,
+  orderSumaryCardPosvue_type_template_id_3b45c91c_render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "b7424606"
+  
+)
+
+/* harmony default export */ var orderSumaryCardPos = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 314:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(315);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+__webpack_require__(5).default("73bba828", content, true)
+
+/***/ }),
+
+/***/ 315:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".bottom-sheet-transition-enter,.bottom-sheet-transition-leave-to{transform:translateY(100%)}.v-bottom-sheet.v-dialog{align-self:flex-end;border-radius:0;flex:0 1 auto;margin:0;overflow:visible}.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:70%}@media only screen and (max-width:599.98px){.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:none}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 316:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -694,7 +1815,20 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 315:
+/***/ 319:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
+/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(115);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
+
+/***/ }),
+
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2612,1133 +3746,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 316:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
-var VAutocomplete = __webpack_require__(275);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBottomSheet/VBottomSheet.js
-var VBottomSheet = __webpack_require__(347);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(55);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(101);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(10);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(273);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 12 modules
-var VDataTable = __webpack_require__(276);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(262);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(99);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(272);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSheet/VSheet.js
-var VSheet = __webpack_require__(22);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(271);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
-var VTextField = __webpack_require__(28);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(298);
-
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var OrderDetailPosCRUDvue_type_template_id_a4b59596_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', [_c(VDialog["a" /* default */], {
-    attrs: {
-      "hide-overlay": "",
-      "persistent": "",
-      "width": "300"
-    },
-    model: {
-      value: _vm.isloading,
-      callback: function ($$v) {
-        _vm.isloading = $$v;
-      },
-      expression: "isloading"
-    }
-  }, [_c('loading-indicator')], 1), _vm._ssrNode(" "), _c(VDialog["a" /* default */], {
-    attrs: {
-      "max-width": "1024"
-    },
-    model: {
-      value: _vm.customerDialog,
-      callback: function ($$v) {
-        _vm.customerDialog = $$v;
-      },
-      expression: "customerDialog"
-    }
-  }, [_c('customer-list', {
-    on: {
-      "close-dialog": function ($event) {
-        _vm.customerDialog = false;
-      }
-    }
-  })], 1), _vm._ssrNode(" "), _c(VBottomSheet["a" /* default */], {
-    attrs: {
-      "inset": ""
-    },
-    model: {
-      value: _vm.sheet,
-      callback: function ($$v) {
-        _vm.sheet = $$v;
-      },
-      expression: "sheet"
-    }
-  }, [_c(VSheet["a" /* default */], {
-    staticClass: "text-center",
-    attrs: {
-      "height": "200px"
-    }
-  }, [_c(VBtn["a" /* default */], {
-    staticClass: "mt-6",
-    attrs: {
-      "text": "",
-      "color": "error"
-    },
-    on: {
-      "click": function ($event) {
-        _vm.sheet = !_vm.sheet;
-      }
-    }
-  }, [_vm._v("\n                close\n            ")]), _vm._v(" "), _c('div', {
-    staticClass: "my-3"
-  }, [_vm._v("\n                " + _vm._s(_vm.validateErrorMessage) + "\n            ")])], 1)], 1), _vm._ssrNode(" "), _c(VCard["a" /* default */], [_c(components_VCard["b" /* VCardSubtitle */], [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "6"
-    }
-  }), _vm._v(" "), _c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "right"
-    },
-    attrs: {
-      "cols": "6"
-    }
-  }, [_vm.isQuotation ? _c(VBtn["a" /* default */], {
-    staticClass: "primary",
-    attrs: {
-      "size": "large",
-      "variant": "outlined",
-      "rounded": ""
-    },
-    on: {
-      "click": _vm.post
-    }
-  }, [_c('span', {
-    staticClass: "mdi mdi-transfer-right"
-  }), _vm._v("Make to invoice\n                    ")]) : _vm._e(), _vm._v(" "), _c(VBtn["a" /* default */], {
-    staticClass: "primary",
-    attrs: {
-      "size": "large",
-      "variant": "outlined",
-      "rounded": ""
-    },
-    on: {
-      "click": _vm.post
-    }
-  }, [_c('span', {
-    staticClass: "mdi mdi-printer-outline"
-  }), _vm._v("Print\n                    ")])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VCard["a" /* default */], {
-    style: _vm.headerError ? `outline:1px solid red` : ``
-  }, [_vm._v("\n                " + _vm._s(_vm.isQuotation ? `Quotation #` : `Invoice #`) + "\n                " + _vm._s(_vm.transaction.id) + "\n                "), _c(components_VCard["c" /* VCardText */], [_c('div', [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "4"
-    }
-  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "type": "date",
-      "label": "ວັນທີ*",
-      "hint": "ເດຶອນ/ວັນ/ປີ 12/31/2023"
-    },
-    model: {
-      value: _vm.transaction.bookingDate,
-      callback: function ($$v) {
-        _vm.$set(_vm.transaction, "bookingDate", $$v);
-      },
-      expression: "transaction.bookingDate"
-    }
-  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VAutocomplete["a" /* default */], {
-    attrs: {
-      "item-text": "payment_code",
-      "item-value": "id",
-      "items": _vm.paymentList,
-      "label": "ການຊຳລະ*"
-    },
-    model: {
-      value: _vm.transaction.paymentId,
-      callback: function ($$v) {
-        _vm.$set(_vm.transaction, "paymentId", $$v);
-      },
-      expression: "transaction.paymentId"
-    }
-  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VTextField["a" /* default */], {
-    directives: [{
-      name: "comma-thousand",
-      rawName: "v-comma-thousand"
-    }],
-    attrs: {
-      "label": "ສ່ວນຫລຸດ*",
-      "required": ""
-    },
-    model: {
-      value: _vm.transaction.discount,
-      callback: function ($$v) {
-        _vm.$set(_vm.transaction, "discount", $$v);
-      },
-      expression: "transaction.discount"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "4"
-    }
-  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VAutocomplete["a" /* default */], {
-    attrs: {
-      "item-text": "company",
-      "item-value": "id",
-      "items": _vm.clientList,
-      "label": "ລູກຄ້າ*"
-    },
-    model: {
-      value: _vm.transaction.clientId,
-      callback: function ($$v) {
-        _vm.$set(_vm.transaction, "clientId", $$v);
-      },
-      expression: "transaction.clientId"
-    }
-  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VAutocomplete["a" /* default */], {
-    attrs: {
-      "item-text": "code",
-      "item-value": "id",
-      "items": _vm.currencyList,
-      "label": "ສະກຸນເງິນ*"
-    },
-    on: {
-      "input": _vm.currencyChange
-    },
-    model: {
-      value: _vm.transaction.currencyId,
-      callback: function ($$v) {
-        _vm.$set(_vm.transaction, "currencyId", $$v);
-      },
-      expression: "transaction.currencyId"
-    }
-  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_vm._v("ອັດຕາແລກປ່ຽນ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "end"
-    },
-    attrs: {
-      "cols": "4"
-    }
-  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VTextarea["a" /* default */], {
-    attrs: {
-      "label": "Notes"
-    },
-    model: {
-      value: _vm.transaction.remark,
-      callback: function ($$v) {
-        _vm.$set(_vm.transaction, "remark", $$v);
-      },
-      expression: "transaction.remark"
-    }
-  })], 1), _vm._v(" "), _vm.transaction.user ? _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_vm._v("ຜູ້ລົງ: " + _vm._s(_vm.transaction.user.cus_id) + "\n                                    ")]) : _vm._e(), _vm._v(" "), _vm.transaction.user ? _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_vm._v("ຊື່: " + _vm._s(_vm.transaction.user.cus_name))]) : _vm._e(), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "12"
-    }
-  }, [_c(VTextField["a" /* default */], {
-    attrs: {
-      "disabled": ""
-    },
-    scopedSlots: _vm._u([{
-      key: "label",
-      fn: function () {
-        return [_c('span', {
-          staticStyle: {
-            "color": "black",
-            "font-weight": "bold"
-          }
-        }, [_vm._v(_vm._s(`Total Amount:
-                                                    ${_vm.getFormatNum(_vm.grandTotal)}`))])];
-      },
-      proxy: true
-    }])
-  })], 1)], 1)], 1)], 1)], 1)])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _vm.transaction.lines ? _c(VDataTable["a" /* default */], {
-    attrs: {
-      "headers": _vm.headers,
-      "search": _vm.search,
-      "items": _vm.transaction.lines
-    },
-    scopedSlots: _vm._u([{
-      key: "item",
-      fn: function ({
-        item
-      }) {
-        return [_c('tr', {
-          style: _vm.errorLineNumber == _vm.transaction.lines.indexOf(item) ? `outline: 1px solid red` : ``
-        }, [_c('td', {
-          class: _vm.errorLineNumber == _vm.transaction.lines.indexOf(item) ? `error` : ``
-        }, [_vm._v("\n                            " + _vm._s(_vm.transaction.lines.indexOf(item) + 1) + "\n                        ")]), _vm._v(" "), _c('td', [_c(VAutocomplete["a" /* default */], {
-          attrs: {
-            "item-text": "pro_name",
-            "item-value": "id",
-            "items": _vm.productList,
-            "label": "ສິນຄ້າ*"
-          },
-          on: {
-            "input": function ($event) {
-              return _vm.productChange(item);
-            }
-          },
-          model: {
-            value: item.productId,
-            callback: function ($$v) {
-              _vm.$set(item, "productId", $$v);
-            },
-            expression: "item.productId"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          directives: [{
-            name: "comma-thousand",
-            rawName: "v-comma-thousand"
-          }],
-          attrs: {
-            "label": "ຈຳນວນ",
-            "rules": [_vm.numberCommaRule]
-          },
-          on: {
-            "input": function ($event) {
-              return _vm.quantityChange(item);
-            }
-          },
-          model: {
-            value: item.quantity,
-            callback: function ($$v) {
-              _vm.$set(item, "quantity", $$v);
-            },
-            expression: "item.quantity"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VAutocomplete["a" /* default */], {
-          attrs: {
-            "item-text": "name",
-            "item-value": "id",
-            "items": _vm.unitList,
-            "label": "ຫົວຫນ່ວຍ*"
-          },
-          on: {
-            "input": function ($event) {
-              return _vm.unitChange(item);
-            }
-          },
-          model: {
-            value: item.unitId,
-            callback: function ($$v) {
-              _vm.$set(item, "unitId", $$v);
-            },
-            expression: "item.unitId"
-          }
-        })], 1), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          directives: [{
-            name: "comma-thousand",
-            rawName: "v-comma-thousand"
-          }],
-          attrs: {
-            "label": "ຈນ ຕໍ່ ຫົວຫນ່ວຍ",
-            "rules": [_vm.numberCommaRule]
-          },
-          on: {
-            "input": function ($event) {
-              return _vm.unitRateChange(item);
-            }
-          },
-          model: {
-            value: item.unitRate,
-            callback: function ($$v) {
-              _vm.$set(item, "unitRate", $$v);
-            },
-            expression: "item.unitRate"
-          }
-        })], 1), _vm._v(" "), _c('td', {
-          staticStyle: {
-            "text-align": "right"
-          }
-        }, [_vm._v("\n                            " + _vm._s(_vm.getFormatNum(item.price)) + "\n                        ")]), _vm._v(" "), _c('td', [_c(VTextField["a" /* default */], {
-          directives: [{
-            name: "comma-thousand",
-            rawName: "v-comma-thousand"
-          }],
-          attrs: {
-            "rules": [_vm.numberCommaRule],
-            "label": "ສ່ວນຫລຸດ"
-          },
-          on: {
-            "input": function ($event) {
-              return _vm.discountChange(item);
-            }
-          },
-          model: {
-            value: item.discount,
-            callback: function ($$v) {
-              _vm.$set(item, "discount", $$v);
-            },
-            expression: "item.discount"
-          }
-        })], 1), _vm._v(" "), _c('td', {
-          staticStyle: {
-            "text-align": "right"
-          }
-        }, [_vm._v("\n                            " + _vm._s(_vm.getFormatNum(item.total)) + "\n                        ")]), _vm._v(" "), _c('td', [_c(VBtn["a" /* default */], {
-          attrs: {
-            "color": "error",
-            "text": ""
-          },
-          on: {
-            "click": function ($event) {
-              return _vm.deleteItem(item);
-            },
-            "keydown": _vm.handleKeyDown
-          }
-        }, [_c('i', {
-          staticClass: "fas fa-trash"
-        })])], 1)])];
-      }
-    }], null, false, 2946179411)
-  }) : _vm._e(), _vm._v(" "), _vm.transaction.lines.length == 0 ? _c('tr', [_c('td', [_c(VBtn["a" /* default */], {
-    staticClass: "primary",
-    attrs: {
-      "size": "large",
-      "variant": "outlined",
-      "rounded": ""
-    },
-    on: {
-      "click": _vm.newRow
-    }
-  }, [_c('span', {
-    staticClass: "mdi mdi-plus"
-  })])], 1)]) : _vm._e()], 1), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "blue-darken-1",
-      "variant": "text"
-    },
-    on: {
-      "click": _vm.toggleDialog
-    }
-  }, [_vm._v("\n                Close\n            ")]), _vm._v(" "), _c(VBtn["a" /* default */], {
-    attrs: {
-      "color": "blue-darken-1",
-      "variant": "text"
-    },
-    on: {
-      "click": _vm.postTransaction
-    }
-  }, [_vm._v("\n                Save\n            ")])], 1)], 1)], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
-
-// EXTERNAL MODULE: ./plugins/comma-thousand.js
-var comma_thousand = __webpack_require__(297);
-
-// EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(12);
-
-// EXTERNAL MODULE: ./common/index.js
-var common = __webpack_require__(17);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=script&lang=js&
-
-
-
-/* harmony default export */ var OrderDetailPosCRUDvue_type_script_lang_js_ = ({
-  props: {
-    headerId: {
-      type: Number,
-      default: 0
-    },
-    isQuotation: {
-      type: Boolean,
-      default: false
-    },
-    isUpdate: {
-      type: Boolean,
-      default: false
-    }
-  },
-  directives: {
-    commaThousand: comma_thousand["a" /* default */]
-  },
-  async created() {
-    if (this.isUpdate) {
-      console.log("View old record");
-      this.isloading = true;
-      await this.loadTransaction();
-      this.isloading = false;
-    } else {
-      const today = new Date().toISOString().substr(0, 10);
-      this.transaction.bookingDate = today;
-      this.transaction.clientId = 1;
-      this.transaction.paymentId = 1;
-      this.transaction.currencyId = 1;
-      this.transaction.discount = 0;
-    }
-  },
-  methods: {
-    handleKeyDown(event) {
-      if (event.key === 'Tab') {
-        // Handle tab key press
-        console.log('Tab key pressed');
-        this.newRow();
-      }
-    },
-    currencyChange() {
-      const currency = this.currencyList.find(el => el['id'] == this.transaction.currencyId);
-      if (!currency) return;
-      this.transaction.exchangeRate = currency['rate'];
-    },
-    async deleteItem(item) {
-      if (item.id) {
-        console.log("Line has id");
-        this.isloading = true;
-        await this.$axios.delete(`api/${this.apiLine}Line/find/${item.id}`).then(res => {
-          this.transaction.lines.splice(this.transaction.lines.indexOf(item), 1);
-        }).catch(er => {
-          Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Operation fail ' + er.Error);
-        });
-        this.isloading = false;
-      } else {
-        this.transaction.lines.splice(this.transaction.lines.indexOf(item), 1);
-        console.log("Line has no id");
-      }
-    },
-    quantityChange(data) {
-      console.log("Qty change");
-      let index = this.transaction.lines.indexOf(data);
-      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
-      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
-    },
-    unitRateChange(data) {
-      console.log("Unit rate change");
-      let index = this.transaction.lines.indexOf(data);
-      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
-      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
-    },
-    discountChange(data) {
-      console.log("Discount change");
-      let index = this.transaction.lines.indexOf(data);
-      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
-      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
-    },
-    unitChange(data) {
-      console.log("Unit change");
-      const unit = this.unitList.find(el => el['id'] == data['unitId']);
-      if (unit == undefined) return;
-      let index = this.transaction.lines.indexOf(data);
-      this.transaction.lines[index]['unitRate'] = unit['unitRate'];
-      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
-      this.transaction.lines[index]['total'] = unit['unitRate'] * qty * price - discount;
-    },
-    productChange(data) {
-      console.log("Product change");
-      const product = this.productList.find(el => el['id'] == data['productId']);
-      if (product == undefined) {
-        console.log("Product is not define");
-        return;
-      }
-      let index = this.transaction.lines.indexOf(data);
-      this.transaction.lines[index]['price'] = product['pro_price'];
-      const qty = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['quantity'], ',', '');
-      const discount = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['discount'], ',', '');
-      const price = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['price'], ',', '');
-      const unitRate = Object(common["i" /* replaceAll */])(this.transaction.lines[index]['unitRate'], ',', '');
-      this.transaction.lines[index]['total'] = unitRate * qty * price - discount;
-    },
-    newRow() {
-      const defaultLine = {
-        // "id":null,
-        "quantity": 0,
-        "unitRate": 1,
-        "price": 0,
-        "discount": 0,
-        "total": 0,
-        "isActive": true,
-        "productId": 0,
-        "unitId": 1
-      };
-      this.transaction.lines.push(defaultLine);
-    },
-    openCustomerDialog() {
-      this.customerDialog = true;
-    },
-    async loadTransaction() {
-      await this.$axios.get(`api/${this.apiLine}/find/${this.headerId}`).then(res => {
-        this.transaction = res.data;
-        console.log("Data ", res.data);
-        // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-      }).catch(er => {
-        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
-      });
-    },
-    post() {
-      this.errorLineNumber = null;
-      for (const iterator of this.transaction.lines) {
-        this.errorLineNumber = this.transaction.lines.indexOf(iterator);
-        if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
-          this.sheet = true;
-          return;
-        }
-        iterator['total'] = iterator['quantity'] * iterator['unitRate'] * iterator['price'] - iterator['discount'];
-      }
-      console.log("******** No error found process posting ********");
-      this.errorLineNumber = null;
-      //  ********** Enable below line to confirm before clear ***********//
-      // confirmSwal(this.$swal, 'You are posting to invoice ?', this.postToInvoice)
-      // this.clearCart()
-    },
-
-    validateLine(obj, errorLineNumber) {
-      // Check if the object has all required properties
-      let {
-        quantity,
-        unitRate,
-        price,
-        discount,
-        total,
-        productId,
-        unitId
-      } = obj;
-      discount = parseInt(discount);
-      unitRate = parseInt(unitRate);
-      quantity = parseInt(quantity);
-      if (!Number.isFinite(quantity) || Number(quantity) <= 0) {
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຈຳນວນ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${quantity}********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (!Number.isFinite(unitRate) || Number(unitRate) <= 0) {
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ອັດຕາຫົວຫນ່ວຍ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${unitRate}********`;
-        return false; // Reach must be a positive number
-      }
-
-      console.log("Type of price ", typeof price, ' [price] ', price);
-      if (!Number.isFinite(price) || Number(price) <= 0) {
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ລາຄາ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${price}********`;
-        return false; // Reach must be a positive number
-      }
-
-      console.log("Type of discount1 ", typeof discount);
-      if (!Number.isFinite(discount)) {
-        console.log("Type of discount2 ", typeof discount);
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ສ່ວນລົດ ຕ້ອງເປັນຕົວເລກ  current value is ${discount}********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (!Number.isFinite(total) || Number(total) <= 0) {
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຍອດລວມ ຕ້ອງໃຫຍ່ກ່ອນ 0 current value is ${total}********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (!Number.isFinite(productId)) {
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ສິນຄ້າບໍ່ຖືກຕ້ອງ  current value is ${productId}********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (!Number.isFinite(unitId)) {
-        this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຫົວຫນ່ວຍບໍ່ຖືກຕ້ອງ  current value is ${unitId}********`;
-        return false; // Reach must be a positive number
-      }
-
-      return true;
-    },
-    validateHeader() {
-      this.headerError = true;
-      this.sheet = true;
-      console.log('=== currency id ', this.transaction.currencyId);
-      if (!this.transaction.currencyId) {
-        this.validateErrorMessage = `******** Error Currency in Header #${this.transaction.currencyId} ບໍ່ສາມາດເປັນຄ່າວ່າງ ********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (!this.transaction.paymentId) {
-        this.validateErrorMessage = `******** Error Payment in Header #${this.transaction.paymentId} ບໍ່ສາມາດເປັນຄ່າວ່າງ ********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (!this.transaction.clientId) {
-        this.validateErrorMessage = `******** Error Customer in Header #${this.transaction.clientId} ບໍ່ສາມາດເປັນຄ່າວ່າງ ********`;
-        return false; // Reach must be a positive number
-      }
-
-      if (this.transaction.lines.length == 0) {
-        this.validateErrorMessage = `******** Error Header ບໍ່ມີລາຍການສິນຄ້າ ********`;
-        return false; // Reach must be a positive number
-      }
-
-      this.sheet = false;
-      this.headerError = false;
-      return true;
-    },
-    getFormatNum(val) {
-      return new Intl.NumberFormat().format(val);
-    },
-    toggleDialog() {
-      this.$emit('close-dialog');
-    },
-    async postToInvoice() {
-      if (this.isloading) return;
-      this.isloading = true;
-      // TODO: How to split data between cod order[not yet paid] and all order
-      const date = {
-        startDate: this.date,
-        endDate: this.date2
-      };
-      await this.$axios.put(`api/sale/postToInvoice/${this.id}`).then(res => {
-        this.$emit('reload');
-        Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-      }).catch(er => {
-        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
-        console.log('Error ===>: ' + er);
-      });
-      this.isloading = false;
-    },
-    async postTransaction() {
-      if (this.isloading || !this.validateHeader()) return;
-      this.isloading = true;
-      this.errorLineNumber = null;
-      for (const iterator of this.transaction.lines) {
-        this.errorLineNumber = this.transaction.lines.indexOf(iterator);
-        if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
-          this.sheet = true;
-          this.isloading = false;
-          return;
-        }
-        iterator.quantity = parseInt(Object(common["i" /* replaceAll */])(iterator.quantity, ',', ''));
-        iterator.unitRate = parseInt(Object(common["i" /* replaceAll */])(iterator.unitRate, ',', ''));
-        // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
-      }
-
-      console.log("******** No error found process posting ********");
-      this.errorLineNumber = null;
-      this.transaction.userId = this.user.id;
-      this.transaction.total = this.grandTotal;
-      console.log(`Amount total ${this.transaction.total}`);
-      if (this.isUpdate) {
-        // ********** If header has data, that means we go for update API ********** //
-        await this.$axios.put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction).then(res => {
-          this.$emit('reload');
-          Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-        }).catch(er => {
-          console.error(er);
-          Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
-          const outOfStockProductId = er.response.data.split("#")[1];
-          if (outOfStockProductId != undefined) {
-            const pronductOutStock = this.productList.find(el => el.id == outOfStockProductId);
-            this.validateErrorMessage = `********  ສິນຄ້າ ${pronductOutStock['pro_name']} ໃນສ້າງບໍ່ພຽງພໍ ********`;
-            this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId));
-            this.sheet = true;
-          }
-          console.log('Error ===>: ' + er);
-        });
-      } else {
-        // ********** If header has data, that means we go for update API ********** //
-        await this.$axios.post(`api/${this.apiLine}/create`, this.transaction).then(res => {
-          this.$emit('reload');
-          Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
-        }).catch(er => {
-          console.error(er);
-          Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
-          const outOfStockProductId = er.response.data.split("#")[1];
-          if (outOfStockProductId != undefined) {
-            this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`;
-            this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId));
-            this.sheet = true;
-          }
-          console.log('Error ===>: ' + er);
-        });
-      }
-      this.isloading = false;
-    }
-  },
-  computed: {
-    ...Object(external_vuex_["mapGetters"])(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
-    clientList() {
-      return this.findAllClient;
-    },
-    user() {
-      return this.$auth.user || '';
-    },
-    apiLine() {
-      return this.isQuotation ? 'quotation' : 'sale';
-    },
-    productList() {
-      return this.findAllProduct;
-    },
-    paymentList() {
-      return this.findAllPayment;
-    },
-    unitList() {
-      return this.findAllUnit;
-    },
-    currencyList() {
-      return this.findAllCurrency;
-    },
-    numberRule() {
-      return [value => value !== undefined && value !== null && value !== '' || 'Field is required', value => /^(\d+(\.\d{1,2})?)|(0(\.\d{1,2})?)$/.test(value) || 'Rate must be a number with up to 2 decimal places'];
-    },
-    grandTotal() {
-      let total = this.transaction.lines.reduce((total, item) => {
-        return total + item.total;
-      }, 0);
-      const discount = Object(common["i" /* replaceAll */])(this.transaction.discount, ',', '');
-      return total - discount;
-    }
-  },
-  data() {
-    return {
-      search: '',
-      numberCommaRule: value => {
-        const regex = /^[0-9,]*$/;
-        return regex.test(value) || 'Only numbers and commas are allowed';
-      },
-      headerError: false,
-      customerDialog: false,
-      validateErrorMessage: '',
-      sheet: false,
-      errorLineNumber: null,
-      isloading: false,
-      transaction: {
-        lines: []
-      },
-      headers: [{
-        text: '#',
-        align: 'start',
-        value: ''
-      }, {
-        text: 'ສິນຄ້າ',
-        align: 'start',
-        value: 'product.pro_name'
-      }, {
-        text: 'ຈຳນວນ',
-        align: 'end',
-        value: 'quantity'
-      }, {
-        text: 'ຫົວຫນ່ວຍ',
-        align: 'end',
-        value: 'unitId',
-        sortable: true
-      }, {
-        text: 'unit rate',
-        align: 'end',
-        value: 'unitRate',
-        sortable: true
-      }, {
-        text: 'ລາຄາ',
-        align: 'end',
-        value: 'price',
-        sortable: true
-      }, {
-        text: 'ສ່ວນຫລຸດ',
-        align: 'end',
-        value: 'discount',
-        sortable: true
-      }, {
-        text: 'ລວມ',
-        align: 'end',
-        value: 'total',
-        sortable: false
-      }, {
-        text: 'delete',
-        align: 'end',
-        value: 'id',
-        sortable: false
-      }]
-    };
-  }
-});
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_OrderDetailPosCRUDvue_type_script_lang_js_ = (OrderDetailPosCRUDvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
-
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue
-
-
-
-function injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_OrderDetailPosCRUDvue_type_script_lang_js_,
-  OrderDetailPosCRUDvue_type_template_id_a4b59596_render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  null,
-  "05abfff7"
-  
-)
-
-/* harmony default export */ var OrderDetailPosCRUD = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,CustomerList: __webpack_require__(77).default})
-
-
-/***/ }),
-
-/***/ 317:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(101);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(10);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(273);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(99);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(272);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(271);
-
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
-
-
-
-
-
-
-
-var orderSumaryCardPosvue_type_template_id_3b45c91c_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c(VCard["a" /* default */], {
-    staticClass: "ml-4"
-  }, [_c(components_VCard["d" /* VCardTitle */], [_vm._v(_vm._s(this.orderDetail.title))]), _vm._v(" "), _c('div', {
-    staticClass: "pa-4"
-  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "left"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v("ຈຳນວນ")]), _vm._v(" "), _c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "right"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v(_vm._s(this.orderDetail.amount) + " ອໍເດີ")])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "left"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v("ມູນຄ່າ")]), _vm._v(" "), _c(VSpacer["a" /* default */]), _vm._v(" "), _c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "right"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v(_vm._s(this.orderDetail.sale))])], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */])], 1);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
-/* harmony default export */ var orderSumaryCardPosvue_type_script_lang_js_ = ({
-  props: {
-    orderDetail: {
-      type: Object,
-      default: ''
-    },
-    showTotal: {
-      type: Boolean,
-      default: false
-    },
-    gross: {
-      type: String,
-      default: '0'
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_orderSumaryCardPosvue_type_script_lang_js_ = (orderSumaryCardPosvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
-
-// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_orderSumaryCardPosvue_type_script_lang_js_,
-  orderSumaryCardPosvue_type_template_id_3b45c91c_render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "b7424606"
-  
-)
-
-/* harmony default export */ var orderSumaryCardPos = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 320:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(116);
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
-
-/***/ }),
-
-/***/ 323:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(324);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-__webpack_require__(5).default("73bba828", content, true)
-
-/***/ }),
-
-/***/ 324:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".bottom-sheet-transition-enter,.bottom-sheet-transition-leave-to{transform:translateY(100%)}.v-bottom-sheet.v-dialog{align-self:flex-end;border-radius:0;flex:0 1 auto;margin:0;overflow:visible}.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:70%}@media only screen and (max-width:599.98px){.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:none}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 334:
+/***/ 328:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4061,11 +4069,11 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 347:
+/***/ 342:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(323);
+/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(314);
 /* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(262);
  // Extensions
@@ -4096,44 +4104,44 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 376:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(424);
+var content = __webpack_require__(431);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(5).default
 module.exports.__inject__ = function (context) {
-  add("05a9aa4b", content, true, context)
+  add("6b9ec0b4", content, true, context)
 };
 
 /***/ }),
 
-/***/ 423:
+/***/ 430:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_23fb6312_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(376);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_23fb6312_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_23fb6312_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_23fb6312_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_23fb6312_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_0b2ce565_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(379);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_0b2ce565_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_0b2ce565_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_0b2ce565_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_0b2ce565_prod_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 424:
+/***/ 431:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".grey[data-v-23fb6312],.text-h5[data-v-23fb6312]{font-family:\"Noto Sans Lao\"}table[data-v-23fb6312]{border:1px solid #000}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".grey[data-v-0b2ce565],.text-h5[data-v-0b2ce565]{font-family:\"Noto Sans Lao\"}table[data-v-0b2ce565]{border:1px solid #000}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -4141,7 +4149,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 471:
+/***/ 483:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4167,7 +4175,7 @@ var VCol = __webpack_require__(273);
 var VDataTable = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePicker.js + 19 modules
-var VDatePicker = __webpack_require__(315);
+var VDatePicker = __webpack_require__(320);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(262);
@@ -4176,7 +4184,7 @@ var VDialog = __webpack_require__(262);
 var VDivider = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(320);
+var VLayout = __webpack_require__(319);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VMenu/VMenu.js + 1 modules
 var VMenu = __webpack_require__(105);
@@ -4187,7 +4195,7 @@ var VRow = __webpack_require__(272);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/ordersFromPos/index.vue?vue&type=template&id=23fb6312&scoped=true&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/ordersFromPos/index.vue?vue&type=template&id=0b2ce565&scoped=true&
 
 
 
@@ -4203,7 +4211,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var ordersFromPosvue_type_template_id_23fb6312_scoped_true_render = function render() {
+var ordersFromPosvue_type_template_id_0b2ce565_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -4459,14 +4467,15 @@ var ordersFromPosvue_type_template_id_23fb6312_scoped_true_render = function ren
     staticClass: "primary",
     attrs: {
       "size": "large",
-      "variant": "outlined"
+      "variant": "outlined",
+      "rounded": ""
     },
     on: {
       "click": _vm.loadData
     }
-  }, [_vm._v("\n            ດຶງລາຍງານ"), _c('span', {
+  }, [_c('span', {
     staticClass: "mdi mdi-cloud-download"
-  })])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VLayout["a" /* default */], {
+  }), _vm._v("\n            ດຶງລາຍງານ\n          ")])], 1)], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], [_c(VLayout["a" /* default */], {
     attrs: {
       "row": "",
       "wrap": ""
@@ -4613,19 +4622,19 @@ var ordersFromPosvue_type_template_id_23fb6312_scoped_true_render = function ren
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/ordersFromPos/index.vue?vue&type=template&id=23fb6312&scoped=true&
+// CONCATENATED MODULE: ./pages/admin/ordersFromPos/index.vue?vue&type=template&id=0b2ce565&scoped=true&
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./components/OrderDetailPos.vue + 4 modules
-var OrderDetailPos = __webpack_require__(334);
+var OrderDetailPos = __webpack_require__(328);
 
 // EXTERNAL MODULE: ./components/OrderDetailPosCRUD.vue + 4 modules
-var OrderDetailPosCRUD = __webpack_require__(316);
+var OrderDetailPosCRUD = __webpack_require__(312);
 
 // EXTERNAL MODULE: ./components/orderSumaryCardPos.vue + 4 modules
-var orderSumaryCardPos = __webpack_require__(317);
+var orderSumaryCardPos = __webpack_require__(313);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/ordersFromPos/index.vue?vue&type=script&lang=js&
 
@@ -4925,7 +4934,7 @@ var componentNormalizer = __webpack_require__(9);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(423)
+  var style0 = __webpack_require__(430)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -4934,11 +4943,11 @@ if (style0.__inject__) style0.__inject__(context)
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_ordersFromPosvue_type_script_lang_js_,
-  ordersFromPosvue_type_template_id_23fb6312_scoped_true_render,
+  ordersFromPosvue_type_template_id_0b2ce565_scoped_true_render,
   staticRenderFns,
   false,
   injectStyles,
-  "23fb6312",
+  "0b2ce565",
   "153a7248"
   
 )
@@ -4946,7 +4955,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var ordersFromPos = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,OrderDetailPosCRUD: __webpack_require__(316).default,CancelTicketForm: __webpack_require__(312).default,OrderSumaryCardPos: __webpack_require__(317).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,OrderDetailPosCRUD: __webpack_require__(312).default,CancelTicketForm: __webpack_require__(316).default,OrderSumaryCardPos: __webpack_require__(313).default})
 
 
 /***/ })

@@ -1,4 +1,4 @@
-exports.ids = [28];
+exports.ids = [29];
 exports.modules = {
 
 /***/ 280:
@@ -50,7 +50,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 298:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -151,7 +151,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 316:
+/***/ 312:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -162,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
 var VAutocomplete = __webpack_require__(275);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBottomSheet/VBottomSheet.js
-var VBottomSheet = __webpack_require__(347);
+var VBottomSheet = __webpack_require__(342);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
 var VBtn = __webpack_require__(55);
@@ -198,11 +198,9 @@ var VSpacer = __webpack_require__(271);
 var VTextField = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(298);
+var VTextarea = __webpack_require__(301);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
-
-
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
 
 
 
@@ -218,7 +216,9 @@ var VTextarea = __webpack_require__(298);
 
 
 
-var OrderDetailPosCRUDvue_type_template_id_a4b59596_render = function render() {
+
+
+var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -311,7 +311,7 @@ var OrderDetailPosCRUDvue_type_template_id_a4b59596_render = function render() {
       "rounded": ""
     },
     on: {
-      "click": _vm.post
+      "click": _vm.quotationPreview
     }
   }, [_c('span', {
     staticClass: "mdi mdi-printer-outline"
@@ -423,7 +423,7 @@ var OrderDetailPosCRUDvue_type_template_id_a4b59596_render = function render() {
     attrs: {
       "cols": "12"
     }
-  }, [_vm._v("ອັດຕາແລກປ່ຽນ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+  }, [_vm._v("ຍອດລວມທັງໝົດ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     staticStyle: {
       "text-align": "end"
     },
@@ -646,7 +646,7 @@ var OrderDetailPosCRUDvue_type_template_id_a4b59596_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=a4b59596&
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(297);
@@ -692,9 +692,14 @@ var common = __webpack_require__(17);
       this.transaction.paymentId = 1;
       this.transaction.currencyId = 1;
       this.transaction.discount = 0;
+      this.newRow();
     }
   },
   methods: {
+    quotationPreview() {
+      const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice';
+      window.open(`/admin/${path}/${this.headerId}`, '_blank');
+    },
     handleKeyDown(event) {
       if (event.key === 'Tab') {
         // Handle tab key press
@@ -706,6 +711,7 @@ var common = __webpack_require__(17);
       const currency = this.currencyList.find(el => el['id'] == this.transaction.currencyId);
       if (!currency) return;
       this.transaction.exchangeRate = currency['rate'];
+      console.log(`Rate exchange ${currency['rate']} real value ${this.transaction.exchangeRate}`);
     },
     async deleteItem(item) {
       if (item.id) {
@@ -934,6 +940,7 @@ var common = __webpack_require__(17);
           this.isloading = false;
           return;
         }
+        iterator.discount = parseInt(Object(common["i" /* replaceAll */])(iterator.discount, ',', ''));
         iterator.quantity = parseInt(Object(common["i" /* replaceAll */])(iterator.quantity, ',', ''));
         iterator.unitRate = parseInt(Object(common["i" /* replaceAll */])(iterator.unitRate, ',', ''));
         // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
@@ -1029,6 +1036,7 @@ var common = __webpack_require__(17);
       errorLineNumber: null,
       isloading: false,
       transaction: {
+        exchangeRate: 1,
         lines: []
       },
       headers: [{
@@ -1095,7 +1103,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_OrderDetailPosCRUDvue_type_script_lang_js_,
-  OrderDetailPosCRUDvue_type_template_id_a4b59596_render,
+  OrderDetailPosCRUDvue_type_template_id_3c2ed934_render,
   staticRenderFns,
   false,
   injectStyles,
@@ -1112,13 +1120,13 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 323:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(324);
+var content = __webpack_require__(315);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -1126,7 +1134,7 @@ __webpack_require__(5).default("73bba828", content, true)
 
 /***/ }),
 
-/***/ 324:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1141,11 +1149,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 347:
+/***/ 342:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(323);
+/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(314);
 /* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(262);
  // Extensions

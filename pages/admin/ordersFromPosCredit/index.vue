@@ -52,8 +52,9 @@
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
           <v-col cols="12" class="text-right">
-            <v-btn size="large" variant="outlined" @click="loadData" class="primary">
-              ດຶງລາຍງານ<span class="mdi mdi-cloud-download"></span>
+            <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
+              <span class="mdi mdi-cloud-download"></span>
+              ດຶງລາຍງານ
             </v-btn>
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>

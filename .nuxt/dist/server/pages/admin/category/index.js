@@ -1,4 +1,4 @@
-exports.ids = [52,16];
+exports.ids = [55,17];
 exports.modules = {
 
 /***/ 278:
@@ -247,7 +247,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 298:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -348,7 +348,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 461:
+/***/ 472:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -389,7 +389,7 @@ var VSpacer = __webpack_require__(271);
 var VTextField = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(298);
+var VTextarea = __webpack_require__(301);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/VToolbar.js
 var VToolbar = __webpack_require__(23);
@@ -397,7 +397,7 @@ var VToolbar = __webpack_require__(23);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/index.js
 var components_VToolbar = __webpack_require__(112);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/category/index.vue?vue&type=template&id=1aa187c4&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/category/index.vue?vue&type=template&id=a5a462cc&
 
 
 
@@ -415,7 +415,7 @@ var components_VToolbar = __webpack_require__(112);
 
 
 
-var categoryvue_type_template_id_1aa187c4_render = function render() {
+var categoryvue_type_template_id_a5a462cc_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -574,10 +574,11 @@ var categoryvue_type_template_id_1aa187c4_render = function render() {
             "vertical": ""
           }
         }), _vm._v(" "), _c(VSpacer["a" /* default */]), _vm._v(" "), _c(VBtn["a" /* default */], {
-          staticClass: "mb-2",
+          staticClass: "primary",
           attrs: {
-            "color": "primary",
-            "dark": ""
+            "size": "large",
+            "variant": "outlined",
+            "rounded": ""
           },
           on: {
             "click": function ($event) {
@@ -629,7 +630,7 @@ var categoryvue_type_template_id_1aa187c4_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/category/index.vue?vue&type=template&id=1aa187c4&
+// CONCATENATED MODULE: ./pages/admin/category/index.vue?vue&type=template&id=a5a462cc&
 
 // EXTERNAL MODULE: ./util/myUtil.js
 var myUtil = __webpack_require__(111);
@@ -724,11 +725,11 @@ var myUtil = __webpack_require__(111);
       if (this.isedit) {
         await this.$axios.put(urlpath + 'update/' + this.form_data.categ_id, this.form_data).then(res => {
           this.dialogForm = false;
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           // this.message = res.data
           // this.reset()
         }).catch(er => {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", er);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", er);
           // this.message = 'Error: ' + er
         });
 
@@ -737,10 +738,10 @@ var myUtil = __webpack_require__(111);
         await this.$axios.post(urlpath + 'create', this.form_data).then(res => {
           // this.message = res.data
           this.dialogForm = false;
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           // this.reset()
         }).catch(er => {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", er);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", er);
           // this.message = 'Error: ' + er
         });
 
@@ -763,7 +764,7 @@ var myUtil = __webpack_require__(111);
         });
       }).catch(er => {
         // console.log('Data: ' + er)
-        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", er);
+        Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", er);
       });
       this.isloading = false;
     },
@@ -790,7 +791,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_categoryvue_type_script_lang_js_,
-  categoryvue_type_template_id_1aa187c4_render,
+  categoryvue_type_template_id_a5a462cc_render,
   staticRenderFns,
   false,
   null,

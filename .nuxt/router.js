@@ -17,6 +17,7 @@ const _180344c1 = () => interopDefault(import('../pages/admin/cancel_order/index
 const _692824b6 = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
 const _fea63afa = () => interopDefault(import('../pages/admin/client/index.vue' /* webpackChunkName: "pages/admin/client/index" */))
 const _6e83a9a5 = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
+const _5dc6dc09 = () => interopDefault(import('../pages/admin/currency/index.vue' /* webpackChunkName: "pages/admin/currency/index" */))
 const _574e60d4 = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
 const _5d7d59e6 = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
 const _300d3e47 = () => interopDefault(import('../pages/admin/login/index.vue' /* webpackChunkName: "pages/admin/login/index" */))
@@ -44,6 +45,8 @@ const _62b820b4 = () => interopDefault(import('../pages/admin/customer_request/w
 const _69d97df0 = () => interopDefault(import('../pages/admin/product/productlist.vue' /* webpackChunkName: "pages/admin/product/productlist" */))
 const _71582f54 = () => interopDefault(import('../pages/admin/advertise/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/advertise/mixins/ImagePreviewMixin" */))
 const _1486e2cc = () => interopDefault(import('../pages/admin/product/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/product/mixins/ImagePreviewMixin" */))
+const _cf9888c4 = () => interopDefault(import('../pages/admin/PDFInvoice/_id/index.vue' /* webpackChunkName: "pages/admin/PDFInvoice/_id/index" */))
+const _848a0606 = () => interopDefault(import('../pages/admin/PDFQuotation/_id/index.vue' /* webpackChunkName: "pages/admin/PDFQuotation/_id/index" */))
 const _558943f8 = () => interopDefault(import('../pages/admin/product/_id/index.vue' /* webpackChunkName: "pages/admin/product/_id/index" */))
 const _2a591ac2 = () => interopDefault(import('../pages/admin/stock/_id/index.vue' /* webpackChunkName: "pages/admin/stock/_id/index" */))
 const _750090f8 = () => interopDefault(import('../pages/product/_id/index.vue' /* webpackChunkName: "pages/product/_id/index" */))
@@ -112,6 +115,10 @@ export const routerOptions = {
     path: "/admin/cod_order",
     component: _6e83a9a5,
     name: "admin-cod_order"
+  }, {
+    path: "/admin/currency",
+    component: _5dc6dc09,
+    name: "admin-currency"
   }, {
     path: "/admin/customer",
     component: _574e60d4,
@@ -220,6 +227,14 @@ export const routerOptions = {
     path: "/admin/product/mixins/ImagePreviewMixin",
     component: _1486e2cc,
     name: "admin-product-mixins-ImagePreviewMixin"
+  }, {
+    path: "/admin/PDFInvoice/:id",
+    component: _cf9888c4,
+    name: "admin-PDFInvoice-id"
+  }, {
+    path: "/admin/PDFQuotation/:id",
+    component: _848a0606,
+    name: "admin-PDFQuotation-id"
   }, {
     path: "/admin/product/:id",
     component: _558943f8,

@@ -36,13 +36,13 @@
                             </template>
                             <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
-                        <v-btn @click="triggerDialog"> ສ້າງລາຍຈ່າຍ </v-btn>
+                        <v-btn @click="triggerDialog" class="primary" size="large" variant="outlined" rounded> ສ້າງລາຍຈ່າຍ </v-btn>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
                         <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line
                             hide-detailsx />
-                        <v-btn @click="loadTxn"> ດຶງລາຍງານ </v-btn>
+                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
                     </v-col>
                 </v-layout>
             </v-card-title>

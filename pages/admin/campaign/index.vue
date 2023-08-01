@@ -20,13 +20,13 @@
                         <v-text-field type="date" label="ວັນທີເລີ່ມ*" v-model="endDate"
                             hint="example of helper text only on focus"></v-text-field>
 
-                        <v-btn @click="openCampaignForm"> ເພີ່ມແຄມເປນ </v-btn>
+                        <v-btn @click="openCampaignForm" class="primary" size="large" variant="outlined" rounded> ເພີ່ມແຄມເປນ </v-btn>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
                         <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line
                             hide-detailsx />
-                        <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn>
+                        <v-btn @click="loadData" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
 
                     </v-col>
                 </v-layout>

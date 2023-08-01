@@ -297,11 +297,33 @@ export const firstAndLastDateOfCurrentYear = () => {
     const today = new Date();
     const year = today.getFullYear();
     console.log(`THIS YEAR IS ${year} ${today}`);
-    const startDate = new Date(year, 0, 1).toISOString().slice(0, 10);
-    const endDate = new Date(year, 11, 31).toISOString().slice(0, 10);
+    // const startDate = new Date(year, 0, 1).toISOString().slice(0, 10);
+    // const endDate = new Date(year, 11, 31).toISOString().slice(0, 10);
+    const startDate = getMySQLDateOfFirstDayOfYear();
+    const endDate = getMySQLDateOfLastDayOfYear();
     console.log(`THIS YEAR IS ${startDate} ${endDate}`);
     return { startDate, endDate };
 }
+
+export const  getMySQLDateOfFirstDayOfYear = ()=> {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const firstDayOfYear = new Date(year, 0, 1);
+  const month = firstDayOfYear.getMonth() + 1;
+  const day = firstDayOfYear.getDate();
+  return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+}
+
+export const getMySQLDateOfLastDayOfYear = ()=> {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const lastDayOfYear = new Date(year, 11, 31);
+  const month = lastDayOfYear.getMonth() +1;
+  const day = lastDayOfYear.getDate();
+  return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+}
+
+
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API

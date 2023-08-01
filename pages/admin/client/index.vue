@@ -21,7 +21,7 @@
         </v-row>
         <v-row>
           <v-col cols="6">
-            <v-btn block size="large" variant="outlined" @click="createItem" class="primary">
+            <v-btn block size="large" variant="outlined" @click="createItem" class="primary" rounded>
               ເພີ່ມລູກຄ້າ<span class="mdi mdi-account-box"></span>
             </v-btn>
             <!-- <v-btn @click="createItem"> ເພີ່ມລູກຄ້າ </v-btn> -->
@@ -32,8 +32,9 @@
         </v-row>
         <v-row>
           <v-col class="text-right">
-            <v-btn size="large" variant="outlined" @click="loadData" class="primary">
-              ດຶງລາຍງານ<span class="mdi mdi-account-box"></span>
+            <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
+              <span class="mdi mdi-account-box"></span>
+              ດຶງລາຍງານ
             </v-btn>
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>

@@ -1,4 +1,4 @@
-exports.ids = [40];
+exports.ids = [41];
 exports.modules = {
 
 /***/ 283:
@@ -126,7 +126,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 397:
+/***/ 402:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -409,11 +409,11 @@ var myUtil = __webpack_require__(111);
           // ******* reload data if transaction completed ********
           console.log("RELOAD DATA TRIGGER");
           this.refreshData(true);
-          return Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'Your transaction completed');
+          return Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'Your transaction completed');
           //  
         }
 
-        return Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
+        return Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
       }).catch(er => {
         this.message = 'Error: ' + er;
       });

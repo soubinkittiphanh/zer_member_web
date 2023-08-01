@@ -21,7 +21,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 495:
+/***/ 509:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -397,9 +397,9 @@ var myUtil = __webpack_require__(111);
           });
         }
         if (!responseErrorList) {
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
         } else {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", responseErrorList[0].msg);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", responseErrorList[0].msg);
         }
       } catch (error) {
         responseErrorList.push({
@@ -407,7 +407,7 @@ var myUtil = __webpack_require__(111);
           msg: 'Can not make dr'
         });
         console.log("Something wrong ===>");
-        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data.erors[0]['msg']);
+        Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data.erors[0]['msg']);
       }
       this.isloading = false;
     }

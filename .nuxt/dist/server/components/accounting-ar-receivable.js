@@ -21,7 +21,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 396:
+/***/ 401:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -414,7 +414,7 @@ var myUtil = __webpack_require__(111);
         this.form.header.bookingDate = response.data['bookingDate'].split('T')[0];
         this.form.header.totalAmount = this.getFormatNum(this.form.header.totalAmount);
       }).catch(error => {
-        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
+        Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data);
       });
     },
     getFormatNum(val) {
@@ -425,17 +425,17 @@ var myUtil = __webpack_require__(111);
       this.isloading = true;
       if (this.isEdit) {
         await this.$axios.put(`/api/finanicial/ar/header/update/${this.receiveHeaderId}`, this.form.header).then(response => {
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           this.$emit('reload');
         }).catch(error => {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data);
         });
       } else {
         await this.$axios.post("/api/finanicial/ar/header/create", this.form.header).then(response => {
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           this.$emit('reload');
         }).catch(error => {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0].msg);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0].msg);
         });
       }
       this.isloading = false;

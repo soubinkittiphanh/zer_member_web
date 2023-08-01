@@ -1,4 +1,4 @@
-exports.ids = [48,2];
+exports.ids = [51,2];
 exports.modules = {
 
 /***/ 287:
@@ -166,7 +166,20 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 315:
+/***/ 319:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
+/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(115);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
+
+/***/ }),
+
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2084,20 +2097,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 320:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(114);
-/* harmony import */ var _src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_grid_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(116);
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(_grid__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])('layout'));
-
-/***/ }),
-
-/***/ 396:
+/***/ 401:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2490,7 +2490,7 @@ var myUtil = __webpack_require__(111);
         this.form.header.bookingDate = response.data['bookingDate'].split('T')[0];
         this.form.header.totalAmount = this.getFormatNum(this.form.header.totalAmount);
       }).catch(error => {
-        Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
+        Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data);
       });
     },
     getFormatNum(val) {
@@ -2501,17 +2501,17 @@ var myUtil = __webpack_require__(111);
       this.isloading = true;
       if (this.isEdit) {
         await this.$axios.put(`/api/finanicial/ar/header/update/${this.receiveHeaderId}`, this.form.header).then(response => {
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           this.$emit('reload');
         }).catch(error => {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data);
         });
       } else {
         await this.$axios.post("/api/finanicial/ar/header/create", this.form.header).then(response => {
-          Object(myUtil["d" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
+          Object(myUtil["c" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
           this.$emit('reload');
         }).catch(error => {
-          Object(myUtil["c" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0].msg);
+          Object(myUtil["b" /* swalError2 */])(this.$swal, "Error", error.response.data.errors[0].msg);
         });
       }
       this.isloading = false;
@@ -2553,7 +2553,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 457:
+/***/ 468:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2576,13 +2576,13 @@ var VCol = __webpack_require__(273);
 var VDataTable = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePicker.js + 19 modules
-var VDatePicker = __webpack_require__(315);
+var VDatePicker = __webpack_require__(320);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(262);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(320);
+var VLayout = __webpack_require__(319);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VMenu/VMenu.js + 1 modules
 var VMenu = __webpack_require__(105);
@@ -2590,7 +2590,7 @@ var VMenu = __webpack_require__(105);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/ar/index.vue?vue&type=template&id=3041560e&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/ar/index.vue?vue&type=template&id=9f344230&
 
 
 
@@ -2602,7 +2602,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var arvue_type_template_id_3041560e_render = function render() {
+var arvue_type_template_id_9f344230_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -2775,6 +2775,12 @@ var arvue_type_template_id_3041560e_render = function render() {
       expression: "date2"
     }
   })], 1), _vm._v(" "), _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
     on: {
       "click": _vm.triggerDialog
     }
@@ -2811,6 +2817,12 @@ var arvue_type_template_id_3041560e_render = function render() {
       expression: "userId"
     }
   }), _vm._v(" "), _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
     on: {
       "click": _vm.loadTxn
     }
@@ -2852,13 +2864,13 @@ var arvue_type_template_id_3041560e_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/ar/index.vue?vue&type=template&id=3041560e&
+// CONCATENATED MODULE: ./pages/admin/ar/index.vue?vue&type=template&id=9f344230&
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./components/accounting/ArReceivable.vue + 4 modules
-var ArReceivable = __webpack_require__(396);
+var ArReceivable = __webpack_require__(401);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/ar/index.vue?vue&type=script&lang=js&
 
@@ -2988,7 +3000,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_arvue_type_script_lang_js_,
-  arvue_type_template_id_3041560e_render,
+  arvue_type_template_id_9f344230_render,
   staticRenderFns,
   false,
   injectStyles,

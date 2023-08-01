@@ -43,6 +43,11 @@ export default {
         //   to: '/admin/dashboard',
         // },
         {
+          icon: 'mdi-currency-usd-off',
+          title: 'ຈັດການອັດຕາແລກປ່ຽນ',
+          to: '/admin/currency',
+        },
+        {
           icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',

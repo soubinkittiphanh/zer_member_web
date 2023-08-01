@@ -1,4 +1,4 @@
-exports.ids = [79,16];
+exports.ids = [83,17];
 exports.modules = {
 
 /***/ 278:
@@ -238,7 +238,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 315:
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2156,7 +2156,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 487:
+/***/ 501:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2179,7 +2179,7 @@ var VCol = __webpack_require__(273);
 var VDataTable = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDatePicker/VDatePicker.js + 19 modules
-var VDatePicker = __webpack_require__(315);
+var VDatePicker = __webpack_require__(320);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(262);
@@ -2205,7 +2205,7 @@ var VToolbar = __webpack_require__(23);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/index.js
 var components_VToolbar = __webpack_require__(112);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/stock/_id/index.vue?vue&type=template&id=4b000b0e&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/stock/_id/index.vue?vue&type=template&id=0a8c97e8&
 
 
 
@@ -2221,7 +2221,7 @@ var components_VToolbar = __webpack_require__(112);
 
 
 
-var _idvue_type_template_id_4b000b0e_render = function render() {
+var _idvue_type_template_id_0a8c97e8_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -2439,6 +2439,12 @@ var _idvue_type_template_id_4b000b0e_render = function render() {
       expression: "userId"
     }
   }), _vm._v(" "), _c(VBtn["a" /* default */], {
+    staticClass: "primary",
+    attrs: {
+      "size": "large",
+      "variant": "outlined",
+      "rounded": ""
+    },
     on: {
       "click": _vm.fetchData
     }
@@ -2484,7 +2490,7 @@ var _idvue_type_template_id_4b000b0e_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/stock/_id/index.vue?vue&type=template&id=4b000b0e&
+// CONCATENATED MODULE: ./pages/admin/stock/_id/index.vue?vue&type=template&id=0a8c97e8&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/stock/_id/index.vue?vue&type=script&lang=js&
 /* harmony default export */ var _idvue_type_script_lang_js_ = ({
@@ -2655,7 +2661,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   stock_idvue_type_script_lang_js_,
-  _idvue_type_template_id_4b000b0e_render,
+  _idvue_type_template_id_0a8c97e8_render,
   staticRenderFns,
   false,
   null,

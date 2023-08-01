@@ -27,7 +27,7 @@
                         <v-btn v-if="isQuotation" size="large" variant="outlined" @click="post" class="primary" rounded>
                             <span class="mdi mdi-transfer-right"></span>Make to invoice
                         </v-btn>
-                        <v-btn size="large" variant="outlined" @click="post" class="primary" rounded>
+                        <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
                             <span class="mdi mdi-printer-outline"></span>Print
                         </v-btn>
                     </v-col>
@@ -73,8 +73,10 @@
                                                 :items="currencyList" label="ສະກຸນເງິນ*"
                                                 v-model="transaction.currencyId"></v-autocomplete>
                                         </v-col>
-                                        <v-col cols="12">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
-                                        <!-- <v-col cols="12">ຍອດລວມທັງໝົດ: {{ getFormatNum(grandTotal) }}</v-col> -->
+                                        <!-- <v-col cols="12">
+                                            <v-text-field v-model="transaction.exchangeRate" disabled label="ອັດຕາແລກປ່ຽນ*"></v-text-field>
+                                        </v-col> -->
+                                        <v-col cols="12">ຍອດລວມທັງໝົດ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" style="text-align: end;">
@@ -210,11 +212,16 @@ export default {
             this.transaction.paymentId = 1;
             this.transaction.currencyId = 1;
             this.transaction.discount = 0;
+            this.newRow();
         }
 
 
     },
     methods: {
+        quotationPreview(){
+            const path = this.isQuotation?'PDFQuotation':'PDFInvoice'
+            window.open(`/admin/${path}/${this.headerId}`, '_blank');
+        },
         handleKeyDown(event) {
             if (event.key === 'Tab') {
                 // Handle tab key press
@@ -226,6 +233,7 @@ export default {
             const currency = this.currencyList.find(el => el['id'] == this.transaction.currencyId);
             if (!currency) return
             this.transaction.exchangeRate = currency['rate'];
+            console.log(`Rate exchange ${currency['rate']} real value ${this.transaction.exchangeRate}`);
         },
         async deleteItem(item) {
             if (item.id) {
@@ -335,6 +343,7 @@ export default {
                     this.sheet = true
                     return
                 }
+                
                 iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
             }
             console.log("******** No error found process posting ********");
@@ -445,6 +454,7 @@ export default {
                     this.isloading = false
                     return
                 }
+                iterator.discount = parseInt(replaceAll(iterator.discount, ',', ''))
                 iterator.quantity = parseInt(replaceAll(iterator.quantity, ',', ''))
                 iterator.unitRate = parseInt(replaceAll(iterator.unitRate, ',', ''))
                 // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
@@ -551,6 +561,7 @@ export default {
             errorLineNumber: null,
             isloading: false,
             transaction: {
+                exchangeRate:1,
                 lines: []
             },
             headers: [

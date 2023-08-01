@@ -87,7 +87,7 @@
               single-line
               hide-detailsx
             />
-            <v-btn @click="fetchData"> ດຶງລາຍງານ </v-btn>
+            <v-btn @click="fetchData" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
           </v-col>
         </v-row>
       </v-card-title>

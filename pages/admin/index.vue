@@ -142,8 +142,7 @@
 </template>
   
 <script>
-import { getFormatNum } from '~/util/myUtil'
-import { generateColorShades, firstAndLastDateOfCurrentYear, getFirstDayOfMonth, today } from '~/common'
+import { generateColorShades, firstAndLastDateOfCurrentYear, getFirstDayOfMonth, today,getFormatNum } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
 import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
