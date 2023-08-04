@@ -1,4 +1,4 @@
-exports.ids = [36,16,92];
+exports.ids = [37,16,94];
 exports.modules = {
 
 /***/ 134:
@@ -206,7 +206,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 286:
+/***/ 290:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -737,7 +737,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(322);
+var content = __webpack_require__(325);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -749,7 +749,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 321:
+/***/ 324:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -761,7 +761,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 322:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1307,7 +1307,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var ProductForm = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,DiaImage: __webpack_require__(286).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,DiaImage: __webpack_require__(290).default})
 
 
 /***/ }),
@@ -1350,7 +1350,7 @@ var VIcon = __webpack_require__(47);
 var VImg = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VRating/VRating.js
-var VRating = __webpack_require__(335);
+var VRating = __webpack_require__(336);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(272);
@@ -1564,7 +1564,7 @@ var componentNormalizer = __webpack_require__(9);
 var script = {}
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(321)
+  var style0 = __webpack_require__(324)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1845,7 +1845,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

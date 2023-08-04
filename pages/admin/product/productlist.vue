@@ -28,8 +28,9 @@
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
           </v-col>
           <v-col cols="6" class="text-right">
-            <v-btn class="primary" size="large" variant="outlined" @click="rebuildStock">
-              Rebuild stock<span class="mdi mdi-update"></span>
+            <v-btn class="primary" size="large" variant="outlined" @click="rebuildStock" rounded>
+              <span class="mdi mdi-update"></span>
+              Refresh
             </v-btn>
           </v-col>
         </v-row>
@@ -46,36 +47,52 @@
             <!-- <v-btn class="mr-0" @click="productFormCreate = true">
               ສ້າງສິນຄ້າໃຫມ່
             </v-btn> -->
-            <v-btn size="large" variant="outlined" @click="productFormCreate = true" class="primary">
-              ສ້າງສິນຄ້າໃຫມ່<span class="mdi mdi-note-plus-outline"></span>
+            <v-btn size="large" variant="outlined" @click="productFormCreate = true" class="primary" rounded>
+              <span class="mdi mdi-note-plus-outline"></span>
+              ສ້າງສິນຄ້າໃຫມ່
             </v-btn>
 
           </v-toolbar>
         </template>
         <template v-slot:[`item.functionEdit`]="{ item }">
-          <v-btn variant="outlined" @click="editItem(item)
+          <!-- <v-btn variant="outlined" @click="editItem(item)
           isedit = true">
             <v-icon small class="mr-2">
               mdi-pencil
             </v-icon>
-            <!-- ແກ້ໄຂ -->
-          </v-btn>
+          </v-btn> -->
+
+          <v-btn color="primary" text @click="editItem(item) 
+            wallet = true
+              ">
+
+              <i class="fa fa-pencil-square-o"></i>
+            </v-btn>
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
 
-          <v-btn variant="outlined" @click="triggerCardForm(item)">
+          <!-- <v-btn variant="outlined" @click="triggerCardForm(item)">
             <i class="fas fa-cart-plus"></i>
 
-            <!-- ເພີ່ມສະຕັອກ -->
-          </v-btn>
+          </v-btn> -->
+          <v-btn color="primary" text @click="triggerCardForm(item) 
+            wallet = true
+              ">
+              <i class="fa fa-cart-plus"></i>
+            </v-btn>
 
         </template>
         <template v-slot:[`item.functionStockView`]="{ item }">
-          <v-btn variant="outlined" @click="editStock(item)">
-            <!-- <i class="fas fa-dolly"></i> -->
+          <!-- <v-btn variant="outlined" @click="editStock(item)">
             <i class="fas fa-eye"></i>
-            <!-- ເບິ່ງສະຕັອກ -->
-          </v-btn>
+          </v-btn> -->
+
+          <v-btn color="primary" text @click="editStock(item) 
+            wallet = true
+              ">
+
+              <i class="fa fa-eye"></i>
+            </v-btn>
         </template>
         <template v-slot:[`item.pro_cost_price`]="{ item }">
           {{ formatNumber(item.pro_cost_price) }}

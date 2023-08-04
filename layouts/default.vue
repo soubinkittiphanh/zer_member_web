@@ -49,6 +49,11 @@ export default {
         },
         {
           icon: 'mdi-view-list',
+          title: 'Warehouse',
+          to: '/admin/location',
+        },
+        {
+          icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
         },

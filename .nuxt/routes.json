@@ -96,6 +96,12 @@
     "chunkName": "pages/admin/customer_request/index"
   },
   {
+    "name": "admin-location",
+    "path": "/admin/location",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/location/index.vue",
+    "chunkName": "pages/admin/location/index"
+  },
+  {
     "name": "admin-login",
     "path": "/admin/login",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/login/index.vue",

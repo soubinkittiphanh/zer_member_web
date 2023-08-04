@@ -51,13 +51,12 @@
                 <!-- <v-card> -->
                 <div style="width: 100%;">
                     <div>
-
-
                         <v-row align="center" class="pa-2">
                             <v-col cols="2">
-                                <!-- <v-btn block size="x-large" variant="outlined" @click="openCustomerDialog" class="primary"> -->
-                                <v-btn @click="openCustomerDialog" style="background-color: #F5F5F5;">
-                                    <!-- <span class="mdi mdi-plus"></span> ເລືອກລູກຄ້າ -->
+                                <!-- <v-btn @click="openCustomerDialog" style="background-color: #F5F5F5;">
+                                    <v-icon class="mdi mdi-account-plus-outline"></v-icon>
+                                </v-btn> -->
+                                <v-btn color="primary" text @click="openCustomerDialog">
                                     <v-icon class="mdi mdi-account-plus-outline"></v-icon>
                                 </v-btn>
                             </v-col>
@@ -69,20 +68,20 @@
 
                             </v-col>
                             <v-col cols="2">
-                                <!-- <v-btn block size="x-large" variant="outlined" @click="newOrder" class="primary"> -->
-                                <v-btn @click="() => { }" style="background-color: #F5F5F5;text-align: right;">
-                                    <!-- <span  class="mdi mdi-file-document-refresh-outline" ></span> -->
-                                    <!-- <v-icon class="mdi mdi-file-document-refresh-outline" hidden></v-icon> -->
-                                    <!-- <v-img width="10"></v-img> -->
+                                <!-- <v-btn @click="() => { }">
                                     <v-icon class="mdi mdi-bike-fast"></v-icon>
+                                </v-btn> -->
+                                <v-btn color="primary" text @click="() => { }">
+                                    
+                                    <v-icon class="mdi mdi-bike-fast"></v-icon>
+                                    <!-- <i class="fa fa-pencil-square-o"></i> -->
                                 </v-btn>
                             </v-col>
                             <v-col cols="2" style="text-align: right;">
-                                <!-- <v-btn block size="x-large" variant="outlined" @click="newOrder" class="primary"> -->
-                                <v-btn @click="newOrder" style="background-color: #F5F5F5;text-align: right;">
-                                    <!-- <span  class="mdi mdi-file-document-refresh-outline" ></span> -->
-                                    <!-- <v-icon class="mdi mdi-file-document-refresh-outline" hidden></v-icon> -->
-                                    <!-- <v-img width="10"></v-img> -->
+                                <!-- <v-btn @click="newOrder" style="background-color: #F5F5F5;text-align: right;">
+                                    <v-icon color="" class="mdi mdi-file-document-refresh-outline"></v-icon>
+                                </v-btn> -->
+                                <v-btn color="primary" text @click="newOrder">
                                     <v-icon color="" class="mdi mdi-file-document-refresh-outline"></v-icon>
                                 </v-btn>
                             </v-col>
@@ -90,7 +89,6 @@
                         </v-row>
                     </div>
                 </div>
-                <!-- amount list -->
                 <v-simple-table class="pa-0 ma-0">
                     <template v-slot:default>
 
@@ -163,10 +161,11 @@
                     <v-divider class="mb-1"></v-divider>
                     <v-row>
                         <v-col :cols="12">
-                            <div class="row" >
+                            <div class="row">
                                 <div v-for="(item, index) in paymentList" :key="index"
                                     class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
-                                    <PaymentCard :id="item.id" :title="item.payment_code" :icon="item.icon" :path="item.path">
+                                    <PaymentCard :id="item.id" :title="item.payment_code" :icon="item.icon"
+                                        :path="item.path">
                                         <template v-slot:iconSlot>
                                             <img :src="svgIcon" height="30">
                                         </template>
@@ -385,7 +384,7 @@ export default {
             this.saleHeader.lines = this.generateSaleLine
             this.saleHeader.userId = this.user.id
             this.saleHeader.bookingDate = jsDateToMysqlDate(today)
-            this.saleHeader.isActive = false
+            this.saleHeader.isActive = true
             await this.$axios
                 .post('/api/quotation/create', this.saleHeader)
                 .then((res) => {

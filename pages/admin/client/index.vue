@@ -21,17 +21,22 @@
         </v-row>
         <v-row>
           <v-col cols="6">
-            <v-btn block size="large" variant="outlined" @click="createItem" class="primary" rounded>
+            <!-- <v-btn block size="large" variant="outlined" @click="createItem" class="primary" rounded>
               ເພີ່ມລູກຄ້າ<span class="mdi mdi-account-box"></span>
-            </v-btn>
-            <!-- <v-btn @click="createItem"> ເພີ່ມລູກຄ້າ </v-btn> -->
+            </v-btn> -->
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
          </v-col>
         </v-row>
         <v-row>
-          <v-col class="text-right">
+          <v-col cols="6">
+            <v-btn size="large" variant="outlined" @click="createItem" class="primary" rounded>
+              <span class="mdi mdi-account-box"></span>
+              ເພີ່ມລູກຄ້າ
+            </v-btn>
+          </v-col>
+          <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
               <span class="mdi mdi-account-box"></span>
               ດຶງລາຍງານ
