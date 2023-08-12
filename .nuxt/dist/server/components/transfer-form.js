@@ -215,7 +215,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 407:
+/***/ 409:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -264,7 +264,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(301);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TransferForm.vue?vue&type=template&id=42e194e5&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TransferForm.vue?vue&type=template&id=070c4ef5&
 
 
 
@@ -282,7 +282,7 @@ var VTextarea = __webpack_require__(301);
 
 
 
-var TransferFormvue_type_template_id_42e194e5_render = function render() {
+var TransferFormvue_type_template_id_070c4ef5_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -363,7 +363,7 @@ var TransferFormvue_type_template_id_42e194e5_render = function render() {
       "rounded": ""
     },
     on: {
-      "click": _vm.quotationPreview
+      "click": _vm.preview
     }
   }, [_c('span', {
     staticClass: "mdi mdi-printer-outline"
@@ -668,7 +668,7 @@ var TransferFormvue_type_template_id_42e194e5_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/TransferForm.vue?vue&type=template&id=42e194e5&
+// CONCATENATED MODULE: ./components/TransferForm.vue?vue&type=template&id=070c4ef5&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(286);
@@ -717,9 +717,9 @@ var common = __webpack_require__(17);
     }
   },
   methods: {
-    quotationPreview() {
+    preview() {
       const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice';
-      window.open(`/admin/${path}/${this.headerId}`, '_blank');
+      window.open(`/admin/PDFTransfer/${this.headerId}`, '_blank');
     },
     handleKeyDown(event) {
       if (event.key === 'Tab') {
@@ -1150,7 +1150,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_TransferFormvue_type_script_lang_js_,
-  TransferFormvue_type_template_id_42e194e5_render,
+  TransferFormvue_type_template_id_070c4ef5_render,
   staticRenderFns,
   false,
   injectStyles,

@@ -1,4 +1,4 @@
-exports.ids = [61,11,29,30,32];
+exports.ids = [63,11,29,30,32];
 exports.modules = {
 
 /***/ 280:
@@ -2183,7 +2183,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 352:
+/***/ 353:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2445,7 +2445,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(425);
+var content = __webpack_require__(427);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2457,7 +2457,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 424:
+/***/ 426:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2469,7 +2469,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 425:
+/***/ 427:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2484,7 +2484,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 483:
+/***/ 489:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2678,7 +2678,7 @@ var staticRenderFns = [];
 var common = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./components/CurrencyForm.vue + 4 modules
-var CurrencyForm = __webpack_require__(352);
+var CurrencyForm = __webpack_require__(353);
 
 // EXTERNAL MODULE: ./components/OrderDetailPos.vue + 4 modules
 var OrderDetailPos = __webpack_require__(320);
@@ -2791,7 +2791,7 @@ var componentNormalizer = __webpack_require__(9);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(424)
+  var style0 = __webpack_require__(426)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2812,7 +2812,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var currency = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,CurrencyForm: __webpack_require__(352).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,CurrencyForm: __webpack_require__(353).default})
 
 
 /***/ })

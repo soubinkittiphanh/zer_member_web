@@ -89,18 +89,6 @@
   "OrderSumaryCardPos": {
     "description": "Auto imported from components/orderSumaryCardPos.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
-  "AccountingApPayment": {
-    "description": "Auto imported from components/accounting/ApPayment.vue"
-  },
-  "AccountingArReceivable": {
-    "description": "Auto imported from components/accounting/ArReceivable.vue"
-  },
-  "AccountingGeneralLedgerForm": {
-    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
-  },
   "CardCampaignCard": {
     "description": "Auto imported from components/card/campaignCard.vue"
   },
@@ -116,14 +104,26 @@
   "DialogsBottomAlert": {
     "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
+  "Menu": {
+    "description": "Auto imported from components/menu/index.vue"
+  },
+  "AccountingApPayment": {
+    "description": "Auto imported from components/accounting/ApPayment.vue"
+  },
+  "AccountingArReceivable": {
+    "description": "Auto imported from components/accounting/ArReceivable.vue"
+  },
+  "AccountingGeneralLedgerForm": {
+    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
+  },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
   "CustomerForm": {
     "description": "Auto imported from components/customer/CustomerForm.vue"
   },
   "CustomerList": {
     "description": "Auto imported from components/customer/CustomerList.vue"
-  },
-  "Menu": {
-    "description": "Auto imported from components/menu/index.vue"
   },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"

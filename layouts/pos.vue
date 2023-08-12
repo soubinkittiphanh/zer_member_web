@@ -72,7 +72,7 @@
                                     <v-icon class="mdi mdi-bike-fast"></v-icon>
                                 </v-btn> -->
                                 <v-btn color="primary" text @click="() => { }">
-                                    
+
                                     <v-icon class="mdi mdi-bike-fast"></v-icon>
                                     <!-- <i class="fa fa-pencil-square-o"></i> -->
                                 </v-btn>
@@ -155,6 +155,9 @@
                                 text-color="white">
                                 {{ item.code }}{{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
+                            <v-btn outlined depressed @click="printReceipt">
+                                Ticket
+                            </v-btn>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -365,6 +368,66 @@ export default {
         }
     },
     methods: {
+        printReceipt() {
+            const receiptContent = `
+        <div style="font-size: 16px; font-weight: bold;">Receipt</div>
+        <hr>
+        <div style="font-size: 14px;">Item 1 - $10.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <hr>
+        <div style="font-size: 14px; font-weight: bold;">Total: $16.98</div>
+ `
+
+            const printWindow = window.open('', 'PRINT', 'height=400,width=600')
+
+            printWindow.document.write(`
+        <html>
+          <head>
+            <title>Receipt</title>
+            <style>
+              @media print {
+                @page {
+                  size: 80mm 100mm;
+                }
+
+                body {
+                  font-size: 14px;
+                  padding: 10px;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            ${receiptContent}
+          </body>
+        </html>
+      `)
+            printWindow.print()
+            printWindow.close()
+        },
         async setQuotation() {
             if (this.isloading || this.generateSaleLine == 0) {
                 if (this.generateSaleLine == 0) {

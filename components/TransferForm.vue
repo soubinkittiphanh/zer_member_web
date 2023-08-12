@@ -27,7 +27,7 @@
                         <!-- <v-btn v-if="isQuotation" size="large" variant="outlined" @click="postToInvoice" class="primary" rounded>
                             <span class="mdi mdi-transfer-right"></span>Make to invoice
                         </v-btn> -->
-                        <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
+                        <v-btn size="large" variant="outlined" @click="preview" class="primary" rounded>
                             <span class="mdi mdi-printer-outline"></span>Print
                         </v-btn>
                     </v-col>
@@ -209,9 +209,9 @@ export default {
 
     },
     methods: {
-        quotationPreview() {
+        preview() {
             const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice'
-            window.open(`/admin/${path}/${this.headerId}`, '_blank');
+            window.open(`/admin/PDFTransfer/${this.headerId}`, '_blank');
         },
         handleKeyDown(event) {
             if (event.key === 'Tab') {

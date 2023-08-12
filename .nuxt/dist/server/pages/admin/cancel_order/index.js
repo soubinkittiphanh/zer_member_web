@@ -1,4 +1,4 @@
-exports.ids = [57,28,31];
+exports.ids = [59,28,31];
 exports.modules = {
 
 /***/ 287:
@@ -2077,7 +2077,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 345:
+/***/ 346:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2267,7 +2267,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 346:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2408,7 +2408,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(421);
+var content = __webpack_require__(423);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2420,7 +2420,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 420:
+/***/ 422:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2432,7 +2432,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 421:
+/***/ 423:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2447,7 +2447,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 479:
+/***/ 485:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2810,7 +2810,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/cancel_order/index.vue?vue&type=template&id=52dc12d5&scoped=true&
 
 // EXTERNAL MODULE: ./components/OrderDetail.vue + 4 modules
-var OrderDetail = __webpack_require__(345);
+var OrderDetail = __webpack_require__(346);
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(17);
@@ -3019,7 +3019,7 @@ var componentNormalizer = __webpack_require__(9);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(420)
+  var style0 = __webpack_require__(422)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -3040,7 +3040,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var cancel_order = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,OrderDetail: __webpack_require__(345).default,OrderSumaryCard: __webpack_require__(346).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,OrderDetail: __webpack_require__(346).default,OrderSumaryCard: __webpack_require__(347).default})
 
 
 /***/ })

@@ -1,4 +1,4 @@
-exports.ids = [71,9,16,17,37,38,79,97];
+exports.ids = [73,9,16,17,37,38,81,99];
 exports.modules = {
 
 /***/ 134:
@@ -2981,7 +2981,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 354:
+/***/ 355:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3206,7 +3206,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 490:
+/***/ 496:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3816,7 +3816,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var minstock = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,DialogClassicMessage: __webpack_require__(278).default,CardForm: __webpack_require__(354).default,ProductForm: __webpack_require__(330).default,ProductFormCreate: __webpack_require__(329).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,DialogClassicMessage: __webpack_require__(278).default,CardForm: __webpack_require__(355).default,ProductForm: __webpack_require__(330).default,ProductFormCreate: __webpack_require__(329).default})
 
 
 /***/ })

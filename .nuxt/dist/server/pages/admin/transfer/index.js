@@ -1,4 +1,4 @@
-exports.ids = [88,6,29,30,32,44];
+exports.ids = [90,6,29,30,32,44];
 exports.modules = {
 
 /***/ 280:
@@ -4160,7 +4160,7 @@ var console = __webpack_require__(3);
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(453);
+var content = __webpack_require__(455);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4172,7 +4172,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 407:
+/***/ 409:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4221,7 +4221,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(301);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TransferForm.vue?vue&type=template&id=42e194e5&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/TransferForm.vue?vue&type=template&id=070c4ef5&
 
 
 
@@ -4239,7 +4239,7 @@ var VTextarea = __webpack_require__(301);
 
 
 
-var TransferFormvue_type_template_id_42e194e5_render = function render() {
+var TransferFormvue_type_template_id_070c4ef5_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -4320,7 +4320,7 @@ var TransferFormvue_type_template_id_42e194e5_render = function render() {
       "rounded": ""
     },
     on: {
-      "click": _vm.quotationPreview
+      "click": _vm.preview
     }
   }, [_c('span', {
     staticClass: "mdi mdi-printer-outline"
@@ -4625,7 +4625,7 @@ var TransferFormvue_type_template_id_42e194e5_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/TransferForm.vue?vue&type=template&id=42e194e5&
+// CONCATENATED MODULE: ./components/TransferForm.vue?vue&type=template&id=070c4ef5&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(286);
@@ -4674,9 +4674,9 @@ var common = __webpack_require__(17);
     }
   },
   methods: {
-    quotationPreview() {
+    preview() {
       const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice';
-      window.open(`/admin/${path}/${this.headerId}`, '_blank');
+      window.open(`/admin/PDFTransfer/${this.headerId}`, '_blank');
     },
     handleKeyDown(event) {
       if (event.key === 'Tab') {
@@ -5107,7 +5107,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_TransferFormvue_type_script_lang_js_,
-  TransferFormvue_type_template_id_42e194e5_render,
+  TransferFormvue_type_template_id_070c4ef5_render,
   staticRenderFns,
   false,
   injectStyles,
@@ -5124,7 +5124,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 452:
+/***/ 454:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5136,7 +5136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 453:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5151,7 +5151,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 501:
+/***/ 507:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5854,7 +5854,7 @@ var componentNormalizer = __webpack_require__(9);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(452)
+  var style0 = __webpack_require__(454)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -5875,7 +5875,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var transfer = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {LoadingIndicator: __webpack_require__(110).default,TransferForm: __webpack_require__(407).default,CancelTicketForm: __webpack_require__(317).default,OrderSumaryCardPos: __webpack_require__(307).default})
+installComponents(component, {LoadingIndicator: __webpack_require__(110).default,TransferForm: __webpack_require__(409).default,CancelTicketForm: __webpack_require__(317).default,OrderSumaryCardPos: __webpack_require__(307).default})
 
 
 /***/ })
