@@ -32,7 +32,7 @@
         <v-row>
           <v-col cols="6">
             <v-btn size="large" variant="outlined" @click="createItem" class="primary" rounded>
-              <span class="mdi mdi-account-box"></span>
+              <span class="mdi mdi-plus-box"></span>
               ເພີ່ມລູກຄ້າ
             </v-btn>
           </v-col>

@@ -37,6 +37,7 @@ const _69ec6a30 = () => interopDefault(import('../pages/admin/quotationList/inde
 const _3fa356a8 = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
 const _cf12bd4e = () => interopDefault(import('../pages/admin/report_card/index.vue' /* webpackChunkName: "pages/admin/report_card/index" */))
 const _69422418 = () => interopDefault(import('../pages/admin/rider/index.vue' /* webpackChunkName: "pages/admin/rider/index" */))
+const _0af1c93a = () => interopDefault(import('../pages/admin/transfer/index.vue' /* webpackChunkName: "pages/admin/transfer/index" */))
 const _153c2e70 = () => interopDefault(import('../pages/admin/txn/index.vue' /* webpackChunkName: "pages/admin/txn/index" */))
 const _69aba667 = () => interopDefault(import('../pages/admin/txn_type/index.vue' /* webpackChunkName: "pages/admin/txn_type/index" */))
 const _66bfd696 = () => interopDefault(import('../pages/admin/walletin/index.vue' /* webpackChunkName: "pages/admin/walletin/index" */))
@@ -196,6 +197,10 @@ export const routerOptions = {
     path: "/admin/rider",
     component: _69422418,
     name: "admin-rider"
+  }, {
+    path: "/admin/transfer",
+    component: _0af1c93a,
+    name: "admin-transfer"
   }, {
     path: "/admin/txn",
     component: _153c2e70,

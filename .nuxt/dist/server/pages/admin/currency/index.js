@@ -1,4 +1,4 @@
-exports.ids = [59,11,29,30,32];
+exports.ids = [61,11,29,30,32];
 exports.modules = {
 
 /***/ 280:
@@ -215,13 +215,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 287:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(288);
+var content = __webpack_require__(298);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -229,7 +229,7 @@ __webpack_require__(5).default("ae7a972c", content, true)
 
 /***/ }),
 
-/***/ 288:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -244,7 +244,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 289:
+/***/ 299:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -500,7 +500,159 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 311:
+/***/ 305:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(306);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+__webpack_require__(5).default("73bba828", content, true)
+
+/***/ }),
+
+/***/ 306:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".bottom-sheet-transition-enter,.bottom-sheet-transition-leave-to{transform:translateY(100%)}.v-bottom-sheet.v-dialog{align-self:flex-end;border-radius:0;flex:0 1 auto;margin:0;overflow:visible}.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:70%}@media only screen and (max-width:599.98px){.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:none}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 307:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
+var VCard = __webpack_require__(101);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
+var components_VCard = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
+var VCol = __webpack_require__(273);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
+var VDivider = __webpack_require__(99);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
+var VRow = __webpack_require__(272);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
+var VSpacer = __webpack_require__(271);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
+
+
+
+
+
+
+
+var orderSumaryCardPosvue_type_template_id_3b45c91c_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c(VCard["a" /* default */], {
+    staticClass: "ml-4"
+  }, [_c(components_VCard["d" /* VCardTitle */], [_vm._v(_vm._s(this.orderDetail.title))]), _vm._v(" "), _c('div', {
+    staticClass: "pa-4"
+  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "left"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v("ຈຳນວນ")]), _vm._v(" "), _c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v(_vm._s(this.orderDetail.amount) + " ອໍເດີ")])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "left"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v("ມູນຄ່າ")]), _vm._v(" "), _c(VSpacer["a" /* default */]), _vm._v(" "), _c(VCol["a" /* default */], {
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "cols": "6",
+      "lg": "6"
+    }
+  }, [_vm._v(_vm._s(this.orderDetail.sale))])], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */])], 1);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
+/* harmony default export */ var orderSumaryCardPosvue_type_script_lang_js_ = ({
+  props: {
+    orderDetail: {
+      type: Object,
+      default: ''
+    },
+    showTotal: {
+      type: Boolean,
+      default: false
+    },
+    gross: {
+      type: String,
+      default: '0'
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_orderSumaryCardPosvue_type_script_lang_js_ = (orderSumaryCardPosvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(9);
+
+// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_orderSumaryCardPosvue_type_script_lang_js_,
+  orderSumaryCardPosvue_type_template_id_3b45c91c_render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "b7424606"
+  
+)
+
+/* harmony default export */ var orderSumaryCardPos = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -511,7 +663,7 @@ __webpack_require__.r(__webpack_exports__);
 var VAutocomplete = __webpack_require__(275);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBottomSheet/VBottomSheet.js
-var VBottomSheet = __webpack_require__(341);
+var VBottomSheet = __webpack_require__(335);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
 var VBtn = __webpack_require__(55);
@@ -549,7 +701,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(301);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=efabe718&
 
 
 
@@ -567,7 +719,7 @@ var VTextarea = __webpack_require__(301);
 
 
 
-var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
+var OrderDetailPosCRUDvue_type_template_id_efabe718_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -648,7 +800,7 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
       "rounded": ""
     },
     on: {
-      "click": _vm.post
+      "click": _vm.postToInvoice
     }
   }, [_c('span', {
     staticClass: "mdi mdi-transfer-right"
@@ -725,6 +877,26 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
       },
       expression: "transaction.discount"
     }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    directives: [{
+      name: "comma-thousand",
+      rawName: "v-comma-thousand"
+    }],
+    attrs: {
+      "label": "Q-ReferenceNo",
+      "disabled": ""
+    },
+    model: {
+      value: _vm.transaction.referenceNo,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "referenceNo", $$v);
+      },
+      expression: "transaction.referenceNo"
+    }
   })], 1)], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     attrs: {
       "cols": "4"
@@ -772,7 +944,7 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
     attrs: {
       "cols": "12"
     }
-  }, [_vm._v("ຍອດລວມທັງໝົດ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+  }, [_vm._v("ອັດຕາແລກປ່ຽນ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     staticStyle: {
       "text-align": "end"
     },
@@ -995,7 +1167,7 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=efabe718&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(286);
@@ -1262,18 +1434,48 @@ var common = __webpack_require__(17);
       this.$emit('close-dialog');
     },
     async postToInvoice() {
-      if (this.isloading) return;
+      if (this.isloading || !this.validateHeader()) return;
       this.isloading = true;
-      // TODO: How to split data between cod order[not yet paid] and all order
-      const date = {
-        startDate: this.date,
-        endDate: this.date2
-      };
-      await this.$axios.put(`api/sale/postToInvoice/${this.id}`).then(res => {
+      this.errorLineNumber = null;
+      const draftInvoiceLine = [];
+      for (const iterator of this.transaction.lines) {
+        this.errorLineNumber = this.transaction.lines.indexOf(iterator);
+        if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
+          this.sheet = true;
+          this.isloading = false;
+          return;
+        }
+        // iterator.id = null
+        iterator.discount = parseInt(Object(common["i" /* replaceAll */])(iterator.discount, ',', ''));
+        iterator.quantity = parseInt(Object(common["i" /* replaceAll */])(iterator.quantity, ',', ''));
+        iterator.unitRate = parseInt(Object(common["i" /* replaceAll */])(iterator.unitRate, ',', ''));
+        draftInvoiceLine.push(iterator);
+        // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
+      }
+      // Remove Line id for insert as new in Invoice //
+      for (const iterator of draftInvoiceLine) {
+        iterator.id = null;
+      }
+      console.log("******** No error found process posting ********");
+      this.errorLineNumber = null;
+      this.transaction.userId = this.user.id;
+      this.transaction.total = this.grandTotal;
+      this.transaction.referenceNo = this.headerId;
+      this.transaction.lines = draftInvoiceLine;
+      console.log(`Amount total ${this.transaction.total}`);
+      // ********** If header has data, that means we go for update API ********** //
+      await this.$axios.post(`api/sale/create`, this.transaction).then(res => {
         this.$emit('reload');
         Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
       }).catch(er => {
-        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
+        console.error(er);
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
+        const outOfStockProductId = er.response.data.split("#")[1];
+        if (outOfStockProductId != undefined) {
+          this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`;
+          this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId));
+          this.sheet = true;
+        }
         console.log('Error ===>: ' + er);
       });
       this.isloading = false;
@@ -1452,7 +1654,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_OrderDetailPosCRUDvue_type_script_lang_js_,
-  OrderDetailPosCRUDvue_type_template_id_3c2ed934_render,
+  OrderDetailPosCRUDvue_type_template_id_efabe718_render,
   staticRenderFns,
   false,
   injectStyles,
@@ -1469,136 +1671,13 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 312:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(101);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(10);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(273);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(99);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(272);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(271);
-
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
-
-
-
-
-
-
-
-var orderSumaryCardPosvue_type_template_id_3b45c91c_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c(VCard["a" /* default */], {
-    staticClass: "ml-4"
-  }, [_c(components_VCard["d" /* VCardTitle */], [_vm._v(_vm._s(this.orderDetail.title))]), _vm._v(" "), _c('div', {
-    staticClass: "pa-4"
-  }, [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "left"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v("ຈຳນວນ")]), _vm._v(" "), _c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "right"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v(_vm._s(this.orderDetail.amount) + " ອໍເດີ")])], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "left"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v("ມູນຄ່າ")]), _vm._v(" "), _c(VSpacer["a" /* default */]), _vm._v(" "), _c(VCol["a" /* default */], {
-    staticStyle: {
-      "text-align": "right"
-    },
-    attrs: {
-      "cols": "6",
-      "lg": "6"
-    }
-  }, [_vm._v(_vm._s(this.orderDetail.sale))])], 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */])], 1);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=template&id=3b45c91c&
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
-/* harmony default export */ var orderSumaryCardPosvue_type_script_lang_js_ = ({
-  props: {
-    orderDetail: {
-      type: Object,
-      default: ''
-    },
-    showTotal: {
-      type: Boolean,
-      default: false
-    },
-    gross: {
-      type: String,
-      default: '0'
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_orderSumaryCardPosvue_type_script_lang_js_ = (orderSumaryCardPosvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
-
-// CONCATENATED MODULE: ./components/orderSumaryCardPos.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_orderSumaryCardPosvue_type_script_lang_js_,
-  orderSumaryCardPosvue_type_template_id_3b45c91c_render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "b7424606"
-  
-)
-
-/* harmony default export */ var orderSumaryCardPos = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 313:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(314);
+var content = __webpack_require__(316);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -1606,7 +1685,7 @@ __webpack_require__(5).default("7b5d4dc6", content, true)
 
 /***/ }),
 
-/***/ 314:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1621,36 +1700,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 315:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(316);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-__webpack_require__(5).default("73bba828", content, true)
-
-/***/ }),
-
-/***/ 316:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".bottom-sheet-transition-enter,.bottom-sheet-transition-leave-to{transform:translateY(100%)}.v-bottom-sheet.v-dialog{align-self:flex-end;border-radius:0;flex:0 1 auto;margin:0;overflow:visible}.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:70%}@media only screen and (max-width:599.98px){.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:none}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 318:
+/***/ 319:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1663,7 +1713,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 323:
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1986,17 +2036,52 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 340:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(313);
+/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(305);
+/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(262);
+ // Extensions
+
+
+/* @vue/component */
+
+/* harmony default export */ __webpack_exports__["a"] = (_VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].extend({
+  name: 'v-bottom-sheet',
+  props: {
+    inset: Boolean,
+    maxWidth: [String, Number],
+    transition: {
+      type: String,
+      default: 'bottom-sheet-transition'
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        ..._VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.computed.classes.call(this),
+        'v-bottom-sheet': true,
+        'v-bottom-sheet--inset': this.inset
+      };
+    }
+  }
+}));
+
+/***/ }),
+
+/***/ 341:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
 /* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(287);
+/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(297);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
-/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(289);
+/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(299);
 // Styles
 
  // Components
@@ -2098,41 +2183,6 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 341:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
-/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(262);
- // Extensions
-
-
-/* @vue/component */
-
-/* harmony default export */ __webpack_exports__["a"] = (_VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].extend({
-  name: 'v-bottom-sheet',
-  props: {
-    inset: Boolean,
-    maxWidth: [String, Number],
-    transition: {
-      type: String,
-      default: 'bottom-sheet-transition'
-    }
-  },
-  computed: {
-    classes() {
-      return {
-        ..._VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.computed.classes.call(this),
-        'v-bottom-sheet': true,
-        'v-bottom-sheet--inset': this.inset
-      };
-    }
-  }
-}));
-
-/***/ }),
-
 /***/ 352:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2150,7 +2200,7 @@ var VCard = __webpack_require__(101);
 var components_VCard = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCheckbox/VCheckbox.js
-var VCheckbox = __webpack_require__(340);
+var VCheckbox = __webpack_require__(341);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(262);
@@ -2395,7 +2445,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(423);
+var content = __webpack_require__(425);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2407,7 +2457,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 422:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2419,7 +2469,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 423:
+/***/ 425:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2434,7 +2484,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 479:
+/***/ 483:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2463,7 +2513,7 @@ var VDialog = __webpack_require__(262);
 var VDivider = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VLayout.js
-var VLayout = __webpack_require__(318);
+var VLayout = __webpack_require__(319);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
@@ -2631,13 +2681,13 @@ var common = __webpack_require__(17);
 var CurrencyForm = __webpack_require__(352);
 
 // EXTERNAL MODULE: ./components/OrderDetailPos.vue + 4 modules
-var OrderDetailPos = __webpack_require__(323);
+var OrderDetailPos = __webpack_require__(320);
 
 // EXTERNAL MODULE: ./components/OrderDetailPosCRUD.vue + 4 modules
-var OrderDetailPosCRUD = __webpack_require__(311);
+var OrderDetailPosCRUD = __webpack_require__(308);
 
 // EXTERNAL MODULE: ./components/orderSumaryCardPos.vue + 4 modules
-var orderSumaryCardPos = __webpack_require__(312);
+var orderSumaryCardPos = __webpack_require__(307);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/currency/index.vue?vue&type=script&lang=js&
 
@@ -2741,7 +2791,7 @@ var componentNormalizer = __webpack_require__(9);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(422)
+  var style0 = __webpack_require__(424)
 if (style0.__inject__) style0.__inject__(context)
 
 }

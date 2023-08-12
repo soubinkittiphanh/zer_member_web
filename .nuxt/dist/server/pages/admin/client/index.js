@@ -1,4 +1,4 @@
-exports.ids = [57,12];
+exports.ids = [59,12];
 exports.modules = {
 
 /***/ 282:
@@ -61,13 +61,13 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 287:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(288);
+var content = __webpack_require__(298);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -75,7 +75,7 @@ __webpack_require__(5).default("ae7a972c", content, true)
 
 /***/ }),
 
-/***/ 288:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -90,7 +90,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 289:
+/***/ 299:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -278,11 +278,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(287);
+/* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(297);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(326);
 /* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(289);
+/* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(299);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
 /* harmony import */ var _directives_touch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(113);
 /* harmony import */ var _transitions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36);
@@ -779,7 +779,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 477:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -813,7 +813,7 @@ var VRow = __webpack_require__(272);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=template&id=24e78629&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=template&id=6685ec68&
 
 
 
@@ -824,7 +824,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var clientvue_type_template_id_24e78629_render = function render() {
+var clientvue_type_template_id_6685ec68_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -907,7 +907,7 @@ var clientvue_type_template_id_24e78629_render = function render() {
       "click": _vm.createItem
     }
   }, [_c('span', {
-    staticClass: "mdi mdi-account-box"
+    staticClass: "mdi mdi-plus-box"
   }), _vm._v("\n            ເພີ່ມລູກຄ້າ\n          ")])], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     staticClass: "text-right",
     attrs: {
@@ -978,7 +978,7 @@ var clientvue_type_template_id_24e78629_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=24e78629&
+// CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=6685ec68&
 
 // EXTERNAL MODULE: ./components/customer/CustomerForm.vue + 4 modules
 var CustomerForm = __webpack_require__(366);
@@ -1084,7 +1084,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_clientvue_type_script_lang_js_,
-  clientvue_type_template_id_24e78629_render,
+  clientvue_type_template_id_6685ec68_render,
   staticRenderFns,
   false,
   null,

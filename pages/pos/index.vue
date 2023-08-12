@@ -6,8 +6,8 @@
                     <div class="row">
                         <div v-for="(item, index) in filterProduct" :key="index"
                             class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
-                            <product-card-pos :product="item" :productName="item.pro_name"
-                                :imagePath="item.img_name" :stock="item.card_count"></product-card-pos>
+                            <product-card-pos :product="item" :productName="item.pro_name" :imagePath="item.img_name"
+                                :stock="item.card_count"></product-card-pos>
                         </div>
                     </div>
                 </v-col>
@@ -28,6 +28,8 @@ export default {
     middleware: 'auths',
     data() {
         return {
+            barcode: '',
+            timer: null,
             tab: null,
             searh: '',
             productSelectedList: [],
@@ -36,7 +38,8 @@ export default {
             categoryList: [],
             pageLine: 30,
             search: '',
-            paymentList: []
+            paymentList: [],
+            productSelectedFromBarcode:null
         }
     },
     async mounted() {
@@ -44,6 +47,10 @@ export default {
         await this.loadCategory()
         await this.loadPayment()
 
+        window.addEventListener('keydown', this.handleKeyDown);
+    },
+    beforeDestroy() {
+        window.removeEventListener('keydown', this.handleKeyDown);
     },
     computed: {
         ...mapGetters({
@@ -74,6 +81,34 @@ export default {
         // }
     },
     methods: {
+        ...mapActions(['addProduct']),
+        findProductFromBarcode(barcode){
+            this.productSelectedFromBarcode = this.productList.find(el => el.barCode==barcode)
+            if(this.productSelectedFromBarcode){
+                this.addProduct(this.productSelectedFromBarcode)
+                this.productSelectedFromBarcode = null;
+            }
+        },
+        handleKeyDown(event) {
+            if (this.timer) {
+                clearInterval(this.timer)
+            }
+            if (event.key == 'Enter') {
+                if (this.barcode) {
+                    // ************ Find product from this barcode and add to cart ************ //
+                    console.log("Do something we got barcode");
+                    this.findProductFromBarcode(this.barcode)
+                }
+                this.barcode = '';
+                return
+            }
+            if (event.key != 'Shift') {
+                this.barcode += event.key;
+            }
+            this.timer = setInterval(() => this.barcode = '', 20);
+
+            console.log(`Key is pressing ${event.key}`);
+        },
         async fetchData() {
             this.isloading = true
             this.productList = []

@@ -54,6 +54,11 @@ export default {
         },
         {
           icon: 'mdi-view-list',
+          title: 'Transfer',
+          to: '/admin/transfer',
+        },
+        {
+          icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
         },

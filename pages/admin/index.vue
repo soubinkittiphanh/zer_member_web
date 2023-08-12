@@ -125,12 +125,12 @@
         <div class="mb-1">
             <v-row>
                 <v-col cols="4" md="6" sm="12" xl="6">
-                    <v-card>
+                    <v-card height="400">
                         <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart>
                     </v-card>
                 </v-col>
                 <v-col cols="8" md="6" sm="12" xl="6" v-if="dailyState">
-                    <v-card>
+                    <v-card height="400">
                         <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
                     </v-card>
                 </v-col>
@@ -440,7 +440,8 @@ export default {
         async loadTopSale() {
             this.isloading = true
             await this.$axios
-                .get('api/topsale/?top=' + 5)
+                // .get('api/topsale/?top=' + 5) // For delivery sale system
+                .get('api/topsaleMinimart/?top=' + 5)
                 .then((res) => {
                     console.log("Data ", res.data[0]);
                     res.data.map((el) => {

@@ -73,11 +73,19 @@ export default {
       password: '',
       errorMessage: '',
       isLoading: false,
+      barcode: '',
+      timer: null,
       login: {
         mem_id: '',
         mem_pwd: ''
       }
     }
+  },
+  mounted() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeyDown);
   },
   components: {
     Notification,
@@ -100,6 +108,24 @@ export default {
     //   }
     // },
     ...mapActions(['initProduct', 'initPayment', 'initCurrency', 'initClient', 'initUnit']),
+    handleKeyDown(event) {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      if (event.key == 'Enter') {
+        if (this.barcode) {
+          console.log("Do something we got barcode: "+this.barcode);
+        }
+        this.barcode = '';
+        return
+      }
+      if (event.key != 'Shift') {
+        this.barcode += event.key;
+      }
+      this.timer = setInterval(() => this.barcode = '', 20);
+
+      console.log(`Key is pressing ${event.key}`);
+    },
     async userLogin() {
       try {
         this.isLoading = true
@@ -112,11 +138,11 @@ export default {
           return
         }
         if (response.data.accessToken) {
-         await this.loadProduct()
-         await    this.loadPayment()
-         await  this.loadCustomer()
-         await  this.loadUnit()
-         await   this.loadCurrency()
+          await this.loadProduct()
+          await this.loadPayment()
+          await this.loadCustomer()
+          await this.loadUnit()
+          await this.loadCurrency()
           this.$router.push('/admin')
         } else {
           console.log('No token')

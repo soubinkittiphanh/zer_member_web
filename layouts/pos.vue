@@ -388,11 +388,11 @@ export default {
             await this.$axios
                 .post('/api/quotation/create', this.saleHeader)
                 .then((res) => {
-                    this.lastTransactionSaleHeaderId = res.data.split('-')[1]
-                    localStorage.setItem('customer', JSON.stringify(this.currenctCustomer));
-                    localStorage.setItem('product', JSON.stringify(this.productCart));
-                    localStorage.setItem('quotationId', this.lastTransactionSaleHeaderId);
-                    window.open('/admin/quotation', '_blank');
+                    this.lastTransactionSaleHeaderId = res.data.split('-')[1].toString().trim()
+                    // localStorage.setItem('customer', JSON.stringify(this.currenctCustomer));
+                    // localStorage.setItem('product', JSON.stringify(this.productCart));
+                    // localStorage.setItem('quotationId', this.lastTransactionSaleHeaderId);
+                    window.open(`/admin/PDFQuotation/${this.lastTransactionSaleHeaderId}`, '_blank');
                     // swalSuccess(this.$swal, "Succeed", res.data)
                 })
                 .catch((er) => {

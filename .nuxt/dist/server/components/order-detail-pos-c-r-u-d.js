@@ -151,7 +151,36 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 311:
+/***/ 305:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(306);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+__webpack_require__(5).default("73bba828", content, true)
+
+/***/ }),
+
+/***/ 306:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".bottom-sheet-transition-enter,.bottom-sheet-transition-leave-to{transform:translateY(100%)}.v-bottom-sheet.v-dialog{align-self:flex-end;border-radius:0;flex:0 1 auto;margin:0;overflow:visible}.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:70%}@media only screen and (max-width:599.98px){.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:none}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -162,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 var VAutocomplete = __webpack_require__(275);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBottomSheet/VBottomSheet.js
-var VBottomSheet = __webpack_require__(341);
+var VBottomSheet = __webpack_require__(335);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
 var VBtn = __webpack_require__(55);
@@ -200,7 +229,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(301);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=efabe718&
 
 
 
@@ -218,7 +247,7 @@ var VTextarea = __webpack_require__(301);
 
 
 
-var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
+var OrderDetailPosCRUDvue_type_template_id_efabe718_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -299,7 +328,7 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
       "rounded": ""
     },
     on: {
-      "click": _vm.post
+      "click": _vm.postToInvoice
     }
   }, [_c('span', {
     staticClass: "mdi mdi-transfer-right"
@@ -376,6 +405,26 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
       },
       expression: "transaction.discount"
     }
+  })], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+    attrs: {
+      "cols": "12"
+    }
+  }, [_c(VTextField["a" /* default */], {
+    directives: [{
+      name: "comma-thousand",
+      rawName: "v-comma-thousand"
+    }],
+    attrs: {
+      "label": "Q-ReferenceNo",
+      "disabled": ""
+    },
+    model: {
+      value: _vm.transaction.referenceNo,
+      callback: function ($$v) {
+        _vm.$set(_vm.transaction, "referenceNo", $$v);
+      },
+      expression: "transaction.referenceNo"
+    }
   })], 1)], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     attrs: {
       "cols": "4"
@@ -423,7 +472,7 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
     attrs: {
       "cols": "12"
     }
-  }, [_vm._v("ຍອດລວມທັງໝົດ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
+  }, [_vm._v("ອັດຕາແລກປ່ຽນ: " + _vm._s(_vm.getFormatNum(_vm.transaction.exchangeRate)))])], 1)], 1), _vm._v(" "), _c(VCol["a" /* default */], {
     staticStyle: {
       "text-align": "end"
     },
@@ -646,7 +695,7 @@ var OrderDetailPosCRUDvue_type_template_id_3c2ed934_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=3c2ed934&
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=efabe718&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
 var comma_thousand = __webpack_require__(286);
@@ -913,18 +962,48 @@ var common = __webpack_require__(17);
       this.$emit('close-dialog');
     },
     async postToInvoice() {
-      if (this.isloading) return;
+      if (this.isloading || !this.validateHeader()) return;
       this.isloading = true;
-      // TODO: How to split data between cod order[not yet paid] and all order
-      const date = {
-        startDate: this.date,
-        endDate: this.date2
-      };
-      await this.$axios.put(`api/sale/postToInvoice/${this.id}`).then(res => {
+      this.errorLineNumber = null;
+      const draftInvoiceLine = [];
+      for (const iterator of this.transaction.lines) {
+        this.errorLineNumber = this.transaction.lines.indexOf(iterator);
+        if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
+          this.sheet = true;
+          this.isloading = false;
+          return;
+        }
+        // iterator.id = null
+        iterator.discount = parseInt(Object(common["i" /* replaceAll */])(iterator.discount, ',', ''));
+        iterator.quantity = parseInt(Object(common["i" /* replaceAll */])(iterator.quantity, ',', ''));
+        iterator.unitRate = parseInt(Object(common["i" /* replaceAll */])(iterator.unitRate, ',', ''));
+        draftInvoiceLine.push(iterator);
+        // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
+      }
+      // Remove Line id for insert as new in Invoice //
+      for (const iterator of draftInvoiceLine) {
+        iterator.id = null;
+      }
+      console.log("******** No error found process posting ********");
+      this.errorLineNumber = null;
+      this.transaction.userId = this.user.id;
+      this.transaction.total = this.grandTotal;
+      this.transaction.referenceNo = this.headerId;
+      this.transaction.lines = draftInvoiceLine;
+      console.log(`Amount total ${this.transaction.total}`);
+      // ********** If header has data, that means we go for update API ********** //
+      await this.$axios.post(`api/sale/create`, this.transaction).then(res => {
         this.$emit('reload');
         Object(common["k" /* swalSuccess */])(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ');
       }).catch(er => {
-        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Could no load data ' + er.Error);
+        console.error(er);
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', er.response.data);
+        const outOfStockProductId = er.response.data.split("#")[1];
+        if (outOfStockProductId != undefined) {
+          this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`;
+          this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId));
+          this.sheet = true;
+        }
         console.log('Error ===>: ' + er);
       });
       this.isloading = false;
@@ -1103,7 +1182,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_OrderDetailPosCRUDvue_type_script_lang_js_,
-  OrderDetailPosCRUDvue_type_template_id_3c2ed934_render,
+  OrderDetailPosCRUDvue_type_template_id_efabe718_render,
   staticRenderFns,
   false,
   injectStyles,
@@ -1120,40 +1199,11 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 315:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(316);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-__webpack_require__(5).default("73bba828", content, true)
-
-/***/ }),
-
-/***/ 316:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".bottom-sheet-transition-enter,.bottom-sheet-transition-leave-to{transform:translateY(100%)}.v-bottom-sheet.v-dialog{align-self:flex-end;border-radius:0;flex:0 1 auto;margin:0;overflow:visible}.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:70%}@media only screen and (max-width:599.98px){.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{max-width:none}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 341:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
+/* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(305);
 /* harmony import */ var _src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VBottomSheet_VBottomSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VDialog_VDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(262);
  // Extensions

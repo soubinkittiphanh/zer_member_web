@@ -269,10 +269,10 @@ export default {
           sortable: false,
         },
       ],
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
-      // date:getFirstDayOfMonth(),
+      // date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      //   .toISOString()
+      //   .substr(0, 10),
+      date: getFirstDayOfMonth(),
       date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -309,7 +309,7 @@ export default {
   },
   computed: {
     activeOrderHeaderList() {
-      return this.orderHeaderList.filter(el => el['isActive'] == true)
+      return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
     },
     computedDateFormatted() {
       return this.formatDate(this.date)

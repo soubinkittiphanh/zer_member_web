@@ -198,6 +198,12 @@
     "chunkName": "pages/admin/rider/index"
   },
   {
+    "name": "admin-transfer",
+    "path": "/admin/transfer",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/transfer/index.vue",
+    "chunkName": "pages/admin/transfer/index"
+  },
+  {
     "name": "admin-txn",
     "path": "/admin/txn",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/txn/index.vue",

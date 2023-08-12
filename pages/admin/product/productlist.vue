@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h1>PRODUCT LIST</h1>
+    <h1>PRODUCT LIST {{ barcode }}</h1>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -62,12 +62,12 @@
             </v-icon>
           </v-btn> -->
 
-          <v-btn color="primary" text @click="editItem(item) 
-            wallet = true
-              ">
+          <v-btn color="primary" text @click="editItem(item)
+          wallet = true
+            ">
 
-              <i class="fa fa-pencil-square-o"></i>
-            </v-btn>
+            <i class="fa fa-pencil-square-o"></i>
+          </v-btn>
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
 
@@ -75,11 +75,11 @@
             <i class="fas fa-cart-plus"></i>
 
           </v-btn> -->
-          <v-btn color="primary" text @click="triggerCardForm(item) 
-            wallet = true
-              ">
-              <i class="fa fa-cart-plus"></i>
-            </v-btn>
+          <v-btn color="primary" text @click="triggerCardForm(item)
+          wallet = true
+            ">
+            <i class="fa fa-cart-plus"></i>
+          </v-btn>
 
         </template>
         <template v-slot:[`item.functionStockView`]="{ item }">
@@ -87,12 +87,12 @@
             <i class="fas fa-eye"></i>
           </v-btn> -->
 
-          <v-btn color="primary" text @click="editStock(item) 
-            wallet = true
-              ">
+          <v-btn color="primary" text @click="editStock(item)
+          wallet = true
+            ">
 
-              <i class="fa fa-eye"></i>
-            </v-btn>
+            <i class="fa fa-eye"></i>
+          </v-btn>
         </template>
         <template v-slot:[`item.pro_cost_price`]="{ item }">
           {{ formatNumber(item.pro_cost_price) }}
@@ -156,6 +156,8 @@ export default {
       editProductForm: false,
       selectedProductId: null,
       stockFormKey: 1,
+      barcode: '',
+      timer: null,
       headers: [
         {
           text: 'key',
@@ -209,9 +211,31 @@ export default {
   async mounted() {
     await this.fetchData()
     await this.loadCardCategory()
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeyDown);
   },
 
   methods: {
+    handleKeyDown(event) {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      if (event.key == 'Enter') {
+        if (this.barcode) {
+          console.log("Do something we got barcode");
+        }
+        this.barcode = '';
+        return
+      }
+      if (event.key != 'Shift') {
+        this.barcode += event.key;
+      }
+      this.timer = setInterval(() => this.barcode = '', 20);
+
+      console.log(`Key is pressing ${event.key}`);
+    },
     formatNumber(value) {
       return getFormatNum(value)
     },

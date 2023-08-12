@@ -24,7 +24,7 @@
                     <v-col cols="6">
                     </v-col>
                     <v-col cols="6" style="text-align: right;">
-                        <v-btn v-if="isQuotation" size="large" variant="outlined" @click="post" class="primary" rounded>
+                        <v-btn v-if="isQuotation" size="large" variant="outlined" @click="postToInvoice" class="primary" rounded>
                             <span class="mdi mdi-transfer-right"></span>Make to invoice
                         </v-btn>
                         <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
@@ -58,12 +58,15 @@
                                             <v-text-field v-model="transaction.discount" label="ສ່ວນຫລຸດ*" required
                                                 v-comma-thousand></v-text-field>
                                         </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="transaction.referenceNo" label="Q-ReferenceNo" disabled
+                                                v-comma-thousand></v-text-field>
+                                        </v-col>
 
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4">
                                     <v-row>
-
                                         <v-col cols="12">
                                             <v-autocomplete item-text="company" item-value="id" :items="clientList"
                                                 label="ລູກຄ້າ*" v-model="transaction.clientId"></v-autocomplete>
@@ -76,7 +79,7 @@
                                         <!-- <v-col cols="12">
                                             <v-text-field v-model="transaction.exchangeRate" disabled label="ອັດຕາແລກປ່ຽນ*"></v-text-field>
                                         </v-col> -->
-                                        <v-col cols="12">ຍອດລວມທັງໝົດ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
+                                        <v-col cols="12">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" style="text-align: end;">
@@ -218,8 +221,8 @@ export default {
 
     },
     methods: {
-        quotationPreview(){
-            const path = this.isQuotation?'PDFQuotation':'PDFInvoice'
+        quotationPreview() {
+            const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice'
             window.open(`/admin/${path}/${this.headerId}`, '_blank');
         },
         handleKeyDown(event) {
@@ -343,7 +346,7 @@ export default {
                     this.sheet = true
                     return
                 }
-                
+
                 iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
             }
             console.log("******** No error found process posting ********");
@@ -423,23 +426,55 @@ export default {
             this.$emit('close-dialog')
         },
         async postToInvoice() {
-            if (this.isloading) return;
+            if (this.isloading || !this.validateHeader()) return;
             this.isloading = true
-            // TODO: How to split data between cod order[not yet paid] and all order
-            const date = {
-                startDate: this.date,
-                endDate: this.date2
+            this.errorLineNumber = null
+            const draftInvoiceLine = []
+            for (const iterator of this.transaction.lines) {
+                this.errorLineNumber = this.transaction.lines.indexOf(iterator)
+                if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
+                    this.sheet = true
+                    this.isloading = false
+                    return
+                }
+                // iterator.id = null
+                iterator.discount = parseInt(replaceAll(iterator.discount, ',', ''))
+                iterator.quantity = parseInt(replaceAll(iterator.quantity, ',', ''))
+                iterator.unitRate = parseInt(replaceAll(iterator.unitRate, ',', ''))
+                draftInvoiceLine.push(iterator)
+                // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
             }
+            // Remove Line id for insert as new in Invoice //
+            for (const iterator of draftInvoiceLine) {
+                iterator.id = null
+            }
+            console.log("******** No error found process posting ********");
+            this.errorLineNumber = null
+            this.transaction.userId = this.user.id
+            this.transaction.total = this.grandTotal
+            this.transaction.referenceNo = this.headerId
+            this.transaction.lines = draftInvoiceLine
+            console.log(`Amount total ${this.transaction.total}`);
+            // ********** If header has data, that means we go for update API ********** //
             await this.$axios
-                .put(`api/sale/postToInvoice/${this.id}`)
+                .post(`api/sale/create`, this.transaction)
                 .then((res) => {
                     this.$emit('reload')
                     swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                 })
                 .catch((er) => {
-                    swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
+                    console.error(er)
+                    swalError2(this.$swal, 'Error', er.response.data)
+                    const outOfStockProductId = er.response.data.split("#")[1]
+                    if (outOfStockProductId != undefined) {
+                        this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`
+                        this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId))
+                        this.sheet = true
+                    }
                     console.log('Error ===>: ' + er)
                 })
+
+
             this.isloading = false
         },
         async postTransaction() {
@@ -561,7 +596,7 @@ export default {
             errorLineNumber: null,
             isloading: false,
             transaction: {
-                exchangeRate:1,
+                exchangeRate: 1,
                 lines: []
             },
             headers: [
