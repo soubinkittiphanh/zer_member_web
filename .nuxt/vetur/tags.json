@@ -89,11 +89,23 @@
   "OrderSumaryCardPos": {
     "description": "Auto imported from components/orderSumaryCardPos.vue"
   },
+  "CustomerForm": {
+    "description": "Auto imported from components/customer/CustomerForm.vue"
+  },
+  "CustomerList": {
+    "description": "Auto imported from components/customer/CustomerList.vue"
+  },
   "CardCampaignCard": {
     "description": "Auto imported from components/card/campaignCard.vue"
   },
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
+  },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
+  "DialogsBottomAlert": {
+    "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
@@ -104,20 +116,8 @@
   "AccountingGeneralLedgerForm": {
     "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
-  },
-  "CustomerForm": {
-    "description": "Auto imported from components/customer/CustomerForm.vue"
-  },
-  "CustomerList": {
-    "description": "Auto imported from components/customer/CustomerList.vue"
-  },
-  "DialogsBottomAlert": {
-    "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
   "DashboardCardGrouping": {
     "description": "Auto imported from components/dashboard/CardGrouping.vue"
@@ -140,9 +140,6 @@
   "PosCateogoryList": {
     "description": "Auto imported from components/pos/CateogoryList.vue"
   },
-  "Quotation": {
-    "description": "Auto imported from components/quotation/index.vue"
-  },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"
   },
@@ -154,5 +151,8 @@
   },
   "ProductFormCreate": {
     "description": "Auto imported from components/product/ProductFormCreate.vue"
+  },
+  "Quotation": {
+    "description": "Auto imported from components/quotation/index.vue"
   }
 }

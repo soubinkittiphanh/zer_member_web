@@ -86,11 +86,6 @@
                   <td colspan="6">ບໍ່ມີຂໍ້ມູນ</td>
                 </tr>
               </div>
-              <!-- <tr class="page-break">
-
-                <td style="text-align: right; font-weight: bold;" colspan="3">ລາຄາລວມ </td>
-                <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total) }}</td>
-              </tr> -->
               <tr v-for="item in currencyList" :key="item.id" class="page-break">
 
                 <td style="text-align: right; font-weight: bold;" colspan="3">{{ item.code }} </td>
