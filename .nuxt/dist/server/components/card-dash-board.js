@@ -21,7 +21,7 @@ var VIcon = __webpack_require__(47);
 var VImg = __webpack_require__(71);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VList/VListItem.js
-var VListItem = __webpack_require__(54);
+var VListItem = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VList/VListItemAvatar.js
 var VListItemAvatar = __webpack_require__(94);

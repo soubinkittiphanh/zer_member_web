@@ -21,7 +21,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 528:
+/***/ 527:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
 var VAutocomplete = __webpack_require__(275);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
-var VBtn = __webpack_require__(55);
+var VBtn = __webpack_require__(56);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
 var VCard = __webpack_require__(101);

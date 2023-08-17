@@ -8,17 +8,14 @@
           </div>
         </div>
         <h1 style="text-align: center;">CHITHANH</h1>
-        <p class="text-color" style="font-size: 11pt; font-weight: bold; text-align: center">
-          Company addres here ...
-        </p>
         <p class="text-color" style="font-size: 21pt; font-weight: bold; text-align: center">
-          ໃບໂອນເຄື່ອງ / Stock transfer
+          Receipt {{ id }}
         </p>
         <v-divider></v-divider>
         <div v-if="header">
           <v-row>
             <v-col cols="6">
-              <table class="table-layout">
+              <!-- <table class="table-layout">
                 <tbody>
                   <tr style="white-space: nowrap">
                     <td> From location: <h2>
@@ -33,18 +30,13 @@
                       </h2>
                     </td>
                   </tr>
-                  <!-- <tr style="white-space: nowrap">
-                    <td> Company: {{ header.client.company }}</td>
-                  </tr>
-                  <tr style="white-space: nowrap">
-                    <td> ເບີໂທ: {{ header.client.telephone }}</td>
-                  </tr> -->
+    
                 </tbody>
-              </table>
+              </table> -->
             </v-col>
             <v-col cols="6" align-self="end">
 
-              <table class="table-layout">
+              <!-- <table class="table-layout">
                 <tbody style="text-align: right;">
                   <tr style="white-space: nowrap">
                     <td> Transfer No: {{ header.id }}</td>
@@ -56,7 +48,7 @@
                     <td> Prepare By: {{ header.user.cus_name }}</td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
             </v-col>
           </v-row>
         </div>
@@ -72,11 +64,8 @@
                 <th style="width: 40px">#</th>
                 <th style="width: 180px">Description</th>
                 <th style="width: 80px">Qty</th>
-                <th style="width: 80px">Unit</th>
-                <th style="width: 80px">Rate</th>
-                <th style="width: 100px">Price</th>
-                <!-- <th style="width: 100px">Discount</th> -->
-                <th style="width: 70px">Amount</th>
+                <!-- <th style="width: 80px">Unit</th> -->
+                <th style="width: 100px">total</th>
               </tr>
             </thead>
             <tbody>
@@ -84,10 +73,10 @@
                 <tr v-for="(line, i) in header.lines" :key="line.id" class="page-break">
                   <td class="text-center">{{ ++i }}</td>
                   <td>{{ line.product['pro_name'] }}</td>
-                  <td style="text-align: right;">{{ line.quantity }}</td>
-                  <td style="text-align: right;">{{ line.unit.name }}</td>
-                  <td style="text-align: right;">{{ line.unit.unitRate }}</td>
-                  <td style="text-align: right;">{{ formatNumber(line.price) }}</td>
+                  <td style="text-align: right;">{{ line.quantity }} X {{ formatNumber(line.price) }}</td>
+                  <!-- <td style="text-align: right;">{{ line.unit.name }}</td> -->
+                  <!-- <td style="text-align: right;">{{ line.unit.unitRate }}</td> -->
+                  <!-- <td style="text-align: right;">{{ formatNumber(line.price) }}</td> -->
                   <!-- <td style="text-align: right;">{{ formatNumber(line.discount) }}</td> -->
                   <td style="text-align: right;">{{ formatNumber(line.total) }}</td>
                 </tr>
@@ -97,10 +86,15 @@
                   <td colspan="6">ບໍ່ມີຂໍ້ມູນ</td>
                 </tr>
               </div>
-              <tr class="page-break">
+              <!-- <tr class="page-break">
 
-                <td style="text-align: right; font-weight: bold;" colspan="6">ລາຄາລວມ </td>
+                <td style="text-align: right; font-weight: bold;" colspan="3">ລາຄາລວມ </td>
                 <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total) }}</td>
+              </tr> -->
+              <tr v-for="item in currencyList" :key="item.id" class="page-break">
+
+                <td style="text-align: right; font-weight: bold;" colspan="3">{{ item.code }} </td>
+                <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total/item.rate) }}</td>
               </tr>
             </tbody>
           </table>
@@ -111,13 +105,15 @@
           <v-row no-gutters>
             <v-col cols="5" style="" align-self="end">
               <v-card class="mx-auto ml-0" height="134" width="100%" outlined>
-                Stock keeper signature:
+                ເຊັນລູກຄ້າ:
               </v-card>
             </v-col>
             <v-col cols="2"></v-col>
             <v-col cols="5">
               <v-card class="mx-auto" height="134" width="100%" outlined>
                 Receiver:
+                <h3 v-if="header">Payment: {{ header.payment.payment_name }}</h3>
+                <h3 v-for="item in currencyList" :key="item.id">{{ item.code }}:{{ formatNumber(item.rate) }}</h3>
               </v-card>
             </v-col>
           </v-row>
@@ -130,7 +126,7 @@
 <script>
 import { mapGetters } from 'vuex'
 // import { _getMonthDiff, _calculateAge } from '@/helper/Utils'
-import { getFormatNum, jsDateToMysqlDate } from '~/common'
+import { getFormatNum, jsDateToMysqlDate,swalSuccess,swalError2 } from '~/common'
 export default {
   name: 'Quotation',
   layout: 'login',
@@ -141,7 +137,7 @@ export default {
       id: null,
       header: null,
       companyLogo: require('~/assets/image/company_logo.jpeg'),
-
+      currencyList:null,
     }
   },
 
@@ -156,16 +152,19 @@ export default {
     if (this.id) {
       const empId = Number.isInteger(this.id) ? this.id : null
       await this.$axios
-        .get(`api/transfer/find/${this.id}`)
+        .get(`api/sale/find/${this.id}`)
         .then((res) => {
           console.log(`Data is loading`);
           this.header = res.data
+          console.log(`Data comes ===> ${this.header.payment.payment_name}`);
+
         })
         .catch((er) => {
           this.message = er
           console.log('Error: ' + er)
         })
       this.isloading = false
+      await this.loadCurrency()
     }
   },
 
@@ -173,7 +172,23 @@ export default {
     formatNumber(val) {
       return getFormatNum(val)
     },
-
+    async loadCurrency() {
+      this.isloading = true;
+      this.currencyList = []
+      console.log("Loading currency ===>");
+      await this.$axios
+        .get('/api/currency/find')
+        .then((res) => {
+          for (const iterator of res.data) {
+            this.currencyList.push(iterator);
+          }
+        })
+        .catch((er) => {
+          console.error('Error: ' + er)
+          // swalError2(this.$swal, "Error", er)
+        })
+      this.isloading = false;
+    },
   }
 
 }
@@ -218,6 +233,8 @@ export default {
   body,
   .page {
     margin: 0;
+    width: 80mm;
+    height: auto;
   }
 
   table {

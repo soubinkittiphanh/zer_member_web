@@ -113,7 +113,7 @@ var staticRenderFns = [];
   },
   data() {
     return {
-      imageSrc: __webpack_require__(138)
+      imageSrc: __webpack_require__(137)
     };
   },
   methods: {

@@ -21,6 +21,7 @@ import nuxt_plugin_jspdfinvoice_24aa2464 from 'nuxt_plugin_jspdfinvoice_24aa2464
 import nuxt_plugin_vuesweetalert2_1def2d6e from 'nuxt_plugin_vuesweetalert2_1def2d6e' // Source: ../plugins/vue-sweetalert2 (mode: 'client')
 import nuxt_plugin_apexchart_56afe430 from 'nuxt_plugin_apexchart_56afe430' // Source: ../plugins/apex-chart.js (mode: 'client')
 import nuxt_plugin_fontawesome_b8db358e from 'nuxt_plugin_fontawesome_b8db358e' // Source: ../plugins/fontawesome.js (mode: 'client')
+import nuxt_plugin_html2canvas_557cc08e from 'nuxt_plugin_html2canvas_557cc08e' // Source: ../plugins/html2canvas.js (mode: 'client')
 import nuxt_plugin_auth_83e7f482 from 'nuxt_plugin_auth_83e7f482' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -249,6 +250,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_fontawesome_b8db358e === 'function') {
     await nuxt_plugin_fontawesome_b8db358e(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_html2canvas_557cc08e === 'function') {
+    await nuxt_plugin_html2canvas_557cc08e(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_83e7f482 === 'function') {

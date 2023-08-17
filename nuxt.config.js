@@ -48,6 +48,7 @@ export default {
       mode: 'client',
     },
     { src: '~/plugins/fontawesome.js', ssr: false },
+    { src: '~/plugins/html2canvas.js', mode: 'client' }
     // { src: '~/plugins/vuelidate.js', mode: 'client' }
     // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],

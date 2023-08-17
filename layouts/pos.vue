@@ -49,7 +49,7 @@
         <v-navigation-drawer app right clipped width="450" fixed>
             <div style=" height: 100%; position: relative;">
                 <!-- <v-card> -->
-                <div style="width: 100%;">
+                <div style="width: 100%;" ref="myElement">
                     <div>
                         <v-row align="center" class="pa-2">
                             <v-col cols="2">
@@ -155,7 +155,7 @@
                                 text-color="white">
                                 {{ item.code }}{{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <v-btn outlined depressed @click="printReceipt">
+                            <v-btn outlined depressed @click="generatePrintView">
                                 Ticket
                             </v-btn>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
@@ -212,10 +212,7 @@ import Quotation from '~/components/quotation'
 import html2canvas from 'html2canvas'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 import { getFormatNum, jsDateToMysqlDate } from '~/common'
-// import { jsPDF } from 'jspdf-invoice-template'
 import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/common/index'
-// import jsPDFInvoiceTemplate, { OutputType, jsPDF } from 'jspdf-invoice-template'
-// import { jsPDF } from '~/plugins/jspdf-invoice';
 export default {
     components: { CustomerList, Quotation },
     name: 'DefaultLayout',
@@ -368,6 +365,65 @@ export default {
         }
     },
     methods: {
+        generatePrintView() {
+            // html2canvas(document.querySelector('#body-print')).then((canvas) => {
+            //   const ctx = canvas.getContext('2d')
+            //   ctx.font = '30px NotoSans, sans-serif'
+            //   ctx.webkitImageSmoothingEnabled = true
+            //   ctx.mozImageSmoothingEnabled = true
+            //   ctx.imageSmoothingEnabled = true
+            //   const dataURL = canvas.toDataURL()
+
+            const windowContent = `
+          <!DOCTYPE html>
+          <html>
+          <head
+          <title></title>
+          </head>
+          <body>
+            <h1> HEADER </h1>
+            <div style="font-size: 14px;">Item 1 - $10.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+          </body>
+          </html>
+        `
+
+            const printWin = window.open(
+                '',
+                '',
+                'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+            )
+            printWin.document.open()
+            printWin.document.write(windowContent)
+
+            setTimeout(() => {
+                printWin.print()
+                printWin.close()
+            }, 1000)
+        },
         printReceipt() {
             const receiptContent = `
         <div style="font-size: 16px; font-weight: bold;">Receipt</div>
@@ -408,14 +464,22 @@ export default {
           <head>
             <title>Receipt</title>
             <style>
+                body {
+                    font-size: 14px;
+                    padding: 10px;
+                    width: 80mm;
+                }
+            </style>
+            <style>
               @media print {
                 @page {
-                  size: 80mm 100mm;
+                    size: 80mm 100mm;
+                    margin: 0;
                 }
-
                 body {
-                  font-size: 14px;
-                  padding: 10px;
+                    font-size: 14px;
+                    padding: 10px;
+                    width: 80mm;
                 }
               }
             </style>
@@ -491,9 +555,11 @@ export default {
             await this.$axios
                 .post('/api/sale/create', this.saleHeader)
                 .then((res) => {
-                    this.lastTransactionSaleHeaderId = res.data.split('-')[1]
+                    this.lastTransactionSaleHeaderId = res.data.split('-')[1].trim()
                     this.newOrder()
                     swalSuccess(this.$swal, "Succeed", res.data.split('-')[0])
+                    console.log('response post completed===> '+res.data);
+                    this.previewTicket(this.lastTransactionSaleHeaderId)
                 })
                 .catch((er) => {
                     swalError2(this.$swal, "Error", er.response.data)
@@ -508,6 +574,10 @@ export default {
             console.log("selected payment ", id);
             this.addSelectedPayment(id)
             console.log("SAATE ", this.currentPayment);
+        },
+        previewTicket(saleHeaderId) {
+            const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice'
+            window.open(`/admin/PDFTicket/${saleHeaderId}`, '_blank');
         },
         async fetchCategory() {
             this.isLoading = true
@@ -592,41 +662,41 @@ export default {
             // confirmSwal(this.$swal, 'ທ່ານ ກຳລັງຈະຂື້ນບິນໃໝ່', this.clearCart)
             this.clearCart()
         },
-        generatePrintView() {
-            html2canvas(document.querySelector('#body-print')).then((canvas) => {
-                const ctx = canvas.getContext('2d')
-                ctx.font = '30px NotoSans, sans-serif'
-                ctx.webkitImageSmoothingEnabled = true
-                ctx.mozImageSmoothingEnabled = true
-                ctx.imageSmoothingEnabled = true
-                const dataURL = canvas.toDataURL()
+        // generatePrintView() {
+        //     html2canvas(document.querySelector('#body-print')).then((canvas) => {
+        //         const ctx = canvas.getContext('2d')
+        //         ctx.font = '30px NotoSans, sans-serif'
+        //         ctx.webkitImageSmoothingEnabled = true
+        //         ctx.mozImageSmoothingEnabled = true
+        //         ctx.imageSmoothingEnabled = true
+        //         const dataURL = canvas.toDataURL()
 
-                const windowContent = `
-          <!DOCTYPE html>
-          <html>
-          <head
-          <title></title>
-          </head>
-          <body>
-            <img width="100%" src="${dataURL}"/>
-          </body>
-          </html>
-        `
+        //         const windowContent = `
+        //   <!DOCTYPE html>
+        //   <html>
+        //   <head
+        //   <title></title>
+        //   </head>
+        //   <body>
+        //     <img width="100%" src="${dataURL}"/>
+        //   </body>
+        //   </html>
+        // `
 
-                const printWin = window.open(
-                    '',
-                    '',
-                    'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
-                )
-                printWin.document.open()
-                printWin.document.write(windowContent)
+        //         const printWin = window.open(
+        //             '',
+        //             '',
+        //             'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+        //         )
+        //         printWin.document.open()
+        //         printWin.document.write(windowContent)
 
-                setTimeout(() => {
-                    printWin.print()
-                    printWin.close()
-                }, 1000)
-            })
-        },
+        //         setTimeout(() => {
+        //             printWin.print()
+        //             printWin.close()
+        //         }, 1000)
+        //     })
+        // },
     }
 }
 </script>

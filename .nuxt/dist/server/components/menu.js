@@ -91,8 +91,8 @@ var staticRenderFns = [];
   },
   data() {
     return {
-      imageSvg: __webpack_require__(139),
-      imageSrc: __webpack_require__(138)
+      imageSvg: __webpack_require__(138),
+      imageSrc: __webpack_require__(137)
     };
   },
   methods: {
