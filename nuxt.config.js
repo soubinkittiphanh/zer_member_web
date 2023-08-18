@@ -1,9 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 import { hostName } from './common'
 export default {
-  // server: {
-  //   host: '0.0.0.0'
-  // },
+  server: {
+    host: '0.0.0.0'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Website',
