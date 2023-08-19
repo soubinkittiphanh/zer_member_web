@@ -3382,7 +3382,8 @@ const getMySQLDateOfLastDayOfYear = () => {
 const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   //  const baseURL = 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
-  const baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net'; //PRODUCTION JACK42 API
+  // const baseURL = 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
+  const baseURL = 'https://nodejsclusters-140806-0.cloudclusters.net'; //PRODUCTION CHITHANH API
   // const  baseURL = 'https://nodejsclusters-124154-0.cloudclusters.net' // ***UAT*** JACK42 API
   // const baseURL = 'http://localhost:8080' // ***UAT*** 
   return baseURL;
@@ -14832,27 +14833,27 @@ __webpack_require__.d(components_namespaceObject, "VuetifyLogo", function() { re
 __webpack_require__.d(components_namespaceObject, "Wallet", function() { return Wallet; });
 __webpack_require__.d(components_namespaceObject, "OrderSumaryCard", function() { return OrderSumaryCard; });
 __webpack_require__.d(components_namespaceObject, "OrderSumaryCardPos", function() { return OrderSumaryCardPos; });
+__webpack_require__.d(components_namespaceObject, "CustomerForm", function() { return CustomerForm; });
+__webpack_require__.d(components_namespaceObject, "CustomerList", function() { return components_CustomerList; });
+__webpack_require__.d(components_namespaceObject, "CardCampaignCard", function() { return CardCampaignCard; });
+__webpack_require__.d(components_namespaceObject, "CardForm", function() { return CardForm; });
+__webpack_require__.d(components_namespaceObject, "DialogsBottomAlert", function() { return DialogsBottomAlert; });
+__webpack_require__.d(components_namespaceObject, "DashboardCardGrouping", function() { return DashboardCardGrouping; });
+__webpack_require__.d(components_namespaceObject, "DashboardCardOnTop", function() { return DashboardCardOnTop; });
 __webpack_require__.d(components_namespaceObject, "AccountingApPayment", function() { return AccountingApPayment; });
 __webpack_require__.d(components_namespaceObject, "AccountingArReceivable", function() { return AccountingArReceivable; });
 __webpack_require__.d(components_namespaceObject, "AccountingGeneralLedgerForm", function() { return AccountingGeneralLedgerForm; });
 __webpack_require__.d(components_namespaceObject, "CampaignForm", function() { return CampaignForm; });
-__webpack_require__.d(components_namespaceObject, "CardCampaignCard", function() { return CardCampaignCard; });
-__webpack_require__.d(components_namespaceObject, "CardForm", function() { return CardForm; });
-__webpack_require__.d(components_namespaceObject, "CustomerForm", function() { return CustomerForm; });
-__webpack_require__.d(components_namespaceObject, "CustomerList", function() { return components_CustomerList; });
-__webpack_require__.d(components_namespaceObject, "DashboardCardGrouping", function() { return DashboardCardGrouping; });
-__webpack_require__.d(components_namespaceObject, "DashboardCardOnTop", function() { return DashboardCardOnTop; });
 __webpack_require__.d(components_namespaceObject, "Menu", function() { return Menu; });
-__webpack_require__.d(components_namespaceObject, "DialogsBottomAlert", function() { return DialogsBottomAlert; });
 __webpack_require__.d(components_namespaceObject, "MenuOverview", function() { return MenuOverview; });
 __webpack_require__.d(components_namespaceObject, "MinStockCard", function() { return MinStockCard; });
 __webpack_require__.d(components_namespaceObject, "PaymentCard", function() { return PaymentCard; });
-__webpack_require__.d(components_namespaceObject, "PoForm", function() { return PoForm; });
-__webpack_require__.d(components_namespaceObject, "PosCateogoryList", function() { return PosCateogoryList; });
 __webpack_require__.d(components_namespaceObject, "ProductItem", function() { return ProductItem; });
 __webpack_require__.d(components_namespaceObject, "ProductCardPos", function() { return ProductCardPos; });
 __webpack_require__.d(components_namespaceObject, "ProductForm", function() { return ProductForm; });
 __webpack_require__.d(components_namespaceObject, "ProductFormCreate", function() { return ProductFormCreate; });
+__webpack_require__.d(components_namespaceObject, "PoForm", function() { return PoForm; });
+__webpack_require__.d(components_namespaceObject, "PosCateogoryList", function() { return PosCateogoryList; });
 __webpack_require__.d(components_namespaceObject, "Quotation", function() { return Quotation; });
 
 // EXTERNAL MODULE: external "vue"
@@ -19163,27 +19164,27 @@ const VuetifyLogo = () => __webpack_require__.e(/* import() | components/vuetify
 const Wallet = () => __webpack_require__.e(/* import() | components/wallet */ 48).then(__webpack_require__.bind(null, 408)).then(c => wrapFunctional(c.default || c));
 const OrderSumaryCard = () => __webpack_require__.e(/* import() | components/order-sumary-card */ 31).then(__webpack_require__.bind(null, 347)).then(c => wrapFunctional(c.default || c));
 const OrderSumaryCardPos = () => __webpack_require__.e(/* import() | components/order-sumary-card-pos */ 32).then(__webpack_require__.bind(null, 308)).then(c => wrapFunctional(c.default || c));
-const AccountingApPayment = () => __webpack_require__.e(/* import() | components/accounting-ap-payment */ 1).then(__webpack_require__.bind(null, 405)).then(c => wrapFunctional(c.default || c));
-const AccountingArReceivable = () => __webpack_require__.e(/* import() | components/accounting-ar-receivable */ 2).then(__webpack_require__.bind(null, 406)).then(c => wrapFunctional(c.default || c));
-const AccountingGeneralLedgerForm = () => __webpack_require__.e(/* import() | components/accounting-general-ledger-form */ 3).then(__webpack_require__.bind(null, 527)).then(c => wrapFunctional(c.default || c));
-const CampaignForm = () => __webpack_require__.e(/* import() | components/campaign-form */ 5).then(__webpack_require__.bind(null, 365)).then(c => wrapFunctional(c.default || c));
-const CardCampaignCard = () => __webpack_require__.e(/* import() | components/card-campaign-card */ 7).then(__webpack_require__.bind(null, 402)).then(c => wrapFunctional(c.default || c));
-const CardForm = () => __webpack_require__.e(/* import() | components/card-form */ 9).then(__webpack_require__.bind(null, 355)).then(c => wrapFunctional(c.default || c));
 const CustomerForm = () => __webpack_require__.e(/* import() | components/customer-form */ 12).then(__webpack_require__.bind(null, 366)).then(c => wrapFunctional(c.default || c));
 const components_CustomerList = () => Promise.resolve(/* import() */).then(__webpack_require__.bind(null, 76)).then(c => wrapFunctional(c.default || c));
+const CardCampaignCard = () => __webpack_require__.e(/* import() | components/card-campaign-card */ 7).then(__webpack_require__.bind(null, 402)).then(c => wrapFunctional(c.default || c));
+const CardForm = () => __webpack_require__.e(/* import() | components/card-form */ 9).then(__webpack_require__.bind(null, 355)).then(c => wrapFunctional(c.default || c));
+const DialogsBottomAlert = () => __webpack_require__.e(/* import() | components/dialogs-bottom-alert */ 18).then(__webpack_require__.bind(null, 527)).then(c => wrapFunctional(c.default || c));
 const DashboardCardGrouping = () => __webpack_require__.e(/* import() | components/dashboard-card-grouping */ 13).then(__webpack_require__.bind(null, 401)).then(c => wrapFunctional(c.default || c));
 const DashboardCardOnTop = () => __webpack_require__.e(/* import() | components/dashboard-card-on-top */ 14).then(__webpack_require__.bind(null, 400)).then(c => wrapFunctional(c.default || c));
+const AccountingApPayment = () => __webpack_require__.e(/* import() | components/accounting-ap-payment */ 1).then(__webpack_require__.bind(null, 405)).then(c => wrapFunctional(c.default || c));
+const AccountingArReceivable = () => __webpack_require__.e(/* import() | components/accounting-ar-receivable */ 2).then(__webpack_require__.bind(null, 406)).then(c => wrapFunctional(c.default || c));
+const AccountingGeneralLedgerForm = () => __webpack_require__.e(/* import() | components/accounting-general-ledger-form */ 3).then(__webpack_require__.bind(null, 528)).then(c => wrapFunctional(c.default || c));
+const CampaignForm = () => __webpack_require__.e(/* import() | components/campaign-form */ 5).then(__webpack_require__.bind(null, 365)).then(c => wrapFunctional(c.default || c));
 const Menu = () => __webpack_require__.e(/* import() | components/menu */ 21).then(__webpack_require__.bind(null, 403)).then(c => wrapFunctional(c.default || c));
-const DialogsBottomAlert = () => __webpack_require__.e(/* import() | components/dialogs-bottom-alert */ 18).then(__webpack_require__.bind(null, 528)).then(c => wrapFunctional(c.default || c));
 const MenuOverview = () => __webpack_require__.e(/* import() | components/menu-overview */ 22).then(__webpack_require__.bind(null, 364)).then(c => wrapFunctional(c.default || c));
 const MinStockCard = () => __webpack_require__.e(/* import() | components/min-stock-card */ 23).then(__webpack_require__.bind(null, 363)).then(c => wrapFunctional(c.default || c));
 const PaymentCard = () => Promise.resolve(/* import() */).then(__webpack_require__.bind(null, 257)).then(c => wrapFunctional(c.default || c));
-const PoForm = () => __webpack_require__.e(/* import() | components/po-form */ 33).then(__webpack_require__.bind(null, 369)).then(c => wrapFunctional(c.default || c));
-const PosCateogoryList = () => __webpack_require__.e(/* import() | components/pos-cateogory-list */ 34).then(__webpack_require__.bind(null, 529)).then(c => wrapFunctional(c.default || c));
-const ProductItem = () => __webpack_require__.e(/* import() | components/product-item */ 39).then(__webpack_require__.bind(null, 530)).then(c => wrapFunctional(c.default || c));
+const ProductItem = () => __webpack_require__.e(/* import() | components/product-item */ 39).then(__webpack_require__.bind(null, 529)).then(c => wrapFunctional(c.default || c));
 const ProductCardPos = () => __webpack_require__.e(/* import() | components/product-card-pos */ 36).then(__webpack_require__.bind(null, 404)).then(c => wrapFunctional(c.default || c));
 const ProductForm = () => __webpack_require__.e(/* import() | components/product-form */ 37).then(__webpack_require__.bind(null, 331)).then(c => wrapFunctional(c.default || c));
 const ProductFormCreate = () => __webpack_require__.e(/* import() | components/product-form-create */ 38).then(__webpack_require__.bind(null, 330)).then(c => wrapFunctional(c.default || c));
+const PoForm = () => __webpack_require__.e(/* import() | components/po-form */ 33).then(__webpack_require__.bind(null, 369)).then(c => wrapFunctional(c.default || c));
+const PosCateogoryList = () => __webpack_require__.e(/* import() | components/pos-cateogory-list */ 34).then(__webpack_require__.bind(null, 530)).then(c => wrapFunctional(c.default || c));
 const Quotation = () => Promise.resolve(/* import() */).then(__webpack_require__.bind(null, 103)).then(c => wrapFunctional(c.default || c));
 
 // nuxt/nuxt.js#8607
@@ -19407,7 +19408,7 @@ const setupProgress = axios => {
   // runtimeConfig
   const runtimeConfig = ctx.$config && ctx.$config.axios || {};
   // baseURL
-  const baseURL =  false ? undefined : runtimeConfig.baseURL || runtimeConfig.baseUrl || process.env._AXIOS_BASE_URL_ || 'https://nodejsclusters-66380-0.cloudclusters.net';
+  const baseURL =  false ? undefined : runtimeConfig.baseURL || runtimeConfig.baseUrl || process.env._AXIOS_BASE_URL_ || 'https://nodejsclusters-140806-0.cloudclusters.net';
 
   // Create fresh objects for all default header scopes
   // Axios creates only one which is shared across SSR requests!
@@ -21538,7 +21539,7 @@ async function createApp(ssrContext, config = {}) {
   const app = {
     head: {
       "titleTemplate": "%s - Website",
-      "title": "PeeAir4",
+      "title": "CHITHANH MINIMART",
       "htmlAttrs": {
         "lang": "en"
       },

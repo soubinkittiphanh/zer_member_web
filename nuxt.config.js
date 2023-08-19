@@ -8,7 +8,8 @@ export default {
   head: {
     titleTemplate: '%s - Website',
     // title: 'Jack42',
-    title: 'PeeAir4',
+    // title: 'PeeAir4',
+    title: 'CHITHANH MINIMART',
     htmlAttrs: {
       lang: 'en'
     },
@@ -74,7 +75,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://nodejsclusters-66380-0.cloudclusters.net'// UAT API
+    // baseURL: 'https://nodejsclusters-66380-0.cloudclusters.net'// UAT API
+    baseURL: 'https://nodejsclusters-140806-0.cloudclusters.net'// PRODUCTION CHITHANH API
     // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
     // baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
     // baseURL: 'http://10.0.28.46:8080',
