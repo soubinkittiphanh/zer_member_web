@@ -280,6 +280,9 @@ export default {
         }
     },
     computed: {
+        user() {
+            return this.$auth.user || ''
+        },
         ...mapState(['productSearchKeyboard',]),
         ...mapGetters(['cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment']),
         serachModel: {
@@ -332,9 +335,7 @@ export default {
             }, 0);
             return totalPrice
         },
-        user() {
-            return this.$auth.user || ''
-        }
+
     },
     mounted() {
         this.fetchCategory()
@@ -383,6 +384,7 @@ export default {
             }
             const today = new Date()
             const bookingDate = jsDateToMysqlDate(today)
+            const bookingDateWithTime = today.toISOString
             let totalHtml = ``
             for (const iterator of this.currencyList) {
                 totalHtml += `
@@ -427,8 +429,10 @@ export default {
                 <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
             </div>
             <h1 style="text-align: center;"> ໃບຮັບເງິນ </h1>
-            <h2> ວັນທີ ${bookingDate}</h2>
+            <h2> ວັນທີ ${today.toLocaleString()}</h2>
             <h2> Ticket ${this.lastTransactionSaleHeaderId} </h2>
+            <h2> Tel 020 7777 5660 </h2>
+            <h2> ຜູ້ຂາຍ: ${this.user.cus_name}  </h2>
             <hr> </hr>
             ${txnListHtml}
             <hr> </hr>

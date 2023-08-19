@@ -107,11 +107,11 @@
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
   },
-  "Menu": {
-    "description": "Auto imported from components/menu/index.vue"
+  "CustomerForm": {
+    "description": "Auto imported from components/customer/CustomerForm.vue"
   },
-  "DialogsBottomAlert": {
-    "description": "Auto imported from components/dialogs/bottomAlert.vue"
+  "CustomerList": {
+    "description": "Auto imported from components/customer/CustomerList.vue"
   },
   "DashboardCardGrouping": {
     "description": "Auto imported from components/dashboard/CardGrouping.vue"
@@ -119,11 +119,11 @@
   "DashboardCardOnTop": {
     "description": "Auto imported from components/dashboard/CardOnTop.vue"
   },
-  "CustomerForm": {
-    "description": "Auto imported from components/customer/CustomerForm.vue"
+  "Menu": {
+    "description": "Auto imported from components/menu/index.vue"
   },
-  "CustomerList": {
-    "description": "Auto imported from components/customer/CustomerList.vue"
+  "DialogsBottomAlert": {
+    "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"
