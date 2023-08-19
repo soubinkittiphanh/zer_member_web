@@ -18,7 +18,7 @@ var components_VCard = __webpack_require__(10);
 var VChip = __webpack_require__(100);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VHover/VHover.js
-var VHover = __webpack_require__(274);
+var VHover = __webpack_require__(275);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=template&id=613caf9e&
 
@@ -91,8 +91,8 @@ var staticRenderFns = [];
   },
   data() {
     return {
-      imageSvg: __webpack_require__(138),
-      imageSrc: __webpack_require__(137)
+      imageSvg: __webpack_require__(139),
+      imageSrc: __webpack_require__(138)
     };
   },
   methods: {

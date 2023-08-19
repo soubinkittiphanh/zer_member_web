@@ -177,23 +177,6 @@
                             </div>
                         </v-col>
                     </v-row>
-                    <!-- <v-row class="ml-2" no-gutters>
-                        <v-col v-for="(item, index) in paymentList" :key="index" cols="auto" class="pa-1"> -->
-                    <!-- <v-btn v-if="item.id == currentPayment" depressed color="primary"
-                                @click="selectePaymentMethod(item.id)">
-                                {{ item.payment_code }}
-                            </v-btn>
-                            <v-btn v-else outlined depressed @click="selectePaymentMethod(item.id)">
-                                {{ item.payment_code }}
-                            </v-btn> -->
-
-                    <!-- <PaymentCard :title="item.payment_code" :icon="item.icon" :path="item.path">
-                                <template v-slot:iconSlot>
-                                    <img :src="svgIcon" height="40">
-                                </template>
-                            </PaymentCard>
-                        </v-col>
-                    </v-row> -->
                     <v-card-actions>
                         <v-btn rounded color="primary" block large @click="postTransaction">
                             <v-icon size="25" left> mdi-cash-100 </v-icon> PAY
@@ -220,6 +203,7 @@ export default {
         return {
             search: '',
             svgIcon: require('~/assets/icons/cash.svg'),
+            logoCompany: require('~/assets/image/company_logo.jpeg'),
             lastTransactionSaleHeaderId: 0,
             drawer: true,
             isloading: false,
@@ -297,7 +281,7 @@ export default {
     },
     computed: {
         ...mapState(['productSearchKeyboard',]),
-        ...mapGetters(['cartOfProduct', 'currenctSelectedCategoryId', 'currentSelectedCustomer', 'currentSelectedPayment']),
+        ...mapGetters(['cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment']),
         serachModel: {
             get() {
                 return this.stateValue;
@@ -318,6 +302,7 @@ export default {
         generateSaleLine() {
             let lines = []
             for (const iterator of this.productCart) {
+
                 lines.push(
                     {
                         quantity: iterator.qty,
@@ -366,50 +351,119 @@ export default {
     },
     methods: {
         generatePrintView() {
-            // html2canvas(document.querySelector('#body-print')).then((canvas) => {
-            //   const ctx = canvas.getContext('2d')
-            //   ctx.font = '30px NotoSans, sans-serif'
-            //   ctx.webkitImageSmoothingEnabled = true
-            //   ctx.mozImageSmoothingEnabled = true
-            //   ctx.imageSmoothingEnabled = true
-            //   const dataURL = canvas.toDataURL()
+            let txnListHtml = ``
+            for (const iterator of this.productCart) {
+                const product = this.findAllProduct.find(el => el.id == iterator.id)
+                const quantity = iterator.qty
+                const unitRate = 1
+                const price = iterator.pro_price
+                const discount = 0
+                const productId = iterator.id
+                const productKey = iterator.id
+                const unitId = 1
+                const total = iterator.qty * iterator.pro_price
+                // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
+                txnListHtml += `<div class="ticket">
+		<div class="product-name">${product.pro_name} </div>
+		<div class="price">x${quantity} ${this.formatNumber(total)}</div>
+	</div>`
+                // lines.push(
+                //     {
+                //         quantity: iterator.qty,
+                //         unitRate: 1,
+                //         price: iterator.pro_price,
+                //         discount: 0,
+                //         productId: iterator.id,
+                //         productKey: iterator.id,
+                //         unitId: 1,
+                //         total: iterator.qty * iterator.pro_price,
+                //         isActive: true
+                //     }
+                // )
+            }
+            const today = new Date()
+            const bookingDate = jsDateToMysqlDate(today)
+            let totalHtml = ``
+            for (const iterator of this.currencyList) {
+                totalHtml += `
+                <div class="ticket">
+                    <div class="product-name"></div>
+                <div class="price">${iterator.code} ${this.formatNumber(this.grandTotal / iterator.rate)}</div>
+            </div>
+                `
+            }
 
             const windowContent = `
           <!DOCTYPE html>
           <html>
           <head
           <title></title>
+          <style type="text/css">
+		.ticket {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+			border-radius: 10px;
+			margin: px;
+	
+		}
+
+		.product-name {
+			float: left;
+			font-weight: bold;
+			font-size: 20px;
+		}
+
+		.price {
+			float: right;
+			font-weight: bold;
+			font-size: 20px;
+		}
+	</style>
           </head>
           <body>
-            <h1> HEADER </h1>
-            <div style="font-size: 14px;">Item 1 - $10.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
+            <div style="text-align: center;">
+                <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+            </div>
+            <h1 style="text-align: center;"> ໃບຮັບເງິນ </h1>
+            <h2> ວັນທີ ${bookingDate}</h2>
+            <h2> Ticket ${this.lastTransactionSaleHeaderId} </h2>
+            <hr> </hr>
+            ${txnListHtml}
+            <hr> </hr>
+            ${totalHtml}
+            <h2 style="text-align: center;"> ຂອບໃຈລູກຄ້າທຸກທ່ານ ທີ່ມາອຸດໜູນ </h2>
+            
           </body>
           </html>
+
         `
+            const content = `<div style="font-size: 14px;">Item 1 - $10.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>
+        <div style="font-size: 14px;">Item 2 - $5.99</div>`
 
             const printWin = window.open(
                 '',
@@ -425,6 +479,8 @@ export default {
             }, 1000)
         },
         printReceipt() {
+
+
             const receiptContent = `
         <div style="font-size: 16px; font-weight: bold;">Receipt</div>
         <hr>
@@ -556,10 +612,11 @@ export default {
                 .post('/api/sale/create', this.saleHeader)
                 .then((res) => {
                     this.lastTransactionSaleHeaderId = res.data.split('-')[1].trim()
-                    this.newOrder()
                     swalSuccess(this.$swal, "Succeed", res.data.split('-')[0])
-                    console.log('response post completed===> '+res.data);
-                    this.previewTicket(this.lastTransactionSaleHeaderId)
+                    console.log('response post completed===> ' + res.data);
+                    // this.previewTicket(this.lastTransactionSaleHeaderId)
+                    this.generatePrintView()
+                    this.newOrder()
                 })
                 .catch((er) => {
                     swalError2(this.$swal, "Error", er.response.data)
@@ -662,41 +719,6 @@ export default {
             // confirmSwal(this.$swal, 'ທ່ານ ກຳລັງຈະຂື້ນບິນໃໝ່', this.clearCart)
             this.clearCart()
         },
-        // generatePrintView() {
-        //     html2canvas(document.querySelector('#body-print')).then((canvas) => {
-        //         const ctx = canvas.getContext('2d')
-        //         ctx.font = '30px NotoSans, sans-serif'
-        //         ctx.webkitImageSmoothingEnabled = true
-        //         ctx.mozImageSmoothingEnabled = true
-        //         ctx.imageSmoothingEnabled = true
-        //         const dataURL = canvas.toDataURL()
-
-        //         const windowContent = `
-        //   <!DOCTYPE html>
-        //   <html>
-        //   <head
-        //   <title></title>
-        //   </head>
-        //   <body>
-        //     <img width="100%" src="${dataURL}"/>
-        //   </body>
-        //   </html>
-        // `
-
-        //         const printWin = window.open(
-        //             '',
-        //             '',
-        //             'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
-        //         )
-        //         printWin.document.open()
-        //         printWin.document.write(windowContent)
-
-        //         setTimeout(() => {
-        //             printWin.print()
-        //             printWin.close()
-        //         }, 1000)
-        //     })
-        // },
     }
 }
 </script>

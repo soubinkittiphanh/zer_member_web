@@ -15,48 +15,15 @@
         <div v-if="header">
           <v-row>
             <v-col cols="6">
-              <!-- <table class="table-layout">
-                <tbody>
-                  <tr style="white-space: nowrap">
-                    <td> From location: <h2>
-                        {{ header.srcLocation.name }}
-                      </h2>
-                    </td>
-                  </tr>
-                  <tr style="white-space: nowrap">
-                    <td> To location: <h2>
-
-                        {{ header.desLocation.name }}
-                      </h2>
-                    </td>
-                  </tr>
-    
-                </tbody>
-              </table> -->
+            
             </v-col>
             <v-col cols="6" align-self="end">
 
-              <!-- <table class="table-layout">
-                <tbody style="text-align: right;">
-                  <tr style="white-space: nowrap">
-                    <td> Transfer No: {{ header.id }}</td>
-                  </tr>
-                  <tr style="white-space: nowrap">
-                    <td> Date: {{ header.bookingDate }}</td>
-                  </tr>
-                  <tr style="white-space: nowrap">
-                    <td> Prepare By: {{ header.user.cus_name }}</td>
-                  </tr>
-                </tbody>
-              </table> -->
             </v-col>
           </v-row>
         </div>
         <v-divider></v-divider>
-        <!-- title 7 -->
-        <!-- <div class="title-space">
-          <b class="text-color heading-14">2. ລາຍການສິນຄ້າ</b>
-        </div> -->
+       
         <div v-if="header">
           <table class="table table-layout" style="border-collapse: collapse;" width="100%">
             <thead>
@@ -74,11 +41,7 @@
                   <td class="text-center">{{ ++i }}</td>
                   <td>{{ line.product['pro_name'] }}</td>
                   <td style="text-align: right;">{{ line.quantity }} X {{ formatNumber(line.price) }}</td>
-                  <!-- <td style="text-align: right;">{{ line.unit.name }}</td> -->
-                  <!-- <td style="text-align: right;">{{ line.unit.unitRate }}</td> -->
-                  <!-- <td style="text-align: right;">{{ formatNumber(line.price) }}</td> -->
-                  <!-- <td style="text-align: right;">{{ formatNumber(line.discount) }}</td> -->
-                  <td style="text-align: right;">{{ formatNumber(line.total) }}</td>
+                 <td style="text-align: right;">{{ formatNumber(line.total) }}</td>
                 </tr>
               </div>
               <div v-else style="display: contents">
@@ -273,24 +236,11 @@ export default {
 
 }
 
-
-/*@page {*/
-/*  size: auto;*/
-/*  margin-top: 50px !important;*/
-/*}*/
-
-/*@page :first {*/
-/*  margin-top: 50px !important;*/
-/*}*/
-
 .page-footer,
 .page-footer-space {
   height: 100px;
 }
 
-/*.page {*/
-/*  page-break-after: always;*/
-/*}*/
 
 .page-footer {
   position: fixed;
@@ -331,36 +281,6 @@ th {
   margin: 0 auto;
   margin-bottom: 0.5cm;
   /*box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);*/
-}
-
-.page[size="A4"] {
-  width: 21cm;
-  /*height: 29.7cm;*/
-}
-
-.page[size="A4"][layout="landscape"] {
-  width: 29.7cm;
-  height: 21cm;
-}
-
-.page[size="A3"] {
-  width: 29.7cm;
-  height: 42cm;
-}
-
-.page[size="A3"][layout="landscape"] {
-  width: 42cm;
-  height: 29.7cm;
-}
-
-.page[size="A5"] {
-  width: 14.8cm;
-  height: 21cm;
-}
-
-.page[size="A5"][layout="landscape"] {
-  width: 21cm;
-  height: 14.8cm;
 }
 
 .d-flex>p {

@@ -1,13 +1,6 @@
 exports.ids = [50];
 exports.modules = {
 
-/***/ 344:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "img/company_logo.01515f7.jpeg";
-
-/***/ }),
-
 /***/ 393:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -64,16 +57,16 @@ __webpack_require__.r(__webpack_exports__);
 var VCard = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(273);
+var VCol = __webpack_require__(274);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js
-var VContainer = __webpack_require__(270);
+var VContainer = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
 var VDivider = __webpack_require__(99);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(272);
+var VRow = __webpack_require__(273);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/PDFQuotation/_id/index.vue?vue&type=template&id=77a46f14&scoped=true&
 
@@ -329,7 +322,7 @@ var common = __webpack_require__(17);
     return {
       id: null,
       header: null,
-      companyLogo: __webpack_require__(344)
+      companyLogo: __webpack_require__(137)
     };
   },
   computed: {
