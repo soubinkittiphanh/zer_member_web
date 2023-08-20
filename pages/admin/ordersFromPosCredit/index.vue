@@ -136,9 +136,9 @@
             <i class="fas fa-sync"></i>
           </v-btn>
         </template>
-        <template v-slot:[`item.cusTel`]="{ item }">
+        <template v-slot:[`item.client.telephone`]="{ item }">
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-            {{ item.cusTel }}
+            {{ item.client.telephone }}
             <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
           </v-btn>
 
@@ -388,7 +388,7 @@ export default {
     },
     whatsappLink(item) {
       // const completeTel = tel.substring(tel.length-7);
-      const tel = item.cusTel.trim();
+      const tel = item.client.telephone.trim();
 
       // console.log("Customer tel: ",tel);
       const completeTel = tel.substring(tel.length - 8);

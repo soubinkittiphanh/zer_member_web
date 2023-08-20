@@ -121,7 +121,7 @@ export default {
   methods: {
     whatsappLink(item) {
       // const completeTel = tel.substring(tel.length-7);
-      const tel = item.tel.trim();
+      const tel = item.telephone.trim();
 
       // console.log("Customer tel: ",tel);
       const completeTel = tel.substring(tel.length - 8);

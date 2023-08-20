@@ -7,7 +7,7 @@ export const state = () => ({
     cartOfproductSelected: [],
     selectedCategoryId: 9999,
     selectedCustomer: null,
-    selectedPayment: 3,
+    selectedPayment: 1,
     currencyList:[],
     productList:[],
     paymentList:[],

@@ -4080,14 +4080,14 @@ var VDialog = __webpack_require__(263);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(273);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/index.vue?vue&type=template&id=45e47e27&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/index.vue?vue&type=template&id=7a43d447&
 
 
 
 
 
 
-var adminvue_type_template_id_45e47e27_render = function render() {
+var adminvue_type_template_id_7a43d447_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -4189,24 +4189,16 @@ var adminvue_type_template_id_45e47e27_render = function render() {
     attrs: {
       "cols": "3"
     }
-  })], 1)], 1), _vm._ssrNode(" "), _vm._ssrNode("<div>", "</div>", [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
+  })], 1)], 1), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"mb-1\">", "</div>", [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
     attrs: {
-      "cols": 6
-    }
-  }, [_vm._v("\n                ....\n            ")]), _vm._v(" "), _c(VCol["a" /* default */], {
-    attrs: {
-      "cols": 6
-    }
-  }, [_vm._v("\n                ....\n            ")])], 1)], 1), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"mb-1\">", "</div>", [_c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
-    attrs: {
-      "cols": "4",
+      "cols": "6",
       "md": "6",
-      "sm": "12",
+      "sm": "6",
       "xl": "6"
     }
   }, [_c(VCard["a" /* default */], {
     attrs: {
-      "height": "400"
+      "height": "650"
     }
   }, [_c('apexchart', {
     attrs: {
@@ -4215,14 +4207,14 @@ var adminvue_type_template_id_45e47e27_render = function render() {
     }
   })], 1)], 1), _vm._v(" "), _vm.dailyState ? _c(VCol["a" /* default */], {
     attrs: {
-      "cols": "8",
+      "cols": "6",
       "md": "6",
-      "sm": "12",
+      "sm": "6",
       "xl": "6"
     }
   }, [_c(VCard["a" /* default */], {
     attrs: {
-      "height": "400"
+      "height": "650"
     }
   }, [_c('apexchart', {
     attrs: {
@@ -4233,7 +4225,7 @@ var adminvue_type_template_id_45e47e27_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/index.vue?vue&type=template&id=45e47e27&
+// CONCATENATED MODULE: ./pages/admin/index.vue?vue&type=template&id=7a43d447&
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(17);
@@ -4296,7 +4288,7 @@ var menuOverview = __webpack_require__(365);
         title: 'ລາຍການ ການຂາຍ',
         // icon: 'mdi-warehouse',
         svgIcon: __webpack_require__(417),
-        path: '/admin/product/ordersFromPos'
+        path: '/admin/ordersFromPos'
       }, {
         title: 'Customer',
         // icon: 'mdi-warehouse',
@@ -4379,6 +4371,11 @@ var menuOverview = __webpack_require__(365);
           align: 'center',
           style: {
             fontSize: '16px'
+          },
+          style: {
+            fontFamily: 'noto sans lao',
+            fontSize: '16',
+            fontWeight: 'bold'
           }
         },
         labels: [],
@@ -4391,8 +4388,7 @@ var menuOverview = __webpack_require__(365);
         // },
         chart: {
           type: 'pie',
-          width: '100%',
-          height: '400px'
+          height: 'auto'
         }
       },
       barSeriesForDailyStat: [{
@@ -4402,7 +4398,8 @@ var menuOverview = __webpack_require__(365);
       barOptionsForDailyStat: {
         colors: [],
         chart: {
-          type: 'line'
+          type: 'line',
+          height: 'auto'
         },
         plotOptions: {
           bar: {
@@ -4422,15 +4419,31 @@ var menuOverview = __webpack_require__(365);
           enabled: true
         },
         xaxis: {
-          categories: []
+          categories: [],
+          style: {
+            fontFamily: 'noto sans lao',
+            fontSize: '16',
+            fontWeight: 'bold'
+          }
         },
         yaxis: {
           title: {
             text: 'Sales (in thousands)'
+          },
+          labels: {
+            formatter: function (value) {
+              return value.toLocaleString(); // use toLocaleString() method to format numbers with 1000 separators
+            }
           }
         },
+
         title: {
-          text: 'ສະຖິຕິການຂາຍໃນເດືອນ'
+          text: 'ສະຖິຕິການຂາຍໃນເດືອນ',
+          style: {
+            fontFamily: 'noto sans lao',
+            fontSize: '16',
+            fontWeight: 'bold'
+          }
         }
       }
     };
@@ -4647,7 +4660,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   pages_adminvue_type_script_lang_js_,
-  adminvue_type_template_id_45e47e27_render,
+  adminvue_type_template_id_7a43d447_render,
   staticRenderFns,
   false,
   null,

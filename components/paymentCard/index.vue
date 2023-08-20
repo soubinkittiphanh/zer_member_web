@@ -2,7 +2,7 @@
     <div>
         <v-hover v-slot:default="{ hover }" open-delay="100">
         <v-card :elevation="hover ? 16 : 0" @click="selectePaymentMethod(id)" class="rounded-card" rounded
-            :style="id != currentPayment ? `background-color: #F5F5F5;` : `background-color: #C0FFEC;`">
+            :style="id != currentPayment ? `background-color: #F5F5F5;` : `background-color: #08A045;`">
             <!-- <v-img 
                     :src="imageSvg"  height="80">
                 </v-img> -->

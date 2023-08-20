@@ -813,7 +813,7 @@ var VRow = __webpack_require__(273);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=template&id=6685ec68&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=template&id=5c9994d1&
 
 
 
@@ -824,7 +824,7 @@ var VTextField = __webpack_require__(28);
 
 
 
-var clientvue_type_template_id_6685ec68_render = function render() {
+var clientvue_type_template_id_5c9994d1_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -978,7 +978,7 @@ var clientvue_type_template_id_6685ec68_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=6685ec68&
+// CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=5c9994d1&
 
 // EXTERNAL MODULE: ./components/customer/CustomerForm.vue + 4 modules
 var CustomerForm = __webpack_require__(367);
@@ -1033,7 +1033,7 @@ var CustomerForm = __webpack_require__(367);
   methods: {
     whatsappLink(item) {
       // const completeTel = tel.substring(tel.length-7);
-      const tel = item.tel.trim();
+      const tel = item.telephone.trim();
 
       // console.log("Customer tel: ",tel);
       const completeTel = tel.substring(tel.length - 8);
@@ -1084,7 +1084,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   admin_clientvue_type_script_lang_js_,
-  clientvue_type_template_id_6685ec68_render,
+  clientvue_type_template_id_5c9994d1_render,
   staticRenderFns,
   false,
   null,

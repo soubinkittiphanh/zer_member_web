@@ -153,7 +153,7 @@
                             <v-spacer></v-spacer>
                             <v-chip v-for="item in currencyList" :key="item.id" class="ma-2" color="green"
                                 text-color="white">
-                                {{ item.code }}{{ formatNumber((grandTotal - discount) / item.rate) }}
+                                {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>

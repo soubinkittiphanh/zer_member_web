@@ -112,7 +112,7 @@
             <!-- </v-card-text>
             </v-card> -->
         </div>
-        <div>
+        <!-- <div>
             <v-row>
                 <v-col :cols="6">
                     ....
@@ -121,16 +121,16 @@
                     ....
                 </v-col>
             </v-row>
-        </div>
+        </div> -->
         <div class="mb-1">
             <v-row>
-                <v-col cols="4" md="6" sm="12" xl="6">
-                    <v-card height="400">
+                <v-col cols="6" md="6" sm="6" xl="6">
+                    <v-card height="650">
                         <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart>
                     </v-card>
                 </v-col>
-                <v-col cols="8" md="6" sm="12" xl="6" v-if="dailyState">
-                    <v-card height="400">
+                <v-col cols="6" md="6" sm="6" xl="6" v-if="dailyState">
+                    <v-card height="650">
                         <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
                     </v-card>
                 </v-col>
@@ -142,7 +142,7 @@
 </template>
   
 <script>
-import { generateColorShades, firstAndLastDateOfCurrentYear, getFirstDayOfMonth, today,getFormatNum } from '~/common'
+import { generateColorShades, firstAndLastDateOfCurrentYear, getFirstDayOfMonth, today, getFormatNum } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
 import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
@@ -184,7 +184,7 @@ export default {
                     title: 'ລາຍການ ການຂາຍ',
                     // icon: 'mdi-warehouse',
                     svgIcon: require('~/assets/icons/responsive.svg'),
-                    path: '/admin/product/ordersFromPos'
+                    path: '/admin/ordersFromPos'
                 },
                 {
                     title: 'Customer',
@@ -281,6 +281,11 @@ export default {
                     style: {
                         fontSize: '16px',
                     },
+                    style: {
+                        fontFamily: 'noto sans lao',
+                        fontSize: '16',
+                        fontWeight: 'bold'
+                    }
                 },
                 labels: [
                 ],
@@ -294,18 +299,19 @@ export default {
                 // },
                 chart: {
                     type: 'pie',
-                    width: '100%',
-                    height: '400px',
+                    height: 'auto',
                 },
             },
             barSeriesForDailyStat: [{
                 data: []
+
             }],
             //ກາບຍອດຂາຍແຕ່ລະມື ເປັນ ຮູບທຽນ
             barOptionsForDailyStat: {
                 colors: [],
                 chart: {
                     type: 'line',
+                    height: 'auto'
                 },
                 plotOptions: {
                     bar: {
@@ -326,13 +332,29 @@ export default {
                 xaxis: {
                     categories: [
                     ],
+                    style: {
+                        fontFamily: 'noto sans lao',
+                        fontSize: '16',
+                        fontWeight: 'bold'
+                    }
+
                 }, yaxis: {
                     title: {
                         text: 'Sales (in thousands)'
+                    },
+                    labels: {
+                        formatter: function (value) {
+                            return value.toLocaleString(); // use toLocaleString() method to format numbers with 1000 separators
+                        }
                     }
                 },
                 title: {
-                    text: 'ສະຖິຕິການຂາຍໃນເດືອນ'
+                    text: 'ສະຖິຕິການຂາຍໃນເດືອນ',
+                    style: {
+                        fontFamily: 'noto sans lao',
+                        fontSize: '16',
+                        fontWeight: 'bold'
+                    }
                 }
             }
         };
@@ -372,10 +394,10 @@ export default {
                 const date = transaction.bookingDate;
                 const index = acc.findIndex((item) => item.date === date);
                 if (index === -1) {
-                    acc.push({ date, transactions: [transaction], totalSale: transaction.total-transaction.discount });
+                    acc.push({ date, transactions: [transaction], totalSale: transaction.total - transaction.discount });
                 } else {
                     acc[index].transactions.push(transaction);
-                    acc[index].totalSale += transaction.total-transaction.discount;
+                    acc[index].totalSale += transaction.total - transaction.discount;
                 }
                 return acc;
             }, []);
