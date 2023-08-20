@@ -10,6 +10,9 @@
             <v-card-text>
                 <v-container>
                     <v-form ref="myform" @submit.prevent="submitForm">
+                        <v-autocomplete item-text="name" item-value="id" :items="locationList"
+                                                label="Source location*"
+                                                v-model="srcLocationId"></v-autocomplete>
                         <v-text-field label="ຈຳນວນ" :rules="numberRule" hide-details="auto"
                             v-model="stockQty"></v-text-field>
                         <v-text-field label="ຕົ້ນທຶນທັງຫໝົດ" :rules="numberRule" hide-details="auto"
@@ -61,6 +64,8 @@ export default {
             stockQty: 1,
             stockCost: this.cost,
             isSubmitting: false,
+            locationList:[],
+            srcLocationId:1
         }
     },
     computed: {
@@ -75,7 +80,23 @@ export default {
         }
 
     },
+    created(){
+        this.loadLocation()
+    },
     methods: {
+        async loadLocation(item) {
+            this.isloading = true
+            await this.$axios
+                .get(`api/location/find`)
+                .then((res) => {
+                    this.locationList = res.data.map(el => el)
+                })
+                .catch((er) => {
+                    swalError2(this.$swal, 'Error', 'Operation fail ' + er.Error)
+                })
+            this.isloading = false
+
+        },
         async stockSubmit() {
             if (this.$refs.myform.validate() && !this.isSubmitting) {
                 this.isSubmitting = true
@@ -84,7 +105,8 @@ export default {
                     product_id: this.productId,
                     stocCardkQty: this.stockQty,
                     totalCost: this.stockCost,
-                    productId: this.id
+                    productId: this.id,
+                    srcLocationId: this.srcLocationId
                 }
                 console.log("Pre fly ",stockData);
                 // return

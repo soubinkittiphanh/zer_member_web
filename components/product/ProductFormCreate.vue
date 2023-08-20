@@ -10,7 +10,7 @@
     <v-dialog v-model="preview" hide-overlay width="400px">
       <dia-image :i-url="previewSrc" @closeDia="preview = false"> </dia-image>
     </v-dialog>
-    SELECTED OUTLET {{ formData.outlet }}
+    <!-- SELECTED OUTLET {{ formData.outlet }} -->
     <v-card>
       <v-card-title>
 
@@ -195,6 +195,7 @@ export default {
       isloading: false,
       valid: true,
       name: '',
+      title: 'Create product',
       rules: {
         nameRule: [
           (v) => !!v || 'ກະລຸນາ ໃສ່ຊື່ສິນຄ້າ ',
@@ -241,6 +242,7 @@ export default {
       },
       category: [],
       formData: {
+        outlet:1,
         pro_category: 1001,
         pro_id: null,
         pro_name: '',

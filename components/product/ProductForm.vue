@@ -228,10 +228,11 @@ export default {
             },
             preview: false,
             previewSrc: null,
-            title: 'ແກ້ໄຂສິນຄ້າ ',
+            title: 'Update product',
             valid: false,
             category: [],
             formData: {
+                // outlet:1,
                 pro_category: 1001,
                 pro_id: null,
                 pro_name: '',

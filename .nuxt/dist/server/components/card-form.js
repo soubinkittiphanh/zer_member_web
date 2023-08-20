@@ -126,12 +126,15 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 355:
+/***/ 356:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete.js
+var VAutocomplete = __webpack_require__(276);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
 var VBtn = __webpack_require__(56);
@@ -157,7 +160,7 @@ var VSpacer = __webpack_require__(272);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=template&id=6d8690f6&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/card/cardForm.vue?vue&type=template&id=aa92539c&
 
 
 
@@ -169,7 +172,8 @@ var VTextField = __webpack_require__(28);
 
 
 
-var cardFormvue_type_template_id_6d8690f6_render = function render() {
+
+var cardFormvue_type_template_id_aa92539c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -195,7 +199,21 @@ var cardFormvue_type_template_id_6d8690f6_render = function render() {
         return _vm.submitForm.apply(null, arguments);
       }
     }
-  }, [_c(VTextField["a" /* default */], {
+  }, [_c(VAutocomplete["a" /* default */], {
+    attrs: {
+      "item-text": "name",
+      "item-value": "id",
+      "items": _vm.locationList,
+      "label": "Source location*"
+    },
+    model: {
+      value: _vm.srcLocationId,
+      callback: function ($$v) {
+        _vm.srcLocationId = $$v;
+      },
+      expression: "srcLocationId"
+    }
+  }), _vm._v(" "), _c(VTextField["a" /* default */], {
     attrs: {
       "label": "ຈຳນວນ",
       "rules": _vm.numberRule,
@@ -243,7 +261,7 @@ var cardFormvue_type_template_id_6d8690f6_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=6d8690f6&
+// CONCATENATED MODULE: ./components/card/cardForm.vue?vue&type=template&id=aa92539c&
 
 // EXTERNAL MODULE: ./common/index.js
 var common = __webpack_require__(17);
@@ -277,7 +295,9 @@ var common = __webpack_require__(17);
     return {
       stockQty: 1,
       stockCost: this.cost,
-      isSubmitting: false
+      isSubmitting: false,
+      locationList: [],
+      srcLocationId: 1
     };
   },
   computed: {
@@ -288,7 +308,19 @@ var common = __webpack_require__(17);
       return this.$auth.user || '';
     }
   },
+  created() {
+    this.loadLocation();
+  },
   methods: {
+    async loadLocation(item) {
+      this.isloading = true;
+      await this.$axios.get(`api/location/find`).then(res => {
+        this.locationList = res.data.map(el => el);
+      }).catch(er => {
+        Object(common["j" /* swalError2 */])(this.$swal, 'Error', 'Operation fail ' + er.Error);
+      });
+      this.isloading = false;
+    },
     async stockSubmit() {
       if (this.$refs.myform.validate() && !this.isSubmitting) {
         this.isSubmitting = true;
@@ -297,7 +329,8 @@ var common = __webpack_require__(17);
           product_id: this.productId,
           stocCardkQty: this.stockQty,
           totalCost: this.stockCost,
-          productId: this.id
+          productId: this.id,
+          srcLocationId: this.srcLocationId
         };
         console.log("Pre fly ", stockData);
         // return
@@ -334,7 +367,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   card_cardFormvue_type_script_lang_js_,
-  cardFormvue_type_template_id_6d8690f6_render,
+  cardFormvue_type_template_id_aa92539c_render,
   staticRenderFns,
   false,
   injectStyles,

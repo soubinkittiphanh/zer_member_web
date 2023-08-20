@@ -155,9 +155,6 @@
                                 text-color="white">
                                 {{ item.code }}{{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <v-btn outlined depressed @click="generatePrintView">
-                                Ticket
-                            </v-btn>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -203,7 +200,7 @@ export default {
         return {
             search: '',
             svgIcon: require('~/assets/icons/cash.svg'),
-            logoCompany: require('~/assets/image/company_logo.jpeg'),
+            logoCompany: require('~/assets/image/BWLOGO.jpeg'),
             lastTransactionSaleHeaderId: 0,
             drawer: true,
             isloading: false,
@@ -368,19 +365,6 @@ export default {
 		<div class="product-name">${product.pro_name} </div>
 		<div class="price">x${quantity} ${this.formatNumber(total)}</div>
 	</div>`
-                // lines.push(
-                //     {
-                //         quantity: iterator.qty,
-                //         unitRate: 1,
-                //         price: iterator.pro_price,
-                //         discount: 0,
-                //         productId: iterator.id,
-                //         productKey: iterator.id,
-                //         unitId: 1,
-                //         total: iterator.qty * iterator.pro_price,
-                //         isActive: true
-                //     }
-                // )
             }
             const today = new Date()
             const bookingDate = jsDateToMysqlDate(today)
@@ -401,74 +385,52 @@ export default {
           <head
           <title></title>
           <style type="text/css">
+        * {
+            font-family: 'noto sans lao';
+            padding: 0px;
+            margin: 0px;
+        }
 		.ticket {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 10px;
+			padding: 0px;
 			border-radius: 10px;
-			margin: px;
+			margin: 0px;
 	
 		}
 
 		.product-name {
 			float: left;
-			font-weight: bold;
-			font-size: 20px;
+			font-size: 12px;
 		}
 
 		.price {
 			float: right;
-			font-weight: bold;
-			font-size: 20px;
+			font-size: 12px;
 		}
+        
 	</style>
           </head>
           <body>
             <div style="text-align: center;">
                 <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
             </div>
-            <h1 style="text-align: center;"> ໃບຮັບເງິນ </h1>
-            <h2> ວັນທີ ${today.toLocaleString()}</h2>
-            <h2> Ticket ${this.lastTransactionSaleHeaderId} </h2>
-            <h2> Tel 020 7777 5660 </h2>
-            <h2> ຜູ້ຂາຍ: ${this.user.cus_name}  </h2>
+            <h3 style="text-align: center;"> ໃບຮັບເງິນ </h1>
+            <h5> ວັນທີ ${today.toLocaleString()}</h5>
+            <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
+            <h5> Tel 020 7777 5660 </h5>
+            <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
             <hr> </hr>
             ${txnListHtml}
             <hr> </hr>
             ${totalHtml}
-            <h2 style="text-align: center;"> ຂອບໃຈລູກຄ້າທຸກທ່ານ ທີ່ມາອຸດໜູນ </h2>
+            <h2 style="text-align: center;"> THANKYOU </h2>
             
           </body>
           </html>
 
         `
-            const content = `<div style="font-size: 14px;">Item 1 - $10.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>`
-
             const printWin = window.open(
                 '',
                 '',
@@ -481,76 +443,6 @@ export default {
                 printWin.print()
                 printWin.close()
             }, 1000)
-        },
-        printReceipt() {
-
-
-            const receiptContent = `
-        <div style="font-size: 16px; font-weight: bold;">Receipt</div>
-        <hr>
-        <div style="font-size: 14px;">Item 1 - $10.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <div style="font-size: 14px;">Item 2 - $5.99</div>
-        <hr>
-        <div style="font-size: 14px; font-weight: bold;">Total: $16.98</div>
- `
-
-            const printWindow = window.open('', 'PRINT', 'height=400,width=600')
-
-            printWindow.document.write(`
-        <html>
-          <head>
-            <title>Receipt</title>
-            <style>
-                body {
-                    font-size: 14px;
-                    padding: 10px;
-                    width: 80mm;
-                }
-            </style>
-            <style>
-              @media print {
-                @page {
-                    size: 80mm 100mm;
-                    margin: 0;
-                }
-                body {
-                    font-size: 14px;
-                    padding: 10px;
-                    width: 80mm;
-                }
-              }
-            </style>
-          </head>
-          <body>
-            ${receiptContent}
-          </body>
-        </html>
-      `)
-            printWindow.print()
-            printWindow.close()
         },
         async setQuotation() {
             if (this.isloading || this.generateSaleLine == 0) {

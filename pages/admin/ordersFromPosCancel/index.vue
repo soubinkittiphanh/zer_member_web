@@ -283,7 +283,7 @@ export default {
 
     quotationList() {
       // return this.orderHeaderList.filter(el => el['isActive'] != true)
-      return this.orderHeaderList.filter(el => el['isActive'] == true)
+      return this.orderHeaderList.filter(el => el['isActive'] == false)
 
     },
     computedDateFormatted() {

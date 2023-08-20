@@ -274,7 +274,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 350:
+/***/ 351:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -404,7 +404,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 366:
+/***/ 367:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -439,7 +439,7 @@ var VRow = __webpack_require__(273);
 var VSpacer = __webpack_require__(272);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(350);
+var VSwitch = __webpack_require__(351);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(28);
@@ -779,7 +779,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(110).default
 
 /***/ }),
 
-/***/ 487:
+/***/ 488:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -981,7 +981,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/client/index.vue?vue&type=template&id=6685ec68&
 
 // EXTERNAL MODULE: ./components/customer/CustomerForm.vue + 4 modules
-var CustomerForm = __webpack_require__(366);
+var CustomerForm = __webpack_require__(367);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/client/index.vue?vue&type=script&lang=js&
 
@@ -1096,7 +1096,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var client = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {CustomerForm: __webpack_require__(366).default,LoadingIndicator: __webpack_require__(110).default})
+installComponents(component, {CustomerForm: __webpack_require__(367).default,LoadingIndicator: __webpack_require__(110).default})
 
 
 /***/ })

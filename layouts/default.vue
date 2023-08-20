@@ -48,12 +48,17 @@ export default {
           to: '/admin/currency',
         },
         {
-          icon: 'mdi-view-list',
+          icon: 'mdi mdi-warehouse',
           title: 'Warehouse',
           to: '/admin/location',
         },
         {
-          icon: 'mdi-view-list',
+          icon: 'mdi mdi-account-box-multiple-outline',
+          title: 'ຈັດການລູກຄ້າ',
+          to: '/admin/client',
+        },
+        {
+          icon: 'mdi mdi-transfer',
           title: 'Transfer',
           to: '/admin/transfer',
         },
@@ -69,14 +74,9 @@ export default {
           to: '/admin/product/productlist',
         },
         {
-          icon: 'mdi-arrow-bottom-right',
+          icon: 'mdi mdi-speedometer-slow',
           title: 'ສິນຄ້າໃກ້ໝົດ',
           to: '/admin/minstock',
-        },
-        {
-          icon: 'mdi-cart-check',
-          title: 'ຈັດການລູກຄ້າ',
-          to: '/admin/client',
         },
         {
           icon: 'mdi-receipt-text-check-outline',
@@ -94,7 +94,7 @@ export default {
           to: '/admin/quotationList',
         },
         {
-          icon: 'mdi-receipt-text-arrow-right',
+          icon: 'mdi-receipt-text-remove-outline',
           title: 'ລາຍງານຍົກເລີກ',
           to: '/admin/ordersFromPosCancel',
         },
@@ -110,11 +110,11 @@ export default {
         //   to: '/admin/cod_order',
         // },
         // **************** This menu to check sale from Mobile App and this is Facebook COD sale model *************//
-        {
-          icon: 'mdi-receipt-text-remove-outline',
-          title: 'ລາຍການໃບບິນຍົກເລີກ ',
-          to: '/admin/cancel_order',
-        },
+        // {
+        //   icon: 'mdi-receipt-text-remove-outline',
+        //   title: 'ລາຍການໃບບິນຍົກເລີກ ',
+        //   to: '/admin/cancel_order',
+        // },
         // {
         //   icon: 'mdi-account-key',
         //   title: 'ຈັດການຜູ້ໃຊ້ງານ',

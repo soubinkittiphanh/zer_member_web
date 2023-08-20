@@ -513,10 +513,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
       },
       preview: false,
       previewSrc: null,
-      title: 'ແກ້ໄຂສິນຄ້າ ',
+      title: 'Update product',
       valid: false,
       category: [],
       formData: {
+        // outlet:1,
         pro_category: 1001,
         pro_id: null,
         pro_name: '',
@@ -840,7 +841,7 @@ var VTextField = __webpack_require__(28);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(302);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/product/ProductForm.vue?vue&type=template&id=11073358&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/product/ProductForm.vue?vue&type=template&id=44cf9046&
 
 
 
@@ -865,7 +866,7 @@ var VTextarea = __webpack_require__(302);
 
 
 
-var ProductFormvue_type_template_id_11073358_render = function render() {
+var ProductFormvue_type_template_id_44cf9046_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -1275,7 +1276,7 @@ var ProductFormvue_type_template_id_11073358_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/product/ProductForm.vue?vue&type=template&id=11073358&
+// CONCATENATED MODULE: ./components/product/ProductForm.vue?vue&type=template&id=44cf9046&
 
 // EXTERNAL MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/product/ProductForm.vue?vue&type=script&lang=js&
 var ProductFormvue_type_script_lang_js_ = __webpack_require__(305);
@@ -1295,7 +1296,7 @@ var componentNormalizer = __webpack_require__(9);
 
 var component = Object(componentNormalizer["a" /* default */])(
   product_ProductFormvue_type_script_lang_js_,
-  ProductFormvue_type_template_id_11073358_render,
+  ProductFormvue_type_template_id_44cf9046_render,
   staticRenderFns,
   false,
   null,

@@ -1,7 +1,7 @@
 exports.ids = [22];
 exports.modules = {
 
-/***/ 364:
+/***/ 365:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113,7 +113,7 @@ var staticRenderFns = [];
   },
   data() {
     return {
-      imageSrc: __webpack_require__(138)
+      imageSrc: __webpack_require__(137)
     };
   },
   methods: {
