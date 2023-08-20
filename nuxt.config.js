@@ -6,7 +6,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Website',
+    titleTemplate: '%s - LIVE',
     // title: 'Jack42',
     // title: 'PeeAir4',
     title: 'CHITHANH MINIMART',
@@ -21,7 +21,7 @@ export default {
     ],
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: '/jack.jpeg' }
-      { rel: 'icon', type: 'image/x-icon', href: '/peeair.jpeg' }
+      { rel: 'icon', type: 'image/x-icon', href: '/chithanh.jpeg' }
     ],
     script: [
       {
