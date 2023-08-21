@@ -8,7 +8,7 @@
         <div class="mb-1">
             <v-card class="pa-4" style="background-color: transparent;">
                 <v-card-title style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
-                    SHORTCUT
+                    SHORTCUT 
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
@@ -125,15 +125,26 @@
         <div class="mb-1">
             <v-row>
                 <v-col cols="6" md="6" sm="6" xl="6">
-                    <v-card height="650">
-                        <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart>
+                    <v-card >
+                        <div ref="chart" style="width: 100%; height: 400px;"></div>
+                        <!-- <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart> -->
                     </v-card>
                 </v-col>
                 <v-col cols="6" md="6" sm="6" xl="6" v-if="dailyState">
-                    <v-card height="650">
+                    <v-card >
                         <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
                     </v-card>
                 </v-col>
+            </v-row>
+        </div>
+        <div class="mb-1" v-if="dailyState">
+            <v-row>
+                <v-col cols="6" md="6" sm="6" xl="6">
+                    <v-card >
+                        <apexchart :options="barOptionsForMonthlyStat" :series="barSeriesForMonthlyStat"></apexchart>
+                    </v-card>
+                </v-col>
+
             </v-row>
         </div>
         <MinStockCard />
@@ -148,13 +159,69 @@ import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
 import MinStockCard from '~/components/minStockCard'
 import MenuOverview from '~/components/menuOverview'
+// import ECharts from 'echarts'
+// import { ECharts } from 'echarts'
+import * as ECharts from 'echarts';
 
 export default {
     components: { CardOnTop, CampaignCard, CardGrouping, MenuOverview, MinStockCard },
     middleware: 'auths',
     data() {
         return {
-            // imageSrc: require('@/assets/images/icon/pos-terminal.png'),
+            barOptionsForMonthlyStat: {
+                colors: [],
+                chart: {
+                    type: 'line',
+                    height: 'auto'
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                    }, dataLabels: {
+                        style: {
+                            fontSize: '12px',
+                        },
+                        formatter: function (val) {
+                            return val.toFixed(2);
+                        },
+                    },
+                },
+                dataLabels: {
+                    enabled: true
+                },
+                xaxis: {
+                    categories: [
+                    ],
+                    style: {
+                        fontFamily: 'noto sans lao',
+                        fontSize: '16',
+                        fontWeight: 'bold'
+                    }
+
+                }, yaxis: {
+                    title: {
+                        text: 'Sales (in thousands)'
+                    },
+                    labels: {
+                        formatter: function (value) {
+                            return value.toLocaleString(); // use toLocaleString() method to format numbers with 1000 separators
+                        }
+                    }
+                },
+                title: {
+                    text: 'ສະຖິຕິການຂາຍໃນປີ',
+                    style: {
+                        fontFamily: 'noto sans lao',
+                        fontSize: '16',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            barSeriesForMonthlyStat: [{
+                data: []
+
+            }],
             menus: [
                 {
                     title: 'POS',
@@ -366,10 +433,12 @@ export default {
         this.init();
         await this.minStockProduct()
     }, async mounted() {
+
         await this.loadTopSale()
         await this.paymentGroup()
     },
     computed: {
+       
         totalSaleYTD() {
             const totalPrice = this.yearlySale.reduce((total, item) => {
                 // discountTotal+=item.discount
@@ -465,11 +534,59 @@ export default {
                 // .get('api/topsale/?top=' + 5) // For delivery sale system
                 .get('api/topsaleMinimart/?top=' + 5)
                 .then((res) => {
+                    // ************** PIE FROM ECHARTS *************//
+                    const chart = ECharts.init(this.$refs.chart)
+
+                    const option = {
+                        title: {
+                            text: 'ສິນຄ້າຂາຍດີຕາມໝວດ',
+                            subtext: '-',
+                            left: 'center',
+                            textStyle: {
+                                fontFamily: 'noto sans lao'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            left: 'left'
+                        },
+                        series: [
+                            {
+                                name: 'Access From',
+                                type: 'pie',
+                                radius: '50%',
+                                data: [
+                                    // { value: 0, name: 'Search Engine' },
+                                    // { value: 0, name: 'Direct' },
+                                    // { value: 0, name: 'Email' },
+                                    // { value: 0, name: 'Union Ads' },
+                                    // { value: 0, name: 'Video Ads' }
+                                ],
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                    // ************** PIE FROM ECHARTS *************//
                     console.log("Data ", res.data[0]);
                     res.data.map((el) => {
-                        this.pieChartOption.barSeries.push(+el.sale_count)
-                        this.pieChartOption.labels.push(el.categ_name + ' ' + getFormatNum(el.total_sale))
+                        const entry = {
+                            name: el.categ_name + ' ' + getFormatNum(el.total_sale),
+                            value: +el.sale_count
+                        }
+                        option.series[0].data.push(entry)
                     })
+
+
+                    chart.setOption(option)
 
                 }).catch(err => {
                     console.log('error', err);
@@ -492,6 +609,7 @@ export default {
                     this.menusOverview[1]['total'] = this.totalSaleMTD
                     this.menusOverview[0]['total'] = this.totalSaleTD
                     console.log("Lend of sale yearly " + this.yearlySale.length);
+                    this.monthGroupSale()
                 }).catch(err => {
                     console.log('error', err);
                 });
@@ -523,7 +641,45 @@ export default {
             }
 
             this.dailyState = true
+
             this.isloading = false
+
+        },
+        monthGroupSale() {
+            let groupedTransactions = {};
+
+            this.yearlySale.forEach(transaction => {
+                const date = new Date(transaction.bookingDate);
+                const month = date.getMonth() + 1;
+                const year = date.getFullYear();
+                const key = `${year}-${month.toString().padStart(2, '0')}`;
+
+                if (!groupedTransactions[key]) {
+                    groupedTransactions[key] = { total: 0, transactions: [] };
+                }
+
+                groupedTransactions[key].total += transaction.total - transaction.discount;
+                groupedTransactions[key].transactions.push(transaction);
+                console.log('datat add===>');
+            });
+            console.log('====> my chart' + groupedTransactions);
+            const keyList = Object.keys(groupedTransactions)
+            for (const iterator of keyList) {
+                console.log("*****ETERATOR*****"+iterator);
+                this.barOptionsForMonthlyStat.colors.push(this.getRandomColor) // ******* Original
+                this.barSeriesForMonthlyStat[0].data.push(groupedTransactions[iterator]['total'])
+                this.barOptionsForMonthlyStat.xaxis.categories.push(iterator)
+            }
+            // for (const key in groupedTransactions) {
+            //     console.log(`Month: ${groupedTransactions['2023-07']}`);
+            //     console.log(`Total: ${groupedTransactions[key].total}`);
+            //     console.log("Transactions:");
+            //     groupedTransactions[key].transactions.forEach(transaction => {
+            //         console.log(`  ID: ${transaction.id}, Date: ${transaction.date}, Amount: ${transaction.amount}`);
+            //     });
+            //     console.log("--------------------");
+            // }
+            return groupedTransactions;
         },
         async paymentGroup() {
             this.isloading = true
