@@ -1,5 +1,25 @@
 <template>
     <v-app dark>
+        <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
+            <v-card>
+                <v-card-title>ເລືອກ Terminal</v-card-title>
+                <v-divider></v-divider>
+                <v-card-text style="height: 300px;">
+                    <v-radio-group v-model="terminalSelected" column>
+                        <v-radio v-for="terminal in findAllTerminal" :key="terminal.id"
+                            :label="terminal.name + ' - ' + terminal.description" :value="terminal.id"></v-radio>
+                        <!-- <v-radio label="Bahrain" value="bahrain"></v-radio>
+                        <v-radio label="Bangladesh" value="bangladesh"></v-radio> -->
+                    </v-radio-group>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                    <v-btn color="blue-darken-1" variant="text" @click="switchTerminal">
+                        ເລືອກ
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
@@ -16,6 +36,9 @@
             <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
                 prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted />
             <v-spacer />
+            <v-chip class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
+                {{ currentTerminal['name'] }}
+            </v-chip>
             <v-btn class="flexcol ml-10" icon v-for="item in menuItems" :key="item.title" :to="item.path"
                 @click="item.method">
                 <v-icon> {{ item.icon }} </v-icon>
@@ -25,7 +48,11 @@
 
         <v-navigation-drawer app v-model="drawer" clipped width="180">
             <v-list dense>
-                <v-subheader style="font-size: larger; font-weight: bold;">ຮ້ານຈີ່ທັນ </v-subheader>
+                <v-subheader style="font-size: larger; font-weight: bold;">
+                    <v-chip class="ma-2" color="warning" variant="outlined">
+                        CHITHANH MINI MART
+            </v-chip>
+                </v-subheader>
                 <v-list-item-group v-model="selectedItem" color="primary">
                     <v-divider></v-divider>
                     <v-list-item v-for="(item, i) in categoryList" :key="i">
@@ -62,7 +89,7 @@
                             </v-col>
                             <v-col cols="4" style="text-align: left;">
                                 <v-chip class="ma-2" color="success" variant="outlined">
-                                    {{ currenctCustomer == null ? '' : currenctCustomer.name }}
+                                    {{ currenctCustomer == null ? '' : currenctCustomer['company'] }}
                                 </v-chip>
 
 
@@ -155,6 +182,7 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
+                            <v-btn @click="generatePrintView">ticket</v-btn>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -198,6 +226,8 @@ export default {
     name: 'DefaultLayout',
     data() {
         return {
+            terminalDialog: false,
+            terminalSelected: null,
             search: '',
             svgIcon: require('~/assets/icons/cash.svg'),
             logoCompany: require('~/assets/image/BWLOGO.jpeg'),
@@ -281,7 +311,7 @@ export default {
             return this.$auth.user || ''
         },
         ...mapState(['productSearchKeyboard',]),
-        ...mapGetters(['cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment']),
+        ...mapGetters(['cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
         serachModel: {
             get() {
                 return this.stateValue;
@@ -295,7 +325,10 @@ export default {
         currenctCustomer() {
             return this.currentSelectedCustomer
         },
-
+        currentTerminal() {
+            console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
+            return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+        },
         productCart() {
             return this.cartOfProduct
         },
@@ -335,6 +368,7 @@ export default {
 
     },
     mounted() {
+        this.terminalSelected = this.findSelectedTerminal
         this.fetchCategory()
         this.loadPayment()
         this.loadCustomer()
@@ -348,6 +382,11 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['setSelectedTerminal']),
+        switchTerminal() {
+            this.setSelectedTerminal(this.terminalSelected)
+            this.terminalDialog = false
+        },
         generatePrintView() {
             let txnListHtml = ``
             for (const iterator of this.productCart) {
@@ -385,11 +424,7 @@ export default {
           <head
           <title></title>
           <style type="text/css">
-        * {
-            font-family: 'noto sans lao';
-            padding: 0px;
-            margin: 0px;
-        }
+
 		.ticket {
 			display: flex;
 			justify-content: space-between;
@@ -408,6 +443,10 @@ export default {
 		.price {
 			float: right;
 			font-size: 12px;
+		}
+
+        * {
+			font-family: 'noto sans lao';
 		}
         
 	</style>
@@ -503,7 +542,9 @@ export default {
             this.saleHeader.lines = this.generateSaleLine
             this.saleHeader.userId = this.user.id
             this.saleHeader.bookingDate = jsDateToMysqlDate(today)
-            console.log(this.saleHeader);
+            this.saleHeader.locationId = this.currentTerminal['locationId']
+            // console.log('HEADER ' +this.saleHeader['locationId']);
+            // return
             await this.$axios
                 .post('/api/sale/create', this.saleHeader)
                 .then((res) => {

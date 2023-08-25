@@ -1,7 +1,7 @@
 exports.ids = [8];
 exports.modules = {
 
-/***/ 525:
+/***/ 538:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12,22 +12,22 @@ __webpack_require__.r(__webpack_exports__);
 var VCard = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(10);
+var components_VCard = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/VIcon.js
-var VIcon = __webpack_require__(48);
+var VIcon = __webpack_require__(51);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VImg/VImg.js + 2 modules
-var VImg = __webpack_require__(71);
+var VImg = __webpack_require__(75);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VList/VListItem.js
-var VListItem = __webpack_require__(55);
+var VListItem = __webpack_require__(59);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VList/VListItemAvatar.js
-var VListItemAvatar = __webpack_require__(94);
+var VListItemAvatar = __webpack_require__(98);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VList/index.js + 2 modules
-var VList = __webpack_require__(15);
+var VList = __webpack_require__(17);
 
 // CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CardDashBoard.vue?vue&type=template&id=138d1775&
 
@@ -86,7 +86,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/CardDashBoard.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_CardDashBoardvue_type_script_lang_js_ = (CardDashBoardvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./components/CardDashBoard.vue
 

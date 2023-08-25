@@ -4,6 +4,26 @@
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
+        <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
+            <v-card>
+                <v-card-title>ເລືອກ Terminal</v-card-title>
+                <v-divider></v-divider>
+                <v-card-text style="height: 300px;">
+                    <v-radio-group v-model="terminalSelected" column>
+                        <v-radio v-for="terminal in findAllTerminal" :key="terminal.id" :label="terminal.name+' - '+terminal.description"
+                            :value="terminal.id"></v-radio>
+                        <!-- <v-radio label="Bahrain" value="bahrain"></v-radio>
+                        <v-radio label="Bangladesh" value="bangladesh"></v-radio> -->
+                    </v-radio-group>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                    <v-btn color="blue-darken-1" variant="text" @click="chooseTerminal">
+                        ເລືອກ
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <!-- <h1>Dash board</h1> -->
         <div class="mb-1">
             <v-card class="pa-4" style="background-color: transparent;">
@@ -159,6 +179,7 @@ import CardGrouping from '~/components/dashboard/CardGrouping.vue'
 import CampaignCard from '~/components/card/campaignCard.vue'
 import MinStockCard from '~/components/minStockCard'
 import MenuOverview from '~/components/menuOverview'
+import { mapActions, mapGetters } from 'vuex'
 // import ECharts from 'echarts'
 // import { ECharts } from 'echarts'
 import * as ECharts from 'echarts';
@@ -168,6 +189,8 @@ export default {
     middleware: 'auths',
     data() {
         return {
+            terminalDialog:false,
+            terminalSelected: null,
             barOptionsForMonthlyStat: {
                 colors: [],
                 chart: {
@@ -427,18 +450,22 @@ export default {
         };
     },
     async created() {
-        // await this.loadDailySaleStatistic()
+        if(!this.findSelectedTerminal){
+            this.terminalSelected = 1
+            this.terminalDialog = true
+        }
         await this.loadSaleStatistic()
         this.generateDailyStatisticSale()
         this.init();
         await this.minStockProduct()
+
     }, async mounted() {
 
         await this.loadTopSale()
         await this.paymentGroup()
     },
     computed: {
-       
+        ...mapGetters(['findAllTerminal','findSelectedTerminal']),
         totalSaleYTD() {
             const totalPrice = this.yearlySale.reduce((total, item) => {
                 // discountTotal+=item.discount
@@ -484,6 +511,11 @@ export default {
         },
     },
     methods: {
+        ...mapActions(['setSelectedTerminal']),
+        chooseTerminal() {
+            this.setSelectedTerminal(this.terminalSelected)
+            this.terminalDialog = false
+        },
         numberFormatter(value) {
             return getFormatNum(value)
         },

@@ -13,6 +13,9 @@ export const state = () => ({
     paymentList:[],
     clientList:[],
     unitList:[],
+    terminalList:[],
+    locationList:[],
+    selectedTerminal:null,
 })
 
 // the function to update state variable should be called by setter [actions]
@@ -23,11 +26,23 @@ export const mutations = {
     SetUnitList(state, unit) {
         state.unitList = unit
     },
+    SetTerminalList(state, terminal) {
+        state.terminalList = terminal
+    },
+    SetLocationList(state, location) {
+        state.locationList = location
+    },
     SetClientList(state, client) {
+        for (const iterator of client) {
+            iterator['company'] += ' - '+iterator['name']
+        }
         state.clientList = client
     },
     SetPaymentList(state, payment) {
         state.paymentList = payment
+    },
+    ChooseTerminal(state, terminalId) {
+        state.selectedTerminal = terminalId
     },
     SetProductList(state, product) {
         state.productList = product
@@ -108,6 +123,12 @@ export const getters = {
     findAllProduct(state) {
         return state.productList
     },
+    findAllTerminal(state) {
+        return state.terminalList
+    },
+    findAllLocation(state) {
+        return state.locationList
+    },
     findAllPayment(state) {
         return state.paymentList
     },
@@ -126,6 +147,10 @@ export const getters = {
     findSelectedProductDetail(state) {
         return state.productDetail
     },
+    findSelectedTerminal(state) {
+        return state.selectedTerminal
+    },
+
     isAuthenticated(state) {
         return state.auth.loggedIn
     },
@@ -168,6 +193,9 @@ export const actions = {
     addProduct(state, product) {
         state.commit("addProductToCart", product)
     },
+    setSelectedTerminal(state, terminalId) {
+        state.commit("ChooseTerminal", terminalId)
+    },
     deleteProduct(state, product) {
         state.commit("removeProductFromCart", product)
     },
@@ -197,6 +225,12 @@ export const actions = {
     },
     initUnit(state, unit) {
         state.commit("SetUnitList", unit)
+    },
+    initTerminal(state, terminal) {
+        state.commit("SetTerminalList", terminal)
+    },
+    initLocation(state, location) {
+        state.commit("SetLocationList", location)
     },
 }
 // this.$store.dispatch('assignProductDetail', payload)       => this to set sate

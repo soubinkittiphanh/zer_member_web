@@ -103,7 +103,7 @@ export default {
                 const stockData = {
                     inputter: this.user.id,
                     product_id: this.productId,
-                    stocCardkQty: this.stockQty,
+                    stockCardQty: this.stockQty,
                     totalCost: this.stockCost,
                     productId: this.id,
                     srcLocationId: this.srcLocationId

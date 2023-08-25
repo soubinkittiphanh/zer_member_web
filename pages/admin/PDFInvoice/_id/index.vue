@@ -3,14 +3,43 @@
     <div size="A4" class="wrapper page">
       <v-container>
         <div style="display: flex; justify-content: center;">
-          <div class="mt-6 mb-6">
+
+          <v-row>
+            <v-col cols="6">
+              <img :src="companyLogo" width="200px" />
+            </v-col>
+            <v-col cols="6" align-self="end">
+
+              <table class="table-layout" style="font-size: larger; font-weight: bold; ">
+                <tbody style="text-align: right;">
+                  <tr style="white-space: nowrap">
+                    <td> ຮ້ານ ຈີທັນ ມິນິມາດ</td>
+                  </tr>
+                  <tr style="white-space: nowrap">
+                    <td> CHITHANH MINI MART</td>
+                  </tr>
+                  <tr style="white-space: nowrap">
+                    <td> ຕໍ່ຫນ້າຕະຫຼາດ ດາລາ ຫຼວງພະບາງ</td>
+                  </tr>
+                  <tr style="white-space: nowrap">
+                    <td> Tel: 020 7777 5660</td>
+                  </tr>
+                  <tr style="white-space: nowrap">
+                    <td> 020 2865 3388</td>
+                  </tr>
+                </tbody>
+              </table>
+            </v-col>
+          </v-row>
+
+          <!-- <div class="mt-6 mb-6">
             <img :src="companyLogo" width="200px" />
-          </div>
+          </div> -->
         </div>
-        <h1 style="text-align: center;">CHITHANH</h1>
-        <p class="text-color" style="font-size: 11pt; font-weight: bold; text-align: center">
+        <!-- <h1 style="text-align: center;">CHITHANH MINIMART</h1> -->
+        <!-- <p class="text-color" style="font-size: 11pt; font-weight: bold; text-align: center">
           Company addres here ...
-        </p>
+        </p> -->
         <p class="text-color" style="font-size: 21pt; font-weight: bold; text-align: center">
           ໃບແຈ້ງໜີ້ / Invoice
         </p>
@@ -18,7 +47,7 @@
         <div v-if="header">
           <v-row>
             <v-col cols="6">
-              <table class="table-layout">
+              <table class="table-layout" style="font-size: larger; font-weight: bold;">
                 <tbody>
                   <tr style="white-space: nowrap">
                     <td> Customer ID: {{ header.client.id }}</td>
@@ -37,7 +66,7 @@
             </v-col>
             <v-col cols="6" align-self="end">
 
-              <table class="table-layout">
+              <table class="table-layout" style="font-size: larger; font-weight: bold;">
                 <tbody style="text-align: right;">
                   <tr style="white-space: nowrap">
                     <td> Invoice No: {{ header.id }}</td>
@@ -62,11 +91,11 @@
           <table class="table table-layout" style="border-collapse: collapse;" width="100%">
             <thead>
               <tr>
-                <th style="width: 40px">#</th>
+                <th style="width: 40px">ລດ</th>
                 <th style="width: 180px">Description</th>
                 <th style="width: 80px">Qty</th>
                 <th style="width: 80px">Unit</th>
-                <th style="width: 80px">Rate</th>
+                <!-- <th style="width: 80px">Rate</th> -->
                 <th style="width: 100px">Price</th>
                 <th style="width: 100px">Discount</th>
                 <th style="width: 70px">Amount</th>
@@ -79,7 +108,7 @@
                   <td>{{ line.product['pro_name'] }}</td>
                   <td style="text-align: right;">{{ line.quantity }}</td>
                   <td style="text-align: right;">{{ line.unit.name }}</td>
-                  <td style="text-align: right;">{{ line.unit.unitRate }}</td>
+                  <!-- <td style="text-align: right;">{{ line.unit.unitRate }}</td> -->
                   <td style="text-align: right;">{{ formatNumber(line.price) }}</td>
                   <td style="text-align: right;">{{ formatNumber(line.discount) }}</td>
                   <td style="text-align: right;">{{ formatNumber(line.total) }}</td>
@@ -92,7 +121,7 @@
               </div>
               <tr class="page-break">
 
-                <td style="text-align: right; font-weight: bold;" colspan="7">ລາຄາລວມ </td>
+                <td style="text-align: right; font-weight: bold;" colspan="6">ລາຄາລວມ </td>
                 <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total) }}</td>
               </tr>
             </tbody>
@@ -102,16 +131,16 @@
         <v-row no-gutters class="title-space">
           <v-col>
             <!--              <b class="text-color heading-14">12. ສັງເກດຕີລາຄາ ຈຸດດີ ແລະ ຈຸດອ່ອນພື້ນຖານຂອງຕົນເອງ</b>-->
-            <b class="text-color heading-14"> Term and condition</b>
+            <!-- <b class="text-color heading-14"> Term and condition</b> -->
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col>
-            <div>
+            <!-- <div>
               This quotation is valid for 30 days
               Delivery in maximum 15 days after confirmation of order
             </div>
-            <br>
+            <br> -->
 
             <div>
               Name/signature/company stamp
@@ -313,7 +342,7 @@ th {
 }
 
 .table td {
-  font-size: 8pt;
+  font-size: 10pt;
 }
 
 

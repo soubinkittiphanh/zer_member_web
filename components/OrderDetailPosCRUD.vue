@@ -24,7 +24,8 @@
                     <v-col cols="6">
                     </v-col>
                     <v-col cols="6" style="text-align: right;">
-                        <v-btn v-if="isQuotation" size="large" variant="outlined" @click="postToInvoice" class="primary" rounded>
+                        <v-btn v-if="isQuotation" size="large" variant="outlined" @click="postToInvoice" class="primary"
+                            rounded>
                             <span class="mdi mdi-transfer-right"></span>Make to invoice
                         </v-btn>
                         <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
@@ -454,6 +455,7 @@ export default {
             this.transaction.total = this.grandTotal
             this.transaction.referenceNo = this.headerId
             this.transaction.lines = draftInvoiceLine
+            this.transaction.locationId = this.currentTerminal['locationId']
             console.log(`Amount total ${this.transaction.total}`);
             // ********** If header has data, that means we go for update API ********** //
             await this.$axios
@@ -499,6 +501,8 @@ export default {
             this.transaction.userId = this.user.id
             this.transaction.total = this.grandTotal
             console.log(`Amount total ${this.transaction.total}`);
+
+
             if (this.isUpdate) {
                 // ********** If header has data, that means we go for update API ********** //
                 await this.$axios
@@ -544,9 +548,13 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
+        ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency','findAllTerminal', 'findSelectedTerminal']),
         clientList() {
             return this.findAllClient
+        },
+        currentTerminal() {
+            console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
+            return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
         },
         user() {
             return this.$auth.user || ''

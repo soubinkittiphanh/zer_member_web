@@ -1,35 +1,101 @@
 exports.ids = [21];
 exports.modules = {
 
-/***/ 405:
+/***/ 415:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js + 1 modules
+var VBtn = __webpack_require__(60);
+
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
 var VCard = __webpack_require__(101);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(10);
+var components_VCard = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VChip/VChip.js
-var VChip = __webpack_require__(100);
+var VChip = __webpack_require__(105);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
+var VDialog = __webpack_require__(273);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
+var VDivider = __webpack_require__(104);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VHover/VHover.js
-var VHover = __webpack_require__(276);
+var VHover = __webpack_require__(288);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=template&id=613caf9e&
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VRadioGroup/VRadio.js
+var VRadio = __webpack_require__(283);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VRadioGroup/VRadioGroup.js
+var VRadioGroup = __webpack_require__(282);
+
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=template&id=329567c0&
 
 
 
 
 
-var menuvue_type_template_id_613caf9e_render = function render() {
+
+
+
+
+
+
+
+var menuvue_type_template_id_329567c0_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_c(VHover["a" /* default */], {
+  return _c('div', [_c(VDialog["a" /* default */], {
+    attrs: {
+      "scrollable": "",
+      "max-width": "1200",
+      "persistent": ""
+    },
+    model: {
+      value: _vm.terminalDialog,
+      callback: function ($$v) {
+        _vm.terminalDialog = $$v;
+      },
+      expression: "terminalDialog"
+    }
+  }, [_c(VCard["a" /* default */], [_c(components_VCard["d" /* VCardTitle */], [_vm._v("ເລືອກ Terminal")]), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["c" /* VCardText */], {
+    staticStyle: {
+      "height": "300px"
+    }
+  }, [_c(VRadioGroup["a" /* default */], {
+    attrs: {
+      "column": ""
+    },
+    model: {
+      value: _vm.terminalSelected,
+      callback: function ($$v) {
+        _vm.terminalSelected = $$v;
+      },
+      expression: "terminalSelected"
+    }
+  }, _vm._l(_vm.findAllTerminal, function (terminal) {
+    return _c(VRadio["a" /* default */], {
+      key: terminal.id,
+      attrs: {
+        "label": terminal.name + ' - ' + terminal.description,
+        "value": terminal.id
+      }
+    });
+  }), 1)], 1), _vm._v(" "), _c(VDivider["a" /* default */]), _vm._v(" "), _c(components_VCard["a" /* VCardActions */], [_c(VBtn["a" /* default */], {
+    attrs: {
+      "color": "blue-darken-1",
+      "variant": "text"
+    },
+    on: {
+      "click": _vm.takeToPOS
+    }
+  }, [_vm._v("\n                    ເລືອກ\n                ")])], 1)], 1)], 1), _vm._ssrNode(" "), _c(VHover["a" /* default */], {
     attrs: {
       "open-delay": "100"
     },
@@ -62,14 +128,17 @@ var menuvue_type_template_id_613caf9e_render = function render() {
         }, [_vm._v("\n                        " + _vm._s(_vm.title) + "\n                    ")])], 1)])], 1)];
       }
     }], null, true)
-  })], 1);
+  })], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/menu/index.vue?vue&type=template&id=613caf9e&
+// CONCATENATED MODULE: ./components/menu/index.vue?vue&type=template&id=329567c0&
+
+// EXTERNAL MODULE: external "vuex"
+var external_vuex_ = __webpack_require__(13);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/menu/index.vue?vue&type=script&lang=js&
-// import MySvgIcon from '~/assets/icons/cashier.svg'
+
 /* harmony default export */ var menuvue_type_script_lang_js_ = ({
   name: 'menu-card',
   components: {
@@ -91,12 +160,28 @@ var staticRenderFns = [];
   },
   data() {
     return {
-      imageSvg: __webpack_require__(138),
-      imageSrc: __webpack_require__(137)
+      imageSvg: __webpack_require__(143),
+      imageSrc: __webpack_require__(142),
+      terminalDialog: false,
+      terminalSelected: this.findSelectedTerminal || 1
     };
   },
+  computed: {
+    ...Object(external_vuex_["mapGetters"])(['findAllTerminal', 'findSelectedTerminal'])
+  },
   methods: {
+    ...Object(external_vuex_["mapActions"])(['setSelectedTerminal']),
     takeMeTo() {
+      if (this.path.includes('/pos') && !this.findSelectedTerminal) {
+        this.terminalDialog = true;
+        console.log(`PATH ${this.path}`);
+      } else {
+        this.$router.push(this.path);
+      }
+    },
+    takeToPOS() {
+      this.setSelectedTerminal(this.terminalSelected);
+      this.terminalDialog = false;
       this.$router.push(this.path);
     }
   }
@@ -104,7 +189,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/menu/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_menuvue_type_script_lang_js_ = (menuvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./components/menu/index.vue
 
@@ -119,7 +204,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_menuvue_type_script_lang_js_,
-  menuvue_type_template_id_613caf9e_render,
+  menuvue_type_template_id_329567c0_render,
   staticRenderFns,
   false,
   injectStyles,

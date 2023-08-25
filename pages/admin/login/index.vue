@@ -1,19 +1,11 @@
 <template>
   <v-app>
-    <!-- <v-main> -->
-    <!-- <v-container class="fill-height"> -->
-    <!-- <v-container> -->
     <div class="container">
-
       <v-dialog v-model="isLoading" hide-overlay persistent width="300">
         <loading-indicator> </loading-indicator>
       </v-dialog>
-      <!-- <v-row align="center">
-        <v-col cols="12" align-self="center"> -->
       <v-card>
         <div class="pa-16">
-
-
           <v-row>
             <v-col cols="12">
               <p class="text-center"
@@ -23,19 +15,11 @@
             </v-col>
           </v-row>
           <v-card-text>
-
-
-            <!-- <v-row align="center" justify="center" dense>
-            <v-col cols="12" sm="8" md="4" lg="4"> -->
-            <!-- <v-card class="elevation-1"> -->
             <notification v-if="errorMessage" :message="errorMessage" />
-            <!-- <p>{{ this.$store.getters.loggedInUser.name }}</p> -->
             <v-card-title class="my-text-center">
               ເຂົ້າສູ່ລະບົບ
             </v-card-title>
-            <!-- <v-card-text> -->
             <v-form>
-              <!-- <font-awesome-icon icon="coffee" /> -->
               <v-text-field v-model="login.mem_id" label="ກະລຸນາ ໃສ່ໄອດີ" name="email"
                 prepend-inner-icon="mdi-account-tie-hat" class="rounded-10 my-text-center" outlined>
               </v-text-field>
@@ -47,18 +31,10 @@
                 <v-icon> mdi mdi-login</v-icon>
               </v-btn>
             </v-form>
-            <!-- </v-card-text> -->
-            <!-- </v-card>
-            </v-col> -->
-            <!-- </v-row> -->
           </v-card-text>
         </div>
       </v-card>
-      <!-- </v-col>
-      </v-row> -->
     </div>
-    <!-- </v-container> -->
-    <!-- </v-main> -->
   </v-app>
 </template>
 <script>
@@ -66,7 +42,6 @@ import Notification from '../../../components/Notification.vue'
 import { mapActions } from 'vuex'
 export default {
   layout: "login",
-
   data() {
     return {
       email: '',
@@ -81,51 +56,13 @@ export default {
       }
     }
   },
-  mounted() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  },
-  beforeDestroy() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  },
+
   components: {
     Notification,
-    // FontAwesomeIcon,
   },
   methods: {
-    // async loginAuto() {
-    //   console.log('auto login')
-    //   const payload = {
-    //     mem_id: this.email,
-    //     mem_pwd: this.password,
-    //   }
-    //   try {
-    //     await this.$auth.loginWith('local', {
-    //       data: payload,
-    //     })
-    //     this.$router.push('/')
-    //   } catch (e) {
-    //     this.$router.push('/login')
-    //   }
-    // },
-    ...mapActions(['initProduct', 'initPayment', 'initCurrency', 'initClient', 'initUnit']),
-    handleKeyDown(event) {
-      if (this.timer) {
-        clearInterval(this.timer)
-      }
-      if (event.key == 'Enter') {
-        if (this.barcode) {
-          console.log("Do something we got barcode: "+this.barcode);
-        }
-        this.barcode = '';
-        return
-      }
-      if (event.key != 'Shift') {
-        this.barcode += event.key;
-      }
-      this.timer = setInterval(() => this.barcode = '', 20);
-
-      console.log(`Key is pressing ${event.key}`);
-    },
+    ...mapActions(['initProduct', 'initPayment', 'initCurrency', 'initClient', 'initUnit','initTerminal','initLocation']),
+   
     async userLogin() {
       try {
         this.isLoading = true
@@ -143,6 +80,8 @@ export default {
           await this.loadCustomer()
           await this.loadUnit()
           await this.loadCurrency()
+          await this.loadTerminal()
+          await this.loadLocation()
           this.$router.push('/admin')
         } else {
           console.log('No token')
@@ -170,6 +109,19 @@ export default {
         })
       this.isLoading = false
     },
+    async loadLocation() {
+      this.isloading = true
+      await this.$axios
+        .get(`api/location/find`)
+        .then((res) => {
+          this.initLocation(res.data)
+        })
+        .catch((er) => {
+          swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
+          console.log('Error ===>: ' + er)
+        })
+      this.isloading = false
+    },
     async loadUnit() {
       this.isLoading = true
       this.unitList = [];
@@ -190,6 +142,18 @@ export default {
         .get('api/client/find')
         .then((res) => {
           this.initClient(res.data)
+        })
+        .catch((er) => {
+          console.log('Data: ' + er)
+        })
+      this.isLoading = false
+    },
+    async loadTerminal() {
+      this.isLoading = true
+      await this.$axios
+        .get('api/terminal/find')
+        .then((res) => {
+          this.initTerminal(res.data)
         })
         .catch((er) => {
           console.log('Data: ' + er)
@@ -222,49 +186,6 @@ export default {
         })
       this.isLoading = false
     },
-    //  async login() {
-    //     this.isLoading = true
-    //     this.errorMessage = ''
-    //     const payload = {
-    //       mem_id: this.email,
-    //       mem_pwd: this.password,
-    //     }
-    //     console.log("Loading from server: "+this.isLoading);
-    //     await this.$axios
-    //       .post('mem_auth', payload)
-    //       .then((res) => {
-    //         console.log('RES: ' + res.data)
-    //         const resData = res.data
-    //         console.log('Status: ' + res.status)
-    //         if (res.status !== 200) {
-    //           this.isLoading = false
-    //           this.errorMessage = 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ'
-    //           return
-    //         }
-
-    //         console.log('Token: ' + resData.accessToken)
-    //         if (resData.accessToken) {
-    //           console.log('Get token')
-    //           const payload = {
-    //             name: resData.userName,
-    //             id: resData.userId,
-    //             phone: resData.userPhone,
-    //             token: resData.accessToken,
-    //           }
-    //           this.$store.dispatch('login', payload)
-    //           console.log(this.$store.getters.oggedInUser)
-    //           this.$router.push('/admin')
-    //         } else {
-    //           console.log('No token')
-    //           this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
-    //         }
-    //       })
-    //       .catch((er) => {
-    //         console.log('Server error: ' + er)
-    //         this.errorMessage = er.data
-    //       })
-    //     this.isLoading = false
-    //   },
   },
 }
 </script>

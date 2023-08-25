@@ -13,21 +13,48 @@
       </v-list>
     </v-navigation-drawer>
     <v-main>
+      <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
+        <v-card>
+          <v-card-title>ເລືອກ Terminal {{ findSelectedTerminal }}</v-card-title>
+          <v-divider></v-divider>
+          <v-card-text style="height: 300px;">
+            <v-radio-group v-model="terminalSelected" column>
+              <v-radio v-for="terminal in findAllTerminal" :key="terminal.id"
+                :label="terminal.name + ' - ' + terminal.description" :value="terminal.id"></v-radio>
+              <!-- <v-radio label="Bahrain" value="bahrain"></v-radio>
+                        <v-radio label="Bangladesh" value="bangladesh"></v-radio> -->
+            </v-radio-group>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn color="blue-darken-1" variant="text" @click="switchTerminal">
+              ເລືອກ
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
       <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1 user: {{ user.cus_name }} id: {{ user.id }} </span>
+      <v-spacer></v-spacer>
+      <v-chip v-if="findSelectedTerminal" class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
+         {{ currentTerminal['name'] }}
+      </v-chip>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 export default {
   // layout:"empty",
   data() {
     return {
+      terminalDialog: false,
+      terminalSelected: this.findSelectedTerminal,
       clipped: false,
       drawer: true,
       fixed: true,
@@ -51,6 +78,11 @@ export default {
           icon: 'mdi mdi-warehouse',
           title: 'Warehouse',
           to: '/admin/location',
+        },
+        {
+          icon: 'mdi mdi-network-pos',
+          title: 'terminal',
+          to: '/admin/terminal',
         },
         {
           icon: 'mdi mdi-account-box-multiple-outline',
@@ -208,10 +240,25 @@ export default {
       title: 'Vuetify.js',
     }
   },
+  mounted() {
+    this.terminalSelected = this.findSelectedTerminal
+  },
   computed: {
+    ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
     user() {
       return this.$auth.user || ''
-    }
+    }, 
+    currentTerminal() {
+      console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
+      return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+    },
+  },
+  methods: {
+    switchTerminal() {
+      this.setSelectedTerminal(this.terminalSelected)
+      this.terminalDialog = false
+    },
+    ...mapActions(['setSelectedTerminal']),
   }
 }
 </script>
