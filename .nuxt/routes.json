@@ -3,318 +3,371 @@
     "name": "admin",
     "path": "/admin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/index.vue",
-    "chunkName": "pages/admin/index"
+    "chunkName": "pages/admin/index",
+    "_name": "_3f4190a6"
   },
   {
     "name": "home",
     "path": "/home",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/home/index.vue",
-    "chunkName": "pages/home/index"
+    "chunkName": "pages/home/index",
+    "_name": "_fb64be52"
   },
   {
     "name": "pos",
     "path": "/pos",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/pos/index.vue",
-    "chunkName": "pages/pos/index"
+    "chunkName": "pages/pos/index",
+    "_name": "_86ba6d9c"
   },
   {
     "name": "product",
     "path": "/product",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/product/index.vue",
-    "chunkName": "pages/product/index"
+    "chunkName": "pages/product/index",
+    "_name": "_7572f6e6"
   },
   {
     "name": "admin-advertise",
     "path": "/admin/advertise",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/advertise/index.vue",
-    "chunkName": "pages/admin/advertise/index"
+    "chunkName": "pages/admin/advertise/index",
+    "_name": "_a7842ff6"
   },
   {
     "name": "admin-ap",
     "path": "/admin/ap",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ap/index.vue",
-    "chunkName": "pages/admin/ap/index"
+    "chunkName": "pages/admin/ap/index",
+    "_name": "_0f7f0467"
   },
   {
     "name": "admin-ar",
     "path": "/admin/ar",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ar/index.vue",
-    "chunkName": "pages/admin/ar/index"
+    "chunkName": "pages/admin/ar/index",
+    "_name": "_394869e9"
   },
   {
     "name": "admin-bank",
     "path": "/admin/bank",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/bank/index.vue",
-    "chunkName": "pages/admin/bank/index"
+    "chunkName": "pages/admin/bank/index",
+    "_name": "_66ede218"
   },
   {
     "name": "admin-campaign",
     "path": "/admin/campaign",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/campaign/index.vue",
-    "chunkName": "pages/admin/campaign/index"
+    "chunkName": "pages/admin/campaign/index",
+    "_name": "_7dddfa48"
   },
   {
     "name": "admin-cancel_order",
     "path": "/admin/cancel_order",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/cancel_order/index.vue",
-    "chunkName": "pages/admin/cancel_order/index"
+    "chunkName": "pages/admin/cancel_order/index",
+    "_name": "_180344c1"
   },
   {
     "name": "admin-category",
     "path": "/admin/category",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/category/index.vue",
-    "chunkName": "pages/admin/category/index"
+    "chunkName": "pages/admin/category/index",
+    "_name": "_692824b6"
   },
   {
     "name": "admin-client",
     "path": "/admin/client",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/client/index.vue",
-    "chunkName": "pages/admin/client/index"
+    "chunkName": "pages/admin/client/index",
+    "_name": "_fea63afa"
   },
   {
     "name": "admin-cod_order",
     "path": "/admin/cod_order",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/cod_order/index.vue",
-    "chunkName": "pages/admin/cod_order/index"
+    "chunkName": "pages/admin/cod_order/index",
+    "_name": "_6e83a9a5"
   },
   {
     "name": "admin-currency",
     "path": "/admin/currency",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/currency/index.vue",
-    "chunkName": "pages/admin/currency/index"
+    "chunkName": "pages/admin/currency/index",
+    "_name": "_5dc6dc09"
   },
   {
     "name": "admin-customer",
     "path": "/admin/customer",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/customer/index.vue",
-    "chunkName": "pages/admin/customer/index"
+    "chunkName": "pages/admin/customer/index",
+    "_name": "_574e60d4"
   },
   {
     "name": "admin-customer_request",
     "path": "/admin/customer_request",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/customer_request/index.vue",
-    "chunkName": "pages/admin/customer_request/index"
+    "chunkName": "pages/admin/customer_request/index",
+    "_name": "_5d7d59e6"
   },
   {
     "name": "admin-location",
     "path": "/admin/location",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/location/index.vue",
-    "chunkName": "pages/admin/location/index"
+    "chunkName": "pages/admin/location/index",
+    "_name": "_848362a6"
   },
   {
     "name": "admin-login",
     "path": "/admin/login",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/login/index.vue",
-    "chunkName": "pages/admin/login/index"
+    "chunkName": "pages/admin/login/index",
+    "_name": "_300d3e47"
   },
   {
     "name": "admin-logout",
     "path": "/admin/logout",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/logout/index.vue",
-    "chunkName": "pages/admin/logout/index"
+    "chunkName": "pages/admin/logout/index",
+    "_name": "_3f9e2182"
   },
   {
     "name": "admin-member",
     "path": "/admin/member",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/member/index.vue",
-    "chunkName": "pages/admin/member/index"
+    "chunkName": "pages/admin/member/index",
+    "_name": "_28458292"
   },
   {
     "name": "admin-minstock",
     "path": "/admin/minstock",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/minstock/index.vue",
-    "chunkName": "pages/admin/minstock/index"
+    "chunkName": "pages/admin/minstock/index",
+    "_name": "_1d174c3c"
   },
   {
     "name": "admin-orders",
     "path": "/admin/orders",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/orders/index.vue",
-    "chunkName": "pages/admin/orders/index"
+    "chunkName": "pages/admin/orders/index",
+    "_name": "_4f34b91d"
   },
   {
     "name": "admin-ordersFromPos",
     "path": "/admin/ordersFromPos",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPos/index.vue",
-    "chunkName": "pages/admin/ordersFromPos/index"
+    "chunkName": "pages/admin/ordersFromPos/index",
+    "_name": "_ff84b6fa"
   },
   {
     "name": "admin-ordersFromPosCancel",
     "path": "/admin/ordersFromPosCancel",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPosCancel/index.vue",
-    "chunkName": "pages/admin/ordersFromPosCancel/index"
+    "chunkName": "pages/admin/ordersFromPosCancel/index",
+    "_name": "_295e189d"
   },
   {
     "name": "admin-ordersFromPosCredit",
     "path": "/admin/ordersFromPosCredit",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/ordersFromPosCredit/index.vue",
-    "chunkName": "pages/admin/ordersFromPosCredit/index"
+    "chunkName": "pages/admin/ordersFromPosCredit/index",
+    "_name": "_36d97b48"
   },
   {
     "name": "admin-po",
     "path": "/admin/po",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/po/index.vue",
-    "chunkName": "pages/admin/po/index"
+    "chunkName": "pages/admin/po/index",
+    "_name": "_23f9fb92"
   },
   {
     "name": "admin-product",
     "path": "/admin/product",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/product/index.vue",
-    "chunkName": "pages/admin/product/index"
+    "chunkName": "pages/admin/product/index",
+    "_name": "_57be90e6"
   },
   {
     "name": "admin-productInuse",
     "path": "/admin/productInuse",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/productInuse.vue",
-    "chunkName": "pages/admin/productInuse"
+    "chunkName": "pages/admin/productInuse",
+    "_name": "_ae16b5f0"
   },
   {
     "name": "admin-quotation",
     "path": "/admin/quotation",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/quotation/index.vue",
-    "chunkName": "pages/admin/quotation/index"
+    "chunkName": "pages/admin/quotation/index",
+    "_name": "_85a6c9ac"
   },
   {
     "name": "admin-quotationList",
     "path": "/admin/quotationList",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/quotationList/index.vue",
-    "chunkName": "pages/admin/quotationList/index"
+    "chunkName": "pages/admin/quotationList/index",
+    "_name": "_69ec6a30"
   },
   {
     "name": "admin-report",
     "path": "/admin/report",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/report/index.vue",
-    "chunkName": "pages/admin/report/index"
+    "chunkName": "pages/admin/report/index",
+    "_name": "_3fa356a8"
   },
   {
     "name": "admin-report_card",
     "path": "/admin/report_card",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/report_card/index.vue",
-    "chunkName": "pages/admin/report_card/index"
+    "chunkName": "pages/admin/report_card/index",
+    "_name": "_cf12bd4e"
   },
   {
     "name": "admin-rider",
     "path": "/admin/rider",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/rider/index.vue",
-    "chunkName": "pages/admin/rider/index"
+    "chunkName": "pages/admin/rider/index",
+    "_name": "_69422418"
   },
   {
     "name": "admin-terminal",
     "path": "/admin/terminal",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/terminal/index.vue",
-    "chunkName": "pages/admin/terminal/index"
+    "chunkName": "pages/admin/terminal/index",
+    "_name": "_eff29698"
   },
   {
     "name": "admin-transfer",
     "path": "/admin/transfer",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/transfer/index.vue",
-    "chunkName": "pages/admin/transfer/index"
+    "chunkName": "pages/admin/transfer/index",
+    "_name": "_0af1c93a"
   },
   {
     "name": "admin-txn",
     "path": "/admin/txn",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/txn/index.vue",
-    "chunkName": "pages/admin/txn/index"
+    "chunkName": "pages/admin/txn/index",
+    "_name": "_153c2e70"
   },
   {
     "name": "admin-txn_type",
     "path": "/admin/txn_type",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/txn_type/index.vue",
-    "chunkName": "pages/admin/txn_type/index"
+    "chunkName": "pages/admin/txn_type/index",
+    "_name": "_69aba667"
   },
   {
     "name": "admin-user",
     "path": "/admin/user",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/user/index.vue",
-    "chunkName": "pages/admin/user/index"
+    "chunkName": "pages/admin/user/index",
+    "_name": "_22378dc3"
   },
   {
     "name": "admin-walletin",
     "path": "/admin/walletin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/walletin/index.vue",
-    "chunkName": "pages/admin/walletin/index"
+    "chunkName": "pages/admin/walletin/index",
+    "_name": "_66bfd696"
   },
   {
     "name": "admin-walletout",
     "path": "/admin/walletout",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/walletout/index.vue",
-    "chunkName": "pages/admin/walletout/index"
+    "chunkName": "pages/admin/walletout/index",
+    "_name": "_4182d9da"
   },
   {
     "name": "admin-customer_request-topup",
     "path": "/admin/customer_request/topup",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/customer_request/topup.vue",
-    "chunkName": "pages/admin/customer_request/topup"
+    "chunkName": "pages/admin/customer_request/topup",
+    "_name": "_8c123e78"
   },
   {
     "name": "admin-customer_request-withdraw",
     "path": "/admin/customer_request/withdraw",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/customer_request/withdraw.vue",
-    "chunkName": "pages/admin/customer_request/withdraw"
+    "chunkName": "pages/admin/customer_request/withdraw",
+    "_name": "_62b820b4"
   },
   {
     "name": "admin-product-productlist",
     "path": "/admin/product/productlist",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/product/productlist.vue",
-    "chunkName": "pages/admin/product/productlist"
+    "chunkName": "pages/admin/product/productlist",
+    "_name": "_69d97df0"
   },
   {
     "name": "admin-advertise-mixins-ImagePreviewMixin",
     "path": "/admin/advertise/mixins/ImagePreviewMixin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/advertise/mixins/ImagePreviewMixin.vue",
-    "chunkName": "pages/admin/advertise/mixins/ImagePreviewMixin"
+    "chunkName": "pages/admin/advertise/mixins/ImagePreviewMixin",
+    "_name": "_71582f54"
   },
   {
     "name": "admin-product-mixins-ImagePreviewMixin",
     "path": "/admin/product/mixins/ImagePreviewMixin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/product/mixins/ImagePreviewMixin.vue",
-    "chunkName": "pages/admin/product/mixins/ImagePreviewMixin"
+    "chunkName": "pages/admin/product/mixins/ImagePreviewMixin",
+    "_name": "_1486e2cc"
   },
   {
     "name": "admin-PDFInvoice-id",
     "path": "/admin/PDFInvoice/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/PDFInvoice/_id/index.vue",
-    "chunkName": "pages/admin/PDFInvoice/_id/index"
+    "chunkName": "pages/admin/PDFInvoice/_id/index",
+    "_name": "_cf9888c4"
   },
   {
     "name": "admin-PDFQuotation-id",
     "path": "/admin/PDFQuotation/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/PDFQuotation/_id/index.vue",
-    "chunkName": "pages/admin/PDFQuotation/_id/index"
+    "chunkName": "pages/admin/PDFQuotation/_id/index",
+    "_name": "_848a0606"
   },
   {
     "name": "admin-PDFTicket-id",
     "path": "/admin/PDFTicket/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/PDFTicket/_id/index.vue",
-    "chunkName": "pages/admin/PDFTicket/_id/index"
+    "chunkName": "pages/admin/PDFTicket/_id/index",
+    "_name": "_4c411287"
   },
   {
     "name": "admin-PDFTransfer-id",
     "path": "/admin/PDFTransfer/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/PDFTransfer/_id/index.vue",
-    "chunkName": "pages/admin/PDFTransfer/_id/index"
+    "chunkName": "pages/admin/PDFTransfer/_id/index",
+    "_name": "_e5bc7834"
   },
   {
     "name": "admin-product-id",
     "path": "/admin/product/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/product/_id/index.vue",
-    "chunkName": "pages/admin/product/_id/index"
+    "chunkName": "pages/admin/product/_id/index",
+    "_name": "_558943f8"
   },
   {
     "name": "admin-stock-id",
     "path": "/admin/stock/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/stock/_id/index.vue",
-    "chunkName": "pages/admin/stock/_id/index"
+    "chunkName": "pages/admin/stock/_id/index",
+    "_name": "_2a591ac2"
   },
   {
     "name": "product-id",
     "path": "/product/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/product/_id/index.vue",
-    "chunkName": "pages/product/_id/index"
+    "chunkName": "pages/product/_id/index",
+    "_name": "_750090f8"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_66a204ad"
   }
 ]

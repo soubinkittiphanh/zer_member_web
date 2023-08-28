@@ -95,18 +95,6 @@
   "OrderSumaryCardPos": {
     "description": "Auto imported from components/orderSumaryCardPos.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
-  "CardCampaignCard": {
-    "description": "Auto imported from components/card/campaignCard.vue"
-  },
-  "CardForm": {
-    "description": "Auto imported from components/card/cardForm.vue"
-  },
-  "DialogsBottomAlert": {
-    "description": "Auto imported from components/dialogs/bottomAlert.vue"
-  },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
   },
@@ -115,6 +103,15 @@
   },
   "AccountingGeneralLedgerForm": {
     "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
+  },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
+  "CardCampaignCard": {
+    "description": "Auto imported from components/card/campaignCard.vue"
+  },
+  "CardForm": {
+    "description": "Auto imported from components/card/cardForm.vue"
   },
   "CustomerForm": {
     "description": "Auto imported from components/customer/CustomerForm.vue"
@@ -127,6 +124,9 @@
   },
   "DashboardCardOnTop": {
     "description": "Auto imported from components/dashboard/CardOnTop.vue"
+  },
+  "DialogsBottomAlert": {
+    "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
