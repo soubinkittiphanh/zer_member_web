@@ -455,6 +455,7 @@ export default {
             this.transaction.total = this.grandTotal
             this.transaction.referenceNo = this.headerId
             this.transaction.lines = draftInvoiceLine
+            this.transaction.discount = replaceAll(this.transaction.discount, ',', '')
             this.transaction.locationId = this.currentTerminal['locationId']
             console.log(`Amount total ${this.transaction.total}`);
             // ********** If header has data, that means we go for update API ********** //
@@ -500,6 +501,8 @@ export default {
             this.errorLineNumber = null
             this.transaction.userId = this.user.id
             this.transaction.total = this.grandTotal
+            this.transaction.discount = replaceAll(this.transaction.discount, ',', '')
+            this.transaction.locationId = this.currentTerminal['locationId']
             console.log(`Amount total ${this.transaction.total}`);
 
 

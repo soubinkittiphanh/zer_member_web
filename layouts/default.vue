@@ -162,11 +162,11 @@ export default {
         //   title: 'Campaign manager',
         //   to: '/admin/campaign',
         // },
-        // {
-        //   icon: 'mdi-account',
-        //   title: 'ຈັດການລູກຄ້າ',
-        //   to: '/admin/customer',
-        // },
+        {
+          icon: 'mdi-account',
+          title: 'ຜູ້ໃຊ້ງານ',
+          to: '/admin/user',
+        },
         {
           // <i class="fas fa-money-check-edit-alt"></i>
           icon: 'mdi-receipt-text-arrow-right-outline',

@@ -31,15 +31,7 @@
               </table>
             </v-col>
           </v-row>
-
-          <!-- <div class="mt-6 mb-6">
-            <img :src="companyLogo" width="200px" />
-          </div> -->
         </div>
-        <!-- <h1 style="text-align: center;">CHITHANH MINIMART</h1> -->
-        <!-- <p class="text-color" style="font-size: 11pt; font-weight: bold; text-align: center">
-          Company addres here ...
-        </p> -->
         <p class="text-color" style="font-size: 21pt; font-weight: bold; text-align: center">
           ໃບແຈ້ງໜີ້ / Invoice
         </p>
@@ -47,7 +39,7 @@
         <div v-if="header">
           <v-row>
             <v-col cols="6">
-              <table class="table-layout" style="font-size: larger; font-weight: bold;">
+              <table class="table-layout" style="font-size: 12pt; font-weight: bold;">
                 <tbody>
                   <tr style="white-space: nowrap">
                     <td> Customer ID: {{ header.client.id }}</td>
@@ -66,7 +58,7 @@
             </v-col>
             <v-col cols="6" align-self="end">
 
-              <table class="table-layout" style="font-size: larger; font-weight: bold;">
+              <table class="table-layout" style="font-size: 12pt; font-weight: bold;">
                 <tbody style="text-align: right;">
                   <tr style="white-space: nowrap">
                     <td> Invoice No: {{ header.id }}</td>
@@ -83,10 +75,6 @@
           </v-row>
         </div>
         <v-divider></v-divider>
-        <!-- title 7 -->
-        <!-- <div class="title-space">
-          <b class="text-color heading-14">2. ລາຍການສິນຄ້າ</b>
-        </div> -->
         <div v-if="header">
           <table class="table table-layout" style="border-collapse: collapse;" width="100%">
             <thead>
@@ -97,7 +85,7 @@
                 <th style="width: 80px">Unit</th>
                 <!-- <th style="width: 80px">Rate</th> -->
                 <th style="width: 100px">Price</th>
-                <th style="width: 100px">Discount</th>
+                <!-- <th style="width: 100px">Discount</th> -->
                 <th style="width: 70px">Amount</th>
               </tr>
             </thead>
@@ -110,8 +98,8 @@
                   <td style="text-align: right;">{{ line.unit.name }}</td>
                   <!-- <td style="text-align: right;">{{ line.unit.unitRate }}</td> -->
                   <td style="text-align: right;">{{ formatNumber(line.price) }}</td>
-                  <td style="text-align: right;">{{ formatNumber(line.discount) }}</td>
-                  <td style="text-align: right;">{{ formatNumber(line.total) }}</td>
+                  <!-- <td style="text-align: right;">{{ formatNumber(line.discount) }}</td> -->
+                  <td style="text-align: right;">{{ formatNumber(line.total+line.discount) }}</td>
                 </tr>
               </div>
               <div v-else style="display: contents">
@@ -120,8 +108,11 @@
                 </tr>
               </div>
               <tr class="page-break">
-
-                <td style="text-align: right; font-weight: bold;" colspan="6">ລາຄາລວມ </td>
+                <td style="text-align: right; font-weight: bold;" colspan="5">Discount </td>
+                <td style="text-align: right; font-weight: bold;"> {{ formatNumber(totalDiscount) }}</td>
+              </tr>
+              <tr class="page-break">
+                <td style="text-align: right; font-weight: bold;" colspan="5">ລາຄາລວມ </td>
                 <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total) }}</td>
               </tr>
             </tbody>
@@ -188,6 +179,14 @@ export default {
 
   computed: {
     ...mapGetters(['cartOfProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findAllProduct']),
+    totalDiscount(){
+      let totalDiscount = 0
+      for (const iterator of this.header.lines) {
+        totalDiscount+=iterator['discount']
+      }
+      totalDiscount+=this.header.discount
+      return totalDiscount
+    }
 
   },
   async created() {
@@ -342,7 +341,8 @@ th {
 }
 
 .table td {
-  font-size: 10pt;
+  font-size: 12pt;
+  /* font-weight: bold; */
 }
 
 

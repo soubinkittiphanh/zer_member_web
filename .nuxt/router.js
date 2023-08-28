@@ -41,6 +41,7 @@ const _eff29698 = () => interopDefault(import('../pages/admin/terminal/index.vue
 const _0af1c93a = () => interopDefault(import('../pages/admin/transfer/index.vue' /* webpackChunkName: "pages/admin/transfer/index" */))
 const _153c2e70 = () => interopDefault(import('../pages/admin/txn/index.vue' /* webpackChunkName: "pages/admin/txn/index" */))
 const _69aba667 = () => interopDefault(import('../pages/admin/txn_type/index.vue' /* webpackChunkName: "pages/admin/txn_type/index" */))
+const _22378dc3 = () => interopDefault(import('../pages/admin/user/index.vue' /* webpackChunkName: "pages/admin/user/index" */))
 const _66bfd696 = () => interopDefault(import('../pages/admin/walletin/index.vue' /* webpackChunkName: "pages/admin/walletin/index" */))
 const _4182d9da = () => interopDefault(import('../pages/admin/walletout/index.vue' /* webpackChunkName: "pages/admin/walletout/index" */))
 const _8c123e78 = () => interopDefault(import('../pages/admin/customer_request/topup.vue' /* webpackChunkName: "pages/admin/customer_request/topup" */))
@@ -216,6 +217,10 @@ export const routerOptions = {
     path: "/admin/txn_type",
     component: _69aba667,
     name: "admin-txn_type"
+  }, {
+    path: "/admin/user",
+    component: _22378dc3,
+    name: "admin-user"
   }, {
     path: "/admin/walletin",
     component: _66bfd696,

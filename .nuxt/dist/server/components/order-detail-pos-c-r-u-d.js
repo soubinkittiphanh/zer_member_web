@@ -30,7 +30,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 299:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -229,7 +229,7 @@ var VTextField = __webpack_require__(30);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(311);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=5fcf51ba&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/OrderDetailPosCRUD.vue?vue&type=template&id=4c28edf6&
 
 
 
@@ -247,7 +247,7 @@ var VTextarea = __webpack_require__(311);
 
 
 
-var OrderDetailPosCRUDvue_type_template_id_5fcf51ba_render = function render() {
+var OrderDetailPosCRUDvue_type_template_id_4c28edf6_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c(VDialog["a" /* default */], {
@@ -695,10 +695,10 @@ var OrderDetailPosCRUDvue_type_template_id_5fcf51ba_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=5fcf51ba&
+// CONCATENATED MODULE: ./components/OrderDetailPosCRUD.vue?vue&type=template&id=4c28edf6&
 
 // EXTERNAL MODULE: ./plugins/comma-thousand.js
-var comma_thousand = __webpack_require__(299);
+var comma_thousand = __webpack_require__(297);
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(13);
@@ -990,6 +990,7 @@ var common = __webpack_require__(18);
       this.transaction.total = this.grandTotal;
       this.transaction.referenceNo = this.headerId;
       this.transaction.lines = draftInvoiceLine;
+      this.transaction.discount = Object(common["i" /* replaceAll */])(this.transaction.discount, ',', '');
       this.transaction.locationId = this.currentTerminal['locationId'];
       console.log(`Amount total ${this.transaction.total}`);
       // ********** If header has data, that means we go for update API ********** //
@@ -1030,6 +1031,8 @@ var common = __webpack_require__(18);
       this.errorLineNumber = null;
       this.transaction.userId = this.user.id;
       this.transaction.total = this.grandTotal;
+      this.transaction.discount = Object(common["i" /* replaceAll */])(this.transaction.discount, ',', '');
+      this.transaction.locationId = this.currentTerminal['locationId'];
       console.log(`Amount total ${this.transaction.total}`);
       if (this.isUpdate) {
         // ********** If header has data, that means we go for update API ********** //
@@ -1187,7 +1190,7 @@ function injectStyles (context) {
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_OrderDetailPosCRUDvue_type_script_lang_js_,
-  OrderDetailPosCRUDvue_type_template_id_5fcf51ba_render,
+  OrderDetailPosCRUDvue_type_template_id_4c28edf6_render,
   staticRenderFns,
   false,
   injectStyles,

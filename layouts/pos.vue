@@ -460,11 +460,11 @@ export default {
             <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
             <h5> Tel 020 7777 5660 </h5>
             <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
-            <hr> </hr>
+            <hr style="margin-top: 50px;"> </hr>
             ${txnListHtml}
             <hr> </hr>
             ${totalHtml}
-            <h2 style="text-align: center;"> THANKYOU </h2>
+            <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
             
           </body>
           </html>

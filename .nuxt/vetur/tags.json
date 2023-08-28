@@ -80,6 +80,9 @@
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
   },
+  "UserForm": {
+    "description": "Auto imported from components/UserForm.vue"
+  },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
@@ -101,17 +104,8 @@
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
   },
-  "DashboardCardGrouping": {
-    "description": "Auto imported from components/dashboard/CardGrouping.vue"
-  },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
-  },
   "DialogsBottomAlert": {
     "description": "Auto imported from components/dialogs/bottomAlert.vue"
-  },
-  "Menu": {
-    "description": "Auto imported from components/menu/index.vue"
   },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
@@ -127,6 +121,15 @@
   },
   "CustomerList": {
     "description": "Auto imported from components/customer/CustomerList.vue"
+  },
+  "DashboardCardGrouping": {
+    "description": "Auto imported from components/dashboard/CardGrouping.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
+  },
+  "Menu": {
+    "description": "Auto imported from components/menu/index.vue"
   },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"

@@ -1,4 +1,4 @@
-exports.ids = [89,40];
+exports.ids = [90,40];
 exports.modules = {
 
 /***/ 296:
@@ -126,13 +126,13 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 315:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(316);
+var content = __webpack_require__(313);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -140,7 +140,7 @@ __webpack_require__(5).default("7b5d4dc6", content, true)
 
 /***/ }),
 
-/***/ 316:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -168,11 +168,11 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 346:
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
+/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(312);
 /* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(140);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__);
@@ -280,7 +280,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 380:
+/***/ 381:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -297,7 +297,7 @@ var VCard = __webpack_require__(101);
 var components_VCard = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCheckbox/VCheckbox.js
-var VCheckbox = __webpack_require__(346);
+var VCheckbox = __webpack_require__(340);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(273);
@@ -540,7 +540,7 @@ installComponents(component, {LoadingIndicator: __webpack_require__(115).default
 
 /***/ }),
 
-/***/ 520:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -727,7 +727,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./pages/admin/rider/index.vue?vue&type=template&id=cc508110&
 
 // EXTERNAL MODULE: ./components/RiderForm.vue + 4 modules
-var RiderForm = __webpack_require__(380);
+var RiderForm = __webpack_require__(381);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/admin/rider/index.vue?vue&type=script&lang=js&
 
@@ -846,7 +846,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var rider = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {RiderForm: __webpack_require__(380).default,LoadingIndicator: __webpack_require__(115).default})
+installComponents(component, {RiderForm: __webpack_require__(381).default,LoadingIndicator: __webpack_require__(115).default})
 
 
 /***/ })

@@ -222,6 +222,12 @@
     "chunkName": "pages/admin/txn_type/index"
   },
   {
+    "name": "admin-user",
+    "path": "/admin/user",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/user/index.vue",
+    "chunkName": "pages/admin/user/index"
+  },
+  {
     "name": "admin-walletin",
     "path": "/admin/walletin",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/online_store/web/dcommerce_web/pages/admin/walletin/index.vue",

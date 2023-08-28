@@ -42,7 +42,7 @@
         <div v-if="header">
           <v-row>
             <v-col cols="6">
-              <table class="table-layout" style="font-size: larger; font-weight: bold;">
+              <table class="table-layout" style="font-size: 12pt; font-weight: bold;">
                 <tbody>
                   <tr style="white-space: nowrap">
                     <td> Customer ID: {{ header.client.id }}</td>
@@ -61,7 +61,7 @@
             </v-col>
             <v-col cols="6" align-self="end">
 
-              <table class="table-layout" style="font-size: larger; font-weight: bold;">
+              <table class="table-layout" style="font-size: 12pt; font-weight: bold;">
                 <tbody style="text-align: right;">
                   <tr style="white-space: nowrap">
                     <td> Quotation No: {{ header.id }}</td>
@@ -92,7 +92,7 @@
                 <th style="width: 80px">Unit</th>
                 <!-- <th style="width: 80px">Rate</th> -->
                 <th style="width: 100px">Price</th>
-                <th style="width: 100px">Discount</th>
+                <!-- <th style="width: 100px">Discount</th> -->
                 <th style="width: 70px">Amount</th>
               </tr>
             </thead>
@@ -105,8 +105,8 @@
                   <td style="text-align: right;">{{ line.unit.name }}</td>
                   <!-- <td style="text-align: right;">{{ line.unit.unitRate }}</td> -->
                   <td style="text-align: right;">{{ formatNumber(line.price) }}</td>
-                  <td style="text-align: right;">{{ formatNumber(line.discount) }}</td>
-                  <td style="text-align: right;">{{ formatNumber(line.total) }}</td>
+                  <!-- <td style="text-align: right;">{{ formatNumber(line.discount) }}</td> -->
+                  <td style="text-align: right;">{{ formatNumber(line.total+line.discount) }}</td>
                 </tr>
               </div>
               <div v-else style="display: contents">
@@ -115,8 +115,12 @@
                 </tr>
               </div>
               <tr class="page-break">
+                <td style="text-align: right; font-weight: bold;" colspan="5">Discount </td>
+                <td style="text-align: right; font-weight: bold;"> {{ formatNumber(totalDiscount) }}</td>
+              </tr>
+              <tr class="page-break">
 
-                <td style="text-align: right; font-weight: bold;" colspan="6">ລາຄາລວມ </td>
+                <td style="text-align: right; font-weight: bold;" colspan="5">ລາຄາລວມ </td>
                 <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total) }}</td>
               </tr>
             </tbody>
@@ -182,7 +186,14 @@ export default {
 
   computed: {
     ...mapGetters(['cartOfProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findAllProduct']),
-
+    totalDiscount(){
+      let totalDiscount = 0
+      for (const iterator of this.header.lines) {
+        totalDiscount+=iterator['discount']
+      }
+      totalDiscount+=this.header.discount
+      return totalDiscount
+    }
   },
   async created() {
 
@@ -336,7 +347,8 @@ th {
 }
 
 .table td {
-  font-size: 10pt;
+  font-size: 12pt;
+  /* font-weight: bold; */
 }
 
 
