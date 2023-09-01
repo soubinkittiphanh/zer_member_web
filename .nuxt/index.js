@@ -13,17 +13,17 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_0db489bb from 'nuxt_plugin_plugin_0db489bb' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_3c62e7da from 'nuxt_plugin_plugin_3c62e7da' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_fontawesome_2cf607d3 from 'nuxt_plugin_fontawesome_2cf607d3' // Source: ./fontawesome.js (mode: 'all')
-import nuxt_plugin_axios_e039955e from 'nuxt_plugin_axios_e039955e' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_e2278e14 from 'nuxt_plugin_plugin_e2278e14' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_51d09eb8 from 'nuxt_plugin_plugin_51d09eb8' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_fontawesome_bef70164 from 'nuxt_plugin_fontawesome_bef70164' // Source: ./fontawesome.js (mode: 'all')
+import nuxt_plugin_axios_0f93a50c from 'nuxt_plugin_axios_0f93a50c' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_jspdfinvoice_24aa2464 from 'nuxt_plugin_jspdfinvoice_24aa2464' // Source: ../plugins/jspdf-invoice.js (mode: 'client')
 import nuxt_plugin_vuesweetalert2_1def2d6e from 'nuxt_plugin_vuesweetalert2_1def2d6e' // Source: ../plugins/vue-sweetalert2 (mode: 'client')
 import nuxt_plugin_apexchart_56afe430 from 'nuxt_plugin_apexchart_56afe430' // Source: ../plugins/apex-chart.js (mode: 'client')
 import nuxt_plugin_fontawesome_b8db358e from 'nuxt_plugin_fontawesome_b8db358e' // Source: ../plugins/fontawesome.js (mode: 'client')
 import nuxt_plugin_html2canvas_557cc08e from 'nuxt_plugin_html2canvas_557cc08e' // Source: ../plugins/html2canvas.js (mode: 'client')
 import nuxt_plugin_echarts_30712fb1 from 'nuxt_plugin_echarts_30712fb1' // Source: ../plugins/echarts.js (mode: 'client')
-import nuxt_plugin_auth_83e7f482 from 'nuxt_plugin_auth_83e7f482' // Source: ./auth.js (mode: 'all')
+import nuxt_plugin_auth_1d0132a4 from 'nuxt_plugin_auth_1d0132a4' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -221,20 +221,20 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_0db489bb === 'function') {
-    await nuxt_plugin_plugin_0db489bb(app.context, inject)
+  if (typeof nuxt_plugin_plugin_e2278e14 === 'function') {
+    await nuxt_plugin_plugin_e2278e14(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_3c62e7da === 'function') {
-    await nuxt_plugin_plugin_3c62e7da(app.context, inject)
+  if (typeof nuxt_plugin_plugin_51d09eb8 === 'function') {
+    await nuxt_plugin_plugin_51d09eb8(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_fontawesome_2cf607d3 === 'function') {
-    await nuxt_plugin_fontawesome_2cf607d3(app.context, inject)
+  if (typeof nuxt_plugin_fontawesome_bef70164 === 'function') {
+    await nuxt_plugin_fontawesome_bef70164(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_e039955e === 'function') {
-    await nuxt_plugin_axios_e039955e(app.context, inject)
+  if (typeof nuxt_plugin_axios_0f93a50c === 'function') {
+    await nuxt_plugin_axios_0f93a50c(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_jspdfinvoice_24aa2464 === 'function') {
@@ -261,8 +261,8 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_echarts_30712fb1(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_auth_83e7f482 === 'function') {
-    await nuxt_plugin_auth_83e7f482(app.context, inject)
+  if (typeof nuxt_plugin_auth_1d0132a4 === 'function') {
+    await nuxt_plugin_auth_1d0132a4(app.context, inject)
   }
 
   // Lock enablePreview in context

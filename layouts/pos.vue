@@ -182,7 +182,7 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <v-btn @click="generatePrintView">ticket</v-btn>
+                            <!-- <v-btn @click="generatePrintView">ticket</v-btn> -->
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -556,7 +556,15 @@ export default {
                     this.newOrder()
                 })
                 .catch((er) => {
-                    swalError2(this.$swal, "Error", er.response.data)
+                    if(er.response.data.includes("#")){
+                        const id = er.response.data.split("#")[1]
+                        const productName = ''
+                        const product = this.findAllProduct.find(el=>el.id==id)
+                        console.log(`PRODUCT FILTER ${product}`);
+                        swalError2(this.$swal, "Error", `${er.response.data} ${product.pro_name}`)
+                    }else{
+                        swalError2(this.$swal, "Error", er.response.data)
+                    }
                 })
             this.isloading = false;
         },
