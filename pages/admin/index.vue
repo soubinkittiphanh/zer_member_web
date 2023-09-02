@@ -10,8 +10,8 @@
                 <v-divider></v-divider>
                 <v-card-text style="height: 300px;">
                     <v-radio-group v-model="terminalSelected" column>
-                        <v-radio v-for="terminal in findAllTerminal" :key="terminal.id" :label="terminal.name+' - '+terminal.description"
-                            :value="terminal.id"></v-radio>
+                        <v-radio v-for="terminal in findAllTerminal" :key="terminal.id"
+                            :label="terminal.name + ' - ' + terminal.description" :value="terminal.id"></v-radio>
                         <!-- <v-radio label="Bahrain" value="bahrain"></v-radio>
                         <v-radio label="Bangladesh" value="bangladesh"></v-radio> -->
                     </v-radio-group>
@@ -49,7 +49,7 @@
         <div class="mb-1">
             <v-card class="pa-1" style="background-color: transparent;">
                 <v-card-title style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
-                    OVERVIEW
+                    OVERVIEW 
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
@@ -145,13 +145,13 @@
         <div class="mb-1">
             <v-row>
                 <v-col cols="6" md="6" sm="6" xl="6">
-                    <v-card >
+                    <v-card>
                         <div ref="chart" style="width: 100%; height: 400px;"></div>
                         <!-- <apexchart :options="pieChartOption" :series="pieChartOption.barSeries"></apexchart> -->
                     </v-card>
                 </v-col>
                 <v-col cols="6" md="6" sm="6" xl="6" v-if="dailyState">
-                    <v-card >
+                    <v-card>
                         <apexchart :options="barOptionsForDailyStat" :series="barSeriesForDailyStat"></apexchart>
                     </v-card>
                 </v-col>
@@ -160,14 +160,16 @@
         <div class="mb-1" v-if="dailyState">
             <v-row>
                 <v-col cols="6" md="6" sm="6" xl="6">
-                    <v-card >
+                    <v-card>
                         <apexchart :options="barOptionsForMonthlyStat" :series="barSeriesForMonthlyStat"></apexchart>
                     </v-card>
                 </v-col>
 
             </v-row>
         </div>
-        <MinStockCard />
+        <div :key="minstockComponentsKey">
+            <MinStockCard v-if="currentSelectedLocation" />
+        </div>
 
     </div>
 </template>
@@ -189,8 +191,9 @@ export default {
     middleware: 'auths',
     data() {
         return {
-            terminalDialog:false,
+            terminalDialog: false,
             terminalSelected: null,
+            // displayMinstock:false,
             barOptionsForMonthlyStat: {
                 colors: [],
                 chart: {
@@ -282,6 +285,12 @@ export default {
                     svgIcon: require('~/assets/icons/patient.svg'),
                     path: '/admin/client'
                 },
+                {
+                    title: 'ຄົ້ນຫາອິນວອຍຄ້າງຈ່າຍ',
+                    // icon: 'mdi-warehouse',
+                    svgIcon: require('~/assets/icons/account-clock.svg'),
+                    path: '/admin/ordersFromPosSummaryByCustomer'
+                },
             ],
             yearlySale: [],
             menusOverview: [
@@ -324,7 +333,7 @@ export default {
                     id: 3,
                 },
             ],
-            minProductList: [],
+            minstockComponentsKey:1,
             isloading: false,
             dailyState: false,
             series: [0, 0],
@@ -450,14 +459,14 @@ export default {
         };
     },
     async created() {
-        if(!this.findSelectedTerminal){
+        if (!this.findSelectedTerminal) {
             this.terminalSelected = 1
             this.terminalDialog = true
         }
         await this.loadSaleStatistic()
         this.generateDailyStatisticSale()
         this.init();
-        await this.minStockProduct()
+       
 
     }, async mounted() {
 
@@ -465,7 +474,7 @@ export default {
         await this.paymentGroup()
     },
     computed: {
-        ...mapGetters(['findAllTerminal','findSelectedTerminal']),
+        ...mapGetters(['findAllTerminal', 'findSelectedTerminal','currentSelectedLocation', 'findAllLocation']),
         totalSaleYTD() {
             const totalPrice = this.yearlySale.reduce((total, item) => {
                 // discountTotal+=item.discount
@@ -511,47 +520,42 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['setSelectedTerminal']),
-        chooseTerminal() {
+        ...mapActions(['setSelectedTerminal', 'setSelectedLocation', 'initProduct']),
+       async chooseTerminal() {
+            // this.displayMinstock = false
             this.setSelectedTerminal(this.terminalSelected)
+            console.log(`LOCATION LIST ${this.findAllLocation.length}`);
+            const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el=>el.id==this.terminalSelected)['locationId'] )
+            if(!location){
+                console.log(`LOCATION IS !TRUE`);
+            }
+            console.log(`LOCATION IS ${location}`);
+            console.log(`LOCATION FOUND ${location['id']}`);
+
+            this.setSelectedLocation(location)
+            console.log(`Location id ${location.id}`);
+            this.minstockComponentsKey +=1;
+            // this.displayMinstock = true
             this.terminalDialog = false
+            await this.loadProduct(location.id)
+        },
+        async loadProduct(locationId) {
+            this.isloading = true
+            this.productList = [];
+            await this.$axios
+                .get(`product_f/${locationId}`)
+                .then((res) => {
+                    this.initProduct(res.data)
+                })
+                .catch((er) => {
+                    console.log('Data: ' + er)
+                })
+            this.isloading = false
         },
         numberFormatter(value) {
             return getFormatNum(value)
         },
-        async minStockProduct() {
-            this.isloading = true
-            await this.$axios
-                .get('product_f')
-                .then((res) => {
-                    this.minProductList = []
-                    for (const iterator of res.data) {
-                        if (iterator['minStock'] > iterator['card_count']) {
-                            this.minProductList.push({
-                                pro_id: iterator.pro_id,
-                                pro_name: iterator.pro_name,
-                                pro_price: iterator.pro_price,
-                                pro_desc: iterator.pro_desc,
-                                pro_status: iterator.pro_status,
-                                pro_category: iterator.pro_category,
-                                pro_category_desc: iterator.pro_category + ' - ' + iterator.categ_name,
-                                pro_card_count: iterator.card_count,
-                                pro_cost_price: iterator.cost_price,
-                                pro_outlet: iterator.outlet,
-                                pro_outlet_name: iterator.outlet_name,
-                                minStock: iterator.minStock,
-                                function: iterator.pro_id,
-                            })
-                        }
-                    }
-                })
-                .catch((er) => {
-                    this.message = er
-                    console.log('Error: ' + er)
-                })
-            this.isloading = false
-        },
-
+      
         getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';
@@ -697,7 +701,7 @@ export default {
             console.log('====> my chart' + groupedTransactions);
             const keyList = Object.keys(groupedTransactions)
             for (const iterator of keyList) {
-                console.log("*****ETERATOR*****"+iterator);
+                console.log("*****ETERATOR*****" + iterator);
                 this.barOptionsForMonthlyStat.colors.push(this.getRandomColor) // ******* Original
                 this.barSeriesForMonthlyStat[0].data.push(groupedTransactions[iterator]['total'])
                 this.barOptionsForMonthlyStat.xaxis.categories.push(iterator)

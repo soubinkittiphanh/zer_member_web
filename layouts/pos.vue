@@ -20,6 +20,7 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
         <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
@@ -51,7 +52,7 @@
                 <v-subheader style="font-size: larger; font-weight: bold;">
                     <v-chip class="ma-2" color="warning" variant="outlined">
                         CHITHANH MINI MART
-            </v-chip>
+                    </v-chip>
                 </v-subheader>
                 <v-list-item-group v-model="selectedItem" color="primary">
                     <v-divider></v-divider>
@@ -70,7 +71,7 @@
 
 
         <v-main style="background-color: rgb(235, 235, 235)">
-            <Nuxt class="py-2 px-3" />
+            <Nuxt :key="productComponentKey" class="py-2 px-3" />
         </v-main>
 
         <v-navigation-drawer app right clipped width="450" fixed>
@@ -226,6 +227,7 @@ export default {
     name: 'DefaultLayout',
     data() {
         return {
+            productComponentKey:1,
             terminalDialog: false,
             terminalSelected: null,
             search: '',
@@ -382,9 +384,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['setSelectedTerminal']),
+        ...mapActions(['setSelectedTerminal','setSelectedLocation']),
         switchTerminal() {
             this.setSelectedTerminal(this.terminalSelected)
+            const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
+            this.setSelectedLocation(location)
+            this.productComponentKey +=1;
             this.terminalDialog = false
         },
         generatePrintView() {
@@ -556,13 +561,13 @@ export default {
                     this.newOrder()
                 })
                 .catch((er) => {
-                    if(er.response.data.includes("#")){
+                    if (er.response.data.includes("#")) {
                         const id = er.response.data.split("#")[1]
                         const productName = ''
-                        const product = this.findAllProduct.find(el=>el.id==id)
+                        const product = this.findAllProduct.find(el => el.id == id)
                         console.log(`PRODUCT FILTER ${product}`);
                         swalError2(this.$swal, "Error", `${er.response.data} ${product.pro_name}`)
-                    }else{
+                    } else {
                         swalError2(this.$swal, "Error", er.response.data)
                     }
                 })

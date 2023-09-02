@@ -62,7 +62,7 @@
           </v-btn>
         </template> -->
         <template v-slot:[`item.functionEdit`]="{ item }">
-          <v-btn  variant="outlined" @click="editItem(item)
+          <v-btn variant="outlined" @click="editItem(item)
           isedit = true">
             <v-icon small class="mr-2">
               <!-- mdi-pencil -->
@@ -78,12 +78,12 @@
             </v-icon>
           </v-btn> -->
 
-          <v-btn color="primary" text @click="editItem(item) 
-            wallet = true
-              ">
+          <v-btn color="primary" text @click="editItem(item)
+          wallet = true
+            ">
 
-              <i class="fa fa-pencil-square-o"></i>
-            </v-btn>
+            <i class="fa fa-pencil-square-o"></i>
+          </v-btn>
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
 
@@ -91,11 +91,11 @@
             <i class="fas fa-cart-plus"></i>
 
           </v-btn> -->
-          <v-btn color="primary" text @click="triggerCardForm(item) 
-            wallet = true
-              ">
-              <i class="fa fa-cart-plus"></i>
-            </v-btn>
+          <v-btn color="primary" text @click="triggerCardForm(item)
+          wallet = true
+            ">
+            <i class="fa fa-cart-plus"></i>
+          </v-btn>
 
         </template>
         <template v-slot:[`item.functionStockView`]="{ item }">
@@ -103,12 +103,12 @@
             <i class="fas fa-eye"></i>
           </v-btn> -->
 
-          <v-btn color="primary" text @click="editStock(item) 
-            wallet = true
-              ">
+          <v-btn color="primary" text @click="editStock(item)
+          wallet = true
+            ">
 
-              <i class="fa fa-eye"></i>
-            </v-btn>
+            <i class="fa fa-eye"></i>
+          </v-btn>
         </template>
         <template v-slot:[`item.pro_cost_price`]="{ item }">
           {{ formatNumber(item.pro_cost_price) }}
@@ -140,6 +140,7 @@ import ProductForm from '~/components/product/ProductForm.vue'
 import { getFormatNum } from '~/common'
 import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { ProductForm, ProductFormCreate },
   middleware: 'auths',
@@ -148,7 +149,7 @@ export default {
       productFormCreate: false,
       productFormKey: 1,
       isstock: false,
-      selectedId:'',
+      selectedId: '',
       selectedProductCost: 0,
       selectedProductName: '',
       isloading: false,
@@ -219,7 +220,9 @@ export default {
     await this.fetchData()
     await this.loadCardCategory()
   },
-
+  computed: {
+    ...mapGetters(['currentSelectedLocation', 'findAllLocation']),
+  },
   methods: {
     formatNumber(value) {
       return getFormatNum(value)
@@ -239,8 +242,16 @@ export default {
     },
     async fetchData() {
       this.isloading = true
+      console.log(`Minstock widget is calling`);
+      let locationId = 1;
+      if (this.currentSelectedLocation) {
+        console.log(`Current location is selected and not null`);
+        locationId = this.currentSelectedLocation['id']
+      } else {
+        console.log(`Current location is not selected and null`);
+      }
       await this.$axios
-        .get('product_f')
+        .get(`product_f/${locationId}`)
         .then((res) => {
           this.loaddata = []
           for (const iterator of res.data) {

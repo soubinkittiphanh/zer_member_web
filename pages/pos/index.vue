@@ -1,5 +1,8 @@
 <template>
     <div class="pa-6">
+        <v-dialog v-model="isloading" hide-overlay persistent width="300">
+            <loading-indicator> </loading-indicator>
+        </v-dialog>
         <v-card class="pa-4">
             <v-row v-if="filterProduct.length > 0">
                 <v-col :cols="12">
@@ -43,7 +46,7 @@ export default {
         }
     },
     async mounted() {
-        await this.fetchData()
+        await this.loadProduct()
         await this.loadCategory()
         await this.loadPayment()
 
@@ -56,6 +59,7 @@ export default {
         ...mapGetters({
             searchKeyword: 'searchKeyword',
             currenctSelectedCategoryId: 'currenctSelectedCategoryId',
+            currentSelectedLocation: 'currentSelectedLocation'
         }),
         // ...mapGetters(['cartOfProduct','currenctSelectedCategoryId']),
         filterProduct() {
@@ -109,11 +113,11 @@ export default {
 
             console.log(`Key is pressing ${event.key}`);
         },
-        async fetchData() {
+        async loadProduct() {
             this.isloading = true
             this.productList = []
             await this.$axios
-                .get('product_f')
+                .get(`product_f/${this.currentSelectedLocation['id']}`)
                 .then((res) => {
                     for (const iterator of res.data) {
                         this.productList.push(iterator)

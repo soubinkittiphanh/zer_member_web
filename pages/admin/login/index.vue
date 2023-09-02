@@ -61,7 +61,7 @@ export default {
     Notification,
   },
   methods: {
-    ...mapActions(['initProduct', 'initPayment', 'initCurrency', 'initClient', 'initUnit','initTerminal','initLocation']),
+    ...mapActions(['initPayment', 'initCurrency', 'initClient', 'initUnit','initTerminal','initLocation']),
    
     async userLogin() {
       try {
@@ -75,13 +75,13 @@ export default {
           return
         }
         if (response.data.accessToken) {
-          await this.loadProduct()
+          // await this.loadProduct()
+          await this.loadLocation()
           await this.loadPayment()
           await this.loadCustomer()
           await this.loadUnit()
           await this.loadCurrency()
           await this.loadTerminal()
-          await this.loadLocation()
           this.$router.push('/admin')
         } else {
           console.log('No token')
@@ -96,19 +96,19 @@ export default {
       this.isLoading = false
     },
 
-    async loadProduct() {
-      this.isLoading = true
-      this.productList = [];
-      await this.$axios
-        .get('product_f')
-        .then((res) => {
-          this.initProduct(res.data)
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isLoading = false
-    },
+    // async loadProduct() {
+    //   this.isLoading = true
+    //   this.productList = [];
+    //   await this.$axios
+    //     .get('product_f/1')
+    //     .then((res) => {
+    //       this.initProduct(res.data)
+    //     })
+    //     .catch((er) => {
+    //       console.log('Data: ' + er)
+    //     })
+    //   this.isLoading = false
+    // },
     async loadLocation() {
       this.isloading = true
       await this.$axios

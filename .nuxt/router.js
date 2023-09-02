@@ -29,6 +29,7 @@ const _613d8598 = () => interopDefault(import('../pages/admin/orders/index.vue' 
 const _23b030b0 = () => interopDefault(import('../pages/admin/ordersFromPos/index.vue' /* webpackChunkName: "pages/admin/ordersFromPos/index" */))
 const _32dea7fc = () => interopDefault(import('../pages/admin/ordersFromPosCancel/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCancel/index" */))
 const _bc74547e = () => interopDefault(import('../pages/admin/ordersFromPosCredit/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCredit/index" */))
+const _3b04a9e9 = () => interopDefault(import('../pages/admin/ordersFromPosSummaryByCustomer/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosSummaryByCustomer/index" */))
 const _7e434432 = () => interopDefault(import('../pages/admin/po/index.vue' /* webpackChunkName: "pages/admin/po/index" */))
 const _03317a72 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
 const _8a051cfa = () => interopDefault(import('../pages/admin/productInuse.vue' /* webpackChunkName: "pages/admin/productInuse" */))
@@ -169,6 +170,10 @@ export const routerOptions = {
     path: "/admin/ordersFromPosCredit",
     component: _bc74547e,
     name: "admin-ordersFromPosCredit"
+  }, {
+    path: "/admin/ordersFromPosSummaryByCustomer",
+    component: _3b04a9e9,
+    name: "admin-ordersFromPosSummaryByCustomer"
   }, {
     path: "/admin/po",
     component: _7e434432,

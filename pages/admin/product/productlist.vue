@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h1>PRODUCT LIST {{ barcode }}</h1>
+    <h1>ລາຍການສິນຄ້າ</h1>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -30,7 +30,7 @@
           <v-col cols="6" class="text-right">
             <v-btn class="primary" size="large" variant="outlined" @click="rebuildStock" rounded>
               <span class="mdi mdi-update"></span>
-              Refresh
+              Rebuild stock
             </v-btn>
           </v-col>
         </v-row>
@@ -51,10 +51,10 @@
               <span class="mdi mdi-note-plus-outline"></span>
               ສ້າງສິນຄ້າໃຫມ່
             </v-btn>
-            <v-btn size="large" variant="outlined" @click="importStock" class="primary" rounded>
+            <!-- <v-btn size="large" variant="outlined" @click="importStock" class="primary" rounded>
               <span class="mdi mdi-note-plus-outline"></span>
               Impor stock
-            </v-btn>
+            </v-btn> -->
 
           </v-toolbar>
         </template>
@@ -135,6 +135,7 @@ import ProductForm from '~/components/product/ProductForm.vue'
 import { getFormatNum } from '~/common'
 import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { ProductForm, ProductFormCreate },
   middleware: 'auths',
@@ -160,7 +161,6 @@ export default {
       editProductForm: false,
       selectedProductId: null,
       stockFormKey: 1,
-      barcode: '',
       timer: null,
       headers: [
         {
@@ -213,14 +213,14 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchData()
     await this.loadCardCategory()
-    window.addEventListener('keydown', this.handleKeyDown);
-  },
-  beforeDestroy() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    await this.fetchData()
   },
 
+  computed:{
+    ...mapGetters(['currentSelectedLocation', 'findAllLocation']),
+     
+  },
   methods: {
     async importStock() {
       const stockImportList = [{ 'inputter': 1000, 'product_id': 1001, 'stockCardQty': 4, 'totalCost': 320000, 'productId': 1, 'srcLocation': 1 },
@@ -527,24 +527,7 @@ export default {
         this.isloading = false
       }
     },
-    handleKeyDown(event) {
-      if (this.timer) {
-        clearInterval(this.timer)
-      }
-      if (event.key == 'Enter') {
-        if (this.barcode) {
-          console.log("Do something we got barcode");
-        }
-        this.barcode = '';
-        return
-      }
-      if (event.key != 'Shift') {
-        this.barcode += event.key;
-      }
-      this.timer = setInterval(() => this.barcode = '', 20);
 
-      console.log(`Key is pressing ${event.key}`);
-    },
     formatNumber(value) {
       return getFormatNum(value)
     },
@@ -562,10 +545,11 @@ export default {
       this.isstock = true;
     },
     async fetchData() {
+      console.log(`PRODUCT LIST ===>`);
       this.isloading = true
       // https://nodejsclusters-124154-0.cloudclusters.net/product_f
       await this.$axios
-        .get('product_f')
+        .get(`product_f/${this.currentSelectedLocation['id']}`)
         .then((res) => {
           this.loaddata = res.data.map((el) => {
             console.log(el.pro_id)

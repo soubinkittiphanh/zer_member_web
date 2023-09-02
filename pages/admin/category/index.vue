@@ -1,6 +1,7 @@
 <template>
   <div class="text-center">
-    <span class="text-h5">ລາຍການ ປະເພດສິນຄ້າ</span>
+    <!-- <span class="text-h5"></span> -->
+    <h1>ລາຍການ ປະເພດສິນຄ້າ</h1>
     <v-dialog v-model="dialogForm" max-width="600px">
       <v-card>
         <v-card-title>

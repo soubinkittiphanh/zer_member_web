@@ -175,6 +175,13 @@
     "_name": "_bc74547e"
   },
   {
+    "name": "admin-ordersFromPosSummaryByCustomer",
+    "path": "/admin/ordersFromPosSummaryByCustomer",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/ordersFromPosSummaryByCustomer/index.vue",
+    "chunkName": "pages/admin/ordersFromPosSummaryByCustomer/index",
+    "_name": "_3b04a9e9"
+  },
+  {
     "name": "admin-po",
     "path": "/admin/po",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/po/index.vue",

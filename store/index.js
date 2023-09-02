@@ -8,6 +8,7 @@ export const state = () => ({
     selectedCategoryId: 9999,
     selectedCustomer: null,
     selectedPayment: 1,
+    selectedLocation: null,
     currencyList:[],
     productList:[],
     paymentList:[],
@@ -61,6 +62,9 @@ export const mutations = {
     },
     setSelectedPayment(state, paymentId) {
         state.selectedPayment = paymentId
+    },
+    setSelectedLocation(state, location) {
+        state.selectedLocation = location
     },
     addProductToCart(state, product) {
         let found = false;
@@ -172,6 +176,9 @@ export const getters = {
     },
     currentSelectedPayment(state) {
         return state.selectedPayment
+    },
+    currentSelectedLocation(state) {
+        return state.selectedLocation
     }
 
 }
@@ -196,6 +203,11 @@ export const actions = {
     setSelectedTerminal(state, terminalId) {
         state.commit("ChooseTerminal", terminalId)
     },
+    
+    setSelectedLocation(state, location) {
+        state.commit("setSelectedLocation", location)
+    },
+    
     deleteProduct(state, product) {
         state.commit("removeProductFromCart", product)
     },

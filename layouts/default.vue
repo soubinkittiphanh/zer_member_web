@@ -41,7 +41,7 @@
       <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1 user: {{ user.cus_name }} id: {{ user.id }} </span>
       <v-spacer></v-spacer>
       <v-chip v-if="findSelectedTerminal" class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
-         {{ currentTerminal['name'] }}
+        {{ currentTerminal['name'] }}
       </v-chip>
     </v-footer>
   </v-app>
@@ -114,6 +114,11 @@ export default {
           icon: 'mdi-receipt-text-check-outline',
           title: 'ລາຍການບິນຂາຍ ',
           to: '/admin/ordersFromPos',
+        },
+        {
+          icon: 'mdi-receipt-text-check-outline',
+          title: 'ຄົ້ນຫາລາຍການບິນຂາຍ ຕາມລູກຄ້າ',
+          to: '/admin/ordersFromPosSummaryByCustomer',
         },
         {
           icon: 'mdi-receipt-text-clock-outline',
@@ -247,7 +252,7 @@ export default {
     ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
     user() {
       return this.$auth.user || ''
-    }, 
+    },
     currentTerminal() {
       console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
       return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
@@ -256,9 +261,11 @@ export default {
   methods: {
     switchTerminal() {
       this.setSelectedTerminal(this.terminalSelected)
+      const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
+      this.setSelectedLocation(location)
       this.terminalDialog = false
     },
-    ...mapActions(['setSelectedTerminal']),
+    ...mapActions(['setSelectedTerminal','setSelectedLocation']),
   }
 }
 </script>

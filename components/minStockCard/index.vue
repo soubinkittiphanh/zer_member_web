@@ -62,6 +62,7 @@ import ProductForm from '~/components/product/ProductForm.vue'
 import { getFormatNum } from '~/common'
 import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { ProductForm, ProductFormCreate },
   middleware: 'auths',
@@ -123,6 +124,10 @@ export default {
       ],
     }
   },
+  computed:{
+    ...mapGetters(['findAllTerminal', 'findSelectedTerminal','currentSelectedLocation', 'findAllLocation']),
+        
+  },
   watch: {
     message(val) {
       if (val != null) {
@@ -154,9 +159,10 @@ export default {
       this.isstock = true;
     },
     async fetchData() {
+      console.log(`CARD SELECTE ${this.currentSelectedLocation['id']}`);
       this.isloading = true
       await this.$axios
-        .get('product_f')
+        .get(`product_f/${this.currentSelectedLocation['id']}`)
         .then((res) => {
           this.loaddata = []
           for (const iterator of res.data) {
