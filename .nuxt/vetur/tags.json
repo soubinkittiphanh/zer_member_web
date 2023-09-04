@@ -95,23 +95,14 @@
   "OrderSumaryCardPos": {
     "description": "Auto imported from components/orderSumaryCardPos.vue"
   },
-  "CustomerForm": {
-    "description": "Auto imported from components/customer/CustomerForm.vue"
+  "CardCampaignCard": {
+    "description": "Auto imported from components/card/campaignCard.vue"
   },
-  "CustomerList": {
-    "description": "Auto imported from components/customer/CustomerList.vue"
+  "CardForm": {
+    "description": "Auto imported from components/card/cardForm.vue"
   },
   "CampaignForm": {
     "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
-  "AccountingApPayment": {
-    "description": "Auto imported from components/accounting/ApPayment.vue"
-  },
-  "AccountingArReceivable": {
-    "description": "Auto imported from components/accounting/ArReceivable.vue"
-  },
-  "AccountingGeneralLedgerForm": {
-    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
   "DialogsBottomAlert": {
     "description": "Auto imported from components/dialogs/bottomAlert.vue"
@@ -125,14 +116,23 @@
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
   },
-  "CardCampaignCard": {
-    "description": "Auto imported from components/card/campaignCard.vue"
+  "AccountingApPayment": {
+    "description": "Auto imported from components/accounting/ApPayment.vue"
   },
-  "CardForm": {
-    "description": "Auto imported from components/card/cardForm.vue"
+  "AccountingArReceivable": {
+    "description": "Auto imported from components/accounting/ArReceivable.vue"
+  },
+  "AccountingGeneralLedgerForm": {
+    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"
+  },
+  "CustomerForm": {
+    "description": "Auto imported from components/customer/CustomerForm.vue"
+  },
+  "CustomerList": {
+    "description": "Auto imported from components/customer/CustomerList.vue"
   },
   "MinStockCard": {
     "description": "Auto imported from components/minStockCard/index.vue"
