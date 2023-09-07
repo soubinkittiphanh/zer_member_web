@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+
 import { hostName } from './common'
 export default {
   server: {
@@ -50,7 +50,8 @@ export default {
     },
     { src: '~/plugins/fontawesome.js', ssr: false },
     { src: '~/plugins/html2canvas.js', mode: 'client' },
-    { src: '@/plugins/echarts.js', ssr: false }
+    { src: '@/plugins/echarts.js', ssr: false },
+    { src: '~/plugins/xlsx.js', mode: 'client' }
     // { src: '~/plugins/vuelidate.js', mode: 'client' }
     // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],

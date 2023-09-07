@@ -329,6 +329,13 @@
     "_name": "_30dc45ce"
   },
   {
+    "name": "admin-PDFInvoiceSummary-id",
+    "path": "/admin/PDFInvoiceSummary/:id",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/PDFInvoiceSummary/_id/index.vue",
+    "chunkName": "pages/admin/PDFInvoiceSummary/_id/index",
+    "_name": "_70237d99"
+  },
+  {
     "name": "admin-PDFQuotation-id",
     "path": "/admin/PDFQuotation/:id",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/PDFQuotation/_id/index.vue",

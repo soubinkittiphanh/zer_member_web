@@ -4,6 +4,26 @@
       <v-dialog v-model="isLoading" hide-overlay persistent width="300">
         <loading-indicator> </loading-indicator>
       </v-dialog>
+      <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
+        <v-card>
+          <v-card-title>ເລືອກ Terminal </v-card-title>
+          <v-divider></v-divider>
+          <v-card-text style="height: 300px;">
+            <v-radio-group v-model="terminalSelected" column>
+              <v-radio v-for="terminal in findAllTerminal" :key="terminal.id"
+                :label="terminal.name + ' - ' + terminal.description" :value="terminal.id"></v-radio>
+              <!-- <v-radio label="Bahrain" value="bahrain"></v-radio>
+                        <v-radio label="Bangladesh" value="bangladesh"></v-radio> -->
+            </v-radio-group>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn color="blue-darken-1" variant="text" @click="switchTerminal">
+              ເລືອກ
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-card>
         <div class="pa-16">
           <v-row>
@@ -39,14 +59,17 @@
 </template>
 <script>
 import Notification from '../../../components/Notification.vue'
-import { mapActions } from 'vuex'
+import { swalError2 } from '~/common'
+import { mapActions,mapGetters } from 'vuex'
 export default {
   layout: "login",
   data() {
     return {
+      terminalDialog: false,
       email: '',
       password: '',
       errorMessage: '',
+      terminalSelected:1,
       isLoading: false,
       barcode: '',
       timer: null,
@@ -60,9 +83,19 @@ export default {
   components: {
     Notification,
   },
+  computed: {
+    ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
+  },
   methods: {
-    ...mapActions(['initPayment', 'initCurrency', 'initClient', 'initUnit','initTerminal','initLocation']),
-   
+    ...mapActions(['initiateData','setSelectedTerminal','setSelectedLocation']),
+    switchTerminal() {
+      this.setSelectedTerminal(this.terminalSelected)
+      const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
+      this.setSelectedLocation(location)
+      //********** refresh component so the data will be update fresh **********//
+      this.terminalDialog = false
+      this.$router.push('/admin')
+    },
     async userLogin() {
       try {
         this.isLoading = true
@@ -72,23 +105,18 @@ export default {
         if (response.status !== 200) {
           this.isLoading = false
           this.errorMessage = 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ'
-          return
+          return swalError2(this.$swal, 'Error', 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ')
+         
         }
         if (response.data.accessToken) {
-          // await this.loadProduct()
-          await this.loadLocation()
-          await this.loadPayment()
-          await this.loadCustomer()
-          await this.loadUnit()
-          await this.loadCurrency()
-          await this.loadTerminal()
-          this.$router.push('/admin')
+          console.log(`LOGIN COMPLETED`);
+          this.initiateData(this.$axios)
+          this.terminalDialog = true
         } else {
           console.log('No token')
           this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
+          swalError2(this.$swal, 'Error', 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ')
         }
-
-
         console.log(response)
       } catch (err) {
         console.log(err)
@@ -96,96 +124,6 @@ export default {
       this.isLoading = false
     },
 
-    // async loadProduct() {
-    //   this.isLoading = true
-    //   this.productList = [];
-    //   await this.$axios
-    //     .get('product_f/1')
-    //     .then((res) => {
-    //       this.initProduct(res.data)
-    //     })
-    //     .catch((er) => {
-    //       console.log('Data: ' + er)
-    //     })
-    //   this.isLoading = false
-    // },
-    async loadLocation() {
-      this.isloading = true
-      await this.$axios
-        .get(`api/location/find`)
-        .then((res) => {
-          this.initLocation(res.data)
-        })
-        .catch((er) => {
-          swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
-          console.log('Error ===>: ' + er)
-        })
-      this.isloading = false
-    },
-    async loadUnit() {
-      this.isLoading = true
-      this.unitList = [];
-      await this.$axios
-        .get('api/unit/find')
-        .then((res) => {
-          this.initUnit(res.data)
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isLoading = false
-    },
-    async loadCustomer() {
-      this.isLoading = true
-      this.customerList = [];
-      await this.$axios
-        .get('api/client/find')
-        .then((res) => {
-          this.initClient(res.data)
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isLoading = false
-    },
-    async loadTerminal() {
-      this.isLoading = true
-      await this.$axios
-        .get('api/terminal/find')
-        .then((res) => {
-          this.initTerminal(res.data)
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isLoading = false
-    },
-    async loadPayment() {
-      this.isLoading = true
-      this.paymentList = [];
-      await this.$axios
-        .get('api/paymentMethod/find')
-        .then((res) => {
-          this.initPayment(res.data)
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isLoading = false
-    },
-    async loadCurrency() {
-      this.isLoading = true
-      this.currencyList = [];
-      await this.$axios
-        .get('api/currency/find')
-        .then((res) => {
-          this.initCurrency(res.data)
-        })
-        .catch((er) => {
-          console.log('Data: ' + er)
-        })
-      this.isLoading = false
-    },
   },
 }
 </script>

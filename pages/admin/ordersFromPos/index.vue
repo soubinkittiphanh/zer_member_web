@@ -54,6 +54,9 @@
             <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
               <span class="mdi mdi-plus"></span>Create
             </v-btn>
+            <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
+              <span class="mdi mdi-microsoft-excel"></span>Generate excel file
+            </v-btn>
           </v-col>
           <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
@@ -72,10 +75,10 @@
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                   'title': 'ຍອດບິນ',
                   'amount': getFormatNum(activeOrderHeaderList.length),
-                  'sale': getFormatNum(totalSale),
-                  'discount': getFormatNum(totalDiscount),
+                  'sale': getFormatNum(totalSale - totalDiscount),
+                  // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  'gross': getFormatNum(totalSale - totalDiscount)
+                  // 'gross': getFormatNum(totalSale - totalDiscount)
 
                 }">
 
@@ -370,6 +373,12 @@ export default {
   },
 
   methods: {
+    exportToExcel() {
+      const worksheet = this.$xlsx.utils.json_to_sheet(this.activeOrderHeaderList);
+      const workbook = this.$xlsx.utils.book_new();
+      this.$xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      this.$xlsx.writeFile(workbook, 'data.xlsx');
+    },
     createSale() {
       this.componentKey += 1;
       this.selectedOrder = 0

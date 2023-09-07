@@ -28,7 +28,7 @@
         <div class="mb-1">
             <v-card class="pa-4" style="background-color: transparent;">
                 <v-card-title style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
-                    SHORTCUT 
+                    SHORTCUT
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
@@ -49,7 +49,7 @@
         <div class="mb-1">
             <v-card class="pa-1" style="background-color: transparent;">
                 <v-card-title style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">
-                    OVERVIEW 
+                    OVERVIEW
                 </v-card-title>
                 <v-row>
                     <v-col :cols="12">
@@ -285,12 +285,12 @@ export default {
                     svgIcon: require('~/assets/icons/patient.svg'),
                     path: '/admin/client'
                 },
-                {
-                    title: 'ຄົ້ນຫາອິນວອຍຄ້າງຈ່າຍ',
-                    // icon: 'mdi-warehouse',
-                    svgIcon: require('~/assets/icons/account-clock.svg'),
-                    path: '/admin/ordersFromPosSummaryByCustomer'
-                },
+                // {
+                //     title: 'ຄົ້ນຫາອິນວອຍຄ້າງຈ່າຍ',
+                //     // icon: 'mdi-warehouse',
+                //     svgIcon: require('~/assets/icons/account-clock.svg'),
+                //     path: '/admin/ordersFromPosSummaryByCustomer'
+                // },
             ],
             yearlySale: [],
             menusOverview: [
@@ -319,21 +319,8 @@ export default {
             //     pro_name:'',
             //     pro_id:1
             // }],
-            items: [
-                {
-                    name: 'Item #1',
-                    id: 1,
-                },
-                {
-                    name: 'Item #2',
-                    id: 2,
-                },
-                {
-                    name: 'Item #3',
-                    id: 3,
-                },
-            ],
-            minstockComponentsKey:1,
+          
+            minstockComponentsKey: 1,
             isloading: false,
             dailyState: false,
             series: [0, 0],
@@ -459,22 +446,16 @@ export default {
         };
     },
     async created() {
-        if (!this.findSelectedTerminal) {
-            this.terminalSelected = 1
-            this.terminalDialog = true
-        }
         await this.loadSaleStatistic()
         this.generateDailyStatisticSale()
         this.init();
-       
-
     }, async mounted() {
 
         await this.loadTopSale()
         await this.paymentGroup()
     },
     computed: {
-        ...mapGetters(['findAllTerminal', 'findSelectedTerminal','currentSelectedLocation', 'findAllLocation']),
+        ...mapGetters(['findAllTerminal', 'findSelectedTerminal', 'currentSelectedLocation', 'findAllLocation']),
         totalSaleYTD() {
             const totalPrice = this.yearlySale.reduce((total, item) => {
                 // discountTotal+=item.discount
@@ -521,12 +502,12 @@ export default {
     },
     methods: {
         ...mapActions(['setSelectedTerminal', 'setSelectedLocation', 'initProduct']),
-       async chooseTerminal() {
+        async chooseTerminal() {
             // this.displayMinstock = false
             this.setSelectedTerminal(this.terminalSelected)
             console.log(`LOCATION LIST ${this.findAllLocation.length}`);
-            const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el=>el.id==this.terminalSelected)['locationId'] )
-            if(!location){
+            const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
+            if (!location) {
                 console.log(`LOCATION IS !TRUE`);
             }
             console.log(`LOCATION IS ${location}`);
@@ -534,7 +515,7 @@ export default {
 
             this.setSelectedLocation(location)
             console.log(`Location id ${location.id}`);
-            this.minstockComponentsKey +=1;
+            this.minstockComponentsKey += 1;
             // this.displayMinstock = true
             this.terminalDialog = false
             await this.loadProduct(location.id)
@@ -555,7 +536,7 @@ export default {
         numberFormatter(value) {
             return getFormatNum(value)
         },
-      
+
         getRandomColor() {
             var letters = '0123456789ABCDEF';
             var color = '#';

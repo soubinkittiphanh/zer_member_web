@@ -38,7 +38,7 @@
                 prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted />
             <v-spacer />
             <v-chip class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
-                {{ currentTerminal['name'] }}
+                {{ currentTerminal == undefined ? '' : currentTerminal['name'] }}
             </v-chip>
             <v-btn class="flexcol ml-10" icon v-for="item in menuItems" :key="item.title" :to="item.path"
                 @click="item.method">
@@ -227,7 +227,7 @@ export default {
     name: 'DefaultLayout',
     data() {
         return {
-            productComponentKey:1,
+            productComponentKey: 1,
             terminalDialog: false,
             terminalSelected: null,
             search: '',
@@ -313,7 +313,7 @@ export default {
             return this.$auth.user || ''
         },
         ...mapState(['productSearchKeyboard',]),
-        ...mapGetters(['cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
+        ...mapGetters(['currentSelectedLocation', 'cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
         serachModel: {
             get() {
                 return this.stateValue;
@@ -335,6 +335,7 @@ export default {
             return this.cartOfProduct
         },
         generateSaleLine() {
+            console.log(`Gennerate Sale LINE=====> ${this.productCart.length}`);
             let lines = []
             for (const iterator of this.productCart) {
 
@@ -370,11 +371,16 @@ export default {
 
     },
     mounted() {
+        window.addEventListener('beforeunload', this.checkAllInitData);
         this.terminalSelected = this.findSelectedTerminal
         this.fetchCategory()
         this.loadPayment()
         this.loadCustomer()
         this.loadCurrency()
+        this.checkAllInitData()
+    },
+    beforeDestroy() {
+        window.removeEventListener('beforeunload', null);
     },
     watch: {
         selectedItem(val) {
@@ -384,18 +390,31 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['setSelectedTerminal','setSelectedLocation']),
+        ...mapActions(['initiateData','setSelectedTerminal', 'setSelectedLocation']),
+        checkAllInitData() {
+            // setInterval(() => {
+            console.info(`...loading pos layout ${this.findAllTerminal.length}... ${new Date().toLocaleTimeString()}`);
+            if (this.findAllTerminal.length == 0) {
+                console.error(`Data missing need to reload`)
+                this.initiateData(this.$axios)
+            }
+            if (!this.currentSelectedLocation) {
+                this.terminalDialog = true
+            }
+            // }, 1000);
+        },
         switchTerminal() {
             this.setSelectedTerminal(this.terminalSelected)
             const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
             this.setSelectedLocation(location)
-            this.productComponentKey +=1;
+            this.productComponentKey += 1;
             this.terminalDialog = false
         },
         generatePrintView() {
             let txnListHtml = ``
             for (const iterator of this.productCart) {
                 const product = this.findAllProduct.find(el => el.id == iterator.id)
+                console.log(`=======${product}======`);
                 const quantity = iterator.qty
                 const unitRate = 1
                 const price = iterator.pro_price
@@ -561,12 +580,13 @@ export default {
                     this.newOrder()
                 })
                 .catch((er) => {
+                    console.error(er);
                     if (er.response.data.includes("#")) {
                         const id = er.response.data.split("#")[1]
                         const productName = ''
                         const product = this.findAllProduct.find(el => el.id == id)
                         console.log(`PRODUCT FILTER ${product}`);
-                        swalError2(this.$swal, "Error", `${er.response.data} ${product.pro_name}`)
+                        swalError2(this.$swal, "Error", `ຈຳນວນສິນຄ້າ: ${product.pro_name} ມີບໍ່ພຽງພໍໃນສາງ`)
                     } else {
                         swalError2(this.$swal, "Error", er.response.data)
                     }

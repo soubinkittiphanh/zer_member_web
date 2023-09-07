@@ -51,6 +51,7 @@ const _38fd842d = () => interopDefault(import('../pages/admin/product/productlis
 const _0d56c4e2 = () => interopDefault(import('../pages/admin/advertise/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/advertise/mixins/ImagePreviewMixin" */))
 const _78a0b872 = () => interopDefault(import('../pages/admin/product/mixins/ImagePreviewMixin.vue' /* webpackChunkName: "pages/admin/product/mixins/ImagePreviewMixin" */))
 const _30dc45ce = () => interopDefault(import('../pages/admin/PDFInvoice/_id/index.vue' /* webpackChunkName: "pages/admin/PDFInvoice/_id/index" */))
+const _70237d99 = () => interopDefault(import('../pages/admin/PDFInvoiceSummary/_id/index.vue' /* webpackChunkName: "pages/admin/PDFInvoiceSummary/_id/index" */))
 const _a3d2a890 = () => interopDefault(import('../pages/admin/PDFQuotation/_id/index.vue' /* webpackChunkName: "pages/admin/PDFQuotation/_id/index" */))
 const _8ba954a8 = () => interopDefault(import('../pages/admin/PDFTicket/_id/index.vue' /* webpackChunkName: "pages/admin/PDFTicket/_id/index" */))
 const _2987d1cb = () => interopDefault(import('../pages/admin/PDFTransfer/_id/index.vue' /* webpackChunkName: "pages/admin/PDFTransfer/_id/index" */))
@@ -258,6 +259,10 @@ export const routerOptions = {
     path: "/admin/PDFInvoice/:id",
     component: _30dc45ce,
     name: "admin-PDFInvoice-id"
+  }, {
+    path: "/admin/PDFInvoiceSummary/:id",
+    component: _70237d99,
+    name: "admin-PDFInvoiceSummary-id"
   }, {
     path: "/admin/PDFQuotation/:id",
     component: _a3d2a890,

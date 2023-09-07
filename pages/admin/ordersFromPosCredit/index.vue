@@ -21,8 +21,6 @@
     </v-dialog>
     <v-card>
       <v-card-title>
-
-
         <v-layout row wrap>
           <v-col cols="6">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
@@ -51,7 +49,15 @@
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
           </v-col>
-          <v-col cols="12" class="text-right">
+          <v-col cols="6" class="text-left">
+            <!-- <v-btn size="large" variant="outlined" @click="generateInvoice" class="primary" rounded>
+              <span class="mdi mdi-plusmdi mdi-file-pdf-box"></span>Generate invoice
+            </v-btn> -->
+            <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
+              <span class="mdi mdi-microsoft-excel"></span>Generate excel file
+            </v-btn>
+          </v-col>
+          <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
               <span class="mdi mdi-cloud-download"></span>
               ດຶງລາຍງານ
@@ -66,23 +72,18 @@
           <v-row>
             <v-col cols="6" lg="6">
               <order-sumary-card-pos :showTotal="true"
-                :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
+                :gross="getFormatNum(0)" :orderDetail="{
                   'title': 'ຍອດບິນ ຕິດຫນີ້',
                   'amount': getFormatNum(creditOrder.length),
-                  'sale': getFormatNum(totalSale),
-                  'discount': getFormatNum(totalDiscount),
+                  'sale': getFormatNum(totalSale-totalDiscount),
+                  // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  'gross': getFormatNum(totalSale - totalDiscount)
+                  // 'gross': getFormatNum(totalSale - totalDiscount)
 
                 }">
 
               </order-sumary-card-pos>
             </v-col>
-            <!-- <v-col cols="6" lg="6">
-              <order-sumary-card i :orderDetail="this.unpaidCodOrder">
-
-              </order-sumary-card>
-            </v-col> -->
           </v-row>
         </v-layout>
       </v-card-text>
@@ -315,67 +316,29 @@ export default {
       return total
       // return total
     },
-    totalSaleRaw() {
-      let total = 0
-      this.noCancelData.forEach((el) => {
-        console.log("====>", el.cartTotal);
-        total += parseInt(el.cartTotal)
-      })
-      console.log('Price total: ' + total)
-      // return previousValue.cartTotal + currentValue.cartTotal
-      return total
-      // return total
-    },
+
     totalDiscount() {
       let total = 0
-      this.orderHeaderList.forEach((el) => {
+      this.creditOrder.forEach((el) => {
         total += parseInt(el.discount)
       })
       return total
       // return total
     },
-    noCancelData() {
-      this.loadDataNoCancelOrder = []
-      this.orderHeaderList.forEach(element => {
-        console.log(element.recordStatus);
-        if (element.recordStatus === 1) {
-          console.log("Concept applied");
-          this.loadDataNoCancelOrder.push(element)
-        }
-      });
-      return this.loadDataNoCancelOrder;
-    },
-    unpaidCodOrder() {
-      let txnList = []
-      let orderDetail = {}
-      this.orderHeaderList.forEach(element => {
-        if (element.paymentStatus === 'PENDING' && element.payment.includes('COD')) {
-          console.log("Concept applied");
-          txnList.push(element)
-        }
-      });
-      const totalPrice = txnList.reduce((total, item) => {
-        return total + item.cartTotal;
-      }, 0);
-      const totalDiscount = txnList.reduce((total, item) => {
-        return total + item.discount;
-      }, 0);
-
-      orderDetail.amount = txnList.length
-      orderDetail.saleRawNumber = totalPrice;
-      orderDetail.sale = this.getFormatNum(totalPrice)
-      orderDetail.discount = this.getFormatNum(totalDiscount)
-      orderDetail.gross = this.getFormatNum(0)
-      orderDetail.title = 'ຍອດບິນ COD'
-      return orderDetail;
-    },
 
     creditOrder() {
-      return this.orderHeaderList.filter(el => el['paymentId'] == 2)
+      return this.orderHeaderList.filter(el => el['paymentId'] == 2 && el['isActive']==true)
     }
   },
 
   methods: {
+
+    exportToExcel() {
+      const worksheet = this.$xlsx.utils.json_to_sheet(this.creditOrder);
+      const workbook = this.$xlsx.utils.book_new();
+      this.$xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      this.$xlsx.writeFile(workbook, 'data.xlsx');
+    },
     countDay(startDate) {
       return dayCount(startDate)
     },

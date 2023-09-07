@@ -49,21 +49,24 @@
           <v-col cols="6">
             <!-- <v-row>
               <v-col cols="12"> -->
-                <v-autocomplete item-text="company" item-value="id" :items="clientList" label="ລູກຄ້າ*"
-                  v-model="queryPayload.clientId"></v-autocomplete>
-              <!-- </v-col>
+            <v-autocomplete item-text="company" item-value="id" :items="clientList" label="ລູກຄ້າ*"
+              v-model="queryPayload.clientId"></v-autocomplete>
+            <!-- </v-col>
               <v-col cols="12"> -->
-                <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList" label="ການຊຳລະ*"
-                  v-model="queryPayload.paymentId"></v-autocomplete>
-              <!-- </v-col>
+            <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList" label="ການຊຳລະ*"
+              v-model="queryPayload.paymentId"></v-autocomplete>
+            <!-- </v-col>
             </v-row> -->
             <!-- <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx /> -->
             <!-- <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx /> -->
 
           </v-col>
           <v-col cols="6" class="text-left">
-            <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
-              <span class="mdi mdi-plus"></span>Create
+            <v-btn size="large" variant="outlined" @click="generateInvoice" class="primary" rounded>
+              <span class="mdi mdi-plusmdi mdi-file-pdf-box"></span>Generate invoice
+            </v-btn>
+            <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
+              <span class="mdi mdi-microsoft-excel"></span>Generate excel file
             </v-btn>
           </v-col>
           <v-col cols="6" class="text-right">
@@ -72,6 +75,12 @@
               ດຶງລາຍງານ
             </v-btn>
           </v-col>
+          <!-- <v-col cols="6" class="text-right">
+            <v-btn size="large" variant="outlined" @click="generateInvoice" class="primary" rounded>
+              <span class="mdi mdi-cloud-download"></span>
+              Generate invoice
+            </v-btn>
+          </v-col> -->
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
@@ -83,10 +92,10 @@
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                   'title': 'ຍອດບິນ',
                   'amount': getFormatNum(activeOrderHeaderList.length),
-                  'sale': getFormatNum(totalSale),
-                  'discount': getFormatNum(totalDiscount),
+                  'sale': getFormatNum(totalSale-totalDiscount),
+                  // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  'gross': getFormatNum(totalSale - totalDiscount)
+                  // 'gross': getFormatNum(totalSale - totalDiscount)
 
                 }">
 
@@ -161,10 +170,10 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth } from '~/common'
+import {  swalError2, dayCount, getNextDate, getFirstDayOfMonth } from '~/common'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
-import { mapActions, mapGetters } from 'vuex'
+import {  mapGetters } from 'vuex'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 export default {
   components: { OrderDetailPos, OrderSumaryCardPos, OrderDetailPosCRUD },
@@ -181,7 +190,6 @@ export default {
       dialog: false,
       isloading: false,
       dialogForm: false,
-
       valid: true,
       name: '',
       search: '',
@@ -392,6 +400,20 @@ export default {
   },
 
   methods: {
+    exportToExcel() {
+      const worksheet = this.$xlsx.utils.json_to_sheet(this.activeOrderHeaderList);
+      const workbook = this.$xlsx.utils.book_new();
+      this.$xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      this.$xlsx.writeFile(workbook, 'data.xlsx');
+    },
+    generateInvoice() {
+      const date = {
+        startDate: this.date,
+        endDate: this.date2
+      }
+      this.queryPayload.date = date
+      window.open(`/admin/PDFInvoiceSummary/${1}?payload=${JSON.stringify(this.queryPayload)}`, '_blank');
+    },
     createSale() {
       this.componentKey += 1;
       this.selectedOrder = 0

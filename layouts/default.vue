@@ -12,10 +12,10 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
+    <v-main :key="mainComponentKey">
       <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
         <v-card>
-          <v-card-title>ເລືອກ Terminal {{ findSelectedTerminal }}</v-card-title>
+          <v-card-title>ເລືອກ Terminal </v-card-title>
           <v-divider></v-divider>
           <v-card-text style="height: 300px;">
             <v-radio-group v-model="terminalSelected" column>
@@ -38,7 +38,7 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.1 user: {{ user.cus_name }} id: {{ user.id }} </span>
+      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.5 user: {{ user.cus_name }} id: {{ user.id }} </span>
       <v-spacer></v-spacer>
       <v-chip v-if="findSelectedTerminal" class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
         {{ currentTerminal['name'] }}
@@ -48,16 +48,18 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   // layout:"empty",
   data() {
     return {
+      intervalId: null,
       terminalDialog: false,
-      terminalSelected: this.findSelectedTerminal,
+      terminalSelected: 1,
       clipped: false,
       drawer: true,
       fixed: true,
+      mainComponentKey: 1,
       items: [
         {
           icon: 'mdi-home',
@@ -114,11 +116,6 @@ export default {
           icon: 'mdi-receipt-text-check-outline',
           title: 'ລາຍການບິນຂາຍ ',
           to: '/admin/ordersFromPos',
-        },
-        {
-          icon: 'mdi-receipt-text-check-outline',
-          title: 'ຄົ້ນຫາລາຍການບິນຂາຍ ຕາມລູກຄ້າ',
-          to: '/admin/ordersFromPosSummaryByCustomer',
         },
         {
           icon: 'mdi-receipt-text-clock-outline',
@@ -234,6 +231,11 @@ export default {
         //   to: '/admin/customer_request/withdraw',
         // },
         {
+          icon: 'mdi mdi-file-search-outline',
+          title: 'ຄົ້ນຫາບິນຂາຍ ຕາມລູກຄ້າ',
+          to: '/admin/ordersFromPosSummaryByCustomer',
+        },
+        {
           icon: 'mdi-logout',
           title: 'ອອກຈາກລະບົບ',
           to: '/admin/logout',
@@ -245,11 +247,22 @@ export default {
       title: 'Vuetify.js',
     }
   },
-  mounted() {
+  created() {
+    console.log(`TERMINAL SELECTED CREATED= >>>>>>>> ${this.findSelectedTerminal}`);
     this.terminalSelected = this.findSelectedTerminal
+    this.checkAllInitData()
+  },
+  mounted() {
+    //******** Check if all common variable is ready ******** */
+    // this.intervalId = setInterval(this.checkAllInitData, 1000);
+    //******** Listen for browser reload ******** */
+    window.addEventListener('beforeunload', this.checkAllInitData);
+  },
+  beforeDestroy() {
+    window.removeEventListener('beforeunload', this.clearInterval);
   },
   computed: {
-    ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
+    ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation', 'currentSelectedLocation']),
     user() {
       return this.$auth.user || ''
     },
@@ -259,13 +272,32 @@ export default {
     },
   },
   methods: {
+
+    clearInterval() {
+      clearInterval(this.intervalId);
+    },
+    ...mapActions(['initiateData']),
+    checkAllInitData() {
+      // setInterval(() => {
+      console.info(`...loading ${this.findAllTerminal.length}... ${new Date().toLocaleTimeString()}`);
+      if (this.findAllTerminal.length == 0) {
+        console.error(`Data missing need to reload`)
+        this.initiateData(this.$axios)
+      }
+      if (!this.currentSelectedLocation) {
+        this.terminalDialog = true
+      }
+      // }, 1000);
+    },
     switchTerminal() {
       this.setSelectedTerminal(this.terminalSelected)
       const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
       this.setSelectedLocation(location)
+      //********** refresh component so the data will be update fresh **********//
+      this.mainComponentKey += 1;
       this.terminalDialog = false
     },
-    ...mapActions(['setSelectedTerminal','setSelectedLocation']),
+    ...mapActions(['setSelectedTerminal', 'setSelectedLocation']),
   }
 }
 </script>
