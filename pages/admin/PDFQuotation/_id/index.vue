@@ -121,7 +121,7 @@
               <tr class="page-break">
 
                 <td style="text-align: right; font-weight: bold;" colspan="5">ລາຄາລວມ </td>
-                <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total) }}</td>
+                <td style="text-align: right; font-weight: bold;"> {{ formatNumber(header.total-totalDiscount) }}</td>
               </tr>
             </tbody>
           </table>

@@ -100,7 +100,7 @@
                   <td style="text-align: right;">No.{{ header.id }}</td>
                   <!-- <td style="text-align: right;">{{ formatNumber(header.discount) }}</td> -->
                   <!-- <td style="text-align: right;">{{ formatNumber(header.total) }}</td> -->
-                  <td style="text-align: right;">{{ formatNumber(header.total + header.discount) }}</td>
+                  <td style="text-align: right;">{{ formatNumber(header.total ) }}</td>
                 </tr>
               </div>
               <div v-else style="display: contents">
