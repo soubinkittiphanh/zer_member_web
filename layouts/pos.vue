@@ -183,7 +183,7 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <!-- <v-btn @click="generatePrintView">ticket</v-btn> -->
+                            <v-btn @click="generatePrintView">ticket</v-btn>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -218,7 +218,6 @@
 <script>
 import CustomerList from '~/components/customer/CustomerList.vue'
 import Quotation from '~/components/quotation'
-import html2canvas from 'html2canvas'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 import { getFormatNum, jsDateToMysqlDate } from '~/common'
 import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/common/index'
@@ -390,7 +389,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['initiateData','setSelectedTerminal', 'setSelectedLocation']),
+        ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation']),
         checkAllInitData() {
             // setInterval(() => {
             console.info(`...loading pos layout ${this.findAllTerminal.length}... ${new Date().toLocaleTimeString()}`);
@@ -424,10 +423,11 @@ export default {
                 const unitId = 1
                 const total = iterator.qty * iterator.pro_price
                 // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
-                txnListHtml += `<div class="ticket">
-		<div class="product-name">${product.pro_name} </div>
-		<div class="price">x${quantity} ${this.formatNumber(total)}</div>
-	</div>`
+                txnListHtml +=
+                    `<div class="ticket">
+                    <div class="product-name">${product.pro_name} </div>
+                    <div class="price"> ${quantity}x  ${this.formatNumber(total)}</div>
+                </div>`
             }
             const today = new Date()
             const bookingDate = jsDateToMysqlDate(today)
@@ -447,8 +447,16 @@ export default {
           <html>
           <head
           <title></title>
-          <style type="text/css">
+          <style>
 
+          @font-face {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('~assets/font/notosan/NotoSansLao-Light.ttf') format('truetype');
+        }
+          
 		.ticket {
 			display: flex;
 			justify-content: space-between;
@@ -469,30 +477,30 @@ export default {
 			font-size: 12px;
 		}
 
-        * {
-			font-family: 'noto sans lao';
-		}
+        h3 {
+        text-align: center;
+        font-family: 'DM Sans';
+        }
         
-	</style>
-          </head>
-          <body>
-            <div style="text-align: center;">
-                <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
-            </div>
-            <h3 style="text-align: center;"> ໃບຮັບເງິນ </h1>
-            <h5> ວັນທີ ${today.toLocaleString()}</h5>
-            <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
-            <h5> Tel 020 7777 5660 </h5>
-            <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
-            <hr style="margin-top: 50px;"> </hr>
-            ${txnListHtml}
-            <hr> </hr>
-            ${totalHtml}
-            <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
-            
-          </body>
-          </html>
-
+        </style>
+            </head>
+            <body>
+                <div style="text-align: center;">
+                    <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+                </div>
+                <h3> ໃບຮັບເງິນ</h3>
+                <h5> ວັນທີ ${today.toLocaleString()}</h5>
+                <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
+                <h5> Tel 020 7777-5660, 020 2865-3388 </h5>
+                <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+                <hr style="margin-top: 50px;"> </hr>
+                ${txnListHtml}
+                <hr> </hr>
+                ${totalHtml}
+                <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
+                
+            </body>
+            </html>
         `
             const printWin = window.open(
                 '',
@@ -693,7 +701,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* * {
+    font-family: 'noto sans lao';
+} */
+
 .flexcol .v-btn__content {
     display: flex;
     flex-direction: column;
