@@ -183,7 +183,7 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <v-btn @click="generatePrintView">ticket</v-btn>
+                            <!-- <v-btn @click="generatePrintView">ticket</v-btn> -->
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
