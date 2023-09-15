@@ -183,7 +183,7 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <!-- <v-btn @click="generatePrintView">ticket</v-btn> -->
+                            <v-btn @click="generatePrintView">ticket</v-btn>
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -454,9 +454,11 @@ export default {
             font-style: normal;
             font-weight: 400;
             font-display: swap;
-            src: url('~assets/font/notosan/NotoSansLao-Light.ttf') format('truetype');
+            src: url('/notosan/NotoSansLao-Light.ttf') format('truetype');
         }
-          
+          *{
+            font-family: 'DM Sans';
+          }
 		.ticket {
 			display: flex;
 			justify-content: space-between;
