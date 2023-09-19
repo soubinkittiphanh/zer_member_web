@@ -95,6 +95,9 @@
   "OrderSumaryCardPos": {
     "description": "Auto imported from components/orderSumaryCardPos.vue"
   },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
   "CardCampaignCard": {
     "description": "Auto imported from components/card/campaignCard.vue"
   },
@@ -116,26 +119,32 @@
   "AccountingGeneralLedgerForm": {
     "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  "DialogsBottomAlert": {
+    "description": "Auto imported from components/dialogs/bottomAlert.vue"
+  },
+  "DashboardCardGrouping": {
+    "description": "Auto imported from components/dashboard/CardGrouping.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
   },
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
   },
-  "DialogsBottomAlert": {
-    "description": "Auto imported from components/dialogs/bottomAlert.vue"
-  },
-  "MinStockCard": {
-    "description": "Auto imported from components/minStockCard/index.vue"
-  },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"
+  },
+  "PaymentCard": {
+    "description": "Auto imported from components/paymentCard/index.vue"
   },
   "PoForm": {
     "description": "Auto imported from components/po/PoForm.vue"
   },
-  "PosCateogoryList": {
-    "description": "Auto imported from components/pos/CateogoryList.vue"
+  "MinStockCard": {
+    "description": "Auto imported from components/minStockCard/index.vue"
+  },
+  "Quotation": {
+    "description": "Auto imported from components/quotation/index.vue"
   },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"
@@ -149,16 +158,7 @@
   "ProductFormCreate": {
     "description": "Auto imported from components/product/ProductFormCreate.vue"
   },
-  "Quotation": {
-    "description": "Auto imported from components/quotation/index.vue"
-  },
-  "DashboardCardGrouping": {
-    "description": "Auto imported from components/dashboard/CardGrouping.vue"
-  },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
-  },
-  "PaymentCard": {
-    "description": "Auto imported from components/paymentCard/index.vue"
+  "PosCateogoryList": {
+    "description": "Auto imported from components/pos/CateogoryList.vue"
   }
 }

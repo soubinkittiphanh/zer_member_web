@@ -33,21 +33,22 @@
         <v-app-bar app color="primary" dark clipped-left clipped-right>
             <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
             <!-- <v-toolbar-title></v-toolbar-title> -->
-            <v-row justify="end">
-                <v-col cols="4" class="pa-2 ma-2">
+            <v-row no-gutters align="center">
+                <v-col cols="2">
+
+                </v-col>
+                <v-col cols="4">
                     <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
                         prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted /></v-col>
-                <v-col cols="8">
-                    <v-chip  class="pa-2 ma-2" color="warning" variant="outlined"
-                        @click="terminalDialog = true">
+                <v-col cols="6">
+                    <v-chip class="ml-10" color="warning" variant="outlined" @click="terminalDialog = true">
                         {{ currentTerminal == undefined ? '' : currentTerminal['description'] + '-' +
                             currentTerminal['name'] }}
                     </v-chip>
                     <!-- <v-spacer></v-spacer> -->
-                    <v-btn class="ml-10 mt-6" icon v-for="item in menuItems" :key="item.title"
-                        :to="item.path" @click="item.method">
+                    <v-btn size="large" variant="outlined" class="primary" rounded v-for="item in menuItems" :key="item.title" :to="item.path" @click="item.method">
                         <v-icon> {{ item.icon }} </v-icon>
-                        <span>{{ item.title }}</span>
+                        <span class="text-right">{{ item.title }}</span>
                     </v-btn>
                 </v-col>
             </v-row>
