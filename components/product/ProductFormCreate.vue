@@ -40,12 +40,34 @@
                 required></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule" label="ລາຄາ*"
-                type="number" required></v-text-field>
+              <!-- <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule" label="ລາຄາ*"
+                type="number" required></v-text-field> -->
+              <v-row>
+                <v-col cols="6" sm="6" md="6">
+                  <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule" label="ລາຄາ*"
+                    type="number" required></v-text-field>
+
+                </v-col>
+                <v-col cols="6" sm="6" md="6">
+                  <v-autocomplete item-text="code" item-value="id" :items="findAllCurrency" label="Currency*"
+                    v-model="formData.saleCurrencyId"></v-autocomplete>
+                </v-col>
+              </v-row>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="formData.pro_cost_price" :counter="10" type="number" :rules="rules.priceRule"
-                label="ຕົ້ນທຶນ*" required></v-text-field>
+              <!-- <v-text-field v-model="formData.pro_cost_price" :counter="10" type="number" :rules="rules.priceRule"
+                label="ຕົ້ນທຶນ*" required></v-text-field> -->
+              <v-row>
+                <v-col cols="6" sm="6" md="6">
+                  <v-text-field v-model="formData.pro_cost_price" :counter="10" type="number" :rules="rules.priceRule"
+                    label="ຕົ້ນທຶນ*" required></v-text-field>
+
+                </v-col>
+                <v-col cols="6" sm="6" md="6">
+                  <v-autocomplete item-text="code" item-value="id" :items="findAllCurrency" label="Currency*"
+                    v-model="formData.costCurrencyId"></v-autocomplete>
+                </v-col>
+              </v-row>
             </v-col>
 
             <v-col cols="12" sm="6" md="4">
@@ -62,8 +84,7 @@
                 label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field v-model="formData.barCode" 
-                label="barcode" required></v-text-field>
+              <v-text-field v-model="formData.barCode" label="barcode" required></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-autocomplete item-text="name" item-value="id" :items="unitList" label="ຫົວຫນ່ວຍຮັບເຄື່ອງ*"
@@ -242,7 +263,7 @@ export default {
       },
       category: [],
       formData: {
-        outlet:1,
+        outlet: 1,
         pro_category: 1001,
         pro_id: null,
         pro_name: '',
@@ -257,6 +278,8 @@ export default {
         barCode: '',
         receiveUnitId: 1,
         stockUnitId: 1,
+        saleCurrencyId: 1,
+        costCurrencyId: 1,
       },
       outlet: [],
     }
@@ -277,11 +300,11 @@ export default {
       console.log('Watch fromData' + obj)
     },
   },
-  computed:{
+  computed: {
     ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
     unitList() {
-            return this.findAllUnit
-        },
+      return this.findAllUnit
+    },
   },
   methods: {
     validate() {

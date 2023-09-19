@@ -25,6 +25,7 @@
 </template>
   
 <script>
+import { getFormatNum,swalError2,swalSuccess } from '~/common'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 export default {
     layout: "pos",
@@ -59,18 +60,15 @@ export default {
         ...mapGetters({
             searchKeyword: 'searchKeyword',
             currenctSelectedCategoryId: 'currenctSelectedCategoryId',
-            currentSelectedLocation: 'currentSelectedLocation'
+            currentSelectedLocation: 'currentSelectedLocation',
+            findAllCurrency:'findAllCurrency',
         }),
-        // ...mapGetters(['cartOfProduct','currenctSelectedCategoryId']),
+
         filterProduct() {
-            console.log('+++caegory ', this.currenctSelectedCategoryId);
             if (!this.searchKeyword) {
-                console.log("Return all");
                 if (this.currenctSelectedCategoryId != 9999) {
-                    console.log("Filter by category only");
                     return this.productList.filter(item => item.pro_category === this.currenctSelectedCategoryId);
                 }
-                console.log("All no filter case");
                 return this.productList;
             }
             // element.age > 25 || element.name.includes("a")
@@ -80,12 +78,13 @@ export default {
             return this.productList.filter(item => item.pro_category === this.currenctSelectedCategoryId && item.pro_name.toLowerCase().includes(this.searchKeyword));
 
         },
-        // setSearchKeyWorkdZ() {
-        //     return this.setSearchKeyWorkd
-        // }
+
     },
     methods: {
         ...mapActions(['addProduct']),
+        findCurrency(currencyId){
+            return this.findAllCurrency.find(el=>el.id==currencyId);
+        },
         findProductFromBarcode(barcode){
             this.productSelectedFromBarcode = this.productList.find(el => el.barCode==barcode)
             if(this.productSelectedFromBarcode){
@@ -100,7 +99,6 @@ export default {
             if (event.key == 'Enter') {
                 if (this.barcode) {
                     // ************ Find product from this barcode and add to cart ************ //
-                    console.log("Do something we got barcode");
                     this.findProductFromBarcode(this.barcode)
                 }
                 this.barcode = '';
@@ -110,8 +108,6 @@ export default {
                 this.barcode += event.key;
             }
             this.timer = setInterval(() => this.barcode = '', 20);
-
-            console.log(`Key is pressing ${event.key}`);
         },
         async loadProduct() {
             this.isloading = true
@@ -120,6 +116,8 @@ export default {
                 .get(`product_f/${this.currentSelectedLocation['id']}`)
                 .then((res) => {
                     for (const iterator of res.data) {
+                        const currency = this.findCurrency(iterator['saleCurrencyId'])
+                        iterator['localPrice'] = iterator['pro_price']*currency['rate']
                         this.productList.push(iterator)
                     }
                 })
@@ -135,14 +133,11 @@ export default {
             await this.$axios
                 .get('/category_f')
                 .then((res) => {
-                    console.log('Data: ' + res.data)
                     for (const iterator of res.data) {
-                        console.log("CATEGOR", iterator);
                         this.categoryList.push(iterator);
                     }
                 })
                 .catch((er) => {
-                    // console.log('Data: ' + er)
                     swalError2(this.$swal, "Error", er)
                 })
             this.isloading = false;
@@ -154,12 +149,10 @@ export default {
                 .get('/api/paymentMethod/find')
                 .then((res) => {
                     for (const iterator of res.data) {
-                        console.log("Payment", iterator);
                         this.paymentList.push(iterator);
                     }
                 })
                 .catch((er) => {
-                    // console.log('Data: ' + er)
                     swalError2(this.$swal, "Error", er)
                 })
             this.isloading = false;

@@ -9,7 +9,7 @@
       </dialog-classic-message>
     </v-dialog>
     <v-dialog v-model="isstock" max-width="600px">
-      <card-form :key="stockFormKey" :product-id="selectedProductId" :id="selectedId" :cost="selectedProductCost"
+      <card-form :key="stockFormKey"  :product-id="selectedProductId" :id="selectedId" :cost="selectedProductCost"
         :product-name="selectedProductName" @close-dialog="isstock = false" @reload="rebuildStock"></card-form>
     </v-dialog>
     <v-dialog v-model="editProductForm" max-width="1200px">
@@ -137,9 +137,8 @@
 </template>
 <script>
 import ProductForm from '~/components/product/ProductForm.vue'
-import { getFormatNum } from '~/common'
+import { getFormatNum,swalError2,swalSuccess } from '~/common'
 import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
-import { swalSuccess, swalError2 } from '~/util/myUtil'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   components: { ProductForm, ProductFormCreate },
@@ -239,6 +238,7 @@ export default {
       this.selectedProductCost = payload.pro_cost_price;
       this.selectedProductName = payload.pro_name;
       this.isstock = true;
+      
     },
     async fetchData() {
       this.isloading = true

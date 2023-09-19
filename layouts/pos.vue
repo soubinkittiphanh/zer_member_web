@@ -31,20 +31,29 @@
             <Quotation> </Quotation>
         </v-dialog>
         <v-app-bar app color="primary" dark clipped-left clipped-right>
-            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title></v-toolbar-title>
-            <v-spacer />
-            <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
-                prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted />
-            <v-spacer />
-            <v-chip class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
-                {{ currentTerminal == undefined ? '' : currentTerminal['name'] }}
-            </v-chip>
-            <v-btn class="flexcol ml-10" icon v-for="item in menuItems" :key="item.title" :to="item.path"
-                @click="item.method">
-                <v-icon> {{ item.icon }} </v-icon>
-                <span class="mt-2">{{ item.title }}</span>
-            </v-btn>
+            <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
+            <!-- <v-toolbar-title></v-toolbar-title> -->
+            <v-row justify="end">
+                <v-col cols="4" class="pa-2 ma-2">
+                    <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
+                        prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted /></v-col>
+                <v-col cols="8">
+                    <v-chip  class="pa-2 ma-2" color="warning" variant="outlined"
+                        @click="terminalDialog = true">
+                        {{ currentTerminal == undefined ? '' : currentTerminal['description'] + '-' +
+                            currentTerminal['name'] }}
+                    </v-chip>
+                    <!-- <v-spacer></v-spacer> -->
+                    <v-btn class="ml-10 mt-6" icon v-for="item in menuItems" :key="item.title"
+                        :to="item.path" @click="item.method">
+                        <v-icon> {{ item.icon }} </v-icon>
+                        <span>{{ item.title }}</span>
+                    </v-btn>
+                </v-col>
+            </v-row>
+
+            <!-- <v-spacer /> -->
+
         </v-app-bar>
 
         <v-navigation-drawer app v-model="drawer" clipped width="180">
@@ -158,7 +167,8 @@
                                             <v-icon>fa-solid fa-plus</v-icon>
                                         </v-btn>
                                     </td>
-                                    <td class="font-weight-medium">{{ formatNumber(item.pro_price * item.qty) }}</td>
+                                    <!-- <td class="font-weight-medium">{{ formatNumber(item.pro_price * item.qty) }}</td> -->
+                                    <td class="font-weight-medium">{{ formatNumber(item.localPrice * item.qty) }}</td>
                                 </tr>
                             </tbody>
                         </template>
@@ -183,7 +193,7 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <v-btn @click="generatePrintView">ticket</v-btn>
+                            <!-- <v-btn @click="generatePrintView">ticket</v-btn> -->
                             <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
@@ -342,12 +352,14 @@ export default {
                     {
                         quantity: iterator.qty,
                         unitRate: 1,
-                        price: iterator.pro_price,
+                        // price: iterator.pro_price,
+                        price: iterator.localPrice,
                         discount: 0,
                         productId: iterator.id,
                         productKey: iterator.id,
                         unitId: 1,
-                        total: iterator.qty * iterator.pro_price,
+                        // total: iterator.qty * iterator.pro_price,
+                        total: iterator.qty * iterator.localPrice,
                         isActive: true
                     }
                 )
@@ -363,7 +375,8 @@ export default {
 
         grandTotal() {
             const totalPrice = this.cartOfProduct.reduce((total, item) => {
-                return total + item.qty * item.pro_price;
+                // return total + item.qty * item.pro_price;
+                return total + item.qty * item.localPrice;
             }, 0);
             return totalPrice
         },
@@ -416,12 +429,14 @@ export default {
                 console.log(`=======${product}======`);
                 const quantity = iterator.qty
                 const unitRate = 1
-                const price = iterator.pro_price
+                // const price = iterator.pro_price
+                const price = iterator.localPrice
                 const discount = 0
                 const productId = iterator.id
                 const productKey = iterator.id
                 const unitId = 1
-                const total = iterator.qty * iterator.pro_price
+                // const total = iterator.qty * iterator.pro_price
+                const total = iterator.qty * iterator.localPrice
                 // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
                 txnListHtml +=
                     `<div class="ticket">

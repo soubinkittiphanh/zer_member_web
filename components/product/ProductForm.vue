@@ -28,20 +28,36 @@
                                 <v-text-field v-model="formData.pro_id" :counter="10" :disabled="!!formData.pro_id"
                                     label="ໄອດີສິນຄ້າ" required></v-text-field>
                             </v-col>
-
-
-
                             <v-col cols="12" sm="6" md="4">
                                 <v-text-field v-model="formData.pro_name" :counter="50" :rules="rules.nameRule"
                                     label="ຊື້ສິນຄ້າ*" required></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule"
-                                    label="ລາຄາ*" type="number" required></v-text-field>
+                                <v-row>
+                                    <v-col cols="6" sm="6" md="6">
+                                        <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule"
+                                            label="ລາຄາ*" type="number" required></v-text-field>
+
+                                    </v-col>
+                                    <v-col cols="6" sm="6" md="6">
+                                        <v-autocomplete item-text="code" item-value="id" :items="findAllCurrency"
+                                            label="Currency*" v-model="formData.saleCurrencyId"></v-autocomplete>
+                                    </v-col>
+                                </v-row>
+
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="formData.pro_cost_price" :counter="10" type="number"
-                                    :rules="rules.priceRule" label="ຕົ້ນທຶນ*" required></v-text-field>
+                                <v-row>
+                                    <v-col cols="6" sm="6" md="6">
+                                        <v-text-field v-model="formData.pro_cost_price" :counter="10" type="number"
+                                            :rules="rules.priceRule" label="ຕົ້ນທຶນ*" required></v-text-field>
+
+                                    </v-col>
+                                    <v-col cols="6" sm="6" md="6">
+                                        <v-autocomplete item-text="code" item-value="id" :items="findAllCurrency"
+                                            label="Currency*" v-model="formData.costCurrencyId"></v-autocomplete>
+                                    </v-col>
+                                </v-row>
                             </v-col>
 
 
@@ -153,14 +169,14 @@ export default {
     middleware: 'auths',
     mixins: [ImagePreviewMixin],
 
-    computed:{
-    ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
-    unitList() {
+    computed: {
+        ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency']),
+        unitList() {
             return this.findAllUnit
-        },        host() {
+        }, host() {
             return hostName()
         }
-  },
+    },
     mounted() {
         console.log('FORMDATA ID: ' + this.formData.pro_id)
         this.pro_id = this.headerId
@@ -246,6 +262,8 @@ export default {
                 barCode: '',
                 receiveUnitId: 1,
                 stockUnitId: 1,
+                saleCurrencyId:1,
+                costCurrencyId:1,
             },
             outlet: [],
             isLoading: false,
@@ -365,6 +383,8 @@ export default {
                         barCode: el.barCode,
                         receiveUnitId: el.receiveUnitId,
                         stockUnitId: el.stockUnitId,
+                        costCurrencyId: el.costCurrencyId,
+                        saleCurrencyId: el.saleCurrencyId,
                         pro_image: image,
                     }
                     console.log('IMAGE COUNT: ' + this.formData.pro_image.length)

@@ -12,7 +12,8 @@
                         {{ productName }} 
                     </div>
                     <div class="font-weight-meduim primary--text"> Stock: {{ stock }} </div>
-                    <div class="font-weight-meduim primary--text"> ລາຄາ: {{ formatNumber(product.pro_price) }}</div>
+                    <div class="font-weight-meduim primary--text"> ລາຄາ: {{ formatNumber(product.localPrice) }}</div>
+                    <!-- <div class="font-weight-meduim primary--text"> local ລາຄາ: {{ formatNumber(product.localPrice) }}</div> -->
                 </v-card-text>
             </v-card>
         </v-hover>

@@ -222,6 +222,9 @@ export default {
 
     },
     methods: {
+        findCurrency(currencyId) {
+            return this.findAllCurrency.find(el => el.id == currencyId);
+        },
         quotationPreview() {
             const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice'
             window.open(`/admin/${path}/${this.headerId}`, '_blank');
@@ -303,7 +306,11 @@ export default {
                 return
             }
             let index = this.transaction.lines.indexOf(data);
-            this.transaction.lines[index]['price'] = product['pro_price']
+            const currency = this.findCurrency(product['saleCurrencyId'])
+            console.log(`$$$$$$ ${currency.id} $$$$$$`);
+            const localPrice = product['pro_price'] * currency['rate']
+            // this.transaction.lines[index]['price'] = product['pro_price'] // *** Price original  ***
+            this.transaction.lines[index]['price'] = localPrice //  *** Price base on exchange rate  ***
             const qty = replaceAll(this.transaction.lines[index]['quantity'], ',', '');
             const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
@@ -551,7 +558,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency','findAllTerminal', 'findSelectedTerminal']),
+        ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency', 'findAllTerminal', 'findSelectedTerminal']),
         clientList() {
             return this.findAllClient
         },

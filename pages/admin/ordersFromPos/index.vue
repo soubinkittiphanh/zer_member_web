@@ -171,8 +171,6 @@ export default {
       isedit: false,
       dialog: false,
       isloading: false,
-      dialogForm: false,
-
       valid: true,
       name: '',
       search: '',
