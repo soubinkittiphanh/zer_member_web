@@ -9,8 +9,11 @@
         </v-dialog>
         <v-card>
             <v-card-title>
-
-                <span class="headline">{{ title }}</span>
+                <v-chip class="ma-2" color="primary" label text-color="white">
+                    <v-icon start>mdi-label</v-icon>
+                    {{ title }}
+                </v-chip>
+                <!-- <span class="headline">{{ title }}</span> -->
             </v-card-title>
             <v-card-text>
                 <v-container>
@@ -244,7 +247,7 @@ export default {
             },
             preview: false,
             previewSrc: null,
-            title: 'Update product',
+            title: 'ຈັດການສິນຄ້າ',
             valid: false,
             category: [],
             formData: {

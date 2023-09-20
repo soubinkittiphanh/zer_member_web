@@ -7,7 +7,10 @@
         <v-card class="pa-4">
 
             <v-card-title>
-                <span class="text-h5">Currency </span>
+                <v-chip class="ma-2" color="primary" label text-color="white">
+                    <v-icon start>mdi-label</v-icon>
+                    ອັດຕາແລກປ່ຽນ
+                </v-chip>
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">

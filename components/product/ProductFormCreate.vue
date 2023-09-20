@@ -13,8 +13,10 @@
     <!-- SELECTED OUTLET {{ formData.outlet }} -->
     <v-card>
       <v-card-title>
-
-        <span class="headline">{{ title }}</span>
+        <v-chip class="ma-2" color="primary" label text-color="white">
+          <v-icon start>mdi-label</v-icon>
+          {{ title }}
+        </v-chip>
       </v-card-title>
       <v-card-text>
 
@@ -216,7 +218,7 @@ export default {
       isloading: false,
       valid: true,
       name: '',
-      title: 'Create product',
+      title: 'ເພີ່ມສິນຄ້າ',
       rules: {
         nameRule: [
           (v) => !!v || 'ກະລຸນາ ໃສ່ຊື່ສິນຄ້າ ',

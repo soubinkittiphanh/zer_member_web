@@ -6,7 +6,10 @@
         </v-dialog>
         <v-card class="pa-4">
             <v-card-title>
-                <span class="text-h5">Location </span>
+                <v-chip class="ma-2" color="primary" label text-color="white">
+                    <v-icon start>mdi-label</v-icon>
+                    ສາງເກັບເຄື່ອງ
+                </v-chip>
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
