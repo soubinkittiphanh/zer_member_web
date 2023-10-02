@@ -162,6 +162,12 @@
     "chunkName": "pages/admin/ordersFromPosSummaryByCustomer/index"
   },
   {
+    "name": "admin-payment",
+    "path": "/admin/payment",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/payment/index.vue",
+    "chunkName": "pages/admin/payment/index"
+  },
+  {
     "name": "admin-po",
     "path": "/admin/po",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/po/index.vue",

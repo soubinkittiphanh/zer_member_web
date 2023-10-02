@@ -53,6 +53,9 @@
   "OrderDetailPosCRUD": {
     "description": "Auto imported from components/OrderDetailPosCRUD.vue"
   },
+  "PaymentForm": {
+    "description": "Auto imported from components/PaymentForm.vue"
+  },
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
@@ -98,6 +101,9 @@
   "OrderSumaryCardPos": {
     "description": "Auto imported from components/orderSumaryCardPos.vue"
   },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
   "AccountingApPayment": {
     "description": "Auto imported from components/accounting/ApPayment.vue"
   },
@@ -113,8 +119,11 @@
   "CardForm": {
     "description": "Auto imported from components/card/cardForm.vue"
   },
-  "DialogsBottomAlert": {
-    "description": "Auto imported from components/dialogs/bottomAlert.vue"
+  "DashboardCardGrouping": {
+    "description": "Auto imported from components/dashboard/CardGrouping.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
   },
   "CustomerForm": {
     "description": "Auto imported from components/customer/CustomerForm.vue"
@@ -122,26 +131,20 @@
   "CustomerList": {
     "description": "Auto imported from components/customer/CustomerList.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
-  },
-  "DashboardCardGrouping": {
-    "description": "Auto imported from components/dashboard/CardGrouping.vue"
-  },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
-  },
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
+  },
+  "DialogsBottomAlert": {
+    "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"
   },
-  "PaymentCard": {
-    "description": "Auto imported from components/paymentCard/index.vue"
-  },
   "MinStockCard": {
     "description": "Auto imported from components/minStockCard/index.vue"
+  },
+  "PaymentCard": {
+    "description": "Auto imported from components/paymentCard/index.vue"
   },
   "PoForm": {
     "description": "Auto imported from components/po/PoForm.vue"

@@ -83,7 +83,7 @@ export default {
           to: '/admin',
         },
         {
-          icon: 'mdi-finance',
+          icon: 'mdi mdi-truck-cargo-container',
           title: 'ຈັດການຂົນສົ່ງ',
           to: '/admin/shipping',
         },
@@ -91,6 +91,11 @@ export default {
           icon: 'mdi-currency-usd-off',
           title: 'ຈັດການອັດຕາແລກປ່ຽນ',
           to: '/admin/currency',
+        },
+        {
+          icon: 'mdi mdi-cash-multiple',
+          title: 'ຈັດການ ປະເພດຊຳລະ',
+          to: '/admin/payment',
         },
         {
           icon: 'mdi mdi-warehouse',
@@ -113,6 +118,7 @@ export default {
           title: 'ຈັດການລູກຄ້າ',
           to: '/admin/client',
         },
+
         {
           icon: 'mdi mdi-transfer',
           title: 'Transfer',
