@@ -3,7 +3,7 @@
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
-        <v-dialog v-model="customerDialog" max-width="1024">
+        <v-dialog v-model="customerDialog" max-width="1024" >
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
         <!-- ************ Bottom sheet show error message ************* -->
@@ -36,9 +36,9 @@
 
             </v-card-subtitle>
             <v-divider></v-divider>
-            <v-card-text>
+            <v-card-text class="pa-1">
                 <!-- ******* Header Card OPEN *******-->
-                <v-card :style="headerError ? `outline:1px solid red` : ``">
+                <v-card :style="headerError ? `outline:1px solid red` : ``" class="pa-1">
                     {{ isQuotation ? `Quotation #` : `Invoice #` }}
                     {{ transaction.id }}
                     <v-card-text>
@@ -534,7 +534,7 @@ export default {
                         console.log('Error ===>: ' + er)
                     })
             } else {
-                // ********** If header has data, that means we go for update API ********** //
+                // ********** Go for create API ********** //
                 await this.$axios
                     .post(`api/${this.apiLine}/create`, this.transaction)
                     .then((res) => {

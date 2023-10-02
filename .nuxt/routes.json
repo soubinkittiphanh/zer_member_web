@@ -175,6 +175,13 @@
     "_name": "_bc74547e"
   },
   {
+    "name": "admin-ordersFromPosOnline",
+    "path": "/admin/ordersFromPosOnline",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/ordersFromPosOnline/index.vue",
+    "chunkName": "pages/admin/ordersFromPosOnline/index",
+    "_name": "_0fdff89b"
+  },
+  {
     "name": "admin-ordersFromPosSummaryByCustomer",
     "path": "/admin/ordersFromPosSummaryByCustomer",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/ordersFromPosSummaryByCustomer/index.vue",
@@ -236,6 +243,13 @@
     "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/rider/index.vue",
     "chunkName": "pages/admin/rider/index",
     "_name": "_0f005c3d"
+  },
+  {
+    "name": "admin-shipping",
+    "path": "/admin/shipping",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/shipping/index.vue",
+    "chunkName": "pages/admin/shipping/index",
+    "_name": "_f00a79be"
   },
   {
     "name": "admin-terminal",

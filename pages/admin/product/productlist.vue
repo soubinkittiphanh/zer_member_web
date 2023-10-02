@@ -1,6 +1,9 @@
 <template>
-  <div class="text-center">
-    <h1>ລາຍການສິນຄ້າ</h1>
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການສິນຄ້າ</h3>
+    </v-chip>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -217,9 +220,9 @@ export default {
     await this.fetchData()
   },
 
-  computed:{
+  computed: {
     ...mapGetters(['currentSelectedLocation', 'findAllLocation']),
-     
+
   },
   methods: {
     async importStock() {

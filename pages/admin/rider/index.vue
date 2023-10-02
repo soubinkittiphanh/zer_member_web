@@ -126,7 +126,7 @@ export default {
       this.isCreate = true;
     },
     async loadData() {
-      await this.$axios.get("api/rider/find").then(response => {
+      await this.$axios.get("api/rider/findAll").then(response => {
         this.isloading = true
         this.riderList = response.data.map(el => {
           return {

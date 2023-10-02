@@ -12,6 +12,22 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+    <!-- ************** => Header Appbar ************** -->
+    <v-app-bar app light clipped-left clipped-right>
+      <v-row no-gutters align="center">
+        <v-col cols="2">
+
+        </v-col>
+        <v-col cols="4">
+        </v-col>
+        <v-col cols="6">
+          <v-chip class="ml-10" color="primary" variant="outlined">
+            Dcommerce
+          </v-chip>
+        </v-col>
+      </v-row>
+    </v-app-bar>
+    <!-- ************** Header Appbar <= ************** -->
     <v-main :key="mainComponentKey">
       <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
         <v-card>
@@ -66,11 +82,11 @@ export default {
           title: 'ຫນ້າຫລັກ',
           to: '/admin',
         },
-        // {
-        //   icon: 'mdi-finance',
-        //   title: 'Dashboard',
-        //   to: '/admin/dashboard',
-        // },
+        {
+          icon: 'mdi-finance',
+          title: 'ຈັດການຂົນສົ່ງ',
+          to: '/admin/shipping',
+        },
         {
           icon: 'mdi-currency-usd-off',
           title: 'ຈັດການອັດຕາແລກປ່ຽນ',
@@ -81,9 +97,15 @@ export default {
           title: 'Warehouse',
           to: '/admin/location',
         },
+        // {
+        //   icon: 'mdi mdi-network-pos',
+        //   title: 'terminal',
+        //   to: '/admin/terminal',
+        // },
+        // ********* 231001 CH By Bae *********
         {
           icon: 'mdi mdi-network-pos',
-          title: 'terminal',
+          title: 'ຈັດການຮ້ານຄ້າ',
           to: '/admin/terminal',
         },
         {
@@ -114,8 +136,13 @@ export default {
         },
         {
           icon: 'mdi-receipt-text-check-outline',
-          title: 'ລາຍການບິນຂາຍ ',
+          title: 'ລາຍການບິນຂາຍ POS',
           to: '/admin/ordersFromPos',
+        },
+        {
+          icon: 'mdi-receipt-text-check-outline',
+          title: 'ລາຍການບິນຂາຍ Online',
+          to: '/admin/ordersFromPosOnline',
         },
         {
           icon: 'mdi-receipt-text-clock-outline',
@@ -154,11 +181,11 @@ export default {
         //   title: 'ຈັດການຜູ້ໃຊ້ງານ',
         //   to: '/admin/member',
         // },
-        // {
-        //   icon: 'mdi-bike-fast',
-        //   title: 'ຈັດການRider',
-        //   to: '/admin/rider',
-        // },
+        {
+          icon: 'mdi-bike-fast',
+          title: 'ຈັດການRider',
+          to: '/admin/rider',
+        },
         // {
         //   icon: 'mdi-seal',
         //   title: 'Campaign manager',
@@ -232,7 +259,7 @@ export default {
         // },
         {
           icon: 'mdi mdi-file-search-outline',
-          title: 'ຄົ້ນຫາບິນຂາຍ ຕາມລູກຄ້າ',
+          title: 'ລາຍງານ ລູກຄ້າຕິດຫນີ້',
           to: '/admin/ordersFromPosSummaryByCustomer',
         },
         {

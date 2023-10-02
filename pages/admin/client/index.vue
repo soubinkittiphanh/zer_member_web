@@ -1,6 +1,10 @@
 
 <template>
-  <div>
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການ ລູກຄ້າ</h3>
+    </v-chip>
     <v-dialog v-model="dialogCustomer" max-width="1024">
       <CustomerForm :isEdit="!isEdit" :customerId="selectedCustomerId" @close-dialog="handleEvent" @reload-data="loadData"
         :key="componentKey" />
@@ -12,13 +16,6 @@
 
     <v-card>
       <div class="pa-2">
-        <v-row class="text-center">
-          <v-col cols="12" align-self="center">
-            <h4>
-              ລາຍການ ລູກຄ້າ ທັງໝົດ
-            </h4>
-          </v-col>
-        </v-row>
         <v-row>
           <v-col cols="6">
             <!-- <v-btn block size="large" variant="outlined" @click="createItem" class="primary" rounded>

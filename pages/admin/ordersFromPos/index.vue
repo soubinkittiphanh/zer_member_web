@@ -1,7 +1,9 @@
 <template>
-  <div class="text-center">
-
-
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການບິນຂາຍ</h3>
+    </v-chip>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -115,7 +117,15 @@
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
         </template>
+        <template v-slot:[`item.dynamic_customer`]="{ item }">
 
+          <!-- <v-chip class="ma-2" :color="item.dynamic_customer ? 'green' : 'red'" text-color="black">
+            {{ item.dynamic_customer ? item.dynamic_customer.name : '' }}
+          </v-chip> -->
+          <v-avatar :color="item.dynamic_customer ?'green':'red'" size="10">
+            <!-- {{ item.dynamic_customer ? item.dynamic_customer.name : '' }} -->
+          </v-avatar>
+        </template>
         <template v-slot:[`item.discount`]="{ item }">
           {{ numberWithCommas(item.discount) }}
         </template>
@@ -196,6 +206,12 @@ export default {
           sortable: true,
         },
         {
+          text: 'Offline/Online',
+          align: 'center',
+          value: 'dynamic_customer',
+          sortable: true,
+        },
+        {
           text: 'ລູກຄ້າ',
           align: 'center',
           value: 'client.name',
@@ -207,25 +223,12 @@ export default {
           value: 'client.telephone',
           sortable: true,
         },
-        // {
-        //   text: 'ທີ່ຢູ່',
-        //   align: 'center',
-        //   value: 'client.address',
-        //   sortable: true,
-        // },
         {
           text: 'ຊຳລະດ້ວຍ',
           align: 'center',
           value: 'payment.payment_code',
           sortable: true,
         },
-        // {
-        //   text: 'Due date',
-        //   align: 'center',
-        //   value: 'client.credit',
-        //   sortable: true,
-        // },
-
         {
           text: 'ສະກຸນເງິນ',
           align: 'center',
@@ -439,6 +442,9 @@ export default {
           // ****** Clear Old Data
           this.orderHeaderList = []
           for (const iterator of res.data) {
+            // if(!iterator['dynamic_customer']){
+            //   iterator.dynamic_customer = null;
+            // }
             this.orderHeaderList.push(iterator)
           }
           console.log("====> " + this.orderHeaderList.length);

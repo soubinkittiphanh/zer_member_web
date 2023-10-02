@@ -1,5 +1,9 @@
 <template>
-  <div class="text-center">
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການ ສະກຸນເງິນ</h3>
+    </v-chip>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -13,8 +17,6 @@
       <v-card-title>
         <v-layout row wrap>
           <v-col cols="6">
-
-
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
@@ -158,4 +160,8 @@ export default {
 table {
   border: 1px solid black;
 }
+/* .myelevation {
+  background-color: '#f0f0f';
+  color: red;
+} */
 </style>

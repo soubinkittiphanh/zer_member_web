@@ -1,7 +1,9 @@
 <template>
-  <div class="text-center">
-
-
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການໃບສະເຫນີລາຄາ</h3>
+    </v-chip>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -49,7 +51,7 @@
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
             <!-- <v-btn @click="loadData"> ດຶງລາຍງານ </v-btn> -->
-          </v-col>   
+          </v-col>
           <v-col cols="6" class="text-left">
             <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
               <span class="mdi mdi-plus"></span>Create
@@ -72,7 +74,7 @@
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                   'title': 'ຍອດບິນ',
                   'amount': getFormatNum(quotationList.length),
-                  'sale': getFormatNum(totalSale-totalDiscount),
+                  'sale': getFormatNum(totalSale - totalDiscount),
                   // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale - totalDiscount)
                 }">

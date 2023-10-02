@@ -1,7 +1,9 @@
 <template>
-  <div class="text-center">
-    <!-- <span class="text-h5"></span> -->
-    <h1>ລາຍການ ປະເພດສິນຄ້າ</h1>
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການ ປະເພດສິນຄ້າ</h3>
+    </v-chip>
     <v-dialog v-model="dialogForm" max-width="600px">
       <v-card>
         <v-card-title>

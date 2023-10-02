@@ -1,7 +1,9 @@
 <template>
-  <div class="text-center">
-
-
+  <div class="text-left">
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ລາຍການລູກຄ້າຕິດຫນີ້</h3>
+    </v-chip>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>

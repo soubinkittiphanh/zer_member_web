@@ -112,11 +112,6 @@ export default {
   async created() {
     await this.fetchData()
   },
-  //   computed:{
-  //       formatNum(v){
-  //           return new Intl.NumberFormat().format(v);
-  //       }
-  //   },
   watch: {
     userId(v) {
       this.form_data.user_id = v

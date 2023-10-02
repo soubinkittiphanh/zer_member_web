@@ -20,9 +20,11 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-
         <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
+        </v-dialog>
+        <v-dialog v-model="deliveryForm" max-width="1024">
+            <delivery-form @post-transaction="postTransactionForOnlineCustomer" :key="shippingFormKey"></delivery-form>
         </v-dialog>
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
@@ -30,106 +32,93 @@
         <v-dialog v-model="quotation" hide-overlay width="1024">
             <Quotation> </Quotation>
         </v-dialog>
+        <!-- ************** => Header Appbar ************** -->
         <v-app-bar app color="primary" dark clipped-left clipped-right>
-            <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
-            <!-- <v-toolbar-title></v-toolbar-title> -->
             <v-row no-gutters align="center">
                 <v-col cols="2">
-
                 </v-col>
                 <v-col cols="4">
                     <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
                         prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted /></v-col>
-                <v-col cols="6">
-                    <v-chip class="ml-10" color="warning" variant="outlined" @click="terminalDialog = true">
+                <v-col cols="6" justify="end">
+                    <!-- 231001 CR By BAE -->
+                    <!-- <v-chip class="ml-10" color="warning" variant="outlined" @click="terminalDialog = true">
                         {{ currentTerminal == undefined ? '' : currentTerminal['description'] + '-' +
                             currentTerminal['name'] }}
-                    </v-chip>
-                    <!-- <v-spacer></v-spacer> -->
-                    <v-btn size="large" variant="outlined" class="primary" rounded v-for="item in menuItems" :key="item.title" :to="item.path" @click="item.method">
+                    </v-chip> -->
+                    <v-btn size="large" variant="outlined" class="primary" rounded v-for="item in headerMenu"
+                        :key="item.title" :to="item.path" @click="item.method">
                         <v-icon> {{ item.icon }} </v-icon>
                         <span class="text-right">{{ item.title }}</span>
                     </v-btn>
                 </v-col>
             </v-row>
-
-            <!-- <v-spacer /> -->
-
         </v-app-bar>
+        <!-- ************** Header Appbar <= ************** -->
 
+        <!-- ************** => Drawer Left ************** -->
         <v-navigation-drawer app v-model="drawer" clipped width="180">
             <v-list dense>
                 <v-subheader style="font-size: larger; font-weight: bold;">
-                    <v-chip class="ma-2" color="warning" variant="outlined">
+                    <!-- <v-chip class="ma-2" color="warning" variant="outlined">
                         CHITHANH MINI MART
+                    </v-chip> -->
+                    <!-- 231001 CR BY BAE -->
+                    <v-chip class="ml-0" color="warning" variant="outlined" @click="terminalDialog = true">
+                        {{ currentTerminal == undefined ? '' : currentTerminal['description'] + '-' +
+                            currentTerminal['name'] }}
                     </v-chip>
                 </v-subheader>
                 <v-list-item-group v-model="selectedItem" color="primary">
                     <v-divider></v-divider>
                     <v-list-item v-for="(item, i) in categoryList" :key="i">
-                        <!-- <v-chip class="ma-2" style="background-color: transparent; outline: 1px solid gray;" variant="outlined" > -->
                         <v-list-item-content>
                             <v-list-item-title style="font-size: large;">{{ item.categ_name }}</v-list-item-title>
                             <v-divider></v-divider>
                         </v-list-item-content>
-                        <!-- </v-chip> -->
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
-
         </v-navigation-drawer>
+        <!-- ************** Drawer Left <= ************** -->
 
-
+        <!-- ************** => Product list ************** -->
         <v-main style="background-color: rgb(235, 235, 235)">
             <Nuxt :key="productComponentKey" class="py-2 px-3" />
         </v-main>
+        <!-- **************  Product List <= ************** -->
 
+        <!-- ************** => Drawer Rigth ************** -->
         <v-navigation-drawer app right clipped width="450" fixed>
             <div style=" height: 100%; position: relative;">
-                <!-- <v-card> -->
-                <div style="width: 100%;" ref="myElement">
-                    <div>
-                        <v-row align="center" class="pa-2">
-                            <v-col cols="2">
-                                <!-- <v-btn @click="openCustomerDialog" style="background-color: #F5F5F5;">
-                                    <v-icon class="mdi mdi-account-plus-outline"></v-icon>
-                                </v-btn> -->
-                                <v-btn color="primary" text @click="openCustomerDialog">
-                                    <v-icon class="mdi mdi-account-plus-outline"></v-icon>
-                                </v-btn>
-                            </v-col>
-                            <v-col cols="4" style="text-align: left;">
-                                <v-chip class="ma-2" color="success" variant="outlined">
-                                    {{ currenctCustomer == null ? '' : currenctCustomer['company'] }}
-                                </v-chip>
+                <!-- ************** => Ticket Header menu ************** -->
+                <v-row align="center" class="pa-2">
+                    <v-col cols="2">
+                        <v-btn color="primary" text @click="openCustomerDialog">
+                            <v-icon class="mdi mdi-account-plus-outline"></v-icon>
+                        </v-btn>
+                    </v-col>
+                    <v-col cols="4" style="text-align: left;">
+                        <v-chip class="ma-2" color="success" variant="outlined">
+                            {{ currenctCustomer == null ? '' : currenctCustomer['company'] }}
+                        </v-chip>
+                    </v-col>
+                    <v-col cols="2">
+                        <v-btn color="primary" text @click="openDeliveryBox">
+                            <v-icon class="mdi mdi-bike-fast"></v-icon>
+                        </v-btn>
+                    </v-col>
+                    <v-col cols="2" style="text-align: right;">
+                        <v-btn color="primary" text @click="newOrder">
+                            <v-icon color="" class="mdi mdi-file-document-refresh-outline"></v-icon>
+                        </v-btn>
+                    </v-col>
 
-
-                            </v-col>
-                            <v-col cols="2">
-                                <!-- <v-btn @click="() => { }">
-                                    <v-icon class="mdi mdi-bike-fast"></v-icon>
-                                </v-btn> -->
-                                <v-btn color="primary" text @click="() => { }">
-
-                                    <v-icon class="mdi mdi-bike-fast"></v-icon>
-                                    <!-- <i class="fa fa-pencil-square-o"></i> -->
-                                </v-btn>
-                            </v-col>
-                            <v-col cols="2" style="text-align: right;">
-                                <!-- <v-btn @click="newOrder" style="background-color: #F5F5F5;text-align: right;">
-                                    <v-icon color="" class="mdi mdi-file-document-refresh-outline"></v-icon>
-                                </v-btn> -->
-                                <v-btn color="primary" text @click="newOrder">
-                                    <v-icon color="" class="mdi mdi-file-document-refresh-outline"></v-icon>
-                                </v-btn>
-                            </v-col>
-
-                        </v-row>
-                    </div>
-                </div>
+                </v-row>
+                <!-- ************** Ticket Header menu <= ************** -->
+                <!-- ************** => Ticket order header ************** -->
                 <v-simple-table class="pa-0 ma-0">
                     <template v-slot:default>
-
                         <thead>
                             <tr>
                                 <th class="text-left primary--text secondary"></th>
@@ -142,7 +131,8 @@
                         </thead>
                     </template>
                 </v-simple-table>
-
+                <!-- **************  Ticket order header <= ************** -->
+                <!-- ************** => Order Item list ************** -->
                 <v-card flat height="350" class="overflow-auto">
                     <v-simple-table>
                         <template v-slot:default>
@@ -175,18 +165,13 @@
                         </template>
                     </v-simple-table>
                 </v-card>
+                <!-- ************** Order Item list <= ************** -->
+                <!-- ************** => Ticket order footer ************** -->
                 <div style="position: absolute; bottom: 0px;width: 100%;">
-
                     <v-divider class="mb-1"></v-divider>
                     <div>
-                        <!-- <div class="d-flex  align-center pa-4"> -->
-                        <!-- <span class="pr-4">ສ່ວນຫລຸດ:</span> -->
-                        <!-- <v-text-field :rules="priceRule" type="number" v-model="discount" clearable clear-icon="mdi-close"
-                            prepend-inner-icon="mdi-sale-outline" dense outlined label="ສ່ວນຫລຸດ"
-                            :placeholder="discount.toString()" solo-inverted hide-details /> -->
                         <v-text-field :rules="priceRule" v-model.number="discount" label="ສ່ວນຫລຸດ" filled rounded
                             dense></v-text-field>
-                        <!-- </div> -->
                         <v-list-item>
                             <h3>ລວມ:</h3>
                             <v-spacer></v-spacer>
@@ -194,8 +179,6 @@
                                 text-color="white">
                                 {{ item.code }} {{ formatNumber((grandTotal - discount) / item.rate) }}
                             </v-chip>
-                            <!-- <v-btn @click="generatePrintView">ticket</v-btn> -->
-                            <!-- <h6 v-for="item in currencyList" :key="item.id">{{item.code}} - {{ formatNumber((grandTotal-discount)/item.rate )}} | </h6> -->
                         </v-list-item>
                     </div>
                     <v-divider class="mb-1"></v-divider>
@@ -220,9 +203,11 @@
                         </v-btn>
                     </v-card-actions>
                 </div>
+                <!-- **************  Ticket order footer <= ************** -->
             </div>
 
         </v-navigation-drawer>
+        <!-- ************** Drawer Rigth <= ************** -->
     </v-app>
 </template>
   
@@ -237,6 +222,7 @@ export default {
     name: 'DefaultLayout',
     data() {
         return {
+            deliveryForm: false,
             productComponentKey: 1,
             terminalDialog: false,
             terminalSelected: null,
@@ -252,8 +238,6 @@ export default {
             customerDialog: false,
             discount: 0,
             priceRule: [
-                // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
-                //   (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວ > 0',
                 (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
             ],
             categoryList: [
@@ -261,19 +245,13 @@ export default {
             quotation: false,
             paymentList: [],
             selectedItem: 0,
-            items: [
-                { text: 'Real-Time', icon: 'mdi-clock' },
-                { text: 'Audience', icon: 'mdi-account' },
-                { text: 'Conversions', icon: 'mdi-flag' },
-            ],
-            menuItems: [
+            headerMenu: [
                 {
                     title: 'Home',
                     path: '/admin',
                     icon: 'mdi-home-circle-outline',
                     method: () => { },
                 },
-
                 {
                     title: 'Orders',
                     path: '/admin/ordersFromPos',
@@ -287,19 +265,6 @@ export default {
                     icon: 'mdi-receipt-text-clock-outline',
                     method: this.setQuotation
                 },
-                // {
-                //     title: 'history',
-                //     path: '',
-                //     icon: 'mdi-history',
-                //     method: () => { },
-                // },
-                // {
-                //     title: 'Help',
-                //     path: '',
-                //     icon: 'mdi-help-circle-outline',
-                //     method: () => { },
-                // },
-
                 {
                     title: 'Logout',
                     path: '/admin/logout',
@@ -307,6 +272,7 @@ export default {
                     method: () => { },
                 },
             ],
+            shippingFormKey: 1,
             currencyList: [],
             saleHeader: {
                 bookingDate: '',
@@ -403,6 +369,10 @@ export default {
         }
     },
     methods: {
+        openDeliveryBox() {
+            this.shippingFormKey += 1;
+            this.deliveryForm = true;
+        },
         ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation']),
         checkAllInitData() {
             // setInterval(() => {
@@ -457,7 +427,6 @@ export default {
             </div>
                 `
             }
-
             const windowContent = `
           <!DOCTYPE html>
           <html>
@@ -574,6 +543,17 @@ export default {
         ...mapMutations({
             SetSearchKeyword: 'SetSearchKeyword',
         }),
+        async postTransactionForOnlineCustomer(customerForm) {
+            console.log(`Posting.......`);
+            this.saleHeader.customerForm = customerForm
+            console.log(`888888888${customerForm.name}88888888`);
+            this.discount = customerForm.discount
+            await this.postTransaction()
+            // ************ Clear online customer information after sale done *************//
+            // this.saleHeader.customerForm = null
+            delete this.saleHeader.customerForm
+            this.deliveryForm = false;
+        },
         async postTransaction() {
             if (this.isloading || this.generateSaleLine == 0) {
                 if (this.generateSaleLine == 0) {
@@ -606,7 +586,7 @@ export default {
                     this.newOrder()
                 })
                 .catch((er) => {
-                    console.error(er);
+                    console.error(`error occurs ${er}`);
                     if (er.response.data.includes("#")) {
                         const id = er.response.data.split("#")[1]
                         const productName = ''

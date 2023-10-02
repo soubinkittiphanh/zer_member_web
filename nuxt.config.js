@@ -6,10 +6,10 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - LIVE',
+    titleTemplate: '%s - UAT',
     // title: 'Jack42',
     // title: 'PeeAir4',
-    title: 'CHITHANH MINIMART',
+    title: 'DCOMMERCE',
     htmlAttrs: {
       lang: 'en'
     },

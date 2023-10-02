@@ -29,6 +29,7 @@ const _613d8598 = () => interopDefault(import('../pages/admin/orders/index.vue' 
 const _23b030b0 = () => interopDefault(import('../pages/admin/ordersFromPos/index.vue' /* webpackChunkName: "pages/admin/ordersFromPos/index" */))
 const _32dea7fc = () => interopDefault(import('../pages/admin/ordersFromPosCancel/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCancel/index" */))
 const _bc74547e = () => interopDefault(import('../pages/admin/ordersFromPosCredit/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosCredit/index" */))
+const _0fdff89b = () => interopDefault(import('../pages/admin/ordersFromPosOnline/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosOnline/index" */))
 const _3b04a9e9 = () => interopDefault(import('../pages/admin/ordersFromPosSummaryByCustomer/index.vue' /* webpackChunkName: "pages/admin/ordersFromPosSummaryByCustomer/index" */))
 const _7e434432 = () => interopDefault(import('../pages/admin/po/index.vue' /* webpackChunkName: "pages/admin/po/index" */))
 const _03317a72 = () => interopDefault(import('../pages/admin/product/index.vue' /* webpackChunkName: "pages/admin/product/index" */))
@@ -38,6 +39,7 @@ const _38f40e0d = () => interopDefault(import('../pages/admin/quotationList/inde
 const _1b91bdb2 = () => interopDefault(import('../pages/admin/report/index.vue' /* webpackChunkName: "pages/admin/report/index" */))
 const _79f169be = () => interopDefault(import('../pages/admin/report_card/index.vue' /* webpackChunkName: "pages/admin/report_card/index" */))
 const _0f005c3d = () => interopDefault(import('../pages/admin/rider/index.vue' /* webpackChunkName: "pages/admin/rider/index" */))
+const _f00a79be = () => interopDefault(import('../pages/admin/shipping/index.vue' /* webpackChunkName: "pages/admin/shipping/index" */))
 const _3b0e4e6f = () => interopDefault(import('../pages/admin/terminal/index.vue' /* webpackChunkName: "pages/admin/terminal/index" */))
 const _a4e295c4 = () => interopDefault(import('../pages/admin/transfer/index.vue' /* webpackChunkName: "pages/admin/transfer/index" */))
 const _6d29e62d = () => interopDefault(import('../pages/admin/txn/index.vue' /* webpackChunkName: "pages/admin/txn/index" */))
@@ -172,6 +174,10 @@ export const routerOptions = {
     component: _bc74547e,
     name: "admin-ordersFromPosCredit"
   }, {
+    path: "/admin/ordersFromPosOnline",
+    component: _0fdff89b,
+    name: "admin-ordersFromPosOnline"
+  }, {
     path: "/admin/ordersFromPosSummaryByCustomer",
     component: _3b04a9e9,
     name: "admin-ordersFromPosSummaryByCustomer"
@@ -207,6 +213,10 @@ export const routerOptions = {
     path: "/admin/rider",
     component: _0f005c3d,
     name: "admin-rider"
+  }, {
+    path: "/admin/shipping",
+    component: _f00a79be,
+    name: "admin-shipping"
   }, {
     path: "/admin/terminal",
     component: _3b0e4e6f,

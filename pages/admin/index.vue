@@ -274,10 +274,12 @@ export default {
                     path: '/admin/product/productlist'
                 },
                 {
-                    title: 'ລາຍການ ການຂາຍ',
+                    // title: 'ລາຍການ ການຂາຍ',
+                    title: 'ລາຍງານ ລູກຄ້າຕິດຫນີ້ ', //231001 CR By Bae
                     // icon: 'mdi-warehouse',
                     svgIcon: require('~/assets/icons/responsive.svg'),
-                    path: '/admin/ordersFromPos'
+                    // path: '/admin/ordersFromPos'
+                    path: '/admin/ordersFromPosSummaryByCustomer' //231001 CR By Bae
                 },
                 {
                     title: 'Customer',
