@@ -24,6 +24,7 @@ import nuxt_plugin_fontawesome_b8db358e from 'nuxt_plugin_fontawesome_b8db358e' 
 import nuxt_plugin_html2canvas_557cc08e from 'nuxt_plugin_html2canvas_557cc08e' // Source: ../plugins/html2canvas.js (mode: 'client')
 import nuxt_plugin_echarts_30712fb1 from 'nuxt_plugin_echarts_30712fb1' // Source: ../plugins/echarts.js (mode: 'client')
 import nuxt_plugin_xlsx_719232c8 from 'nuxt_plugin_xlsx_719232c8' // Source: ../plugins/xlsx.js (mode: 'client')
+import nuxt_plugin_vueyoutube_6da200de from 'nuxt_plugin_vueyoutube_6da200de' // Source: ../plugins/vue-youtube.js (mode: 'client')
 import nuxt_plugin_auth_1d0132a4 from 'nuxt_plugin_auth_1d0132a4' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -264,6 +265,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_xlsx_719232c8 === 'function') {
     await nuxt_plugin_xlsx_719232c8(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vueyoutube_6da200de === 'function') {
+    await nuxt_plugin_vueyoutube_6da200de(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_1d0132a4 === 'function') {

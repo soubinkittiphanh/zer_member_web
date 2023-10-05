@@ -326,9 +326,9 @@ export const getMySQLDateOfLastDayOfYear = ()=> {
 
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
-  // const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
+  const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
-  const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
+  // const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
   return baseURL;
 }
 export const dayCount = (fromDate) => {

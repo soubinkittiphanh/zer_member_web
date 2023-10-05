@@ -1,9 +1,19 @@
 <template>
   <div class="text-left">
+  <div >
     <v-chip class="pa-5" color="primary" label text-color="white">
       <v-icon start>mdi-label</v-icon>
       <h3>ລາຍການ ປະເພດສິນຄ້າ</h3>
     </v-chip>
+    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="znnN7ZLdf3I">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="dialogForm" max-width="600px">
       <v-card>
         <v-card-title>
@@ -90,6 +100,7 @@ import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
   middleware: 'auths',
   data: () => ({
+    guidelineDialog:false,
     isloading: false,
     isedit: false,
     singleSelect: false,

@@ -1,16 +1,23 @@
 <template>
   <div class="text-left">
-    <v-chip class="pa-5" color="primary" label text-color="white">
-      <v-icon start>mdi-label</v-icon>
-      <h3>ລາຍການບິນຂາຍ</h3>
-    </v-chip>
+    <div>
+        <v-chip class="pa-5" color="primary" label text-color="white">
+          <v-icon start>mdi-label</v-icon>
+          <h3>ລາຍການບິນຂາຍ</h3>
+        </v-chip>
+        <!-- <v-spacer></v-spacer> -->
+        <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+          <v-icon start>mdi mdi-lifebuoy</v-icon>
+          <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+        </v-chip>
+    </div>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <!-- <v-dialog v-model="dialogOrderDetail" max-width="1024" >
-      <OrderDetailPos :key="componentKey" :header="selectedOrder" @close-dialog="dialogOrderDetail = false">
-      </OrderDetailPos>
-    </v-dialog> -->
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+      <youtube-player @close-dialog="guidelineDialog=false" youtube-link="W6KiQWtiqBM">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
       dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
@@ -23,143 +30,148 @@
       <cancel-ticket-form :id="OrderIdSelected" :key="componentCancelFormKey" @close-dialog="cancelForm = false"
         @reload="cancelForm = false, loadData()"></cancel-ticket-form>
     </v-dialog>
-    <v-card>
-      <v-card-title>
-        <v-layout row wrap>
-          <v-col cols="6">
-            <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
-              max-width="290px" min-width="auto">
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
-                  prepend-icon="mdi-calendar" v-bind="attrs" @blur="date = parseDate(dateFormatted)"
-                  v-on="on"></v-text-field>
-              </template>
-              <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
-            </v-menu>
+    <div>
 
-            <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y
-              max-width="290px" min-width="auto">
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
-                  prepend-icon="mdi-calendar" v-bind="attrs" @blur="date2 = parseDate(dateFormatted2)"
-                  v-on="on"></v-text-field>
-              </template>
-              <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
-            </v-menu>
 
-          </v-col>
-          <v-col cols="6">
-            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
-            <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
-          </v-col>
-          <v-col cols="6" class="text-left">
-            <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
-              <span class="mdi mdi-plus"></span>Create
-            </v-btn>
-            <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
-              <span class="mdi mdi-microsoft-excel"></span>Generate excel file
-            </v-btn>
-          </v-col>
-          <v-col cols="6" class="text-right">
-            <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
-              <span class="mdi mdi-cloud-download"></span>
-              ດຶງລາຍງານ
-            </v-btn>
-          </v-col>
-        </v-layout>
-      </v-card-title>
-      <v-divider></v-divider>
-      <v-card-text>
-        <v-layout row wrap>
-          <v-row>
-            <v-col cols="6" lg="6">
-              <order-sumary-card-pos :showTotal="true"
-                :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ',
-                  'amount': getFormatNum(activeOrderHeaderList.length),
-                  'sale': getFormatNum(totalSale - totalDiscount),
-                  // 'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  // 'gross': getFormatNum(totalSale - totalDiscount)
+      <v-card>
+        <v-card-title>
+          <v-layout row wrap>
+            <v-col cols="6">
+              <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
+                max-width="290px" min-width="auto">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
+                    prepend-icon="mdi-calendar" v-bind="attrs" @blur="date = parseDate(dateFormatted)"
+                    v-on="on"></v-text-field>
+                </template>
+                <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
+              </v-menu>
 
-                }">
+              <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y
+                max-width="290px" min-width="auto">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
+                    prepend-icon="mdi-calendar" v-bind="attrs" @blur="date2 = parseDate(dateFormatted2)"
+                    v-on="on"></v-text-field>
+                </template>
+                <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
+              </v-menu>
 
-              </order-sumary-card-pos>
             </v-col>
-            <!-- <v-col cols="6" lg="6">
+            <v-col cols="6">
+              <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
+              <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
+            </v-col>
+            <v-col cols="6" class="text-left">
+              <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
+                <span class="mdi mdi-plus"></span>Create
+              </v-btn>
+              <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
+                <span class="mdi mdi-microsoft-excel"></span>Generate excel file
+              </v-btn>
+            </v-col>
+            <v-col cols="6" class="text-right">
+              <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
+                <span class="mdi mdi-cloud-download"></span>
+                ດຶງລາຍງານ
+              </v-btn>
+            </v-col>
+          </v-layout>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-layout row wrap>
+            <v-row>
+              <v-col cols="6" lg="6">
+                <order-sumary-card-pos :showTotal="true"
+                  :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
+                    'title': 'ຍອດບິນ',
+                    'amount': getFormatNum(activeOrderHeaderList.length),
+                    'sale': getFormatNum(totalSale - totalDiscount),
+                    // 'discount': getFormatNum(totalDiscount),
+                    // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+                    // 'gross': getFormatNum(totalSale - totalDiscount)
+
+                  }">
+
+                </order-sumary-card-pos>
+              </v-col>
+              <!-- <v-col cols="6" lg="6">
               <order-sumary-card i :orderDetail="this.unpaidCodOrder">
 
               </order-sumary-card>
             </v-col> -->
-          </v-row>
-        </v-layout>
-      </v-card-text>
+            </v-row>
+          </v-layout>
+        </v-card-text>
 
-      <!-- <v-divider></v-divider> -->
+        <!-- <v-divider></v-divider> -->
 
 
 
-      <v-data-table v-if="activeOrderHeaderList" :headers="headers" :search="search" :items="activeOrderHeaderList">
-        <template v-slot:[`item.bookingDate`]="{ item }">
-          {{ item.bookingDate.split('T')[0] }}
-          <!-- <v-chip class="ma-2" color="red" text-color="white"> -->
-          <h6 :style="{ 'color': countDay(item.bookingDate.split('T')[0]) > item.client.credit ? 'red' : 'green' }">
-            {{ countDay(item.bookingDate.split('T')[0]) }}
-          </h6>
-          <!-- </v-chip> -->
-        </template>
-        <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
-            class="ma-2" color="red" text-color="white">
-            {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
-          </v-chip>
-          <v-chip v-else class="ma-2" color="green" text-color="white">
-            {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
-          </v-chip>
-        </template>
-        <template v-slot:[`item.dynamic_customer`]="{ item }">
+        <v-data-table v-if="activeOrderHeaderList" :headers="headers" :search="search" :items="activeOrderHeaderList">
+          <template v-slot:[`item.bookingDate`]="{ item }">
+            {{ item.bookingDate.split('T')[0] }}
+            <!-- <v-chip class="ma-2" color="red" text-color="white"> -->
+            <h6 :style="{ 'color': countDay(item.bookingDate.split('T')[0]) > item.client.credit ? 'red' : 'green' }">
+              {{ countDay(item.bookingDate.split('T')[0]) }}
+            </h6>
+            <!-- </v-chip> -->
+          </template>
+          <template v-slot:[`item.client.credit`]="{ item }">
+            <v-chip
+              v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
+              class="ma-2" color="red" text-color="white">
+              {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
+            </v-chip>
+            <v-chip v-else class="ma-2" color="green" text-color="white">
+              {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
+            </v-chip>
+          </template>
+          <template v-slot:[`item.dynamic_customer`]="{ item }">
 
-          <!-- <v-chip class="ma-2" :color="item.dynamic_customer ? 'green' : 'red'" text-color="black">
+            <!-- <v-chip class="ma-2" :color="item.dynamic_customer ? 'green' : 'red'" text-color="black">
             {{ item.dynamic_customer ? item.dynamic_customer.name : '' }}
           </v-chip> -->
-          <v-avatar :color="item.dynamic_customer ?'green':'red'" size="10">
-            <!-- {{ item.dynamic_customer ? item.dynamic_customer.name : '' }} -->
-          </v-avatar>
-        </template>
-        <template v-slot:[`item.discount`]="{ item }">
-          {{ numberWithCommas(item.discount) }}
-        </template>
-        <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total) }}
-        </template>
-        <template v-slot:[`item.createdAt`]="{ item }">
-          {{ item.createdAt.split('.')[0] }}
-        </template>
-        <template v-slot:[`item.id`]="{ item }">
-          <v-btn color="primary" text @click="viewItem(item)
-          wallet = true
-            ">
-            <i class="fa fa-pencil-square-o"></i>
-          </v-btn>
-        </template>
-        <template v-slot:[`item.cancel`]="{ item }">
+            <v-avatar :color="item.dynamic_customer ? 'green' : 'red'" size="10">
+              <!-- {{ item.dynamic_customer ? item.dynamic_customer.name : '' }} -->
+            </v-avatar>
+          </template>
+          <template v-slot:[`item.discount`]="{ item }">
+            {{ numberWithCommas(item.discount) }}
+          </template>
+          <template v-slot:[`item.total`]="{ item }">
+            {{ numberWithCommas(item.total) }}
+          </template>
+          <template v-slot:[`item.createdAt`]="{ item }">
+            {{ item.createdAt.split('.')[0] }}
+          </template>
+          <template v-slot:[`item.id`]="{ item }">
+            <v-btn color="primary" text @click="viewItem(item)
+            wallet = true
+              ">
+              <i class="fa fa-pencil-square-o"></i>
+            </v-btn>
+          </template>
+          <template v-slot:[`item.cancel`]="{ item }">
 
-          <v-btn color="blue darken-1" text @click="cancelItem(item)
-          wallet = true
-            ">
-            <i class="fas fa-sync"></i>
-          </v-btn>
-        </template>
-        <template v-slot:[`item.cusTel`]="{ item }">
-          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-            {{ item.cusTel }}
-            <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
-          </v-btn>
+            <v-btn color="blue darken-1" text @click="cancelItem(item)
+            wallet = true
+              ">
+              <i class="fas fa-sync"></i>
+            </v-btn>
+          </template>
+          <template v-slot:[`item.cusTel`]="{ item }">
+            <v-btn color="blue darken-1" text @click="whatsappLink(item)">
+              {{ item.cusTel }}
+              <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
+            </v-btn>
 
-        </template>
-      </v-data-table>
+          </template>
+        </v-data-table>
 
-    </v-card>
+      </v-card>
+    </div>
   </div>
 </template>
 <script>
@@ -172,6 +184,7 @@ export default {
   middleware: 'auths',
   data() {
     return {
+      guidelineDialog: false,
       viewTransaction: false,
       whatsappContactLink: '',
       componentKey: 0,

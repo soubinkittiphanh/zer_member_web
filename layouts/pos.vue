@@ -230,7 +230,7 @@ export default {
     name: 'DefaultLayout',
     data() {
         return {
-            onlineCustomerInfo:{},
+            onlineCustomerInfo: {},
             tickePreviewDialog: false,
             deliveryForm: false,
             productComponentKey: 1,
@@ -424,10 +424,19 @@ export default {
                     <div class="product-name">ສ່ວນຫລຸດ </div>
                     <div class="price"> - ${this.formatNumber(this.discount)}</div>
                 </div>`
+            const riderFeeHtml = `<div class="ticket">
+                    <div class="product-name">ຄ່າສົ່ງ </div>
+                    <div class="price">${this.formatNumber(this.onlineCustomerInfo.riderFee)}</div>
+                </div>`
             const today = new Date()
             const bookingDate = jsDateToMysqlDate(today)
             const bookingDateWithTime = today.toISOString
-            let totalHtml = ``
+            // let totalHtml = ``
+            //*********Payment info tag********/
+            let totalHtml = `<div class="ticket">
+                    <div class="product-name">ຊຳລະດ້ວຍ: ${this.onlineCustomerInfo.payment}</div>
+                <div class="price"></div>
+            </div>`
             for (const iterator of this.currencyList) {
                 totalHtml += `
                 <div class="ticket">
@@ -436,6 +445,8 @@ export default {
             </div>
                 `
             }
+
+
             const windowContent = `
           <!DOCTYPE html>
           <html>
@@ -465,12 +476,12 @@ export default {
 
 		.product-name {
 			float: left;
-			font-size: 12px;
+			font-size: 10px;
 		}
 
 		.price {
 			float: right;
-			font-size: 12px;
+			font-size: 10px;
 		}
 
         h3 {
@@ -485,19 +496,18 @@ export default {
                 <h5> ວັນທີ: ${today.toLocaleString()}</h5>
                 <h5> ຮ້ານ: ${this.onlineCustomerInfo.branch} </h5>
                 <h5> ເບີໂທ: 020 7777-5660, 020 2865-3388 </h5>
-                <hr style="margin-top: 50px;"> </hr>
+                <hr> </hr>
                 <h5> ຜູ້ຮັບ: ${this.onlineCustomerInfo.name}</h5>
                 <h5> ໂທ: ${this.onlineCustomerInfo.tel} </h5>
                 <h5> ຂົນສົ່ງ: ${this.onlineCustomerInfo.shipping} </h5>
                 <h5> ບ່ອນສົ່ງ: ${this.onlineCustomerInfo.address} </h5>
                 <h5> ຄ່າຝາກ: ${this.onlineCustomerInfo.shippingFeeBy}</h5>
-                <hr style="margin-top: 50px;"> </hr>
+                <hr> </hr>
                 ${txnListHtml}
+                ${this.onlineCustomerInfo.riderFee > 0 ? riderFeeHtml : ''}
                 ${this.discount > 0 ? discountHtml : ''}
                 <hr> </hr>
                 ${totalHtml}
-                <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
-                
             </body>
             </html>
         `
@@ -707,9 +717,9 @@ export default {
                     this.lastTransactionSaleHeaderId = res.data.split('-')[1].trim()
                     swalSuccess(this.$swal, "Succeed", res.data.split('-')[0])
                     console.log('response post completed===> ' + res.data);
-                    if(isDeliveryCustomer){
+                    if (isDeliveryCustomer) {
                         this.generatePrintViewDeliveryCustomer()
-                    }else{
+                    } else {
                         this.generatePrintView()
                     }
                     this.newOrder()

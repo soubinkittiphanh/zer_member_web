@@ -1,10 +1,16 @@
 
 <template>
   <div class="text-left">
-    <v-chip class="pa-5" color="primary" label text-color="white">
-      <v-icon start>mdi-label</v-icon>
-      <h3>ລາຍການ ລູກຄ້າ</h3>
-    </v-chip>
+    <div>
+      <v-chip class="pa-5" color="primary" label text-color="white">
+        <v-icon start>mdi-label</v-icon>
+        <h3>ລາຍການ ລູກຄ້າ</h3>
+      </v-chip>
+      <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
     <v-dialog v-model="dialogCustomer" max-width="1024">
       <CustomerForm :isEdit="!isEdit" :customerId="selectedCustomerId" @close-dialog="handleEvent" @reload-data="loadData"
         :key="componentKey" />
@@ -12,7 +18,10 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="OEGkC4zNgpY">
+      </youtube-player>
+    </v-dialog>
 
     <v-card>
       <div class="pa-2">
@@ -24,7 +33,7 @@
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
-         </v-col>
+          </v-col>
         </v-row>
         <v-row>
           <v-col cols="6">
@@ -83,6 +92,7 @@ export default {
   },
   data() {
     return {
+      guidelineDialog: false,
       userId: "",
       componentKey: 1,
       selectedCustomerId: 0,

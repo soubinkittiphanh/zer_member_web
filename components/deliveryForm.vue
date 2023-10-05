@@ -43,7 +43,12 @@
                         <v-row v-if="customerForm.discount > 0">
                             ສ່ວນຫລຸດ
                             <v-spacer></v-spacer>
-                            {{ formatNumber(customerForm.discount) }}
+                           - {{ formatNumber(customerForm.discount) }}
+                        </v-row>
+                        <v-row v-if="customerForm.rider_fee > 0">
+                            ຄ່າສົ່ງ
+                            <v-spacer></v-spacer>
+                            {{ formatNumber(customerForm.rider_fee) }}
                         </v-row>
                         <v-row>
                             <v-divider></v-divider>
@@ -160,7 +165,9 @@ export default {
                 tel: this.customerForm.tel,
                 shippingFeeBy: this.customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' : 'ຕົ້ນທາງ',
                 address: this.customerForm.address + ' - ' + this.currentGeo,
-                shipping: this.currentShipping
+                shipping: this.currentShipping,
+                payment: this.currentPayment,
+                riderFee: this.customerForm.rider_fee,
             }
             return customerInfo;
         },
@@ -169,7 +176,7 @@ export default {
             for (const iterator of this.cartOfProduct) {
                 total += iterator['localPrice']
             }
-            return total - this.customerForm.discount;
+            return total - this.customerForm.discount-this.customerForm.rider_fee;
         },
         currentTerminal() {
             console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
