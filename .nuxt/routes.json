@@ -78,6 +78,12 @@
     "chunkName": "pages/admin/cod_order/index"
   },
   {
+    "name": "admin-company",
+    "path": "/admin/company",
+    "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/company/index.vue",
+    "chunkName": "pages/admin/company/index"
+  },
+  {
     "name": "admin-currency",
     "path": "/admin/currency",
     "component": "/Users/soubinkittiphanh/Desktop/Pro/dcommerce/dc_web/pages/admin/currency/index.vue",

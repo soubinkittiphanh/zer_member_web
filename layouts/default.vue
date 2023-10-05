@@ -83,6 +83,11 @@ export default {
           to: '/admin',
         },
         {
+          icon: 'mdi mdi-source-branch',
+          title: 'ຈັດການສາຂາ',
+          to: '/admin/company',
+        },
+        {
           icon: 'mdi mdi-truck-cargo-container',
           title: 'ຈັດການຂົນສົ່ງ',
           to: '/admin/shipping',

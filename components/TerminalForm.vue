@@ -15,7 +15,7 @@
             <v-card-text>
                 <v-form ref="form">
                     <!-- <v-text-field v-model="form.code" label="* Code" required :rules="nameRules"></v-text-field> -->
-                    <v-text-field v-model.number="form.code" label="* code" required :disabled="!this.isCreate"></v-text-field>
+                    <v-text-field  v-model.number="form.code" label="* code" required :disabled="!this.isCreate"></v-text-field>
                     <v-text-field v-model="form.name" label="* ຊື່" required :rules="nameRules"></v-text-field>
                     <v-text-field v-model="form.description" label="Remark" ></v-text-field>
                     <v-text-field v-model.number="form.saleRate" label="* SaleRate" required ></v-text-field>

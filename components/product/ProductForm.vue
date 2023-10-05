@@ -9,7 +9,7 @@
         </v-dialog>
         <v-card>
             <v-card-title>
-                <v-chip class="ma-2" color="primary" label text-color="white">
+                <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
                     {{ title }}
                 </v-chip>

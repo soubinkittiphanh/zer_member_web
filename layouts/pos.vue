@@ -23,6 +23,7 @@
         <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
+
         <v-dialog v-model="deliveryForm" max-width="1024">
             <delivery-form @post-transaction="postTransactionForOnlineCustomer" :key="shippingFormKey"></delivery-form>
         </v-dialog>
@@ -46,11 +47,14 @@
                         {{ currentTerminal == undefined ? '' : currentTerminal['description'] + '-' +
                             currentTerminal['name'] }}
                     </v-chip> -->
-                    <v-btn size="large" variant="outlined" class="primary" rounded v-for="item in headerMenu"
-                        :key="item.title" :to="item.path" @click="item.method">
-                        <v-icon> {{ item.icon }} </v-icon>
-                        <span class="text-right">{{ item.title }}</span>
-                    </v-btn>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-btn size="large" variant="outlined" class="primary" rounded v-for="item in headerMenu"
+                            :key="item.title" :to="item.path" @click="item.method">
+                            <v-icon> {{ item.icon }} </v-icon>
+                            <span class="text-right">{{ item.title }}</span>
+                        </v-btn>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-app-bar>
@@ -107,6 +111,10 @@
                         <v-btn color="primary" text @click="openDeliveryBox">
                             <v-icon class="mdi mdi-bike-fast"></v-icon>
                         </v-btn>
+                        <!-- <v-btn color="primary" text @click="generatePrintViewDeliveryCustomer">
+                            <v-icon class="mdi mdi-bike-fast"></v-icon>
+                            ticket preview
+                        </v-btn> -->
                     </v-col>
                     <v-col cols="2" style="text-align: right;">
                         <v-btn color="primary" text @click="newOrder">
@@ -198,7 +206,7 @@
                         </v-col>
                     </v-row>
                     <v-card-actions>
-                        <v-btn rounded color="primary" block large @click="postTransaction">
+                        <v-btn rounded color="primary" block large @click="postTransaction(false)">
                             <v-icon size="25" left> mdi-cash-100 </v-icon> PAY
                         </v-btn>
                     </v-card-actions>
@@ -222,6 +230,8 @@ export default {
     name: 'DefaultLayout',
     data() {
         return {
+            onlineCustomerInfo:{},
+            tickePreviewDialog: false,
             deliveryForm: false,
             productComponentKey: 1,
             terminalDialog: false,
@@ -370,8 +380,12 @@ export default {
     },
     methods: {
         openDeliveryBox() {
+            if (this.cartOfProduct.length <= 0) return swalError2(this.$swal, "Error", 'ກະລຸນາເລືອກສິນຄ້າ 1 ຢ່າງຂື້ນໄປ')
             this.shippingFormKey += 1;
             this.deliveryForm = true;
+        },
+        previewTicket() {
+            this.tickePreviewDialog = true;
         },
         ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation']),
         checkAllInitData() {
@@ -392,6 +406,113 @@ export default {
             this.setSelectedLocation(location)
             this.productComponentKey += 1;
             this.terminalDialog = false
+        },
+        generatePrintViewDeliveryCustomer() {
+            let txnListHtml = ``
+            for (const iterator of this.productCart) {
+                const product = this.findAllProduct.find(el => el.id == iterator.id)
+                console.log(`=======${product}======`);
+                const quantity = iterator.qty
+                const total = iterator.qty * iterator.localPrice
+                txnListHtml +=
+                    `<div class="ticket">
+                    <div class="product-name">${product.pro_name} </div>
+                    <div class="price"> ${quantity}x  ${this.formatNumber(total)}</div>
+                </div>`
+            }
+            const discountHtml = `<div class="ticket">
+                    <div class="product-name">ສ່ວນຫລຸດ </div>
+                    <div class="price"> - ${this.formatNumber(this.discount)}</div>
+                </div>`
+            const today = new Date()
+            const bookingDate = jsDateToMysqlDate(today)
+            const bookingDateWithTime = today.toISOString
+            let totalHtml = ``
+            for (const iterator of this.currencyList) {
+                totalHtml += `
+                <div class="ticket">
+                    <div class="product-name"></div>
+                <div class="price">${iterator.code} ${this.formatNumber((this.grandTotal - this.discount) / iterator.rate)}</div>
+            </div>
+                `
+            }
+            const windowContent = `
+          <!DOCTYPE html>
+          <html>
+          <head
+          <title></title>
+          <style>
+
+          @font-face {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('/notosan/NotoSansLao-Light.ttf') format('truetype');
+        }
+          *{
+            font-family: 'DM Sans';
+          }
+		.ticket {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0px;
+			border-radius: 10px;
+			margin: 0px;
+	
+		}
+
+		.product-name {
+			float: left;
+			font-size: 12px;
+		}
+
+		.price {
+			float: right;
+			font-size: 12px;
+		}
+
+        h3 {
+        text-align: center;
+        font-family: 'DM Sans';
+        }
+        
+        </style>
+            </head>
+            <body>
+
+                <h5> ວັນທີ: ${today.toLocaleString()}</h5>
+                <h5> ຮ້ານ: ${this.onlineCustomerInfo.branch} </h5>
+                <h5> ເບີໂທ: 020 7777-5660, 020 2865-3388 </h5>
+                <hr style="margin-top: 50px;"> </hr>
+                <h5> ຜູ້ຮັບ: ${this.onlineCustomerInfo.name}</h5>
+                <h5> ໂທ: ${this.onlineCustomerInfo.tel} </h5>
+                <h5> ຂົນສົ່ງ: ${this.onlineCustomerInfo.shipping} </h5>
+                <h5> ບ່ອນສົ່ງ: ${this.onlineCustomerInfo.address} </h5>
+                <h5> ຄ່າຝາກ: ${this.onlineCustomerInfo.shippingFeeBy}</h5>
+                <hr style="margin-top: 50px;"> </hr>
+                ${txnListHtml}
+                ${this.discount > 0 ? discountHtml : ''}
+                <hr> </hr>
+                ${totalHtml}
+                <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
+                
+            </body>
+            </html>
+        `
+            const printWin = window.open(
+                '',
+                '',
+                'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+            )
+            printWin.document.open()
+            printWin.document.write(windowContent)
+
+            setTimeout(() => {
+                printWin.print()
+                printWin.close()
+            }, 1000)
         },
         generatePrintView() {
             let txnListHtml = ``
@@ -415,6 +536,10 @@ export default {
                     <div class="price"> ${quantity}x  ${this.formatNumber(total)}</div>
                 </div>`
             }
+            const discountHtml = `<div class="ticket">
+                    <div class="product-name">ສ່ວນຫລຸດ </div>
+                    <div class="price"> - ${this.formatNumber(this.discount)}</div>
+                </div>`
             const today = new Date()
             const bookingDate = jsDateToMysqlDate(today)
             const bookingDateWithTime = today.toISOString
@@ -423,7 +548,7 @@ export default {
                 totalHtml += `
                 <div class="ticket">
                     <div class="product-name"></div>
-                <div class="price">${iterator.code} ${this.formatNumber(this.grandTotal / iterator.rate)}</div>
+                <div class="price">${iterator.code} ${this.formatNumber((this.grandTotal - this.discount) / iterator.rate)}</div>
             </div>
                 `
             }
@@ -482,6 +607,7 @@ export default {
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
                 ${txnListHtml}
+                ${this.discount > 0 ? discountHtml : ''}
                 <hr> </hr>
                 ${totalHtml}
                 <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
@@ -543,18 +669,18 @@ export default {
         ...mapMutations({
             SetSearchKeyword: 'SetSearchKeyword',
         }),
-        async postTransactionForOnlineCustomer(customerForm) {
+        async postTransactionForOnlineCustomer(payload) {
             console.log(`Posting.......`);
-            this.saleHeader.customerForm = customerForm
-            console.log(`888888888${customerForm.name}88888888`);
-            this.discount = customerForm.discount
-            await this.postTransaction()
+            this.saleHeader.customerForm = payload.customerForm
+            this.discount = payload.customerForm.discount
+            this.onlineCustomerInfo = payload.customerInfo
+            await this.postTransaction(true)
             // ************ Clear online customer information after sale done *************//
             // this.saleHeader.customerForm = null
             delete this.saleHeader.customerForm
             this.deliveryForm = false;
         },
-        async postTransaction() {
+        async postTransaction(isDeliveryCustomer) {
             if (this.isloading || this.generateSaleLine == 0) {
                 if (this.generateSaleLine == 0) {
                     swalError2(this.$swal, "Error", 'ກະລຸນາເລືອກສິນຄ້າ 1 ຢ່າງຂື້ນໄປ')
@@ -581,8 +707,11 @@ export default {
                     this.lastTransactionSaleHeaderId = res.data.split('-')[1].trim()
                     swalSuccess(this.$swal, "Succeed", res.data.split('-')[0])
                     console.log('response post completed===> ' + res.data);
-                    // this.previewTicket(this.lastTransactionSaleHeaderId)
-                    this.generatePrintView()
+                    if(isDeliveryCustomer){
+                        this.generatePrintViewDeliveryCustomer()
+                    }else{
+                        this.generatePrintView()
+                    }
                     this.newOrder()
                 })
                 .catch((er) => {

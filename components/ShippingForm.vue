@@ -7,14 +7,14 @@
         <v-card class="pa-4">
 
             <v-card-title>
-                <v-chip class="ma-2" color="primary" label text-color="white">
+                <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
                     ຈັດການຂົນສົ່ງ
                 </v-chip>
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-text-field v-model="form.code" label="* Code" required :rules="nameRules"></v-text-field>
+                    <v-text-field :disabled="!isCreate" v-model="form.code" label="* Code" required :rules="nameRules"></v-text-field>
                     <v-text-field v-model="form.name" label="* ຊື່" required :rules="nameRules"></v-text-field>
                     <v-select v-model="form.rating" :items="items" label="Membership Level"></v-select>
                     <v-checkbox v-model.number="form.isActive" label="Is Active"></v-checkbox>

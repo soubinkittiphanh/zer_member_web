@@ -10,7 +10,7 @@
         </v-dialog>
         <v-card class="pa-4">
             <v-card-title>
-                <v-chip class="ma-2" color="primary" label text-color="white">
+                <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
                     ຈັດການລູກຄ້າ
                 </v-chip>

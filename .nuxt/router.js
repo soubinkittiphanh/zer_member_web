@@ -17,6 +17,7 @@ const _65e188fc = () => interopDefault(import('../pages/admin/cancel_order/index
 const _1c2fbe71 = () => interopDefault(import('../pages/admin/category/index.vue' /* webpackChunkName: "pages/admin/category/index" */))
 const _da94a204 = () => interopDefault(import('../pages/admin/client/index.vue' /* webpackChunkName: "pages/admin/client/index" */))
 const _1c6f474a = () => interopDefault(import('../pages/admin/cod_order/index.vue' /* webpackChunkName: "pages/admin/cod_order/index" */))
+const _79315f00 = () => interopDefault(import('../pages/admin/company/index.vue' /* webpackChunkName: "pages/admin/company/index" */))
 const _10ce75c4 = () => interopDefault(import('../pages/admin/currency/index.vue' /* webpackChunkName: "pages/admin/currency/index" */))
 const _f13f2d5e = () => interopDefault(import('../pages/admin/customer/index.vue' /* webpackChunkName: "pages/admin/customer/index" */))
 const _4dd908a1 = () => interopDefault(import('../pages/admin/customer_request/index.vue' /* webpackChunkName: "pages/admin/customer_request/index" */))
@@ -126,6 +127,10 @@ export const routerOptions = {
     path: "/admin/cod_order",
     component: _1c6f474a,
     name: "admin-cod_order"
+  }, {
+    path: "/admin/company",
+    component: _79315f00,
+    name: "admin-company"
   }, {
     path: "/admin/currency",
     component: _10ce75c4,
