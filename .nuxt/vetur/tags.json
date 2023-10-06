@@ -116,17 +116,17 @@
   "AccountingGeneralLedgerForm": {
     "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
-  "DashboardCardGrouping": {
-    "description": "Auto imported from components/dashboard/CardGrouping.vue"
-  },
-  "DashboardCardOnTop": {
-    "description": "Auto imported from components/dashboard/CardOnTop.vue"
-  },
   "CustomerForm": {
     "description": "Auto imported from components/customer/CustomerForm.vue"
   },
   "CustomerList": {
     "description": "Auto imported from components/customer/CustomerList.vue"
+  },
+  "DashboardCardGrouping": {
+    "description": "Auto imported from components/dashboard/CardGrouping.vue"
+  },
+  "DashboardCardOnTop": {
+    "description": "Auto imported from components/dashboard/CardOnTop.vue"
   },
   "DialogsBottomAlert": {
     "description": "Auto imported from components/dialogs/bottomAlert.vue"
@@ -152,14 +152,11 @@
   "PaymentCard": {
     "description": "Auto imported from components/paymentCard/index.vue"
   },
-  "PosCateogoryList": {
-    "description": "Auto imported from components/pos/CateogoryList.vue"
-  },
   "PoForm": {
     "description": "Auto imported from components/po/PoForm.vue"
   },
-  "Quotation": {
-    "description": "Auto imported from components/quotation/index.vue"
+  "PosCateogoryList": {
+    "description": "Auto imported from components/pos/CateogoryList.vue"
   },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"
@@ -172,5 +169,8 @@
   },
   "ProductFormCreate": {
     "description": "Auto imported from components/product/ProductFormCreate.vue"
+  },
+  "Quotation": {
+    "description": "Auto imported from components/quotation/index.vue"
   }
 }
