@@ -14,7 +14,7 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-text-field v-model="form.payment_code" label="* Code" required :rules="nameRules"></v-text-field>
+                    <v-text-field :disabled="!isCreate" v-model="form.payment_code" label="* Code" required :rules="nameRules"></v-text-field>
                     <v-text-field v-model="form.payment_name" label="* ຊື່" required :rules="nameRules"></v-text-field>
                     <v-checkbox v-model.number="form.isActive" label="Is Active"></v-checkbox>
                 </v-form>
