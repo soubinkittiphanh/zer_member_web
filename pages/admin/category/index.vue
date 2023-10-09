@@ -10,7 +10,7 @@
         <h3>ຄູ່ມືການນຳໃຊ້ </h3>
       </v-chip>
     </div>
-    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
       <youtube-player @close-dialog="guidelineDialog = false" youtube-link="znnN7ZLdf3I">
       </youtube-player>
     </v-dialog>
@@ -76,21 +76,22 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.categ_function`]="{ item }">
-          <v-icon small class="mr-2" @click="
+          <!-- <v-icon small class="mr-2" @click="
             editItem(item)
           isedit = true
             ">
             mdi-pencil
           </v-icon>
-        </template>
-        <template v-slot:[`item.categ_wallet`]="{ item }">
-          <v-icon small class="mr-2" @click="
-            wallet(item)
-          isedit = true
+          <i class="fa fa-pencil-square-o"></i>
+ -->
+
+          <v-btn color="primary" text @click="editItem(item)
+          wallet = true
             ">
-            mdi-pencil
-          </v-icon>
+            <i class="fa fa-pencil-square-o"></i>
+          </v-btn>
         </template>
+
       </v-data-table>
     </v-card>
   </div>

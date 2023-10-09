@@ -4,11 +4,21 @@
     <v-dialog v-model="dialogRider" max-width="1024" persistent>
       <RiderForm :is-create="isCreate" :rider-id="selectedRiderId" @close-dialog="handleEvent" @reload-data="loadData" :key="componentKey"/>
     </v-dialog>
-    <h1>ສ້າງລາຍເດີປະຈຳ</h1>
-    <!-- <v-dialog v-model="dialog" max-width="300px" persistent>
-      <dialog-classic-message :message="message" @closedialog="message = null">
-      </dialog-classic-message>
-    </v-dialog> -->
+    <div>
+    <v-chip class="pa-5" color="primary" label text-color="white">
+      <v-icon start>mdi-label</v-icon>
+      <h3>ຈັດການຣາຍເດີ</h3>
+    </v-chip>
+    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
+
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="ZCfSp3zuTL4">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -37,7 +47,7 @@
       <v-data-table v-if="riderList" :headers="headers" :search="search" :items="riderList">
         <template v-slot:[`item.function`]="{ item }">
 
-          <v-btn color="blue darken-1" text @click="editItem(item.id)
+          <v-btn color="primary" text @click="editItem(item.id)
           wallet = true
             ">
 
@@ -46,11 +56,8 @@
 
         </template>
         <template v-slot:[`item.tel`]="{ item }">
-
-          <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-
-            <!-- <i class="fas fa-whatsapp"></i> -->
-            {{ item.tel }}
+          {{ item.tel }}
+          <v-btn color="primary" text @click="whatsappLink(item)">
             <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
           </v-btn>
 
@@ -73,6 +80,7 @@ export default {
       componentKey:1,
       selectedRiderId:"",
       dialogRider: false,
+      guidelineDialog: false,
       riderList: [],
       search: '',
       isCreate:false,

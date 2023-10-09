@@ -1,9 +1,20 @@
 <template>
   <div class="text-left">
+  <div>
     <v-chip class="pa-5" color="primary" label text-color="white">
       <v-icon start>mdi-label</v-icon>
       <h3>ລາຍການໃບສະເຫນີລາຄາ</h3>
     </v-chip>
+    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
+
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="AFEwQPaHVW8">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -170,6 +181,7 @@ export default {
   data() {
     return {
       viewTransaction: false,
+      guidelineDialog: false,
       whatsappContactLink: '',
       componentKey: 0,
       dialogOrderDetail: false,

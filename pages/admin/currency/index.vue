@@ -1,16 +1,28 @@
 <template>
   <div class="text-left">
-    <v-chip class="pa-5" color="primary" label text-color="white">
-      <v-icon start>mdi-label</v-icon>
-      <h3>ລາຍການ ສະກຸນເງິນ</h3>
-    </v-chip>
+    <div>
+      <v-chip class="pa-5" color="primary" label text-color="white">
+        <v-icon start>mdi-label</v-icon>
+        <h3>ລາຍການ ສະກຸນເງິນ</h3>
+
+      </v-chip>
+      <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
+
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="5zESPW16wgY">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
     <v-dialog v-model="currencyDialogForm" max-width="1024">
       <currency-form @reload-data="loadData()
-      currencyDialogForm = false" :isCreate="isCreate" :key="componentKey" 
-        :recordId="currencySelected" @close-dialog="currencyDialogForm = false">
+      currencyDialogForm = false" :isCreate="isCreate" :key="componentKey" :recordId="currencySelected"
+        @close-dialog="currencyDialogForm = false">
       </currency-form>
     </v-dialog>
     <v-card>
@@ -52,7 +64,7 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth,getFormatNum } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import CurrencyForm from '~/components/CurrencyForm.vue'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
@@ -62,6 +74,7 @@ export default {
   middleware: 'auths',
   data() {
     return {
+      guidelineDialog:false,
       componentKey: 0,
       currencyDialogForm: false,
       isCreate: true,
@@ -128,7 +141,7 @@ export default {
       this.currencyDialogForm = true;
     },
     async loadData() {
-      if(this.isloading) return
+      if (this.isloading) return
       this.isloading = true
       await this.$axios
         .get(`api/currency/find`)
@@ -160,6 +173,7 @@ export default {
 table {
   border: 1px solid black;
 }
+
 /* .myelevation {
   background-color: '#f0f0f';
   color: red;

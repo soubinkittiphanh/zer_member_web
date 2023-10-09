@@ -274,6 +274,11 @@ export default {
           to: '/admin/ordersFromPosSummaryByCustomer',
         },
         {
+          icon: 'mdi mdi-lifebuoy',
+          title: 'ຄູ່ມືການນຳໃຊ້',
+          to: '/admin/tutorial',
+        },
+        {
           icon: 'mdi-logout',
           title: 'ອອກຈາກລະບົບ',
           to: '/admin/logout',

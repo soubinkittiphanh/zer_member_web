@@ -53,7 +53,8 @@ export default {
     { src: '~/plugins/html2canvas.js', mode: 'client' },
     { src: '@/plugins/echarts.js', ssr: false },
     { src: '~/plugins/xlsx.js', mode: 'client' },
-    { src: '~/plugins/vue-youtube.js', ssr: false }
+    { src: '~/plugins/vue-youtube.js', ssr: false },
+    { src: '~/plugins/barcode.js', ssr: false }
     // { src: '~/plugins/vuelidate.js', mode: 'client' }
     // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],

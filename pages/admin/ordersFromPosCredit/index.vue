@@ -1,9 +1,20 @@
 <template>
   <div class="text-left">
+  <div >
     <v-chip class="pa-5" color="primary" label text-color="white">
       <v-icon start>mdi-label</v-icon>
       <h3>ລາຍການລູກຄ້າຕິດຫນີ້</h3>
     </v-chip>
+    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
+
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="lduzK_oVV_g">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
@@ -131,17 +142,10 @@
           </v-btn>
 
         </template>
-        <template v-slot:[`item.cancel`]="{ item }">
 
-          <v-btn color="blue darken-1" text @click="cancelItem(item)
-          wallet = true
-            ">
-            <i class="fas fa-sync"></i>
-          </v-btn>
-        </template>
         <template v-slot:[`item.client.telephone`]="{ item }">
+          {{ item.client.telephone }}
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
-            {{ item.client.telephone }}
             <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
           </v-btn>
 
@@ -162,6 +166,7 @@ export default {
   data() {
     return {
       viewTransaction: false,
+      guidelineDialog: false,
       whatsappContactLink: '',
       componentKey: 0,
       dialogOrderDetail: false,

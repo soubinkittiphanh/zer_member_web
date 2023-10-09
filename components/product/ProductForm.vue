@@ -18,24 +18,28 @@
             <v-card-text>
                 <v-container>
                     <v-form ref="formLocal" v-model="validLocal" lazy-validation>
+                        <!-- Row 1 -->
                         <v-row>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-autocomplete item-text="outlet_name" item-value="outlet_id" :items="outlet" label="ຮ້ານ*"
                                     v-model="formData.outlet"></v-autocomplete>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-autocomplete item-text="categ_name" item-value="categ_id" :items="category"
                                     label="ປະເພດສິນຄ້າ*" v-model="formData.pro_category"></v-autocomplete>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-text-field v-model="formData.pro_id" :counter="10" :disabled="!!formData.pro_id"
                                     label="ໄອດີສິນຄ້າ" required></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                        </v-row>
+                        <!-- Row 2 -->
+                        <v-row>
+                            <v-col cols="4" sm="6" md="4">
                                 <v-text-field v-model="formData.pro_name" :counter="50" :rules="rules.nameRule"
                                     label="ຊື້ສິນຄ້າ*" required></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-row>
                                     <v-col cols="6" sm="6" md="6">
                                         <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule"
@@ -49,7 +53,7 @@
                                 </v-row>
 
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-row>
                                     <v-col cols="6" sm="6" md="6">
                                         <v-text-field v-model="formData.pro_cost_price" :counter="10" type="number"
@@ -62,48 +66,74 @@
                                     </v-col>
                                 </v-row>
                             </v-col>
-
-
-                            <v-col cols="12" sm="6" md="4">
+                        </v-row>
+                        <!-- Row 3 -->
+                        <v-row>
+                            <v-col cols="4" sm="6" md="4">
                                 <v-text-field v-model="formData.pro_retail_price" :counter="10" type="number"
                                     :rules="rules.priceRule" label="ລາຄາສົ່ງ %" required></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-file-input :rules="rules.imageRule" ref="filesfield" multiple
                                     accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
                                     prepend-icon="mdi-camera" label="ຮູບພາບຫລາຍພາບ" @change="onFilesChange"></v-file-input>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-text-field v-model="formData.minStock" :counter="10" type="number" :rules="rules.minRule"
                                     label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                        </v-row>
+                        <!-- Row 4 -->
+                        <v-row>
+                            <v-col cols="4" sm="6" md="4">
                                 <v-text-field v-model="formData.barCode" label="barcode" required></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-autocomplete item-text="name" item-value="id" :items="unitList"
                                     label="ຫົວຫນ່ວຍຮັບເຄື່ອງ*" v-model="formData.receiveUnitId"></v-autocomplete>
-                                <!-- <v-text-field v-model="formData.receiveUnitId" :counter="10" type="number" :rules="rules.minRule"
-                label="ຫົວຫນ່ວຍຮັບເຄື່ອງ" required></v-text-field> -->
+
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="4" sm="6" md="4">
                                 <v-autocomplete item-text="name" item-value="id" :items="unitList" label="ຫົວຫນ່ວຍນັບສາງ*"
                                     v-model="formData.stockUnitId"></v-autocomplete>
-                                <!-- <v-text-field v-model="formData.stockUnitId" :counter="10" type="number" :rules="rules.minRule"
-                label="ຫົວຫນ່ວຍນັບສາງ" required></v-text-field> -->
+
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                        </v-row>
+                        <!-- Row 5 -->
+                        <v-row>
+                            <v-col cols="4" sm="6" md="4">
+                                <v-card class="mb-1">
+                                    <canvas ref="barcodeCanvas"></canvas>
+                                    <v-card-text>
+                                        ລາຄາ: {{ formatNumber(formData.pro_price) }}
+                                        <!-- <img :src="barcodeImage" /> -->
+                                    </v-card-text>
+                                </v-card>
+                                <v-btn :disabled="formData.barCode.length > 0" color="primary" rounded
+                                    @click.prevent="generateBarcode">
+                                    <i class="mdi mdi-barcode"></i>
+                                    Generate
+                                </v-btn>
+                                <v-btn :disabled="formData.barCode.length == 0" color="primary" rounded
+                                    @click.prevent="printBarcode">
+                                    <i class="mdi mdi-barcode"></i>
+                                    print
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="4" sm="6" md="4">
                                 <v-textarea outlined name="input-7-4" counter="100" label="ຄຳອະທິບາຍ" value="abc"
                                     v-model="formData.pro_desc"></v-textarea>
                             </v-col>
+                            <v-col cols="4" sm="6" md="4">
+                                <v-checkbox v-model.number="formData.isActive" label="Is Active"></v-checkbox>
+                            </v-col>
 
                         </v-row>
+                        <v-divider class="mt-1"></v-divider>
                         <div>
                             <v-card class="pa-md-6 mx-lg-auto" v-for="(img, idx) in formData.pro_image" :key="idx">
                                 <v-row justify="space-around">
-                                    <v-list-item-avatar @click.prevent="
-                                        previewImg(`${host}/uploads/${img.name}`)
-                                        ">
+                                    <v-list-item-avatar @click.prevent="previewImg(`${host}/uploads/${img.name}`)">
                                         <v-img :src="`${host}/uploads/${img.name}`">
                                         </v-img>
                                     </v-list-item-avatar>
@@ -114,6 +144,7 @@
                                 </v-row>
                             </v-card>
                         </div>
+                        <!-- Image list -->
                         <div>
                             <v-list three-line>
                                 <template v-for="(item, index) in imagesPreviewURL">
@@ -141,10 +172,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
+                <v-btn color="warning" variant="text" rounded @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="uploadFilesLocal">
+                <v-btn color="primary" variant="text" rounded @click="uploadFilesLocal">
                     Save
                 </v-btn>
             </v-card-actions>
@@ -153,11 +184,12 @@
 </template>
   
 <script>
-import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
-import { mysqlDateToDateObject, parseDate } from '~/common'
+// import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import ImagePreviewMixin from '../../pages/product/index.vue'
 import { hostName } from '../../common/index'
 import { mapActions, mapGetters } from 'vuex'
+import JsBarcode from 'jsbarcode';
 export default {
     props: {
         isEdit: {
@@ -181,6 +213,7 @@ export default {
         }
     },
     mounted() {
+
         console.log('FORMDATA ID: ' + this.formData.pro_id)
         this.pro_id = this.headerId
         this.formData.pro_id = this.headerId
@@ -197,10 +230,12 @@ export default {
     },
     data() {
         return {
+            barcodeValue: '',
             imagesPreviewURL: [],
             files: null,
             IMG_URL: '',
             NAME: '',
+            barcodeImage: '',
             rules: {
                 nameRule: [
                     (v) => !!v || 'ກະລຸນາ ໃສ່ຊື່ສິນຄ້າ ',
@@ -265,8 +300,9 @@ export default {
                 barCode: '',
                 receiveUnitId: 1,
                 stockUnitId: 1,
-                saleCurrencyId:1,
-                costCurrencyId:1,
+                saleCurrencyId: 1,
+                costCurrencyId: 1,
+                isActive: true,
             },
             outlet: [],
             isLoading: false,
@@ -280,6 +316,41 @@ export default {
         }
     },
     methods: {
+        formatNumber(val) {
+            return getFormatNum(val)
+        },
+        generateBarcode() {
+            // Generate a random 12-digit number as the barcode value
+            const barcodeValue = Math.floor(Math.random() * 900000000000) + 100000000000;
+            // Use jsbarcode library to generate the barcode SVG image
+            // Get the canvas element
+            const canvas = document.createElement('canvas');
+            JsBarcode(canvas, barcodeValue.toString(), {
+                format: "code128",
+                displayValue: true,
+                fontSize: 20,
+                margin: 10
+            });
+            this.formData.barCode = barcodeValue.toString();
+            this.generateBarcodeImage(barcodeValue)
+        },
+        generateBarcodeImage(barcodeValue) {
+            // Get the canvas element using the ref attribute
+            const canvas = this.$refs.barcodeCanvas;
+            console.log(`.....Canvas logger.....`);
+            console.log(canvas);
+            console.log(canvas.width, canvas.height);
+            // Generate the barcode image using JsBarcode
+            JsBarcode(canvas, barcodeValue, {
+                format: 'code128',
+                displayValue: true,
+                fontSize: 20,
+                margin: 10
+            });
+
+            // Convert the canvas to a data URL and set it as the barcodeImage data property
+            this.barcodeImage = canvas.toDataURL();
+        },
         validateLocal() {
             console.log('VALIDATING...')
             this.$refs.formLocal.validate()
@@ -389,7 +460,9 @@ export default {
                         costCurrencyId: el.costCurrencyId,
                         saleCurrencyId: el.saleCurrencyId,
                         pro_image: image,
+                        isActive: el.isActive,
                     }
+                    this.generateBarcodeImage(this.formData.barCode)
                     console.log('IMAGE COUNT: ' + this.formData.pro_image.length)
                 })
                 .catch((er) => {
@@ -423,6 +496,73 @@ export default {
 
         },
 
+        printBarcode() {
+            const windowContent = `
+          <!DOCTYPE html>
+          <html>
+          <head
+          <title></title>
+          <style>
+
+          @font-face {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('/notosan/NotoSansLao-Light.ttf') format('truetype');
+        }
+          *{
+            font-family: 'DM Sans';
+          }
+		.ticket {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0px;
+			border-radius: 10px;
+			margin: 0px;
+	
+		}
+
+		.product-name {
+			float: left;
+			font-size: 12px;
+		}
+
+		.price {
+			float: right;
+			font-size: 12px;
+		}
+
+        h3 {
+        text-align: center;
+        font-family: 'DM Sans';
+        }
+        
+        </style>
+            </head>
+            <body>
+                ລາຄາ:${  this.formatNumber(this.formData.pro_price) }
+                <div style="text-align: center;">
+                    <img src="${this.barcodeImage}">
+                   
+                </div>
+            </body>
+            </html>
+        `
+            const printWin = window.open(
+                '',
+                '',
+                'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+            )
+            printWin.document.open()
+            printWin.document.write(windowContent)
+
+            setTimeout(() => {
+                printWin.print()
+                printWin.close()
+            }, 1000)
+        },
         async uploadFilesLocal() {
             console.log("===> Upload data");
             if (!this.$refs.formLocal.validate()) {

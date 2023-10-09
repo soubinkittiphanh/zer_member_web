@@ -26,6 +26,7 @@
     "core-js": "^3.20.0",
     "echarts": "^5.4.3",
     "html2canvas": "^1.4.1",
+    "jsbarcode": "^3.11.5",
     "jspdf-invoice-template": "^1.4.3",
     "nuxt": "^2.15.8",
     "vue-apexcharts": "^1.6.2",

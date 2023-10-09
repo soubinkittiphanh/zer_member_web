@@ -14,7 +14,7 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
       <youtube-player @close-dialog="guidelineDialog=false" youtube-link="W6KiQWtiqBM">
       </youtube-player>
     </v-dialog>

@@ -1,16 +1,27 @@
 <template>
   <div class="text-left">
+  <div >
     <v-chip class="pa-5" color="primary" label text-color="white">
       <v-icon start>mdi-label</v-icon>
       <h3>ລາຍການ Shipping</h3>
     </v-chip>
+    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
+    </div>
+
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="M8GsEpxydWI">
+      </youtube-player>
+    </v-dialog>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
     <v-dialog v-model="entryFormDialog" max-width="1024">
       <shipping-form @reload-data="loadData()
-      entryFormDialog = false" :isCreate="isCreate" :key="componentKey" 
-        :recordId="entrySelected" @close-dialog="entryFormDialog = false">
+      entryFormDialog = false" :isCreate="isCreate" :key="componentKey" :recordId="entrySelected"
+        @close-dialog="entryFormDialog = false">
       </shipping-form>
     </v-dialog>
     <v-card>
@@ -52,7 +63,7 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth,getFormatNum } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import ShippingForm from '~/components/ShippingForm.vue'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
@@ -64,6 +75,7 @@ export default {
     return {
       componentKey: 0,
       entryFormDialog: false,
+      guidelineDialog: false,
       isCreate: true,
       dialog: false,
       isloading: false,
@@ -121,7 +133,7 @@ export default {
       this.entryFormDialog = true;
     },
     async loadData() {
-      if(this.isloading) return
+      if (this.isloading) return
       this.isloading = true
       await this.$axios
         .get(`api/shipping/findAll`)
@@ -153,6 +165,7 @@ export default {
 table {
   border: 1px solid black;
 }
+
 /* .myelevation {
   background-color: '#f0f0f';
   color: red;

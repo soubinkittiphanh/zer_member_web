@@ -10,7 +10,7 @@
         <h3>ຄູ່ມືການນຳໃຊ້ </h3>
       </v-chip>
     </div>
-    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
       <youtube-player @close-dialog="guidelineDialog = false" youtube-link="5yMsQ6gRSkI">
       </youtube-player>
     </v-dialog>

@@ -18,7 +18,7 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <v-dialog v-model="guidelineDialog" hide-overlay max-width="auto">
+    <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
       <youtube-player @close-dialog="guidelineDialog = false" youtube-link="OEGkC4zNgpY">
       </youtube-player>
     </v-dialog>
@@ -68,11 +68,8 @@
 
           </template>
           <template v-slot:[`item.telephone`]="{ item }">
-
+            {{ item.telephone }}
             <v-btn color="primary" text @click="whatsappLink(item)">
-
-              <!-- <i class="fas fa-whatsapp"></i> -->
-              {{ item.telephone }}
               <a :href="whatsappContactLink" target="_blank">Whatsapp</a>
             </v-btn>
 
