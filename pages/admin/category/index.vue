@@ -40,10 +40,10 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <!-- <v-btn color="error" class="mr-4" @click="reset"> ລ້າງຂໍ້ມູນ </v-btn> -->
-          <v-btn color="blue darken-1" text @click="dialogForm = false">
+          <v-btn color="warning" rounded @click="dialogForm = false">
             ປິດ
           </v-btn>
-          <v-btn color="blue darken-1" text @click="submitDatas">
+          <v-btn color="primary" rounded @click="submitDatas">
             ບັນທຶກ
           </v-btn>
         </v-card-actions>

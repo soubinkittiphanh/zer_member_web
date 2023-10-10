@@ -158,10 +158,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="toggleDialog">
+                <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <v-btn v-if="!isUpdate" color="blue-darken-1" variant="text" @click="postTransaction">
+                <v-btn v-if="!isUpdate" color="primary" rounded variant="text" @click="postTransaction">
                     Save
                 </v-btn>
             </v-card-actions>

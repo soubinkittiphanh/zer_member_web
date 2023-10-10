@@ -83,12 +83,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="toggleDialog">
+                <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <!-- <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-        Save
-    </v-btn> -->
+      
             </v-card-actions>
         </v-card>
     </div>

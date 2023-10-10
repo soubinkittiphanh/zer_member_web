@@ -18,7 +18,7 @@
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
-                    <v-btn color="blue-darken-1" variant="text" @click="chooseTerminal">
+                    <v-btn color="primary" rounded variant="text" @click="chooseTerminal">
                         ເລືອກ
                     </v-btn>
                 </v-card-actions>

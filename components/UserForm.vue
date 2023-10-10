@@ -81,10 +81,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="toggleDialog">
+                <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="commitRecord">
+                <v-btn color="primary" rounded variant="text" @click="commitRecord">
                     Save
                 </v-btn>
             </v-card-actions>

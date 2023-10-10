@@ -10,9 +10,14 @@
             <loading-indicator> </loading-indicator>
         </v-dialog>
         <v-card class="pa-4">
-            {{ isCreate ? "true" : "false" }}
-            <v-card-title>
+            <!-- <v-card-title>
                 <span class="text-h5">ລາຍເດີ {{ riderId }}</span>
+            </v-card-title> -->
+            <v-card-title>
+                <v-chip class="ma-0" color="primary" label text-color="white">
+                    <v-icon start>mdi-label</v-icon>
+                    ຈັດການລາຍເດີ
+                </v-chip>
             </v-card-title>
             <v-card-text>
                 <!-- <v-form @submit.prevent="handleSubmit" ref="form"> -->
@@ -27,10 +32,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
+                <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="handleSubmit">
+                <v-btn color="primary" rounded variant="text" @click="handleSubmit">
                     Save
                 </v-btn>
             </v-card-actions>

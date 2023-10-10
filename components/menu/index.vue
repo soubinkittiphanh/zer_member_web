@@ -14,7 +14,7 @@
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
-                    <v-btn color="blue-darken-1" variant="text" @click="takeToPOS">
+                    <v-btn color="primary" rounded variant="text" @click="takeToPOS">
                         ເລືອກ
                     </v-btn>
                 </v-card-actions>

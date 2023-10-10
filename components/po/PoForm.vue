@@ -89,7 +89,7 @@
                                         :rules="totalRules"></v-text-field>
                                 </td>
                                 <td>
-                                    <v-btn color="blue-darken-1" variant="text" @click="deleteItem(item)">
+                                    <v-btn color="warning" variant="text" @click="deleteItem(item)">
                                         ລົບ
                                     </v-btn>
                                 </td>
@@ -102,10 +102,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="$emit('close-dialog')">
+                <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="blue-darken-1" variant="text" @click="submit">
+                <v-btn color="primary" rounded variant="text" @click="submit">
                     Save
                 </v-btn>
             </v-card-actions>
