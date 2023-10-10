@@ -466,6 +466,10 @@ export default {
                         pro_image: image,
                         isActive: el.isActive,
                     }
+                    if(!this.formData.barCode){
+                        // ****** prevent error temporary *****
+                        this.formData.barCode = '';
+                    }
                     this.generateBarcodeImage(this.formData.barCode)
                 })
                 .catch((er) => {
