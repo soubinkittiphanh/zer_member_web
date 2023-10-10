@@ -336,6 +336,7 @@ export default {
         },
         generateBarcodeImage(barcodeValue) {
             // Get the canvas element using the ref attribute
+            if(!barcodeValue) return;
             const canvas = this.$refs.barcodeCanvas;
             console.log(`.....Canvas logger.....`);
             console.log(canvas);
@@ -466,7 +467,6 @@ export default {
                         isActive: el.isActive,
                     }
                     this.generateBarcodeImage(this.formData.barCode)
-                    console.log('IMAGE COUNT: ' + this.formData.pro_image.length)
                 })
                 .catch((er) => {
                     console.log('Error: ' + er)
