@@ -537,10 +537,13 @@ export default {
                 const total = iterator.qty * iterator.localPrice
                 // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
                 txnListHtml +=
-                    `<div class="ticket">
+                `<div class="ticket">
                     <div class="product-name">${product.pro_name} </div>
-                    <div class="price"> ${quantity}x  ${this.formatNumber(total)}</div>
-                </div>`
+                    <div class="price">  ${this.formatNumber(total)}</div>
+                </div>
+                <div class="product-name">${quantity} X ${this.formatNumber(iterator.localPrice)}</div>
+                <br>
+                    `
             }
             const discountHtml = `<div class="ticket">
                     <div class="product-name">ສ່ວນຫລຸດ </div>
