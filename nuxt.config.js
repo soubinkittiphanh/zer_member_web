@@ -6,7 +6,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - UAT',
+    titleTemplate: 'LIVE %s',
     // title: 'Jack42',
     // title: 'PeeAir4',
     title: 'DCOMMERCE',

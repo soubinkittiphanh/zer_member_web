@@ -12,6 +12,30 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <!-- <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed color="#01532B" app>
+      <v-list> -->
+        <!-- Group A -->
+        <!-- <v-list-group v-for="menu in menuGroup" :key="menu.name" prepend-icon="mdi-folder" v-model="menu.expand">
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>{{ menu.name }}</v-list-item-title>
+            </v-list-item-content>
+          </template> -->
+
+          <!-- Group A menu items -->
+          <!-- <v-list-item v-for="(item, i) in menu.menuList" :key="i" :to="item.to" router exact>
+            <v-list-item-action>
+              <v-icon color="white">{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" :style="{ color: 'white' }" />
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+      </v-list>
+    </v-navigation-drawer> -->
+
     <!-- ************** => Header Appbar ************** -->
     <v-app-bar app light clipped-left clipped-right>
       <v-row no-gutters align="center">
@@ -53,9 +77,9 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.5 user: {{ user.cus_name }} id: {{ user.id }} </span>
+    <v-footer app>
       <v-spacer></v-spacer>
+      <span>&copy;{{ new Date().getFullYear() }} Dcommerce: V.R23.0.5 user: {{ user.cus_name }} id: {{ user.id }} </span>
       <v-chip v-if="findSelectedTerminal" class="ma-2" color="warning" variant="outlined" @click="terminalDialog = true">
         {{ currentTerminal['name'] }}
       </v-chip>
@@ -76,6 +100,49 @@ export default {
       drawer: true,
       fixed: true,
       mainComponentKey: 1,
+      groupAExpanded: false,
+      menuGroup: [
+        {
+          name: 'Main',
+          expand: false,
+          menuList: [{
+            icon: 'mdi-home',
+            title: 'ຫນ້າຫລັກ',
+            to: '/admin',
+          },]
+        },
+        {
+          name: 'Configuration', expand: false, menuList: [{
+            icon: 'mdi mdi-source-branch',
+            title: 'ຈັດການສາຂາ',
+            to: '/admin/company',
+          },
+          {
+            icon: 'mdi mdi-truck-cargo-container',
+            title: 'ຈັດການຂົນສົ່ງ',
+            to: '/admin/shipping',
+          },
+          {
+            icon: 'mdi-currency-usd-off',
+            title: 'ຈັດການອັດຕາແລກປ່ຽນ',
+            to: '/admin/currency',
+          },]
+        },
+        {
+          name: 'Operation', expand: false, menuList: [{
+            icon: 'mdi mdi-transfer',
+            title: 'Transfer',
+            to: '/admin/transfer',
+          },]
+        },
+        {
+          name: 'Accounting', expand: false, menuList: [{
+            icon: 'mdi-receipt-text-arrow-right-outline',
+            title: 'ບັນຊີ ລາຍຈ່າຍ',
+            to: '/admin/ap',
+          },]
+        },
+      ],
       items: [
         {
           icon: 'mdi-home',
@@ -133,6 +200,12 @@ export default {
           icon: 'mdi-view-list',
           title: 'ຈັດການປະເພດສິນຄ້າ',
           to: '/admin/category',
+        },
+
+        {
+          icon: 'mdi mdi-bottle-wine',
+          title: 'ຫົວໜ່ວຍສິນຄ້າ',
+          to: '/admin/unit',
         },
 
         {

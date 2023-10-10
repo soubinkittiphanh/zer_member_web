@@ -334,7 +334,7 @@ export default {
         format: 'code128',
         displayValue: true,
         fontSize: 20,
-        margin: 10
+        // margin: 10
       });
 
       // Convert the canvas to a data URL and set it as the barcodeImage data property
@@ -358,30 +358,6 @@ export default {
           *{
             font-family: 'DM Sans';
           }
-		.ticket {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0px;
-			border-radius: 10px;
-			margin: 0px;
-	
-		}
-
-		.product-name {
-			float: left;
-			font-size: 12px;
-		}
-
-		.price {
-			float: right;
-			font-size: 12px;
-		}
-
-        h3 {
-        text-align: center;
-        font-family: 'DM Sans';
-        }
         
         </style>
             </head>
