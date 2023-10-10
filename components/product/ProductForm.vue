@@ -513,6 +513,7 @@ export default {
         }
           *{
             font-family: 'DM Sans';
+            font-weight: bold;
           }
 		.ticket {
 			display: flex;
@@ -542,10 +543,12 @@ export default {
         </style>
             </head>
             <body>
-                ລາຄາ:${  this.formatNumber(this.formData.pro_price) }
                 <div style="text-align: center;">
-                    <img src="${this.barcodeImage}">
-                   
+                    <div style="text-align: center;">
+                        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+                        </div>
+                        <img src="${this.barcodeImage}">
+                    
                 </div>
             </body>
             </html>
@@ -596,4 +599,9 @@ export default {
     },
 }
 </script>
+<style scoped>
+/* .my-forn{
+    font-weight: bold;
+} */
+</style>
   

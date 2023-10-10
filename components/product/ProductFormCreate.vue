@@ -354,6 +354,7 @@ export default {
         }
           *{
             font-family: 'DM Sans';
+            font-weight: bold;
           }
 		.ticket {
 			display: flex;
@@ -383,8 +384,11 @@ export default {
         </style>
             </head>
             <body>
-              ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+             
                 <div style="text-align: center;">
+                  <div style="text-align: center;">
+                        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+                        </div>
                     <img src="${this.barcodeImage}">
 
                 </div>
