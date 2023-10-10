@@ -455,7 +455,7 @@ export default {
             font-style: normal;
             font-weight: 400;
             font-display: swap;
-            src: url('/notosan/NotoSansLao-Light.ttf') format('truetype');
+            src: url('/notosan/NotoSansLao-Regular.ttf') format('truetype');
         }
           *{
             font-family: 'DM Sans';
@@ -570,7 +570,7 @@ export default {
             font-style: normal;
             font-weight: 400;
             font-display: swap;
-            src: url('/notosan/NotoSansLao-Light.ttf') format('truetype');
+            src: url('/notosan/NotoSansLao-Regular.ttf') format('truetype');
         }
           *{
             font-family: 'DM Sans';
