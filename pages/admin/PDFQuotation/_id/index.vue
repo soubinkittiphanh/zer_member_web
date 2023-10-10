@@ -15,10 +15,10 @@
               <table class="table-layout" style="font-size: larger; font-weight: bold; ">
                 <tbody style="text-align: right;">
                   <tr style="white-space: nowrap">
-                    <td> ຮ້ານ ຈີທັນ ມິນິມາດ</td>
+                    <td> ຮ້ານ ສະຫາຍ</td>
                   </tr>
                   <tr style="white-space: nowrap">
-                    <td> CHITHANH MINI MART</td>
+                    <td> Laos Friend</td>
                   </tr>
                   <tr style="white-space: nowrap">
                     <td> ຕໍ່ຫນ້າຕະຫຼາດ ດາລາ ຫຼວງພະບາງ</td>

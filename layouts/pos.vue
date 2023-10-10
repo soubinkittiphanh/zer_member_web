@@ -111,10 +111,6 @@
                         <v-btn color="primary" text @click="openDeliveryBox">
                             <v-icon class="mdi mdi-bike-fast"></v-icon>
                         </v-btn>
-                        <!-- <v-btn color="primary" text @click="generatePrintViewDeliveryCustomer">
-                            <v-icon class="mdi mdi-bike-fast"></v-icon>
-                            ticket preview
-                        </v-btn> -->
                     </v-col>
                     <v-col cols="2" style="text-align: right;">
                         <v-btn color="primary" text @click="newOrder">

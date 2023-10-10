@@ -7,7 +7,7 @@
             <img :src="companyLogo" width="200px" />
           </div>
         </div>
-        <h1 style="text-align: center;">CHITHANH</h1>
+        <h1 style="text-align: center;">Laos Friend</h1>
         <p class="text-color" style="font-size: 11pt; font-weight: bold; text-align: center">
           Company addres here ...
         </p>
