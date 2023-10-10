@@ -340,6 +340,9 @@ export default {
             console.log(`.....Canvas logger.....`);
             console.log(canvas);
             console.log(canvas.width, canvas.height);
+            // Set the canvas width and height to match the paper size
+            canvas.width = 40;
+            canvas.height = 20;
             // Generate the barcode image using JsBarcode
             JsBarcode(canvas, barcodeValue, {
                 format: 'code128',
@@ -509,11 +512,10 @@ export default {
             font-style: normal;
             font-weight: 400;
             font-display: swap;
-            src: url('/notosan/NotoSansLao-Light.ttf') format('truetype');
+            src: url('/notosan/NotoSansLao-Bold.ttf') format('truetype');
         }
           *{
             font-family: 'DM Sans';
-            font-weight: bold;
           }
 		.ticket {
 			display: flex;
@@ -600,8 +602,8 @@ export default {
 }
 </script>
 <style scoped>
-/* .my-forn{
-    font-weight: bold;
-} */
+.my-forn {
+    font-weight: bo;
+}
 </style>
   
