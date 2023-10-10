@@ -113,20 +113,14 @@
   "UnitForm": {
     "description": "Auto imported from components/unitForm.vue"
   },
-  "CampaignForm": {
-    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  "AccountingApPayment": {
+    "description": "Auto imported from components/accounting/ApPayment.vue"
   },
-  "CardCampaignCard": {
-    "description": "Auto imported from components/card/campaignCard.vue"
+  "AccountingArReceivable": {
+    "description": "Auto imported from components/accounting/ArReceivable.vue"
   },
-  "CardForm": {
-    "description": "Auto imported from components/card/cardForm.vue"
-  },
-  "CustomerForm": {
-    "description": "Auto imported from components/customer/CustomerForm.vue"
-  },
-  "CustomerList": {
-    "description": "Auto imported from components/customer/CustomerList.vue"
+  "AccountingGeneralLedgerForm": {
+    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
   "DashboardCardGrouping": {
     "description": "Auto imported from components/dashboard/CardGrouping.vue"
@@ -137,32 +131,38 @@
   "DialogsBottomAlert": {
     "description": "Auto imported from components/dialogs/bottomAlert.vue"
   },
+  "CampaignForm": {
+    "description": "Auto imported from components/campaign/CampaignForm.vue"
+  },
+  "CustomerForm": {
+    "description": "Auto imported from components/customer/CustomerForm.vue"
+  },
+  "CustomerList": {
+    "description": "Auto imported from components/customer/CustomerList.vue"
+  },
+  "CardCampaignCard": {
+    "description": "Auto imported from components/card/campaignCard.vue"
+  },
+  "CardForm": {
+    "description": "Auto imported from components/card/cardForm.vue"
+  },
   "Menu": {
     "description": "Auto imported from components/menu/index.vue"
-  },
-  "AccountingApPayment": {
-    "description": "Auto imported from components/accounting/ApPayment.vue"
-  },
-  "AccountingArReceivable": {
-    "description": "Auto imported from components/accounting/ArReceivable.vue"
-  },
-  "AccountingGeneralLedgerForm": {
-    "description": "Auto imported from components/accounting/GeneralLedgerForm.vue"
   },
   "MenuOverview": {
     "description": "Auto imported from components/menuOverview/index.vue"
   },
-  "MinStockCard": {
-    "description": "Auto imported from components/minStockCard/index.vue"
-  },
-  "PoForm": {
-    "description": "Auto imported from components/po/PoForm.vue"
-  },
   "PaymentCard": {
     "description": "Auto imported from components/paymentCard/index.vue"
   },
+  "MinStockCard": {
+    "description": "Auto imported from components/minStockCard/index.vue"
+  },
   "PosCateogoryList": {
     "description": "Auto imported from components/pos/CateogoryList.vue"
+  },
+  "PoForm": {
+    "description": "Auto imported from components/po/PoForm.vue"
   },
   "ProductItem": {
     "description": "Auto imported from components/product/Item.vue"
