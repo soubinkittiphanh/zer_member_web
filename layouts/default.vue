@@ -16,8 +16,8 @@
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed color="#01532B" app>
       <v-list>
         <!-- Group A -->
-        <v-list-group v-for="(menu, i) in menuGroup" :key="i" :prepend-icon-color="'white'" :prepend-icon="menu.icon"
-          v-model="menu.expand" color="white">
+        <v-list-group v-for="(menu, i) in menuGroup2" :key="i" color="white"
+          v-model="menu.expand" >
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title style="color: white">{{ menu.name }}</v-list-item-title>
@@ -102,6 +102,202 @@ export default {
       fixed: true,
       mainComponentKey: 1,
       groupAExpanded: false,
+      menuGroup2: [
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ການຂາຍ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi-view-list',
+              title: 'POS',
+              to: '/pos',
+            },
+            {
+              icon: 'mdi-receipt-text-arrow-right',
+              title: 'ໃບສະເຫນີລາຄາ',
+              to: '/admin/quotationList',
+            },
+            {
+              icon: 'mdi-receipt-text-check-outline',
+              title: 'ລາຍການບິນຂາຍ POS',
+              to: '/admin/ordersFromPos',
+            },
+            {
+              icon: 'mdi-receipt-text-check-outline',
+              title: 'ລາຍການບິນຂາຍ Online',
+              to: '/admin/ordersFromPosOnline',
+            },
+            {
+              icon: 'mdi-receipt-text-remove-outline',
+              title: 'ຍົກເລີກ - ສົ່ງຄືນ',
+              to: '/admin/ordersFromPosCancel',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ສິນຄ້າ',
+          expand: false,
+          menuList: [
+          {
+              icon: 'mdi-view-list',
+              title: 'ຈັດການໝວດສິນຄ້າ',
+              to: '/admin/category',
+            },
+            {
+              icon: 'mdi-barcode',
+              title: 'ລາຍການສິນຄ້າ',
+              to: '/admin/product/productlist',
+            },
+            {
+              icon: 'mdi mdi-bottle-wine',
+              title: 'ຫົວໜ່ວຍສິນຄ້າ',
+              to: '/admin/unit',
+            },
+ 
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ສາງສິນຄ້າ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-warehouse',
+              title: 'ຈັດການສາງສິນຄ້າ',
+              to: '/admin/location',
+            },
+
+            {
+              icon: 'mdi mdi-speedometer-slow',
+              title: 'ສິນຄ້າໃກ້ໝົດ',
+              to: '/admin/minstock',
+            },
+            {
+              icon: 'mdi mdi-transfer',
+              title: 'ໂອນສາງ',
+              to: '/admin/transfer',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ລູກຄ້າ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-account-box-multiple-outline',
+              title: 'ຈັດການລູກຄ້າ',
+              to: '/admin/client',
+            },
+            {
+              icon: 'mdi-receipt-text-clock-outline',
+              title: 'ລູກຄ້າຕິດຫນີ້',
+              to: '/admin/ordersFromPosCredit',
+            },
+            {
+              icon: 'mdi mdi-file-search-outline',
+              title: 'ລາຍງານ ລູກຄ້າຕິດຫນີ້',
+              to: '/admin/ordersFromPosSummaryByCustomer',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ຮ້ານຄ້າ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-source-branch',
+              title: 'ຈັດການສາຂາ',
+              to: '/admin/company',
+            },
+            {
+              icon: 'mdi mdi-network-pos',
+              title: 'ຈັດການຮ້ານຄ້າ',
+              to: '/admin/terminal',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ຂົນສົ່ງ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-truck-cargo-container',
+              title: 'ຈັດການຂົນສົ່ງ',
+              to: '/admin/shipping',
+            },
+            {
+              icon: 'mdi-bike-fast',
+              title: 'ຈັດການRider',
+              to: '/admin/rider',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ບັນຊີ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi-currency-usd-off',
+              title: 'ຈັດການອັດຕາແລກປ່ຽນ',
+              to: '/admin/currency',
+            },
+            {
+              icon: 'mdi mdi-cash-multiple',
+              title: 'ຈັດການ ປະເພດຊຳລະ',
+              to: '/admin/payment',
+            },
+            {
+              icon: 'mdi-receipt-text-arrow-right-outline',
+              title: 'ບັນຊີ ລາຍຈ່າຍ',
+              to: '/admin/ap',
+            },
+            {
+              icon: 'mdi-receipt-text-arrow-left-outline',
+              title: 'ບັນຊີ ລາຍຮັບ',
+              to: '/admin/ar',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ຮຽນຮູ້',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-lifebuoy',
+              title: 'ຄູ່ມືການນຳໃຊ້',
+              to: '/admin/tutorial',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-home-circle",
+          name: 'ຕັ້ງຄ່າ',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi-account',
+              title: 'ຜູ້ໃຊ້ງານ',
+              to: '/admin/user',
+            },
+            {
+              icon: 'mdi-logout',
+              title: 'ອອກຈາກລະບົບ',
+              to: '/admin/logout',
+            },
+
+          ]
+        },
+      ],
+
+
+
       menuGroup: [
         {
           icon: "mdi mdi-home-circle",
@@ -153,7 +349,8 @@ export default {
               icon: 'mdi mdi-warehouse',
               title: 'Warehouse',
               to: '/admin/location',
-            }, {
+            },
+            {
               icon: 'mdi mdi-network-pos',
               title: 'ຈັດການຮ້ານຄ້າ',
               to: '/admin/terminal',
@@ -506,6 +703,4 @@ export default {
 * {
   font-family: 'noto sans lao';
 }
-
-
 </style>
