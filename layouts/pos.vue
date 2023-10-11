@@ -491,7 +491,7 @@ export default {
 
                 <h5> ວັນທີ: ${today.toLocaleString()}</h5>
                 <h5> ຮ້ານ: ${this.onlineCustomerInfo.branch} </h5>
-                <h5> ເບີໂທ: 020 7777-5660, 020 2865-3388 </h5>
+                <h5> ເບີໂທ: 020 2337-8899 </h5>
                 <hr> </hr>
                 <h5> ຜູ້ຮັບ: ${this.onlineCustomerInfo.name}</h5>
                 <h5> ໂທ: ${this.onlineCustomerInfo.tel} </h5>
@@ -612,7 +612,7 @@ export default {
                 <h3> ໃບຮັບເງິນ</h3>
                 <h5> ວັນທີ ${today.toLocaleString()}</h5>
                 <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
-                <h5> Tel 020 7777-5660, 020 2865-3388 </h5>
+                <h5> Tel 020 2337-8899 </h5>
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
                 ${txnListHtml}

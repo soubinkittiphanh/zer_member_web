@@ -24,10 +24,10 @@
                     <td> ຕໍ່ຫນ້າຕະຫຼາດ ດາລາ ຫຼວງພະບາງ</td>
                   </tr>
                   <tr style="white-space: nowrap">
-                    <td> Tel: 020 7777 5660</td>
+                    <td> Tel: 020 2337-8899</td>
                   </tr>
                   <tr style="white-space: nowrap">
-                    <td> 020 2865 3388</td>
+                    <td> 020 2337-8899</td>
                   </tr>
                 </tbody>
               </table>
