@@ -144,7 +144,7 @@ export default {
       if (this.isloading) return
       this.isloading = true
       await this.$axios
-        .get(`api/currency/find`)
+        .get(`api/currency/findAll`)
         .then((res) => {
           // ****** Clear Old Data
           this.currencyList = []
