@@ -13,12 +13,20 @@
       </v-list>
     </v-navigation-drawer> -->
 
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed color="#01532B" app>
+    <v-navigation-drawer class="elevation-6" :mini-variant="miniVariant"  :clipped="clipped" dark v-model="drawer" fixed color="primary" app>
+      <v-layout column align-center>
+        <v-flex class="shadow mt-4 mb-4">
+          <v-img :src="require('~/assets/image/Dcommerce-Logo.png')" />
+        </v-flex>
+      </v-layout>
       <v-list>
         <!-- Group A -->
-        <v-list-group v-for="(menu, i) in menuGroup2" :key="i" color="white"
-          v-model="menu.expand" >
+        <v-divider></v-divider>
+        <!-- :disabled="!isGranted(menu.code)"  -->
+        <v-list-group :disabled="!isGranted(menu.code)"  v-for="(menu, i) in menuGroup2" :key="i"  :prepend-icon="menu.icon" no-action color="white"
+          v-model="menu.expand">
           <template v-slot:activator>
+          <!-- <template #activator> -->
             <v-list-item-content>
               <v-list-item-title style="color: white">{{ menu.name }}</v-list-item-title>
             </v-list-item-content>
@@ -33,12 +41,21 @@
               <v-list-item-title v-text="item.title" :style="{ color: 'white' }" />
             </v-list-item-content>
           </v-list-item>
+          <v-divider></v-divider>
         </v-list-group>
+        <v-list-item  to="/admin/logout" router exact>
+          <v-list-item-action>
+            <v-icon color="white">mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="'ອອກຈາກລະບົບ'" :style="{ color: 'white' }" />
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <!-- ************** => Header Appbar ************** -->
-    <v-app-bar app light clipped-left clipped-right>
+    <!-- <v-app-bar app light clipped-left clipped-right>
       <v-row no-gutters align="center">
         <v-col cols="2">
 
@@ -51,7 +68,7 @@
           </v-chip>
         </v-col>
       </v-row>
-    </v-app-bar>
+    </v-app-bar> -->
     <!-- ************** Header Appbar <= ************** -->
     <v-main :key="mainComponentKey">
       <v-dialog v-model="terminalDialog" scrollable max-width="1200" persistent>
@@ -104,8 +121,9 @@ export default {
       groupAExpanded: false,
       menuGroup2: [
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-printer",
           name: 'ການຂາຍ',
+          code: 'POS',
           expand: false,
           menuList: [
             {
@@ -136,8 +154,9 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-bottle-wine",
           name: 'ສິນຄ້າ',
+          code: 'PRODUCT',
           expand: false,
           menuList: [
           {
@@ -159,8 +178,9 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-warehouse",
           name: 'ສາງສິນຄ້າ',
+          code: 'INVENTORY',
           expand: false,
           menuList: [
             {
@@ -182,8 +202,9 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-account-box-multiple-outline",
           name: 'ລູກຄ້າ',
+          code: 'CLIENT',
           expand: false,
           menuList: [
             {
@@ -204,8 +225,9 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-source-branch",
           name: 'ຮ້ານຄ້າ',
+          code: 'BRANCH',
           expand: false,
           menuList: [
             {
@@ -221,8 +243,9 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-truck-cargo-container",
           name: 'ຂົນສົ່ງ',
+          code: 'SHIPPING',
           expand: false,
           menuList: [
             {
@@ -238,14 +261,20 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-calculator-variant",
           name: 'ບັນຊີ',
+          code: 'ACCOUNT',
           expand: false,
           menuList: [
             {
               icon: 'mdi-currency-usd-off',
               title: 'ຈັດການອັດຕາແລກປ່ຽນ',
               to: '/admin/currency',
+            },
+            {
+              icon: 'mdi mdi-office-building',
+              title: 'ຜັງບັນຊີ',
+              to: '/admin/chartAccount',
             },
             {
               icon: 'mdi mdi-cash-multiple',
@@ -265,8 +294,9 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-book-open-page-variant-outline",
           name: 'ຮຽນຮູ້',
+          code: 'HELP',
           expand: false,
           menuList: [
             {
@@ -277,20 +307,31 @@ export default {
           ]
         },
         {
-          icon: "mdi mdi-home-circle",
+          icon: "mdi mdi-cog",
           name: 'ຕັ້ງຄ່າ',
+          code: 'SETTING',
           expand: false,
           menuList: [
+            {
+              icon: 'mdi mdi-security',
+              title: 'ສິດທີການໃຊ້ງານ',
+              to: '/admin/authority',
+            },
+            {
+              icon: 'mdi mdi-account-multiple',
+              title: 'ກຸ່ມຜູ້ໃຊ້ງານ',
+              to: '/admin/group',
+            },
             {
               icon: 'mdi-account',
               title: 'ຜູ້ໃຊ້ງານ',
               to: '/admin/user',
             },
-            {
-              icon: 'mdi-logout',
-              title: 'ອອກຈາກລະບົບ',
-              to: '/admin/logout',
-            },
+            // {
+            //   icon: 'mdi-logout',
+            //   title: 'ອອກຈາກລະບົບ',
+            //   to: '/admin/logout',
+            // },
 
           ]
         },
@@ -662,6 +703,7 @@ export default {
   computed: {
     ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation', 'currentSelectedLocation']),
     user() {
+     
       return this.$auth.user || ''
     },
     currentTerminal() {
@@ -670,6 +712,13 @@ export default {
     },
   },
   methods: {
+    isGranted(code){
+
+      const grantedCodes = this.user.userGroup.authorities.map(el => el.code)
+      console.log(`Grand code len: ${grantedCodes.length}`);
+      if(grantedCodes.includes(code)) return true
+      return false
+    },
 
     clearInterval() {
       clearInterval(this.intervalId);

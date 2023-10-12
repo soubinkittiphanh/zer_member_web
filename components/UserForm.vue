@@ -23,10 +23,13 @@
                                         </v-col>
                                         <v-col cols="12">
                                             <!-- :disabled="isUpdate" -->
-                                            <v-text-field v-if="!isUpdate" label="ລະຫັດຜ່ານ*" v-model="record.cus_pass"></v-text-field>
+                                            <v-text-field v-if="!isUpdate" label="ລະຫັດຜ່ານ*"
+                                                v-model="record.cus_pass"></v-text-field>
+                                            <v-text-field v-model="record.cus_name" label="ຊື່ຜູ້ໃຊ້"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="record.cus_name" label="ຊື່ຜູ້ໃຊ້"></v-text-field>
+                                            <v-switch v-model="record.cus_active" label="Active" :true-value="true"
+                                                :false-value="false"></v-switch>
                                         </v-col>
 
                                     </v-row>
@@ -37,9 +40,12 @@
                                             <v-text-field label="ອີເມວ" v-model="record.cus_email">
                                             </v-text-field>
                                         </v-col>
-                                        <v-col>
-                                            <v-switch v-model="record.cus_active" label="Active" :true-value="true"
-                                                :false-value="false"></v-switch>
+                                        <v-col cols="12">
+                                            <v-autocomplete item-text="code" item-value="id" :items="groupList"
+                                                label="ກຸ່ມຜູ້ໃຊ້*" v-model="record.groupId"></v-autocomplete>
+                                        </v-col>
+                                        <v-col cols="12">
+
                                         </v-col>
                                     </v-row>
                                 </v-col>
@@ -71,7 +77,6 @@
                                     {{ terminal.name }} - {{ terminal.description }}
                                 </v-chip>
                             </v-row>
-
                         </div>
                     </v-card-text>
                 </v-card>
@@ -117,6 +122,7 @@ export default {
     },
     async created() {
         await this.loadTerminal()
+        await this.loadGroup()
         if (this.isUpdate) {
             console.log("View old record");
             this.isloading = true
@@ -139,10 +145,10 @@ export default {
         addTerminal() {
             const newTerminal = this.terminalList.find(el => el.id == this.terminalSelected)
             console.log(`terminal ${newTerminal}`);
-            if(this.record.terminals.length==0){
+            if (this.record.terminals.length == 0) {
                 console.log(`TEHERE IS NO TERMINAL`);
                 this.record.terminals.push(newTerminal)
-            }else if (this.record.terminals == 'undefined') {
+            } else if (this.record.terminals == 'undefined') {
                 this.record.terminals.push(newTerminal)
             } else {
                 const terminal = this.record.terminals.find(el => el.id == this.terminalSelected)
@@ -179,6 +185,18 @@ export default {
                     swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
                 })
         },
+        async loadGroup() {
+            await this.$axios
+                .get(`api/group/find`)
+                .then((res) => {
+                    this.groupList = res.data;
+                    console.log("Group count => ", res.data.length);
+                    // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+                })
+                .catch((er) => {
+                    swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
+                })
+        },
 
         toggleDialog() {
             this.$emit('close-dialog')
@@ -186,7 +204,7 @@ export default {
         async commitRecord() {
             // ********** If header has data, that means we go for update API ********** //
             if (this.isloading) return
-            this.isloading=true
+            this.isloading = true
             if (this.isUpdate) {
                 await this.$axios
                     .put(`api/user/update/${this.recordId}`, this.record)
@@ -226,6 +244,7 @@ export default {
                 return regex.test(value) || 'Only numbers and commas are allowed';
             },
             terminalList: [],
+            groupList: [],
             isloading: false,
             record: {
                 "id": null,
@@ -235,7 +254,8 @@ export default {
                 "cus_tel": "TELEPHONE",
                 "cus_email": "EMAIL",
                 "cus_active": true,
-                'terminals':[],
+                'terminals': [],
+                groupId:1,
             },
             terminalSelected: 1,
         }
