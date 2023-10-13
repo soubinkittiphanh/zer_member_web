@@ -33,7 +33,7 @@
         <!-- Group A -->
         <v-divider></v-divider>
         <!-- :disabled="!isGranted(menu.code)"  -->
-        <v-list-group v-for="(menu, i) in menuGroup2" :key="i" :prepend-icon="menu.icon" color="white"
+        <v-list-group :disabled="!isGranted(menu.code)" v-for="(menu, i) in menuGroup2" :key="i" :prepend-icon="menu.icon" color="white"
           v-model="menu.expand">
           <template v-slot:activator>
             <!-- <template #activator> -->
