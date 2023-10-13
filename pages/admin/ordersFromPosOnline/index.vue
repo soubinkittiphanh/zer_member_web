@@ -436,10 +436,15 @@ export default {
       // TODO: How to split data between cod order[not yet paid] and all order
       const date = {
         startDate: this.date,
-        endDate: this.date2
+        endDate: this.date2,
+        userId: this.userId
+      }
+      let apiLine = 'api/sale/findByDate'
+      if (date.userId) {
+        apiLine = 'api/sale/findByDateAndUser'
       }
       await this.$axios
-        .get(`api/sale/findByDate`, { params: { date } })
+        .get(apiLine, { params: { date } })
         .then((res) => {
           // ****** Clear Old Data
           this.orderHeaderList = []

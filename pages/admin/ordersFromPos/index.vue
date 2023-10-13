@@ -1,21 +1,21 @@
 <template>
   <div class="text-left">
     <div>
-        <v-chip class="pa-5" color="primary" label text-color="white">
-          <v-icon start>mdi-label</v-icon>
-          <h3>ລາຍການບິນຂາຍ</h3>
-        </v-chip>
-        <!-- <v-spacer></v-spacer> -->
-        <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
-          <v-icon start>mdi mdi-lifebuoy</v-icon>
-          <h3>ຄູ່ມືການນຳໃຊ້ </h3>
-        </v-chip>
+      <v-chip class="pa-5" color="primary" label text-color="white">
+        <v-icon start>mdi-label</v-icon>
+        <h3>ລາຍການບິນຂາຍ</h3>
+      </v-chip>
+      <!-- <v-spacer></v-spacer> -->
+      <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+        <v-icon start>mdi mdi-lifebuoy</v-icon>
+        <h3>ຄູ່ມືການນຳໃຊ້ </h3>
+      </v-chip>
     </div>
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
     <v-dialog v-model="guidelineDialog" hide-overlay max-width="700">
-      <youtube-player @close-dialog="guidelineDialog=false" youtube-link="W6KiQWtiqBM">
+      <youtube-player @close-dialog="guidelineDialog = false" youtube-link="W6KiQWtiqBM">
       </youtube-player>
     </v-dialog>
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
@@ -447,10 +447,15 @@ export default {
       // TODO: How to split data between cod order[not yet paid] and all order
       const date = {
         startDate: this.date,
-        endDate: this.date2
+        endDate: this.date2,
+        userId: this.userId
+      }
+      let apiLine = 'api/sale/findByDate'
+      if (date.userId) {
+        apiLine = 'api/sale/findByDateAndUser'
       }
       await this.$axios
-        .get(`api/sale/findByDate`, { params: { date } })
+        .get(apiLine, { params: { date } })
         .then((res) => {
           // ****** Clear Old Data
           this.orderHeaderList = []

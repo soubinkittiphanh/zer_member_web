@@ -1,20 +1,20 @@
 <template>
   <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/admin">
+    <coming-soon />
+    <!-- <NuxtLink to="/admin">
       Home page
-    </NuxtLink>
+    </NuxtLink> -->
   </v-app>
 </template>
 
 <script>
+import ComingSoon from '~/components/ComingSoon.vue';
+
 export default {
-  layout: 'empty',
+  components: {
+    ComingSoon
+  },
+  // layout: 'comingSoon',
   props: {
     error: {
       type: Object,
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       pageNotFound: '404 Not Found: ເກີດຂໍ້ຜິດພາດ',
-      otherError: 'An error occurred: ເກີດຂໍ້ຜິດພາດ'
+      otherError: 'Comming soon'
     }
   },
   head() {

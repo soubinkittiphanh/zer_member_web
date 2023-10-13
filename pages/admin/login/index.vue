@@ -60,7 +60,7 @@
 <script>
 import Notification from '../../../components/Notification.vue'
 import { swalError2 } from '~/common'
-import { mapActions,mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   layout: "login",
   data() {
@@ -69,7 +69,7 @@ export default {
       email: '',
       password: '',
       errorMessage: '',
-      terminalSelected:1,
+      terminalSelected: 1,
       isLoading: false,
       barcode: '',
       timer: null,
@@ -87,7 +87,7 @@ export default {
     ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
   },
   methods: {
-    ...mapActions(['initiateData','setSelectedTerminal','setSelectedLocation']),
+    ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation']),
     switchTerminal() {
       this.setSelectedTerminal(this.terminalSelected)
       const location = this.findAllLocation.find(el => el.id == this.findAllTerminal.find(el => el.id == this.terminalSelected)['locationId'])
@@ -104,17 +104,25 @@ export default {
 
         if (response.status !== 200) {
           this.isLoading = false
-          this.errorMessage = 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ'
           return swalError2(this.$swal, 'Error', 'ບໍ່ສາມາດ ລັອກອິນ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ')
-         
+
         }
         if (response.data.accessToken) {
           console.log(`LOGIN COMPLETED`);
           this.initiateData(this.$axios)
+          // this.$axios.get('api/terminal/find')
+          //   .then((res) => {
+          //     for (const iterator of res.data) {
+          //       console.log(`DATA TERMINAL ${iterator['name']}`);
+          //     }
+
+          //   })
+          //   .catch((er) => {
+          //     console.error('Terminal initiate fail ' + er)
+          //   })
           this.terminalDialog = true
         } else {
           console.log('No token')
-          this.errorMessage = 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ'
           swalError2(this.$swal, 'Error', 'ໄອດີ ຫລື ລະຫັດຜ່ານ ບໍ່ຖືກຕ້ອງ')
         }
         console.log(response)

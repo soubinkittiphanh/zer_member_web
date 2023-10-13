@@ -13,27 +13,37 @@
       </v-list>
     </v-navigation-drawer> -->
 
-    <v-navigation-drawer class="elevation-6" :mini-variant="miniVariant"  :clipped="clipped" dark v-model="drawer" fixed color="primary" app>
+    <v-navigation-drawer class="elevation-6" :mini-variant="miniVariant" :clipped="clipped" dark v-model="drawer" fixed
+      color="primary" app>
       <v-layout column align-center>
         <v-flex class="shadow mt-4 mb-4">
           <v-img :src="require('~/assets/image/Dcommerce-Logo.png')" />
         </v-flex>
       </v-layout>
       <v-list>
+        <!-- Home -->
+        <v-list-item to="/admin" router exact>
+          <v-list-item-action>
+            <v-icon color="white">mdi mdi-home-circle-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="'Home'" :style="{ color: 'white' }" />
+          </v-list-item-content>
+        </v-list-item>
         <!-- Group A -->
         <v-divider></v-divider>
         <!-- :disabled="!isGranted(menu.code)"  -->
-        <v-list-group :disabled="!isGranted(menu.code)"  v-for="(menu, i) in menuGroup2" :key="i"  :prepend-icon="menu.icon" no-action color="white"
+        <v-list-group v-for="(menu, i) in menuGroup2" :key="i" :prepend-icon="menu.icon" color="white"
           v-model="menu.expand">
           <template v-slot:activator>
-          <!-- <template #activator> -->
+            <!-- <template #activator> -->
             <v-list-item-content>
               <v-list-item-title style="color: white">{{ menu.name }}</v-list-item-title>
             </v-list-item-content>
           </template>
 
           <!-- Group A menu items -->
-          <v-list-item v-for="(item, i) in menu.menuList" :key="i" :to="item.to" router exact>
+          <v-list-item v-for="(item, i) in menu.menuList" :key="i" :to="item.to" router exact :style="{ 'background-color': '#004222' }">
             <v-list-item-action>
               <v-icon color="white">{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -43,7 +53,7 @@
           </v-list-item>
           <v-divider></v-divider>
         </v-list-group>
-        <v-list-item  to="/admin/logout" router exact>
+        <v-list-item to="/admin/logout" router exact>
           <v-list-item-action>
             <v-icon color="white">mdi-logout</v-icon>
           </v-list-item-action>
@@ -159,7 +169,7 @@ export default {
           code: 'PRODUCT',
           expand: false,
           menuList: [
-          {
+            {
               icon: 'mdi-view-list',
               title: 'ຈັດການໝວດສິນຄ້າ',
               to: '/admin/category',
@@ -174,7 +184,7 @@ export default {
               title: 'ຫົວໜ່ວຍສິນຄ້າ',
               to: '/admin/unit',
             },
- 
+
           ]
         },
         {
@@ -307,6 +317,20 @@ export default {
           ]
         },
         {
+          icon: "mdi mdi-database-arrow-up",
+          name: 'Moduels',
+          code: 'MODULES',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-chevron-triple-up',
+              title: 'ຟັງຊັ່ນເສີມ',
+              to: '/admin/authoritysss',
+            },
+
+          ]
+        },
+        {
           icon: "mdi mdi-cog",
           name: 'ຕັ້ງຄ່າ',
           code: 'SETTING',
@@ -336,9 +360,6 @@ export default {
           ]
         },
       ],
-
-
-
       menuGroup: [
         {
           icon: "mdi mdi-home-circle",
@@ -703,7 +724,7 @@ export default {
   computed: {
     ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation', 'currentSelectedLocation']),
     user() {
-     
+
       return this.$auth.user || ''
     },
     currentTerminal() {
@@ -712,11 +733,11 @@ export default {
     },
   },
   methods: {
-    isGranted(code){
+    isGranted(code) {
 
       const grantedCodes = this.user.userGroup.authorities.map(el => el.code)
       console.log(`Grand code len: ${grantedCodes.length}`);
-      if(grantedCodes.includes(code)) return true
+      if (grantedCodes.includes(code)) return true
       return false
     },
 

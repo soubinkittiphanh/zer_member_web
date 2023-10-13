@@ -33,7 +33,7 @@
                     </v-row>
                     <v-row no-gutters>
                         <v-chip v-for="authority in form.authorities" :key="authority.id" class="ma-2" color="warning"
-                            variant="outlined" @click="removeAuthority(terminal)">
+                            variant="outlined" @click="removeAuthority(authority)">
                             {{ authority.code }} - {{ authority.name }}
                         </v-chip>
                     </v-row>

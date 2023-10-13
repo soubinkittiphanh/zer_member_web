@@ -25,7 +25,7 @@
                 <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="primary" rounded variant="text" @click="commitRecord">
+                <v-btn color="primary" disabled rounded variant="text" @click="commitRecord">
                     Save
                 </v-btn>
             </v-card-actions>
