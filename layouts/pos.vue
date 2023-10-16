@@ -429,17 +429,21 @@ export default {
             const bookingDateWithTime = today.toISOString
             // let totalHtml = ``
             //*********Payment info tag********/
-            let totalHtml = `<div class="ticket">
-                    <div class="product-name">ຊຳລະດ້ວຍ: ${this.onlineCustomerInfo.payment}</div>
-                <div class="price"></div>
-            </div>`
+            let totalHtml = '';
+            // let totalHtml = `<div class="ticket">
+            //         <div class="product-name"> ${this.onlineCustomerInfo.payment}</div>
+            //     <div class="price"></div>
+            // </div>`
             for (const iterator of this.currencyList) {
-                totalHtml += `
-                <div class="ticket">
-                    <div class="product-name"></div>
-                <div class="price">${iterator.code} ${this.formatNumber((this.grandTotal - this.discount) / iterator.rate)}</div>
-            </div>
-                `
+                if (iterator.code == 'LAK' && this.onlineCustomerInfo.payment =='COD') {
+                    totalHtml += `
+                                    <div class="ticket">
+                                        <div class="product-name"> </div>
+                                    <div class="price">${this.onlineCustomerInfo.payment}: ${this.formatNumber((this.grandTotal - this.discount) / iterator.rate)}</div>
+                                </div>
+                                    `
+                }
+
             }
 
 
@@ -497,7 +501,7 @@ export default {
                 <h5> ໂທ: ${this.onlineCustomerInfo.tel} </h5>
                 <h5> ຂົນສົ່ງ: ${this.onlineCustomerInfo.shipping} </h5>
                 <h5> ບ່ອນສົ່ງ: ${this.onlineCustomerInfo.address} </h5>
-                <h5> ຄ່າຝາກ: ${this.onlineCustomerInfo.shippingFeeBy}</h5>
+              ${this.onlineCustomerInfo.shipping == 'RIDER' ? `` : `<h5> ຄ່າຝາກ: ${this.onlineCustomerInfo.shippingFeeBy}</h5>`}  
                 <hr> </hr>
                 ${txnListHtml}
                 ${this.onlineCustomerInfo.riderFee > 0 ? riderFeeHtml : ''}
@@ -537,7 +541,7 @@ export default {
                 const total = iterator.qty * iterator.localPrice
                 // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
                 txnListHtml +=
-                `<div class="ticket">
+                    `<div class="ticket">
                     <div class="product-name">${product.pro_name} </div>
                     <div class="price">  ${this.formatNumber(total)}</div>
                 </div>

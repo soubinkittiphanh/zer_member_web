@@ -22,7 +22,7 @@
                                 <v-row>ໂທ: {{ customerForm.tel }}</v-row>
                                 <v-row>ຂົນສົ່ງ: {{ currentShipping }}</v-row>
                                 <v-row>ບ່ອນສົ່ງ: {{ customerForm.address }} - {{ currentGeo }}</v-row>
-                                <v-row>ຄ່າຝາກ: {{ customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' :
+                                <v-row v-if="currentShipping!='RIDER'">ຄ່າຝາກ: {{ customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' :
                                     'ຕົ້ນທາງ'
                                 }}</v-row>
                             </v-col>
@@ -53,9 +53,10 @@
                         <v-row>
                             <v-divider></v-divider>
                         </v-row>
-                        <v-row>
-                            ຊຳລະດ້ວຍ: {{ currentPayment }}
+                        <v-row v-if="currentPayment=='COD'">
+                        
                             <v-spacer></v-spacer>
+                            {{ currentPayment }} :
                             {{ formatNumber(ticketTotal) }}
                         </v-row>
                     </v-card-text>
