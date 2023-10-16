@@ -318,7 +318,7 @@ export default {
         },
         {
           icon: "mdi mdi-database-arrow-up",
-          name: 'Moduels',
+          name: 'Modules',
           code: 'MODULES',
           expand: false,
           menuList: [
