@@ -1,11 +1,11 @@
 <template>
   <div class="text-left">
-  <div >
-    <v-chip class="pa-5" color="primary" label text-color="white">
-      <v-icon start>mdi-label</v-icon>
-      <h3>ລາຍການ ປະເພດສິນຄ້າ</h3>
-    </v-chip>
-    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+    <div>
+      <v-chip class="pa-5" color="primary" label text-color="white">
+        <v-icon start>mdi-label</v-icon>
+        <h3>ລາຍການ ປະເພດສິນຄ້າ</h3>
+      </v-chip>
+      <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
         <v-icon start>mdi mdi-lifebuoy</v-icon>
         <h3>ຄູ່ມືການນຳໃຊ້ </h3>
       </v-chip>
@@ -18,9 +18,9 @@
       <v-card>
         <v-card-title>
           <v-chip class="ma-2" color="primary" label text-color="white">
-                    <v-icon start>mdi-label</v-icon>
-                    ຈັດການປະເພດສິນຄ້າ
-                </v-chip>
+            <v-icon start>mdi-label</v-icon>
+            ຈັດການປະເພດສິນຄ້າ
+          </v-chip>
           <!-- <span class="text-h5">ຈັດການປະເພດສິນຄ້າ</span> -->
         </v-card-title>
         <v-card-text>
@@ -101,7 +101,7 @@ import { swalSuccess, swalError2 } from '~/util/myUtil'
 export default {
   middleware: 'auths',
   data: () => ({
-    guidelineDialog:false,
+    guidelineDialog: false,
     isloading: false,
     isedit: false,
     singleSelect: false,
@@ -187,13 +187,11 @@ export default {
           .then((res) => {
             this.dialogForm = false
             swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-            // this.message = res.data
-            // this.reset()
           })
           .catch((er) => {
             swalError2(this.$swal, "Error", er)
-            // this.message = 'Error: ' + er
           })
+        this.isedit = false;
         this.isloading = false
       } else {
         await this.$axios
@@ -237,6 +235,7 @@ export default {
     },
     editItem(val) {
       console.log('SHOULD BE ID: ' + val.categ_function)
+      this.isedit = true;
       const filtData = this.loadData.find(
         (el) => el.categ_id === val.categ_function
       )
