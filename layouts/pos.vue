@@ -413,7 +413,7 @@ export default {
                 txnListHtml +=
                     `<div class="ticket">
                     <div class="product-name">${product.pro_name} </div>
-                    <div class="price"> ${quantity}x  ${this.formatNumber(total)}</div>
+                    <div class="price"> ${quantity} ${this.onlineCustomerInfo.payment == 'COD' ? ' X ' + this.formatNumber(total) : ''}</div>
                 </div>`
             }
             const discountHtml = `<div class="ticket">
@@ -435,11 +435,11 @@ export default {
             //     <div class="price"></div>
             // </div>`
             for (const iterator of this.currencyList) {
-                if (iterator.code == 'LAK' && this.onlineCustomerInfo.payment =='COD') {
+                if (iterator.code == 'LAK' && (this.onlineCustomerInfo.payment == 'COD' || this.onlineCustomerInfo.shipping == 'RIDER')) {
                     totalHtml += `
                                     <div class="ticket">
                                         <div class="product-name"> </div>
-                                    <div class="price">${this.onlineCustomerInfo.payment}: ${this.formatNumber((this.grandTotal - this.discount) / iterator.rate)}</div>
+                                    <div class="price "> <h5> ${this.onlineCustomerInfo.shipping == 'RIDER?' ? 'ລວມ' : this.onlineCustomerInfo.payment}: ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
                                 </div>
                                     `
                 }

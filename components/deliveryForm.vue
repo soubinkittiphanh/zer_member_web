@@ -36,8 +36,7 @@
                             <v-col cols="4">{{ prod['qty'] }}</v-col> -->
                             {{ prod['pro_name'] }}
                             <v-spacer></v-spacer>
-                            {{ formatNumber(prod['localPrice']) }}
-                            X
+                            {{ currentPayment=='COD'? formatNumber(prod['localPrice']) +' X ':'' }}
                             {{ prod['qty'] }}
                         </v-row>
                         <v-row v-if="customerForm.discount > 0">
@@ -59,6 +58,11 @@
                             {{ currentPayment }} :
                             {{ formatNumber(ticketTotal) }}
                         </v-row>
+                        <v-row v-if="currentShipping=='RIDER'">
+                        
+                        <v-spacer></v-spacer>
+                        ລວມ: {{ formatNumber(ticketTotal) }}
+                    </v-row>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -177,7 +181,7 @@ export default {
             for (const iterator of this.cartOfProduct) {
                 total += iterator['localPrice']
             }
-            return total - this.customerForm.discount-this.customerForm.rider_fee;
+            return (total+(+this.customerForm.rider_fee)) - this.customerForm.discount;
         },
         currentTerminal() {
             console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
