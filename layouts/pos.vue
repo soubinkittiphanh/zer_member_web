@@ -439,7 +439,7 @@ export default {
                     totalHtml += `
                                     <div class="ticket">
                                         <div class="product-name"> </div>
-                                    <div class="price "> <h5>ຍອດລວມ(${this.onlineCustomerInfo.payment}) ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
+                                    <div class="price-total"> <h5>ຍອດລວມ(${this.onlineCustomerInfo.payment}) ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
                                 </div>
                                     `
                 }
@@ -483,7 +483,9 @@ export default {
 			float: right;
 			font-size: 10px;
 		}
-
+		.price-total {
+			float: right;
+		}
         h3 {
         text-align: center;
         font-family: 'DM Sans';
