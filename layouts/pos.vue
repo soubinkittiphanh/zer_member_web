@@ -439,7 +439,7 @@ export default {
                     totalHtml += `
                                     <div class="ticket">
                                         <div class="product-name"> </div>
-                                    <div class="price-total"> <h5>ຍອດລວມ(${this.onlineCustomerInfo.payment}) ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
+                                    <div class="price-total"> <h5>ຍອດລວມ(${this.onlineCustomerInfo.payment}): ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
                                 </div>
                                     `
                 }
@@ -453,7 +453,11 @@ export default {
           <head
           <title></title>
           <style>
-
+          h3, h5 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
           @font-face {
             font-family: 'DM Sans';
             font-style: normal;
@@ -494,10 +498,9 @@ export default {
         </style>
             </head>
             <body>
-
                 <h5> ວັນທີ: ${today.toLocaleString()}</h5>
                 <h5> ຮ້ານ: ${this.onlineCustomerInfo.branch} </h5>
-                <h5> ເບີໂທ: 020 2337-8899 </h5>
+                <h5> ເບີໂທ: ${this.onlineCustomerInfo.branchTel} </h5>
                 <hr> </hr>
                 <h5> ຜູ້ຮັບ: ${this.onlineCustomerInfo.name}</h5>
                 <h5> ໂທ: ${this.onlineCustomerInfo.tel} </h5>
@@ -618,7 +621,7 @@ export default {
                 <h3> ໃບຮັບເງິນ</h3>
                 <h5> ວັນທີ ${today.toLocaleString()}</h5>
                 <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
-                <h5> Tel 020 2337-8899 </h5>
+                <h5> Tel ${this.currentTerminal['location']['company']['tel'] }</h5>
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
                 ${txnListHtml}

@@ -16,7 +16,8 @@
                     <!-- <v-text-field v-model="form.code" label="* Code" required :rules="nameRules"></v-text-field> -->
                     <v-text-field v-model="form.name" label="* ຊື່" required :rules="nameRules"></v-text-field>
                     <v-text-field v-model="form.description" label="* Remark" required :rules="nameRules"></v-text-field>
-                    <!-- <v-text-field v-model="form.rate" label="* ອັດຕາແລກປ່ຽນ" required></v-text-field> -->
+                    <v-autocomplete item-text="name" item-value="id" :items="companyEntry" label="ສາຂາ*"
+                        v-model="form.companyId"></v-autocomplete>
                     <v-checkbox v-model.number="form.isActive" label="Is Active"></v-checkbox>
                 </v-form>
                 <small>* ສະແດງເຖິງຟິວທີ່ຕ້ອງໃສ່ຂໍ້ມູນ</small>
@@ -52,9 +53,11 @@ export default {
     },
     data() {
         return {
+            companyEntry:[],
             form: {
                 description: '',
                 name: '',
+                companyId:1,
                 isActive: true
             },
             isloading: false,
@@ -64,11 +67,9 @@ export default {
             ],
         };
     },
-    // mounted() {
-    //     this.loadEntry();
-    // },
     async created() {
         this.loadEntry();
+        this.loadCompanyEntry()
 
     },
     methods: {
@@ -103,13 +104,19 @@ export default {
             console.log(`===> Update form record load`);
             if (this.recordId && !this.isCreate) {
                 await this.$axios.get(`api/location/find/${this.recordId}`).then(response => {
-                    this.form.name = response.data["name"]
-                    this.form.description = response.data["description"]
-                    this.form.isActive = response.data["isActive"]
+                    this.form = response.data
                 }).catch(error => {
                     console.log("Cannot fetch data " + error);
                 })
             }
+
+        },
+        async loadCompanyEntry() {
+            await this.$axios.get(`api/company/find`).then(response => {
+                this.companyEntry= response.data
+            }).catch(error => {
+                console.log("Cannot fetch data " + error);
+            })
 
         },
         refreshData() {

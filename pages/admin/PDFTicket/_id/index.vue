@@ -84,7 +84,7 @@
 <script>
 import { mapGetters } from 'vuex'
 // import { _getMonthDiff, _calculateAge } from '@/helper/Utils'
-import { getFormatNum, jsDateToMysqlDate,swalSuccess,swalError2 } from '~/common'
+import { getFormatNum, mainCompanyInfo,swalSuccess,swalError2 } from '~/common'
 export default {
   name: 'Quotation',
   layout: 'login',
@@ -100,6 +100,10 @@ export default {
   },
 
   computed: {
+    companyData(){
+      console.log(`**********COMPANY DATA ${mainCompanyInfo}**********`);
+      return mainCompanyInfo()
+    },
     ...mapGetters(['cartOfProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findAllProduct']),
 
   },

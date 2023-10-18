@@ -81,7 +81,7 @@ export default {
     data() {
         return {
             form: {
-                "id": 1,
+                "id": null,
                 "mnemonic": "BNK",
                 "name": "Dcommerce",
                 "tel": "123-456-7890",

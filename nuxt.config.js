@@ -1,15 +1,15 @@
 
-import { hostName } from './common'
+import { hostName,mainCompanyInfo } from './common'
 export default {
   server: {
     host: '0.0.0.0'
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'LIVE %s',
+    titleTemplate: `${mainCompanyInfo()['env']} %s`,
     // title: 'Jack42',
     // title: 'PeeAir4',
-    title: 'DCOMMERCE',
+    title: `DCOMMERCE ${mainCompanyInfo()['name']}`,
     htmlAttrs: {
       lang: 'en'
     },
@@ -78,26 +78,9 @@ export default {
     '@nuxtjs/fontawesome',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'https://nodejsclusters-66380-0.cloudclusters.net'// UAT API
-    
-    // baseURL: 'https://nodejsclusters-140806-0.cloudclusters.net'// PRODUCTION CHITHANH API
-    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net' //PRODUCTION PEEAIR4 API
-    // baseURL: 'https://nodejsclusters-130797-0.cloudclusters.net' //PRODUCTION JACK42 API
-    // baseURL: 'http://10.0.28.46:8080',http://108.181.161.222:3000/admin/login
     baseURL: hostName(),
-    // baseURL: 'http://localhost:8080',
-    // baseURL: hostName(),
-    // credentials: true,
-    // headers: {
-    //   common: {
-    //     'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
-    //   }
-    // },
-    // proxy: true
-    // baseURL: 'https://sitapionlinestore.herokuapp.com'
-    // baseURL: 'https://nodejsclusters-99563-0.cloudclusters.net'
+
   },
   auth: {
     strategies: {

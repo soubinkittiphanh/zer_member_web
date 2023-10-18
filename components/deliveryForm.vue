@@ -7,10 +7,9 @@
                     <v-card-text>
                         <v-row>
                             <v-col cols="12">
-                                <v-row>ວັນທີ: {{ customerForm.txn_date }}</v-row>
-                                <v-row>ຮ້ານ: {{ currentTerminal == undefined ? '' : currentTerminal['description'] + '-' +
-                                    currentTerminal['name'] }}</v-row>
-                                <v-row>ເບີໂທ:</v-row>
+                                <v-row>ວັນທີ: {{ customerForm.txn_date }} </v-row>
+                                <v-row>ຮ້ານ: {{ currentTerminal['location']['company']['name'] }}</v-row>
+                                <v-row>ເບີໂທ: {{ currentTerminal['location']['company']['tel']}}</v-row>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -53,16 +52,11 @@
                         <v-row>
                             <v-divider></v-divider>
                         </v-row>
-                        <v-row v-if="currentPayment == 'COD'">
-
+                        <v-row v-if="currentPayment == 'COD' || currentShipping == 'RIDER'">
                             <v-spacer></v-spacer>
-                            ລວມ({{ currentPayment }}) {{ formatNumber(ticketTotal) }}
+                            ລວມ({{ currentPayment }}): {{ formatNumber(ticketTotal) }}
                         </v-row>
-                        <v-row v-if="currentShipping == 'RIDER'">
-
-                            <v-spacer></v-spacer>
-                            ລວມ({{ currentPayment }}) {{ formatNumber(ticketTotal) }}
-                        </v-row>
+          
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -134,7 +128,8 @@
 
                         </v-col>
                         <v-col cols="4">
-
+                            <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList" label="ການຊຳລະ*"
+                                v-model="paymentSelected"></v-autocomplete>
                         </v-col>
                         <v-col cols="4">
                             <v-text-field v-model="customerForm.discount" label="ສ່ວນຫລຸດ"></v-text-field>
@@ -152,6 +147,7 @@ import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 import { getFormatNum } from '~/common'
 export default {
     name: 'delivery-form',
+
     async created() {
         const today = new Date().toISOString().substr(0, 10);
         this.customerForm.txn_date = today;
@@ -160,13 +156,15 @@ export default {
         await this.loadGeo()
         await this.loadShipping()
         await this.loadPayment()
+        this.paymentSelected = this.currentSelectedPayment
+        console.log(`*********PAYMENT ${this.currentSelectedPayment} SELECTED ********`);
     },
     computed: {
         generateCustomerObjec() {
             const customerInfo = {
                 name: this.customerForm.name,
-                branch: this.currentTerminal == undefined ? '' : this.currentTerminal['description'] + '-' +
-                    this.currentTerminal['name'],
+                branch:  this.currentTerminal['location']['company']['name'],
+                branchTel: this.currentTerminal['location']['company']['tel'],
                 tel: this.customerForm.tel,
                 shippingFeeBy: this.customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' : 'ຕົ້ນທາງ',
                 address: this.customerForm.address + ' - ' + this.currentGeo,
@@ -213,6 +211,7 @@ export default {
             riderList: [],
             shippingList: [],
             ticketPreviewDialog: false,
+            paymentSelected: 1,
             customerForm: {
                 name: '',
                 tel: '',
@@ -228,8 +227,13 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['addSelectedPayment']),
+        selectePaymentMethod() {
+            this.addSelectedPayment(this.paymentSelected)
+        },
         submit() {
             // handle form submission
+            this.selectePaymentMethod()
             console.log(this.customerForm)
             const payload = {
                 customerForm: this.customerForm,

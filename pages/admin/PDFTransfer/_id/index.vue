@@ -7,7 +7,7 @@
             <img :src="companyLogo" width="200px" />
           </div>
         </div>
-        <h1 style="text-align: center;">Laos Friend</h1>
+        <h1 style="text-align: center;">{{this.companyData.name}}</h1>
         <p class="text-color" style="font-size: 11pt; font-weight: bold; text-align: center">
           Company addres here ...
         </p>
@@ -130,7 +130,7 @@
 <script>
 import { mapGetters } from 'vuex'
 // import { _getMonthDiff, _calculateAge } from '@/helper/Utils'
-import { getFormatNum, jsDateToMysqlDate } from '~/common'
+import { getFormatNum, mainCompanyInfo } from '~/common'
 export default {
   name: 'Quotation',
   layout: 'login',
@@ -146,6 +146,10 @@ export default {
   },
 
   computed: {
+    companyData(){
+      console.log(`**********COMPANY DATA ${mainCompanyInfo}**********`);
+      return mainCompanyInfo()
+    },
     ...mapGetters(['cartOfProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findAllProduct']),
 
   },

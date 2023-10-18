@@ -13,20 +13,21 @@
               <table class="table-layout" style="font-size: larger; font-weight: bold; ">
                 <tbody style="text-align: right;">
                   <tr style="white-space: nowrap">
-                    <td> ຮ້ານ ສະຫາຍ</td>
+                    <!-- <td> ຮ້ານ ສະຫາຍ</td> -->
+                    <td> {{this.companyData.name}}</td>
                   </tr>
-                  <tr style="white-space: nowrap">
+                  <!-- <tr style="white-space: nowrap">
                     <td> Laos Friend</td>
-                  </tr>
+                  </tr> -->
                   <tr style="white-space: nowrap">
                     <td> ຕໍ່ຫນ້າຕະຫຼາດ ດາລາ ຫຼວງພະບາງ</td>
                   </tr>
                   <tr style="white-space: nowrap">
-                    <td> Tel: 020 2337-8899</td>
+                    <td> Tel: {{this.companyData.tel}}</td>
                   </tr>
-                  <tr style="white-space: nowrap">
+                  <!-- <tr style="white-space: nowrap">
                     <td> 020 2337-8899</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </v-col>
@@ -162,7 +163,7 @@
 <script>
 import { mapGetters } from 'vuex'
 // import { _getMonthDiff, _calculateAge } from '@/helper/Utils'
-import { getFormatNum, jsDateToMysqlDate } from '~/common'
+import { getFormatNum, jsDateToMysqlDate,mainCompanyInfo } from '~/common'
 export default {
   name: 'Quotation',
   layout: 'login',
@@ -186,6 +187,10 @@ export default {
       }
       totalDiscount+=this.header.discount
       return totalDiscount
+    },
+    companyData(){
+      console.log(`**********COMPANY DATA ${mainCompanyInfo}**********`);
+      return mainCompanyInfo()
     }
 
   },
