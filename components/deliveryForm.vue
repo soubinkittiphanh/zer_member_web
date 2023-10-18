@@ -22,7 +22,8 @@
                                 <v-row>ໂທ: {{ customerForm.tel }}</v-row>
                                 <v-row>ຂົນສົ່ງ: {{ currentShipping }}</v-row>
                                 <v-row>ບ່ອນສົ່ງ: {{ customerForm.address }} - {{ currentGeo }}</v-row>
-                                <v-row v-if="currentShipping!='RIDER'">ຄ່າຝາກ: {{ customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' :
+                                <v-row v-if="currentShipping != 'RIDER'">ຄ່າຝາກ: {{
+                                    customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' :
                                     'ຕົ້ນທາງ'
                                 }}</v-row>
                             </v-col>
@@ -36,13 +37,13 @@
                             <v-col cols="4">{{ prod['qty'] }}</v-col> -->
                             {{ prod['pro_name'] }}
                             <v-spacer></v-spacer>
-                            {{ currentPayment=='COD'? formatNumber(prod['localPrice']) +' X ':'' }}
+                            {{ currentPayment == 'COD' ? formatNumber(prod['localPrice']) + ' X ' : '' }}
                             {{ prod['qty'] }}
                         </v-row>
-                        <v-row v-if="customerForm.discount > 0">
+                        <v-row v-if="customerForm.discount > 0 && currentPayment == 'COD'">
                             ສ່ວນຫລຸດ
                             <v-spacer></v-spacer>
-                           - {{ formatNumber(customerForm.discount) }}
+                            - {{ formatNumber(customerForm.discount) }}
                         </v-row>
                         <v-row v-if="customerForm.rider_fee > 0">
                             ຄ່າສົ່ງ
@@ -52,17 +53,16 @@
                         <v-row>
                             <v-divider></v-divider>
                         </v-row>
-                        <v-row v-if="currentPayment=='COD'">
-                        
+                        <v-row v-if="currentPayment == 'COD'">
+
                             <v-spacer></v-spacer>
-                            {{ currentPayment }} :
-                            {{ formatNumber(ticketTotal) }}
+                            ລວມ({{ currentPayment }}) {{ formatNumber(ticketTotal) }}
                         </v-row>
-                        <v-row v-if="currentShipping=='RIDER'">
-                        
-                        <v-spacer></v-spacer>
-                        ລວມ: {{ formatNumber(ticketTotal) }}
-                    </v-row>
+                        <v-row v-if="currentShipping == 'RIDER'">
+
+                            <v-spacer></v-spacer>
+                            ລວມ({{ currentPayment }}) {{ formatNumber(ticketTotal) }}
+                        </v-row>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -181,7 +181,7 @@ export default {
             for (const iterator of this.cartOfProduct) {
                 total += iterator['localPrice']
             }
-            return (total+(+this.customerForm.rider_fee)) - this.customerForm.discount;
+            return (total + (+this.customerForm.rider_fee)) - this.customerForm.discount;
         },
         currentTerminal() {
             console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);

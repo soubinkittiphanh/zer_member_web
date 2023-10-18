@@ -439,7 +439,7 @@ export default {
                     totalHtml += `
                                     <div class="ticket">
                                         <div class="product-name"> </div>
-                                    <div class="price "> <h5> ${this.onlineCustomerInfo.shipping == 'RIDER?' ? 'ລວມ' : this.onlineCustomerInfo.payment}: ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
+                                    <div class="price "> <h5>ຍອດລວມ(${this.onlineCustomerInfo.payment}) ${this.formatNumber(((this.grandTotal + (+this.onlineCustomerInfo.riderFee)) - this.discount) / iterator.rate)}  </h5> </div>
                                 </div>
                                     `
                 }
@@ -505,7 +505,7 @@ export default {
                 <hr> </hr>
                 ${txnListHtml}
                 ${this.onlineCustomerInfo.riderFee > 0 ? riderFeeHtml : ''}
-                ${this.discount > 0 ? discountHtml : ''}
+                ${this.discount > 0 && this.onlineCustomerInfo.payment == 'COD' ? discountHtml : ''}
                 <hr> </hr>
                 ${totalHtml}
             </body>
