@@ -441,7 +441,6 @@ export default {
     },
     async loadData() {
       this.isloading = true
-      // TODO: How to split data between cod order[not yet paid] and all order
       const date = {
         startDate: this.date,
         endDate: this.date2

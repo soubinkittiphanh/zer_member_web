@@ -402,7 +402,6 @@ export default {
     },
     async loadData() {
       this.isloading = true
-      // TODO: How to split data between cod order[not yet paid] and all order
       await this.$axios
         .get('api/dynamicCustomer/findDymCustomerByBookingDate/?fdate=' + this.date + '&tdate=' + this.date2)
         .then((res) => {

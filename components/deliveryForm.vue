@@ -183,6 +183,9 @@ export default {
         },
         currentTerminal() {
             console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
+            const terminalInfo =this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal);
+            console.log(`************ ${this.findAllTerminal.length} SELECTED ${terminalInfo['name']} ************ `);
+
             return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
         },
         currentGeo() {

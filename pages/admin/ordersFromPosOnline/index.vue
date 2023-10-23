@@ -137,13 +137,15 @@
             <i class="fa fa-pencil-square-o"></i>
           </v-btn>
         </template>
-        <template v-slot:[`item.cancel`]="{ item }">
-
-          <v-btn color="blue darken-1" text @click="cancelItem(item)
+        <template v-slot:[`item.print`]="{ item }">
+          <v-btn  variant="outlined" @click="printTicket(item.print)" class="primary" rounded>
+              <span class="mdi mdi-printer"></span>
+            </v-btn>
+          <!-- <v-btn color="blue darken-1" text @click="cancelItem(item)
           wallet = true
             ">
             <i class="fas fa-sync"></i>
-          </v-btn>
+          </v-btn> -->
         </template>
         <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
           <v-row>
@@ -201,12 +203,12 @@ export default {
           value: 'bookingDate',
           sortable: true,
         },
-        {
-          text: 'ID ລູກຄ້າ',
-          align: 'center',
-          value: 'client.id',
-          sortable: true,
-        },
+        // {
+        //   text: 'ID ລູກຄ້າ',
+        //   align: 'center',
+        //   value: 'client.id',
+        //   sortable: true,
+        // },
         {
           text: 'Offline/Online',
           align: 'center',
@@ -254,6 +256,12 @@ export default {
           text: 'ລວມ',
           align: 'end',
           value: 'total',
+          sortable: false,
+        },
+        {
+          text: '',
+          align: 'end',
+          value: 'print',
           sortable: false,
         },
         {
@@ -382,6 +390,9 @@ export default {
       this.$xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
       this.$xlsx.writeFile(workbook, 'data.xlsx');
     },
+    printTicket(orderId) {
+      console.log(`********* Order ID ${orderId} ********`);
+    },
     createSale() {
       this.componentKey += 1;
       this.selectedOrder = 0
@@ -433,7 +444,6 @@ export default {
     },
     async loadData() {
       this.isloading = true
-      // TODO: How to split data between cod order[not yet paid] and all order
       const date = {
         startDate: this.date,
         endDate: this.date2,
@@ -450,6 +460,7 @@ export default {
           this.orderHeaderList = []
           for (const iterator of res.data) {
             if (iterator['dynamic_customer']) {
+              iterator['print'] = iterator['id']
               this.orderHeaderList.push(iterator)
             }
           }
