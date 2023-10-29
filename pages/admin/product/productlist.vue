@@ -34,6 +34,11 @@
       </product-form-create>
     </v-dialog>
 
+    <v-dialog v-model="priceListDialog" max-width="1200px">
+      <price-list-form :key="priceListFormKey" @close-dialog="priceListDialog = false" :record-id="pricingRecordId" @refresh="fetchData">
+      </price-list-form>
+    </v-dialog>
+
     <v-card>
       <v-card-title>
         <v-row>
@@ -57,76 +62,53 @@
             <v-toolbar-title>ສິນຄ້າທັງຫມົດ: {{ loaddata.length }}</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-            <!-- <v-btn class="mr-0" @click="productFormCreate = true">
-              ສ້າງສິນຄ້າໃຫມ່
-            </v-btn> -->
             <v-btn size="large" variant="outlined" @click="productFormCreate = true" class="primary" rounded>
               <span class="mdi mdi-note-plus-outline"></span>
               ສ້າງສິນຄ້າໃຫມ່
             </v-btn>
-            <!-- <v-btn size="large" variant="outlined" @click="importStock" class="primary" rounded>
-              <span class="mdi mdi-note-plus-outline"></span>
-              Impor stock
-            </v-btn> -->
+
 
           </v-toolbar>
         </template>
         <template v-slot:[`item.functionEdit`]="{ item }">
-          <!-- <v-btn variant="outlined" @click="editItem(item)
-          isedit = true">
-            <v-icon small class="mr-2">
-              mdi-pencil
-            </v-icon>
-          </v-btn> -->
+
 
           <v-btn color="primary" text @click="editItem(item)
           wallet = true
             ">
-
             <i class="fa fa-pencil-square-o"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
-
-          <!-- <v-btn variant="outlined" @click="triggerCardForm(item)">
-            <i class="fas fa-cart-plus"></i>
-
-          </v-btn> -->
           <v-btn color="primary" text @click="triggerCardForm(item)
           wallet = true
             ">
             <i class="fa fa-cart-plus"></i>
           </v-btn>
-
+        </template>
+        <template v-slot:[`item.pricing`]="{ item }">
+          <v-btn color="primary" text @click="triggerPriceListForm(item)
+          wallet = true
+            ">
+             <v-icon>mdi mdi-currency-usd</v-icon>
+            <!-- <i class="mdi mdi-currency-usd"></i> -->
+          </v-btn>
         </template>
         <template v-slot:[`item.functionStockView`]="{ item }">
-          <!-- <v-btn variant="outlined" @click="editStock(item)">
-            <i class="fas fa-eye"></i>
-          </v-btn> -->
-
           <v-btn color="primary" text @click="editStock(item)
           wallet = true
             ">
-
             <i class="fa fa-eye"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.pro_cost_price`]="{ item }">
           {{ formatNumber(item.pro_cost_price) }}
-
         </template>
         <template v-slot:[`item.pro_price`]="{ item }">
           {{ formatNumber(item.pro_price) }}
-
         </template>
         <template v-slot:[`item.pro_card_count`]="{ item }">
-          <!-- <v-chip v-if="item['pro_card_count'] < item['minStock']" class="ma-2" color="red" text-color="white">
-            <v-icon start icon="mdi-label" style="font-weight: bold;"> {{ item.pro_card_count }}</v-icon>
-          </v-chip> -->
-
           {{ item.pro_card_count }}
-
-
         </template>
         <template v-slot:[`item.minStock`]="{ item }">
           {{ formatNumber(item.minStock) }}
@@ -145,16 +127,20 @@
 </template>
 <script>
 import ProductForm from '~/components/product/ProductForm.vue'
+import PriceListForm from '~/components/PriceListForm.vue'
 import { getFormatNum } from '~/common'
 import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  components: { ProductForm, ProductFormCreate },
+  components: { ProductForm, ProductFormCreate,PriceListForm },
   middleware: 'auths',
   data() {
     return {
+      priceListDialog:false,
+      priceListFormKey:1,
       guidelineDialog:false,
+      pricingRecordId:null,
       productFormCreate: false,
       productFormKey: 1,
       isstock: false,
@@ -206,6 +192,12 @@ export default {
           text: 'ເບິ່ງສະຕັອກ',
           align: 'center',
           value: 'functionStockView',
+          sortable: false,
+        },
+        {
+          text: 'ຈັດການລາຄາ',
+          align: 'center',
+          value: 'pricing',
           sortable: false,
         },
         {
@@ -541,7 +533,11 @@ export default {
         this.isloading = false
       }
     },
-
+    triggerPriceListForm(item){
+      this.pricingRecordId = item.id
+      this.priceListFormKey += 1;
+      this.priceListDialog = true;
+    },
     formatNumber(value) {
       return getFormatNum(value)
     },
@@ -583,6 +579,7 @@ export default {
               minStock: el.minStock,
               functionEdit: el.pro_id,
               functionStock: el.pro_id,
+              pricing: el.pro_id,
               functionStockView: el.pro_id,
               status: el.pro_id,
             }

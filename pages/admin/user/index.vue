@@ -35,7 +35,21 @@
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
-      <v-data-table v-if="recordList" :headers="headers" :search="search" :items="recordList">
+      <v-data-table v-if="recordList" :headers="headers" :search="search" :items="filterEntries">
+        <template v-slot:top>
+          <v-toolbar flat class="pa-4">
+            <v-row>
+              <v-col cols="8">
+              </v-col>
+              <v-col cols="4" jujustify="end">
+                <v-row>
+                  <v-spacer></v-spacer>
+                  <v-checkbox v-model.number="showActive" label="ສະແດງລາຍການ inActive"></v-checkbox>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-toolbar>
+        </template>
         <template v-slot:[`item.rate`]="{ item }">
           {{ getFormatNum(item.rate) }}
         </template>
@@ -67,6 +81,7 @@ export default {
       dialog: false,
       isloading: false,
       search: '',
+      showActive:false,
       recordList: [],
       entrySelected: '',
       headers: [
@@ -110,6 +125,11 @@ export default {
     preNewUserId(){
       const maxUserId = Math.max(...this.recordList.map(user => user.cus_id));
       return maxUserId+1
+    },
+    filterEntries(){
+      console.log(`Show inActive = ${this.showActive}`);
+      if(this.showActive) return this.recordList
+      return this.recordList.filter(el=>el['cus_active']==true) || []
     }
   },
 
@@ -141,7 +161,6 @@ export default {
             iterator.pk = iterator['id']
             this.recordList.push(iterator)
           }
-          console.log("====> " + this.recordList.length);
         })
         .catch((er) => {
           swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)

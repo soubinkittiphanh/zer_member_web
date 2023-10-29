@@ -99,7 +99,7 @@ export default {
       headers: [
         {
           text: 'ຫົວຂໍ້',
-          align: 'center',
+          align: 'left',
           value: 'topic',
           sortable: true,
         },

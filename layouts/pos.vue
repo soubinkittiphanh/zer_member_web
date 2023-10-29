@@ -23,6 +23,9 @@
         <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
+        <v-dialog v-model="pricingDialog" max-width="1024">
+            <pricing-option :key="pricingDialogKey" @close-dialog="pricingDialog = false" :record-id="productPricingSelected"></pricing-option>
+        </v-dialog>
 
         <v-dialog v-model="deliveryForm" max-width="1024">
             <delivery-form @post-transaction="postTransactionForOnlineCustomer" :key="shippingFormKey"></delivery-form>
@@ -163,7 +166,11 @@
                                         </v-btn>
                                     </td>
                                     <!-- <td class="font-weight-medium">{{ formatNumber(item.pro_price * item.qty) }}</td> -->
-                                    <td class="font-weight-medium">{{ formatNumber(item.localPrice * item.qty) }}</td>
+                                    <td class="font-weight-medium" >
+                                        <v-chip style="float: right;" class="ml-0" color="warning" variant="outlined"  @click="pricingLogig(item)">
+                                            {{ formatNumber(item.localPrice * item.qty) }}
+                                        </v-chip>
+                                    </td>
                                 </tr>
                             </tbody>
                         </template>
@@ -218,14 +225,18 @@
 <script>
 import CustomerList from '~/components/customer/CustomerList.vue'
 import Quotation from '~/components/quotation'
+import PricingOption from '~/components/PricingOption.vue'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
-import { getFormatNum, jsDateToMysqlDate } from '~/common'
+import { getFormatNum, jsDateToMysqlDate, ticketHtml } from '~/common'
 import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/common/index'
 export default {
-    components: { CustomerList, Quotation },
+    components: { CustomerList, Quotation,PricingOption },
     name: 'DefaultLayout',
     data() {
         return {
+            productPricingSelected:null,
+            pricingDialogKey:1,
+            pricingDialog: false,
             onlineCustomerInfo: {},
             tickePreviewDialog: false,
             deliveryForm: false,
@@ -291,6 +302,9 @@ export default {
         }
     },
     computed: {
+        ticketCommon() {
+            return ticketHtml();
+        },
         user() {
             return this.$auth.user || ''
         },
@@ -375,6 +389,12 @@ export default {
         }
     },
     methods: {
+        pricingLogig(item) {
+            console.log(`PRINCING CLICK....${item.id}`);
+            this.productPricingSelected = item.id;
+            this.pricingDialogKey +=1
+            this.pricingDialog = true;
+        },
         openDeliveryBox() {
             if (this.cartOfProduct.length <= 0) return swalError2(this.$swal, "Error", 'ກະລຸນາເລືອກສິນຄ້າ 1 ຢ່າງຂື້ນໄປ')
             this.shippingFormKey += 1;
@@ -448,55 +468,7 @@ export default {
 
 
             const windowContent = `
-          <!DOCTYPE html>
-          <html>
-          <head
-          <title></title>
-          <style>
-          h3, h5 {
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-          @font-face {
-            font-family: 'DM Sans';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url('/notosan/NotoSansLao-Regular.ttf') format('truetype');
-        }
-          *{
-            font-family: 'DM Sans';
-          }
-		.ticket {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0px;
-			border-radius: 10px;
-			margin: 0px;
-	
-		}
-
-		.product-name {
-			float: left;
-			font-size: 10px;
-		}
-
-		.price {
-			float: right;
-			font-size: 10px;
-		}
-		.price-total {
-			float: right;
-		}
-        h3 {
-        text-align: center;
-        font-family: 'DM Sans';
-        }
-        
-        </style>
-            </head>
+         ${this.ticketCommon.header}
             <body>
                 <h5> ວັນທີ: ${today.toLocaleString()}</h5>
                 <h5> ຮ້ານ: ${this.onlineCustomerInfo.branch} </h5>
@@ -535,14 +507,6 @@ export default {
                 const product = this.findAllProduct.find(el => el.id == iterator.id)
                 console.log(`=======${product}======`);
                 const quantity = iterator.qty
-                const unitRate = 1
-                // const price = iterator.pro_price
-                const price = iterator.localPrice
-                const discount = 0
-                const productId = iterator.id
-                const productKey = iterator.id
-                const unitId = 1
-                // const total = iterator.qty * iterator.pro_price
                 const total = iterator.qty * iterator.localPrice
                 // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
                 txnListHtml +=
@@ -571,49 +535,7 @@ export default {
                 `
             }
             const windowContent = `
-          <!DOCTYPE html>
-          <html>
-          <head
-          <title></title>
-          <style>
-
-          @font-face {
-            font-family: 'DM Sans';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url('/notosan/NotoSansLao-Regular.ttf') format('truetype');
-        }
-          *{
-            font-family: 'DM Sans';
-          }
-		.ticket {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0px;
-			border-radius: 10px;
-			margin: 0px;
-	
-		}
-
-		.product-name {
-			float: left;
-			font-size: 12px;
-		}
-
-		.price {
-			float: right;
-			font-size: 12px;
-		}
-
-        h3 {
-        text-align: center;
-        font-family: 'DM Sans';
-        }
-        
-        </style>
-            </head>
+         ${this.ticketCommon.header}
             <body>
                 <div style="text-align: center;">
                     <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
@@ -621,7 +543,7 @@ export default {
                 <h3> ໃບຮັບເງິນ</h3>
                 <h5> ວັນທີ ${today.toLocaleString()}</h5>
                 <h5> Ticket ${this.lastTransactionSaleHeaderId} </h5>
-                <h5> Tel ${this.currentTerminal['location']['company']['tel'] }</h5>
+                <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
                 ${txnListHtml}

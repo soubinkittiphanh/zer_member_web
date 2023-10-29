@@ -3,8 +3,12 @@
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
-        <v-dialog v-model="customerDialog" max-width="1024" >
+        <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
+        </v-dialog>
+        <v-dialog v-model="pricingDialog" max-width="1024">
+            <pricing-option :key="pricingDialogKey" :isBackend="true" @new-price-update="updatePricing"
+                @close-dialog="pricingDialog = false" :record-id="productPricingSelected"></pricing-option>
         </v-dialog>
         <!-- ************ Bottom sheet show error message ************* -->
         <v-bottom-sheet v-model="sheet" inset>
@@ -133,7 +137,10 @@
                                     v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <td style="text-align: right;">
-                                {{ getFormatNum(item.price) }}
+                                <v-chip class="ml-0" color="warning" variant="outlined" @click="pricingLogig(item)">
+                                    <!-- {{ formatNumber(item.localPrice * item.qty) }} -->
+                                    {{ getFormatNum(item.price) }}
+                                </v-chip>
                             </td>
                             <td>
                                 <v-text-field @input="discountChange(item)" :rules="[numberCommaRule]" v-comma-thousand
@@ -184,8 +191,10 @@
 <script>
 import commaThousand from "@/plugins/comma-thousand";
 import { mapActions, mapGetters } from 'vuex'
+import PricingOption from '~/components/PricingOption.vue'
 import { swalSuccess, swalError2, confirmSwal, dayCount, getNextDate, replaceAll } from '~/common'
 export default {
+    components: { PricingOption },
     props: {
         headerId: {
             type: Number,
@@ -219,9 +228,35 @@ export default {
             this.newRow();
         }
 
-
+        // TODO: Add pricing option here
     },
     methods: {
+        updatePricing(priceInfo) {
+            let newPrice = priceInfo['amount']
+            console.log(`New pricing ${newPrice}`);
+            console.log(`New pricing ${JSON.stringify(this.transaction.lines[0])}`);
+            const idx = this.transaction.lines.findIndex(el => el['productId'] == this.productPricingSelected)
+            if (idx < 0) return
+            const qty = this.transaction.lines[idx]["quantity"]
+            const unitRate = this.transaction.lines[idx]["unitRate"]
+            const discount = this.transaction.lines[idx]["discount"]
+            if(priceInfo['type']!='Direct') {
+                // ************ Increase price by percentage ************ //
+                let currentPrice = this.transaction.lines[idx]['price']
+                const updatedPrice = (currentPrice * newPrice / 100)+currentPrice;
+                this.transaction.lines[idx]['total'] = (qty * unitRate*(updatedPrice)) - discount;
+                this.transaction.lines[idx]['price'] = updatedPrice;
+            }else{
+                this.transaction.lines[idx]['total'] = (qty * unitRate*(newPrice)) - discount;
+                this.transaction.lines[idx]['price'] = newPrice;
+            }
+        },
+        pricingLogig(item) {
+            console.log(`PRINCING CLICK....${JSON.stringify(item)}`);
+            this.productPricingSelected = item['productId'];
+            this.pricingDialogKey += 1
+            this.pricingDialog = true;
+        },
         findCurrency(currencyId) {
             return this.findAllCurrency.find(el => el.id == currencyId);
         },
@@ -603,6 +638,9 @@ export default {
     },
     data() {
         return {
+            productPricingSelected: null,
+            pricingDialogKey: 1,
+            pricingDialog: false,
             search: '',
             numberCommaRule: (value) => {
                 const regex = /^[0-9,]*$/;

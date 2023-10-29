@@ -46,7 +46,21 @@
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
-      <v-data-table v-if="entries" :headers="headers" :search="search" :items="entries">
+      <v-data-table v-if="entries" :headers="headers" :search="search" :items="filterEntries">
+        <template v-slot:top>
+          <v-toolbar flat class="pa-4">
+            <v-row>
+              <v-col cols="8">
+              </v-col>
+              <v-col cols="4" jujustify="end">
+                <v-row>
+                  <v-spacer></v-spacer>
+                  <v-checkbox v-model.number="showActive" label="ສະແດງລາຍການ inActive"></v-checkbox>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-toolbar>
+        </template>
         <template v-slot:[`item.rate`]="{ item }">
           {{ getFormatNum(item.rate) }}
         </template>
@@ -65,9 +79,6 @@
 <script>
 import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import unitForm from '~/components/unitForm.vue'
-import OrderDetailPos from '~/components/OrderDetailPos.vue'
-import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
-import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 export default {
   components: { unitForm },
   middleware: 'auths',
@@ -79,6 +90,7 @@ export default {
       isCreate: true,
       dialog: false,
       isloading: false,
+      showActive: false,
       search: '',
       entries: [],
       entrySelected: '',
@@ -114,6 +126,11 @@ export default {
     await this.loadData()
   },
   computed: {
+    filterEntries(){
+      console.log(`Show inActive = ${this.showActive}`);
+      if(this.showActive) return this.entries
+      return this.entries.filter(el=>el['isActive']==true) || []
+    }
   },
 
   methods: {

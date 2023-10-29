@@ -294,18 +294,18 @@ export const getFirstDayOfMonth = () => {
 }
 export const firstAndLastDateOfCurrentYear = () => {
 
-    const today = new Date();
-    const year = today.getFullYear();
-    console.log(`THIS YEAR IS ${year} ${today}`);
-    // const startDate = new Date(year, 0, 1).toISOString().slice(0, 10);
-    // const endDate = new Date(year, 11, 31).toISOString().slice(0, 10);
-    const startDate = getMySQLDateOfFirstDayOfYear();
-    const endDate = getMySQLDateOfLastDayOfYear();
-    console.log(`THIS YEAR IS ${startDate} ${endDate}`);
-    return { startDate, endDate };
+  const today = new Date();
+  const year = today.getFullYear();
+  console.log(`THIS YEAR IS ${year} ${today}`);
+  // const startDate = new Date(year, 0, 1).toISOString().slice(0, 10);
+  // const endDate = new Date(year, 11, 31).toISOString().slice(0, 10);
+  const startDate = getMySQLDateOfFirstDayOfYear();
+  const endDate = getMySQLDateOfLastDayOfYear();
+  console.log(`THIS YEAR IS ${startDate} ${endDate}`);
+  return { startDate, endDate };
 }
 
-export const  getMySQLDateOfFirstDayOfYear = ()=> {
+export const getMySQLDateOfFirstDayOfYear = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const firstDayOfYear = new Date(year, 0, 1);
@@ -314,33 +314,86 @@ export const  getMySQLDateOfFirstDayOfYear = ()=> {
   return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
 }
 
-export const getMySQLDateOfLastDayOfYear = ()=> {
+export const getMySQLDateOfLastDayOfYear = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const lastDayOfYear = new Date(year, 11, 31);
-  const month = lastDayOfYear.getMonth() +1;
+  const month = lastDayOfYear.getMonth() + 1;
   const day = lastDayOfYear.getDate();
   return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
 }
 
+export const ticketHtml = () => {
+  return {
+    header: ` <!DOCTYPE html>
+<html>
+<head
+<title></title>
+<style>
+h3, h5 {
+margin: 0;
+padding: 0;
+line-height: 1.5;
+}
+@font-face {
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-display: swap;
+src: url('/notosan/NotoSansLao-Regular.ttf') format('truetype');
+}
+*{
+font-family: 'DM Sans';
+}
+.ticket {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+border-radius: 10px;
+margin: 0px;
+
+}
+
+.product-name {
+float: left;
+font-size: 10px;
+}
+
+.price {
+float: right;
+font-size: 10px;
+}
+.price-total {
+float: right;
+}
+h3 {
+text-align: center;
+font-family: 'DM Sans';
+}
+
+</style>
+</head>`
+  }
+}
 
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   // const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
   // const baseURL = 'http://150.95.31.23:8006' // ***PRODUCTION laofriend*** 
-  const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
-  // const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
+  // const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
+  const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
   return baseURL;
 }
 export const mainCompanyInfo = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   const info = {
-    name: 'beverhome',
-    tel:'9999-9999',
-    imageUrl:'',
-    imageName:'',
-    env: 'LIVE'
+    name: 'DC',
+    tel: '9999-9999',
+    imageUrl: '',
+    imageName: '',
+    env: 'UAT'
   }
   return info;
 }
@@ -401,7 +454,7 @@ function componentToHex(c) {
   return hex.length == 1 ? "0" + hex : hex
 }
 export const replaceAll = (str, find, replace) => {
-  if(undefined==str) return
+  if (undefined == str) return
   return str.toString().replace(new RegExp(find, 'g'), replace);
 }
 

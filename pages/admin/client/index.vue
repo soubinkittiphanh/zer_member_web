@@ -52,11 +52,22 @@
         </v-row>
       </div>
       <v-divider></v-divider>
-
       <v-card-text>
-
-
-        <v-data-table v-if="customerList" :headers="headers" :search="search" :items="customerList">
+        <v-data-table v-if="customerList" :headers="headers" :search="search" :items="filterEntries">
+          <template v-slot:top>
+            <v-toolbar flat class="pa-4">
+              <v-row>
+                <v-col cols="8">
+                </v-col>
+                <v-col cols="4" jujustify="end">
+                  <v-row>
+                    <v-spacer></v-spacer>
+                    <v-checkbox v-model.number="showActive" label="ສະແດງລາຍການ inActive"></v-checkbox>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-toolbar>
+          </template>
           <template v-slot:[`item.function`]="{ item }">
 
             <v-btn color="primary" text @click="editItem(item.id)
@@ -87,9 +98,17 @@ export default {
   components: {
     CustomerForm
   },
+  computed:{
+    filterEntries(){
+      console.log(`Show inActive = ${this.showActive}`);
+      if(this.showActive) return this.customerList
+      return this.customerList.filter(el=>el['isActive']==true) || []
+    }
+  },
   data() {
     return {
       guidelineDialog: false,
+      showActive: false,
       userId: "",
       componentKey: 1,
       selectedCustomerId: 0,

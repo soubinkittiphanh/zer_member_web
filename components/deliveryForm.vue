@@ -159,6 +159,12 @@ export default {
         this.paymentSelected = this.currentSelectedPayment
         console.log(`*********PAYMENT ${this.currentSelectedPayment} SELECTED ********`);
     },
+    watch:{
+        paymentSelected (value){
+            console.log(`New data payment selected ${value}`);
+            this.addSelectedPayment(value)
+        }
+    },
     computed: {
         generateCustomerObjec() {
             const customerInfo = {
@@ -185,7 +191,6 @@ export default {
             console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
             const terminalInfo =this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal);
             console.log(`************ ${this.findAllTerminal.length} SELECTED ${terminalInfo['name']} ************ `);
-
             return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
         },
         currentGeo() {
@@ -231,12 +236,8 @@ export default {
     },
     methods: {
         ...mapActions(['addSelectedPayment']),
-        selectePaymentMethod() {
-            this.addSelectedPayment(this.paymentSelected)
-        },
         submit() {
             // handle form submission
-            this.selectePaymentMethod()
             console.log(this.customerForm)
             const payload = {
                 customerForm: this.customerForm,

@@ -242,12 +242,12 @@ export default {
           menuList: [
             {
               icon: 'mdi mdi-source-branch',
-              title: 'ຈັດການສາຂາ',
+              title: 'ຈັດການຮ້ານຄ້າ',
               to: '/admin/company',
             },
             {
               icon: 'mdi mdi-network-pos',
-              title: 'ຈັດການຮ້ານຄ້າ',
+              title: 'ຈັດການສາຂາ',
               to: '/admin/terminal',
             },
           ]

@@ -79,6 +79,23 @@ export const mutations = {
             state.cartOfproductSelected.push({ ...product, qty: 1 })
         }
     },
+    updateProductCart(state, productInfo) {
+        const productId = productInfo['productId']
+        const price = productInfo['amount']
+        console.log(`PRODUCT MODEL ${JSON.stringify(state.cartOfproductSelected[0])}`);
+        const productIdxFound = state.cartOfproductSelected.findIndex(el => el['id'] == productId)
+        if (productIdxFound < 0) return
+        console.log(`Found INDEX ${productIdxFound}`);
+        let newPrice = 0;
+        if (productInfo['type'] != 'Direct') {
+            newPrice = (state.cartOfproductSelected[productIdxFound]['localPrice'] * price / 100) * state.cartOfproductSelected[productIdxFound]['qty']
+            newPrice += state.cartOfproductSelected[productIdxFound]['localPrice']
+        } else {
+            newPrice = price * state.cartOfproductSelected[productIdxFound]['qty']
+        }
+        console.log(`Found new price ${newPrice}`);
+        state.cartOfproductSelected[productIdxFound]['localPrice'] = newPrice
+    },
     removeProductFromCart(state, product) {
         let found = false;
         state.cartOfproductSelected.forEach(item => {
@@ -199,6 +216,9 @@ export const actions = {
     },
     addProduct(state, product) {
         state.commit("addProductToCart", product)
+    },
+    updateProduct(state, product) {
+        state.commit("updateProductCart", product)
     },
     setSelectedTerminal(state, terminalId) {
         state.commit("ChooseTerminal", terminalId)

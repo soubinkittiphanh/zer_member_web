@@ -138,9 +138,10 @@
           </v-btn>
         </template>
         <template v-slot:[`item.print`]="{ item }">
-          <v-btn  variant="outlined" @click="printTicket(item.print)" class="primary" rounded>
-              <span class="mdi mdi-printer"></span>
-            </v-btn>
+          <!-- TODO: TICKET PRINT -->
+          <v-btn variant="outlined" @click="generatePrintViewDeliveryCustomer(item)" class="primary" rounded>
+            <span class="mdi mdi-printer"></span>
+          </v-btn>
           <!-- <v-btn color="blue darken-1" text @click="cancelItem(item)
           wallet = true
             ">
@@ -167,15 +168,18 @@
   </div>
 </template>
 <script>
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth } from '~/common'
+import { ticketHtml, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
+import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 export default {
   components: { OrderDetailPos, OrderSumaryCardPos, OrderDetailPosCRUD },
   middleware: 'auths',
   data() {
     return {
+      shippingList: [],
+      currencyList: [],
       viewTransaction: false,
       whatsappContactLink: '',
       componentKey: 0,
@@ -307,6 +311,8 @@ export default {
   },
   async created() {
     await this.loadData()
+    await this.loadShipping()
+    await this.loadCurrency()
   },
   watch: {
     isedit(v) {
@@ -322,6 +328,16 @@ export default {
     },
   },
   computed: {
+    currentTerminal() {
+      console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
+      const terminalInfo = this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal);
+      console.log(`************ ${this.findAllTerminal.length} SELECTED ${terminalInfo['name']} ************ `);
+      return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+    },
+    ticketCommon() {
+      return ticketHtml();
+    },
+    ...mapGetters(['currentSelectedLocation', 'cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
     activeOrderHeaderList() {
       return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
     },
@@ -390,8 +406,10 @@ export default {
       this.$xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
       this.$xlsx.writeFile(workbook, 'data.xlsx');
     },
-    printTicket(orderId) {
-      console.log(`********* Order ID ${orderId} ********`);
+    currentShipping(shippingId) {
+      const shipping = this.shippingList.find(el => el.id == shippingId)
+      if (shipping == undefined) return ''
+      return shipping['name']
     },
     createSale() {
       this.componentKey += 1;
@@ -483,6 +501,110 @@ export default {
 
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    async loadShipping() {
+      this.$axios
+        .get('/api/shipping/find')
+        .then((res) => {
+          this.shippingList = res.data
+        })
+        .catch((er) => {
+          swalError2(this.$swal, "Error", er)
+        })
+      this.isloading = false;
+    },
+    async loadCurrency() {
+      this.isloading = true;
+      this.currencyList = []
+      console.log("Loading currency ===>");
+      await this.$axios
+        .get('/api/currency/find')
+        .then((res) => {
+          for (const iterator of res.data) {
+            this.currencyList.push(iterator);
+          }
+        })
+        .catch((er) => {
+          // console.log('Data: ' + er)
+          swalError2(this.$swal, "Error", er)
+        })
+      this.isloading = false;
+    },
+    formatNumber(val) {
+      return getFormatNum(val)
+    },
+
+    generatePrintViewDeliveryCustomer(saleHeader) {
+      console.log(`ITEM SALE HEADER : ${saleHeader.id}`);
+      console.log(`ITEM SALE HEADER : ${this.currentTerminal.id}`);
+      let txnListHtml = ``
+      for (const iterator of saleHeader.lines) {
+        const product = this.findAllProduct.find(el => el.id == iterator.productId)
+        console.log(`=======${JSON.stringify(product)}======`);
+        const quantity = iterator.quantity
+        const total = iterator.quantity * iterator.price
+        txnListHtml +=
+          `<div class="ticket">
+                    <div class="product-name">${product.pro_name} </div>
+                    <div class="price"> ${quantity} ${saleHeader.payment.payment_code == 'COD' ? ' X ' + this.formatNumber(total) : ''}</div>
+                </div>`
+      }
+      const discountHtml = `<div class="ticket">
+                    <div class="product-name">ສ່ວນຫລຸດ </div>
+                    <div class="price"> - ${this.formatNumber(saleHeader.discount)}</div>
+                </div>`
+      const riderFeeHtml = `<div class="ticket">
+                    <div class="product-name">ຄ່າສົ່ງ </div>
+                    <div class="price">${this.formatNumber(saleHeader.dynamic_customer.rider_fee)}</div>
+                </div>`
+      //*********Payment info tag********/
+      let totalHtml = '';
+      for (const iterator of this.currencyList) {
+        if (iterator.code == 'LAK' && (saleHeader.payment.payment_code == 'COD' || this.currentShipping(saleHeader.dynamic_customer.shippingId) == 'RIDER')) {
+          totalHtml += `
+                                    <div class="ticket">
+                                        <div class="product-name"></div>
+                                    <div class="price-total"> <h5>ຍອດລວມ(${saleHeader.payment.payment_code}): ${this.formatNumber(((saleHeader.total + (+saleHeader.dynamic_customer.rider_fee)) - saleHeader.discount))}  </h5> </div>
+                                </div>
+                                    `
+        }
+
+      }
+
+
+      const windowContent = `
+         ${this.ticketCommon.header}
+            <body>
+                <h5> ວັນທີ: ${saleHeader.bookingDate}</h5>
+                 <h5> ຮ້ານ: ${this.currentTerminal['location']['company']['name']} </h5>
+       <h5> ເບີໂທ: ${this.currentTerminal['location']['company']['tel']} </h5>
+                <hr> </hr>
+                <h5> ຜູ້ຮັບ: ${saleHeader.dynamic_customer.name}</h5>
+                <h5> ໂທ: ${saleHeader.dynamic_customer.tel} </h5>
+                <h5> ຂົນສົ່ງ: ${this.currentShipping(saleHeader.dynamic_customer.shippingId)} </h5>
+                <h5> ບ່ອນສົ່ງ: ${saleHeader.dynamic_customer.address} </h5>
+              ${this.currentShipping(saleHeader.dynamic_customer.shippingId) == 'RIDER' ? `` : `<h5> ຄ່າຝາກ: ${saleHeader.dynamic_customer.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' : 'ຕົ້ນທາງ'}</h5>`}  
+                <hr> </hr>
+                ${txnListHtml}
+                ${saleHeader.dynamic_customer.rider_fee > 0 ? riderFeeHtml : ''}
+                ${saleHeader.discount > 0 && saleHeader.payment.payment_code == 'COD' ? discountHtml : ''}
+                <hr> </hr>
+                ${totalHtml}
+            </body>
+            </html>
+        `
+      const printWin = window.open(
+        '',
+        '',
+        'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+      )
+      printWin.document.open()
+      printWin.document.write(windowContent)
+
+      setTimeout(() => {
+        printWin.print()
+        printWin.close()
+      }, 1000)
     },
   },
 }
