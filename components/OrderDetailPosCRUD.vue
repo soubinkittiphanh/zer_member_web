@@ -240,7 +240,7 @@ export default {
             const qty = this.transaction.lines[idx]["quantity"]
             const unitRate = this.transaction.lines[idx]["unitRate"]
             const discount = this.transaction.lines[idx]["discount"]
-            if(priceInfo['type']!='Direct') {
+            if(priceInfo['type']!='Price') {
                 // ************ Increase price by percentage ************ //
                 let currentPrice = this.transaction.lines[idx]['price']
                 const updatedPrice = (currentPrice * newPrice / 100)+currentPrice;

@@ -53,7 +53,7 @@ export default {
             entries: [],
             headers: [
                 {
-                    text: 'Note',
+                    text: 'Name',
                     align: 'end',
                     value: 'name',
                     sortable: false,
@@ -101,7 +101,7 @@ export default {
             console.log(`${JSON.stringify(item)} isbackend = ${this.isBackend}`);
             // ************** isBackend indecate that operation is not from POS [so, we dont need to update state]**************
             const currency = this.findCurrency(item['currencyId'])
-            if (item['type'] == 'Direct') item.amount = currency['rate'] * item.amount
+            if (item['type'] == 'Price') item.amount = currency['rate'] * item.amount
             if (this.isBackend) {
                 const priceInfo = {
                     amount: item.amount,

@@ -80,8 +80,8 @@
                     <v-divider></v-divider>
                     <v-list-item v-for="(item, i) in categoryList" :key="i">
                         <v-list-item-content>
-                            <v-list-item-title style="font-size: large;">{{ item.categ_name }}</v-list-item-title>
-                            <v-divider></v-divider>
+                            <v-list-item-title v-text="item.categ_name"></v-list-item-title>
+                            <!-- <v-divider></v-divider> -->
                         </v-list-item-content>
                     </v-list-item>
                 </v-list-item-group>

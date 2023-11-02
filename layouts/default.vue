@@ -157,6 +157,11 @@ export default {
               to: '/admin/ordersFromPosOnline',
             },
             {
+              icon: 'mdi-receipt-text-check-outline',
+              title: 'ຕິດຕາມ COD',
+              to: '/admin/ordersFromPosOnlineCOD',
+            },
+            {
               icon: 'mdi-receipt-text-remove-outline',
               title: 'ຍົກເລີກ - ສົ່ງຄືນ',
               to: '/admin/ordersFromPosCancel',
@@ -267,6 +272,39 @@ export default {
               icon: 'mdi-bike-fast',
               title: 'ຈັດການRider',
               to: '/admin/rider',
+            },
+          ]
+        },
+        {
+          icon: "mdi mdi-shopping",
+          name: 'shipping',
+          code: 'SHIPPING',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-shopping',
+              title: 'ຈັດການອໍເດີ',
+              to: '/admin/orders',
+            },
+            {
+              icon: 'mdi mdi-wardrobe',
+              title: 'ເຄື່ອງຄ້າງສາງ',
+              to: '/admin/ordersIn',
+            },
+            {
+              icon: 'mdi mdi-hand-extended-outline',
+              title: 'ເຄື່ອງຈັດສົ່ງ',
+              to: '/admin/ordersOut',
+            },
+            {
+              icon: 'mdi-store-marker-outline',
+              title: 'Vendor',
+              to: '/admin/vendor',
+            },
+            {
+              icon: 'mdi mdi-tooltip-account',
+              title: 'ລູກຄ້າ',
+              to: '/admin/client',
             },
           ]
         },

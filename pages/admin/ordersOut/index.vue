@@ -72,7 +72,7 @@
       </v-card-text>
 
 
-      <v-data-table v-if="entries" :headers="headers" :search="search" :items="entries">
+      <v-data-table  :headers="headers" :search="search" :items="filterOrders">
         <template v-slot:[`item.bookingDate`]="{ item }">
           {{ item.bookingDate }}
           <!-- <v-chip class="ma-2" color="red" text-color="white"> -->
@@ -193,6 +193,9 @@ export default {
     this.loadData()
   },
   computed: {
+    filterOrders(){
+      return this.entries.filter(el=>el['status']=='delivered')
+    },
     user() {
       return this.$auth.user || ''
     },

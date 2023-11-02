@@ -19,7 +19,7 @@
                             <v-text-field v-model="form.productId" label="* ລະຫັດສິນຄ້າ" disabled></v-text-field>
                         </v-col>
                         <v-col cols="4">
-                            <v-text-field v-model="form.name" label="* Note" required :rules="nameRules"></v-text-field>
+                            <v-text-field v-model="form.name" label="* Name" required :rules="nameRules"></v-text-field>
                         </v-col>
                         <v-col cols="2">
                             <v-text-field v-model="form.amount" label="* ລາຄາ" required :rules="nameRules"></v-text-field>
@@ -65,9 +65,9 @@
                 <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="primary" rounded variant="text" @click="commitRecord">
+                <!-- <v-btn color="primary" rounded variant="text" @click="commitRecord">
                     Save
-                </v-btn>
+                </v-btn> -->
             </v-card-actions>
         </v-card>
 
@@ -98,18 +98,18 @@ export default {
                 id: null,
                 name: '',
                 amount: 0,
-                type: 'Direct',
+                type: 'Price',
                 currencyId: 1,
                 isActive: true
             },
             type: [
-                'Direct',
+                'Price',
                 'Percent',
             ],
             entries: [],
             headers: [
                 {
-                    text: 'Note',
+                    text: 'Name',
                     align: 'end',
                     value: 'name',
                     sortable: false,

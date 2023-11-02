@@ -364,7 +364,7 @@ export default {
     },
     ...mapGetters(['currentSelectedLocation', 'cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
     activeOrderHeaderList() {
-      return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
+      return this.orderHeaderList.filter(el => el['isActive'] == true && el['payment']['payment_code'] == 'COD')
     },
     computedDateFormatted() {
       return this.formatDate(this.date)

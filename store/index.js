@@ -87,7 +87,7 @@ export const mutations = {
         if (productIdxFound < 0) return
         console.log(`Found INDEX ${productIdxFound}`);
         let newPrice = 0;
-        if (productInfo['type'] != 'Direct') {
+        if (productInfo['type'] != 'Price') {
             newPrice = (state.cartOfproductSelected[productIdxFound]['localPrice'] * price / 100) * state.cartOfproductSelected[productIdxFound]['qty']
             newPrice += state.cartOfproductSelected[productIdxFound]['localPrice']
         } else {
