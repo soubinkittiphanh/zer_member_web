@@ -167,15 +167,15 @@ export default {
                 link: '',
                 price: 0,
                 isActive: true,
-                status: 'await',
+                status: 'ORDERED',
 
             },
             customerTel: '',
             customerName: '',
             status: [
-                'await',
-                'received',
-                'delivered',
+                'ORDERED',
+                'RECEIVED',
+                'INVOICED',
             ],
             isloading: false,
             nameRules: [
@@ -212,6 +212,9 @@ export default {
         if (this.isCreate) {
             const today = new Date().toISOString().substr(0, 10);
             this.form.bookingDate = today;
+            console.log(`******** DEFAULT CURRENCY ${this.currencyList[0]['id']}*******`);
+            this.form.currencyId = this.currencyList[0]['id'];
+            this.form.shippingFeeCurrencyId = this.currencyList[0]['id'];
         }
         this.loadEntry();
         this.loadVendor();

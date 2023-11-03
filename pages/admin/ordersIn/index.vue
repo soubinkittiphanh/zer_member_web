@@ -6,8 +6,8 @@
         :key="componentKey" />
     </v-dialog>
     <v-dialog v-model="statusFormDialog" max-width="1024">
-      <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false" @reload-data="loadData"
-        :key="orderStatusComponentKey" />
+      <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
+        @reload-data="loadData" :key="orderStatusComponentKey" />
     </v-dialog>
     <v-dialog v-model="guidelineDialog" hide-overlay max-width="700" :key="dialogKey">
       <youtube-player @close-dialog="guidelineDialog = false" :youtube-link="watchingLink">
@@ -72,7 +72,7 @@
       </v-card-text>
 
 
-      <v-data-table  :headers="headers" :search="search" :items="filterOrders">
+      <v-data-table :headers="headers" :search="search" :items="filterOrders">
         <template v-slot:[`item.bookingDate`]="{ item }">
           {{ item.bookingDate }}
           <!-- <v-chip class="ma-2" color="red" text-color="white"> -->
@@ -124,7 +124,9 @@ export default {
   },
   data() {
     return {
-      statusFormDialog:false,
+      timer: null,
+      barcode: '',
+      statusFormDialog: false,
       whatsappContactLink: '',
       guidelineDialog: false,
       componentKey: 1,
@@ -191,16 +193,20 @@ export default {
   },
   mounted() {
     this.loadData()
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
-    filterOrders(){
-      return this.entries.filter(el=>el['status']=='received')
+    filterOrders() {
+      return this.entries.filter(el => el['status'] == 'RECEIVED')
     },
     user() {
       return this.$auth.user || ''
     },
   },
-  watch:{
+  watch: {
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
       this.loadData()
@@ -211,6 +217,43 @@ export default {
     },
   },
   methods: {
+    handleKeyDown(event) {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      if (event.key == 'Enter') {
+        if (this.barcode) {
+          // ************ Find product from this barcode and add to cart ************ //
+          // this.findProductFromBarcode(this.barcode)
+          // Handle barcode [Receiving, Invoicing]
+          this.findOrderByTrackingNumber(this.barcode)
+        }
+        this.barcode = '';
+        return
+      }
+      if (event.key != 'Shift') {
+        this.barcode += event.key;
+      }
+      this.timer = setInterval(() => this.barcode = '', 20);
+    },
+    findOrderByTrackingNumber(barcode) {
+      const order = this.entries.find(el => el['trackingNumber'] == barcode)
+      if (order != undefined) {
+        return this.changeOrderStatus('RECEIVED', order['id'])
+      }
+
+    },
+    async changeOrderStatus(orderStatus, orderId) {
+      this.isloading = true
+      try {
+        const response = await this.$axios.put(`api/order/changeStatus/${orderId}`, { status: orderStatus })
+        swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
+      } catch (error) {
+        console.log(`Cannot change order status with error ${error}`);
+        swalError2(this.$swal, "Error", `ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ ${error}`);
+      }
+      this.isloading = false
+    },
     exportToExcel() {
       const worksheet = this.$xlsx.utils.json_to_sheet(this.entries);
       const workbook = this.$xlsx.utils.book_new();

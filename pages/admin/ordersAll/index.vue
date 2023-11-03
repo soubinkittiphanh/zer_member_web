@@ -72,7 +72,7 @@
       </v-card-text>
 
 
-      <v-data-table :headers="headers" :search="search" :items="filterOrders">
+      <v-data-table v-if="entries" :headers="headers" :search="search" :items="entries">
         <template v-slot:[`item.bookingDate`]="{ item }">
           {{ item.bookingDate }}
           <!-- <v-chip class="ma-2" color="red" text-color="white"> -->
@@ -199,9 +199,6 @@ export default {
     window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
-    filterOrders() {
-      return this.entries.filter(el => el['status'] == 'ORDERED')
-    },
     user() {
       return this.$auth.user || ''
     },
@@ -224,8 +221,7 @@ export default {
       if (event.key == 'Enter') {
         if (this.barcode) {
           // ************ Find product from this barcode and add to cart ************ //
-          // this.findProductFromBarcode(this.barcode)
-          // Handle barcode [Receiving, Invoicing]
+          this.findProductFromBarcode(this.barcode)
         }
         this.barcode = '';
         return

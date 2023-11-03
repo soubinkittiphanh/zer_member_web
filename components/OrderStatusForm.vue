@@ -137,15 +137,15 @@ export default {
                 price: 0,
                 shippingFee: 0,
                 isActive: true,
-                status: 'await',
+                status: 'ORDERED',
 
             },
             customerTel: '',
             customerName: '',
             status: [
-                'await',
-                'received',
-                'delivered',
+                'ORDERED',
+                'RECEIVED',
+                'INVOICED',
             ],
             isloading: false,
             nameRules: [
@@ -264,7 +264,7 @@ export default {
                     this.timeoutId = setTimeout(() => {
                         console.log(`******Reset auto suggest*******`);
                         this.lockSuggest = false
-                        this.form.status = 'received'
+                        this.form.status = 'RECEIVED'
                         this.isloading = false
                     }, 2000)
                     // customer mapping
