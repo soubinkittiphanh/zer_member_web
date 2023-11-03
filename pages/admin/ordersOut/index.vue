@@ -6,8 +6,8 @@
         :key="componentKey" />
     </v-dialog>
     <v-dialog v-model="statusFormDialog" max-width="1024">
-      <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
-        @reload-data="loadData" :key="orderStatusComponentKey" />
+      <order-status-form :is-create="isCreate" :record-id="entrySelectedId" order-status="INVOICED"
+        @close-dialog="statusFormDialog = false" @reload-data="loadData" :key="orderStatusComponentKey" />
     </v-dialog>
     <v-dialog v-model="guidelineDialog" hide-overlay max-width="700" :key="dialogKey">
       <youtube-player @close-dialog="guidelineDialog = false" :youtube-link="watchingLink">
@@ -68,10 +68,7 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-
       </v-card-text>
-
-
       <v-data-table :headers="headers" :search="search" :items="filterOrders">
         <template v-slot:[`item.bookingDate`]="{ item }">
           {{ item.bookingDate }}
@@ -85,14 +82,14 @@
           <v-btn color="primary" text @click="editItem(item)
           isedit = true
             ">
-            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.function`]="{ item }">
           <v-btn color="primary" text @click="changeOrderStatus(item)
           isedit = true
             ">
-            <span class="mdi mdi-human-dolly"></span>
+            <i class="fa fa-wallet"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.notify`]="{ item }">
@@ -102,6 +99,11 @@
             </a>
           </v-btn>
           {{ item.client.telephone }}
+        </template>
+        <template v-slot:[`item.print`]="{ item }">
+          <v-btn color="primary" text @click="printTicket(item)">
+            <i class="fa-solid fa-print"></i>
+          </v-btn>
         </template>
         <template v-slot:[`item.link`]="{ item }">
           <a :href="item.link" target="_blank">
@@ -115,8 +117,9 @@
 
 <script>
 import OrderForm from '@/components/OrderForm.vue';
+import { mapActions, mapGetters } from 'vuex'
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
+import { ticketHtml,jsDateToMysqlDate, swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
   components: {
     OrderForm,
@@ -140,6 +143,7 @@ export default {
       isCreate: false,
       isloading: false,
       dialogKey: 1,
+      logoCompany: require('~/assets/image/BWLOGO.jpeg'),
       headers: [
         {
           text: 'ວັນທີ',
@@ -157,20 +161,26 @@ export default {
         { text: 'Tracking', align: 'center', value: 'trackingNumber' },
         { text: 'Link', align: 'center', value: 'link' },
         {
-          text: 'ຮັບເຄື່ອງ',
-          align: 'end',
+          text: 'ຮັບຊຳລະ',
+          align: 'center',
           value: 'function',
           sortable: false,
         },
         {
           text: 'ແຈ້ງລູກຄ້າ',
-          align: 'end',
+          align: 'center',
           value: 'notify',
           sortable: false,
         },
         {
+          text: 'Print',
+          align: 'center',
+          value: 'print',
+          sortable: false,
+        },
+        {
           text: 'ແກ້ໄຂ',
-          align: 'end',
+          align: 'center',
           value: 'edit',
           sortable: false,
         },
@@ -199,12 +209,20 @@ export default {
     window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
+    ticketCommon() {
+      return ticketHtml();
+    },
     filterOrders() {
       return this.entries.filter(el => el['status'] == 'INVOICED')
     },
     user() {
       return this.$auth.user || ''
     },
+    currentTerminal() {
+      return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+    },
+    ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency', 'findAllTerminal', 'findSelectedTerminal']),
+
   },
   watch: {
     date(val) {
@@ -217,6 +235,73 @@ export default {
     },
   },
   methods: {
+    formatNumber(val) {
+      return getFormatNum(val)
+    },
+    printTicket(item) {
+      let txnListHtml = ``
+      const price = item.shippingFee * item.shippingRate;
+      // for (const iterator of this.productCart) {
+      //   const product = this.findAllProduct.find(el => el.id == iterator.id)
+      //   console.log(`=======${product}======`);
+      //   const quantity = iterator.qty
+      //   const total = iterator.qty * iterator.localPrice
+      // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
+      txnListHtml +=
+        `<div class="ticket">
+                    <div class="product-name">${item.name}</div>
+                    <div class="price">  ${this.formatNumber(price)}</div>
+                </div>
+                <div class="product-name">${item.trackingNumber} X ${this.formatNumber(price)}</div>
+                <br>
+                    `
+      // }
+      // const discountHtml = `<div class="ticket">
+      //               <div class="product-name">ສ່ວນຫລຸດ </div>
+      //               <div class="price"> - ${this.formatNumber(this.discount)}</div>
+      //           </div>`
+      const today = new Date()
+      const bookingDate = jsDateToMysqlDate(today)
+      const bookingDateWithTime = today.toISOString
+      let totalHtml = `
+      <div class="ticket">
+                    <div class="product-name"></div>
+                <div class="price">LAK ${this.formatNumber((item['shippingFee'] * item['shippingRate']))}</div>
+            </div>`
+
+      const windowContent = `
+         ${this.ticketCommon.header}
+            <body>
+                <div style="text-align: center;">
+                    <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+                </div>
+                <h3> ໃບຮັບເງິນ</h3>
+                <h5> ວັນທີ ${today.toLocaleString()}</h5>
+                <h5> Ticket ${item.id} </h5>
+                <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
+                <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+                <hr style="margin-top: 50px;"> </hr>
+                ${txnListHtml}
+                <hr> </hr>
+                ${totalHtml}
+                <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
+                
+            </body>
+            </html>
+        `
+      const printWin = window.open(
+        '',
+        '',
+        'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+      )
+      printWin.document.open()
+      printWin.document.write(windowContent)
+
+      setTimeout(() => {
+        printWin.print()
+        printWin.close()
+      }, 1000)
+    },
     handleKeyDown(event) {
       if (this.timer) {
         clearInterval(this.timer)

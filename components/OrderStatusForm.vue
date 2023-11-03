@@ -71,8 +71,13 @@
                             <v-text-field disabled v-model="form.shippingRate" label="ອັດຕາແລກປ່ຽນ"></v-text-field>
                         </v-col>
 
-                        <v-col cols="6">
-                            <v-select v-model="form.status" :items="status" label="ສະຖານະເຄື່ອງ" required></v-select>
+                        <v-col cols="3">
+                            <v-select disabled v-model="form.status" :items="status" label="ສະຖານະເຄື່ອງ" required></v-select>
+                        </v-col>
+                        <v-col cols="3" v-if="orderStatus=='INVOICED'">
+                            <!-- <v-select v-model="form.paymentId" :items="status" label="ປະເພດການຊຳລະ" required></v-select> -->
+                            <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList"
+                                                label="ການຊຳລະ*" v-model="form.paymentId"></v-autocomplete>
                         </v-col>
                     </v-row>
                     <v-divider></v-divider>
@@ -117,6 +122,10 @@ export default {
             type: Number,
             require: false,
             default: 0,
+        },
+        orderStatus: {
+            type: String,
+            default: 'RECEIVED',
         }
     },
     data() {
@@ -138,6 +147,7 @@ export default {
                 shippingFee: 0,
                 isActive: true,
                 status: 'ORDERED',
+                paymentId: null,
 
             },
             customerTel: '',
@@ -183,7 +193,12 @@ export default {
             const today = new Date().toISOString().substr(0, 10);
             this.form.bookingDate = today;
         }
-        this.loadEntry();
+   
+        await this.loadEntry();
+        if(this.orderStatus=='INVOICED') {
+            console.log(`$$$$$$$$$ ${this.paymentList[0]['id']} $$$$$$$$$$`);
+            this.form.paymentId = this.paymentList[0]['id']
+        }
     },
     methods: {
         currencyChange(isPrice) {
@@ -254,7 +269,6 @@ export default {
             if (this.recordId && !this.isCreate) {
                 this.isloading = true
                 await this.$axios.get(`api/order/find/${this.recordId}`).then(response => {
-
                     this.form = response.data
                     // customer mapping 
                     this.customerTel = response.data['client']['telephone']
@@ -264,7 +278,7 @@ export default {
                     this.timeoutId = setTimeout(() => {
                         console.log(`******Reset auto suggest*******`);
                         this.lockSuggest = false
-                        this.form.status = 'RECEIVED'
+                        this.form.status = this.orderStatus
                         this.isloading = false
                     }, 2000)
                     // customer mapping
@@ -281,6 +295,9 @@ export default {
     computed: {
         currencyList() {
             return this.findAllCurrency
+        },
+        paymentList() {
+            return this.findAllPayment
         },
         ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency', 'findAllTerminal', 'findSelectedTerminal']),
 

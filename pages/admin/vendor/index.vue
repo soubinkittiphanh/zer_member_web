@@ -52,7 +52,7 @@
           <v-btn color="primary" text @click="editItem(item)
           isedit = true
             ">
-            <i class="fa fa-pencil-square-o"></i>
+<i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
       </v-data-table>

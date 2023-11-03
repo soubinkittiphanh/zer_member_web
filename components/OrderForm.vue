@@ -57,8 +57,8 @@
                     </v-row>
                     <v-row>
                         <v-col cols="3">
-                            <v-autocomplete item-text="name" item-value="id"
-                                :items="vendorList" label="ຜູ້ສະໜອງສິນຄ້າ" v-model="form.vendorId"></v-autocomplete>
+                            <v-autocomplete item-text="name" item-value="id" :items="vendorList" label="ຜູ້ສະໜອງສິນຄ້າ"
+                                v-model="form.vendorId"></v-autocomplete>
                         </v-col>
                         <v-col cols="3">
                             <v-text-field v-model="form.trackingNumber" label="* trackingNumber"></v-text-field>
@@ -270,6 +270,8 @@ export default {
                 console.log("API => ", api);
                 if (this.isCreate) {
                     this.form.client = this.customerObject()
+                    this.form.userId = this.user.id
+                    this.form.locationId = this.currentTerminal['locationId']
                     await this.$axios.post(api, this.form).then(response => {
                         this.refreshData()
                         return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
@@ -280,6 +282,8 @@ export default {
                 } else {
                     this.form.client = this.customerObject()
                     this.form.clientId = this.selectedClient
+                    this.form.userId = this.user.id
+                    this.form.locationId = this.currentTerminal['locationId']
                     await this.$axios.put(api, this.form).then(response => {
                         this.refreshData()
                         return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
@@ -321,6 +325,12 @@ export default {
         }
     },
     computed: {
+        currentTerminal() {
+            return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+        },
+        user() {
+            return this.$auth.user || ''
+        },
         currencyList() {
             return this.findAllCurrency
         },

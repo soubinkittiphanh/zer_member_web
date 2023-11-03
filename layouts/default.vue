@@ -275,44 +275,44 @@ export default {
             },
           ]
         },
-        // {
-        //   icon: "mdi mdi-shopping",
-        //   name: 'shipping',
-        //   code: 'SHIPPING',
-        //   expand: false,
-        //   menuList: [
-        //     {
-        //       icon: 'mdi mdi-shopping',
-        //       title: 'ຈັດການອໍເດີ',
-        //       to: '/admin/orders',
-        //     },
-        //     {
-        //       icon: 'mdi mdi-wardrobe',
-        //       title: 'ຮັບເຄື່ອງເຂົ້າສາງ',
-        //       to: '/admin/ordersIn',
-        //     },
-        //     {
-        //       icon: 'mdi mdi-receipt-text-check',
-        //       title: 'ອອກບິນຮັບເຄື່ອງ',
-        //       to: '/admin/ordersOut',
-        //     },
-        //     {
-        //       icon: 'mdi mdi-notebook-multiple',
-        //       title: 'ອໍເດີທັງໝົດ',
-        //       to: '/admin/ordersAll',
-        //     },
-        //     {
-        //       icon: 'mdi-store-marker-outline',
-        //       title: 'Vendor',
-        //       to: '/admin/vendor',
-        //     },
-        //     {
-        //       icon: 'mdi mdi-tooltip-account',
-        //       title: 'ລູກຄ້າ',
-        //       to: '/admin/client',
-        //     },
-        //   ]
-        // },
+        {
+          icon: "mdi mdi-shopping",
+          name: 'shipping',
+          code: 'SHIPPING',
+          expand: false,
+          menuList: [
+            {
+              icon: 'mdi mdi-shopping',
+              title: 'ຈັດການອໍເດີ',
+              to: '/admin/orders',
+            },
+            {
+              icon: 'mdi mdi-wardrobe',
+              title: 'ຮັບເຄື່ອງເຂົ້າສາງ',
+              to: '/admin/ordersIn',
+            },
+            {
+              icon: 'mdi mdi-receipt-text-check',
+              title: 'ອອກບິນຮັບເຄື່ອງ',
+              to: '/admin/ordersOut',
+            },
+            {
+              icon: 'mdi mdi-notebook-multiple',
+              title: 'ອໍເດີທັງໝົດ',
+              to: '/admin/ordersAll',
+            },
+            {
+              icon: 'mdi-store-marker-outline',
+              title: 'Vendor',
+              to: '/admin/vendor',
+            },
+            {
+              icon: 'mdi mdi-tooltip-account',
+              title: 'ລູກຄ້າ',
+              to: '/admin/client',
+            },
+          ]
+        },
         {
           icon: "mdi mdi-calculator-variant",
           name: 'ບັນຊີ',

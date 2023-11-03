@@ -25,12 +25,12 @@ export default {
       // { rel: 'icon', type: 'image/x-icon', href: '/laofriend.jpeg' }
     ],
     script: [
-      {
-        src: "https://kit.fontawesome.com/ca11dcec40.js",
-        rel: "stylesheet"
-      },
+      // {
+      //   src: "https://kit.fontawesome.com/ca11dcec40.js",
+      //   rel: "stylesheet"
+      // },
       { src: "https://unpkg.com/jspdf-invoice-template@1.4.3/dist/index.js" },
-      { src: '/fontawesome.js', defer: true },
+      // { src: '/fontawesome.js', defer: true },
     ],
   },
 
@@ -38,6 +38,7 @@ export default {
   css: [
     '@/assets/css/mycss.css',
     '@/assets/css/style.css',
+    '@fortawesome/fontawesome-free/css/all.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -49,7 +50,7 @@ export default {
       src: '@/plugins/apex-chart.js',
       mode: 'client',
     },
-    { src: '~/plugins/fontawesome.js', ssr: false },
+    // { src: '~/plugins/fontawesome.js', ssr: false },
     { src: '~/plugins/html2canvas.js', mode: 'client' },
     { src: '@/plugins/echarts.js', ssr: false },
     { src: '~/plugins/xlsx.js', mode: 'client' },
@@ -75,7 +76,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/fontawesome',
+    // '@nuxtjs/fontawesome',
   ],
 
   axios: {

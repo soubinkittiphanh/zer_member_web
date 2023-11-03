@@ -150,7 +150,7 @@
             <v-btn color="primary" text @click="viewItem(item)
             wallet = true
               ">
-              <i class="fa fa-pencil-square-o"></i>
+<i class="fa-regular fa-pen-to-square"></i>
             </v-btn>
           </template>
           <template v-slot:[`item.cancel`]="{ item }">

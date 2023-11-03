@@ -61,11 +61,11 @@
             ">
             mdi-pencil
           </v-icon>
-          <i class="fa fa-pencil-square-o"></i>
+
  -->
 
           <v-btn color="primary" text @click="editItem(item)">
-            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
 

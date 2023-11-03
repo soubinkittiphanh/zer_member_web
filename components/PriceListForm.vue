@@ -52,7 +52,6 @@
                     <template v-slot:[`item.id`]="{ item }">
                         <v-btn color="warning" text @click="deleteItem(item)">
                             <i class="fa fa-trash"></i>
-                            <!-- <i class="fa fa-pencil-square-o"></i> -->
                         </v-btn>
                     </template>
                     <template v-slot:[`item.amount`]="{ item }">

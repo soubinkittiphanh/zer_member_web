@@ -85,14 +85,17 @@
           <v-btn color="primary" text @click="editItem(item)
           isedit = true
             ">
-            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.function`]="{ item }">
           <v-btn color="primary" text @click="changeOrderStatus(item)
           isedit = true
             ">
-            <span class="mdi mdi-human-dolly"></span>
+            <!-- <i class="fa fa-cart-flatbed"></i> -->
+            <!-- <i class="fa-solid fa-cart-flatbed"></i> -->
+            <i class="fa fa-cart-flatbed"></i>
+            <!-- <span class="mdi mdi-human-dolly"></span> -->
           </v-btn>
         </template>
         <template v-slot:[`item.notify`]="{ item }">
