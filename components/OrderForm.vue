@@ -347,6 +347,10 @@ export default {
                 // if (this.clientOption.length > 0) {
                 //     this.clientDialog = true
                 // }
+                this.timeoutId = setTimeout(() => {
+                    console.log(`******Reset auto suggest*******`);
+                    this.clientOption = []
+                }, 5000)
             }
         }, 10), // Debo
         customerObject() {
