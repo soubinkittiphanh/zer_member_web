@@ -54,6 +54,26 @@
                     <v-row>
                         <v-col cols="6">
                             <v-text-field v-model="customerTel" label="* ເບີໂທລູກຄ້າ"></v-text-field>
+                            <!-- Replace 'name' with the property you want to display in the suggestions -->
+                            <v-card v-for="client in clientOption" :key="client['id']">
+                                <v-card-text>
+                                    <v-row>
+                                        <v-col cols="8">
+                                            {{ client['name'].concat(' - ').concat(client['telephone']) }}
+                                        </v-col>
+                                        <!-- <v-col cols="2" align-self="center">
+                                            <v-btn color="warning" rounded variant="text" @click="null">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                            </v-btn>
+                                        </v-col> -->
+                                        <v-col cols="2" align-self="center">
+                                            <v-btn color="primary" rounded variant="text" @click="selectedClientNew(client['id'])">
+                                                <i class="fa-regular fa-circle-check"></i>
+                                            </v-btn>
+                                        </v-col>
+                                    </v-row>
+                                </v-card-text>
+                            </v-card>
                         </v-col>
                         <v-col cols="6">
                             <v-text-field v-model="customerName" label="* ຊື່ລູກຄ້າ"></v-text-field>
@@ -102,15 +122,17 @@
                     </v-row>
                     <v-row>
                         <v-col cols="2">
-                            <v-text-field v-if="!isStatusOrdered" v-model="form.shippingFee" label="* ຄ່າຂົນສົ່ງ"></v-text-field>
+                            <v-text-field v-if="!isStatusOrdered" v-model="form.shippingFee"
+                                label="* ຄ່າຂົນສົ່ງ"></v-text-field>
                         </v-col>
-                        <v-col cols="2" >
-                            <v-autocomplete v-if="!isStatusOrdered" @input="currencyChange(false)" item-text="code" item-value="id"
-                                :items="currencyList" label="ສະກຸນເງິນ*"
+                        <v-col cols="2">
+                            <v-autocomplete v-if="!isStatusOrdered" @input="currencyChange(false)" item-text="code"
+                                item-value="id" :items="currencyList" label="ສະກຸນເງິນ*"
                                 v-model="form.shippingFeeCurrencyId"></v-autocomplete>
                         </v-col>
-                        <v-col cols="2" >
-                            <v-text-field  v-if="!isStatusOrdered" disabled v-model="form.shippingRate" label="*ອັດຕາແລກປ່ຽນ"></v-text-field>
+                        <v-col cols="2">
+                            <v-text-field v-if="!isStatusOrdered" disabled v-model="form.shippingRate"
+                                label="*ອັດຕາແລກປ່ຽນ"></v-text-field>
                         </v-col>
                         <v-col cols="6">
                             <!-- <v-btn color="primary" rounded variant="text" @click="$emit('close-dialog')">
@@ -164,6 +186,13 @@ export default {
     },
     data() {
         return {
+            selectedItem: null,
+            suggestions: [
+                { id: 1, name: 'Item 1' },
+                { id: 2, name: 'Item 2' },
+                { id: 3, name: 'Item 3' },
+                // ... Add more items based on your data
+            ],
             timeoutId: null,
             clientDialog: false,
             lockSuggest: false,
@@ -225,7 +254,9 @@ export default {
 
     watch: {
         customerTel(newVal) {
+            console.log(`DATA CHANGE...`);
             this.handleTypingEvent()
+            // this.debouncedGetSuggestions(newVal)
         },
         customerName(newValue) {
             if (this.lockSuggest) return
@@ -258,6 +289,21 @@ export default {
         this.loadVendor();
     },
     methods: {
+        selectedClientNew(newVal) {
+            const newClient = this.findAllClient.find(el => el.id == newVal)
+            if (newClient != undefined) {
+                this.lockSuggest = true
+                this.customerName = newClient['name']
+                this.customerTel = newClient['telephone']
+                this.clientDialog = false
+                this.clientOption = []
+                this.timeoutId = setTimeout(() => {
+                    console.log(`******Reset auto suggest*******`);
+                    this.lockSuggest = false
+                }, 2000)
+
+            }
+        },
         async loadVendor() {
             await this.$axios.get("api/vendor/find").then(response => {
                 this.isloading = true
@@ -290,6 +336,7 @@ export default {
         clientList(custTel) {
             return this.findAllClient.filter(el => el.telephone.includes(custTel))
         },
+     
         handleTypingEvent: debounce(function () {
             // Do something after the user has finished typing
             console.log('User finished typing! Input value: ' + this.customerTel)
@@ -297,11 +344,11 @@ export default {
             if (this.clientList(this.customerTel) != undefined) {
                 this.clientOption = this.clientList(this.customerTel)
                 console.log(`*****${this.clientOption.length}*****`);
-                if (this.clientOption.length > 0) {
-                    this.clientDialog = true
-                }
+                // if (this.clientOption.length > 0) {
+                //     this.clientDialog = true
+                // }
             }
-        }, 1000), // Debo
+        }, 10), // Debo
         customerObject() {
             return {
                 id: this.selectedClient,
@@ -372,8 +419,8 @@ export default {
         }
     },
     computed: {
-        isStatusOrdered(){
-            return this.form.status=='ORDERED' ? true:false
+        isStatusOrdered() {
+            return this.form.status == 'ORDERED' ? true : false
         },
         currentTerminal() {
             return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)

@@ -181,4 +181,5 @@ export default {
     /* Set your desired border color */
     padding: 10px;
     /* Adjust padding as needed */
-}</style>
+}
+</style>
