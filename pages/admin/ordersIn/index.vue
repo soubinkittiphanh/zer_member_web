@@ -242,7 +242,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['addOrderToConfirmStockInList', 'setSelectedTerminal', 'setSelectedLocation']),
+    ...mapActions(['addOrderToConformPaymentList', 'setSelectedTerminal', 'setSelectedLocation']),
     handleKeyDown(event) {
       console.log(`BACORD SCANING....`);
       if (this.timer) {
@@ -275,7 +275,8 @@ export default {
         this.entrySelectedId = order.id;
         this.statusFormDialog = true;
         this.isCreate = false;
-        this.addOrderToConfirmStockInList(order)
+        // this.addOrderToConfirmStockInList(order)
+        this.addOrderToConformPaymentList(order)
       }
 
     },

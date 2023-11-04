@@ -14,7 +14,7 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-card v-for="order in confirmEntries" :key="order.id" class="mb-2" >
+                    <v-card v-for="order in confirmEntries" :key="order.id" class="mb-2">
                         <v-card-text>
                             <v-row>
                                 <v-col cols="2">
@@ -108,6 +108,9 @@ export default {
             // this.confirmEntries = this.$store.state.listOfConfirmPaymentOrder;
             this.confirmEntries = this.$store.state.listOfConfirmPaymentOrder.map(order => ({ ...order }));
             console.log(`$$$$$$$$$  PAYMENT LIST [${this.confirmEntries.length}] $$$$$$$$$$`);
+            for (const iterator of this.confirmEntries) {
+                iterator['paymentId'] = this.paymentList[0]['id']
+            }
         } else {
             // this.confirmEntries = this.$store.state.listOfConfirmStockInOrder;
             this.confirmEntries = this.$store.state.listOfConfirmStockInOrder.map(order => ({ ...order }));
@@ -172,8 +175,10 @@ export default {
 
 <style scoped>
 .custom-card {
-  border-radius: 20px; /* Adjust the border radius as needed */
-  border: 1px solid #ff9800; /* Set your desired border color */
-  padding: 10px; /* Adjust padding as needed */
-}
-</style>
+    border-radius: 20px;
+    /* Adjust the border radius as needed */
+    border: 1px solid #ff9800;
+    /* Set your desired border color */
+    padding: 10px;
+    /* Adjust padding as needed */
+}</style>
