@@ -105,7 +105,7 @@
         </template>
         <template v-slot:[`item.link`]="{ item }">
           <a :href="item.link" target="_blank">
-            {{ item.link }}
+            <i class="fa-solid fa-link"></i>
           </a>
         </template>
       </v-data-table>
@@ -145,6 +145,12 @@ export default {
           text: 'ວັນທີ',
           align: 'left',
           value: 'bookingDate',
+          sortable: true,
+        },
+        {
+          text: 'ຊືລູກຄ້າ',
+          align: 'left',
+          value: 'client.name',
           sortable: true,
         },
         {

@@ -7,7 +7,7 @@
     </v-dialog>
     <v-dialog v-model="statusFormDialog" max-width="1024">
       <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
-        @reload-data="loadData" :key="orderStatusComponentKey" />
+        @reload-data="loadData" :key="orderStatusComponentKey" order-status="INVOICED" />
     </v-dialog>
     <v-dialog v-model="guidelineDialog" hide-overlay max-width="700" :key="dialogKey">
       <youtube-player @close-dialog="guidelineDialog = false" :youtube-link="watchingLink">
@@ -88,14 +88,19 @@
             <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
-        <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="changeOrderStatus(item)
+        <!-- <template v-slot:[`item.function`]="{ item }">
+          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
           isedit = true
             ">
-            <!-- <i class="fa fa-cart-flatbed"></i> -->
-            <!-- <i class="fa-solid fa-cart-flatbed"></i> -->
-            <i class="fa fa-cart-flatbed"></i>
-            <!-- <span class="mdi mdi-human-dolly"></span> -->
+            <i class="fa-solid fa-cart-flatbed"></i>
+
+          </v-btn>
+        </template> -->
+        <template v-slot:[`item.function`]="{ item }">
+          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
+          isedit = true
+            ">
+            <i class="fa fa-wallet"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.notify`]="{ item }">
@@ -108,7 +113,7 @@
         </template>
         <template v-slot:[`item.link`]="{ item }">
           <a :href="item.link" target="_blank">
-            {{ item.link }}
+            <i class="fa-solid fa-link"></i>
           </a>
         </template>
       </v-data-table>
@@ -119,6 +124,11 @@
 <script>
 import OrderForm from '@/components/OrderForm.vue';
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
+import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
+// addOrderToConfirmStockInList
+//     addOrderToConformPaymentList
+//     findAllListOfConfirmStockIn
+//     findAllListOfConfirmPayment
 import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
   components: {
@@ -151,24 +161,36 @@ export default {
           sortable: true,
         },
         {
+          text: 'ຊືລູກຄ້າ',
+          align: 'left',
+          value: 'client.name',
+          sortable: true,
+        },
+        {
           text: 'ຊື່ສິຄ້າ',
           align: 'left',
           value: 'name',
           sortable: true,
         },
-        { text: 'Note', align: 'center', value: 'note' },
+        // { text: 'Note', align: 'center', value: 'note' },
         { text: 'Tracking', align: 'center', value: 'trackingNumber' },
         { text: 'Link', align: 'center', value: 'link' },
-        {
-          text: 'ຮັບເຄື່ອງ',
-          align: 'end',
-          value: 'function',
-          sortable: false,
-        },
         {
           text: 'ແຈ້ງລູກຄ້າ',
           align: 'end',
           value: 'notify',
+          sortable: false,
+        },
+        // {
+        //   text: 'ຮັບເຄື່ອງ',
+        //   align: 'end',
+        //   value: 'function',
+        //   sortable: false,
+        // },
+        {
+          text: 'ຮັບຊຳລະ',
+          align: 'center',
+          value: 'function',
           sortable: false,
         },
         {
@@ -220,7 +242,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addOrderToConfirmStockInList', 'setSelectedTerminal', 'setSelectedLocation']),
     handleKeyDown(event) {
+      console.log(`BACORD SCANING....`);
       if (this.timer) {
         clearInterval(this.timer)
       }
@@ -229,6 +253,7 @@ export default {
           // ************ Find product from this barcode and add to cart ************ //
           // this.findProductFromBarcode(this.barcode)
           // Handle barcode [Receiving, Invoicing]
+          console.log(`BACORD SCAN RESULT: ${this.barcode}`);
           this.findOrderByTrackingNumber(this.barcode)
         }
         this.barcode = '';
@@ -240,13 +265,21 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
+      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
       const order = this.entries.find(el => el['trackingNumber'] == barcode)
       if (order != undefined) {
-        return this.changeOrderStatus('RECEIVED', order['id'])
+
+        // return this.changeOrderStatus('RECEIVED', order['id'])
+        // this.changeOrderStatus(order)
+        this.orderStatusComponentKey += 1;
+        this.entrySelectedId = order.id;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConfirmStockInList(order)
       }
 
     },
-    async changeOrderStatus(orderStatus, orderId) {
+    async changeOrderStatusDirect(orderStatus, orderId) {
       this.isloading = true
       try {
         const response = await this.$axios.put(`api/order/changeStatus/${orderId}`, { status: orderStatus })
@@ -316,7 +349,6 @@ export default {
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
     async loadData() {
-      this.statusFormDialog = false;
       this.formDialog = false;
       const date = {
         startDate: this.date,

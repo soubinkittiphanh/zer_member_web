@@ -89,7 +89,7 @@
           </v-btn>
         </template>
         <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="changeOrderStatus(item)
+          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
           isedit = true
             ">
             <i class="fa fa-cart-flatbed"></i>
@@ -105,7 +105,7 @@
         </template>
         <template v-slot:[`item.link`]="{ item }">
           <a :href="item.link" target="_blank">
-            {{ item.link }}
+            <i class="fa-solid fa-link"></i>
           </a>
         </template>
       </v-data-table>
@@ -116,6 +116,7 @@
 <script>
 import OrderForm from '@/components/OrderForm.vue';
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
+import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
   components: {
@@ -145,6 +146,12 @@ export default {
           text: 'ວັນທີ',
           align: 'left',
           value: 'bookingDate',
+          sortable: true,
+        },
+        {
+          text: 'ຊືລູກຄ້າ',
+          align: 'left',
+          value: 'client.name',
           sortable: true,
         },
         {
@@ -217,6 +224,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addOrderToConfirmStockInList', 'setSelectedTerminal', 'setSelectedLocation']),
     handleKeyDown(event) {
       if (this.timer) {
         clearInterval(this.timer)
@@ -226,6 +234,8 @@ export default {
           // ************ Find product from this barcode and add to cart ************ //
           // this.findProductFromBarcode(this.barcode)
           // Handle barcode [Receiving, Invoicing]
+          console.log(`BACORD SCAN RESULT: ${this.barcode}`);
+          this.findOrderByTrackingNumber(this.barcode)
         }
         this.barcode = '';
         return
@@ -234,6 +244,21 @@ export default {
         this.barcode += event.key;
       }
       this.timer = setInterval(() => this.barcode = '', 20);
+    },
+    findOrderByTrackingNumber(barcode) {
+      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
+      const order = this.entries.find(el => el['trackingNumber'] == barcode)
+      if (order != undefined) {
+
+        // return this.changeOrderStatus('RECEIVED', order['id'])
+        // this.changeOrderStatus(order)
+        this.orderStatusComponentKey += 1;
+        this.entrySelectedId = order.id;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConfirmStockInList(order)
+      }
+
     },
     exportToExcel() {
       const worksheet = this.$xlsx.utils.json_to_sheet(this.entries);

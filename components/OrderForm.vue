@@ -42,6 +42,23 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
+                    <v-row justify="center" align="center">
+                        <v-divider></v-divider>
+                        <div class="mx-2">
+                            <h3>
+                                ຂໍ້ມູນລູກຄ້າ
+                            </h3>
+                        </div>
+                        <v-divider></v-divider>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="6">
+                            <v-text-field v-model="customerTel" label="* ເບີໂທລູກຄ້າ"></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field v-model="customerName" label="* ຊື່ລູກຄ້າ"></v-text-field>
+                        </v-col>
+                    </v-row>
                     <v-row>
                         <v-col cols="3">
                             <v-text-field type="date" label="ວັນທີ*" v-model="form.bookingDate"
@@ -49,10 +66,11 @@
                         </v-col>
                         <v-col cols="3">
 
-                            <v-text-field v-model="form.name" label="* name" required :rules="nameRules"></v-text-field>
+                            <v-text-field v-model="form.name" label="* ລາຍການເຄື່ອງ" required
+                                :rules="nameRules"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field v-model="form.note" label="note"></v-text-field>
+                            <v-text-field v-model="form.note" label="ຄຳອະທິບາຍ"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -61,10 +79,10 @@
                                 v-model="form.vendorId"></v-autocomplete>
                         </v-col>
                         <v-col cols="3">
-                            <v-text-field v-model="form.trackingNumber" label="* trackingNumber"></v-text-field>
+                            <v-text-field v-model="form.trackingNumber" label="* Tracking No."></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field v-model="form.link" label="* link"></v-text-field>
+                            <v-text-field v-model="form.link" label="* ລິ້ງສິນຄ້າ"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -84,33 +102,32 @@
                     </v-row>
                     <v-row>
                         <v-col cols="2">
-                            <v-text-field v-model="form.shippingFee" label="* ຄ່າຂົນສົ່ງ"></v-text-field>
+                            <v-text-field v-if="!isStatusOrdered" v-model="form.shippingFee" label="* ຄ່າຂົນສົ່ງ"></v-text-field>
                         </v-col>
-                        <v-col cols="2">
-                            <v-autocomplete @input="currencyChange(false)" item-text="code" item-value="id"
+                        <v-col cols="2" >
+                            <v-autocomplete v-if="!isStatusOrdered" @input="currencyChange(false)" item-text="code" item-value="id"
                                 :items="currencyList" label="ສະກຸນເງິນ*"
                                 v-model="form.shippingFeeCurrencyId"></v-autocomplete>
                         </v-col>
-                        <v-col cols="2">
-                            <v-text-field disabled v-model="form.shippingRate" label="*ອັດຕາແລກປ່ຽນ"></v-text-field>
+                        <v-col cols="2" >
+                            <v-text-field  v-if="!isStatusOrdered" disabled v-model="form.shippingRate" label="*ອັດຕາແລກປ່ຽນ"></v-text-field>
                         </v-col>
                         <v-col cols="6">
+                            <!-- <v-btn color="primary" rounded variant="text" @click="$emit('close-dialog')">
+                                <i class="fa-regular fa-images"></i>
+
+                            </v-btn> -->
+                            <v-file-input :rules="masterRules.imageRule" ref="filesfield" multiple
+                                accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
+                                prepend-icon="mdi-camera" label="ຮູບພາບ" @change="onFilesChange"></v-file-input>
                         </v-col>
-                    </v-row>
-                    <v-row justify="center" align="center">
-                        <v-divider></v-divider>
-                        <div class="mx-2">ຂໍ້ມູນລູກຄ້າ</div>
-                        <v-divider></v-divider>
                     </v-row>
                     <v-row>
-                        <v-col cols="6">
-                            <v-text-field v-model="customerTel" label="* ເບີໂທລູກຄ້າ"></v-text-field>
+                        <v-col cols="2">
+                            <v-checkbox v-model.number="form.isActive" label="ໃຊ້ງານຢູ່"></v-checkbox>
                         </v-col>
-                        <v-col cols="6">
-                            <v-text-field v-model="customerName" label="* ຊື່ລູກຄ້າ"></v-text-field>
-                        </v-col>
+                        <v-col cols="10"></v-col>
                     </v-row>
-                    <v-checkbox v-model.number="form.isActive" label="Is Active"></v-checkbox>
                 </v-form>
                 <small>* ສະແດງເຖິງຟິວທີ່ຕ້ອງໃສ່ຂໍ້ມູນ</small>
             </v-card-text>
@@ -182,6 +199,27 @@ export default {
                 value => !!value || 'Name is required',
                 value => (value && value.length <= 20) || 'Name must be less than 20 characters'
             ],
+            masterRules: {
+                imageRule: [
+                    (files) => {
+                        let fileSize = 0
+                        let totalSize = 0
+                        if (files) {
+                            files.forEach((el) => {
+                                fileSize += el.size
+                                console.log('Size: ' + el.size)
+                            })
+                            totalSize = fileSize / files.length
+                            console.log('File size: aaa' + files.length + " Each: " + totalSize || 0);
+                        } else {
+                            console.log('File: ' + files)
+                        }
+
+                        console.log('Total: ' + totalSize)
+                        return totalSize < 2000000 || "ຂະຫນາດເກີນ"
+                    },
+                ],
+            },
         };
     },
 
@@ -228,6 +266,15 @@ export default {
                 console.log("Error ", error);
             })
             this.isloading = false
+        },
+        async onFilesChange() {
+            // await this.$axios.get("api/vendor/find").then(response => {
+            //     this.isloading = true
+            //     this.vendorList = response.data
+            // }).catch(error => {
+            //     console.log("Error ", error);
+            // })
+            // this.isloading = false
         },
         currencyChange(isPrice) {
             if (isPrice) {
@@ -325,6 +372,9 @@ export default {
         }
     },
     computed: {
+        isStatusOrdered(){
+            return this.form.status=='ORDERED' ? true:false
+        },
         currentTerminal() {
             return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
         },

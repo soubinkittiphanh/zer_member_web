@@ -85,13 +85,13 @@
             <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
-        <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="changeOrderStatus(item)
+        <!-- <template v-slot:[`item.function`]="{ item }">
+          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
           isedit = true
             ">
             <i class="fa fa-wallet"></i>
           </v-btn>
-        </template>
+        </template> -->
         <template v-slot:[`item.notify`]="{ item }">
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
             <a :href="whatsappContactLink" target="_blank">
@@ -107,7 +107,7 @@
         </template>
         <template v-slot:[`item.link`]="{ item }">
           <a :href="item.link" target="_blank">
-            {{ item.link }}
+            <i class="fa-solid fa-link"></i>
           </a>
         </template>
       </v-data-table>
@@ -118,6 +118,10 @@
 <script>
 import OrderForm from '@/components/OrderForm.vue';
 import { mapActions, mapGetters } from 'vuex'
+// addOrderToConfirmStockInList
+//     addOrderToConformPaymentList
+//     findAllListOfConfirmStockIn
+//     findAllListOfConfirmPayment
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
 import { ticketHtml,jsDateToMysqlDate, swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
@@ -152,26 +156,33 @@ export default {
           sortable: true,
         },
         {
+          text: 'ຊືລູກຄ້າ',
+          align: 'left',
+          value: 'client.name',
+          sortable: true,
+        },
+        {
           text: 'ຊື່ສິຄ້າ',
           align: 'left',
           value: 'name',
           sortable: true,
         },
-        { text: 'Note', align: 'center', value: 'note' },
+        // { text: 'Note', align: 'center', value: 'note' },
         { text: 'Tracking', align: 'center', value: 'trackingNumber' },
         { text: 'Link', align: 'center', value: 'link' },
-        {
-          text: 'ຮັບຊຳລະ',
-          align: 'center',
-          value: 'function',
-          sortable: false,
-        },
         {
           text: 'ແຈ້ງລູກຄ້າ',
           align: 'center',
           value: 'notify',
           sortable: false,
         },
+        // {
+        //   text: 'ຮັບຊຳລະ',
+        //   align: 'center',
+        //   value: 'function',
+        //   sortable: false,
+        // },
+
         {
           text: 'Print',
           align: 'center',
@@ -235,6 +246,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addOrderToConformPaymentList', 'setSelectedTerminal', 'setSelectedLocation']),
     formatNumber(val) {
       return getFormatNum(val)
     },
@@ -322,7 +334,12 @@ export default {
     findOrderByTrackingNumber(barcode) {
       const order = this.entries.find(el => el['trackingNumber'] == barcode)
       if (order != undefined) {
-        return this.changeOrderStatus('INVOICED', order['id'])
+        // return this.changeOrderStatus('INVOICED', order['id'])
+        this.orderStatusComponentKey += 1;
+        this.entrySelectedId = order.id;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConformPaymentList(order)
       }
 
     },
@@ -396,7 +413,6 @@ export default {
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
     async loadData() {
-      this.statusFormDialog = false;
       this.formDialog = false;
       const date = {
         startDate: this.date,

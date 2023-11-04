@@ -5,6 +5,8 @@ export const state = () => ({
     productDetail: null,
     productSearchKeyboard: '',
     cartOfproductSelected: [],
+    listOfConfirmStockInOrder: [],
+    listOfConfirmPaymentOrder: [],
     selectedCategoryId: 9999,
     selectedCustomer: null,
     selectedPayment: 1,
@@ -21,6 +23,14 @@ export const state = () => ({
 
 // the function to update state variable should be called by setter [actions]
 export const mutations = {
+    removeFromStockConfirm(state, order){
+        const idx = state.listOfConfirmStockInOrder.indexOf(order)
+        state.listOfConfirmStockInOrder.splice(idx,1)
+    },
+    removeFromPaymentConfirk(state, order){
+        const idx = state.listOfConfirmPaymentOrder.indexOf(order)
+        state.listOfConfirmPaymentOrder.splice(idx,1)
+    },
     SetCurrencyList(state, currency) {
         state.currencyList = currency
     },
@@ -66,6 +76,37 @@ export const mutations = {
     setSelectedLocation(state, location) {
         state.selectedLocation = location
     },
+
+    addPaymentConfirmList(state, order) {
+        let found = false;
+        state.listOfConfirmPaymentOrder.forEach(item => {
+            if (item.trackingNumber === order.trackingNumber) {
+                found = true;
+                //Nothing todo
+            }
+        });
+        if (!found) {
+            // state.cart.push({ ...product, qty: 1 });
+            state.listOfConfirmPaymentOrder.push(order)
+        }
+        console.log(`Order add ${found} to mutation payment ${state.listOfConfirmPaymentOrder.length}`);
+    },
+    addStockInConfirmList(state, order) {
+        // console.log(`Order add to mutation ${JSON.stringify(order)}`);
+        let found = false;
+        state.listOfConfirmStockInOrder.forEach(item => {
+            if (item.trackingNumber === order.trackingNumber) {
+                found = true;
+                //Nothing todo
+            }
+        });
+        if (!found) {
+            // state.cart.push({ ...product, qty: 1 });
+            state.listOfConfirmStockInOrder.push(order)
+        }
+        console.log(`Order add ${found} to mutation ${state.listOfConfirmStockInOrder.length}`);
+        
+    },
     addProductToCart(state, product) {
         let found = false;
         state.cartOfproductSelected.forEach(item => {
@@ -78,6 +119,7 @@ export const mutations = {
             // state.cart.push({ ...product, qty: 1 });
             state.cartOfproductSelected.push({ ...product, qty: 1 })
         }
+      
     },
     updateProductCart(state, productInfo) {
         const productId = productInfo['productId']
@@ -141,6 +183,12 @@ export const mutations = {
 // action to get sate
 export const getters = {
 
+    findAllListOfConfirmStockIn(state) {
+        return state.listOfConfirmStockInOrder
+    },
+    findAllListOfConfirmPayment(state) {
+        return state.listOfConfirmPaymentOrder
+    },
     findAllProduct(state) {
         return state.productList
     },
@@ -201,6 +249,18 @@ export const getters = {
 }
 // action to set sate
 export const actions = {
+    removeOrderFromStockConfirm(state, order){
+        state.commit("removeFromStockConfirm", order)
+    },removeOrderFromPaymentConfirm(state,order){
+        state.commit("removeFromPaymentConfirk", order)
+    },
+    addOrderToConformPaymentList(state, payload) {
+        state.commit("addPaymentConfirmList", payload)
+    },
+    addOrderToConfirmStockInList(state, payload) {
+        console.log(`Order add to state ${JSON.stringify(payload)}`);
+        state.commit("addStockInConfirmList", payload)
+    },
     login(state, payload) {
         state.commit("setUser", payload)
         state.commit("setLogin")
