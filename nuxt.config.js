@@ -21,8 +21,8 @@ export default {
     ],
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: '/jack.jpeg' }
-      { rel: 'icon', type: 'image/x-icon', href: '/chithanh.jpeg' }
-      // { rel: 'icon', type: 'image/x-icon', href: '/laofriend.jpeg' }
+      // { rel: 'icon', type: 'image/x-icon', href: '/chithanh.jpeg' }
+      { rel: 'icon', type: 'image/x-icon', href: '/laofriend.jpeg' }
     ],
     script: [
       // {
