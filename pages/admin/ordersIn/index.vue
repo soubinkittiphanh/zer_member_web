@@ -5,7 +5,7 @@
       <order-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="handleEvent" @reload-data="loadData"
         :key="componentKey" />
     </v-dialog>
-    <v-dialog v-model="statusFormDialog" max-width="auto">
+    <v-dialog v-model="statusFormDialog" max-width="1024">
       <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
         @reload-data="loadData" :key="orderStatusComponentKey" order-status="INVOICED" />
     </v-dialog>
@@ -54,9 +54,9 @@
             <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
               <span class="mdi mdi-plus"></span>Create
             </v-btn>
-            <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
+            <!-- <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
               <span class="mdi mdi-microsoft-excel"></span>Generate excel file
-            </v-btn>
+            </v-btn> -->
           </v-col>
           <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
@@ -167,7 +167,7 @@ export default {
           sortable: true,
         },
         {
-          text: 'ຊື່ສິຄ້າ',
+          text: 'ລາຍການສິນຄ້າ',
           align: 'left',
           value: 'name',
           sortable: true,

@@ -24,6 +24,7 @@
     "@tillpos/xml-escpos-helper": "^0.2.7",
     "apexcharts": "^3.40.0",
     "chart.js": "^4.3.0",
+    "child_process": "^1.0.2",
     "core-js": "^3.20.0",
     "echarts": "^5.4.3",
     "html2canvas": "^1.4.1",

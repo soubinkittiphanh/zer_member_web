@@ -31,6 +31,16 @@ export const mutations = {
         const idx = state.listOfConfirmPaymentOrder.indexOf(order)
         state.listOfConfirmPaymentOrder.splice(idx,1)
     },
+    clearConfirmPaymentList(state){
+
+        state.listOfConfirmPaymentOrder.length= 0
+        console.log(`LIST OF PAYMENT HAS BEEN CLEARED ${state.listOfConfirmPaymentOrder.length}`);
+    },
+    clearConfirmStockList(state ){
+
+        state.listOfConfirmStockInOrder.length = 0
+        console.log(`LIST OF STOCK HAS BEEN CLEARED ${state.listOfConfirmStockInOrder.length}`);
+    },
     SetCurrencyList(state, currency) {
         state.currencyList = currency
     },
@@ -249,6 +259,14 @@ export const getters = {
 }
 // action to set sate
 export const actions = {
+    clearPaymentList(state){
+
+        state.commit("clearConfirmPaymentList")
+    },
+
+    clearStockList(state){
+        state.commit("clearConfirmStockList")
+    },
     removeOrderFromStockConfirm(state, order){
         state.commit("removeFromStockConfirm", order)
     },removeOrderFromPaymentConfirm(state,order){

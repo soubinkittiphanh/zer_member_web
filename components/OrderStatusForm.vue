@@ -14,9 +14,9 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-card v-for="order in confirmEntries" :key="order.id" class="mb-2">
-                        <v-card-text>
-                            <v-row>
+                    <v-card v-for="order in confirmEntries" :key="order.id" class="mb-2 pa-0">
+                        <v-card-text class="pa-0">
+                            <v-row class="pa-0 ma-0">
                                 <v-col cols="2">
                                     <v-text-field disabled v-model="order.trackingNumber"
                                         label="* Tracking No."></v-text-field>
@@ -68,8 +68,8 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
-                    Close
+                <v-btn color="warning" rounded variant="text" @click="orderStatus=='RECEIVED'?  clearStockList():clearPaymentList(); $emit('close-dialog');">
+                    Close 
                 </v-btn>
                 <v-btn color="primary" rounded variant="text" @click="merceEntryToPrint" v-if="orderStatus=='INVOICED'">
                     <i class="fa-solid fa-clipboard-check"></i>
@@ -134,7 +134,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['removeOrderFromStockConfirm', 'removeOrderFromPaymentConfirm']),
+        ...mapActions(['removeOrderFromStockConfirm', 'removeOrderFromPaymentConfirm','clearPaymentList','clearStockList']),
         formatNumber(val) {
             return getFormatNum(val)
         },

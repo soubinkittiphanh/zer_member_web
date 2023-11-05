@@ -26,7 +26,7 @@
         <v-layout row wrap>
           <v-col cols="6">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
-              max-width="290px" min-width="auto">
+              max-width="290px" min-width="1024">
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
                   prepend-icon="mdi-calendar" v-bind="attrs" @blur="date = parseDate(dateFormatted)"
@@ -54,9 +54,9 @@
             <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
               <span class="mdi mdi-plus"></span>Create
             </v-btn>
-            <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
+            <!-- <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
               <span class="mdi mdi-microsoft-excel"></span>Generate excel file
-            </v-btn>
+            </v-btn> -->
           </v-col>
           <v-col cols="6" class="text-right">
             <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
@@ -154,12 +154,12 @@ export default {
           sortable: true,
         },
         {
-          text: 'ຊື່ສິຄ້າ',
+          text: 'ລາຍການສິນຄ້າ',
           align: 'left',
           value: 'name',
           sortable: true,
         },
-        { text: 'Note', align: 'center', value: 'note' },
+        { text: 'ຄຳອະທິບາຍ', align: 'center', value: 'note' },
         { text: 'Tracking', align: 'center', value: 'trackingNumber' },
         { text: 'Link', align: 'center', value: 'link' },
         {
