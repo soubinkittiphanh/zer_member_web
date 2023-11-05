@@ -319,7 +319,7 @@ export default {
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
     async loadData() {
-      this.statusFormDialog = false;
+      // this.statusFormDialog = false;
       this.formDialog = false;
       const date = {
         startDate: this.date,
