@@ -24,7 +24,7 @@
                                 <v-col cols="1">
                                     <v-text-field v-model="order.shippingFee" label="* ຄ່າສົ່ງ"></v-text-field>
                                 </v-col>
-                                <v-col cols="2">
+                                <v-col cols="1">
                                     <v-autocomplete @input="currencyChange(order)" item-text="code" item-value="id"
                                         :items="currencyList" label="ສະກຸນເງິນ*"
                                         v-model="order.shippingFeeCurrencyId"></v-autocomplete>
@@ -40,6 +40,7 @@
                                     <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList"
                                         label="ການຊຳລະ*" v-model="order.paymentId"></v-autocomplete>
                                 </v-col>
+                                <v-spacer></v-spacer>
                                 <v-col cols="1" align-self="center">
                                     <v-btn color="warning" rounded variant="text"
                                         @click="removeItemFromConfirmEntrie(order)">
@@ -49,6 +50,13 @@
                                 <v-col cols="1" align-self="center">
                                     <v-btn color="primary" rounded variant="text" @click="confirmOrder(order)">
                                         <i class="fa-regular fa-circle-check"></i>
+                                    </v-btn>
+                                </v-col>
+                                <v-col cols="1" align-self="center" v-if="orderStatus=='INVOICED'">
+                                    <v-btn color="primary" rounded variant="text" @click="confirmOrder(order); printTicket(order)">
+                                        <i class="fa-regular fa-circle-check"></i>
+                                        &
+                                        <i class="fa-solid fa-print"></i>
                                     </v-btn>
                                 </v-col>
                             </v-row>
@@ -63,6 +71,10 @@
                 <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
+                <v-btn color="primary" rounded variant="text" @click="merceEntryToPrint" v-if="orderStatus=='INVOICED'">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    ອອກບິນໃຫ້ລູກຄ້າ
+                </v-btn>
             </v-card-actions>
         </v-card>
 
@@ -70,7 +82,7 @@
 </template>
 
 <script>
-import { swalSuccess, swalError2 } from '~/common'
+import { swalSuccess, swalError2, ticketHtml, getFormatNum } from '~/common'
 import { debounce } from 'lodash'
 import { mapActions, mapGetters } from 'vuex'
 export default {
@@ -92,6 +104,7 @@ export default {
     },
     data() {
         return {
+            logoCompany: require('~/assets/image/BWLOGO.jpeg'),
             confirmEntries: [],
             status: [
                 'ORDERED',
@@ -122,6 +135,116 @@ export default {
     },
     methods: {
         ...mapActions(['removeOrderFromStockConfirm', 'removeOrderFromPaymentConfirm']),
+        formatNumber(val) {
+            return getFormatNum(val)
+        },
+        merceEntryToPrint() {
+
+            let txnListHtml = ``
+            for (const item of this.confirmEntries) {
+                const price = item.shippingFee * item.shippingRate;
+                txnListHtml +=
+                    `<div class="ticket">
+            <div class="product-name">${item.name}</div>
+            <div class="price">  ${this.formatNumber(price)}</div>
+        </div>
+        <div class="product-name">${item.trackingNumber} X ${this.formatNumber(price)}</div>
+        <br>
+            `
+            }
+
+            const today = new Date()
+            let totalHtml = `
+<div class="ticket">
+            <div class="product-name"></div>
+        <div class="price">LAK ${this.formatNumber(this.ticketTotal)}</div>
+    </div>`
+
+            // <h5> Ticket ${item.id} </h5>
+            const windowContent = `
+ ${this.ticketCommon.header}
+    <body>
+        <div style="text-align: center;">
+            <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+        </div>
+        <h3> ໃບຮັບເງິນ</h3>
+        <h5> ວັນທີ ${today.toLocaleString()}</h5>
+        <h5> Ticket [Dynamic]</h5>
+        <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
+        <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+        <hr style="margin-top: 50px;"> </hr>
+        ${txnListHtml}
+        <hr> </hr>
+        ${totalHtml}
+        <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
+        
+    </body>
+    </html>
+`
+            const printWin = window.open(
+                '',
+                '',
+                'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+            )
+            printWin.document.open()
+            printWin.document.write(windowContent)
+
+            setTimeout(() => {
+                printWin.print()
+                printWin.close()
+            }, 1000)
+        },
+        printTicket(item) {
+            let txnListHtml = ``
+            const price = item.shippingFee * item.shippingRate;
+            txnListHtml +=
+                `<div class="ticket">
+                    <div class="product-name">${item.name}</div>
+                    <div class="price">  ${this.formatNumber(price)}</div>
+                </div>
+                <div class="product-name">${item.trackingNumber} X ${this.formatNumber(price)}</div>
+                <br>
+                    `
+            const today = new Date()
+            let totalHtml = `
+      <div class="ticket">
+                    <div class="product-name"></div>
+                <div class="price">LAK ${this.formatNumber((item['shippingFee'] * item['shippingRate']))}</div>
+            </div>`
+
+            const windowContent = `
+         ${this.ticketCommon.header}
+            <body>
+                <div style="text-align: center;">
+                    <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+                </div>
+                <h3> ໃບຮັບເງິນ</h3>
+                <h5> ວັນທີ ${today.toLocaleString()}</h5>
+                <h5> Ticket ${item.id} </h5>
+                <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
+                <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+                <hr style="margin-top: 50px;"> </hr>
+                ${txnListHtml}
+                <hr> </hr>
+                ${totalHtml}
+                <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
+                
+            </body>
+            </html>
+        `
+            const printWin = window.open(
+                '',
+                '',
+                'left=0,top=0,width=2480,height=3508,toolbar=0,scrollbars=0,status=0'
+            )
+            printWin.document.open()
+            printWin.document.write(windowContent)
+
+            setTimeout(() => {
+                printWin.print()
+                printWin.close()
+            }, 1000)
+        },
         currencyChange(order) {
             const orderIdx = this.confirmEntries.indexOf(order)
             const currency = this.currencyList.find(el => el['id'] == this.confirmEntries[orderIdx].shippingFeeCurrencyId);
@@ -139,10 +262,14 @@ export default {
             }
         },
         async confirmOrder(order) {
+            // if(order['shippingFee']<=0 && this.orderStatus=='RECEIVED') return swalError2(this.$swal, "Error", 'ກະລຸນາໃສ່ຄ່າສົ່ງ');
+            if(order['shippingFee']<=0 ) return swalError2(this.$swal, "Error", 'ກະລຸນາໃສ່ຄ່າສົ່ງ');
             if (!this.isloading) {
                 // Implement form submission logic here
                 this.isloading = true
                 let api = `api/order/update/${order.id}`
+                order.userId = this.user.id
+                order.locationId = this.currentTerminal['locationId']
                 await this.$axios.put(api, order).then(response => {
                     this.refreshData()
                     // *** remove from state ****
@@ -161,8 +288,24 @@ export default {
         }
     },
     computed: {
+        user() {
+            return this.$auth.user || ''
+        },
+        currentTerminal() {
+            return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+        },
+        ticketCommon() {
+            return ticketHtml();
+        },
         currencyList() {
             return this.findAllCurrency
+        },
+        ticketTotal() {
+            const totalAmount = this.confirmEntries.reduce((accumulator, currentItem) => {
+                return accumulator + (currentItem['shippingFee'] * currentItem['shippingRate']);
+
+            }, 0);
+            return totalAmount
         },
         paymentList() {
             return this.findAllPayment

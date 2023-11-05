@@ -5,7 +5,7 @@
       <order-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="handleEvent" @reload-data="loadData"
         :key="componentKey" />
     </v-dialog>
-    <v-dialog v-model="statusFormDialog" max-width="1024">
+    <v-dialog v-model="statusFormDialog" max-width="auto">
       <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
         @reload-data="loadData" :key="orderStatusComponentKey" />
     </v-dialog>
