@@ -94,7 +94,8 @@ export default {
       this.setSelectedLocation(location)
       //********** refresh component so the data will be update fresh **********//
       this.terminalDialog = false
-      this.$router.push('/admin')
+      // this.$router.push('/admin') // Main screen for minimart business
+      this.$router.push('/admin/orders') // Main screen for shipping bussiness
     },
     async userLogin() {
       try {

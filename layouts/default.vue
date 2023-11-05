@@ -130,68 +130,68 @@ export default {
       mainComponentKey: 1,
       groupAExpanded: false,
       menuGroup2: [
-        {
-          icon: "mdi mdi-printer",
-          name: 'ການຂາຍ',
-          code: 'POS',
-          expand: false,
-          menuList: [
-            {
-              icon: 'mdi-view-list',
-              title: 'POS',
-              to: '/pos',
-            },
-            {
-              icon: 'mdi-receipt-text-arrow-right',
-              title: 'ໃບສະເຫນີລາຄາ',
-              to: '/admin/quotationList',
-            },
-            {
-              icon: 'mdi-receipt-text-check-outline',
-              title: 'ລາຍການບິນຂາຍ POS',
-              to: '/admin/ordersFromPos',
-            },
-            {
-              icon: 'mdi-receipt-text-check-outline',
-              title: 'ລາຍການບິນຂາຍ Online',
-              to: '/admin/ordersFromPosOnline',
-            },
-            {
-              icon: 'mdi-receipt-text-check-outline',
-              title: 'ຕິດຕາມ COD',
-              to: '/admin/ordersFromPosOnlineCOD',
-            },
-            {
-              icon: 'mdi-receipt-text-remove-outline',
-              title: 'ຍົກເລີກ - ສົ່ງຄືນ',
-              to: '/admin/ordersFromPosCancel',
-            },
-          ]
-        },
-        {
-          icon: "mdi mdi-bottle-wine",
-          name: 'ສິນຄ້າ',
-          code: 'PRODUCT',
-          expand: false,
-          menuList: [
-            {
-              icon: 'mdi-view-list',
-              title: 'ຈັດການໝວດສິນຄ້າ',
-              to: '/admin/category',
-            },
-            {
-              icon: 'mdi-barcode',
-              title: 'ລາຍການສິນຄ້າ',
-              to: '/admin/product/productlist',
-            },
-            {
-              icon: 'mdi mdi-bottle-wine',
-              title: 'ຫົວໜ່ວຍສິນຄ້າ',
-              to: '/admin/unit',
-            },
+        // {
+        //   icon: "mdi mdi-printer",
+        //   name: 'ການຂາຍ',
+        //   code: 'POS',
+        //   expand: false,
+        //   menuList: [
+        //     {
+        //       icon: 'mdi-view-list',
+        //       title: 'POS',
+        //       to: '/pos',
+        //     },
+        //     {
+        //       icon: 'mdi-receipt-text-arrow-right',
+        //       title: 'ໃບສະເຫນີລາຄາ',
+        //       to: '/admin/quotationList',
+        //     },
+        //     {
+        //       icon: 'mdi-receipt-text-check-outline',
+        //       title: 'ລາຍການບິນຂາຍ POS',
+        //       to: '/admin/ordersFromPos',
+        //     },
+        //     {
+        //       icon: 'mdi-receipt-text-check-outline',
+        //       title: 'ລາຍການບິນຂາຍ Online',
+        //       to: '/admin/ordersFromPosOnline',
+        //     },
+        //     {
+        //       icon: 'mdi-receipt-text-check-outline',
+        //       title: 'ຕິດຕາມ COD',
+        //       to: '/admin/ordersFromPosOnlineCOD',
+        //     },
+        //     {
+        //       icon: 'mdi-receipt-text-remove-outline',
+        //       title: 'ຍົກເລີກ - ສົ່ງຄືນ',
+        //       to: '/admin/ordersFromPosCancel',
+        //     },
+        //   ]
+        // },
+        // {
+        //   icon: "mdi mdi-bottle-wine",
+        //   name: 'ສິນຄ້າ',
+        //   code: 'PRODUCT',
+        //   expand: false,
+        //   menuList: [
+        //     {
+        //       icon: 'mdi-view-list',
+        //       title: 'ຈັດການໝວດສິນຄ້າ',
+        //       to: '/admin/category',
+        //     },
+        //     {
+        //       icon: 'mdi-barcode',
+        //       title: 'ລາຍການສິນຄ້າ',
+        //       to: '/admin/product/productlist',
+        //     },
+        //     {
+        //       icon: 'mdi mdi-bottle-wine',
+        //       title: 'ຫົວໜ່ວຍສິນຄ້າ',
+        //       to: '/admin/unit',
+        //     },
 
-          ]
-        },
+        //   ]
+        // },
         {
           icon: "mdi mdi-warehouse",
           name: 'ສາງສິນຄ້າ',
@@ -257,24 +257,24 @@ export default {
             },
           ]
         },
-        {
-          icon: "mdi mdi-truck-cargo-container",
-          name: 'ຂົນສົ່ງ',
-          code: 'SHIPPING',
-          expand: false,
-          menuList: [
-            {
-              icon: 'mdi mdi-truck-cargo-container',
-              title: 'ຈັດການຂົນສົ່ງ',
-              to: '/admin/shipping',
-            },
-            {
-              icon: 'mdi-bike-fast',
-              title: 'ຈັດການRider',
-              to: '/admin/rider',
-            },
-          ]
-        },
+        // {
+        //   icon: "mdi mdi-truck-cargo-container",
+        //   name: 'ຂົນສົ່ງ',
+        //   code: 'SHIPPING',
+        //   expand: false,
+        //   menuList: [
+        //     {
+        //       icon: 'mdi mdi-truck-cargo-container',
+        //       title: 'ຈັດການຂົນສົ່ງ',
+        //       to: '/admin/shipping',
+        //     },
+        //     {
+        //       icon: 'mdi-bike-fast',
+        //       title: 'ຈັດການRider',
+        //       to: '/admin/rider',
+        //     },
+        //   ]
+        // },
         {
           icon: "mdi mdi-shopping",
           name: 'shipping',
@@ -306,11 +306,11 @@ export default {
               title: 'Vendor',
               to: '/admin/vendor',
             },
-            {
-              icon: 'mdi mdi-tooltip-account',
-              title: 'ລູກຄ້າ',
-              to: '/admin/client',
-            },
+            // {
+            //   icon: 'mdi mdi-tooltip-account',
+            //   title: 'ລູກຄ້າ',
+            //   to: '/admin/client',
+            // },
           ]
         },
         {

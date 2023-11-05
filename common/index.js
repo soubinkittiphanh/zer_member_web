@@ -383,8 +383,9 @@ export const hostName = () => {
   // const baseURL = 'http://192.168.1.8:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
   // const baseURL = 'http://150.95.31.23:8006' // ***PRODUCTION laofriend*** 
+  const baseURL = 'http://150.95.31.23:8007' // ***DEMO*** 
   // const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
-  const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
+  // const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
   return baseURL;
 }
 export const mainCompanyInfo = () => {
@@ -394,7 +395,7 @@ export const mainCompanyInfo = () => {
     tel: '9999-9999',
     imageUrl: '',
     imageName: '',
-    env: 'UAT'
+    env: 'DEMO'
   }
   return info;
 }
