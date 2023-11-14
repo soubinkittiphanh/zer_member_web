@@ -494,7 +494,7 @@ export default {
       // }, 1000);
     },
     async loadMenu() {
-      console.log(`===> Update form record load`);
+      console.log(`===> Loadin user menu`);
       const response = await this.$axios.get(`api/group/find/${this.user.userGroup.id}`)
       this.myMenu = response.data['menuHeaders']
     },
