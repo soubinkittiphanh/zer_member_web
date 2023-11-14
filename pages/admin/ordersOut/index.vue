@@ -48,21 +48,27 @@
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
-            <!-- <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx /> -->
+            <v-row>
+              <v-col cols="6">
+                <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
+                  <span class="mdi mdi-plus"></span>Create
+                </v-btn>
+              </v-col>
+              <v-spacer></v-spacer>
+              <v-col cols="6" class="text-right">
+                <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
+                  <span class="mdi mdi-cloud-download"></span>
+                  ດຶງລາຍງານ
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-col>
-          <v-col cols="6" class="text-left">
-            <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
-              <span class="mdi mdi-plus"></span>Create
-            </v-btn>
-            <!-- <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
-              <span class="mdi mdi-microsoft-excel"></span>Generate excel file
-            </v-btn> -->
-          </v-col>
-          <v-col cols="6" class="text-right">
-            <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
-              <span class="mdi mdi-cloud-download"></span>
-              ດຶງລາຍງານ
-            </v-btn>
+          <v-col cols="4" class="text-center">
+            <v-text-field disabled>
+              <template v-slot:label>
+                <span style="color: black; font-weight: bolder;">{{ `ອໍເດີທັງໝົດ: ${filterOrders.length} ລາຍການ` }}</span>
+              </template>
+            </v-text-field>
           </v-col>
         </v-layout>
       </v-card-title>
@@ -123,7 +129,7 @@ import { mapActions, mapGetters } from 'vuex'
 //     findAllListOfConfirmStockIn
 //     findAllListOfConfirmPayment
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
-import { ticketHtml,jsDateToMysqlDate, swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
+import { ticketHtml, jsDateToMysqlDate, swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
   components: {
     OrderForm,
@@ -150,7 +156,7 @@ export default {
       logoCompany: require('~/assets/image/BWLOGO.jpeg'),
       headers: [
         {
-          text: 'ວັນທີ',
+          text: 'ວັນທີສັ່ງ',
           align: 'left',
           value: 'bookingDate',
           sortable: true,
@@ -193,6 +199,12 @@ export default {
           text: 'ແກ້ໄຂ',
           align: 'center',
           value: 'edit',
+          sortable: false,
+        },
+        {
+          text: 'ສະຖານະ',
+          align: 'end',
+          value: 'status',
           sortable: false,
         },
       ],

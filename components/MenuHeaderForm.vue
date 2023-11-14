@@ -9,32 +9,53 @@
             <v-card-title>
                 <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
-                    ຈັດການກຸ່ມຜູ້ໃຊ້ງານ
+                    ຈັດການເມນູ
                 </v-chip>
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-text-field :disabled="!isCreate" v-model="form.code" label="* Code" required
-                        :rules="nameRules"></v-text-field>
-                    <v-text-field v-model="form.name" label="* ຊື່" required :rules="nameRules"></v-text-field>
-                    <v-autocomplete item-text="llname" item-value="id" :items="authorityList" label="Authority*"
-                        v-model="authoritySelected"></v-autocomplete>
-                    <v-btn size="large" variant="outlined" @click="addAuthority" class="primary" rounded>
-                        <span class="mdi mdi-note-plus-outline"></span>
-                        ເພີ່ມ Authority
-                    </v-btn>
+                    <v-row>
+                        <v-col cols="3">
+                            <v-text-field :disabled="!isCreate" v-model="form.code" label="* Code" required
+                                :rules="nameRules"></v-text-field>
+                        </v-col>
+                        <v-col cols="3">
+                            <v-text-field v-model="form.name" label="* ຊື່" required :rules="nameRules"></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field v-model="form.llname" label="* ຊື່ LL"></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field v-model="form.remark" label="remark"></v-text-field>
+                        </v-col>
+                        <v-col cols="2" align-self="center">
+                            <v-icon color="primary">{{ form.icon }}</v-icon>
+                        </v-col>
+                        <v-col cols="4">
+                            <v-text-field v-model="form.icon" label="icon"></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-autocomplete item-text="name" item-value="id" :items="menuLineList" label="ເມນູຍ່ອຍ*"
+                                v-model="menuLineSelected">
+                            </v-autocomplete>
+                            <v-btn size="large" variant="outlined" @click="addMenuLine" class="primary" rounded>
+                                <span class="mdi mdi-note-plus-outline"></span>
+                                ເພີ່ມ ເມນູຍ່ອຍ
+                            </v-btn>
+                        </v-col>
+                    </v-row>
                     <v-checkbox v-model.number="form.isActive" label="Is Active"></v-checkbox>
                 </v-form>
                 <div>
                     <v-row justify="center" align="center">
                         <v-divider></v-divider>
-                        <div class="mx-2">ສິດທິ ອານຸຍາດໃນການນຳໃຊ້</div>
+                        <div class="mx-2">ເມນູຍ່ອຍທີ່ ອານຸຍາດໃນການນຳໃຊ້</div>
                         <v-divider></v-divider>
                     </v-row>
                     <v-row no-gutters>
-                        <v-chip v-for="menu in form.menuHeaders" :key="menu.id" class="ma-2" color="warning"
-                            variant="outlined" @click="removeAuthority(menu)">
-                            {{ menu.code }} - {{ menu.llname }}
+                        <v-chip v-for="menu in form.menuLines" :key="menu.id" class="ma-2" color="warning"
+                            variant="outlined" @click="removeMenuLine(menu)">
+                            {{ menu.id }} - {{ menu.name }}
                         </v-chip>
                     </v-row>
                 </div>
@@ -73,12 +94,15 @@ export default {
         return {
             form: {
                 code: '',
+                menuLines: [],
                 name: '',
-                menuHeaders: [],
+                llname: '',
+                icon: '',
+                remark: '',
                 isActive: true
             },
-            authorityList: [],
-            authoritySelected: 1,
+            menuLineList: [],
+            menuLineSelected: 1,
             isloading: false,
             nameRules: [
                 value => !!value || 'Name is required',
@@ -86,39 +110,37 @@ export default {
             ],
         };
     },
-    // mounted() {
-    //     this.loadEntry();
-    // },
     async created() {
         this.loadEntry();
-        this.loadAuthority();
+        this.loadMenuLine();
     },
     methods: {
-        removeAuthority(menu) {
-            const idx = this.form.menuHeaders.indexOf(menu)
-            this.form.menuHeaders.splice(idx, 1);
+        removeMenuLine(menu) {
+            const idx = this.form.menuLines.indexOf(menu)
+            this.form.menuLines.splice(idx, 1);
         },
-        addAuthority() {
-            if(!this.authoritySelected) return
-            const newAuthority = this.authorityList.find(el => el.id == this.authoritySelected)
-            console.log(`Authority ${newAuthority.code}`);
-            if (this.form.menuHeaders.length == 0) {
-                console.log(`TEHERE IS NO TERMINAL`);
-                this.form.menuHeaders.push(newAuthority)
-            } else if (this.form.menuHeaders == 'undefined') {
-                this.form.menuHeaders.push(newAuthority)
+        addMenuLine() {
+            if (!this.menuLineSelected) return
+            const newMenuLine = this.menuLineList.find(el => el.id == this.menuLineSelected)
+            console.log(`Authority ${newMenuLine.id} len ${this.form.menuLines.length}`);
+            
+            if (this.form.menuLines.length == 0) {
+                console.log(`TEHERE IS NO MENULINE`);
+                this.form.menuLines.push(newMenuLine)
+            } else if (this.form.menuLines == 'undefined') {
+                this.form.menuLines.push(newMenuLine)
             } else {
-                const authority = this.form.menuHeaders.find(el => el.id == this.authoritySelected)
-                console.log(`ADD TERMINAL ${authority}`)
-                if (!authority) this.form.menuHeaders.push(newAuthority)
+                const menu = this.form.menuLines.find(el => el.id == this.menuLineSelected)
+                console.log(`ADD menu line ${menu}`)
+                if (!menu) this.form.menuLines.push(newMenuLine)
             }
-            // this.record.terminals.splice(idx, 1);
+            // this.form.menuLines.splice(idx, 1);
         },
         async commitRecord() {
             if (this.$refs.form.validate() && !this.isloading) {
                 // Implement form submission logic here
                 this.isloading = true
-                let api = this.isCreate ? 'api/group/create' : `api/group/update/${this.recordId}`
+                let api = this.isCreate ? 'api/menuHeader/create' : `api/menuHeader/update/${this.recordId}`
                 console.log("API => ", api);
                 if (this.isCreate) {
                     await this.$axios.post(api, this.form).then(response => {
@@ -144,7 +166,10 @@ export default {
         async loadEntry() {
             console.log(`===> Update form record load`);
             if (this.recordId && !this.isCreate) {
-                await this.$axios.get(`api/group/find/${this.recordId}`).then(response => {
+                await this.$axios.get(`api/menuHeader/find/${this.recordId}`).then(response => {
+                    // this.form.name = response.data["name"]
+                    // this.form.code = response.data["code"]
+                    // this.form.isActive = response.data["isActive"]
                     this.form = response.data
                 }).catch(error => {
                     console.log("Cannot fetch data " + error);
@@ -152,21 +177,16 @@ export default {
             }
 
         },
-        async loadAuthority() {
-            if (this.isloading) return
-            this.isloading = true
-            await this.$axios
-                .get(`api/menuHeader/find`)
-                .then((res) => {
-                    // ****** Clear Old Data
-                    this.authorityList = res.data
-                    this.authoritySelected = this.authorityList[0]['id']
+        async loadMenuLine() {
+            console.log(`===> Update form record load`);
+            if (this.recordId && !this.isCreate) {
+                await this.$axios.get(`api/menuLine/find`).then(response => {
+                    this.menuLineList = response.data
+                }).catch(error => {
+                    console.log("Cannot fetch data " + error);
                 })
-                .catch((er) => {
-                    swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
-                    console.log('Error ===>: ' + er)
-                })
-            this.isloading = false
+            }
+
         },
         refreshData() {
             this.$emit('reload-data')

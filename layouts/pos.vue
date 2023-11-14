@@ -128,12 +128,12 @@
                     <template v-slot:default>
                         <thead>
                             <tr>
-                                <th class="text-left primary--text secondary"></th>
-                                <th class="text-left primary--text secondary">ສິນຄ້າ</th>
-                                <th class="text-left primary--text secondary">-</th>
-                                <th class="text-left primary--text secondary">ຈຳນວນ</th>
-                                <th class="text-left primary--text secondary">+</th>
-                                <th class="text-left primary--text secondary">ລາຄາ</th>
+                                <th class="text-left"></th>
+                                <th class="text-left">ສິນຄ້າ</th>
+                                <th class="text-left">-</th>
+                                <th class="text-left">ຈຳນວນ</th>
+                                <th class="text-left">+</th>
+                                <th class="text-left">ລາຄາ</th>
                             </tr>
                         </thead>
                     </template>

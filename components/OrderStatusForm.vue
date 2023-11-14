@@ -17,7 +17,15 @@
                     <v-card v-for="order in confirmEntries" :key="order.id" class="mb-2 pa-0">
                         <v-card-text class="pa-0">
                             <v-row class="pa-0 ma-0">
-                                <v-col cols="2">
+                                <v-col cols="1">
+                                    <v-text-field  v-model="order.client.name"
+                                        label="* ຊື່ລູກຄ້າ"></v-text-field>
+                                </v-col>
+                                <v-col cols="1">
+                                    <v-text-field  v-model="order.client.telephone"
+                                        label="* ເບີໂທ"></v-text-field>
+                                </v-col>
+                                <v-col cols="1">
                                     <v-text-field disabled v-model="order.trackingNumber"
                                         label="* Tracking No."></v-text-field>
                                 </v-col>
@@ -32,11 +40,11 @@
                                 <v-col cols="1">
                                     <v-text-field disabled v-model="order.shippingRate" label="ອັດຕາແລກປ່ຽນ"></v-text-field>
                                 </v-col>
-                                <v-col cols="2">
+                                <!-- <v-col cols="1">
                                     <v-select v-if="orderStatus != 'ORDERED'" disabled v-model="order.status"
                                         :items="status" label="ສະຖານະເຄື່ອງ" required></v-select>
-                                </v-col>
-                                <v-col cols="2" v-if="orderStatus == 'INVOICED'">
+                                </v-col> -->
+                                <v-col cols="1" v-if="orderStatus == 'INVOICED'">
                                     <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList"
                                         label="ການຊຳລະ*" v-model="order.paymentId"></v-autocomplete>
                                 </v-col>

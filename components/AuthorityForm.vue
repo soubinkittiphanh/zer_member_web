@@ -9,7 +9,7 @@
             <v-card-title>
                 <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
-                    ຈັດການກ ສິດທິການໃຊ້ງານ
+                    ຈັດການ ສິດທິການໃຊ້ງານ
                 </v-chip>
             </v-card-title>
             <v-card-text>
@@ -25,7 +25,7 @@
                 <v-btn color="warning" rounded variant="text" @click="$emit('close-dialog')">
                     Close
                 </v-btn>
-                <v-btn color="primary" disabled rounded variant="text" @click="commitRecord">
+                <v-btn color="primary"  rounded variant="text" @click="commitRecord">
                     Save
                 </v-btn>
             </v-card-actions>

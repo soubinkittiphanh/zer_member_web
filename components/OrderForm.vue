@@ -99,10 +99,10 @@
                                 v-model="form.vendorId"></v-autocomplete>
                         </v-col>
                         <v-col cols="3">
-                            <v-text-field v-model="form.trackingNumber" label="* Tracking No."></v-text-field>
+                            <v-text-field v-model="form.trackingNumber" label="Tracking No."></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field v-model="form.link" label="* ລິ້ງສິນຄ້າ"></v-text-field>
+                            <v-text-field v-model="form.link" label="ລິ້ງສິນຄ້າ"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>

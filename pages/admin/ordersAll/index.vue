@@ -43,27 +43,27 @@
                   v-on="on"></v-text-field>
               </template>
               <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
-            </v-menu>
 
+            </v-menu>
+            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
+            <v-row>
+              <v-col cols="6" class="text-left">
+                <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
+                  <span class="mdi mdi-plus"></span>Create
+                </v-btn>
+              </v-col>
+              <v-col cols="6" class="text-right">
+                <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
+                  <span class="mdi mdi-cloud-download"></span>
+                  ດຶງລາຍງານ
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-col>
           <v-col cols="6">
-            <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
-            <!-- <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx /> -->
+            <order-sumary-card-v-2 :orderDetail="orderSummary" class="pa-4" />
           </v-col>
-          <v-col cols="6" class="text-left">
-            <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
-              <span class="mdi mdi-plus"></span>Create
-            </v-btn>
-            <!-- <v-btn size="large" variant="outlined" @click="exportToExcel" class="primary" rounded>
-              <span class="mdi mdi-microsoft-excel"></span>Generate excel file
-            </v-btn> -->
-          </v-col>
-          <v-col cols="6" class="text-right">
-            <v-btn size="large" variant="outlined" @click="loadData" class="primary" rounded>
-              <span class="mdi mdi-cloud-download"></span>
-              ດຶງລາຍງານ
-            </v-btn>
-          </v-col>
+
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
@@ -142,7 +142,7 @@ export default {
       dialogKey: 1,
       headers: [
         {
-          text: 'ວັນທີ',
+          text: 'ວັນທີສັ່ງ',
           align: 'left',
           value: 'bookingDate',
           sortable: true,
@@ -180,6 +180,12 @@ export default {
           value: 'edit',
           sortable: false,
         },
+        {
+          text: 'ສະຖານະ',
+          align: 'end',
+          value: 'status',
+          sortable: false,
+        },
       ],
       menu1: false,
       menu2: false,
@@ -208,6 +214,34 @@ export default {
     user() {
       return this.$auth.user || ''
     },
+    orderSummary() {
+      const orderedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'),true)
+      const receivedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'RECEIVED'),true)
+      const invoicedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'INVOICED'),true)
+
+      const orderedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'),false)
+      const receivedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'RECEIVED'),false)
+      const invoicedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'INVOICED'),false)
+      return [{
+        'name': 'ອໍເດີ ',
+        'amount': getFormatNum(orderedAmount),
+        'value': getFormatNum(this.entries.filter(el => el['status'] == 'ORDERED').length),
+        'deliveryFee': getFormatNum(orderedDeliverFee),
+      }, {
+        'name': 'ອໍເດີ ຮັບເຂົ້າສາງ',
+        'amount': getFormatNum(receivedAmount),
+        'value': getFormatNum(this.entries.filter(el => el['status'] == 'RECEIVED').length),
+        'deliveryFee': getFormatNum(receivedDeliverFee),
+      }, 
+      {
+        'name': 'ອໍເດີ ຈັດສົ່ງລູກຄ້າ',
+        'amount': getFormatNum(invoicedAmount),
+        'value': getFormatNum(this.entries.filter(el => el['status'] == 'INVOICED').length),
+        'deliveryFee': getFormatNum(invoicedDeliverFee),
+      },
+
+    ]
+    }
   },
   watch: {
     date(val) {
@@ -220,6 +254,16 @@ export default {
     },
   },
   methods: {
+    getFormatNum(val) {
+      return getFormatNum(val);
+    },
+    orderPriceSummary(orders,isPrice) {
+      const itemProp = isPrice? 'price':'shippingFee'
+      let finalTotal = orders.reduce((total, item) => {
+        return total + item[itemProp];
+      }, 0);
+      return finalTotal;
+    },
     handleKeyDown(event) {
       if (this.timer) {
         clearInterval(this.timer)
