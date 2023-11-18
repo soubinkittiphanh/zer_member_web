@@ -417,22 +417,19 @@ export default {
         const user = iterator['user']['cus_name'];
         const customer = iterator['client']['name'];
         const product = iterator['product']['pro_name'];
-
-        delete iterator['user']
-        delete iterator['unitId']
-        delete iterator['productId']
-        delete iterator['headerId']
-        delete iterator['updateTimestamp']
-        delete iterator['isActive']
-        delete iterator['id']
-        delete iterator['product']
-        delete iterator['header']
-        delete iterator['client']
-
         iterator['userName'] = user
         iterator['customer'] = customer
         iterator['productName'] = product
-        messageLineExport.push(iterator)
+        const newRow = {
+          'ສິນຄ້າ':iterator['productName'],
+          'ຈຳນວນ':iterator['quantity'],
+          'ລາຄາ':iterator['price'],
+          'ສ່ວນຫຼຸດ':iterator['discount'],
+          'ລວມ':iterator['total'],
+          'ຜູ້ຂາຍ':iterator['userName'],
+          'ລູກຄ້າ':iterator['customer'],
+        }
+        messageLineExport.push(newRow)
  
       }
       const worksheet = this.$xlsx.utils.json_to_sheet(messageLineExport);

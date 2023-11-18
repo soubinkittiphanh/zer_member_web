@@ -91,13 +91,9 @@
             <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
-        <!-- <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
-          isedit = true
-            ">
-            <i class="fa fa-wallet"></i>
-          </v-btn>
-        </template> -->
+        <template v-slot:[`item.updateTimestamp`]="{ item }">
+          {{ findInvoicingDate(item) }}
+        </template>
         <template v-slot:[`item.notify`]="{ item }">
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
             <a :href="whatsappContactLink" target="_blank">
@@ -115,6 +111,13 @@
           <a :href="item.link" target="_blank">
             <i class="fa-solid fa-link"></i>
           </a>
+        </template>
+        <template v-slot:[`item.histories`]="{ item }">
+          <v-btn color="primary" text @click="printTicket(item)">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            {{ item.histories.length }}
+          </v-btn>
+
         </template>
       </v-data-table>
     </v-card>
@@ -162,6 +165,12 @@ export default {
           sortable: true,
         },
         {
+          text: 'ວັນທີສັ່ງອອກບິນ',
+          align: 'left',
+          value: 'updateTimestamp',
+          sortable: true,
+        },
+        {
           text: 'ຊືລູກຄ້າ',
           align: 'left',
           value: 'client.name',
@@ -205,6 +214,12 @@ export default {
           text: 'ສະຖານະ',
           align: 'end',
           value: 'status',
+          sortable: false,
+        },
+        {
+          text: 'ປະຫວັດອໍເດີ',
+          align: 'end',
+          value: 'histories',
           sortable: false,
         },
       ],
@@ -258,6 +273,18 @@ export default {
     },
   },
   methods: {
+    findInvoicingDate(order){
+      let invoicingDate = order['updateTimestamp'].split('T')[0]
+      let orderWithInvoicedDate =  null
+      if(order['histories'].length>0){
+        orderWithInvoicedDate = order['histories'].find(el=>el['status'] == 'INVOICED')
+        if(orderWithInvoicedDate!=undefined){
+          console.log(`ORDER STATUS: ${orderWithInvoicedDate['status']} ORDER INVOICED DATE ${orderWithInvoicedDate['updateTimestamp']}`);
+          invoicingDate = orderWithInvoicedDate['updateTimestamp'].split('T')[0]
+        }
+      }
+      return invoicingDate;
+    },
     ...mapActions(['addOrderToConformPaymentList', 'setSelectedTerminal', 'setSelectedLocation']),
     formatNumber(val) {
       return getFormatNum(val)

@@ -244,7 +244,6 @@ export default {
       if (event.key == 'Enter') {
         if (this.barcode) {
           // ************ Find product from this barcode and add to cart ************ //
-          // this.findProductFromBarcode(this.barcode)
           // Handle barcode [Receiving, Invoicing]
           console.log(`BACORD SCAN RESULT: ${this.barcode}`);
           this.findOrderByTrackingNumber(this.barcode)
@@ -261,14 +260,13 @@ export default {
       console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
       const order = this.entries.find(el => el['trackingNumber'] == barcode)
       if (order != undefined) {
-
-        // return this.changeOrderStatus('RECEIVED', order['id'])
-        // this.changeOrderStatus(order)
         this.orderStatusComponentKey += 1;
         this.entrySelectedId = order.id;
         this.statusFormDialog = true;
         this.isCreate = false;
         this.addOrderToConfirmStockInList(order)
+      }else{
+        // Handle order not found here
       }
 
     },

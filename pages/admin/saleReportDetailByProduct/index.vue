@@ -138,9 +138,9 @@
             {{ numberWithCommas(item.totalAmount) }}
           </template>
           <template v-slot:[`item.totalPrice`]="{ item }">
-            {{ numberWithCommas(item.totalPrice/item.totalQTY) }}
+            {{ numberWithCommas(item.totalPrice / item.totalQTY) }}
           </template>
-         
+
         </v-data-table>
 
       </v-card>
@@ -149,7 +149,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth,getFormatNum } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
@@ -177,7 +177,7 @@ export default {
       componentCancelFormKey: 1,
       cancelForm: false,
       OrderIdSelected: '',
-      
+
       productList: [],
       creteria: {
         productId: -1,
@@ -377,18 +377,22 @@ export default {
 
   methods: {
     exportToExcel() {
-      let messageLineExport = []
+      let messageLineExport = [];
       for (const iterator of this.activeOrderHeaderList) {
-        const user = iterator['header']['user']['cus_name'];
         const product = iterator['product']['pro_name'];
-        delete iterator['product']
-        delete iterator['header']
-        iterator['price'] = iterator['totalPrice']/iterator['totalQTY']
-        // iterator['userName'] = user
-        iterator['productName'] = product
-        delete iterator['totalPrice']
-        messageLineExport.push(iterator)
- 
+        iterator['productName'] = product;
+        iterator['totalQTY'] = iterator['totalQTY'];
+        iterator['price'] = iterator['totalPrice'] / iterator['totalQTY'];
+        iterator['totalDiscount'] = iterator['totalDiscount'];
+        iterator['totalAmount'] = iterator['totalAmount'];
+        const newRow = {
+          'productName': iterator['productName'],
+          'totalQTY': iterator['totalQTY'],
+          'price': iterator['price'],
+          'totalDiscount': iterator['totalDiscount'],
+          'totalAmount': iterator['totalAmount'],
+        }
+        messageLineExport.push(newRow);
       }
       const worksheet = this.$xlsx.utils.json_to_sheet(messageLineExport);
       const workbook = this.$xlsx.utils.book_new();
@@ -463,7 +467,7 @@ export default {
       try {
         const response = await this.$axios.get(apiLine);
         this.productList = response.data
-        this.productList.push({id:-1,'pro_name':'ທັງຫມົດ'})
+        this.productList.push({ id: -1, 'pro_name': 'ທັງຫມົດ' })
       } catch (error) {
         swalError2(this.$swal, 'Error', 'Could no load data ' + JSON.stringify(error))
       }

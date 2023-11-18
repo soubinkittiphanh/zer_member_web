@@ -409,17 +409,17 @@ export default {
       for (const iterator of this.orderLineByUser) {
         const user = iterator['user']['cus_name'];
         const product = iterator['product']['pro_name'];
-
-        delete iterator['user']
-        delete iterator['product']
-        delete iterator['header']
-        delete iterator['updateTimestamp']
-        delete iterator['isActive']
-        delete iterator['headerId']
-
         iterator['userName'] = user
         iterator['productName'] = product
-        messageLineExport.push(iterator)
+        const newRow = {
+          'ສິນຄ້າ':iterator['productName'],
+          'ຈຳນວນ':iterator['quantity'],
+          'ລາຄາ':iterator['price'],
+          'ສ່ວນຫຼຸດ':iterator['discount'],
+          'ລວມ':iterator['total'],
+          'ຜູ້ຂາຍ':iterator['userName'],
+        }
+        messageLineExport.push(newRow)
  
       }
       const worksheet = this.$xlsx.utils.json_to_sheet(messageLineExport);

@@ -22,14 +22,14 @@
       </v-layout>
       <v-list>
         <!-- Home -->
-        <!-- <v-list-item to="/admin" router exact>
+        <v-list-item to="/admin" router exact>
           <v-list-item-action>
             <v-icon color="white">mdi mdi-home-circle-outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="'Home'" :style="{ color: 'white' }" />
           </v-list-item-content>
-        </v-list-item> -->
+        </v-list-item>
         <!-- Group A -->
         <v-divider></v-divider>
         <!-- :disabled="!isGranted(menu.code)"  -->

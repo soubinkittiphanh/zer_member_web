@@ -18,13 +18,33 @@
                         <v-card-text class="pa-0">
                             <v-row class="pa-0 ma-0">
                                 <v-col cols="1">
-                                    <v-text-field  v-model="order.client.name"
-                                        label="* ຊື່ລູກຄ້າ"></v-text-field>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field @volumechange="testMyTrigger" v-model="order.client.telephone" label="* ເບີໂທ"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-card v-for="client in clientOption" :key="client['id']">
+                                                <v-card-text>
+                                                    <v-row>
+                                                        <v-col cols="8">
+                                                            {{ client['name'].concat(' - ').concat(client['telephone']) }}
+                                                        </v-col>
+                                                        <v-col cols="2" align-self="center">
+                                                            <v-btn color="primary" rounded variant="text"
+                                                                @click="selectedClientNew(client['id'])">
+                                                                <i class="fa-regular fa-circle-check"></i>
+                                                            </v-btn>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-col>
+                                    </v-row>
                                 </v-col>
                                 <v-col cols="1">
-                                    <v-text-field  v-model="order.client.telephone"
-                                        label="* ເບີໂທ"></v-text-field>
+                                    <v-text-field v-model="order.client.name" label="* ຊື່ລູກຄ້າ"></v-text-field>
                                 </v-col>
+
                                 <v-col cols="1">
                                     <v-text-field disabled v-model="order.trackingNumber"
                                         label="* Tracking No."></v-text-field>
@@ -60,8 +80,9 @@
                                         <i class="fa-regular fa-circle-check"></i>
                                     </v-btn>
                                 </v-col>
-                                <v-col cols="1" align-self="center" v-if="orderStatus=='INVOICED'">
-                                    <v-btn color="primary" rounded variant="text" @click="confirmOrder(order); printTicket(order)">
+                                <v-col cols="1" align-self="center" v-if="orderStatus == 'INVOICED'">
+                                    <v-btn color="primary" rounded variant="text"
+                                        @click="confirmOrder(order); printTicket(order)">
                                         <i class="fa-regular fa-circle-check"></i>
                                         &
                                         <i class="fa-solid fa-print"></i>
@@ -76,10 +97,11 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="warning" rounded variant="text" @click="orderStatus=='RECEIVED'?  clearStockList():clearPaymentList(); $emit('close-dialog');">
-                    Close 
+                <v-btn color="warning" rounded variant="text"
+                    @click="orderStatus == 'RECEIVED' ? clearStockList() : clearPaymentList(); $emit('close-dialog');">
+                    Close
                 </v-btn>
-                <v-btn color="primary" rounded variant="text" @click="merceEntryToPrint" v-if="orderStatus=='INVOICED'">
+                <v-btn color="primary" rounded variant="text" @click="merceEntryToPrint" v-if="orderStatus == 'INVOICED'">
                     <i class="fa-solid fa-clipboard-check"></i>
                     ອອກບິນໃຫ້ລູກຄ້າ
                 </v-btn>
@@ -112,8 +134,11 @@ export default {
     },
     data() {
         return {
+            timeoutId: null,
+            customerTel:'',
             logoCompany: require('~/assets/image/BWLOGO.jpeg'),
             confirmEntries: [],
+            clientOption: [],
             status: [
                 'ORDERED',
                 'RECEIVED',
@@ -141,12 +166,76 @@ export default {
             iterator['status'] = this.orderStatus
         }
     },
+    // watch: {
+    //     'order.client.telephone':(newVal)=>{
+    //         console.log(`DATA CHANGE...`);
+    //         this.handleTypingEvent()
+    //         // this.debouncedGetSuggestions(newVal)
+    //     },
+    // },
     methods: {
-        ...mapActions(['removeOrderFromStockConfirm', 'removeOrderFromPaymentConfirm','clearPaymentList','clearStockList']),
+        testMyTrigger(){
+            console.log(`Valuee is changing`);
+        },
+        handleTypingEvent: debounce(function () {
+            // Do something after the user has finished typing
+            console.log('User finished typing! Input value: ' + this.customerTel)
+            if (this.lockSuggest) return
+            if (this.clientList(this.customerTel) != undefined) {
+                this.clientOption = this.clientList(this.customerTel)
+                console.log(`*****${this.clientOption.length}*****`);
+                // if (this.clientOption.length > 0) {
+                //     this.clientDialog = true
+                // }
+                this.timeoutId = setTimeout(() => {
+                    console.log(`******Reset auto suggest*******`);
+                    this.clientOption = []
+                }, 5000)
+            }
+        }, 10), // Debo
+        selectedClientNew(newVal) {
+            const newClient = this.findAllClient.find(el => el.id == newVal)
+            if (newClient != undefined) {
+                this.lockSuggest = true
+                this.customerName = newClient['name']
+                this.customerTel = newClient['telephone']
+                this.clientOption = []
+                this.timeoutId = setTimeout(() => {
+                    console.log(`******Reset auto suggest*******`);
+                    this.lockSuggest = false
+                }, 2000)
+
+            }
+        },
+        ...mapActions(['removeOrderFromStockConfirm', 'removeOrderFromPaymentConfirm', 'clearPaymentList', 'clearStockList']),
         formatNumber(val) {
             return getFormatNum(val)
         },
-        merceEntryToPrint() {
+        async bulkUpdateStatus() {
+            if (this.isloading) return
+            this.isloading = true
+            console.log(`order len==== ${this.confirmEntries.length}`);
+            for (let index = 0; index < this.confirmEntries.length; index++) {
+                console.log(`LOOP ####${index}`);
+                const order = this.confirmEntries[index];
+                let api = `api/order/update/${order.id}`
+                order.userId = this.user.id
+                order.locationId = this.currentTerminal['locationId']
+                try {
+                    const response = await this.$axios.put(api, order)
+
+                } catch (error) {
+                    return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
+                }
+            }
+            console.log(`START REMOVING ENTRY FROM STATE`);
+            this.clearAllFromConfirmEntrie()
+            this.$emit('close-dialog')
+            this.refreshData()
+            this.isloading = false
+            // return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
+        },
+        async merceEntryToPrint() {
 
             let txnListHtml = ``
             for (const item of this.confirmEntries) {
@@ -196,7 +285,7 @@ export default {
             )
             printWin.document.open()
             printWin.document.write(windowContent)
-
+            this.bulkUpdateStatus()
             setTimeout(() => {
                 printWin.print()
                 printWin.close()
@@ -269,9 +358,18 @@ export default {
                 this.removeOrderFromPaymentConfirm(entry)
             }
         },
+        clearAllFromConfirmEntrie() {
+            this.confirmEntries = []
+            // ***** remove from state *****
+            if (this.orderStatus == 'RECEIVED') {
+                this.removeOrderFromStockConfirm(entry)
+            } else {
+                this.clearPaymentList()
+            }
+        },
         async confirmOrder(order) {
             // if(order['shippingFee']<=0 && this.orderStatus=='RECEIVED') return swalError2(this.$swal, "Error", 'ກະລຸນາໃສ່ຄ່າສົ່ງ');
-            if(order['shippingFee']<=0 ) return swalError2(this.$swal, "Error", 'ກະລຸນາໃສ່ຄ່າສົ່ງ');
+            if (order['shippingFee'] <= 0) return swalError2(this.$swal, "Error", 'ກະລຸນາໃສ່ຄ່າສົ່ງ');
             if (!this.isloading) {
                 // Implement form submission logic here
                 this.isloading = true

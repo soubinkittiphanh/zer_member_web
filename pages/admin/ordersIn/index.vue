@@ -5,7 +5,7 @@
       <order-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="handleEvent" @reload-data="loadData"
         :key="componentKey" />
     </v-dialog>
-    <v-dialog v-model="statusFormDialog" max-width="1024">
+    <v-dialog v-model="statusFormDialog" max-width="ັauto">
       <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
         @reload-data="loadData" :key="orderStatusComponentKey" order-status="INVOICED" />
     </v-dialog>
@@ -89,6 +89,9 @@
           </h6>
           <!-- </v-chip> -->
         </template>
+        <template v-slot:[`item.updateTimestamp`]="{ item }">
+          {{ findReceivingDate(item) }}
+        </template>
         <template v-slot:[`item.edit`]="{ item }">
           <v-btn color="primary" text @click="editItem(item)
           isedit = true
@@ -96,14 +99,6 @@
             <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
-        <!-- <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
-          isedit = true
-            ">
-            <i class="fa-solid fa-cart-flatbed"></i>
-
-          </v-btn>
-        </template> -->
         <template v-slot:[`item.function`]="{ item }">
           <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
           isedit = true
@@ -133,10 +128,6 @@
 import OrderForm from '@/components/OrderForm.vue';
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
-// addOrderToConfirmStockInList
-//     addOrderToConformPaymentList
-//     findAllListOfConfirmStockIn
-//     findAllListOfConfirmPayment
 import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
   components: {
@@ -169,6 +160,12 @@ export default {
           sortable: true,
         },
         {
+          text: 'ວັນທີຮັບເຄື່ອງ',
+          align: 'left',
+          value: 'updateTimestamp',
+          sortable: true,
+        },
+        {
           text: 'ຊືລູກຄ້າ',
           align: 'left',
           value: 'client.name',
@@ -189,12 +186,6 @@ export default {
           value: 'notify',
           sortable: false,
         },
-        // {
-        //   text: 'ຮັບເຄື່ອງ',
-        //   align: 'end',
-        //   value: 'function',
-        //   sortable: false,
-        // },
         {
           text: 'ຮັບຊຳລະ',
           align: 'center',
@@ -256,6 +247,18 @@ export default {
     },
   },
   methods: {
+    findReceivingDate(order){
+      let receivingDate = order['updateTimestamp'].split('T')[0]
+      let orderWithReceivingDate =  null
+      if(order['histories'].length>0){
+        orderWithReceivingDate = order['histories'].find(el=>el['status'] == 'RECEIVED')
+        if(orderWithReceivingDate!=undefined){
+          console.log(`ORDER STATUS: ${orderWithReceivingDate['status']} ORDER RECEIVING DATE ${orderWithReceivingDate['updateTimestamp']}`);
+          receivingDate = orderWithReceivingDate['updateTimestamp'].split('T')[0]
+        }
+      }
+      return receivingDate;
+    },
     ...mapActions(['addOrderToConformPaymentList', 'setSelectedTerminal', 'setSelectedLocation']),
     handleKeyDown(event) {
       console.log(`BACORD SCANING....`);
@@ -282,15 +285,13 @@ export default {
       console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
       const order = this.entries.find(el => el['trackingNumber'] == barcode)
       if (order != undefined) {
-
-        // return this.changeOrderStatus('RECEIVED', order['id'])
-        // this.changeOrderStatus(order)
         this.orderStatusComponentKey += 1;
         this.entrySelectedId = order.id;
         this.statusFormDialog = true;
         this.isCreate = false;
-        // this.addOrderToConfirmStockInList(order)
         this.addOrderToConformPaymentList(order)
+      }else{
+        // No order found hadler here
       }
 
     },
@@ -337,7 +338,6 @@ export default {
       this.formDialog = false;
     },
     editItem(item) {
-
       this.componentKey += 1;
       this.entrySelectedId = item.id;
       this.formDialog = true;
@@ -350,7 +350,6 @@ export default {
       this.isCreate = false;
     },
     whatsappLink(item) {
-
       console.log(`******** customer tel ${item} *******`);
       const tel = item.client.telephone.trim();
       const completeTel = tel.substring(tel.length - 8);
@@ -359,7 +358,6 @@ export default {
     },
     parseDate(date) {
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
