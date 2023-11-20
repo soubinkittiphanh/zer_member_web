@@ -150,7 +150,7 @@
             <v-btn color="primary" text @click="viewItem(item)
             wallet = true
               ">
-<i class="fa-regular fa-pen-to-square"></i>
+              <i class="fa-regular fa-pen-to-square"></i>
             </v-btn>
           </template>
           <template v-slot:[`item.cancel`]="{ item }">
@@ -286,17 +286,11 @@ export default {
           sortable: false,
         },
       ],
-      // date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-      //   .toISOString()
-      //   .substr(0, 10),
       date: getFirstDayOfMonth(),
       date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
       dateFormatted: this.formatDate(
-        // new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        //   .toISOString()
-        //   .substr(0, 10)
         getFirstDayOfMonth()
       ),
       dateFormatted2: this.formatDate(
@@ -410,13 +404,9 @@ export default {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
     whatsappLink(item) {
-      // const completeTel = tel.substring(tel.length-7);
       const tel = item.cusTel.trim();
-
-      // console.log("Customer tel: ",tel);
       const completeTel = tel.substring(tel.length - 8);
       this.whatsappContactLink = `https://api.whatsapp.com/send?phone=+85620${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
-      // return `https://api.whatsapp.com/send?phone=${completeTel}&text=${encodeURIComponent('ສະບາຍດີ ລູກຄ້າ ')}`;
     },
     getFormatNum(val) {
       return new Intl.NumberFormat().format(val)

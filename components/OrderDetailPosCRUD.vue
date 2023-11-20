@@ -6,6 +6,9 @@
         <v-dialog v-model="customerDialog" max-width="1024">
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
+        <v-dialog v-model="cancelConfirmDialog" max-width="1024">
+            <cancel-ticket-form @refresh="$emit('reload')" :id="headerId" @close-dialog="cancelConfirmDialog = false"></cancel-ticket-form>
+        </v-dialog>
         <v-dialog v-model="pricingDialog" max-width="1024">
             <pricing-option :key="pricingDialogKey" :isBackend="true" @new-price-update="updatePricing"
                 @close-dialog="pricingDialog = false" :record-id="productPricingSelected"></pricing-option>
@@ -30,7 +33,10 @@
                     <v-col cols="6" style="text-align: right;">
                         <v-btn v-if="isQuotation" size="large" variant="outlined" @click="postToInvoice" class="primary"
                             rounded>
-                            <span class="mdi mdi-transfer-right"></span>Make to invoice
+                            <span class="mdi mdi-cancel"></span>Make to invoice
+                        </v-btn>
+                        <v-btn :disabled="!isUpdate || !transaction.isActive" size="large" variant="outlined" @click="cancelOrder" class="warning" rounded>
+                            <span class="mdi mdi-printer-outline"></span>ຍົກເລີກບິນ
                         </v-btn>
                         <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
                             <span class="mdi mdi-printer-outline"></span>Print
@@ -150,7 +156,7 @@
                                 {{ getFormatNum(item.total) }}
                             </td>
                             <td>
-                                <v-btn color="error" text @click="deleteItem(item)" v-on:keydown="handleKeyDown">
+                                <v-btn :disabled="!transaction.isActive" color="error" text @click="deleteItem(item)" v-on:keydown="handleKeyDown">
 
                                     <i class="fas fa-trash"></i>
                                 </v-btn>
@@ -180,7 +186,7 @@
                 <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <v-btn color="primary" rounded variant="text" @click="postTransaction">
+                <v-btn :disabled="!transaction.isActive" color="primary" rounded variant="text" @click="postTransaction">
                     Save
                 </v-btn>
             </v-card-actions>
@@ -193,8 +199,9 @@ import commaThousand from "@/plugins/comma-thousand";
 import { mapActions, mapGetters } from 'vuex'
 import PricingOption from '~/components/PricingOption.vue'
 import { swalSuccess, swalError2, confirmSwal, dayCount, getNextDate, replaceAll } from '~/common'
+import CancelTicketForm from './CancelTicketForm.vue';
 export default {
-    components: { PricingOption },
+    components: { PricingOption, CancelTicketForm },
     props: {
         headerId: {
             type: Number,
@@ -231,6 +238,9 @@ export default {
         // TODO: Add pricing option here
     },
     methods: {
+        cancelOrder(){
+            this.cancelConfirmDialog = true;
+        },
         updatePricing(priceInfo) {
             let newPrice = priceInfo['amount']
             console.log(`New pricing ${newPrice}`);
@@ -638,6 +648,7 @@ export default {
     },
     data() {
         return {
+            cancelConfirmDialog:false,
             productPricingSelected: null,
             pricingDialogKey: 1,
             pricingDialog: false,
@@ -653,6 +664,7 @@ export default {
             errorLineNumber: null,
             isloading: false,
             transaction: {
+                isActive:true,
                 exchangeRate: 1,
                 lines: []
             },

@@ -9,7 +9,7 @@
     </v-dialog>
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="true" :key="componentKey" :is-update="viewTransaction"
+      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
         :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPosCRUD>
     </v-dialog>
