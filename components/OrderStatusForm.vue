@@ -14,33 +14,33 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-card v-for="order in confirmEntries" :key="order.id" class="mb-2 pa-0">
+                    <v-card v-for="(order, idx) in confirmEntries" :key="idx" class="mb-2 pa-0">
                         <v-card-text class="pa-0">
                             <v-row class="pa-0 ma-0">
-                                <v-col cols="1">
-                                    <v-row>
-                                        <v-col cols="12">
-                                            <v-text-field @volumechange="testMyTrigger" v-model="order.client.telephone" label="* ເບີໂທ"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                            <v-card v-for="client in clientOption" :key="client['id']">
-                                                <v-card-text>
-                                                    <v-row>
-                                                        <v-col cols="8">
-                                                            {{ client['name'].concat(' - ').concat(client['telephone']) }}
-                                                        </v-col>
-                                                        <v-col cols="2" align-self="center">
-                                                            <v-btn color="primary" rounded variant="text"
-                                                                @click="selectedClientNew(client['id'])">
-                                                                <i class="fa-regular fa-circle-check"></i>
-                                                            </v-btn>
-                                                        </v-col>
-                                                    </v-row>
-                                                </v-card-text>
-                                            </v-card>
-                                        </v-col>
-                                    </v-row>
-                                </v-col>
+                                <v-row align="center" class="pa-2">
+                                    <v-col cols="12">
+                                        <v-text-field @input="testMyTrigger(idx)" v-model="order.client.telephone"
+                                            label="* ເບີໂທ">
+                                        </v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" v-if="clientOption.length > 0 && customerOptionForOrderId == idx">
+                                        <v-card v-for="client in clientOption" :key="client['id']">
+                                            <v-card-text>
+                                                <v-row>
+                                                    <v-col cols="8">
+                                                        {{ client['name'].concat(' - ').concat(client['telephone']) }}
+                                                    </v-col>
+                                                    <v-col cols="2" align-self="center">
+                                                        <v-btn color="primary" rounded variant="text"
+                                                            @click="selectedClientNew(client['id'],idx)">
+                                                            <i class="fa-regular fa-circle-check"></i>
+                                                        </v-btn>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-card-text>
+                                        </v-card>
+                                    </v-col>
+                                </v-row>
                                 <v-col cols="1">
                                     <v-text-field v-model="order.client.name" label="* ຊື່ລູກຄ້າ"></v-text-field>
                                 </v-col>
@@ -134,10 +134,12 @@ export default {
     },
     data() {
         return {
+            customerOptionForOrderId: null,
             timeoutId: null,
-            customerTel:'',
+            customerTel:null,
             logoCompany: require('~/assets/image/BWLOGO.jpeg'),
             confirmEntries: [],
+            lockSuggest: false,
             clientOption: [],
             status: [
                 'ORDERED',
@@ -151,19 +153,25 @@ export default {
 
     mounted() {
         if (this.orderStatus == 'INVOICED') {
-            // this.confirmEntries = this.$store.state.listOfConfirmPaymentOrder;
-            this.confirmEntries = this.$store.state.listOfConfirmPaymentOrder.map(order => ({ ...order }));
+            // We cannot change client data comming from state, 
+            //we have to clone data from state to new variable
+            this.confirmEntries = this.$store.state.listOfConfirmPaymentOrder.map(order => ({ ...JSON.parse(JSON.stringify(order)) }));
             console.log(`$$$$$$$$$  PAYMENT LIST [${this.confirmEntries.length}] $$$$$$$$$$`);
             for (const iterator of this.confirmEntries) {
                 iterator['paymentId'] = this.paymentList[0]['id']
             }
         } else {
-            // this.confirmEntries = this.$store.state.listOfConfirmStockInOrder;
-            this.confirmEntries = this.$store.state.listOfConfirmStockInOrder.map(order => ({ ...order }));
+            // We cannot change client data comming from state, 
+            // we have to clone data from state to new variable
+            this.confirmEntries = this.$store.state.listOfConfirmStockInOrder.map(order => ({ ...JSON.parse(JSON.stringify(order)) }));
             console.log(`$$$$$$$$$ STOCK LIST [${this.confirmEntries.length}] $$$$$$$$$$`);
         }
         for (const iterator of this.confirmEntries) {
             iterator['status'] = this.orderStatus
+            iterator['custel'] = iterator['client']['telephone']
+            iterator['cusname'] = iterator['client']['name']
+            // this.confirmEntries1.push(iterator)
+
         }
     },
     // watch: {
@@ -174,36 +182,37 @@ export default {
     //     },
     // },
     methods: {
-        testMyTrigger(){
-            console.log(`Valuee is changing`);
+        handleButtonClick() {
+            console.log(`LIKE BUTTON CLICK`);
         },
-        handleTypingEvent: debounce(function () {
-            // Do something after the user has finished typing
-            console.log('User finished typing! Input value: ' + this.customerTel)
-            if (this.lockSuggest) return
-            if (this.clientList(this.customerTel) != undefined) {
-                this.clientOption = this.clientList(this.customerTel)
-                console.log(`*****${this.clientOption.length}*****`);
-                // if (this.clientOption.length > 0) {
-                //     this.clientDialog = true
-                // }
-                this.timeoutId = setTimeout(() => {
-                    console.log(`******Reset auto suggest*******`);
-                    this.clientOption = []
-                }, 5000)
+        testMyTrigger(orderId) {
+            console.log(`Typing on order id: ${orderId}`);
+            this.customerOptionForOrderId=orderId
+            this.customerTel = this.confirmEntries[orderId]['client']['telephone'];
+            if (this.clientList != undefined) {
+                this.clientOption = this.clientList
+                console.log(`TIMER ${this.timeoutId}`);
+                if (this.timeoutId == null) {
+                    this.timeoutId = setTimeout(() => {
+                        console.log(`******Reset auto suggest*******`);
+                        this.clientOption = []
+                        this.timeoutId = null
+                    }, 5000)
+                }
             }
-        }, 10), // Debo
-        selectedClientNew(newVal) {
+        },
+        selectedClientNew(newVal,orderId) {
+            console.log(`SELECT CLIENT CLICK`);
             const newClient = this.findAllClient.find(el => el.id == newVal)
             if (newClient != undefined) {
                 this.lockSuggest = true
-                this.customerName = newClient['name']
-                this.customerTel = newClient['telephone']
+                this.confirmEntries[orderId]['client']['name'] = newClient['name']
+                this.confirmEntries[orderId]['client']['telephone'] = newClient['telephone']
                 this.clientOption = []
                 this.timeoutId = setTimeout(() => {
                     console.log(`******Reset auto suggest*******`);
                     this.lockSuggest = false
-                }, 2000)
+                }, 5000)
 
             }
         },
@@ -219,11 +228,15 @@ export default {
                 console.log(`LOOP ####${index}`);
                 const order = this.confirmEntries[index];
                 let api = `api/order/update/${order.id}`
+                if (!order.id) api = `api/order/create`
                 order.userId = this.user.id
                 order.locationId = this.currentTerminal['locationId']
                 try {
-                    const response = await this.$axios.put(api, order)
-
+                    if (order.id) {
+                        const response = await this.$axios.put(api, order)
+                    } else {
+                        const response = await this.$axios.post(api, order)
+                    }
                 } catch (error) {
                     return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
                 }
@@ -373,18 +386,28 @@ export default {
             if (!this.isloading) {
                 // Implement form submission logic here
                 this.isloading = true
+                // IF ORDER ID IS NOT FOUND WE WILL CREATE
                 let api = `api/order/update/${order.id}`
+                if (!order.id) {
+                    api = `api/order/create`
+                }
                 order.userId = this.user.id
                 order.locationId = this.currentTerminal['locationId']
-                await this.$axios.put(api, order).then(response => {
-                    this.refreshData()
+                try {
+                    if (!order.id) {
+                        console.log(`CREATEING ORDER AND CHANGE DATA STATE`);
+                        const response = await this.$axios.post(api, order)
+                    } else {
+                        const response = await this.$axios.put(api, order)
+                    }
                     // *** remove from state ****
                     this.removeItemFromConfirmEntrie(order)
-                    return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
-                }).catch(error => {
+                    this.refreshData()
+                    swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
+                } catch (error) {
                     console.log("Error: ", error);
-                    return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
-                })
+                    swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
+                }
                 this.isloading = false
             }
 
@@ -396,6 +419,9 @@ export default {
     computed: {
         user() {
             return this.$auth.user || ''
+        },
+        clientList() {
+            return this.findAllClient.filter(el => el.telephone.includes(this.customerTel))
         },
         currentTerminal() {
             return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
@@ -421,14 +447,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.custom-card {
-    border-radius: 20px;
-    /* Adjust the border radius as needed */
-    border: 1px solid #ff9800;
-    /* Set your desired border color */
-    padding: 10px;
-    /* Adjust padding as needed */
-}
-</style>

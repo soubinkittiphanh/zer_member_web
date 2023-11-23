@@ -6,8 +6,8 @@
         :key="componentKey" />
     </v-dialog>
     <v-dialog v-model="statusFormDialog" max-width="auto">
-      <order-status-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="statusFormDialog = false"
-        @reload-data="loadData" :key="orderStatusComponentKey" />
+      <order-status-form :is-create="isCreate" @close-dialog="statusFormDialog = false" @reload-data="loadData"
+        :key="orderStatusComponentKey" />
     </v-dialog>
     <v-dialog v-model="guidelineDialog" hide-overlay max-width="700" :key="dialogKey">
       <youtube-player @close-dialog="guidelineDialog = false" :youtube-link="watchingLink">
@@ -52,6 +52,9 @@
               <v-col cols="6">
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
+                </v-btn>
+                <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('')" class="primary" rounded>
+                  <span class="mdi mdi-plus"></span>Scanning not found
                 </v-btn>
               </v-col>
               <v-spacer></v-spacer>
@@ -224,6 +227,41 @@ export default {
     user() {
       return this.$auth.user || ''
     },
+    currentTerminal() {
+      return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+    },
+    ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency', 'findAllTerminal', 'findSelectedTerminal']),
+    orderTemplate() {
+      const today = new Date().toISOString().substr(0, 10);
+      const locationId = this.currentTerminal['locationId']
+      const orderTemp = {
+        "id": null,
+        "bookingDate": today,
+        "name": "",
+        "note": "",
+        "trackingNumber": this.barcode,
+        "link": "",
+        "price": 0,
+        "priceRate": 1,
+        "shippingFee": 0,
+        "shippingRate": 1,
+        "status": "RECEIVED",
+        "isActive": true,
+        "riderId": null,
+        "locationId": locationId,
+        "userId": this.user.id,
+        "currencyId": 1,
+        "shippingFeeCurrencyId": 1,
+        "vendorId": null,
+        "paymentId": 1,
+        "client": {
+          "id": null,
+          "name": "",
+          "telephone": "",
+        }
+      }
+      return orderTemp;
+    }
   },
   watch: {
     date(val) {
@@ -237,6 +275,7 @@ export default {
   },
   methods: {
     ...mapActions(['addOrderToConfirmStockInList', 'setSelectedTerminal', 'setSelectedLocation']),
+
     handleKeyDown(event) {
       if (this.timer) {
         clearInterval(this.timer)
@@ -261,12 +300,16 @@ export default {
       const order = this.entries.find(el => el['trackingNumber'] == barcode)
       if (order != undefined) {
         this.orderStatusComponentKey += 1;
-        this.entrySelectedId = order.id;
         this.statusFormDialog = true;
         this.isCreate = false;
         this.addOrderToConfirmStockInList(order)
-      }else{
+      } else {
         // Handle order not found here
+        console.log(`Add order from null barcode`);
+        this.orderStatusComponentKey += 1;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConfirmStockInList(this.orderTemplate)
       }
 
     },
@@ -308,12 +351,12 @@ export default {
       this.formDialog = true;
       this.isCreate = false;
     },
-    changeOrderStatus(item) {
-      this.orderStatusComponentKey += 1;
-      this.entrySelectedId = item.id;
-      this.statusFormDialog = true;
-      this.isCreate = false;
-    },
+    // changeOrderStatus(item) {
+    //   this.orderStatusComponentKey += 1;
+    //   this.entrySelectedId = item.id;
+    //   this.statusFormDialog = true;
+    //   this.isCreate = false;
+    // },
     whatsappLink(item) {
 
       console.log(`******** customer tel ${item} *******`);

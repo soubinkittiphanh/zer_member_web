@@ -53,6 +53,7 @@
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
                 </v-btn>
+    
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="6" class="text-right">
@@ -70,7 +71,7 @@
               </template>
             </v-text-field>
           </v-col>
-        
+
 
         </v-layout>
       </v-card-title>
@@ -235,6 +236,40 @@ export default {
     user() {
       return this.$auth.user || ''
     },
+    currentTerminal() {
+      return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+    },
+    ...mapGetters(['findAllProduct', 'findAllClient', 'findAllPayment', 'findAllUnit', 'findAllCurrency', 'findAllTerminal', 'findSelectedTerminal']),
+    orderTemplate() {
+      const today = new Date().toISOString().substr(0, 10);
+      const locationId = this.currentTerminal['locationId']
+      orderTemp = {
+        "id": null,
+        "bookingDate": today,
+        "name": "",
+        "note": "",
+        "trackingNumber": "",
+        "link": "",
+        "price": 0,
+        "priceRate": 1,
+        "shippingFee": 0,
+        "shippingRate": 1,
+        "status": "RECEIVED",
+        "isActive": true,
+        "riderId": null,
+        "locationId": locationId,
+        "userId": this.user.id,
+        "currencyId": 1,
+        "shippingFeeCurrencyId": 1,
+        "vendorId": null,
+        "paymentId": 1,
+        "client": {
+          "id": 61,
+          "name": "ແບ້"
+        }
+      }
+      return orderTemp;
+    }
   },
   watch: {
     date(val) {
@@ -247,12 +282,12 @@ export default {
     },
   },
   methods: {
-    findReceivingDate(order){
+    findReceivingDate(order) {
       let receivingDate = order['updateTimestamp'].split('T')[0]
-      let orderWithReceivingDate =  null
-      if(order['histories'].length>0){
-        orderWithReceivingDate = order['histories'].find(el=>el['status'] == 'RECEIVED')
-        if(orderWithReceivingDate!=undefined){
+      let orderWithReceivingDate = null
+      if (order['histories'].length > 0) {
+        orderWithReceivingDate = order['histories'].find(el => el['status'] == 'RECEIVED')
+        if (orderWithReceivingDate != undefined) {
           console.log(`ORDER STATUS: ${orderWithReceivingDate['status']} ORDER RECEIVING DATE ${orderWithReceivingDate['updateTimestamp']}`);
           receivingDate = orderWithReceivingDate['updateTimestamp'].split('T')[0]
         }
@@ -290,7 +325,7 @@ export default {
         this.statusFormDialog = true;
         this.isCreate = false;
         this.addOrderToConformPaymentList(order)
-      }else{
+      } else {
         // No order found hadler here
       }
 
@@ -333,6 +368,17 @@ export default {
       this.entrySelectedId = 0
       this.isCreate = true
       this.formDialog = true;
+    },
+    notfoundScanning() {
+      if (order != undefined) {
+        this.orderStatusComponentKey += 1;
+        this.entrySelectedId = order.id;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConformPaymentList(order)
+      } else {
+        // No order found hadler here
+      }
     },
     handleEvent() {
       this.formDialog = false;
