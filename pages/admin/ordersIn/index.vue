@@ -334,7 +334,7 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      if (!/[^a-zA-Z]/.test(barcode)) {
+      // if (!/[^a-zA-Z]/.test(barcode)) {
         console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
         const order = this.entries.find(el => el['trackingNumber'] == barcode)
         if (order != undefined) {
@@ -346,10 +346,10 @@ export default {
         } else {
           // No order found hadler here
         }
-      } else {
-        console.log(`LAO ACCEPT`);
-        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
-      }
+      // } else {
+      //   console.log(`LAO ACCEPT`);
+      //   return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
+      // }
 
 
     },

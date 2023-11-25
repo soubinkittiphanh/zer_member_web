@@ -299,7 +299,7 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      if (!/[^a-zA-Z]/.test(barcode)) {
+      // if (!/[^a-zA-Z]/.test(barcode)) {
         console.log(`ENGLISH ACCEPT`);
         console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
         const order = this.entries.find(el => el['trackingNumber'] == barcode)
@@ -316,10 +316,10 @@ export default {
           this.isCreate = false;
           this.addOrderToConfirmStockInList(this.orderTemplate)
         }
-      } else {
-        console.log(`LAO ACCEPT`);
-        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
-      }
+      // } else {
+      //   console.log(`LAO ACCEPT`);
+      //   return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
+      // }
 
 
     },
