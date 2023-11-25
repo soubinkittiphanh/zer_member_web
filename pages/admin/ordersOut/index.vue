@@ -326,9 +326,10 @@ export default {
                 <div style="text-align: center;">
                     <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
                 </div>
+                <h3> ເຈ້ນ່ອງ ຂົນສົ່ງ ໄທ-ລາວ</h3>
                 <h3> ໃບຮັບເງິນ</h3>
                 <h5> ວັນທີ ${today.toLocaleString()}</h5>
-                <h5> Ticket ${item.id} </h5>
+                <h5> ເລກບິນ: ${item.id} </h5>
                 <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
