@@ -53,9 +53,11 @@
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
                 </v-btn>
-                <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('')" class="primary" rounded>
+                <!-- <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('')" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Scanning not found
                 </v-btn>
+                <v-text-field @input="converseHandleInput" v-model="localLanguage" label="* ເບີໂທ">
+                </v-text-field> -->
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="6" class="text-right">
@@ -134,6 +136,7 @@ export default {
   },
   data() {
     return {
+      localLanguage: '',
       timer: null,
       barcode: '',
       statusFormDialog: false,
@@ -296,22 +299,40 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-      const order = this.entries.find(el => el['trackingNumber'] == barcode)
-      if (order != undefined) {
-        this.orderStatusComponentKey += 1;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        this.addOrderToConfirmStockInList(order)
+      if (!/[^a-zA-Z]/.test(barcode)) {
+        console.log(`ENGLISH ACCEPT`);
+        console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
+        const order = this.entries.find(el => el['trackingNumber'] == barcode)
+        if (order != undefined) {
+          this.orderStatusComponentKey += 1;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConfirmStockInList(order)
+        } else {
+          // Handle order not found here
+          console.log(`Add order from null barcode`);
+          this.orderStatusComponentKey += 1;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConfirmStockInList(this.orderTemplate)
+        }
       } else {
-        // Handle order not found here
-        console.log(`Add order from null barcode`);
-        this.orderStatusComponentKey += 1;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        this.addOrderToConfirmStockInList(this.orderTemplate)
+        console.log(`LAO ACCEPT`);
+        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       }
 
+
+    },
+    converseHandleInput(event) {
+      const input = event.trim();
+      // validate input here
+      console.log(`VALIDATING INPUTT...${event}`);
+      if (!/[^a-zA-Z]/.test(event)) {
+        console.log(`ENGLISH ACCEPT`);
+      } else {
+        console.log(`LAO ACCEPT`);
+        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
+      }
     },
     exportToExcel() {
       const worksheet = this.$xlsx.utils.json_to_sheet(this.entries);

@@ -98,6 +98,7 @@ export default {
       this.$router.push('/admin/orders') // Main screen for shipping bussiness
     },
     async userLogin() {
+      if(this.isLoading) return
       try {
         this.isLoading = true
         this.errorMessage = ''

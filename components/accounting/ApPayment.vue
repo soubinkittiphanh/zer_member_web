@@ -10,7 +10,10 @@
         </v-dialog>
         <v-card class="pa-4">
             <v-card-title>
-                <span class="text-h5">ຄ່າໃຊ້ຈ່າຍ {{ today }}</span>
+                <v-chip class="ma-0" color="primary" label text-color="white">
+                    <v-icon start>mdi-label</v-icon>
+                    ຄ່າໃຊ້ຈ່າຍ {{ today }}
+                </v-chip>
             </v-card-title>
             <v-card-text>
                 <v-container>
@@ -148,7 +151,7 @@ export default {
     methods: {
         async loadAccount() {
             this.isloading = true;
-            const response = await this.$axios.get('/api/financial/chartAccount')
+            const response = await this.$axios.get('/api/account/find')
             response.data.forEach(element => {
                 this.account.push({
                     id: element["id"],

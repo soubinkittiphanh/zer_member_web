@@ -53,7 +53,7 @@
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
                 </v-btn>
-    
+
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="6" class="text-right">
@@ -98,6 +98,14 @@
           isedit = true
             ">
             <i class="fa-regular fa-pen-to-square"></i>
+          </v-btn>
+        </template>
+        <template v-slot:[`item.delivery`]="{ item }">
+          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
+          isedit = true
+            ">
+            <!-- <FontAwesomeIcon icon="fa-solid fa-truck-fast" /> -->
+            <i class="fa fa-truck-fast"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.function`]="{ item }">
@@ -185,6 +193,12 @@ export default {
           text: 'ແຈ້ງລູກຄ້າ',
           align: 'end',
           value: 'notify',
+          sortable: false,
+        },
+        {
+          text: 'ຝາກຂົນສົ່ງ',
+          align: 'center',
+          value: 'delivery',
           sortable: false,
         },
         {
@@ -282,6 +296,9 @@ export default {
     },
   },
   methods: {
+    addShipping(orderId){
+
+    },
     findReceivingDate(order) {
       let receivingDate = order['updateTimestamp'].split('T')[0]
       let orderWithReceivingDate = null
@@ -317,17 +334,23 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-      const order = this.entries.find(el => el['trackingNumber'] == barcode)
-      if (order != undefined) {
-        this.orderStatusComponentKey += 1;
-        this.entrySelectedId = order.id;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        this.addOrderToConformPaymentList(order)
+      if (!/[^a-zA-Z]/.test(barcode)) {
+        console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
+        const order = this.entries.find(el => el['trackingNumber'] == barcode)
+        if (order != undefined) {
+          this.orderStatusComponentKey += 1;
+          this.entrySelectedId = order.id;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConformPaymentList(order)
+        } else {
+          // No order found hadler here
+        }
       } else {
-        // No order found hadler here
+        console.log(`LAO ACCEPT`);
+        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       }
+
 
     },
     async changeOrderStatusDirect(orderStatus, orderId) {
@@ -414,10 +437,9 @@ export default {
         endDate: this.date2,
         userId: this.userId
       }
+      this.isloading = true
       await this.$axios.get("api/order/findAllByDate", { params: { date } }).then(response => {
-        this.isloading = true
         this.entries = response.data
-
       }).catch(error => {
         console.log("Error ", error);
       })

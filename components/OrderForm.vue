@@ -4,36 +4,7 @@
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
-        <v-dialog v-model="clientDialog" scrollable width="auto">
-            <!-- <template v-slot:activator="{ props }">
-                <v-btn color="primary" v-bind="props">
-                    Open Dialog
-                </v-btn>
-            </template> -->
-            <v-card>
-                <v-card-title> ເລືອກລູກຄ້າ</v-card-title>
-                <v-divider></v-divider>
-                <v-card-text style="height: 300px;">
-                    <v-radio-group v-model="selectedClient" column>
-                        <v-radio v-for="client in clientOption" :key="client.id"
-                            :label="client['name'].concat(' - ').concat(client['telephone'])"
-                            :value="client['id']"></v-radio>
-                    </v-radio-group>
-                </v-card-text>
-                <v-divider></v-divider>
-                <v-card-actions>
-
-                    <v-btn color="warning" rounded variant="text" @click="clientDialog = false">
-                        Close
-                    </v-btn>
-                    <!-- <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-                        Save
-                    </v-btn> -->
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
         <v-card class="pa-4">
-
             <v-card-title>
                 <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
@@ -46,6 +17,43 @@
                         <v-divider></v-divider>
                         <div class="mx-2">
                             <h3>
+                                ຂໍ້ມູນລູກຄ້າ ຜູ້ຝາກເຄື່ອງ
+                            </h3>
+                        </div>
+                        <v-divider></v-divider>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="6">
+                            <v-text-field v-model="form.sender.telephone" label="* ເບີໂທລູກຄ້າ"
+                                @input="senderTelephoneTypingHandler"></v-text-field>
+                            <v-row v-if="isSenderTyping">
+                                <v-col cols="12">
+                                    <v-card v-for="client in clientOption" :key="client['id']">
+                                        <v-card-text>
+                                            <v-row>
+                                                <v-col cols="8">
+                                                    {{ client['name'].concat(' - ').concat(client['telephone']) }}
+                                                </v-col>
+                                                <v-col cols="2" align-self="center">
+                                                    <v-btn color="primary" rounded variant="text"
+                                                        @click="selectedClientNew(client['id'], true)">
+                                                        <i class="fa-regular fa-circle-check"></i>
+                                                    </v-btn>
+                                                </v-col>
+                                            </v-row>
+                                        </v-card-text>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field v-model="form.sender.name" label="* ຊື່ລູກຄ້າ"></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center" align="center">
+                        <v-divider></v-divider>
+                        <div class="mx-2">
+                            <h3>
                                 ຂໍ້ມູນລູກຄ້າ
                             </h3>
                         </div>
@@ -53,30 +61,30 @@
                     </v-row>
                     <v-row>
                         <v-col cols="6">
-                            <v-text-field v-model="customerTel" label="* ເບີໂທລູກຄ້າ"></v-text-field>
-                            <!-- Replace 'name' with the property you want to display in the suggestions -->
-                            <v-card v-for="client in clientOption" :key="client['id']">
-                                <v-card-text>
-                                    <v-row>
-                                        <v-col cols="8">
-                                            {{ client['name'].concat(' - ').concat(client['telephone']) }}
-                                        </v-col>
-                                        <!-- <v-col cols="2" align-self="center">
-                                            <v-btn color="warning" rounded variant="text" @click="null">
-                                                <i class="fa-solid fa-circle-xmark"></i>
-                                            </v-btn>
-                                        </v-col> -->
-                                        <v-col cols="2" align-self="center">
-                                            <v-btn color="primary" rounded variant="text" @click="selectedClientNew(client['id'])">
-                                                <i class="fa-regular fa-circle-check"></i>
-                                            </v-btn>
-                                        </v-col>
-                                    </v-row>
-                                </v-card-text>
-                            </v-card>
+                            <v-text-field v-model="form.client.telephone" label="* ເບີໂທລູກຄ້າ"
+                                @input="clientTelephoneTypingHandler"></v-text-field>
+                            <v-row v-if="!isSenderTyping">
+                                <v-col cols="12">
+                                    <v-card v-for="client in clientOption" :key="client['id']">
+                                        <v-card-text>
+                                            <v-row>
+                                                <v-col cols="8">
+                                                    {{ client['name'].concat(' - ').concat(client['telephone']) }}
+                                                </v-col>
+                                                <v-col cols="2" align-self="center">
+                                                    <v-btn color="primary" rounded variant="text"
+                                                        @click="selectedClientNew(client['id'], false)">
+                                                        <i class="fa-regular fa-circle-check"></i>
+                                                    </v-btn>
+                                                </v-col>
+                                            </v-row>
+                                        </v-card-text>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field v-model="customerName" label="* ຊື່ລູກຄ້າ"></v-text-field>
+                            <v-text-field v-model="form.client.name" label="* ຊື່ລູກຄ້າ"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -139,6 +147,9 @@
                                 <i class="fa-regular fa-images"></i>
 
                             </v-btn> -->
+                            <v-autocomplete item-text="name" item-value="id"
+                                :items="locationList" label="ສາງປາຍທາງ*"
+                                v-model="form.endLocationId"></v-autocomplete>
                             <v-file-input :rules="masterRules.imageRule" ref="filesfield" multiple
                                 accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
                                 prepend-icon="mdi-camera" label="ຮູບພາບ" @change="onFilesChange"></v-file-input>
@@ -186,24 +197,17 @@ export default {
     },
     data() {
         return {
-            selectedItem: null,
-            suggestions: [
-                { id: 1, name: 'Item 1' },
-                { id: 2, name: 'Item 2' },
-                { id: 3, name: 'Item 3' },
-                // ... Add more items based on your data
-            ],
             timeoutId: null,
-            clientDialog: false,
-            lockSuggest: false,
+            isSenderTyping: true,
             clientOption: [],
             vendorList: [],
-            selectedClient: null,
+            locationList:[],
             form: {
                 bookingDate: '',
                 currencyId: 1,
                 vendorId: 1,
                 priceRate: 1,
+                endLocationId:1,
                 shippingFeeCurrencyId: 1,
                 shippingRate: 1,
                 shippingFee: 0,
@@ -214,10 +218,17 @@ export default {
                 price: 0,
                 isActive: true,
                 status: 'ORDERED',
-
+                client: {
+                    id: null,
+                    name: '',
+                    telephone: ''
+                },
+                sender: {
+                    id: null,
+                    name: '',
+                    telephone: ''
+                }
             },
-            customerTel: '',
-            customerName: '',
             status: [
                 'ORDERED',
                 'RECEIVED',
@@ -253,31 +264,9 @@ export default {
     },
 
     watch: {
-        customerTel(newVal) {
-            console.log(`DATA CHANGE...`);
-            this.handleTypingEvent()
-            // this.debouncedGetSuggestions(newVal)
-        },
-        customerName(newValue) {
-            if (this.lockSuggest) return
-            this.selectedClient = null
-        },
-        selectedClient(newVal) {
-            const newClient = this.findAllClient.find(el => el.id == newVal)
-            if (newClient != undefined) {
-                this.lockSuggest = true
-                this.customerName = newClient['name']
-                this.customerTel = newClient['telephone']
-                this.clientDialog = false
-                this.timeoutId = setTimeout(() => {
-                    console.log(`******Reset auto suggest*******`);
-                    this.lockSuggest = false
-                }, 2000)
 
-            }
-        }
     },
-    async created() {
+    async mounted() {
         if (this.isCreate) {
             const today = new Date().toISOString().substr(0, 10);
             this.form.bookingDate = today;
@@ -285,22 +274,30 @@ export default {
             this.form.currencyId = this.currencyList[0]['id'];
             this.form.shippingFeeCurrencyId = this.currencyList[0]['id'];
         }
-        this.loadEntry();
+        await this.loadEntry();
+        await this.loadLocation();
         this.loadVendor();
     },
     methods: {
-        selectedClientNew(newVal) {
+
+        selectedClientNew(newVal, isSender) {
             const newClient = this.findAllClient.find(el => el.id == newVal)
             if (newClient != undefined) {
-                this.lockSuggest = true
-                this.customerName = newClient['name']
-                this.customerTel = newClient['telephone']
-                this.clientDialog = false
+                if (!isSender) {
+                    this.form.client.id = newClient['id']
+                    this.form.client.name = newClient['name']
+                    this.form.client.telephone = newClient['telephone']
+
+                } else {
+                    this.form.sender.id = newClient['id']
+                    this.form.sender.name = newClient['name']
+                    this.form.sender.telephone = newClient['telephone']
+                }
                 this.clientOption = []
                 this.timeoutId = setTimeout(() => {
                     console.log(`******Reset auto suggest*******`);
-                    this.lockSuggest = false
                 }, 2000)
+
 
             }
         },
@@ -336,30 +333,46 @@ export default {
         clientList(custTel) {
             return this.findAllClient.filter(el => el.telephone.includes(custTel))
         },
-     
-        handleTypingEvent: debounce(function () {
-            // Do something after the user has finished typing
-            console.log('User finished typing! Input value: ' + this.customerTel)
-            if (this.lockSuggest) return
-            if (this.clientList(this.customerTel) != undefined) {
-                this.clientOption = this.clientList(this.customerTel)
+
+
+        senderTelephoneTypingHandler(telephone) {
+            console.log('User finished typing! Input value: ' + telephone)
+            // If using manual typing and not select from auto suggest 
+            // we will remove sender id, so api will create new customer auto
+            this.form.sender.id = null
+            if (this.clientList(telephone) != undefined) {
+                this.isSenderTyping = true
+                this.clientOption = this.clientList(telephone)
                 console.log(`*****${this.clientOption.length}*****`);
-                // if (this.clientOption.length > 0) {
-                //     this.clientDialog = true
-                // }
-                this.timeoutId = setTimeout(() => {
-                    console.log(`******Reset auto suggest*******`);
-                    this.clientOption = []
-                }, 5000)
-            }
-        }, 10), // Debo
-        customerObject() {
-            return {
-                id: this.selectedClient,
-                name: this.customerName,
-                telephone: this.customerTel,
+                if (this.timeoutId == null) {
+                    this.timeoutId = setTimeout(() => {
+                        console.log(`******Reset auto suggest*******`);
+                        this.clientOption = []
+                        this.isSenderTyping = false
+                    }, 5000)
+                }
+
             }
         },
+        clientTelephoneTypingHandler(telephone) {
+            // If using manual typing and not select from auto suggest 
+            // we will remove client id, so api will create new customer auto
+            this.form.client.id = null
+            console.log('User finished typing! Input value: ' + telephone)
+            if (this.clientList(telephone) != undefined) {
+                this.isSenderTyping = false
+                this.clientOption = this.clientList(telephone)
+                console.log(`*****${this.clientOption.length}*****`);
+                if (this.timeoutId == null) {
+                    this.timeoutId = setTimeout(() => {
+                        console.log(`******Reset auto suggest*******`);
+                        this.clientOption = []
+                        this.isSenderTyping = false
+                    }, 5000)
+                }
+            }
+        },
+
         async commitRecord() {
             if (this.$refs.form.validate() && !this.isloading) {
                 // Implement form submission logic here
@@ -367,7 +380,7 @@ export default {
                 let api = this.isCreate ? 'api/order/create' : `api/order/update/${this.recordId}`
                 console.log("API => ", api);
                 if (this.isCreate) {
-                    this.form.client = this.customerObject()
+                    // this.form.client = this.customerObject()
                     this.form.userId = this.user.id
                     this.form.locationId = this.currentTerminal['locationId']
                     await this.$axios.post(api, this.form).then(response => {
@@ -378,8 +391,6 @@ export default {
                         return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
                     })
                 } else {
-                    this.form.client = this.customerObject()
-                    this.form.clientId = this.selectedClient
                     this.form.userId = this.user.id
                     this.form.locationId = this.currentTerminal['locationId']
                     await this.$axios.put(api, this.form).then(response => {
@@ -394,27 +405,40 @@ export default {
             }
 
         },
+        async loadLocation() {
+            if (this.isloading) return
+            this.isloading = true
+            try {
+                const response = await this.$axios.get(`api/location/find`)
+                this.locationList = response.data
+            } catch (error) {
+                swalError2(this.$swal, 'Error', 'Could no load data ' + error)
+                console.log('Error ===>: ' + error)
+            }
+            this.isloading = false
+        },
         async loadEntry() {
             console.log(`===> Update form record load`);
             if (this.recordId && !this.isCreate) {
                 this.isloading = true
-                await this.$axios.get(`api/order/find/${this.recordId}`).then(response => {
-
+                try {
+                    const response = await this.$axios.get(`api/order/find/${this.recordId}`)
                     this.form = response.data
-                    // customer mapping 
-                    this.customerTel = response.data['client']['telephone']
-                    this.selectedClient = response.data['client']['id']
-                    this.lockSuggest = true
-                    this.customerName = response.data['client']['name']
-                    this.timeoutId = setTimeout(() => {
-                        console.log(`******Reset auto suggest*******`);
-                        this.lockSuggest = false
-                        this.isloading = false
-                    }, 2000)
-                    // customer mapping
-                }).catch(error => {
+                    if (!response.data.sender) {
+                        console.log(`SENDER IS NULL ${response.data.sender}`);
+                        this.form.sender = {
+                            id: null,
+                            name: '',
+                            telephone: ''
+                        }
+                    }
+
+
+                } catch (error) {
                     console.log("Cannot fetch data " + error);
-                })
+                    return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
+                }
+
             }
 
         },

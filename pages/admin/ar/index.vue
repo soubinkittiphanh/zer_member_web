@@ -36,7 +36,8 @@
                             </template>
                             <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
-                        <v-btn @click="triggerDialog" class="primary" size="large" variant="outlined" rounded> ເພີ່ມລາຍຮັບ </v-btn>
+                        <v-btn @click="triggerDialog" class="primary" size="large" variant="outlined" rounded> ເພີ່ມລາຍຮັບ
+                        </v-btn>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
@@ -54,7 +55,7 @@
                     wallet = true
                         ">
 
-<i class="fa-regular fa-pen-to-square"></i>
+                        <i class="fa-regular fa-pen-to-square"></i>
                     </v-btn>
                 </template>
                 <template v-slot:[`item.totalAmount`]="{ item }">
