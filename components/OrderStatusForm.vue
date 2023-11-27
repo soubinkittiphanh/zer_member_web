@@ -45,7 +45,7 @@
                                     <v-text-field v-model="order.client.name" label="* ຊື່ລູກຄ້າ"></v-text-field>
                                 </v-col>
 
-                                <v-col cols="1">
+                                <v-col cols="2">
                                     <v-text-field disabled v-model="order.trackingNumber"
                                         label="* Tracking No."></v-text-field>
                                 </v-col>

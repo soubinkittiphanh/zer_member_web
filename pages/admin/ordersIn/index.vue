@@ -286,6 +286,16 @@ export default {
     }
   },
   watch: {
+    formDialog(val) {
+      console.log(`STATUS FORM TRIGGER ${val}`);
+      if (val) {
+        console.log(`STATUS EQ TRUE TRIGGER ${val}`);
+        window.removeEventListener('keydown', this.handleKeyDown);
+      } else {
+        console.log(`STATUS EQ FALSE TRIGGER ${val}`);
+        window.addEventListener('keydown', this.handleKeyDown);
+      }
+    },
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
       this.loadData()
@@ -323,7 +333,7 @@ export default {
           // this.findProductFromBarcode(this.barcode)
           // Handle barcode [Receiving, Invoicing]
           console.log(`BACORD SCAN RESULT: ${this.barcode}`);
-          this.findOrderByTrackingNumber(this.barcode)
+          this.findOrderByTrackingNumber(this.barcode.toUpperCase())
         }
         this.barcode = '';
         return
@@ -336,7 +346,7 @@ export default {
     findOrderByTrackingNumber(barcode) {
       // if (!/[^a-zA-Z]/.test(barcode)) {
         console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-        const order = this.entries.find(el => el['trackingNumber'] == barcode)
+        const order = this.entries.find(el => el['trackingNumber'].toLowerCase() == barcode)
         if (order != undefined) {
           this.orderStatusComponentKey += 1;
           this.entrySelectedId = order.id;

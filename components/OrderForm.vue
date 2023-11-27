@@ -147,8 +147,7 @@
                                 <i class="fa-regular fa-images"></i>
 
                             </v-btn> -->
-                            <v-autocomplete item-text="name" item-value="id"
-                                :items="locationList" label="ສາງປາຍທາງ*"
+                            <v-autocomplete item-text="name" item-value="id" :items="locationList" label="ສາງປາຍທາງ*"
                                 v-model="form.endLocationId"></v-autocomplete>
                             <v-file-input :rules="masterRules.imageRule" ref="filesfield" multiple
                                 accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
@@ -201,13 +200,14 @@ export default {
             isSenderTyping: true,
             clientOption: [],
             vendorList: [],
-            locationList:[],
+            locationList: [],
+            barcode:'',
             form: {
                 bookingDate: '',
                 currencyId: 1,
                 vendorId: 1,
                 priceRate: 1,
-                endLocationId:1,
+                endLocationId: 1,
                 shippingFeeCurrencyId: 1,
                 shippingRate: 1,
                 shippingFee: 0,
@@ -277,9 +277,35 @@ export default {
         await this.loadEntry();
         await this.loadLocation();
         this.loadVendor();
+        window.addEventListener('keydown', this.handleKeyDown);
+    },
+    beforeDestroy() {
+        window.removeEventListener('keydown', this.handleKeyDown);
     },
     methods: {
-
+        handleKeyDown(event) {
+            console.log(`BACORD SCANING....`);
+            if (this.timer) {
+                clearInterval(this.timer)
+            }
+            if (event.key == 'Enter') {
+                if (this.barcode) {
+                    // ************ Find product from this barcode and add to cart ************ //
+                    // this.findProductFromBarcode(this.barcode)
+                    // Handle barcode [Receiving, Invoicing]
+                    console.log(`BACORD SCAN RESULT: ${this.barcode}`);
+                    // if(this.isCreate) return
+                    this.form.trackingNumber = this.barcode.toUpperCase()
+                    // this.findOrderByTrackingNumber(this.barcode)
+                }
+                this.barcode = '';
+                return
+            }
+            if (event.key != 'Shift') {
+                this.barcode += event.key;
+            }
+            this.timer = setInterval(() => this.barcode = '', 20);
+        },
         selectedClientNew(newVal, isSender) {
             const newClient = this.findAllClient.find(el => el.id == newVal)
             if (newClient != undefined) {

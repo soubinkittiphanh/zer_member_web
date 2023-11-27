@@ -267,6 +267,16 @@ export default {
     }
   },
   watch: {
+    formDialog(val) {
+      console.log(`STATUS FORM TRIGGER ${val}`);
+      if (val) {
+        console.log(`STATUS EQ TRUE TRIGGER ${val}`);
+        window.removeEventListener('keydown', this.handleKeyDown);
+      } else {
+        console.log(`STATUS EQ FALSE TRIGGER ${val}`);
+        window.addEventListener('keydown', this.handleKeyDown);
+      }
+    },
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
       this.loadData()
@@ -288,7 +298,7 @@ export default {
           // ************ Find product from this barcode and add to cart ************ //
           // Handle barcode [Receiving, Invoicing]
           console.log(`BACORD SCAN RESULT: ${this.barcode}`);
-          this.findOrderByTrackingNumber(this.barcode)
+          this.findOrderByTrackingNumber(this.barcode.toUpperCase())
         }
         this.barcode = '';
         return
@@ -300,22 +310,22 @@ export default {
     },
     findOrderByTrackingNumber(barcode) {
       // if (!/[^a-zA-Z]/.test(barcode)) {
-        console.log(`ENGLISH ACCEPT`);
-        console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-        const order = this.entries.find(el => el['trackingNumber'] == barcode)
-        if (order != undefined) {
-          this.orderStatusComponentKey += 1;
-          this.statusFormDialog = true;
-          this.isCreate = false;
-          this.addOrderToConfirmStockInList(order)
-        } else {
-          // Handle order not found here
-          console.log(`Add order from null barcode`);
-          this.orderStatusComponentKey += 1;
-          this.statusFormDialog = true;
-          this.isCreate = false;
-          this.addOrderToConfirmStockInList(this.orderTemplate)
-        }
+      console.log(`ENGLISH ACCEPT`);
+      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
+      const order = this.entries.find(el => el['trackingNumber'] == barcode)
+      if (order != undefined) {
+        this.orderStatusComponentKey += 1;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConfirmStockInList(order)
+      } else {
+        // Handle order not found here
+        console.log(`Add order from null barcode`);
+        this.orderStatusComponentKey += 1;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConfirmStockInList(this.orderTemplate)
+      }
       // } else {
       //   console.log(`LAO ACCEPT`);
       //   return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
