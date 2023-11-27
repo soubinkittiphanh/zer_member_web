@@ -555,7 +555,6 @@ export default {
                 .then((res) => {
                     // ************** PIE FROM ECHARTS *************//
                     const chart = ECharts.init(this.$refs.chart)
-
                     const option = {
                         title: {
                             text: 'ສິນຄ້າຂາຍດີຕາມໝວດ',

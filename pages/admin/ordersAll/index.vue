@@ -116,6 +116,7 @@
 <script>
 import OrderForm from '@/components/OrderForm.vue';
 import OrderStatusForm from '@/components/OrderStatusForm.vue';
+import { mapActions, mapGetters } from 'vuex'
 import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
   components: {
@@ -211,36 +212,52 @@ export default {
     window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
+    ...mapGetters(['findAllPayment', 'findAllCurrency',]),
     user() {
       return this.$auth.user || ''
     },
+    findTHBCurrencyId() {
+      return this.findAllCurrency.find(el => el.code == 'THB')['id']
+    },
     orderSummary() {
-      const orderedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'),true)
-      const receivedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'RECEIVED'),true)
-      const invoicedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'INVOICED'),true)
+      const orderedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'), true)
+      const orderedAmountTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'ORDERED' && el['currencyId'] == this.findTHBCurrencyId), true)
+      const receivedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'RECEIVED'), true)
+      const receivedAmountTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'RECEIVED' && el['currencyId'] == this.findTHBCurrencyId), true)
+      const invoicedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'INVOICED'), true)
+      const invoicedAmountTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'INVOICED' && el['currencyId'] == this.findTHBCurrencyId), true)
 
-      const orderedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'),false)
-      const receivedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'RECEIVED'),false)
-      const invoicedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'INVOICED'),false)
+      const orderedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'), false)
+      const orderedDeliverFeeTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'ORDERED' && el['shippingFeeCurrencyId'] == this.findTHBCurrencyId), false)
+      const receivedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'RECEIVED'), false)
+      const receivedDeliverFeeTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'RECEIVED' && el['shippingFeeCurrencyId'] == this.findTHBCurrencyId), false)
+      const invoicedDeliverFee = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'INVOICED'), false)
+      const invoicedDeliverFeeTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'INVOICED' && el['shippingFeeCurrencyId'] == this.findTHBCurrencyId), false)
       return [{
         'name': 'ອໍເດີ ',
         'amount': getFormatNum(orderedAmount),
+        'amountTHB': getFormatNum(orderedAmountTHB),
         'value': getFormatNum(this.entries.filter(el => el['status'] == 'ORDERED').length),
         'deliveryFee': getFormatNum(orderedDeliverFee),
+        'deliveryFeeTHB': getFormatNum(orderedDeliverFeeTHB),
       }, {
         'name': 'ອໍເດີ ຮັບເຂົ້າສາງ',
         'amount': getFormatNum(receivedAmount),
+        'amountTHB': getFormatNum(receivedAmountTHB),
         'value': getFormatNum(this.entries.filter(el => el['status'] == 'RECEIVED').length),
         'deliveryFee': getFormatNum(receivedDeliverFee),
-      }, 
+        'deliveryFeeTHB': getFormatNum(receivedDeliverFeeTHB),
+      },
       {
         'name': 'ອໍເດີ ຈັດສົ່ງລູກຄ້າ',
         'amount': getFormatNum(invoicedAmount),
+        'amountTHB': getFormatNum(invoicedAmountTHB),
         'value': getFormatNum(this.entries.filter(el => el['status'] == 'INVOICED').length),
         'deliveryFee': getFormatNum(invoicedDeliverFee),
+        'deliveryFeeTHB': getFormatNum(invoicedDeliverFeeTHB),
       },
 
-    ]
+      ]
     }
   },
   watch: {
@@ -257,10 +274,20 @@ export default {
     getFormatNum(val) {
       return getFormatNum(val);
     },
-    orderPriceSummary(orders,isPrice) {
-      const itemProp = isPrice? 'price':'shippingFee'
+    orderPriceSummary(orders, isPrice) {
+      const itemProp = isPrice ? 'price' : 'shippingFee'
+      const rate = isPrice ? 'priceRate' : 'shippingRate'
       let finalTotal = orders.reduce((total, item) => {
-        return total + item[itemProp];
+        return total + item[itemProp] * item[rate];
+      }, 0);
+      return finalTotal;
+    },
+    orderPriceTHBSummary(orders, isPrice) {
+      const itemProp = isPrice ? 'price' : 'shippingFee'
+      const rate = isPrice ? 'priceRate' : 'shippingRate'
+      let finalTotal = orders.reduce((total, item) => {
+        // return total + item[itemProp]*item[rate]; // UNCOMMENT TO SHOW LOCAL CURRENCY PRICE
+        return total + item[itemProp] ;
       }, 0);
       return finalTotal;
     },

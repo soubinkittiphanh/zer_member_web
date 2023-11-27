@@ -12,6 +12,7 @@
     </v-card>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     props: {
         orderDetail: {
@@ -33,7 +34,9 @@ export default {
                 { text: 'ລາຍການ', value: 'name' },
                 { text: 'ຈຳນວນ', value: 'value' },
                 { text: 'ມູນຄ່າ', value: 'amount' },
+                { text: 'ມູນຄ່າ THB', value: 'amountTHB' },
                 { text: 'ຄ່າຂົນສົ່ງ', value: 'deliveryFee' },
+                { text: 'ຄ່າຂົນສົ່ງ THB', value: 'deliveryFeeTHB' },
             ],
             headerStyle: {
                 backgroundColor: '#2196f3', // change to your desired color
@@ -41,6 +44,18 @@ export default {
                 fontWeight: 'bold' // change to the font weight you want
             }
         }
+    },
+    computed:{
+        headerList(){
+            for (const iterator of object) {
+                
+            }
+        },
+
+
+    },
+    methods:{
+        
     }
 }
 </script>
