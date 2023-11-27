@@ -33,10 +33,10 @@ export default {
             headers: [
                 { text: 'ລາຍການ', value: 'name' },
                 { text: 'ຈຳນວນ', value: 'value' },
-                { text: 'ມູນຄ່າ', value: 'amount' },
-                { text: 'ມູນຄ່າ THB', value: 'amountTHB' },
-                { text: 'ຄ່າຂົນສົ່ງ', value: 'deliveryFee' },
-                { text: 'ຄ່າຂົນສົ່ງ THB', value: 'deliveryFeeTHB' },
+                { text: 'ມູນຄ່າ ກີບ', value: 'amount' },
+                { text: 'ມູນຄ່າ ບາດ', value: 'amountTHB' },
+                { text: 'ຄ່າຂົນສົ່ງ ກີບ', value: 'deliveryFee' },
+                { text: 'ຄ່າຂົນສົ່ງ ບາດ', value: 'deliveryFeeTHB' },
             ],
             headerStyle: {
                 backgroundColor: '#2196f3', // change to your desired color
