@@ -24,7 +24,7 @@
     <v-card>
       <v-card-title>
         <v-layout row wrap>
-          <v-col cols="6">
+          <v-col cols="4">
             <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
               max-width="290px" min-width="1024">
               <template v-slot:activator="{ on, attrs }">
@@ -60,7 +60,7 @@
               </v-col>
             </v-row>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="8">
             <order-sumary-card-v-2 :orderDetail="orderSummary" class="pa-4" />
           </v-col>
 
