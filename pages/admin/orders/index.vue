@@ -100,7 +100,7 @@
           </v-btn>
         </template>
         <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
+          <v-btn color="primary" text @click="findOrderById(item['id'])
           isedit = true
             ">
             <i class="fa fa-cart-flatbed"></i>
@@ -312,7 +312,7 @@ export default {
       // if (!/[^a-zA-Z]/.test(barcode)) {
       console.log(`ENGLISH ACCEPT`);
       console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-      const order = this.entries.find(el => el['trackingNumber'] == barcode)
+      const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode)
       if (order != undefined) {
         this.orderStatusComponentKey += 1;
         this.statusFormDialog = true;
@@ -326,12 +326,17 @@ export default {
         this.isCreate = false;
         this.addOrderToConfirmStockInList(this.orderTemplate)
       }
-      // } else {
-      //   console.log(`LAO ACCEPT`);
-      //   return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
-      // }
-
-
+    },
+    findOrderById(orderId) {
+      const order = this.entries.find(el => el['id'] == orderId)
+      if (order != undefined) {
+        this.orderStatusComponentKey += 1;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConfirmStockInList(order)
+      } else {
+        // No order found hadler here
+      }
     },
     converseHandleInput(event) {
       const input = event.trim();

@@ -361,7 +361,7 @@ export default {
       if (event.key == 'Enter') {
         if (this.barcode) {
           // ************ Find product from this barcode and add to cart ************ //
-          this.findOrderByTrackingNumber(this.barcode)
+          this.findOrderByTrackingNumber(this.barcode.toLocaleUpperCase())
         }
         this.barcode = '';
         return
@@ -372,7 +372,7 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      const order = this.entries.find(el => el['trackingNumber'] == barcode)
+      const order = this.entries.find(el => el['trackingNumber'].toLocaleUpperCase() == barcode)
       if (order != undefined) {
         // return this.changeOrderStatus('INVOICED', order['id'])
         this.orderStatusComponentKey += 1;

@@ -109,7 +109,7 @@
           </v-btn>
         </template>
         <template v-slot:[`item.function`]="{ item }">
-          <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
+          <v-btn color="primary" text @click="findOrderById(item['id'])
           isedit = true
             ">
             <i class="fa fa-wallet"></i>
@@ -306,7 +306,7 @@ export default {
     },
   },
   methods: {
-    addShipping(orderId){
+    addShipping(orderId) {
 
     },
     findReceivingDate(order) {
@@ -345,23 +345,36 @@ export default {
     },
     findOrderByTrackingNumber(barcode) {
       // if (!/[^a-zA-Z]/.test(barcode)) {
-        console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-        const order = this.entries.find(el => el['trackingNumber'].toLowerCase() == barcode)
-        if (order != undefined) {
-          this.orderStatusComponentKey += 1;
-          this.entrySelectedId = order.id;
-          this.statusFormDialog = true;
-          this.isCreate = false;
-          this.addOrderToConformPaymentList(order)
-        } else {
-          // No order found hadler here
-        }
+      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
+      // const order = this.entries.find(el => el['trackingNumber'].toLowerCase() == barcode)
+      const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode.toUpperCase())
+      if (order != undefined) {
+        this.orderStatusComponentKey += 1;
+        this.entrySelectedId = order.id;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConformPaymentList(order)
+      } else {
+        // No order found hadler here
+      }
       // } else {
       //   console.log(`LAO ACCEPT`);
       //   return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       // }
 
 
+    },
+    findOrderById(orderId) {
+      const order = this.entries.find(el => el['id'] == orderId)
+      if (order != undefined) {
+        this.orderStatusComponentKey += 1;
+        this.entrySelectedId = order.id;
+        this.statusFormDialog = true;
+        this.isCreate = false;
+        this.addOrderToConformPaymentList(order)
+      } else {
+        // No order found hadler here
+      }
     },
     async changeOrderStatusDirect(orderStatus, orderId) {
       this.isloading = true

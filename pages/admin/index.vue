@@ -253,7 +253,7 @@ export default {
                     title: 'POS',
                     // icon: 'mdi-network-pos',
                     svgIcon: require('~/assets/icons/cashier_2.svg'),
-                    path: '/pos',
+                    path: '/pos/minimart',
                 },
                 {
                     title: 'Invoice',
