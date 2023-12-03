@@ -13,7 +13,8 @@
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-row justify="center" align="center">
+                    <!-- SENDER INFORMATION -->
+                    <!-- <v-row justify="center" align="center">
                         <v-divider></v-divider>
                         <div class="mx-2">
                             <h3>
@@ -49,7 +50,8 @@
                         <v-col cols="6">
                             <v-text-field v-model="form.sender.name" label="* ຊື່ລູກຄ້າ"></v-text-field>
                         </v-col>
-                    </v-row>
+                    </v-row> -->
+                    <!-- SENDER INFORMATION -->
                     <v-row justify="center" align="center">
                         <v-divider></v-divider>
                         <div class="mx-2">
@@ -142,17 +144,15 @@
                             <v-text-field v-if="!isStatusOrdered" disabled v-model="form.shippingRate"
                                 label="*ອັດຕາແລກປ່ຽນ"></v-text-field>
                         </v-col>
-                        <v-col cols="6">
-                            <!-- <v-btn color="primary" rounded variant="text" @click="$emit('close-dialog')">
-                                <i class="fa-regular fa-images"></i>
-
-                            </v-btn> -->
+                        <!-- DESTINATION WAREHOUSE -->
+                        <!-- <v-col cols="6">
                             <v-autocomplete item-text="name" item-value="id" :items="locationList" label="ສາງປາຍທາງ*"
-                                v-model="form.endLocationId"></v-autocomplete>
+                            v-model="form.endLocationId"></v-autocomplete>
                             <v-file-input :rules="masterRules.imageRule" ref="filesfield" multiple
-                                accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
-                                prepend-icon="mdi-camera" label="ຮູບພາບ" @change="onFilesChange"></v-file-input>
-                        </v-col>
+                            accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
+                            prepend-icon="mdi-camera" label="ຮູບພາບ" @change="onFilesChange"></v-file-input>
+                        </v-col> -->
+                        <!-- DESTINATION WAREHOUSE -->
                     </v-row>
                     <v-row>
                         <v-col cols="2">
