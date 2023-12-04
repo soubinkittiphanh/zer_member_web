@@ -43,24 +43,29 @@
             </v-row>
         </v-card>
         <!-- USER INPUT FORM -->
-        <v-card style="  height: 10vh; position: fixed; left: 0; right: 0; z-index: 2; margin-top: 40vh; ">
+        <v-card style="  height: 15vh; position: fixed; left: 0; right: 0; z-index: 2; margin-top: 40vh; ">
             <!-- Your content goes here -->
             <v-card-text class="ma-0">
                 <v-row>
                     <v-col class="pa-0" cols="3">
+                        <h2>.</h2>
                         <v-text-field type="number" outlined v-model="luckyNumber" label="* ເລກສ່ຽງ"
                             @input="luckyNumberTypingTrigger" @focus="luckyNumberTypingTrigger">
                         </v-text-field>
                     </v-col>
-                    <v-col class="pa-0" cols="2">
-                        <v-text-field type="number" outlined v-model="amount" label="* ຈຳນວນ ລ່າງ"
-                            @input="amountTypingTrigger"></v-text-field>
+                    <v-col class="pa-0" cols="3">
+                        <h2>ຈຳນວນບົນ</h2>
+                        <v-text-field type="number" outlined v-model="amountUp" 
+                        @input="amountUpTypingTrigger"></v-text-field>
                     </v-col>
                     <v-col class="pa-0" cols="3">
-                        <v-text-field type="number" outlined v-model="amountUp" label="* ຈຳນວນ ບົນ"
-                            @input="amountUpTypingTrigger"></v-text-field>
+                        <h2>ຈຳນວນລ່າງ</h2>
+                        <v-text-field type="number" outlined v-model="amount"
+                        @input="amountTypingTrigger"></v-text-field>
                     </v-col>
-                    <v-col cols="4">
+                    
+                    <v-col cols="3">
+                        <h2>.</h2>
                         <v-btn color="primary" width="20" rounded variant="text" @click="addTransaction">
                             ເພີ່ມ
                         </v-btn>
@@ -69,7 +74,7 @@
             </v-card-text>
         </v-card>
         <!-- Transaction summary  -->
-        <v-card style="  height: 20vh; position: fixed; left: 0; right: 0; z-index: 2; margin-top: 50vh; ">
+        <v-card style="  height: 20vh; position: fixed; left: 0; right: 0; z-index: 2; margin-top: 55vh; ">
             <!-- Your content goes here -->
             <v-card-text>
                 <v-row>
@@ -151,7 +156,7 @@ export default {
             ],
             maxLength: 3,
             luckyNumber: '',
-            amount: 1000,
+            amount: 0,
             amountUp: 0,
             screenWidth: 0,
             screenHeight: 0,
