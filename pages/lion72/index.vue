@@ -131,7 +131,6 @@
   
 <script>
 import { getFormatNum, swalError2, swalSuccess } from '~/common'
-import { mapMutations, mapGetters, mapActions } from 'vuex'
 export default {
     layout: "login",
     // middleware: 'auths',
@@ -442,7 +441,7 @@ export default {
         },
         generateTicket() {
             this.$router.push({
-                path: '/pos/ticket',
+                path: '/lion72/ticket',
                 query: { txn: this.transactionList }
             });
         }

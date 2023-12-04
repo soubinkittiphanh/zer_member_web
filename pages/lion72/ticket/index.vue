@@ -97,7 +97,7 @@ export default {
             return getFormatNum(val)
         }, goHome() {
             this.$router.push({
-                path: '/pos/lottery',
+                path: '/lion72',
             });
         }
     },
