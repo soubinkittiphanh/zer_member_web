@@ -55,15 +55,14 @@
                     </v-col>
                     <v-col class="pa-0" cols="3">
                         <h2>ຈຳນວນບົນ</h2>
-                        <v-text-field type="number" outlined v-model="amountUp" 
-                        @input="amountUpTypingTrigger"></v-text-field>
+                        <v-text-field type="number" outlined v-model="amountUp"
+                            @input="amountUpTypingTrigger"></v-text-field>
                     </v-col>
                     <v-col class="pa-0" cols="3">
                         <h2>ຈຳນວນລ່າງ</h2>
-                        <v-text-field type="number" outlined v-model="amount"
-                        @input="amountTypingTrigger"></v-text-field>
+                        <v-text-field type="number" outlined v-model="amount" @input="amountTypingTrigger"></v-text-field>
                     </v-col>
-                    
+
                     <v-col cols="3">
                         <h2>.</h2>
                         <v-btn color="primary" width="20" rounded variant="text" @click="addTransaction">
@@ -297,7 +296,12 @@ export default {
             this.amountUp = amount
         },
         selectLuckyNumber() {
-            // if (this.amount < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+            if(this.amount < 1000 || this.amountUp < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+            if (this.amount < 1000) {
+                // return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+                if (this.amountUp > 0) this.selectLuckyNumberUP()
+                return
+            }
             for (const iterator of this.luckyNumberOptionForSelect) {
                 if (iterator.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
                 const existTxn = this.transactionList.find(el => el['luckyNumber'] == iterator && el['normal'] == true)
