@@ -297,7 +297,7 @@ export default {
             this.amountUp = amount
         },
         selectLuckyNumber() {
-            if (this.amount < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+            // if (this.amount < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
             for (const iterator of this.luckyNumberOptionForSelect) {
                 if (iterator.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
                 const existTxn = this.transactionList.find(el => el['luckyNumber'] == iterator && el['normal'] == true)

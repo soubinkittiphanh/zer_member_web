@@ -206,6 +206,7 @@ export default {
             const newClient = this.findAllClient.find(el => el.id == newVal)
             if (newClient != undefined) {
                 this.lockSuggest = true
+                // this.confirmEntries[orderId]['client']['id'] = newClient['id']
                 this.confirmEntries[orderId]['client']['name'] = newClient['name']
                 this.confirmEntries[orderId]['client']['telephone'] = newClient['telephone']
                 this.clientOption = []

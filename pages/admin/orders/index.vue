@@ -53,10 +53,10 @@
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
                 </v-btn>
-                <!-- <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('')" class="primary" rounded>
+                <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('LAK9949939004')" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Scanning not found
                 </v-btn>
-                <v-text-field @input="converseHandleInput" v-model="localLanguage" label="* ເບີໂທ">
+                <!-- <v-text-field @input="converseHandleInput" v-model="localLanguage" label="* ເບີໂທ">
                 </v-text-field> -->
               </v-col>
               <v-spacer></v-spacer>
@@ -242,7 +242,7 @@ export default {
         "bookingDate": today,
         "name": "",
         "note": "",
-        "trackingNumber": this.barcode,
+        "trackingNumber": 'nodejsclusters-40083-0',
         "link": "",
         "price": 0,
         "priceRate": 1,
@@ -324,6 +324,7 @@ export default {
         this.orderStatusComponentKey += 1;
         this.statusFormDialog = true;
         this.isCreate = false;
+        
         this.addOrderToConfirmStockInList(this.orderTemplate)
       }
     },
