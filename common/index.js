@@ -393,11 +393,11 @@ export const hostName = () => {
 export const mainCompanyInfo = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   const info = {
-    name: 'UAT',
+    name: 'JNONG',
     tel: '02091993749',
     imageUrl: '',
     imageName: '',
-    env: 'DEMO'
+    env: 'LIVE'
   }
   return info;
 }
