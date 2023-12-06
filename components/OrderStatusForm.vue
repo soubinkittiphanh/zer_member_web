@@ -32,7 +32,7 @@
                                                     </v-col>
                                                     <v-col cols="2" align-self="center">
                                                         <v-btn color="primary" rounded variant="text"
-                                                            @click="selectedClientNew(client['id'],idx)">
+                                                            @click="selectedClientNew(client['id'], idx)">
                                                             <i class="fa-regular fa-circle-check"></i>
                                                         </v-btn>
                                                     </v-col>
@@ -105,6 +105,7 @@
                     <i class="fa-solid fa-clipboard-check"></i>
                     ອອກບິນໃຫ້ລູກຄ້າ
                 </v-btn>
+                <canvas ref="barcodeCanvas" :style="{ display: showCanvas ? 'block' : 'none' }"></canvas>
             </v-card-actions>
         </v-card>
 
@@ -134,9 +135,11 @@ export default {
     },
     data() {
         return {
+            showCanvas: false,
+            barcodeImage: '',
             customerOptionForOrderId: null,
             timeoutId: null,
-            customerTel:null,
+            customerTel: null,
             logoCompany: require('~/assets/image/BWLOGO.jpeg'),
             confirmEntries: [],
             lockSuggest: false,
@@ -187,7 +190,7 @@ export default {
         },
         testMyTrigger(orderId) {
             console.log(`Typing on order id: ${orderId}`);
-            this.customerOptionForOrderId=orderId
+            this.customerOptionForOrderId = orderId
             this.customerTel = this.confirmEntries[orderId]['client']['telephone'];
             if (this.clientList != undefined) {
                 this.clientOption = this.clientList
@@ -201,7 +204,7 @@ export default {
                 }
             }
         },
-        selectedClientNew(newVal,orderId) {
+        selectedClientNew(newVal, orderId) {
             console.log(`SELECT CLIENT CLICK`);
             const newClient = this.findAllClient.find(el => el.id == newVal)
             if (newClient != undefined) {
@@ -249,8 +252,29 @@ export default {
             this.isloading = false
             // return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
         },
-        async merceEntryToPrint() {
+        generateBarcodeImage(barcode) {
+            // Generate a random 12-digit number as the barcode value
+            // Get the canvas element using the ref attribute
+            const canvas = this.$refs.barcodeCanvas;
+            console.log(`.....Canvas logger.....`);
+            console.log(canvas);
+            console.log(canvas.width, canvas.height);
+            // Set the canvas width and height to match the paper size
+            canvas.width = 40;
+            canvas.height = 20;
+            // Generate the barcode image using JsBarcode
+            JsBarcode(canvas, barcode, {
+                format: 'code128',
+                displayValue: true,
+                fontSize: 20,
+                // margin: 10
+            });
 
+            // Convert the canvas to a data URL and set it as the barcodeImage data property
+            this.barcodeImage = canvas.toDataURL();
+        },
+        async merceEntryToPrint() {
+            this.generateBarcodeImage(this.confirmEntries[0]['trackingNumber'])
             let txnListHtml = ``
             for (const item of this.confirmEntries) {
                 const price = item.shippingFee * item.shippingRate;
@@ -268,7 +292,7 @@ export default {
             let totalHtml = `
 <div class="ticket">
             <div class="product-name"></div>
-        <div class="price">LAK ${this.formatNumber(this.ticketTotal)}</div>
+        <div class="price">THB ${this.formatNumber(this.ticketTotal)}</div>
     </div>`
 
             // <h5> Ticket ${item.id} </h5>
@@ -276,17 +300,20 @@ export default {
  ${this.ticketCommon.header}
     <body>
         <div style="text-align: center;">
-            <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+            <img src="${this.logoCompany}" alt="Description of the image" width="100" height="100">
         </div>
+        <h3> ເຈ້ນ່ອງ ຂົນສົ່ງ ໄທ-ລາວ</h3>
         <h3> ໃບຮັບເງິນ</h3>
         <h5> ວັນທີ ${today.toLocaleString()}</h5>
-        <h5> Ticket [Dynamic]</h5>
+        <h5> Ticket ${this.confirmEntries[0].id} </h5>
         <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
         <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+        <h5> ຜູ້ຮັບ: ${this.confirmEntries[0]['client']['name']}  </h5>
         <hr style="margin-top: 50px;"> </hr>
         ${txnListHtml}
         <hr> </hr>
         ${totalHtml}
+        <h2 style="text-align: center; margin-top: 50px;">  <img src="${this.barcodeImage}"> </h2>
         <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
         
     </body>
@@ -306,8 +333,10 @@ export default {
             }, 1000)
         },
         printTicket(item) {
+            console.log(`${JSON.stringify(item)}`);
             let txnListHtml = ``
             const price = item.shippingFee * item.shippingRate;
+            this.generateBarcodeImage(item['trackingNumber'])
             txnListHtml +=
                 `<div class="ticket">
                     <div class="product-name">${item.name}</div>
@@ -320,24 +349,27 @@ export default {
             let totalHtml = `
       <div class="ticket">
                     <div class="product-name"></div>
-                <div class="price">LAK ${this.formatNumber((item['shippingFee'] * item['shippingRate']))}</div>
+                <div class="price">${this.findCurrencyById(item['shippingFeeCurrencyId'])} ${this.formatNumber((item['shippingFee']))}</div>
             </div>`
 
             const windowContent = `
          ${this.ticketCommon.header}
             <body>
                 <div style="text-align: center;">
-                    <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+                    <img src="${this.logoCompany}" alt="Description of the image" width="100" height="100">
                 </div>
+                <h3> ເຈ້ນ່ອງ ຂົນສົ່ງ ໄທ-ລາວ </h3>
                 <h3> ໃບຮັບເງິນ</h3>
                 <h5> ວັນທີ ${today.toLocaleString()}</h5>
                 <h5> Ticket ${item.id} </h5>
                 <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+                <h5> ຜູ້ຮັບ: ${item['client']['name']}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
                 ${txnListHtml}
                 <hr> </hr>
                 ${totalHtml}
+                <h2 style="text-align: center; margin-top: 50px;">  <img src="${this.barcodeImage}"> </h2>
                 <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
                 
             </body>
@@ -415,7 +447,10 @@ export default {
         },
         refreshData() {
             this.$emit('reload-data')
-        }
+        },
+        findCurrencyById(id) {
+            return this.findAllCurrency.find(el=>el['id'] == id)['code']
+        },
     },
     computed: {
         user() {
@@ -433,6 +468,7 @@ export default {
         currencyList() {
             return this.findAllCurrency
         },
+
         ticketTotal() {
             const totalAmount = this.confirmEntries.reduce((accumulator, currentItem) => {
                 return accumulator + (currentItem['shippingFee'] * currentItem['shippingRate']);

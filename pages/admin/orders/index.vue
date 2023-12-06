@@ -53,9 +53,9 @@
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
                 </v-btn>
-                <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('LAK9949939004')" class="primary" rounded>
+                <!-- <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('LAK9949939004')" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Scanning not found
-                </v-btn>
+                </v-btn> -->
                 <!-- <v-text-field @input="converseHandleInput" v-model="localLanguage" label="* ເບີໂທ">
                 </v-text-field> -->
               </v-col>

@@ -120,6 +120,7 @@
 
         </template>
       </v-data-table>
+      <canvas ref="barcodeCanvas" :style="{ display: showCanvas ? 'block' : 'none' }"></canvas>
     </v-card>
   </div>
 </template>
@@ -141,6 +142,8 @@ export default {
   data() {
     return {
       timer: null,
+      barcodeImage: '',
+      showCanvas:false,
       barcode: '',
       statusFormDialog: false,
       whatsappContactLink: '',
@@ -273,12 +276,12 @@ export default {
     },
   },
   methods: {
-    findInvoicingDate(order){
+    findInvoicingDate(order) {
       let invoicingDate = order['updateTimestamp'].split('T')[0]
-      let orderWithInvoicedDate =  null
-      if(order['histories'].length>0){
-        orderWithInvoicedDate = order['histories'].find(el=>el['status'] == 'INVOICED')
-        if(orderWithInvoicedDate!=undefined){
+      let orderWithInvoicedDate = null
+      if (order['histories'].length > 0) {
+        orderWithInvoicedDate = order['histories'].find(el => el['status'] == 'INVOICED')
+        if (orderWithInvoicedDate != undefined) {
           console.log(`ORDER STATUS: ${orderWithInvoicedDate['status']} ORDER INVOICED DATE ${orderWithInvoicedDate['updateTimestamp']}`);
           invoicingDate = orderWithInvoicedDate['updateTimestamp'].split('T')[0]
         }
@@ -289,7 +292,29 @@ export default {
     formatNumber(val) {
       return getFormatNum(val)
     },
+    generateBarcodeImage(barcode) {
+      // Generate a random 12-digit number as the barcode value
+      // Get the canvas element using the ref attribute
+      const canvas = this.$refs.barcodeCanvas;
+      console.log(`.....Canvas logger.....`);
+      console.log(canvas);
+      console.log(canvas.width, canvas.height);
+      // Set the canvas width and height to match the paper size
+      canvas.width = 40;
+      canvas.height = 20;
+      // Generate the barcode image using JsBarcode
+      JsBarcode(canvas, barcode, {
+        format: 'code128',
+        displayValue: true,
+        fontSize: 20,
+        // margin: 10
+      });
+
+      // Convert the canvas to a data URL and set it as the barcodeImage data property
+      this.barcodeImage = canvas.toDataURL();
+    },
     printTicket(item) {
+      this.generateBarcodeImage(item['trackingNumber'])
       let txnListHtml = ``
       const price = item.shippingFee * item.shippingRate;
       // for (const iterator of this.productCart) {
@@ -317,30 +342,33 @@ export default {
       let totalHtml = `
       <div class="ticket">
                     <div class="product-name"></div>
-                <div class="price">LAK ${this.formatNumber((item['shippingFee'] * item['shippingRate']))}</div>
+                <div class="price">THB ${this.formatNumber((item['shippingFee'] * item['shippingRate']))}</div>
             </div>`
 
       const windowContent = `
          ${this.ticketCommon.header}
             <body>
                 <div style="text-align: center;">
-                    <img src="${this.logoCompany}" alt="Description of the image" width="200" height="200">
+                    <img src="${this.logoCompany}" alt="Description of the image" width="100" height="100">
                 </div>
-                <h3> ເຈ້ນ່ອງ ຂົນສົ່ງ ໄທ-ລາວ</h3>
+                <h3> ເຈ້ນ່ອງ ຂົນສົ່ງ ໄທ-ລາວ </h3>
                 <h3> ໃບຮັບເງິນ</h3>
                 <h5> ວັນທີ ${today.toLocaleString()}</h5>
                 <h5> ເລກບິນ: ${item.id} </h5>
                 <h5> Tel ${this.currentTerminal['location']['company']['tel']}</h5>
                 <h5> ຜູ້ຂາຍ: ${this.user.cus_name}  </h5>
+                <h5> ຜູ້ຮັບ: ${item['client']['name']}  </h5>
                 <hr style="margin-top: 50px;"> </hr>
                 ${txnListHtml}
                 <hr> </hr>
                 ${totalHtml}
+                <h2 style="text-align: center; margin-top: 50px;">  <img src="${this.barcodeImage}"> </h2>
                 <h2 style="text-align: center; margin-top: 50px;"> THANKYOU </h2>
                 
             </body>
             </html>
         `
+      
       const printWin = window.open(
         '',
         '',
@@ -353,6 +381,7 @@ export default {
         printWin.print()
         printWin.close()
       }, 1000)
+
     },
     handleKeyDown(event) {
       if (this.timer) {
