@@ -242,7 +242,7 @@ export default {
         "bookingDate": today,
         "name": "",
         "note": "",
-        "trackingNumber": 'nodejsclusters-40083-0',
+        "trackingNumber": '',
         "link": "",
         "price": 0,
         "priceRate": 1,
