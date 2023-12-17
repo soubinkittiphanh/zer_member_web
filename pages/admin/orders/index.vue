@@ -242,7 +242,7 @@ export default {
         "bookingDate": today,
         "name": "",
         "note": "",
-        "trackingNumber": '',
+        "trackingNumber": this.barcode,
         "link": "",
         "price": 0,
         "priceRate": 1,
@@ -309,23 +309,28 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      // if (!/[^a-zA-Z]/.test(barcode)) {
-      console.log(`ENGLISH ACCEPT`);
-      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-      const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode)
-      if (order != undefined) {
-        this.orderStatusComponentKey += 1;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        this.addOrderToConfirmStockInList(order)
+      const regex = /^[A-Za-z0-9]*$/;
+      const isValid = regex.test(barcode); // Should return true
+      if (!isValid) {
+        //  Lao character handle
+        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       } else {
-        // Handle order not found here
-        console.log(`Add order from null barcode`);
-        this.orderStatusComponentKey += 1;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        
-        this.addOrderToConfirmStockInList(this.orderTemplate)
+        console.log(`ENGLISH ACCEPT`);
+        console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
+        const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode)
+        if (order != undefined) {
+          this.orderStatusComponentKey += 1;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConfirmStockInList(order)
+        } else {
+          // Handle order not found here
+          console.log(`Add order from null barcode`);
+          this.orderStatusComponentKey += 1;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConfirmStockInList(this.orderTemplate)
+        }
       }
     },
     findOrderById(orderId) {
@@ -340,13 +345,15 @@ export default {
       }
     },
     converseHandleInput(event) {
+      const regex = /^[A-Za-z0-9]*$/;
       const input = event.trim();
+      const isValid = regex.test(input); // Should return true
       // validate input here
-      console.log(`VALIDATING INPUTT...${event}`);
-      if (!/[^a-zA-Z]/.test(event)) {
-        console.log(`ENGLISH ACCEPT`);
-      } else {
-        console.log(`LAO ACCEPT`);
+      console.log(`VALIDATING INPUTT...${isValid}`);
+
+      if(isValid){
+
+      }else{
         return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       }
     },
