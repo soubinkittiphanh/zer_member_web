@@ -53,7 +53,7 @@
                 <v-btn size="large" variant="outlined" @click="createRecord" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Create
                 </v-btn>
-                <!-- <v-btn size="large" variant="outlined" @click="findOrderByTrackingNumber('LAK9949939004')" class="primary" rounded>
+                <!-- <v-btn size="large" variant="outlined" @click="converseHandleInput('Aaadd33002')" class="primary" rounded>
                   <span class="mdi mdi-plus"></span>Scanning not found
                 </v-btn> -->
                 <!-- <v-text-field @input="converseHandleInput" v-model="localLanguage" label="* ເບີໂທ">
@@ -79,10 +79,7 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-
       </v-card-text>
-
-
       <v-data-table :headers="headers" :search="search" :items="filterOrders">
         <template v-slot:[`item.bookingDate`]="{ item }">
           {{ item.bookingDate }}
@@ -242,7 +239,7 @@ export default {
         "bookingDate": today,
         "name": "",
         "note": "",
-        "trackingNumber": this.barcode,
+        "trackingNumber": this.barcode.toUpperCase(),
         "link": "",
         "price": 0,
         "priceRate": 1,
@@ -298,7 +295,7 @@ export default {
           // ************ Find product from this barcode and add to cart ************ //
           // Handle barcode [Receiving, Invoicing]
           console.log(`BACORD SCAN RESULT: ${this.barcode}`);
-          this.findOrderByTrackingNumber(this.barcode.toUpperCase())
+          this.findOrderByTrackingNumber(this.barcode)
         }
         this.barcode = '';
         return
@@ -351,9 +348,10 @@ export default {
       // validate input here
       console.log(`VALIDATING INPUTT...${isValid}`);
 
-      if(isValid){
+      if (isValid) {
+        return swalError2(this.$swal, "Error", `CONVERT TO UPPER CASE ${input} TO ${input.toUpperCase()}`);
 
-      }else{
+      } else {
         return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       }
     },

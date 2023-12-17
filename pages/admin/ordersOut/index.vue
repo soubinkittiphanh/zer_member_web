@@ -143,7 +143,7 @@ export default {
     return {
       timer: null,
       barcodeImage: '',
-      showCanvas:false,
+      showCanvas: false,
       barcode: '',
       statusFormDialog: false,
       whatsappContactLink: '',
@@ -368,7 +368,7 @@ export default {
             </body>
             </html>
         `
-      
+
       const printWin = window.open(
         '',
         '',
@@ -401,16 +401,24 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      const order = this.entries.find(el => el['trackingNumber'].toLocaleUpperCase() == barcode)
-      if (order != undefined) {
-        // return this.changeOrderStatus('INVOICED', order['id'])
-        this.orderStatusComponentKey += 1;
-        this.entrySelectedId = order.id;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        this.addOrderToConformPaymentList(order)
+      const regex = /^[A-Za-z0-9]*$/;
+      const isValid = regex.test(barcode); // Should return true
+      if (!isValid) {
+        //  Lao character handle
+        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
+      } else {
+        const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode.toUpperCase())
+        if (order != undefined) {
+          // return this.changeOrderStatus('INVOICED', order['id'])
+          this.orderStatusComponentKey += 1;
+          this.entrySelectedId = order.id;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConformPaymentList(order)
+        }else{
+          return swalError2(this.$swal, "Error", `Tracking number ${barcode.toUpperCase()} ບໍ່ພົບໃນລະບົບ`);
+        }
       }
-
     },
     async changeOrderStatus(orderStatus, orderId) {
       this.isloading = true

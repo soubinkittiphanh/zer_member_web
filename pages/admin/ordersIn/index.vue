@@ -344,25 +344,24 @@ export default {
       this.timer = setInterval(() => this.barcode = '', 20);
     },
     findOrderByTrackingNumber(barcode) {
-      // if (!/[^a-zA-Z]/.test(barcode)) {
-      console.log(`FIND TRACKING NUMBER BY BARCODE SCAN RESULT: ${barcode}`);
-      // const order = this.entries.find(el => el['trackingNumber'].toLowerCase() == barcode)
-      const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode.toUpperCase())
-      if (order != undefined) {
-        this.orderStatusComponentKey += 1;
-        this.entrySelectedId = order.id;
-        this.statusFormDialog = true;
-        this.isCreate = false;
-        this.addOrderToConformPaymentList(order)
+      const regex = /^[A-Za-z0-9]*$/;
+      const isValid = regex.test(barcode); // Should return true
+      if (!isValid) {
+        //  Lao character handle
+        return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
       } else {
-        // No order found hadler here
+        const order = this.entries.find(el => el['trackingNumber'].toUpperCase() == barcode.toUpperCase())
+        if (order != undefined) {
+          this.orderStatusComponentKey += 1;
+          this.entrySelectedId = order.id;
+          this.statusFormDialog = true;
+          this.isCreate = false;
+          this.addOrderToConformPaymentList(order)
+        } else {
+          return swalError2(this.$swal, "Error", `Tracking number ${barcode.toUpperCase()} ບໍ່ພົບໃນລະບົບ`);
+          // No order found hadler here
+        }
       }
-      // } else {
-      //   console.log(`LAO ACCEPT`);
-      //   return swalError2(this.$swal, "Error", 'ລະບົບບໍ່ເຂົ້າໃຈພາສາລາວ ກະລຸນາປ່ງນພາສາ ເປັນພາສາອັງກິດ ກ່ອນສະແກນ');
-      // }
-
-
     },
     findOrderById(orderId) {
       const order = this.entries.find(el => el['id'] == orderId)
