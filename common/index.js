@@ -387,17 +387,18 @@ export const hostName = () => {
   // const baseURL = 'http://150.95.31.23:8007' // ***DEMO*** 
   // const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
   // const baseURL = 'http://150.95.31.23:8009' // ***PRODUCTION JNONG*** 
-  const baseURL = 'http://150.95.31.23:8004' // ***UAT*** 
+  const baseURL = 'http://150.95.31.23:8010' // ***PRODUCTION PEEAIR2024*** 
+  // const baseURL = 'http://150.95.31.23:8004' // ***ONLINE UAT*** 
   return baseURL;
 }
 export const mainCompanyInfo = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
   const info = {
-    name: 'DCOMMERCE',
+    name: 'PEEAIR4',
     tel: '02091993749',
     imageUrl: '',
     imageName: '',
-    env: 'UAT'
+    env: 'LIVE'
   }
   return info;
 }
