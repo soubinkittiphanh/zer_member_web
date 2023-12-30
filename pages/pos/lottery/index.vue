@@ -152,7 +152,7 @@ export default {
             ],
             maxLength: 3,
             luckyNumber: '',
-            amount: 1000,
+            amount: 0,
             amountUp: 0,
             screenWidth: 0,
             screenHeight: 0,
