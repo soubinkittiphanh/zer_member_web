@@ -48,8 +48,8 @@
             <v-card-text class="ma-0">
                 <v-row>
                     <v-col class="pa-0" cols="3">
-                        <v-text-field type="number" outlined v-model="luckyNumber" label="* ເລກສ່ຽງ"
-                            @input="luckyNumberTypingTrigger" @focus="luckyNumberTypingTrigger">
+                        <v-text-field outlined v-model="luckyNumber" label="* ເລກສ່ຽງ" @input="luckyNumberTypingTrigger"
+                            @focus="luckyNumberTypingTrigger">
                         </v-text-field>
                     </v-col>
                     <v-col class="pa-0" cols="2">
@@ -250,6 +250,10 @@ export default {
         luckyNumberTypingTrigger() {
             console.log(`LuckyNumber is typing...`);
             // this.luckyNumberOptionForSelect.length = 0;
+            if(this.luckyNumber.includes(',')){
+                this.luckyNumberOption = true;
+                return this.luckyNumberOptionForSelect = this.luckyNumber.split(',')
+            };
             this.luckyNumberOption = true;
             this.amountOption = false;
             // Clear existing timeout
@@ -293,20 +297,31 @@ export default {
             this.amountUp = amount
         },
         selectLuckyNumber() {
-            if (this.amount < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
-            for (const iterator of this.luckyNumberOptionForSelect) {
-                if (iterator.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
-                const existTxn = this.transactionList.find(el => el['luckyNumber'] == iterator && el['normal'] == true)
-                if (existTxn != undefined) {
-                    existTxn['amount'] += parseInt(this.amount, 10);
-                    continue
-                }
-                this.transactionList.push(
-                    { luckyNumber: iterator, amount: this.amount, normal: true },
-                )
-            }
-            if (this.amountUp > 0) this.selectLuckyNumberUP()
-            this.luckyNumberOption = false
+            // if (this.amount < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+            // for (const iterator of this.luckyNumberOptionForSelect) {
+            //     if (iterator.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
+            //     const existTxn = this.transactionList.find(el => el['luckyNumber'] == iterator && el['normal'] == true)
+            //     if (existTxn != undefined) {
+            //         existTxn['amount'] += parseInt(this.amount, 10);
+            //         continue
+            //     }
+            //     this.transactionList.push(
+            //         { luckyNumber: iterator, amount: this.amount, normal: true },
+            //     )
+            // }
+            // if (this.amountUp > 0) this.selectLuckyNumberUP()
+            // this.luckyNumberOption = false
+            console.log(`LUCKY NUMBER LIST ${this.luckyNumberOptionLable}`);
+            const temp = this.luckyNumberOptionLable.split(',');
+
+            // Remove any empty strings resulting from leading/trailing commas
+            const filteredTemp = temp.filter((item) => item.trim());
+            console.log(`FILTER ${filteredTemp.join(',').toString()}`);
+            this.luckyNumber = filteredTemp.join(',');
+            // ********** Remove lucky number option after selected ***********
+            this.luckyNumberOptionForSelect = [];
+
+
         },
         selectLuckyNumberUP() {
             if (this.amountUp < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
@@ -350,30 +365,63 @@ export default {
             this.prefixOption = false;
         },
         addTransaction() {
-            // Dupplicate check
-            if (this.amount > 0) {
-                if (this.luckyNumber.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
-                const existTxn = this.transactionList.find(el => el['luckyNumber'] == this.luckyNumber && el['normal'] == true)
-                if (existTxn != undefined) {
-                    existTxn['amount'] += parseInt(this.amount, 10);
-                } else {
+
+            if (this.luckyNumber.includes(",")) {
+                for (const iterator of this.luckyNumber.split(',')) {
+                    if (this.amount > 0) {
+                        if (iterator.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
+                        const existTxn = this.transactionList.find(el => el['luckyNumber'] == iterator && el['normal'] == true)
+                        if (existTxn != undefined) {
+                            existTxn['amount'] += parseInt(this.amount, 10);
+                        } else {
+                            this.transactionList.push(
+                                { luckyNumber: iterator, amount: this.amount, normal: true },
+                            )
+                        }
+
+                    }
+                    // // AMOUNT UPPER ADD
+                    if (this.amountUp > 0) {
+                        if (this.amountUp < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+                        const existTxnUP = this.transactionList.find(el => el['luckyNumber'] == iterator && el['normal'] == false)
+                        if (existTxnUP != undefined) {
+                            return existTxnUP['amount'] += parseInt(this.amountUp, 10);
+                        }
+                        this.transactionList.push(
+                            { luckyNumber: iterator, amount: parseInt(this.amountUp, 10), normal: false },
+                        )
+                    }
+                }
+                this.luckyNumberOptionForSelect.length = 0;
+            } else {
+                // Dupplicate check
+                if (this.amount > 0) {
+                    if (this.luckyNumber.length > this.maxLength) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ທາງເຮົາຂາຍສະເພາະເລກ 3 ຕົວ")
+                    const existTxn = this.transactionList.find(el => el['luckyNumber'] == this.luckyNumber && el['normal'] == true)
+                    if (existTxn != undefined) {
+                        existTxn['amount'] += parseInt(this.amount, 10);
+                    } else {
+                        this.transactionList.push(
+                            { luckyNumber: this.luckyNumber, amount: this.amount, normal: true },
+                        )
+                    }
+
+                }
+                // AMOUNT UPPER ADD
+                if (this.amountUp > 0) {
+                    if (this.amountUp < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
+                    const existTxnUP = this.transactionList.find(el => el['luckyNumber'] == this.luckyNumber && el['normal'] == false)
+                    if (existTxnUP != undefined) {
+                        return existTxnUP['amount'] += parseInt(this.amountUp, 10);
+                    }
                     this.transactionList.push(
-                        { luckyNumber: this.luckyNumber, amount: this.amount, normal: true },
+                        { luckyNumber: this.luckyNumber, amount: parseInt(this.amountUp, 10), normal: false },
                     )
                 }
+                this.luckyNumberOptionForSelect.length = 0;
+            }
 
-            }
-            // AMOUNT UPPER ADD
-            if (this.amountUp > 0) {
-                if (this.amountUp < 1000) return swalError2(this.$swal, "ເກີດຂໍ້ຜິດພາດ", "ກະລຸນາໃສ່ຈຳນວນເງິນ 1000 ຂັ້ນຕ່ຳ")
-                const existTxnUP = this.transactionList.find(el => el['luckyNumber'] == this.luckyNumber && el['normal'] == false)
-                if (existTxnUP != undefined) {
-                    return existTxnUP['amount'] += parseInt(this.amountUp, 10);
-                }
-                this.transactionList.push(
-                    { luckyNumber: this.luckyNumber, amount: parseInt(this.amountUp, 10), normal: false },
-                )
-            }
+
         },
         removeTransaction(element) {
             const indexInOddList = this.transactionList.findIndex((item) => item.luckyNumber === element['luckyNumber'] && item.normal == element['normal']);
