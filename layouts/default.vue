@@ -460,7 +460,6 @@ export default {
   computed: {
     ...mapGetters(['findSelectedTerminal', 'findAllTerminal', 'findAllLocation', 'currentSelectedLocation']),
     user() {
-
       return this.$auth.user || ''
     },
 

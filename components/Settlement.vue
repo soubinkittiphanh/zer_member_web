@@ -11,15 +11,13 @@
     </v-dialog>
     <v-card>
       <v-card-title>
-        ຊຳລະບິນ {{ this.orderId +'-'+ this.lockingSessionId || 'null' }} ຍອດ:
+        ຊຳລະບິນ {{ this.orderId || 'null' }} ຍອດ:
         {{ formatNum(this.amount) }} </v-card-title>
       <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-text-field v-model="userName" :counter="10" :rules="rule.idRules" label="ໄອດີ ຜູ້ລົງ" required
-            disabled></v-text-field>
-          <v-select v-model="form_data.txn_type" :items="loaddata" :item-value="(item) => item.txn_id"
-            :item-text="(item) => item.txn_id + ' - ' + item.txn_name" @change="selectChange" append-outer-icon="mdi-cash-check"
-            menu-props="auto" hide-details label="ປະເພດການຊຳລະ" single-line :rules="rule.txnRule"></v-select>
+          
+            <v-autocomplete item-text="payment_code" item-value="id" :items="findAllPayment"
+                                        label="ການຊຳລະ*" v-model="paymentId"></v-autocomplete>
           <v-text-field v-model="paymentAmount" :counter="10" :rules="rule.amountRules"
             :label="`ຈຳນວນເງິນ: ` + formatNum(paymentAmount)" required></v-text-field>
           <v-text-field v-model.number="codFee" :counter="10" :rules="numberRule"
@@ -31,17 +29,19 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <!-- <v-btn color="error" class="mr-4" @click="reset"> ລ້າງຂໍ້ມູນ </v-btn> -->
-        <v-btn color="blue darken-1" text @click="$emit('close-dialog')">
+        <v-btn class="warning" rounded text @click="$emit('close-dialog')">
           ປິດ
         </v-btn>
-        <v-btn color="blue darken-1" text @click="submitDatas"> ບັນທຶກ </v-btn>
+        <v-btn class="primary" rounded text @click="submitDatas"> ບັນທຶກ </v-btn>
+   
       </v-card-actions>
     </v-card>
   </div>
 </template>
 
 <script>
-import {swalSuccess,swalError2} from '~/util/myUtil'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
+import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 export default {
 //   There are several types available for Vue.js props:
 
@@ -66,17 +66,16 @@ export default {
       type: Number,
       require: true,
     },
-    lockingSessionId:{
-      type:String,
-      require:true,
-    }
+    dyCusId: {
+      type: Number,
+      require: true,
+    },
+
   },
   computed:{
-    userId(){
-      return this.$auth.user.id;
-    },
-    userName(){
-      return this.$auth.user.name;
+    ...mapGetters([ 'findAllPayment',  'findAllCurrency', ]),
+    user() {
+      return this.$auth.user || ''
     },
     numberRule() {
             return [
@@ -94,17 +93,9 @@ export default {
       message: null,
       dialogMessage: false,
       paymentAmount: this.amount,
+      paymentId:1,
       codFee: 0,
-      form_data: {
-        txn_his_id: 1000,
-        txn_id: 1000,
-        txn_type: "TRANSFER",
-        txn_his_amount: 10000,
-        user_id: this.userId,
-        user_balance: this.cusBalance,
-        txn_his_inputter: this.$store.getters.loggedInUser.id,
-        txn_his_date: '2021-09-25 00:00:00',
-      },
+      
       rule: {
         idRules: [(v) => !!v || 'ໄອດີ is required'],
         amountRules: [(v) => !!v || 'ກລນ ໃສ່ຈຳນວນ is required'],
@@ -115,25 +106,17 @@ export default {
     }
   },
   async created() {
-    await this.fetchData()
     this.codFee = +0;
-    console.log("Assign amount: ",this.paymentAmount);
   },
 
   watch: {
-    userId(v) {
-      this.form_data.user_id = v
-    },
     amount(newAmount){
       console.log("New amount: ",newAmount);
       this.paymentAmount= newAmount;
     }
   },
   methods: {
-    selectChange(v) {
-      console.log('SELECT: ' + v)
-      this.form_data.txn_id = v
-    },
+    
     async submitDatas() {
       this.isloading = true
       console.log("AMOUNT: ", this.amount);
@@ -144,55 +127,32 @@ export default {
       }
       //  if (1===1) return ;
       const paymentPayload = {
-        lockingSessionId: this.lockingSessionId,
-        paymentCode: this.form_data.txn_type,
+        paymentId: this.paymentId,
         codFee: this.codFee,
-        orderId: this.orderId,
-        userId: this.userId,
+        customerId: this.dyCusId,
         amount: this.paymentAmount,
       }
 
-      const urlpath = '/order_cod_settle'
-
+      const urlpath = `api/sale/settle/${this.orderId}`
+      console.log(`PAYLOAD: ${JSON.stringify(paymentPayload)}`);
       await this.$axios
-        .post(urlpath, { ...paymentPayload })
+        .put(urlpath,paymentPayload)
         .then((res) => {
-          this.message = res.data
-          console.log("this.message", this.message);
-          if (this.message.includes("completed")) {
+          console.log("this.message", res.status);
+          if (res.status ==200 ) {
             // ******* reload data if transaction completed ********
             console.log("RELOAD DATA TRIGGER");
             this.refreshData(true);
             return swalSuccess(this.$swal,'Succeed','Your transaction completed');
-      //  
-      
           }
           return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
         })
         .catch((er) => {
-          this.message = 'Error: ' + er
+          return swalError2(this.$swal, "Error", `ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ ${er}`);
         })
       this.isloading = false
 
-      // this.fetchData()
-    },
-    async fetchData() {
-      await this.$axios
-        .get('payment')
-        .then((res) => {
-          this.loaddata = res.data.map((el) => {
-            console.log(el.txn_id)
-            return {
-              txn_id: el.payment_code,
-              txn_type: el.payment_code,
-              txn_name: el.payment_name,
-            }
-          })
-        })
-        .catch((er) => {
-          this.message = er
-          console.log('Error: ' + er)
-        })
+      // this.fetchData()  PAYLOAD: {"paymentId":1,"codFee":10000,"customerId":214,"amount":14000} //405
     },
     validate() {
       this.$refs.form.validate()

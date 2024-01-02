@@ -130,13 +130,14 @@
         <template v-slot:[`item.createdAt`]="{ item }">
           {{ item.createdAt.split('.')[0] }}
         </template>
-        <template v-slot:[`item.id`]="{ item }">
+        <!-- Bae request to remove edit button  -->
+        <!-- <template v-slot:[`item.id`]="{ item }">
           <v-btn color="primary" text @click="viewItem(item)
           wallet = true
             ">
 <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
-        </template>
+        </template> -->
         <template v-slot:[`item.print`]="{ item }">
           <!-- TODO: TICKET PRINT -->
           <v-btn variant="outlined" @click="generatePrintViewDeliveryCustomer(item)" class="primary" rounded>
@@ -299,12 +300,12 @@ export default {
           value: 'createdAt',
           sortable: false,
         },
-        {
-          text: 'View/Update',
-          align: 'end',
-          value: 'id',
-          sortable: false,
-        },
+        // {
+        //   text: 'View/Update',
+        //   align: 'end',
+        //   value: 'id',
+        //   sortable: false,
+        // },
         {
           text: '',
           align: 'end',

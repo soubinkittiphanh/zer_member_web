@@ -19,6 +19,12 @@
     </v-dialog>
 
 
+    <v-dialog v-model="settleDialog" max-width="1024">
+      <settlement :order-id="OrderIdSelected" :dy-cus-id="customerId" :amount="settleAmount" :key="settleFormKey" @close-dialog="settleDialog = false"
+        @reload="settleDialog = false, loadData()"></settlement>
+    </v-dialog>
+
+
     <v-dialog v-model="cancelForm" max-width="1024">
       <cancel-ticket-form :id="OrderIdSelected" :key="componentCancelFormKey" @close-dialog="cancelForm = false"
         @reload="cancelForm = false, loadData()"></cancel-ticket-form>
@@ -125,17 +131,23 @@
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total) }}
+          {{ numberWithCommas(item.total+item.discount+item.dynamic_customer.rider_fee) }}
+        </template>
+        <template v-slot:[`item.riderFee`]="{ item }">
+          {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
           {{ item.createdAt.split('.')[0] }}
         </template>
         <template v-slot:[`item.id`]="{ item }">
-          <v-btn color="primary" text @click="viewItem(item)
+          <v-btn color="primary" text @click="settleInvoice(item)
           wallet = true
             ">
-<i class="fa-regular fa-pen-to-square"></i>
+          <span class="mdi mdi-wallet-plus-outline"></span>
           </v-btn>
+        </template>
+        <template v-slot:[`item.grandTotal`]="{ item }">
+         <span> {{ numberWithCommas(item.total) }}</span>
         </template>
         <template v-slot:[`item.print`]="{ item }">
           <!-- TODO: TICKET PRINT -->
@@ -173,13 +185,18 @@ import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import OrderDetailPosCRUD from '~/components/OrderDetailPosCRUD.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
+import Settlement from '~/components/Settlement.vue'
 export default {
-  components: { OrderDetailPos, OrderSumaryCardPos, OrderDetailPosCRUD },
+  components: { OrderDetailPos, OrderSumaryCardPos, OrderDetailPosCRUD, Settlement },
   middleware: 'auths',
   data() {
     return {
       shippingList: [],
       currencyList: [],
+      customerId:null,
+      settleFormKey:0,
+      settleAmount: 0,
+      settleDialog: false,
       viewTransaction: false,
       whatsappContactLink: '',
       componentKey: 0,
@@ -250,6 +267,18 @@ export default {
           sortable: true,
         },
         {
+          text: 'ຄ່າຂົນສົ່ງ',
+          align: 'center',
+          value: 'riderFee',
+          sortable: true,
+        },
+        {
+          text: 'ຣາຍເດີ',
+          align: 'center',
+          value: 'dynamic_customer.rider.name',
+          sortable: true,
+        },
+        {
           text: 'ບ່ອນສົ່ງ',
           align: 'center',
           value: 'dynamic_customer.address',
@@ -274,16 +303,21 @@ export default {
           sortable: true,
         },
         {
+          text: 'ລາຄາເຕັມ',
+          align: 'end',
+          value: 'total',
+          sortable: false,
+        },
+        {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
           value: 'discount',
           sortable: true,
         },
-
         {
-          text: 'ລວມ',
+          text: 'ລວມ(ຫັກສ່ວນຫລຸດ)',
           align: 'end',
-          value: 'total',
+          value: 'grandTotal',
           sortable: false,
         },
 
@@ -300,13 +334,13 @@ export default {
           sortable: false,
         },
         {
-          text: 'View/Update',
+          text: 'ຮັບເງິນ',
           align: 'end',
           value: 'id',
           sortable: false,
         },
         {
-          text: '',
+          text: 'ສັ່ງພິມ',
           align: 'end',
           value: 'print',
           sortable: false,
@@ -481,6 +515,15 @@ export default {
       this.OrderIdSelected = payload.orderId
       // this.orderLockingSessionId = payload.lockingSessionId;
       this.cancelForm = true;
+    },
+    settleInvoice(payload) {
+      console.log("Order id", payload.id, "amount: ",payload['total']," dy _ ",payload.dynamic_customer.id);
+      this.settleFormKey += 1;
+      this.OrderIdSelected = payload.id
+      this.customerId = payload.dynamic_customer.id
+      this.settleAmount = payload.total
+      // this.orderLockingSessionId = payload.lockingSessionId;
+      this.settleDialog = true;
     },
     handleEvent() {
       this.dialogOrderDetail = false;
