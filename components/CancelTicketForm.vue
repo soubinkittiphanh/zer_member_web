@@ -7,15 +7,16 @@ html
         <v-card class="pa-4">
             ຍົກເລີກບິນ
             <v-form ref="myform" @submit.prevent="submitForm">
-                <v-text-field disabled v-model="id" label="ເລກທີອໍເດີ " ></v-text-field>
+                <v-text-field disabled v-model="id" label="ເລກທີອໍເດີ "></v-text-field>
                 <v-text-field v-model="form.remark" label="ເຫດຜົນການຍົກເລີກ" :rules="nameRules"></v-text-field>
+                <v-text-field v-model="form.cancel_fee" label="ຄ່າທຳນຽມ"></v-text-field>
             </v-form>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="$emit('close-dialog')">
+                <v-btn class="warning" text rounded @click="$emit('close-dialog')">
                     ຍົກເລີກ
                 </v-btn>
-                <v-btn color="primary" text @click="submitForm">
+                <v-btn class="primary" text @click="submitForm" rounded>
                     ຢືນຢັນ
                 </v-btn>
             </v-card-actions>
@@ -30,6 +31,11 @@ export default {
         id: {
             type: Number,
             require: false,
+        },
+        customerId: {
+            type: Number,
+            require: false,
+            default: null,
         }
     },
     data() {
@@ -38,7 +44,7 @@ export default {
             form: {
                 isActive: false,
                 remark: '',
-
+                cancel_fee: 0,
             },
             nameRules: [
                 value => !!value || 'ກະລຸນາ ໃສ່ເຫດຜົນ',
@@ -56,14 +62,18 @@ export default {
             if (this.$refs.myform.validate() && !this.isLoading) {
                 this.isLoading = true
                 try {
+                    this.form.customerId = this.customerId;
+                    console.log(`${JSON.stringify(this.form)}`);
                     const response = await this.$axios.put(`api/sale/reverse/${this.id}`, this.form)
-                    swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-                    this.refreshData()
+                    if(response.status = 200){
+                        this.refreshData()
+                        swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+                    }
                 } catch (error) {
-                    swalError2(this.$swal, 'Error', 'Could no load data ' + error)
+                    swalError2(this.$swal, 'Error', 'Something went wrong ' + error)
                 }
                 this.isLoading = false
-                
+
             } else {
                 // Form is invalid, do not submit
                 return
@@ -71,8 +81,9 @@ export default {
             this.isLoading = false
         },
         refreshData() {
-            this.$emit('refresh')
+            this.$emit('reload-data')
         }
+
     },
 };
 </script>

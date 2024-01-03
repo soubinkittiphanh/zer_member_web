@@ -20,14 +20,16 @@
 
 
     <v-dialog v-model="settleDialog" max-width="1024">
-      <settlement :order-id="OrderIdSelected" :dy-cus-id="customerId" :amount="settleAmount" :key="settleFormKey" @close-dialog="settleDialog = false"
-        @reload="settleDialog = false, loadData()"></settlement>
+      <settlement :order-id="OrderIdSelected" :dy-cus-id="customerId" :amount="settleAmount" :key="settleFormKey"
+        @close-dialog="settleDialog = false" @reload="settleDialog = false; loadData()"></settlement>
     </v-dialog>
 
 
+
+
     <v-dialog v-model="cancelForm" max-width="1024">
-      <cancel-ticket-form :id="OrderIdSelected" :key="componentCancelFormKey" @close-dialog="cancelForm = false"
-        @reload="cancelForm = false, loadData()"></cancel-ticket-form>
+      <cancel-ticket-form :id="OrderIdSelected" :customer-id="customerId" :key="componentCancelFormKey"
+        @close-dialog="cancelForm = false" @reload-data="cancelSucceed"></cancel-ticket-form>
     </v-dialog>
     <v-card>
       <v-card-title>
@@ -131,7 +133,7 @@
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total+item.discount+item.dynamic_customer.rider_fee) }}
+          {{ numberWithCommas(item.total + item.discount + item.dynamic_customer.rider_fee) }}
         </template>
         <template v-slot:[`item.riderFee`]="{ item }">
           {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
@@ -143,22 +145,22 @@
           <v-btn color="primary" text @click="settleInvoice(item)
           wallet = true
             ">
-          <span class="mdi mdi-wallet-plus-outline"></span>
+            <span class="mdi mdi-wallet-plus-outline"></span>
           </v-btn>
         </template>
         <template v-slot:[`item.grandTotal`]="{ item }">
-         <span> {{ numberWithCommas(item.total) }}</span>
+          <span> {{ numberWithCommas(item.total) }}</span>
         </template>
         <template v-slot:[`item.print`]="{ item }">
           <!-- TODO: TICKET PRINT -->
-          <v-btn variant="outlined" @click="generatePrintViewDeliveryCustomer(item)" class="primary" rounded>
+          <!-- <v-btn variant="outlined" @click="generatePrintViewDeliveryCustomer(item)" class="primary" rounded>
             <span class="mdi mdi-printer"></span>
-          </v-btn>
-          <!-- <v-btn color="blue darken-1" text @click="cancelItem(item)
+          </v-btn> -->
+          <v-btn class="warning" text @click="cancelItem(item)
           wallet = true
             ">
             <i class="fas fa-sync"></i>
-          </v-btn> -->
+          </v-btn>
         </template>
         <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
           <v-row>
@@ -193,10 +195,11 @@ export default {
     return {
       shippingList: [],
       currencyList: [],
-      customerId:null,
-      settleFormKey:0,
+      customerId: null,
+      settleFormKey: 0,
       settleAmount: 0,
       settleDialog: false,
+      cancelDialog: false,
       viewTransaction: false,
       whatsappContactLink: '',
       componentKey: 0,
@@ -512,12 +515,12 @@ export default {
     cancelItem(payload) {
       console.log("Order id", payload.orderId);
       this.componentCancelFormKey += 1;
-      this.OrderIdSelected = payload.orderId
-      // this.orderLockingSessionId = payload.lockingSessionId;
+      this.OrderIdSelected = payload.id
+      this.customerId = payload.dynamic_customer.id
       this.cancelForm = true;
     },
     settleInvoice(payload) {
-      console.log("Order id", payload.id, "amount: ",payload['total']," dy _ ",payload.dynamic_customer.id);
+      console.log("Order id", payload.id, "amount: ", payload['total'], " dy _ ", payload.dynamic_customer.id);
       this.settleFormKey += 1;
       this.OrderIdSelected = payload.id
       this.customerId = payload.dynamic_customer.id
@@ -527,6 +530,10 @@ export default {
     },
     handleEvent() {
       this.dialogOrderDetail = false;
+    },
+    cancelSucceed() {
+      this.cancelForm = false
+      this.loadData();
     },
     async loadData() {
       this.isloading = true
