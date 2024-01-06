@@ -116,6 +116,11 @@
             <i class="fa-solid fa-link"></i>
           </a>
         </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-btn color="primary" text>
+            {{ localStatus.find(el => el['code'] == item.status)['name'] }}
+          </v-btn>
+        </template>
       </v-data-table>
     </v-card>
   </div>
@@ -221,6 +226,14 @@ export default {
     window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
+    localStatus() {
+      const status = [
+        { 'name': 'ຍັງບໍ່ເຂົ້າສາງ', 'code': 'ORDERED' },
+        { 'name': 'ເຄື່ອງເຂົ້າສາງ', 'code': 'RECEIVED' },
+        { 'name': 'ຮັບແລ້ວ', 'code': 'INVOICED' },
+      ];
+      return status;
+    },
     filterOrders() {
       return this.entries.filter(el => el['status'] == 'ORDERED')
     },

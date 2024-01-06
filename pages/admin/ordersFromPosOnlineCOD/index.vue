@@ -13,7 +13,7 @@
     </v-dialog> -->
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
+      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction" :updateAllow="false"
         :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPosCRUD>
     </v-dialog>
@@ -133,7 +133,7 @@
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total + item.discount + item.dynamic_customer.rider_fee) }}
+          {{ numberWithCommas(item.total +item.discount) }}
         </template>
         <template v-slot:[`item.riderFee`]="{ item }">
           {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
@@ -149,19 +149,33 @@
           </v-btn>
         </template>
         <template v-slot:[`item.grandTotal`]="{ item }">
-          <span> {{ numberWithCommas(item.total) }}</span>
-        </template>
-        <template v-slot:[`item.print`]="{ item }">
-          <!-- TODO: TICKET PRINT -->
-          <!-- <v-btn variant="outlined" @click="generatePrintViewDeliveryCustomer(item)" class="primary" rounded>
-            <span class="mdi mdi-printer"></span>
+          <span> {{ numberWithCommas(item.total+item.dynamic_customer.rider_fee+item.dynamic_customer.cod_fee) }}</span>
+          <!-- <v-btn text  @click="viewItem(item)" color="primary" >
+            {{ `total: ${item.total}` }}
+            {{ `disc: ${item.discount}` }}
+            {{ `rider fee: ${item.dynamic_customer.rider_fee}` }}
+            {{ `cod fee: ${item.dynamic_customer.cod_fee}` }}
           </v-btn> -->
-          <v-btn class="warning" text @click="cancelItem(item)
+        </template>
+        <template v-slot:[`item.view`]="{ item }">
+          <!-- TODO: TICKET PRINT -->
+          <v-btn text  @click="viewItem(item)" color="primary" >
+            <!-- <span class="mdi mdi-eye-circle-outline"></span> -->
+            <i class="fas fa-eye"></i>
+          </v-btn>
+          <!-- <v-btn class="warning" text @click="viewItem(item)
+          wallet = true
+            ">
+            View
+          </v-btn> -->
+        </template>
+        <!-- <template v-slot:[`item.print`]="{ item }">
+          <v-btn rounded class="warning" text @click="cancelItem(item)
           wallet = true
             ">
             <i class="fas fa-sync"></i>
           </v-btn>
-        </template>
+        </template> -->
         <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
           <v-row>
             <v-col cols="12">
@@ -252,57 +266,9 @@ export default {
           sortable: true,
         },
         {
-          text: 'ຊຳລະດ້ວຍ',
-          align: 'center',
-          value: 'payment.payment_code',
-          sortable: true,
-        },
-        {
-          text: 'ເຂດ',
-          align: 'center',
-          value: 'dynamic_customer.geography.description',
-          sortable: true,
-        },
-        {
-          text: 'ຂົນສົ່ງ',
-          align: 'center',
-          value: 'dynamic_customer.shipping.name',
-          sortable: true,
-        },
-        {
-          text: 'ຄ່າຂົນສົ່ງ',
-          align: 'center',
-          value: 'riderFee',
-          sortable: true,
-        },
-        {
-          text: 'ຣາຍເດີ',
-          align: 'center',
-          value: 'dynamic_customer.rider.name',
-          sortable: true,
-        },
-        {
           text: 'ບ່ອນສົ່ງ',
           align: 'center',
           value: 'dynamic_customer.address',
-          sortable: true,
-        },
-        // {
-        //   text: 'ສະກຸນເງິນ',
-        //   align: 'center',
-        //   value: 'currency.code',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ອັດຕາແລກປ່ຽນ',
-        //   align: 'center',
-        //   value: 'exchangeRate',
-        //   sortable: true,
-        // },
-        {
-          text: 'ຮ້ານ',
-          align: 'center',
-          value: 'location.name',
           sortable: true,
         },
         {
@@ -318,12 +284,47 @@ export default {
           sortable: true,
         },
         {
+          text: 'ຄ່າຂົນສົ່ງ',
+          align: 'center',
+          value: 'riderFee',
+          sortable: true,
+        },
+        {
           text: 'ລວມ(ຫັກສ່ວນຫລຸດ)',
           align: 'end',
           value: 'grandTotal',
           sortable: false,
         },
-
+        {
+          text: 'ຂົນສົ່ງ',
+          align: 'center',
+          value: 'dynamic_customer.shipping.name',
+          sortable: true,
+        },
+        {
+          text: 'ຊຳລະດ້ວຍ',
+          align: 'center',
+          value: 'payment.payment_code',
+          sortable: true,
+        },
+        {
+          text: 'ຮ້ານ',
+          align: 'center',
+          value: 'location.name',
+          sortable: true,
+        },
+        {
+          text: 'ຣາຍເດີ',
+          align: 'center',
+          value: 'dynamic_customer.rider.name',
+          sortable: true,
+        },
+        {
+          text: 'ເຂດ',
+          align: 'center',
+          value: 'dynamic_customer.geography.description',
+          sortable: true,
+        },
         {
           text: 'ຜູ້ລົງທຸລະກຳ',
           align: 'end',
@@ -343,11 +344,17 @@ export default {
           sortable: false,
         },
         {
-          text: 'ສັ່ງພິມ',
+          text: 'view',
           align: 'end',
-          value: 'print',
+          value: 'view',
           sortable: false,
         },
+        // {
+        //   text: 'ຍົກເລີກ',
+        //   align: 'end',
+        //   value: 'print',
+        //   sortable: false,
+        // },
       ],
       // date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       //   .toISOString()

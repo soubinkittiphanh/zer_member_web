@@ -156,7 +156,7 @@
                                 {{ getFormatNum(item.total) }}
                             </td>
                             <td>
-                                <v-btn :disabled="!transaction.isActive" color="error" text @click="deleteItem(item)" v-on:keydown="handleKeyDown">
+                                <v-btn :disabled="!transaction.isActive || !updateAllow" color="error" text @click="deleteItem(item)" v-on:keydown="handleKeyDown">
 
                                     <i class="fas fa-trash"></i>
                                 </v-btn>
@@ -186,7 +186,7 @@
                 <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <v-btn :disabled="!transaction.isActive" color="primary" rounded variant="text" @click="postTransaction">
+                <v-btn :disabled="!transaction.isActive || !updateAllow" color="primary" rounded variant="text" @click="postTransaction">
                     Save
                 </v-btn>
             </v-card-actions>
@@ -214,6 +214,10 @@ export default {
         isUpdate: {
             type: Boolean,
             default: false
+        },
+        updateAllow: {
+            type: Boolean,
+            default: true
         },
     },
     directives: {

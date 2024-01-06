@@ -95,6 +95,11 @@
             <i class="fa fa-cart-flatbed"></i>
           </v-btn>
         </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-btn color="primary" text>
+            {{ localStatus.find(el => el['code'] == item.status)['name'] }}
+          </v-btn>
+        </template>
         <template v-slot:[`item.notify`]="{ item }">
           <v-btn color="blue darken-1" text @click="whatsappLink(item)">
             <a :href="whatsappContactLink" target="_blank">
@@ -219,6 +224,14 @@ export default {
     findTHBCurrencyId() {
       return this.findAllCurrency.find(el => el.code == 'THB')['id']
     },
+    localStatus() {
+      const status = [
+        { 'name': 'ຍັງບໍ່ເຂົ້າສາງ', 'code': 'ORDERED' },
+        { 'name': 'ເຄື່ອງເຂົ້າສາງ', 'code': 'RECEIVED' },
+        { 'name': 'ຮັບແລ້ວ', 'code': 'INVOICED' },
+      ];
+      return status;
+    },
     orderSummary() {
       const orderedAmount = this.orderPriceSummary(this.entries.filter(el => el['status'] == 'ORDERED'), true)
       const orderedAmountTHB = this.orderPriceTHBSummary(this.entries.filter(el => el['status'] == 'ORDERED' && el['currencyId'] == this.findTHBCurrencyId), true)
@@ -287,7 +300,7 @@ export default {
       const rate = isPrice ? 'priceRate' : 'shippingRate'
       let finalTotal = orders.reduce((total, item) => {
         // return total + item[itemProp]*item[rate]; // UNCOMMENT TO SHOW LOCAL CURRENCY PRICE
-        return total + item[itemProp] ;
+        return total + item[itemProp];
       }, 0);
       return finalTotal;
     },

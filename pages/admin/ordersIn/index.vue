@@ -100,6 +100,11 @@
             <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-btn color="primary" text>
+            {{ localStatus.find(el => el['code'] == item.status)['name'] }}
+          </v-btn>
+        </template>
         <template v-slot:[`item.delivery`]="{ item }">
           <v-btn color="primary" text @click="findOrderByTrackingNumber(item.trackingNumber)
           isedit = true
@@ -244,6 +249,14 @@ export default {
     window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
+    localStatus() {
+      const status = [
+        { 'name': 'ຍັງບໍ່ເຂົ້າສາງ', 'code': 'ORDERED' },
+        { 'name': 'ເຄື່ອງເຂົ້າສາງ', 'code': 'RECEIVED' },
+        { 'name': 'ຮັບແລ້ວ', 'code': 'INVOICED' },
+      ];
+      return status;
+    },
     filterOrders() {
       return this.entries.filter(el => el['status'] == 'RECEIVED')
     },

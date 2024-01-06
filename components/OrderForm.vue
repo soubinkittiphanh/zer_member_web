@@ -109,9 +109,12 @@
                                 v-model="form.vendorId"></v-autocomplete>
                         </v-col>
                         <v-col cols="3">
+                            <v-text-field v-model="form.refNumber" label="Order No."></v-text-field>
+                        </v-col>
+                        <v-col cols="3">
                             <v-text-field v-model="form.trackingNumber" label="Tracking No."></v-text-field>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="ໂ">
                             <v-text-field v-model="form.link" label="ລິ້ງສິນຄ້າ"></v-text-field>
                         </v-col>
                     </v-row>
@@ -127,7 +130,11 @@
                             <v-text-field disabled v-model="form.priceRate" label="ອັດຕາແລກປ່ຽນ"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-select v-model="form.status" :items="status" label="ສະຖານະເຄື່ອງ" required></v-select>
+                            <!-- <v-select v-model="form.status" :items="status" label="ສະຖານະເຄື່ອງ" required></v-select>
+                             -->
+                             <v-autocomplete  item-text="name"
+                                item-value="code" :items="status" label="ສະຖານະເຄື່ອງ*"
+                                v-model="form.status"></v-autocomplete>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -213,6 +220,7 @@ export default {
                 shippingFee: 0,
                 note: '',
                 name: '',
+                refNumber: '',
                 trackingNumber: '',
                 link: '',
                 price: 0,
@@ -229,10 +237,15 @@ export default {
                     telephone: ''
                 }
             },
+            // status: [
+            //     'ORDERED',
+            //     'RECEIVED',
+            //     'INVOICED',
+            // ],
             status: [
-                'ORDERED',
-                'RECEIVED',
-                'INVOICED',
+                {'name':'ຍັງບໍ່ເຂົ້າສາງ','code':'ORDERED'},
+                {'name':'ເຄື່ອງເຂົ້າສາງ','code':'RECEIVED'},
+                {'name':'ຮັບແລ້ວ','code':'INVOICED'},
             ],
             isloading: false,
             nameRules: [

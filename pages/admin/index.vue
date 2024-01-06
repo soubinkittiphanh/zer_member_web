@@ -321,7 +321,7 @@ export default {
             //     pro_name:'',
             //     pro_id:1
             // }],
-          
+
             minstockComponentsKey: 1,
             isloading: false,
             dailyState: false,
@@ -461,7 +461,8 @@ export default {
         totalSaleYTD() {
             const totalPrice = this.yearlySale.reduce((total, item) => {
                 // discountTotal+=item.discount
-                return total + item.total - item.discount;
+                // return total + item.total - item.discount;//OLD VERSION 240106
+                return total + item.total; //Total field already exclude discount
             }, 0);
             console.log(`YTD SALE ${totalPrice}`);
             return getFormatNum(totalPrice)
@@ -471,7 +472,8 @@ export default {
             const monthSaleList = this.yearlySale.filter(el => el.bookingDate.split('-')[1] == today.split('-')[1])
             const totalPrice = monthSaleList.reduce((total, item) => {
                 // discountTotal+=item.discount
-                return total + item.total - item.discount;
+                // return total + item.total - item.discount; //OLD VERSION 240106
+                return total + item.total; //Total field already exclude discount
             }, 0);
             console.log(`MTD SALE ${totalPrice}`);
             return getFormatNum(totalPrice)
@@ -496,7 +498,8 @@ export default {
             const todaySaleList = this.yearlySale.filter(el => el.bookingDate == today)
             const totalPrice = todaySaleList.reduce((total, item) => {
                 // discountTotal+=item.discount
-                return total + item.total - item.discount;
+                // return total + item.total - item.discount; //OLD VERSION 240106
+                return total + item.total; //Total field already exclude discount
             }, 0);
             console.log(`TD SALE ${totalPrice}`);
             return getFormatNum(totalPrice)

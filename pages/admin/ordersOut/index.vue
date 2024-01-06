@@ -119,6 +119,11 @@
           </v-btn>
 
         </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-btn color="primary" text>
+            {{ localStatus.find(el => el['code'] == item.status)['name'] }}
+          </v-btn>
+        </template>
       </v-data-table>
       <canvas ref="barcodeCanvas" :style="{ display: showCanvas ? 'block' : 'none' }"></canvas>
     </v-card>
@@ -250,6 +255,14 @@ export default {
     window.removeEventListener('keydown', this.handleKeyDown);
   },
   computed: {
+    localStatus() {
+      const status = [
+        { 'name': 'ຍັງບໍ່ເຂົ້າສາງ', 'code': 'ORDERED' },
+        { 'name': 'ເຄື່ອງເຂົ້າສາງ', 'code': 'RECEIVED' },
+        { 'name': 'ຮັບແລ້ວ', 'code': 'INVOICED' },
+      ];
+      return status;
+    },
     ticketCommon() {
       return ticketHtml();
     },

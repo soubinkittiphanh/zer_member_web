@@ -77,7 +77,8 @@
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                   'title': 'ຍອດບິນ',
                   'amount': getFormatNum(activeOrderHeaderList.length),
-                  'sale': getFormatNum(totalSale - totalDiscount),
+                  // 'sale': getFormatNum(totalSale - totalDiscount),// Old version 
+                  'sale': getFormatNum(totalSale ), // The total field is already exclude discount
                   // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                   // 'gross': getFormatNum(totalSale - totalDiscount)
@@ -125,7 +126,16 @@
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total) }}
+          {{ numberWithCommas(item.total+item.discount) }}
+        </template>
+        <template v-slot:[`item.grandTotal`]="{ item }">
+          {{ numberWithCommas(item.total+item.dynamic_customer.rider_fee+item.dynamic_customer.cod_fee) }}
+        </template>
+        <template v-slot:[`item.dynamic_customer.cod_fee`]="{ item }">
+          {{ numberWithCommas(item.dynamic_customer.cod_fee) }}
+        </template>
+        <template v-slot:[`item.dynamic_customer.rider_fee`]="{ item }">
+          {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
           {{ item.createdAt.split('.')[0] }}
@@ -140,14 +150,24 @@
         </template> -->
         <template v-slot:[`item.print`]="{ item }">
           <!-- TODO: TICKET PRINT -->
-          <v-btn variant="outlined" @click="generatePrintViewDeliveryCustomer(item)" class="primary" rounded>
+          <v-btn  @click="generatePrintViewDeliveryCustomer(item)" text color="primary" >
             <span class="mdi mdi-printer"></span>
           </v-btn>
-          <!-- <v-btn color="blue darken-1" text @click="cancelItem(item)
+ 
+        </template>
+        <!-- <template v-slot:[`item.cancel`]="{ item }">
+          <v-btn  color="warning" text @click="cancelItem(item)
           wallet = true
             ">
             <i class="fas fa-sync"></i>
-          </v-btn> -->
+          </v-btn>
+          
+        </template> -->
+        <template v-slot:[`item.view`]="{ item }">
+          <v-btn text  @click="viewItem(item)" color="primary" >
+            <i class="fas fa-eye"></i>
+          </v-btn>
+          
         </template>
         <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
           <v-row>
@@ -233,46 +253,16 @@ export default {
           sortable: true,
         },
         {
-          text: 'ຊຳລະດ້ວຍ',
-          align: 'center',
-          value: 'payment.payment_code',
-          sortable: true,
-        },
-        {
-          text: 'ເຂດ',
-          align: 'center',
-          value: 'dynamic_customer.geography.description',
-          sortable: true,
-        },
-        {
-          text: 'ຂົນສົ່ງ',
-          align: 'center',
-          value: 'dynamic_customer.shipping.name',
-          sortable: true,
-        },
-        {
           text: 'ບ່ອນສົ່ງ',
           align: 'center',
           value: 'dynamic_customer.address',
           sortable: true,
         },
-        // {
-        //   text: 'ສະກຸນເງິນ',
-        //   align: 'center',
-        //   value: 'currency.code',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ອັດຕາແລກປ່ຽນ',
-        //   align: 'center',
-        //   value: 'exchangeRate',
-        //   sortable: true,
-        // },
         {
-          text: 'ຮ້ານ',
-          align: 'center',
-          value: 'location.name',
-          sortable: true,
+          text: 'ລາຄາເຕັມ',
+          align: 'end',
+          value: 'total',
+          sortable: false,
         },
         {
           text: 'ສ່ວນຫລຸດ',
@@ -282,12 +272,53 @@ export default {
         },
 
         {
-          text: 'ລວມ',
+          text: 'ຄ່າຂົນສົ່ງ',
           align: 'end',
-          value: 'total',
+          value: 'dynamic_customer.rider_fee',
           sortable: false,
         },
-
+        {
+          text: 'COD/Rider Fee',
+          align: 'end',
+          value: 'dynamic_customer.cod_fee',
+          sortable: false,
+        },
+        {
+          text: 'ລວມ',
+          align: 'end',
+          value: 'grandTotal',
+          sortable: false,
+        },
+        {
+          text: 'ຂົນສົ່ງ',
+          align: 'center',
+          value: 'dynamic_customer.shipping.name',
+          sortable: true,
+        },
+        {
+          text: 'ການຊຳລະ',
+          align: 'center',
+          value: 'payment.payment_code',
+          sortable: true,
+        },
+        {
+          text: 'ຮ້ານ',
+          align: 'center',
+          value: 'location.name',
+          sortable: true,
+        },
+        {
+          text: 'ໄຣເດີ້',
+          align: 'center',
+          value: 'dynamic_customer.rider.name',
+          sortable: true,
+        },
+        {
+          text: 'ເຂດ',
+          align: 'center',
+          value: 'dynamic_customer.geography.description',
+          sortable: true,
+        },
         {
           text: 'ຜູ້ລົງທຸລະກຳ',
           align: 'end',
@@ -300,18 +331,24 @@ export default {
           value: 'createdAt',
           sortable: false,
         },
-        // {
-        //   text: 'View/Update',
-        //   align: 'end',
-        //   value: 'id',
-        //   sortable: false,
-        // },
         {
-          text: '',
+          text: 'ພິມບິນ',
           align: 'end',
           value: 'print',
           sortable: false,
         },
+        {
+          text: 'ລາຍລະອຽດ',
+          align: 'end',
+          value: 'view',
+          sortable: true,
+        },
+        // {
+        //   text: 'ຍົກເລີກບິນ',
+        //   align: 'end',
+        //   value: 'cancel',
+        //   sortable: true,
+        // },
       ],
       // date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       //   .toISOString()
