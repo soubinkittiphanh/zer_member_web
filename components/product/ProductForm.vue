@@ -21,8 +21,9 @@
                         <!-- Row 1 -->
                         <v-row>
                             <v-col cols="4" sm="6" md="4">
-                                <v-autocomplete item-text="outlet_name" item-value="outlet_id" :items="outlet" label="ຮ້ານ*"
-                                    v-model="formData.outlet"></v-autocomplete>
+                                <!-- {{ `company id ${formData.companyId}` }} -->
+                                <v-autocomplete item-text="name" item-value="id" :items="companyList" label="ຮ້ານ*"
+                                    v-model="formData.companyId"></v-autocomplete>
                             </v-col>
                             <v-col cols="4" sm="6" md="4">
                                 <v-autocomplete item-text="categ_name" item-value="categ_id" :items="category"
@@ -220,7 +221,7 @@ export default {
         console.log('Mounted: ')
         this.fetchProId(this.headerId)
         this.fetchCategory()
-        this.fetchOutlet()
+        this.fetchCompany()
     },
     validate(data) {
         // this.formData.pro_id = data.params.id
@@ -286,7 +287,6 @@ export default {
             valid: false,
             category: [],
             formData: {
-                // outlet:1,
                 pro_category: 1001,
                 pro_id: null,
                 pro_name: '',
@@ -294,7 +294,7 @@ export default {
                 pro_retail_price: 0,
                 pro_desc: '',
                 pro_status: false,
-                pro_outlet: 1,
+                companyId: 2,
                 pro_cost_price: 0,
                 minStock: 0,
                 barCode: '',
@@ -304,7 +304,7 @@ export default {
                 costCurrencyId: 1,
                 isActive: true,
             },
-            outlet: [],
+            companyList: [],
             isLoading: false,
             validLocal: true,
             diaMessageTitle: 'ຄຳເຕືອນ',
@@ -378,17 +378,16 @@ export default {
                 })
             this.isLoading = false
         },
-        async fetchOutlet() {
+        async fetchCompany() {
             this.isLoading = true
             await this.$axios
-                .get('outlet')
+                .get('api/company/find')
                 .then((res) => {
-                    console.log('=>outlet' + res.data)
-                    this.outlet = res.data.map((el) => {
+                    console.log('=>Company' + res.data)
+                    this.companyList = res.data.map((el) => {
                         return {
-                            outlet_id: el.id,
-                            outlet_name: el.name,
-                            outlet_tel: el.tel,
+                            id: el.id,
+                            name: el.name,
                         }
                     })
                 })
@@ -456,7 +455,7 @@ export default {
                         pro_status: el.pro_status === 1 || false,
                         pro_retail_price: el.retail_cost_percent,
                         pro_cost_price: el.cost_price,
-                        outlet: el.outlet,
+                        companyId: el.companyId,
                         minStock: el.minStock,
                         barCode: el.barCode,
                         receiveUnitId: el.receiveUnitId,

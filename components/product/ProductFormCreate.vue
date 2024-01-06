@@ -10,7 +10,6 @@
     <v-dialog v-model="preview" hide-overlay width="400px">
       <dia-image :i-url="previewSrc" @closeDia="preview = false"> </dia-image>
     </v-dialog>
-    <!-- SELECTED OUTLET {{ formData.outlet }} -->
     <v-card>
       <v-card-title>
         <v-chip class="ma-2" color="primary" label text-color="white">
@@ -23,8 +22,8 @@
           <!-- Row 1 -->
           <v-row>
             <v-col cols="4">
-              <v-autocomplete item-text="outlet_name" item-value="outlet_id" :items="outlet" label="ຮ້ານ*"
-                v-model="formData.outlet"></v-autocomplete>
+              <v-autocomplete item-text="name" item-value="id" :items="companyList" label="ຮ້ານ*"
+                v-model="formData.companyId"></v-autocomplete>
             </v-col>
             <v-col cols="4">
               <v-autocomplete item-text="categ_name" item-value="categ_id" :items="category" label="ປະເພດສິນຄ້າ*"
@@ -254,7 +253,7 @@ export default {
       },
       category: [],
       formData: {
-        outlet: 1,
+        companyId: 1,
         pro_category: 1001,
         pro_id: null,
         pro_name: '',
@@ -262,7 +261,6 @@ export default {
         pro_retail_price: 0,
         pro_desc: '',
         pro_status: false,
-        pro_outlet: 1,
         pro_cost_price: 0,
         createdAt: null,
         minStock: 0,
@@ -273,12 +271,12 @@ export default {
         costCurrencyId: 1,
         isActive: true,
       },
-      outlet: [],
+      companyList: [],
     }
   },
   mounted() {
     this.fetchCategory();
-    this.fetchOutlet();
+    this.fetchCompany();
   },
   watch: {
     message(val) {
@@ -410,32 +408,29 @@ export default {
           console.log('error: ' + er.response.data)
         })
       this.isloading = false
-    },
-    async fetchOutlet() {
-      this.isloading = true
-      await this.$axios
-        .get('outlet')
-        .then((res) => {
-          console.log('=>outlet' + res.data)
-          this.outlet = res.data.map((el) => {
-            return {
-              outlet_id: el.id,
-              outlet_name: el.name,
-              outlet_tel: el.tel,
-            }
-          })
-        })
-        .catch((er) => {
-          console.log('error: ' + er.response.data)
-        })
-      this.isloading = false
-    },
+    },async fetchCompany() {
+            this.isLoading = true
+            await this.$axios
+                .get('api/company/find')
+                .then((res) => {
+                    console.log('=>Company' + res.data)
+                    this.companyList = res.data.map((el) => {
+                        return {
+                            id: el.id,
+                            name: el.name,
+                        }
+                    })
+                    this.formData.companyId = this.companyList[0]['id'] // Auto assign default company
+                })
+                .catch((er) => {
+                    console.log('error: ' + er.response.data)
+                })
+            this.isLoading = false
+        },
     async uploadFiles() {
       if (!this.$refs.form.validate()) {
         return
       }
-      console.log('Outlet: ' + this.formData.outlet)
-
       this.isloading = true
       const formData = new FormData()
       formData.append('FORM', JSON.stringify(this.formData))
