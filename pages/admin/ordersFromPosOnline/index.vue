@@ -129,7 +129,7 @@
           {{ numberWithCommas(item.total+item.discount) }}
         </template>
         <template v-slot:[`item.grandTotal`]="{ item }">
-          {{ numberWithCommas(item.total+item.dynamic_customer.rider_fee+item.dynamic_customer.cod_fee) }}
+          {{ numberWithCommas(item.total+item.dynamic_customer.rider_fee-item.dynamic_customer.cod_fee) }}
         </template>
         <template v-slot:[`item.dynamic_customer.cod_fee`]="{ item }">
           {{ numberWithCommas(item.dynamic_customer.cod_fee) }}
