@@ -78,7 +78,7 @@
                   'title': 'ຍອດບິນ',
                   'amount': getFormatNum(activeOrderHeaderList.length),
                   // 'sale': getFormatNum(totalSale - totalDiscount),// Old version 
-                  'sale': getFormatNum(totalSale ), // The total field is already exclude discount
+                  'sale': getFormatNum(totalSale), // The total field is already exclude discount
                   // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                   // 'gross': getFormatNum(totalSale - totalDiscount)
@@ -126,10 +126,10 @@
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total+item.discount) }}
+          {{ numberWithCommas(item.total + item.discount) }}
         </template>
         <template v-slot:[`item.grandTotal`]="{ item }">
-          {{ numberWithCommas(item.total+item.dynamic_customer.rider_fee-item.dynamic_customer.cod_fee) }}
+          {{ numberWithCommas((item.total + item.dynamic_customer.rider_fee) - item.dynamic_customer.cod_fee) }}
         </template>
         <template v-slot:[`item.dynamic_customer.cod_fee`]="{ item }">
           {{ numberWithCommas(item.dynamic_customer.cod_fee) }}
@@ -150,10 +150,10 @@
         </template> -->
         <template v-slot:[`item.print`]="{ item }">
           <!-- TODO: TICKET PRINT -->
-          <v-btn  @click="generatePrintViewDeliveryCustomer(item)" text color="primary" >
+          <v-btn @click="generatePrintViewDeliveryCustomer(item)" text color="primary">
             <span class="mdi mdi-printer"></span>
           </v-btn>
- 
+
         </template>
         <!-- <template v-slot:[`item.cancel`]="{ item }">
           <v-btn  color="warning" text @click="cancelItem(item)
@@ -164,10 +164,10 @@
           
         </template> -->
         <template v-slot:[`item.view`]="{ item }">
-          <v-btn text  @click="viewItem(item)" color="primary" >
+          <v-btn text @click="viewItem(item)" color="primary">
             <i class="fas fa-eye"></i>
           </v-btn>
-          
+
         </template>
         <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
           <v-row>
@@ -410,7 +410,7 @@ export default {
     totalSale() {
       let total = 0
       this.activeOrderHeaderList.forEach((el) => {
-        total += el.total
+        total += el.total + el.dynamic_customer.rider_fee - el.dynamic_customer.cod_fee
       })
       return total
       // return total
