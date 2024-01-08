@@ -186,7 +186,7 @@
   
 <script>
 // import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
+import { swalSuccess, swalError2,confirmSwal, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import ImagePreviewMixin from '../../pages/product/index.vue'
 import { hostName } from '../../common/index'
 import { mapActions, mapGetters } from 'vuex'
