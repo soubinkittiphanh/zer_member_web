@@ -465,7 +465,7 @@ export default {
                 // return total + item.total; //Total field already exclude discount
                 let rider_fee = 0;
                 let cod_fee = 0;
-                if(item.dynamic_customer){
+                if (item.dynamic_customer) {
                     rider_fee = item.dynamic_customer.rider_fee
                     cod_fee = item.dynamic_customer.cod_fee
                 }
@@ -483,7 +483,7 @@ export default {
                 // return total + item.total; //Total field already exclude discount
                 let rider_fee = 0;
                 let cod_fee = 0;
-                if(item.dynamic_customer){
+                if (item.dynamic_customer) {
                     rider_fee = item.dynamic_customer.rider_fee
                     cod_fee = item.dynamic_customer.cod_fee
                 }
@@ -497,11 +497,17 @@ export default {
             const dailyTransactions = monthSaleList.reduce((acc, transaction) => {
                 const date = transaction.bookingDate;
                 const index = acc.findIndex((item) => item.date === date);
+                let rider_fee = 0;
+                let cod_fee = 0;
+                if (transaction.dynamic_customer) {
+                    rider_fee = transaction.dynamic_customer.rider_fee
+                    cod_fee = transaction.dynamic_customer.cod_fee
+                }
                 if (index === -1) {
-                    acc.push({ date, transactions: [transaction], totalSale: transaction.total - transaction.discount });
+                    acc.push({ date, transactions: [transaction], totalSale: transaction.total + rider_fee - cod_fee });
                 } else {
                     acc[index].transactions.push(transaction);
-                    acc[index].totalSale += transaction.total - transaction.discount;
+                    acc[index].totalSale += transaction.total + rider_fee - cod_fee;
                 }
                 return acc;
             }, []);
@@ -516,7 +522,7 @@ export default {
                 // return total + item.total; //Total field already exclude discount
                 let rider_fee = 0;
                 let cod_fee = 0;
-                if(item.dynamic_customer){
+                if (item.dynamic_customer) {
                     rider_fee = item.dynamic_customer.rider_fee
                     cod_fee = item.dynamic_customer.cod_fee
                 }
@@ -660,33 +666,13 @@ export default {
         },
         async generateDailyStatisticSale() {
             this.isloading = true
-
-            //****************** Deprecated (old use for delivery sale model) ***************** */
-            // await this.$axios
-            //     .get('api/dailySaleReport')
-            //     .then((res) => {
-            //         console.log("Data ", res.data[0]);
-            //         for (const iterator of res.data) {
-            //             this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
-            //             // this.barOptionsForDailyStat.colors.push('#01532B') // ******* Original
-            //             this.barSeriesForDailyStat[0].data.push(iterator.total_sale)
-            //             this.barOptionsForDailyStat.xaxis.categories.push(iterator.txn_date_short)
-            //         }
-            //     }).catch(err => {
-            //         console.log('error', err);
-            //     });
-            //****************** Deprecated  ***************** */
-
             for (const iterator of this.txnSaleMTD) {
                 this.barOptionsForDailyStat.colors.push(this.getRandomColor) // ******* Original
                 this.barSeriesForDailyStat[0].data.push(iterator['totalSale'])
                 this.barOptionsForDailyStat.xaxis.categories.push(iterator['date'])
             }
-
             this.dailyState = true
-
             this.isloading = false
-
         },
         monthGroupSale() {
             let groupedTransactions = {};
@@ -701,7 +687,13 @@ export default {
                     groupedTransactions[key] = { total: 0, transactions: [] };
                 }
 
-                groupedTransactions[key].total += transaction.total - transaction.discount;
+                let rider_fee = 0;
+                let cod_fee = 0;
+                if (transaction.dynamic_customer) {
+                    rider_fee = transaction.dynamic_customer.rider_fee
+                    cod_fee = transaction.dynamic_customer.cod_fee
+                }
+                groupedTransactions[key].total += transaction.total + rider_fee - cod_fee;
                 groupedTransactions[key].transactions.push(transaction);
                 console.log('datat add===>');
             });

@@ -387,8 +387,8 @@ export const hostName = () => {
   // const baseURL = 'http://150.95.31.23:8007' // ***DEMO*** 
   // const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
   // const baseURL = 'http://150.95.31.23:8009' // ***PRODUCTION JNONG*** 
-  // const baseURL = 'http://150.95.31.23:8010' // ***PRODUCTION PEEAIR2024*** 
-  const baseURL = 'http://150.95.31.23:8011' // ***PRODUCTION Little boutique2024*** 
+  const baseURL = 'http://150.95.31.23:8010' // ***PRODUCTION PEEAIR2024*** 
+  // const baseURL = 'http://150.95.31.23:8011' // ***PRODUCTION Little boutique2024*** 
   // const baseURL = 'http://150.95.31.23:8004' // ***ONLINE UAT*** 
   return baseURL;
 }
