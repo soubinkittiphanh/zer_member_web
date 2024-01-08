@@ -83,9 +83,9 @@
             <v-col cols="6" lg="6">
               <order-sumary-card-pos :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ',
+                  'title': 'ຍອດບິນ l',
                   'amount': getFormatNum(activeOrderHeaderList.length),
-                  'sale': getFormatNum(totalSale - totalDiscount),
+                  'sale': getFormatNum(totalSale),
                   // 'discount': getFormatNum(totalDiscount),
                   // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                   // 'gross': getFormatNum(totalSale - totalDiscount)
@@ -416,7 +416,8 @@ export default {
     totalSale() {
       let total = 0
       this.activeOrderHeaderList.forEach((el) => {
-        total += el.total
+        // total += el.total
+        total += el.total + el.dynamic_customer.rider_fee - el.dynamic_customer.cod_fee
       })
       return total
       // return total

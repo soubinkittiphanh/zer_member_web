@@ -462,7 +462,14 @@ export default {
             const totalPrice = this.yearlySale.reduce((total, item) => {
                 // discountTotal+=item.discount
                 // return total + item.total - item.discount;//OLD VERSION 240106
-                return total + item.total; //Total field already exclude discount
+                // return total + item.total; //Total field already exclude discount
+                let rider_fee = 0;
+                let cod_fee = 0;
+                if(item.dynamic_customer){
+                    rider_fee = item.dynamic_customer.rider_fee
+                    cod_fee = item.dynamic_customer.cod_fee
+                }
+                return total += item.total + rider_fee - cod_fee
             }, 0);
             console.log(`YTD SALE ${totalPrice}`);
             return getFormatNum(totalPrice)
@@ -473,7 +480,14 @@ export default {
             const totalPrice = monthSaleList.reduce((total, item) => {
                 // discountTotal+=item.discount
                 // return total + item.total - item.discount; //OLD VERSION 240106
-                return total + item.total; //Total field already exclude discount
+                // return total + item.total; //Total field already exclude discount
+                let rider_fee = 0;
+                let cod_fee = 0;
+                if(item.dynamic_customer){
+                    rider_fee = item.dynamic_customer.rider_fee
+                    cod_fee = item.dynamic_customer.cod_fee
+                }
+                return total += item.total + rider_fee - cod_fee
             }, 0);
             console.log(`MTD SALE ${totalPrice}`);
             return getFormatNum(totalPrice)
@@ -499,7 +513,15 @@ export default {
             const totalPrice = todaySaleList.reduce((total, item) => {
                 // discountTotal+=item.discount
                 // return total + item.total - item.discount; //OLD VERSION 240106
-                return total + item.total; //Total field already exclude discount
+                // return total + item.total; //Total field already exclude discount
+                let rider_fee = 0;
+                let cod_fee = 0;
+                if(item.dynamic_customer){
+                    rider_fee = item.dynamic_customer.rider_fee
+                    cod_fee = item.dynamic_customer.cod_fee
+                }
+                return total += item.total + rider_fee - cod_fee
+
             }, 0);
             console.log(`TD SALE ${totalPrice}`);
             return getFormatNum(totalPrice)
