@@ -220,6 +220,7 @@ export default {
             shippingList: [],
             ticketPreviewDialog: false,
             paymentSelected: 1,
+            // TODO: Manage this data in vuex state
             customerForm: {
                 name: '',
                 tel: '',

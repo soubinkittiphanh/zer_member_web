@@ -35,7 +35,8 @@
     </v-dialog>
 
     <v-dialog v-model="priceListDialog" max-width="1200px">
-      <price-list-form :key="priceListFormKey" @close-dialog="priceListDialog = false" :record-id="pricingRecordId" @refresh="fetchData">
+      <price-list-form :key="priceListFormKey" @close-dialog="priceListDialog = false" :record-id="pricingRecordId"
+        @refresh="fetchData">
       </price-list-form>
     </v-dialog>
 
@@ -76,7 +77,7 @@
           <v-btn color="primary" text @click="editItem(item)
           wallet = true
             ">
-<i class="fa-regular fa-pen-to-square"></i>
+            <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.functionStock`]="{ item }">
@@ -90,7 +91,7 @@
           <v-btn color="primary" text @click="triggerPriceListForm(item)
           wallet = true
             ">
-             <v-icon>mdi mdi-currency-usd</v-icon>
+            <v-icon>mdi mdi-currency-usd</v-icon>
             <!-- <i class="mdi mdi-currency-usd"></i> -->
           </v-btn>
         </template>
@@ -133,14 +134,14 @@ import ProductFormCreate from '~/components/product/ProductFormCreate.vue'
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  components: { ProductForm, ProductFormCreate,PriceListForm },
+  components: { ProductForm, ProductFormCreate, PriceListForm },
   middleware: 'auths',
   data() {
     return {
-      priceListDialog:false,
-      priceListFormKey:1,
-      guidelineDialog:false,
-      pricingRecordId:null,
+      priceListDialog: false,
+      priceListFormKey: 1,
+      guidelineDialog: false,
+      pricingRecordId: null,
       productFormCreate: false,
       productFormKey: 1,
       isstock: false,
@@ -167,6 +168,11 @@ export default {
           text: 'key',
           align: 'center',
           value: 'id',
+        },
+        {
+          text: 'Company',
+          align: 'center',
+          value: 'co_name',
         },
         {
           text: 'ໄອດີ',
@@ -533,7 +539,7 @@ export default {
         this.isloading = false
       }
     },
-    triggerPriceListForm(item){
+    triggerPriceListForm(item) {
       this.pricingRecordId = item.id
       this.priceListFormKey += 1;
       this.priceListDialog = true;
@@ -562,9 +568,10 @@ export default {
         .get(`product_f/${this.currentSelectedLocation['id']}`)
         .then((res) => {
           this.loaddata = res.data.map((el) => {
-            console.log(el.pro_id)
+            console.log(el.co_name)
             return {
               id: el.id,
+              co_name: el.co_name,
               pro_id: el.pro_id,
               pro_name: el.pro_name,
               pro_price: el.pro_price,

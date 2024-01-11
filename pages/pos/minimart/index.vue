@@ -25,7 +25,7 @@
 </template>
   
 <script>
-import { getFormatNum,swalError2,swalSuccess } from '~/common'
+import { getFormatNum, swalError2, swalSuccess } from '~/common'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 export default {
     layout: "pos",
@@ -43,7 +43,7 @@ export default {
             pageLine: 30,
             search: '',
             paymentList: [],
-            productSelectedFromBarcode:null
+            productSelectedFromBarcode: null
         }
     },
     async mounted() {
@@ -61,33 +61,43 @@ export default {
             searchKeyword: 'searchKeyword',
             currenctSelectedCategoryId: 'currenctSelectedCategoryId',
             currentSelectedLocation: 'currentSelectedLocation',
-            findAllCurrency:'findAllCurrency',
+            findAllCurrency: 'findAllCurrency',
+            findAllTerminal: 'findAllTerminal',
+            findSelectedTerminal: 'findSelectedTerminal',
         }),
-
+        currentTerminal() {
+            return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
+        },
         filterProduct() {
+            console.log(`Category ${this.currenctSelectedCategoryId}`);
+            let productByTerminalCompany = this.productList.filter(pro => pro.companyId === this.currentTerminal.location.companyId);
             if (!this.searchKeyword) {
+                console.log(`Keywoard not available ...${this.searchKeyword}`);
                 if (this.currenctSelectedCategoryId != 9999) {
-                    return this.productList.filter(item => item.pro_category === this.currenctSelectedCategoryId);
+                    return productByTerminalCompany.filter(item => item.pro_category === this.currenctSelectedCategoryId);
                 }
-                return this.productList;
+                // return this.productList; // Backup 20240111
+                return this.productList; //.filter(pro=>pro.companyId === this.currentTerminal.location.companyId);
             }
             // element.age > 25 || element.name.includes("a")
             if (this.currenctSelectedCategoryId == 9999) {
+                console.log(`CATEGORY SELECT ${this.currenctSelectedCategoryId}`);
                 return this.productList.filter(item => item.pro_name.toLowerCase().includes(this.searchKeyword));
             }
-            return this.productList.filter(item => item.pro_category === this.currenctSelectedCategoryId && item.pro_name.toLowerCase().includes(this.searchKeyword));
+            return productByTerminalCompany.filter(item => item.pro_category === this.currenctSelectedCategoryId && item.pro_name.toLowerCase().includes(this.searchKeyword));
 
         },
 
     },
     methods: {
         ...mapActions(['addProduct']),
-        findCurrency(currencyId){
-            return this.findAllCurrency.find(el=>el.id==currencyId);
+        findCurrency(currencyId) {
+            return this.findAllCurrency.find(el => el.id == currencyId);
         },
-        findProductFromBarcode(barcode){
-            this.productSelectedFromBarcode = this.productList.find(el => el.barCode==barcode)
-            if(this.productSelectedFromBarcode){
+
+        findProductFromBarcode(barcode) {
+            this.productSelectedFromBarcode = this.productList.find(el => el.barCode == barcode)
+            if (this.productSelectedFromBarcode) {
                 this.addProduct(this.productSelectedFromBarcode)
                 this.productSelectedFromBarcode = null;
             }
@@ -117,7 +127,7 @@ export default {
                 .then((res) => {
                     for (const iterator of res.data) {
                         const currency = this.findCurrency(iterator['saleCurrencyId'])
-                        iterator['localPrice'] = iterator['pro_price']*currency['rate']
+                        iterator['localPrice'] = iterator['pro_price'] * currency['rate']
                         this.productList.push(iterator)
                     }
                 })
@@ -131,7 +141,7 @@ export default {
             this.isloading = true;
             this.categoryList = []
             await this.$axios
-                .get('/category_f')
+                .get('/api/category/find')
                 .then((res) => {
                     for (const iterator of res.data) {
                         this.categoryList.push(iterator);

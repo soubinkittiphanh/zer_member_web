@@ -24,7 +24,8 @@
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
         <v-dialog v-model="pricingDialog" max-width="1024">
-            <pricing-option :key="pricingDialogKey" @close-dialog="pricingDialog = false" :record-id="productPricingSelected"></pricing-option>
+            <pricing-option :key="pricingDialogKey" @close-dialog="pricingDialog = false"
+                :record-id="productPricingSelected"></pricing-option>
         </v-dialog>
 
         <v-dialog v-model="deliveryForm" max-width="1024">
@@ -43,7 +44,8 @@
                 </v-col>
                 <v-col cols="4">
                     <v-text-field dark v-model="serachModel" clearable clear-icon="mdi-close" class="mt-6"
-                        prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted /></v-col>
+                        prepend-inner-icon="mdi-magnify" dense outlined label="ຄົ້ນຫາ" solo-inverted />
+                </v-col>
                 <v-col cols="6" justify="end">
                     <!-- 231001 CR By BAE -->
                     <!-- <v-chip class="ml-10" color="warning" variant="outlined" @click="terminalDialog = true">
@@ -166,8 +168,9 @@
                                         </v-btn>
                                     </td>
                                     <!-- <td class="font-weight-medium">{{ formatNumber(item.pro_price * item.qty) }}</td> -->
-                                    <td class="font-weight-medium" >
-                                        <v-chip style="float: right;" class="ml-0" color="warning" variant="outlined"  @click="pricingLogig(item)">
+                                    <td class="font-weight-medium">
+                                        <v-chip style="float: right;" class="ml-0" color="warning" variant="outlined"
+                                            @click="pricingLogig(item)">
                                             {{ formatNumber(item.localPrice * item.qty) }}
                                         </v-chip>
                                     </td>
@@ -231,12 +234,12 @@ import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 import { getFormatNum, jsDateToMysqlDate, ticketHtml } from '~/common'
 import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/common/index'
 export default {
-    components: { CustomerList, Quotation,PricingOption },
+    components: { CustomerList, Quotation, PricingOption },
     name: 'DefaultLayout',
     data() {
         return {
-            productPricingSelected:null,
-            pricingDialogKey:1,
+            productPricingSelected: null,
+            pricingDialogKey: 1,
             pricingDialog: false,
             onlineCustomerInfo: {},
             tickePreviewDialog: false,
@@ -313,11 +316,19 @@ export default {
         ...mapGetters(['currentSelectedLocation', 'cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
         serachModel: {
             get() {
+                console.log(`Get menthod called`);
                 return this.stateValue;
             },
             set(value) {
-                const lowerCaseSearchValue = value.toLowerCase();
-                this.SetSearchKeyword(lowerCaseSearchValue);
+                if (value) {
+                    console.log(`Set menthod called`);
+                    const lowerCaseSearchValue = value.toLowerCase();
+                    this.SetSearchKeyword(lowerCaseSearchValue);
+                } else {
+                    console.log(`Set menthod called null`);
+                    this.SetSearchKeyword('');
+                }
+
             }
         },
 
@@ -390,10 +401,11 @@ export default {
         }
     },
     methods: {
+        
         pricingLogig(item) {
             console.log(`PRINCING CLICK....${item.id}`);
             this.productPricingSelected = item.id;
-            this.pricingDialogKey +=1
+            this.pricingDialogKey += 1
             this.pricingDialog = true;
         },
         openDeliveryBox() {

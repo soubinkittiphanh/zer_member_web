@@ -1,54 +1,162 @@
-<template>
 
-    <div class="mx-3">
-        <h2 class="mt-2 grey--text"> ໝວດສິນຄ້າຂາຍດີ</h2>
-        <v-container fluid>
-            <v-row>
-                <v-col cols="12" sm="3" v-for="productItem in productList" :key="productItem.img_path">
-                    <product-card :productItem="productItem" />
-                </v-col>
-            </v-row>
-        </v-container>
+<template>
+    <div class="mr-16 ml-16">
+        <div class="brands mb-4 mt-2">
+            <brands></brands>
+        </div>
+
+        <div class="discount-products mb-4">
+            <v-card class="pa-6 rounded-lg">
+                <v-row>
+                    <v-list class="" style="margin-bottom: -10px">
+                        <v-list-item>
+                            <v-avatar tile color="green rounded-pill" size="40" class="mr-2">
+                                <v-icon color="white">mdi-cash-minus</v-icon></v-avatar>
+                            <v-list-item-title>
+                                <h3>ສິນຄ້າຫຼຸດລາຄາ</h3>
+                            </v-list-item-title>
+                            <v-list-item-icon> </v-list-item-icon>
+                        </v-list-item>
+                    </v-list>
+                    <v-spacer />
+                    <v-btn text color="green" class="green--text mt-3">
+                        ເບິ່ງເພີ່ມເຕີມ
+                        <v-icon right dark> mdi-arrow-right-circle </v-icon>
+                    </v-btn>
+
+                    <v-col cols="12">
+                        <v-divider class="mb-2"></v-divider>
+                        <div class="row">
+                            <div v-for="(item, index) in productList" :key="index"
+                                class="col-12 col-md-2 col-sm-6 col-xs-6 text-center">
+                                <discount-products-card :product-image="item.img_path" :product-name="item.pro_name" :product-price="formatPrice(item.pro_price)"></discount-products-card>
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-card>
+        </div>
+
+        <div class="banner-1 mb-4">
+            <v-card class="rounded-lg">
+                <v-img max-width="100%" :src="Banner_1"></v-img>
+            </v-card>
+        </div>
+
+        <div class="hot-products mb-4">
+            <v-card class="pa-6 rounded-lg">
+                <v-row>
+                    <v-list class="" style="margin-bottom: -10px">
+                        <v-list-item>
+                            <v-avatar tile color="red rounded-pill" size="40" class="mr-2">
+                                <v-icon color="white">mdi-fire</v-icon></v-avatar>
+                            <v-list-item-title>
+                                <h3>ສີນຄ້າຍອດນິຍົມ</h3>
+                            </v-list-item-title>
+                            <v-list-item-icon> </v-list-item-icon>
+                        </v-list-item>
+                    </v-list>
+                    <v-spacer />
+                    <v-btn text color="red" class="red--text mt-3">
+                        ເບິ່ງເພີ່ມເຕີມ
+                        <v-icon right dark> mdi-arrow-right-circle </v-icon>
+                    </v-btn>
+
+                    <v-col cols="12">
+                        <v-divider class="mb-2"></v-divider>
+                        <div class="row">
+                            <!-- <div v-for="(item, index) in productList" :key="index"
+                                class="col-12 col-md-2 col-sm-6 col-xs-6 text-center">
+                                <hot-products-card :product-image="item.img_path" :product-name="item.pro_name" :product-price="formatPrice(item.pro_price)"></hot-products-card>
+                            </div> -->
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-card>
+        </div>
+
+        <div class="banner-2 mb-4">
+            <v-card class="rounded-lg">
+                <v-img max-width="100%" :src="Banner_2"></v-img>
+            </v-card>
+        </div>
+
+        <div class="new-products mb-4">
+            <v-card class="pa-6 rounded-lg">
+                <v-row>
+                    <v-list class="" style="margin-bottom: -10px">
+                        <v-list-item>
+                            <v-avatar tile color="blue rounded-pill" size="40" class="mr-2">
+                                <v-icon color="white">mdi-new-box</v-icon></v-avatar>
+                            <v-list-item-title>
+                                <h3>ສິນຄ້າໃໝ່</h3>
+                            </v-list-item-title>
+                            <v-list-item-icon> </v-list-item-icon>
+                        </v-list-item>
+                    </v-list>
+                    <v-spacer />
+                    <!-- <v-btn text color="blue" class="blue--text">
+              ເບິ່ງເພີ່ມເຕີມ
+              <v-icon right dark> mdi-arrow-right-circle </v-icon>
+            </v-btn> -->
+
+                    <v-col cols="12">
+                        <v-divider class="mb-2"></v-divider>
+                        <div class="row">
+                            <!-- <div v-for="(item, index) in productList" :key="index"
+                                class="col-12 col-md-2 col-sm-6 col-xs-6 text-center">
+                                <new-products-card :product-image="item.img_path" :product-name="item.pro_name" :product-price="formatPrice(item.pro_price)"></new-products-card>
+                            </div> -->
+                            <div class="col-12 col-md-12 col-sm-6 col-xs-6 text-center">
+                                <v-btn class="blue white--text" outlined>
+                                    ເບິ່ງເພີ່ມເຕີມ <v-icon>mdi-arrow-down</v-icon></v-btn>
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-card>
+        </div>
+
+        <!-- <div class="">
+        <v-col cols="12">
+          <div class="row">
+            <footer></footer>
+          </div>
+        </v-col>
+      </div> -->
     </div>
 </template>
-
+  
 <script>
-// import { Carousel3d, Slide } from "vue-carousel-3d";
-import { generateColorShades } from "~/common";
+import Banner_1 from '~/assets/img/banners/banner_1.png'
+import Banner_2 from '~/assets/img/banners/banner_2.png'
+import { hostName,getFormatNum } from "~/common";
 export default {
-    //   middleware: 'auths',
-    components: {
-        // Carousel3d,
-        // Slide,
-    },
-    layout: "products",
-    data: () => {
+    layout: "web",
+    data() {
         return {
-            notCodData: [],
-            productList: [],
-            peeAirOutlet: "PEEAIR4",
-            greewoodOutlet: "Green",
-            deletedCardData: [],
-            isLoading: false,
+            isLoading:false,
+            Banner_1: Banner_1,
+            Banner_2: Banner_2,
+            productList:[],
+            icons: ['mdi-facebook', 'mdi-whatsapp'],
+        }
+    },
+    computed: {
+        host() {
+            return hostName()
         }
     },
     async created() {
-        await this.getData()
-    },
-    computed: {
-
-        dateNow() {
-            const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
-            const fdate = sqlDatetimeNow.substring(0, 11);
-            // const tdate=sqlDatetimeNow.substring(0,11);
-            return fdate;
-        }
-
+        await this.loadProduct();
 
     },
     methods: {
-
-        async getData() {
+        formatPrice(price){
+            console.log(`Price ${getFormatNum(price)}`);
+            return getFormatNum(price)
+        },  
+        async loadProduct() {
             this.isLoading = true
             await this.$axios
                 .get('product_mobile_f')
@@ -84,11 +192,9 @@ export default {
                     console.log('Data: ' + er)
                 })
         },
-
-    },
+    }
 }
 </script>
-
-<style scoped>
-
-</style>
+  
+<style></style>
+  

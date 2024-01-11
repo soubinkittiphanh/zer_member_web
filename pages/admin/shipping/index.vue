@@ -28,6 +28,7 @@
       <v-card-title>
         <v-layout row wrap>
           <v-col cols="6">
+            <v-checkbox v-model.number="showActive" label="ສະແດງລາຍການ inActive"></v-checkbox>
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
@@ -46,7 +47,7 @@
         </v-layout>
       </v-card-title>
       <v-divider></v-divider>
-      <v-data-table v-if="entries" :headers="headers" :search="search" :items="entries">
+      <v-data-table v-if="entries" :headers="headers" :search="search" :items="filterEntries">
         <template v-slot:[`item.rate`]="{ item }">
           {{ getFormatNum(item.rate) }}
         </template>
@@ -82,6 +83,7 @@ export default {
       search: '',
       entries: [],
       entrySelected: '',
+      showActive:false,
       headers: [
         {
           text: '#',
@@ -114,6 +116,11 @@ export default {
     await this.loadData()
   },
   computed: {
+    filterEntries(){
+      console.log(`Show inActive = ${this.showActive}`);
+      if(this.showActive) return this.entries
+      return this.entries.filter(el=>el['isActive']==true) || []
+    }
   },
 
   methods: {

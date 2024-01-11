@@ -19,6 +19,7 @@ export const state = () => ({
     terminalList: [],
     locationList: [],
     selectedTerminal: null,
+    companyList: [],
 })
 
 // the function to update state variable should be called by setter [actions]
@@ -187,6 +188,9 @@ export const mutations = {
     setProductDetail(state, payload) {
         state.productDetail = payload;
     },
+    setCompanyList(state, payload) {
+        state.companyList = payload;
+    },
 
 
 }
@@ -207,6 +211,9 @@ export const getters = {
     },
     findAllLocation(state) {
         return state.locationList
+    },
+    finaAllCompany(state) {
+        return state.companyList
     },
     findAllPayment(state) {
         return state.paymentList
@@ -342,6 +349,9 @@ export const actions = {
     initLocation(state, location) {
         state.commit("SetLocationList", location)
     },
+    initCompany(state, company) {
+        state.commit("setCompanyList", company)
+    },
     async initiateData(state, axios) {
         initTerminal(state, axios);
         initLocation(state, axios);
@@ -350,6 +360,7 @@ export const actions = {
         initCurrency(state, axios);
         initPayment(state, axios);
         initUnit(state, axios);
+        initCompanyData(state, axios);
     }
 
 }
@@ -429,6 +440,17 @@ const initUnit = async (state, axios) => {
         })
         .catch((er) => {
             console.error('Unit initiate data fail ' + er)
+        })
+}
+const initCompanyData = async (state, axios) => {
+    await axios
+        .get('api/company/find')
+        .then((res) => {
+            actions.initCompany(state, res.data)
+            console.log(`Init company data done`);
+        })
+        .catch((er) => {
+            console.error('Company initiate data fail ' + er)
         })
 }
 

@@ -136,7 +136,7 @@ export default {
             this.isloading = true;
             this.categoryList = []
             await this.$axios
-                .get('/category_f')
+                .get('/api/category/find')
                 .then((res) => {
                     for (const iterator of res.data) {
                         this.categoryList.push(iterator);
