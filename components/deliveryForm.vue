@@ -9,7 +9,7 @@
                             <v-col cols="12">
                                 <v-row>ວັນທີ: {{ customerForm.txn_date }} </v-row>
                                 <v-row>ຮ້ານ: {{ currentTerminal['location']['company']['name'] }}</v-row>
-                                <v-row>ເບີໂທ: {{ currentTerminal['location']['company']['tel']}}</v-row>
+                                <v-row>ເບີໂທ: {{ currentTerminal['location']['company']['tel'] }}</v-row>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -56,7 +56,7 @@
                             <v-spacer></v-spacer>
                             ລວມ({{ currentPayment }}): {{ formatNumber(ticketTotal) }}
                         </v-row>
-          
+
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -75,12 +75,12 @@
                         ຂໍ້ມູນການຈັດສົ່ງ
                     </v-chip>
                     <v-spacer></v-spacer>
-                    <!-- <v-btn rounded @click="submit" color="primary">Preview ticket</v-btn> -->
                 </v-row>
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
-                <v-form @submit.prevent="previewTicket">
+                <!-- <v-form @submit.prevent="previewTicket"> -->
+                <v-form>
                     <v-row>
                         <v-col cols="4">
                             <v-text-field type="date" label="ວັນທີ*" v-model="customerForm.txn_date"
@@ -135,9 +135,13 @@
                             <v-text-field v-model="customerForm.discount" label="ສ່ວນຫລຸດ"></v-text-field>
                         </v-col>
                     </v-row>
-                    <v-btn rounded type="submit" color="primary">Print preview</v-btn>
                 </v-form>
             </v-card-text>
+            <v-card-actions>
+                <v-btn rounded @click="previewTicket" color="primary">Print preview</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn rounded @click="caputreStateOfDeliveryForm" color="warning">Close</v-btn>
+            </v-card-actions>
         </v-card>
     </div>
 </template>
@@ -149,6 +153,10 @@ export default {
     name: 'delivery-form',
 
     async created() {
+        // ************ Load the delivery info form from state *************
+        //  this.confirmEntries = this.$store.state.listOfConfirmPaymentOrder.map(order => ({ ...JSON.parse(JSON.stringify(order)) }));
+        this.customerForm = JSON.parse(JSON.stringify(this.$store.state.customerForm))
+        console.log(`Customer information load from statem \n${JSON.stringify(this.customerForm)}`);
         const today = new Date().toISOString().substr(0, 10);
         this.customerForm.txn_date = today;
         console.log(`PRODUCT ${this.cartOfProduct[0]['pro_name']}`);
@@ -157,10 +165,12 @@ export default {
         await this.loadShipping()
         await this.loadPayment()
         this.paymentSelected = this.currentSelectedPayment
-        console.log(`*********PAYMENT ${this.currentSelectedPayment} SELECTED ********`);
     },
-    watch:{
-        paymentSelected (value){
+    beforeDestroy() {
+        console.log(`Before close dialog...`);
+    },
+    watch: {
+        paymentSelected(value) {
             console.log(`New data payment selected ${value}`);
             this.addSelectedPayment(value)
         }
@@ -169,7 +179,7 @@ export default {
         generateCustomerObjec() {
             const customerInfo = {
                 name: this.customerForm.name,
-                branch:  this.currentTerminal['location']['company']['name'],
+                branch: this.currentTerminal['location']['company']['name'],
                 branchTel: this.currentTerminal['location']['company']['tel'],
                 tel: this.customerForm.tel,
                 shippingFeeBy: this.customerForm.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' : 'ຕົ້ນທາງ',
@@ -188,9 +198,8 @@ export default {
             return (total + (+this.customerForm.rider_fee)) - this.customerForm.discount;
         },
         currentTerminal() {
-            console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
-            const terminalInfo =this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal);
-            console.log(`************ ${this.findAllTerminal.length} SELECTED ${terminalInfo['name']} ************ `);
+
+            const terminalInfo = this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal);
             return this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal)
         },
         currentGeo() {
@@ -236,7 +245,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['addSelectedPayment']),
+        ...mapActions(['addSelectedPayment','assignCustomerFormAction']),
         submit() {
             // handle form submission
             console.log(this.customerForm)
@@ -244,7 +253,12 @@ export default {
                 customerForm: this.customerForm,
                 customerInfo: this.generateCustomerObjec
             }
+            this.caputreStateOfDeliveryForm()
             this.$emit('post-transaction', payload)
+        },
+        caputreStateOfDeliveryForm(){
+            this.assignCustomerFormAction(this.customerForm)
+            this.$emit('close-dialog')
         },
         formatNumber(val) {
             return getFormatNum(val)
@@ -274,7 +288,6 @@ export default {
                     this.paymentList = res.data
                 })
                 .catch((er) => {
-                    // console.log('Data: ' + er)
                     swalError2(this.$swal, "Error", er)
                 })
             this.isloading = false;
@@ -286,7 +299,6 @@ export default {
                     this.geographyList = res.data
                     for (const iterator of this.geographyList) {
                         iterator['abbr'] += ' - '.concat(iterator['description'])
-                        console.log('====> ' + iterator['abbr']);
                     }
                 })
                 .catch((er) => {

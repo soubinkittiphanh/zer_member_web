@@ -20,24 +20,57 @@ export const state = () => ({
     locationList: [],
     selectedTerminal: null,
     companyList: [],
+    customerForm: {
+        name: '',
+        tel: '',
+        address: '',
+        rider_fee: 0,
+        txn_date: null,
+        shipping_fee_by: 'destination',
+        shippingId: 1,
+        riderId: 1,
+        geoId: 1,
+        discount: 0,
+    }
 })
 
 // the function to update state variable should be called by setter [actions]
 export const mutations = {
-    removeFromStockConfirm(state, order){
-        const idx = state.listOfConfirmStockInOrder.indexOf(order)
-        state.listOfConfirmStockInOrder.splice(idx,1)
-    },
-    removeFromPaymentConfirk(state, order){
-        const idx = state.listOfConfirmPaymentOrder.indexOf(order)
-        state.listOfConfirmPaymentOrder.splice(idx,1)
-    },
-    clearConfirmPaymentList(state){
 
-        state.listOfConfirmPaymentOrder.length= 0
+
+    removeFromStockConfirm(state, order) {
+        const idx = state.listOfConfirmStockInOrder.indexOf(order)
+        state.listOfConfirmStockInOrder.splice(idx, 1)
+    },
+    removeFromPaymentConfirk(state, order) {
+        const idx = state.listOfConfirmPaymentOrder.indexOf(order)
+        state.listOfConfirmPaymentOrder.splice(idx, 1)
+    },
+    clearConfirmPaymentList(state) {
+
+        state.listOfConfirmPaymentOrder.length = 0
         console.log(`LIST OF PAYMENT HAS BEEN CLEARED ${state.listOfConfirmPaymentOrder.length}`);
     },
-    clearConfirmStockList(state ){
+    clearCustomerForm(state) {
+        state.customerForm = {
+            name: '',
+            tel: '',
+            address: '',
+            rider_fee: 0,
+            txn_date: null,
+            shipping_fee_by: 'destination',
+            shippingId: 1,
+            riderId: 1,
+            geoId: 1,
+            discount: 0,
+        }
+        console.log(`customer form has been cleared `);
+    },
+    setCustomerForm(state,payload) {
+        console.log(`customer form has been assigned `);
+        state.customerForm = payload
+    },
+    clearConfirmStockList(state) {
 
         state.listOfConfirmStockInOrder.length = 0
         console.log(`LIST OF STOCK HAS BEEN CLEARED ${state.listOfConfirmStockInOrder.length}`);
@@ -116,7 +149,7 @@ export const mutations = {
             state.listOfConfirmStockInOrder.push(order)
         }
         console.log(`Order add ${found} to mutation ${state.listOfConfirmStockInOrder.length}`);
-        
+
     },
     addProductToCart(state, product) {
         let found = false;
@@ -130,7 +163,7 @@ export const mutations = {
             // state.cart.push({ ...product, qty: 1 });
             state.cartOfproductSelected.push({ ...product, qty: 1 })
         }
-      
+
     },
     updateProductCart(state, productInfo) {
         const productId = productInfo['productId']
@@ -197,6 +230,9 @@ export const mutations = {
 // action to get sate
 export const getters = {
 
+    findCustomerForm(state) {
+        return state.customerForm
+    },
     findAllListOfConfirmStockIn(state) {
         return state.listOfConfirmStockInOrder
     },
@@ -266,17 +302,26 @@ export const getters = {
 }
 // action to set sate
 export const actions = {
-    clearPaymentList(state){
+    clearCustomerFormAction(state) {
+
+        state.commit("clearCustomerForm")
+    },
+    assignCustomerFormAction(state,payload) {
+
+        state.commit("setCustomerForm",payload)
+    },
+    // TODO: Implement these above 2 function in fontend mapGetters mapAction ...
+    clearPaymentList(state) {
 
         state.commit("clearConfirmPaymentList")
     },
 
-    clearStockList(state){
+    clearStockList(state) {
         state.commit("clearConfirmStockList")
     },
-    removeOrderFromStockConfirm(state, order){
+    removeOrderFromStockConfirm(state, order) {
         state.commit("removeFromStockConfirm", order)
-    },removeOrderFromPaymentConfirm(state,order){
+    }, removeOrderFromPaymentConfirm(state, order) {
         state.commit("removeFromPaymentConfirk", order)
     },
     addOrderToConformPaymentList(state, payload) {

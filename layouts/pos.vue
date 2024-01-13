@@ -28,8 +28,9 @@
                 :record-id="productPricingSelected"></pricing-option>
         </v-dialog>
 
-        <v-dialog v-model="deliveryForm" max-width="1024">
-            <delivery-form @post-transaction="postTransactionForOnlineCustomer" :key="shippingFormKey"></delivery-form>
+        <v-dialog v-model="deliveryForm" max-width="1024" persistent>
+            <delivery-form @post-transaction="postTransactionForOnlineCustomer" @close-dialog="deliveryForm = false"
+                :key="shippingFormKey"></delivery-form>
         </v-dialog>
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
@@ -401,7 +402,7 @@ export default {
         }
     },
     methods: {
-        
+
         pricingLogig(item) {
             console.log(`PRINCING CLICK....${item.id}`);
             this.productPricingSelected = item.id;
@@ -416,7 +417,7 @@ export default {
         previewTicket() {
             this.tickePreviewDialog = true;
         },
-        ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation']),
+        ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation', 'clearCustomerFormAction']),
         checkAllInitData() {
             // setInterval(() => {
             console.info(`...loading pos layout ${this.findAllTerminal.length}... ${new Date().toLocaleTimeString()}`);
@@ -632,7 +633,9 @@ export default {
             // this.saleHeader.customerForm = null
             delete this.saleHeader.customerForm
             this.deliveryForm = false;
+
         },
+
         async postTransaction(isDeliveryCustomer) {
             if (this.isloading || this.generateSaleLine == 0) {
                 if (this.generateSaleLine == 0) {
@@ -662,10 +665,13 @@ export default {
                     console.log('response post completed===> ' + res.data);
                     if (isDeliveryCustomer) {
                         this.generatePrintViewDeliveryCustomer()
+                        // ******** clear delivery form state ***********
+                        this.clearCustomerFormAction()
                     } else {
                         this.generatePrintView()
                     }
                     this.newOrder()
+
                 })
                 .catch((er) => {
                     console.error(`error occurs ${er}`);
