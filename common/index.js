@@ -391,7 +391,7 @@ export const hostName = () => {
   // const baseURL = 'http://150.95.31.23:8011' // ***PRODUCTION Little boutique2024*** 
   // // const baseURL = 'http://150.95.31.23:8004' // ***ONLINE UAT*** 
   // return baseURL;
-  let baseURL = `http://150.95.31.23:${process.env.PORT}`;
+  let baseURL = `http://150.95.31.23:${process.env.API_PORT}`;
 
   // switch (process.env.NODE_ENV) {
   //   case 'production':
