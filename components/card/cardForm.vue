@@ -28,10 +28,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="$emit('close-dialog')">
+                <v-btn class="warning" rounded  @click="$emit('close-dialog')">
                     ປິດ
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="stockSubmit">
+                <v-btn class="primary" rounded  @click="stockSubmit">
                     ບັນທຶກ
                 </v-btn>
             </v-card-actions>
@@ -82,7 +82,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['findAllCurrency']),
+        ...mapGetters(['findAllCurrency','findSelectedTerminal','findAllTerminal']),
         numberRule() {
             return [
                 v => !!v || 'ກະລຸນາ ໃສ່ຈຳນວນ ',
@@ -98,6 +98,10 @@ export default {
 
     },
     created() {
+        console.log(`Location in terminal ${this.findSelectedTerminal}`);
+        const locationIdFromCurrentTerminal = this.findAllTerminal.find(el=>el['id']==this.findSelectedTerminal)['locationId']
+        this.srcLocationId = locationIdFromCurrentTerminal
+
         this.loadLocation()
         this.loadProduct()
     },

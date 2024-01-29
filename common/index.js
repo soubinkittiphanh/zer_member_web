@@ -379,10 +379,10 @@ font-family: 'DM Sans';
 
 export const hostName = () => {
   // // Create a new Date object with the same year and month as the input date, but with day set to 1
-  // // const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
+  // const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
   // // const baseURL = 'http://192.168.8.112:8888' // ***LOCAL UAT*** 
   // // const baseURL = 'http://192.168.1.8:8888' // ***LOCAL UAT*** 
-  // // const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
+  const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
   // // const baseURL = 'http://150.95.31.23:8006' // ***PRODUCTION laofriend*** 
   // // const baseURL = 'http://150.95.31.23:8007' // ***DEMO*** 
   // // const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
@@ -391,7 +391,7 @@ export const hostName = () => {
   // const baseURL = 'http://150.95.31.23:8011' // ***PRODUCTION Little boutique2024*** 
   // // const baseURL = 'http://150.95.31.23:8004' // ***ONLINE UAT*** 
   // return baseURL;
-  let baseURL = `http://150.95.31.23:${process.env.API_PORT}`;
+  // let baseURL = `http://150.95.31.23:${process.env.API_PORT}`;
 
   // switch (process.env.NODE_ENV) {
   //   case 'production':

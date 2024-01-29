@@ -51,6 +51,9 @@
           <v-col cols="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
             <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line hide-detailsx />
+            <v-autocomplete item-text="name" item-value="id" :items="customTerminalList" label="ເລືອກຕາມ ຮ້ານ*"
+              v-model="terminalId"></v-autocomplete>
+            <!-- current LocationId :{{ customTerminalList }} -->
           </v-col>
           <v-col cols="6" class="text-left">
             <v-btn size="large" variant="outlined" @click="createSale" class="primary" rounded>
@@ -199,6 +202,7 @@ export default {
   middleware: 'auths',
   data() {
     return {
+      terminalId: 999, //LocationId to filter sale base on current location selected 
       shippingList: [],
       currencyList: [],
       viewTransaction: false,
@@ -373,6 +377,7 @@ export default {
     }
   },
   async created() {
+    this.terminalId = this.findSelectedTerminal
     await this.loadData()
     await this.loadShipping()
     await this.loadCurrency()
@@ -391,6 +396,16 @@ export default {
     },
   },
   computed: {
+    customTerminalList() {
+      let originalTerminalListVanilla = JSON.stringify(this.findAllTerminal)
+      let originalTerminalList = JSON.parse(originalTerminalListVanilla)
+      const extraTerminal = {
+        "id": 999, "code": 1999, "name": "ທັງໝົດ", "description": "", "locationId": 1,
+      }
+      originalTerminalList.push(extraTerminal)
+      console.log(`Terminal customer all len: ${originalTerminalList.length}`);
+      return originalTerminalList;
+    },
     currentTerminal() {
       console.log(`ALL TEMINAL ${this.findAllTerminal.length} SELECTED ${this.findSelectedTerminal}`);
       const terminalInfo = this.findAllTerminal.find(el => el['id'] == this.findSelectedTerminal);
@@ -402,7 +417,14 @@ export default {
     },
     ...mapGetters(['currentSelectedLocation', 'cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
     activeOrderHeaderList() {
-      return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
+      console.log(`TerminalSelcted ${this.terminalId}`);
+      const terminal = this.findAllTerminal.find(el => el['id'] == this.terminalId)
+      if (!terminal) {
+        return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
+      }
+      console.log(`Current location ${JSON.stringify(terminal)}`);
+      // return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
+      return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2 && el['locationId'] == terminal['locationId'])
     },
     computedDateFormatted() {
       return this.formatDate(this.date)
