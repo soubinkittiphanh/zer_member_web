@@ -644,8 +644,8 @@ export default {
                 return total + item.total;
             }, 0);
             const discount = replaceAll(this.transaction.discount, ',', '')
-            // return total - discount
-            return total;
+            return total - discount
+            // return total;
         },
 
 

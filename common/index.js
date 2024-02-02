@@ -416,11 +416,11 @@ export const mainCompanyInfo = () => {
     // name: 'PEEAIR4',
     // tel: '02091993749',
 
-    name: 'Little boutique',
+    name: 'DC',
     tel: '020 58715651',
     imageUrl: '',
     imageName: '',
-    env: 'LIVE'
+    env: 'UAT'
   }
   return info;
 }

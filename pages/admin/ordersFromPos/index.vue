@@ -144,6 +144,9 @@
             {{ numberWithCommas(item.discount) }}
           </template>
           <template v-slot:[`item.total`]="{ item }">
+            {{ numberWithCommas(item.total + item.discount) }}
+          </template>
+          <template v-slot:[`item.grandTotal`]="{ item }">
             {{ numberWithCommas(item.total) }}
           </template>
           <template v-slot:[`item.createdAt`]="{ item }">
@@ -260,18 +263,29 @@ export default {
           sortable: true,
         },
         {
+          text: 'ລາຄາເຕັມ',
+          align: 'end',
+          value: 'total',
+          sortable: false,
+        },
+        {
           text: 'ສ່ວນຫລຸດ',
           align: 'end',
           value: 'discount',
           sortable: true,
         },
-
         {
           text: 'ລວມ',
           align: 'end',
-          value: 'total',
+          value: 'grandTotal',
           sortable: false,
         },
+        // {
+        //   text: 'ລວມ',
+        //   align: 'end',
+        //   value: 'total',
+        //   sortable: false,
+        // },
         {
           text: 'ຜູ້ລົງທຸລະກຳ',
           align: 'end',
