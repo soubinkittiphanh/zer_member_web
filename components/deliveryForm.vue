@@ -193,7 +193,7 @@ export default {
         ticketTotal() {
             let total = 0;
             for (const iterator of this.cartOfProduct) {
-                total += iterator['localPrice']
+                total += iterator['localPrice'] * iterator['qty']
             }
             return (total + (+this.customerForm.rider_fee)) - this.customerForm.discount;
         },
@@ -245,7 +245,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['addSelectedPayment','assignCustomerFormAction']),
+        ...mapActions(['addSelectedPayment', 'assignCustomerFormAction']),
         submit() {
             // handle form submission
             console.log(this.customerForm)
@@ -256,7 +256,7 @@ export default {
             this.caputreStateOfDeliveryForm()
             this.$emit('post-transaction', payload)
         },
-        caputreStateOfDeliveryForm(){
+        caputreStateOfDeliveryForm() {
             this.assignCustomerFormAction(this.customerForm)
             this.$emit('close-dialog')
         },

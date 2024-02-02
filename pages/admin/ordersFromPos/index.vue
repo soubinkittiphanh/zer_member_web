@@ -90,7 +90,7 @@
                   :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                     'title': 'ຍອດບິນ',
                     'amount': getFormatNum(activeOrderHeaderList.length),
-                    'sale': getFormatNum(totalSale - totalDiscount),
+                    'sale': getFormatNum(totalSale),
                     // 'discount': getFormatNum(totalDiscount),
                     // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                     // 'gross': getFormatNum(totalSale - totalDiscount)

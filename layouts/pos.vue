@@ -594,7 +594,7 @@ export default {
             this.isloading = true;
             this.saleHeader.discount = this.discount
             this.saleHeader.remark = "Quotation"
-            this.saleHeader.total = this.grandTotal
+            this.saleHeader.total = this.grandTotal - this.discount // Sale header total base on mobile logic (it is exclude discount amount)
             this.saleHeader.clientId = this.currenctCustomer.id
             this.saleHeader.paymentId = this.currentPayment
             this.saleHeader.currencyId = 1 // DEFAULT CURRENCY I FOR LAK
@@ -647,7 +647,7 @@ export default {
             this.isloading = true;
             this.saleHeader.isActive = true
             this.saleHeader.discount = this.discount
-            this.saleHeader.total = this.grandTotal
+            this.saleHeader.total = this.grandTotal  - this.discount // Sale header total base on mobile logic (it is exclude discount amount)
             this.saleHeader.clientId = this.currenctCustomer.id
             this.saleHeader.paymentId = this.currentPayment
             this.saleHeader.currencyId = 1 // DEFAULT CURRENCY I FOR LAK

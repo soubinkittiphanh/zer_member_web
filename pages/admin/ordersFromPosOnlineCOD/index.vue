@@ -13,8 +13,8 @@
     </v-dialog> -->
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction" :updateAllow="false"
-        :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
+      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
+        :updateAllow="false" :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPosCRUD>
     </v-dialog>
 
@@ -136,6 +136,7 @@
         </template>
         <template v-slot:[`item.total`]="{ item }">
           {{ numberWithCommas(item.total +item.discount) }}
+          <!-- {{ numberWithCommas(item.total) }} -->
         </template>
         <template v-slot:[`item.riderFee`]="{ item }">
           {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
@@ -151,7 +152,10 @@
           </v-btn>
         </template>
         <template v-slot:[`item.grandTotal`]="{ item }">
-          <span> {{ numberWithCommas(item.total+item.dynamic_customer.rider_fee+item.dynamic_customer.cod_fee) }}</span>
+          <span> {{
+            numberWithCommas((item.total - item.discount) + item.dynamic_customer.rider_fee +
+              item.dynamic_customer.cod_fee)
+          }}</span>
           <!-- <v-btn text  @click="viewItem(item)" color="primary" >
             {{ `total: ${item.total}` }}
             {{ `disc: ${item.discount}` }}
@@ -161,7 +165,7 @@
         </template>
         <template v-slot:[`item.view`]="{ item }">
           <!-- TODO: TICKET PRINT -->
-          <v-btn text  @click="viewItem(item)" color="primary" >
+          <v-btn text @click="viewItem(item)" color="primary">
             <!-- <span class="mdi mdi-eye-circle-outline"></span> -->
             <i class="fas fa-eye"></i>
           </v-btn>
@@ -428,7 +432,7 @@ export default {
         return this.orderHeaderList.filter(el => el['isActive'] == true && el['payment']['payment_code'] == 'COD')
       }
       console.log(`Current location ${JSON.stringify(terminal)}`);
-      return this.orderHeaderList.filter(el => el['isActive'] == true && el['payment']['payment_code'] == 'COD'  && el['locationId'] == terminal['locationId'])
+      return this.orderHeaderList.filter(el => el['isActive'] == true && el['payment']['payment_code'] == 'COD' && el['locationId'] == terminal['locationId'])
     },
     computedDateFormatted() {
       return this.formatDate(this.date)
