@@ -187,6 +187,7 @@ export default {
                 shipping: this.currentShipping,
                 payment: this.currentPayment,
                 riderFee: this.customerForm.rider_fee,
+                geoId: this.customerForm.geoId,
             }
             return customerInfo;
         },
