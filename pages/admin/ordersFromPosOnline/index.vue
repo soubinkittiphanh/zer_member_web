@@ -667,7 +667,7 @@ export default {
                 <h5> ຜູ້ຮັບ: ${saleHeader.dynamic_customer.name}</h5>
                 <h5> ໂທ: ${saleHeader.dynamic_customer.tel} </h5>
                 <h5> ຂົນສົ່ງ: ${this.currentShipping(saleHeader.dynamic_customer.shippingId)} </h5>
-                <h5> ບ່ອນສົ່ງ: ${saleHeader.dynamic_customer.address} </h5>
+                <h5> ບ່ອນສົ່ງ: ${saleHeader.dynamic_customer.address} - ${saleHeader.dynamic_customer.geography.description}</h5>
               ${this.currentShipping(saleHeader.dynamic_customer.shippingId) == 'RIDER' ? `` : `<h5> ຄ່າຝາກ: ${saleHeader.dynamic_customer.shipping_fee_by.includes('destination') ? 'ປາຍທາງ' : 'ຕົ້ນທາງ'}</h5>`}  
                 <hr> </hr>
                 ${txnListHtml}
