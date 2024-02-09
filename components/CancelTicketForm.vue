@@ -14,7 +14,7 @@ html
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="warning" text rounded @click="$emit('close-dialog')">
-                    ຍົກເລີກ
+                    ປິດ
                 </v-btn>
                 <v-btn class="primary" text @click="submitForm" rounded>
                     ຢືນຢັນ

@@ -117,6 +117,9 @@
         <template v-slot:[`item.createdAt`]="{ item }">
           {{ item.createdAt.split('.')[0] }}
         </template>
+        <template v-slot:[`item.recid`]="{ item }">
+          {{ item.id }}
+        </template>
         <template v-slot:[`item.id`]="{ item }">
           <v-btn color="primary" text @click="viewItem(item)
           wallet = true
@@ -162,12 +165,12 @@ export default {
       OrderIdSelected: 0,
 
       headers: [
-        // {
-        //   text: '#',
-        //   align: 'center',
-        //   value: 'id',
-        //   sortable: true,
-        // },
+        {
+          text: 'recid',
+          align: 'center',
+          value: 'recid',
+          sortable: true,
+        },
         {
           text: 'ວັນທີ',
           align: 'center',

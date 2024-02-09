@@ -7,7 +7,7 @@
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
         <v-dialog v-model="cancelConfirmDialog" max-width="1024">
-            <cancel-ticket-form @refresh="$emit('reload')" :id="headerId" @close-dialog="cancelConfirmDialog = false"></cancel-ticket-form>
+            <cancel-ticket-form @refresh="$emit('reload')" :id="headerId" :customerId="onlineCustomerId" @close-dialog="cancelConfirmDialog = false"></cancel-ticket-form>
         </v-dialog>
         <v-dialog v-model="pricingDialog" max-width="1024">
             <pricing-option :key="pricingDialogKey" :isBackend="true" @new-price-update="updatePricing"
@@ -243,6 +243,7 @@ export default {
     },
     methods: {
         cancelOrder(){
+            this.onlineCustomerId = this.transaction.dynamic_customer.id;
             this.cancelConfirmDialog = true;
         },
         updatePricing(priceInfo) {
@@ -666,6 +667,7 @@ export default {
             validateErrorMessage: '',
             sheet: false,
             errorLineNumber: null,
+            onlineCustomerId:null,
             isloading: false,
             transaction: {
                 isActive:true,
