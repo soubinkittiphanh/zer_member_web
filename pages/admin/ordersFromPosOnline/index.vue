@@ -649,7 +649,7 @@ export default {
           totalHtml += `
                                     <div class="ticket">
                                         <div class="product-name"></div>
-                                    <div class="price-total"> <h5>ຍອດລວມ(${saleHeader.payment.payment_code}): ${this.formatNumber(((saleHeader.total + (+saleHeader.dynamic_customer.rider_fee)) - saleHeader.discount))}  </h5> </div>
+                                    <div class="price-total"> <h5>ຍອດລວມ(${saleHeader.payment.payment_code}): ${this.formatNumber(((saleHeader.total + (+saleHeader.dynamic_customer.rider_fee)) ))}  </h5> </div>
                                 </div>
                                     `
         }

@@ -60,8 +60,9 @@
       <v-data-table v-if="loaddata" :headers="headers" :search="search" :items="stockList" :items-per-page="pageLine">
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>ມູນຄ່າສິນຄ້າຄ້າງສະຕັອກ: {{ formatNumber(grandTotalStockValue) }}</v-toolbar-title>
-            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-toolbar-title><v-data-table :headers="simpleHeaders" :items="simpleItems"></v-data-table></v-toolbar-title>
+            <!-- <v-toolbar-title>ມູນຄ່າສິນຄ້າຄ້າງສະຕັອກ: {{ formatNumber(grandTotalStockValue) }}</v-toolbar-title> -->
+            <!-- <v-divider class="mx-4" inset vertical></v-divider> -->
             <v-spacer></v-spacer>
             <!-- <v-btn size="large" variant="outlined" @click="productFormCreate = true" class="primary" rounded>
               <span class="mdi mdi-note-plus-outline"></span>
@@ -106,6 +107,11 @@ export default {
   middleware: 'auths',
   data() {
     return {
+      simpleHeaders: [
+        { text: 'ມູນຄ່າສິນຄ້າຄ້າງສະຕັອກ', value: 'age' },
+      ],
+      simpleItems: [
+      ],
       stockList: [],
       priceListDialog: false,
       priceListFormKey: 1,
@@ -145,7 +151,7 @@ export default {
         },
         { text: 'ລາຄາ', align: 'right', value: 'product.pro_price' },
         { text: 'ຈຳນວນ', align: 'right', value: 'cardCount' },
-        { text: 'ມູນຄ່າຕໍ່ໜ່ວຍ', align: 'right', value: 'cost' },
+        { text: 'ຕົ້ນທຶນ', align: 'right', value: 'cost' },
         { text: 'ມູນຄ່າລວມ', align: 'right', value: 'totalCardValue' },
         // {
         //   text: 'ເບິ່ງສະຕັອກ',
@@ -173,7 +179,6 @@ export default {
   computed: {
     ...mapGetters(['currentSelectedLocation', 'findAllLocation']),
     grandTotalStockValue() {
-
       const totalStockValue = this.stockList.reduce((total, item) => {
         return total + item.totalCardValue;
       }, 0);
@@ -181,11 +186,11 @@ export default {
     }
   },
   methods: {
-    
+
     formatNumber(value) {
       return getFormatNum(value)
     },
-    
+
     async fetchData() {
       console.log(`PRODUCT LIST ===>`);
       this.isloading = true
@@ -201,6 +206,8 @@ export default {
           console.log('Error: ' + er)
         })
       this.isloading = false
+      const simpleHead = { age: this.formatNumber(this.grandTotalStockValue), };
+      this.simpleItems.push(simpleHead)
     },
 
     editStock(idx) {
@@ -210,8 +217,6 @@ export default {
       // const obj=JSON.stringify(idx)
       this.$router.push(`/admin/stock/${idx.product.pro_id}`)
     },
-
-
     loadCardCategory() {
       this.isloading = true
       this.$axios

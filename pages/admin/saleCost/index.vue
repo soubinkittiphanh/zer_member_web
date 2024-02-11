@@ -55,7 +55,7 @@
       </v-card-title>
       <v-card-text>
         <!-- Sold detail -->
-        <v-col cols="8" class="text-right">
+        <v-col cols="6" class="text-right">
           <v-row class="primary pa-2 rounded">
             <h4 style="color: white;">Income ລາຍຮັບ</h4>
           </v-row>
@@ -85,7 +85,7 @@
           </v-row>
         </v-col>
         <!-- Cost of goods sold -->
-        <v-col cols="8" class="text-right">
+        <v-col cols="6" class="text-right">
           <v-row class="primary pa-2 rounded">
             <h4 style="color: white;">Cost of goods sold ຕົ້ນທຶນສິນຄ້າ ທີ່ຂາຍໄປ</h4>
           </v-row>
@@ -114,7 +114,7 @@
           </v-row>
         </v-col>
         <!-- Accounting expense -->
-        <v-col cols="8" class="text-right">
+        <v-col cols="6" class="text-right">
           <v-row class="primary pa-2 rounded">
             <h4 style="color: white;">Expense ລາຍຈ່າຍ</h4>
           </v-row>
@@ -143,7 +143,7 @@
           </v-row>
         </v-col>
         <!-- Net profit -->
-        <v-col cols="8" class="text-right">
+        <v-col cols="6" class="text-right">
           <v-row class="primary pa-2 rounded">
             <h4 style="color: white;">Net operating profit ກຳໄລສຸດທິ</h4>
           </v-row>

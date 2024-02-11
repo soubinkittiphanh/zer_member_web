@@ -165,7 +165,7 @@ export default {
       timer: null,
       headers: [
         {
-          text: 'key',
+          text: 'recid',
           align: 'center',
           value: 'id',
         },
