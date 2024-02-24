@@ -85,10 +85,10 @@
             <v-row>
               <v-col cols="6" lg="6">
                 <order-sumary-card-pos :showTotal="true"
-                  :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
+                  :gross="numberWithCommas(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
                     'title': 'ຍອດບິນ',
-                    'amount': getFormatNum(activeOrderHeaderList.length),
-                    'sale': getFormatNum(totalSale - totalDiscount),
+                    'amount': numberWithCommas(activeOrderHeaderList.length),
+                    'sale': numberWithCommas(totalSale - totalDiscount),
                     // 'discount': getFormatNum(totalDiscount),
                     // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
                     // 'gross': getFormatNum(totalSale - totalDiscount)
@@ -367,9 +367,9 @@ export default {
 
       orderDetail.amount = txnList.length
       orderDetail.saleRawNumber = totalPrice;
-      orderDetail.sale = this.getFormatNum(totalPrice)
-      orderDetail.discount = this.getFormatNum(totalDiscount)
-      orderDetail.gross = this.getFormatNum(0)
+      orderDetail.sale = this.numberWithCommas(totalPrice)
+      orderDetail.discount = this.numberWithCommas(totalDiscount)
+      orderDetail.gross = this.numberWithCommas(0)
       orderDetail.title = 'ຍອດບິນ COD'
       return orderDetail;
     },
@@ -416,9 +416,9 @@ export default {
       return getFormatNum(value)
     },
 
-    getFormatNum(val) {
-      return new Intl.NumberFormat().format(val)
-    },
+    // getFormatNum(val) {
+    //   return new Intl.NumberFormat().format(val)
+    // },
     editItem(item) {
       this.componentKey += 1;
       this.selectedOrderId = item.orderId.toString()

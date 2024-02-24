@@ -110,13 +110,13 @@ export default {
             form: {
                 header: {
                     bookingDate: '',
-                    paymentNumber: 'REF12345',
+                    paymentNumber: '',
                     payee: 'ຮ້ານຄ້າທົ່ວໄປ',
                     paymentMethod: 'Cash',
                     currency: 'LAK',
                     rate: 1,
                     totalAmount: '1,000',
-                    notes: 'Payment for services rendered',
+                    notes: '',
                     // locking_session_id: 'abc123',
                     update_user: 1,
                     drAccount: 15,

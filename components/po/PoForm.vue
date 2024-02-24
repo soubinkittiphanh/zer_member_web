@@ -243,7 +243,7 @@ export default {
                     confirmSwal(this.$swal, 'warning', async () => {
                         console.log("Delete record function");
                         this.isLoading = true
-                        await this.$axios.delete(`/api/po/line/find/${item.id}`)
+                        await this.$axios.delete(`/api/purchasing/line/find/${item.id}`)
                             .then(response => {
                                 console.log("response=>", response.data);
                                 if (response.data.includes('successfully')) {
@@ -305,7 +305,7 @@ export default {
         async loadPurchaseOrder() {
             this.isLoading = true
             if (this.isEdit) {
-                await this.$axios.get(`/api/po/find/${this.campaignId}`).then(response => {
+                await this.$axios.get(`/api/purchasing/find/${this.campaignId}`).then(response => {
                     this.form.header = response.data
                     this.form.header.start = response.data['start'].split('T')[0]
                     this.form.header.end = response.data['end'].split('T')[0]
@@ -340,7 +340,7 @@ export default {
                 // ********* update entry *********
                 if (this.isEdit && this.headerId) {
                     console.log("====> update campaign");
-                    await this.$axios.put(`/api/po/update/${this.headerId}`, this.form.header).then(res => {
+                    await this.$axios.put(`/api/purchasing/update/${this.headerId}`, this.form.header).then(res => {
                         if (res.status == 200) {
                             swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                         } else {
@@ -354,7 +354,7 @@ export default {
                 } else {
                     // this.isLoading = false;
                     // return console.log("Form ===> ", this.form.header);
-                    await this.$axios.post("/api/po/create", this.form.header).then(res => {
+                    await this.$axios.post("/api/purchasing/create", this.form.header).then(res => {
                         if (res.status == 200) {
                             swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                         } else {

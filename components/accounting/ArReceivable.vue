@@ -33,7 +33,7 @@
                                 hint="ຊື່ບຸກຄົນ,ບໍລິສັດ ຫລື ຜູ້ຮັບການຊຳລະ" persistent-hint required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field label="ເນື້ອໃນການຊຳລະ*" required v-model="form.header.notes"></v-text-field>
+                            <v-text-field label="ເນື້ອໃນລາຍການ*" required v-model="form.header.notes"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field v-model="form.header.totalAmount" label="ຈຳນວນເງິນ*" required
@@ -112,13 +112,13 @@ export default {
             form: {
                 header: {
                     bookingDate: '',
-                    receiveNumber: 'REF12345',
+                    receiveNumber: '',
                     payee: 'ຮ້ານຄ້າທົ່ວໄປ',
                     paymentMethod: 'Cash',
                     currency: 'LAK',
                     rate: 1,
                     totalAmount: '1,000',
-                    notes: 'Receive for services rendered',
+                    notes: '',
                     // locking_session_id: 'abc123',
                     update_user: 1,
                     drAccount: 15,
