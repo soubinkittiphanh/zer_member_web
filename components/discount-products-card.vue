@@ -1,30 +1,37 @@
 <template>
   <div class="text-center">
+    <!-- {{ productId }} -->
     <v-hover v-slot:default="{ hover }" open-delay="50">
-      <v-card :elevation="hover ? 8 : 0" class="" width="220">
-        <v-card height="280">
-          <v-img class="pointer-cursor" max-width="220" :src="host + '/' + productImage"></v-img>
+      <v-card :elevation="hover ? 8 : 0" class="" width="220" @click="gotoProductDetail(product.id)">
+        <v-card height=" 280">
+          <v-img class="pointer-cursor" max-width="220" :src="host + '/' + product['img_path']"></v-img>
         </v-card>
         <v-card-text class="text-start">
-          <div class="font-weight-meduim black--text">{{ productName }}</div>
-          <div class="font-weight-meduim red--text">
-            <span class="text-decoration-line-through">{{ productPrice }}
+          <div class="font-weight-meduim black--text">{{ product.pro_name }}</div>
+          <!-- <div class="font-weight-meduim red--text">
+            <span class="text-decoration-line-through">{{ formatPrice(product.pro_price) }}
             </span>
 
             <span class="black--text ml-2">({{ discountPercent }})</span>
-          </div>
+          </div> -->
           <div class="font-weight-meduim green--text">
-            {{ discountPrice }}
+            ລາຄາ: {{ formatPrice(product.pro_price) }}
           </div>
 
           <div class="d-flex justify-space-between mt-2">
-            <v-chip small label class="ma-0 white--text" color="green">
-              ຫຼຸດລາຄາ
+            <v-chip small label class="ma-0 white--text" color="white">
+              <v-btn icon color="green" @click="whatsappProduct">
+                <v-icon>mdi-whatsapp</v-icon>
+              </v-btn>
             </v-chip>
-            <v-spacer></v-spacer>
-            <v-chip small label outlined class="ma-0 white--text" color="green">
-              ພ້ອມສົ່ງ
+            <!-- <v-row align-content="center"> -->
+            <!-- <v-spacer></v-spacer> -->
+            <v-chip small label outlined class="ma-0 white--text" :color="product.stock_count > 0 ? 'green' : 'red'">
+              {{ product.stock_count > 0 ? "ພ້ອມສົ່ງ" : "ໝົດ" }}
             </v-chip>
+
+            <!-- </v-row> -->
+
           </div>
         </v-card-text>
       </v-card>
@@ -34,22 +41,31 @@
 </template>
 
 <script>
-import ProductImage from '~/assets/img/products/product_1.jpg'
-import { hostName } from '~/common'
+import { hostName, getFormatNum } from '~/common'
 export default {
   name: 'discount-products-card',
   props: {
-    productImage: {
-      type: String,
-      require: true,
-    }, productName: {
-      type: String,
+    // productId: {
+    //   type: Number,
+    //   require: true,
+    // },
+    // productImage: {
+    //   type: String,
+    //   require: true,
+    // },
+    //  productName: {
+    //   type: String,
+    //   require: true,
+    // },
+    // productPrice: {
+    //   type: String,
+    //   require: true,
+    // },
+    product: {
+      type: Object,
       require: true,
     },
-    productPrice: {
-      type: String,
-      require: true,
-    },
+
 
 
   }, computed: {
@@ -63,6 +79,19 @@ export default {
       discountPercent: '-50%',
     }
   },
+  methods: {
+    gotoProductDetail(productId) {
+      this.$router.push({ name: 'product-details', params: { id: productId } });
+    },
+    formatPrice(price) {
+      console.log(`Price ${getFormatNum(price)}`);
+      return getFormatNum(price)
+    },
+    whatsappProduct(product) {
+      // console.log(`Price ${getFormatNum(price)}`);
+      // return getFormatNum(price)
+    },
+  }
 }
 </script>
 

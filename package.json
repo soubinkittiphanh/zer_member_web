@@ -32,6 +32,7 @@
     "jspdf-invoice-template": "^1.4.3",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
+    "v-calendar": "^2.4.2",
     "vue-apexcharts": "^1.6.2",
     "vue-carousel-3d": "^1.0.1",
     "vue-echarts": "^6.6.1",

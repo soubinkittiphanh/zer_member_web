@@ -1,10 +1,6 @@
 
 <template>
-    <div>
-
-        <div class="brands mb-4 mt-2">
-            <slider></slider>
-        </div>
+    <div class="mr-16 ml-16">
         <div class="brands mb-4 mt-2">
             <brands></brands>
         </div>
@@ -31,7 +27,7 @@
                     <v-col cols="12">
                         <v-divider class="mb-2"></v-divider>
                         <div class="row">
-                            <div v-for="(item, index) in productList" :key="index"
+                            <div v-for="(item, index) in productList" :key="index" 
                                 class="col-12 col-md-2 col-sm-6 col-xs-6 text-center">
                                 <discount-products-card :product="item"></discount-products-card>
                             </div>
@@ -144,24 +140,12 @@ export default {
             Banner_2: Banner_2,
             productList: [],
             icons: ['mdi-facebook', 'mdi-whatsapp'],
-            menuList: [
-                { text: 'ໂຮມ', icon: 'mdi-home', path: '/home' },
-                { text: 'ສິນຄ້າທັງໝົດ', icon: 'mdi-package-variant', path: '/home' },
-                { text: 'ໝວດໝູ່ສິນຄ້າ', icon: 'mdi-information', path: '/home' },
-                { text: 'ກ່ຽວກັບເຮົາ', icon: 'mdi-file-document-outline', path: '/home' },
-                { text: 'ຊ່ອງທາງການຕິດຕໍ່', icon: 'mdi-file-document-outline', path: '/home' },
-                { text: 'ບົດຄວາມ', icon: 'mdi-file-document-outline', path: '/home' },
-                { text: 'ເງື່ອນໄຂການເຊົ່າຊຸດ', icon: 'mdi-file-document-outline', path: '/home' },
-            ],
-
         }
     },
     computed: {
         host() {
             return hostName()
-        },
-
-
+        }
     },
     async created() {
         await this.loadProduct();

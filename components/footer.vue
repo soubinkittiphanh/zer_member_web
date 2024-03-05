@@ -5,7 +5,7 @@
         flat
         tile
         width="100%"
-        class="primary-gradient white--text text-center"
+        class="primary white--text text-center"
       >
         <v-card-text class="pt-0 text-left text-md-center">
           <v-expansion-panels accordion v-model="panel" multiple>
@@ -56,7 +56,7 @@
 
         <v-card-text class="white--text">
           <strong
-            >Copyright © {{ new Date().getFullYear() }} — Soubin. All rights
+            >Copyright © {{ new Date().getFullYear() }} — Dcommerce. All rights
             reserved.
           </strong>
         </v-card-text>

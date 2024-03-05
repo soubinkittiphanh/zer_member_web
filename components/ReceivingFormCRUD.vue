@@ -33,7 +33,7 @@
                     <v-col cols="6">
                         <v-chip class="pa-5" color="primary" label text-color="white">
                             <v-icon start>mdi-label</v-icon>
-                            <h3>RECEIVING {{ isUpdate }}</h3>
+                            <h3>RECEIVING </h3>
                         </v-chip>
                     </v-col>
                     <v-col cols="6" style="text-align: right;">

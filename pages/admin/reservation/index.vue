@@ -68,6 +68,8 @@
               <span class="mdi mdi-cloud-download"></span>
               ດຶງລາຍງານ
             </v-btn>
+            <my-calendar/>
+
           </v-col>
         </v-layout>
       </v-card-title>
@@ -104,15 +106,15 @@
 
 
       <v-data-table v-if="activeOrderHeaderList" :headers="headers" :search="search" :items="activeOrderHeaderList">
-        <template v-slot:[`item.bookingDate`]="{ item }">
-          {{ item.bookingDate.split('T')[0] }}
+        <template v-slot:[`item.checkin_date`]="{ item }">
+          {{ item.checkin_date.split('T')[0] }}
           <!-- <v-chip class="ma-2" color="red" text-color="white"> -->
-          <h6 :style="{ 'color': countDay(item.bookingDate.split('T')[0]) > item.client.credit ? 'red' : 'green' }">
-            {{ countDay(item.bookingDate.split('T')[0]) }}
+          <h6 :style="{ 'color': 1 > 0 ? 'red' : 'green' }">
+            {{ countDay(item.checkin_date.split('T')[0]) }}
           </h6>
           <!-- </v-chip> -->
         </template>
-        <template v-slot:[`item.client.credit`]="{ item }">
+        <!-- <template v-slot:[`item.client.credit`]="{ item }">
           <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
             class="ma-2" color="red" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
@@ -120,18 +122,18 @@
           <v-chip v-else class="ma-2" color="green" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
-        </template>
-        <template v-slot:[`item.dynamic_customer`]="{ item }">
+        </template> -->
+        <!-- <template v-slot:[`item.dynamic_customer`]="{ item }">
           <v-avatar :color="item.dynamic_customer ? 'green' : 'red'" size="10">
           </v-avatar>
-        </template>
+        </template> -->
         <template v-slot:[`item.discount`]="{ item }">
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
           {{ numberWithCommas(item.total + item.discount) }}
         </template>
-        <template v-slot:[`item.grandTotal`]="{ item }">
+        <!-- <template v-slot:[`item.grandTotal`]="{ item }">
           {{ numberWithCommas((item.total + item.dynamic_customer.rider_fee) - item.dynamic_customer.cod_fee) }}
         </template>
         <template v-slot:[`item.dynamic_customer.cod_fee`]="{ item }">
@@ -139,7 +141,7 @@
         </template>
         <template v-slot:[`item.dynamic_customer.rider_fee`]="{ item }">
           {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
-        </template>
+        </template> -->
         <template v-slot:[`item.createdAt`]="{ item }">
           {{ item.createdAt.split('.')[0] }}
         </template>
@@ -151,13 +153,13 @@
 <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template> -->
-        <template v-slot:[`item.print`]="{ item }">
-          <!-- TODO: TICKET PRINT -->
+        <!-- <template v-slot:[`item.print`]="{ item }">
+
           <v-btn @click="generatePrintViewDeliveryCustomer(item)" text color="primary">
             <span class="mdi mdi-printer"></span>
           </v-btn>
 
-        </template>
+        </template> -->
         <!-- <template v-slot:[`item.cancel`]="{ item }">
           <v-btn  color="warning" text @click="cancelItem(item)
           wallet = true
@@ -172,7 +174,7 @@
           </v-btn>
 
         </template>
-        <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
+        <!-- <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
           <v-row>
             <v-col cols="12">
               <v-btn color="blue darken-1" text @click="whatsappLink(item.dynamic_customer.tel)">
@@ -185,7 +187,7 @@
           </v-row>
 
 
-        </template>
+        </template> -->
       </v-data-table>
 
     </v-card>
@@ -196,9 +198,10 @@ import { ticketHtml, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getF
 import OrderDetailPos from '~/components/OrderDetailPos.vue'
 import ReservationForm from '~/components/ReservationForm.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
+import MyCalendar from '~/components/calendar/MyCalendar.vue'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  components: { OrderDetailPos, OrderSumaryCardPos, ReservationForm },
+  components: { OrderDetailPos, OrderSumaryCardPos, ReservationForm,MyCalendar },
   middleware: 'auths',
   data() {
     return {
@@ -227,41 +230,41 @@ export default {
 
       headers: [
         {
-          text: 'ວັນທີ',
+          text: 'RECID',
           align: 'center',
-          value: 'bookingDate',
+          value: 'id',
+          sortable: true,
+        },
+        {
+          text: 'ຈາກວັນທີ',
+          align: 'center',
+          value: 'checkin_date',
           sortable: true,
         },
         // {
-        //   text: 'ID ລູກຄ້າ',
+        //   text: 'Offline/Online',
         //   align: 'center',
-        //   value: 'client.id',
+        //   value: 'dynamic_customer',
+        //   sortable: true,
+        // },
+        // {
+        //   text: 'ລູກຄ້າ',
+        //   align: 'center',
+        //   value: 'dynamic_customer.name',
         //   sortable: true,
         // },
         {
-          text: 'Offline/Online',
-          align: 'center',
-          value: 'dynamic_customer',
-          sortable: true,
-        },
-        {
-          text: 'ລູກຄ້າ',
-          align: 'center',
-          value: 'dynamic_customer.name',
-          sortable: true,
-        },
-        {
           text: 'ເບີໂທ',
           align: 'center',
-          value: 'dynamic_customer.tel',
+          value: 'customer_telephone',
           sortable: true,
         },
-        {
-          text: 'ບ່ອນສົ່ງ',
-          align: 'center',
-          value: 'dynamic_customer.address',
-          sortable: true,
-        },
+        // {
+        //   text: 'ບ່ອນສົ່ງ',
+        //   align: 'center',
+        //   value: 'dynamic_customer.address',
+        //   sortable: true,
+        // },
         {
           text: 'ລາຄາເຕັມ',
           align: 'end',
@@ -275,72 +278,72 @@ export default {
           sortable: true,
         },
 
-        {
-          text: 'ຄ່າຂົນສົ່ງ',
-          align: 'end',
-          value: 'dynamic_customer.rider_fee',
-          sortable: false,
-        },
-        {
-          text: 'COD/Rider Fee',
-          align: 'end',
-          value: 'dynamic_customer.cod_fee',
-          sortable: false,
-        },
+        // {
+        //   text: 'ຄ່າຂົນສົ່ງ',
+        //   align: 'end',
+        //   value: 'dynamic_customer.rider_fee',
+        //   sortable: false,
+        // },
+        // {
+        //   text: 'COD/Rider Fee',
+        //   align: 'end',
+        //   value: 'dynamic_customer.cod_fee',
+        //   sortable: false,
+        // },
         {
           text: 'ລວມ',
           align: 'end',
           value: 'grandTotal',
           sortable: false,
         },
-        {
-          text: 'ຂົນສົ່ງ',
-          align: 'center',
-          value: 'dynamic_customer.shipping.name',
-          sortable: true,
-        },
-        {
-          text: 'ການຊຳລະ',
-          align: 'center',
-          value: 'payment.payment_code',
-          sortable: true,
-        },
-        {
-          text: 'ຮ້ານ',
-          align: 'center',
-          value: 'location.name',
-          sortable: true,
-        },
-        {
-          text: 'ໄຣເດີ້',
-          align: 'center',
-          value: 'dynamic_customer.rider.name',
-          sortable: true,
-        },
-        {
-          text: 'ເຂດ',
-          align: 'center',
-          value: 'dynamic_customer.geography.description',
-          sortable: true,
-        },
-        {
-          text: 'ຜູ້ລົງທຸລະກຳ',
-          align: 'end',
-          value: 'user.cus_name',
-          sortable: false,
-        },
-        {
-          text: 'ເວລາລົງ',
-          align: 'end',
-          value: 'createdAt',
-          sortable: false,
-        },
-        {
-          text: 'ພິມບິນ',
-          align: 'end',
-          value: 'print',
-          sortable: false,
-        },
+        // {
+        //   text: 'ຂົນສົ່ງ',
+        //   align: 'center',
+        //   value: 'dynamic_customer.shipping.name',
+        //   sortable: true,
+        // },
+        // {
+        //   text: 'ການຊຳລະ',
+        //   align: 'center',
+        //   value: 'payment.payment_code',
+        //   sortable: true,
+        // },
+        // {
+        //   text: 'ຮ້ານ',
+        //   align: 'center',
+        //   value: 'location.name',
+        //   sortable: true,
+        // },
+        // {
+        //   text: 'ໄຣເດີ້',
+        //   align: 'center',
+        //   value: 'dynamic_customer.rider.name',
+        //   sortable: true,
+        // },
+        // {
+        //   text: 'ເຂດ',
+        //   align: 'center',
+        //   value: 'dynamic_customer.geography.description',
+        //   sortable: true,
+        // },
+        // {
+        //   text: 'ຜູ້ລົງທຸລະກຳ',
+        //   align: 'end',
+        //   value: 'user.cus_name',
+        //   sortable: false,
+        // },
+        // {
+        //   text: 'ເວລາລົງ',
+        //   align: 'end',
+        //   value: 'createdAt',
+        //   sortable: false,
+        // },
+        // {
+        //   text: 'ພິມບິນ',
+        //   align: 'end',
+        //   value: 'print',
+        //   sortable: false,
+        // },
         {
           text: 'ລາຍລະອຽດ',
           align: 'end',
@@ -418,13 +421,15 @@ export default {
     ...mapGetters(['currentSelectedLocation', 'cartOfProduct', 'currenctSelectedCategoryId', 'findAllProduct', 'currentSelectedCustomer', 'currentSelectedPayment', 'findSelectedTerminal', 'findAllTerminal', 'findAllLocation']),
     activeOrderHeaderList() {
       console.log(`TerminalSelcted ${this.terminalId}`);
-      const terminal = this.findAllTerminal.find(el => el['id'] == this.terminalId)
-      if (!terminal) {
-        return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
-      }
-      console.log(`Current location ${JSON.stringify(terminal)}`);
-      // return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
-      return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2 && el['locationId'] == terminal['locationId'])
+      return this.orderHeaderList;
+      // const terminal = this.findAllTerminal.find(el => el['id'] == this.terminalId)
+      // if (!terminal) {
+      //   return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
+      // }
+      // console.log(`Current location ${JSON.stringify(terminal)}`);
+      // // return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2)
+      // return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2 && el['locationId'] == terminal['locationId'])
+    
     },
     computedDateFormatted() {
       return this.formatDate(this.date)
@@ -432,7 +437,7 @@ export default {
     totalSale() {
       let total = 0
       this.activeOrderHeaderList.forEach((el) => {
-        total += el.total + el.dynamic_customer.rider_fee - el.dynamic_customer.cod_fee
+        total += el.total 
       })
       return total
       // return total
@@ -552,20 +557,20 @@ export default {
         endDate: this.date2,
         userId: this.userId
       }
-      let apiLine = 'api/sale/findByDate'
-      if (date.userId) {
-        apiLine = 'api/sale/findByDateAndUser'
-      }
+      let apiLine = 'api/reservation/findByDate'
+      // if (date.userId) {
+      //   apiLine = 'api/reservation/findByDateAndUser'
+      // }
       await this.$axios
         .get(apiLine, { params: { date } })
         .then((res) => {
           // ****** Clear Old Data
           this.orderHeaderList = []
           for (const iterator of res.data) {
-            if (iterator['dynamic_customer']) {
+            // if (iterator['dynamic_customer']) {
               iterator['print'] = iterator['id']
               this.orderHeaderList.push(iterator)
-            }
+            // }
           }
           console.log("====> " + this.orderHeaderList.length);
         })
