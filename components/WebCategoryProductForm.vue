@@ -8,35 +8,34 @@
             <v-card-title>
                 <v-chip class="ma-0" color="primary" label text-color="white">
                     <v-icon start>mdi-label</v-icon>
-                    {{ `ສິນຄ້າ: ${product.pro_name} ລາຄາ: ${formatNumber(product.pro_price)}` }}
+                    {{ `ກຸ່ມສິນຄ້າຫນ້າເວັບ: ${category.name} ` }}
                 </v-chip>
                 <!-- {{ JSON.stringify(product) }} -->
-
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
-                    <v-autocomplete item-text="name" item-value="id" :items="categoryList" label="ໝວດສິນຄ້າຫນ້າເວັບ*"
-                        v-model="selectCategoryId"></v-autocomplete>
+                    <v-autocomplete item-text="pro_name" item-value="id" :items="productList" label="ສິນຄ້າ*"
+                        v-model="selectProductId"></v-autocomplete>
 
                 </v-form>
                 <div>
                     <v-row justify="center" align="center">
-                        <v-col cols="12">
-                            <v-btn size="large" variant="outlined" @click="addProductToGroup" class="primary" rounded>
+                        <v-col cols="12"> <v-btn size="large" variant="outlined" @click="addProductToGroup"
+                                class="primary" rounded>
                                 <span class="mdi mdi-note-plus-outline"></span>
-                                ເພີ່ມກຸ່ມ
+                                ເພີ່ມສິນຄ້າເຂົ້າກຸ່ມ
                             </v-btn>
                         </v-col>
                         <v-col cols="12">
-                        <v-divider></v-divider>
-                        <div class="mx-2">ກຸ່ມສິນຄ້າຫນ້າເວັບ ທີ່ເລືອກ</div>
-                        <v-divider></v-divider>
-                    </v-col>
+                            <v-divider></v-divider>
+                            <div class="mx-2">ສິນຄ້າ ທີ່ເລືອກ</div>
+                            <v-divider></v-divider>
+                        </v-col>
                     </v-row>
                     <v-row no-gutters>
-                        <v-chip v-for="group in localProduct.webProductGroups" :key="group.id" class="ma-2"
-                            color="warning" variant="outlined" @click="removeProductFromGroup(group)">
-                            {{ group.id }} - {{ group.name }}
+                        <v-chip v-for="product in localCategory.products" :key="product.id" class="ma-2" color="warning"
+                            variant="outlined" @click="removeProductFromGroup(product)">
+                            {{ product.id }} - {{ product.pro_name }}
                         </v-chip>
                     </v-row>
                 </div>
@@ -59,16 +58,20 @@
 import { swalSuccess, swalError2, getFormatNum } from '~/common'
 export default {
     props: {
-        product: {
+        category: {
             type: Object,
             require: true,
         },
+        isCreate: {
+            type: Boolean,
+            require: true,
+        }
     },
     data() {
         return {
-            categoryList: [],
-            selectCategoryId: null,
-            localProduct: this.product,
+            productList: [],
+            selectProductId: null,
+            localCategory: this.category,
             isloading: false,
             nameRules: [
                 value => !!value || 'Name is required',
@@ -85,13 +88,11 @@ export default {
     },
     methods: {
         async commitRecord() {
-            if (this.$refs.form.validate() && !this.isloading) {
-                // Implement form submission logic here
+            if (!this.isloading) {
                 this.isloading = true
-                let api = this.isCreate ? 'api/webproductgroup/create' : `api/webproductgroup/product_set_groups/${this.product.id}`
-                console.log("API => ", api);
+                let api = this.isCreate ? 'api/webproductgroup/create' : `api/webproductgroup/update/${this.localCategory.id}`
                 if (this.isCreate) {
-                    await this.$axios.post(api, this.localProduct).then(response => {
+                    await this.$axios.post(api, this.localCategory).then(response => {
                         this.refreshData()
                         this.$emit('close-dialog')
                         return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
@@ -101,8 +102,9 @@ export default {
                         return swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ');
                     })
                 } else {
-                    this.localProduct.groupList = this.localProduct.webProductGroups
-                    await this.$axios.put(api, this.localProduct).then(response => {
+                    console.log(`update category product`);
+                    this.localCategory.productList = this.localCategory.products
+                    await this.$axios.put(api, this.localCategory).then(response => {
                         this.refreshData()
                         this.$emit('close-dialog')
                         return swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
@@ -120,30 +122,30 @@ export default {
         },
         addProductToGroup() {
             console.log(`Add product to group handler`);
-            if (!this.selectCategoryId) return
-            const newGroup = this.categoryList.find(el => el.id == this.selectCategoryId)
+            if (!this.selectProductId) return
+            const newGroup = this.productList.find(el => el.id == this.selectProductId)
             console.log(`Authority ${newGroup.id}`);
-            if (this.localProduct.webProductGroups.length == 0) {
+            if (this.localCategory.products.length == 0) {
                 console.log(`TEHERE IS NO TERMINAL`);
-                this.localProduct.webProductGroups.push(newGroup)
-            } else if (this.localProduct.webProductGroups == 'undefined') {
-                this.localProduct.webProductGroups.push(newGroup)
+                this.localCategory.products.push(newGroup)
+            } else if (this.localCategory.products == 'undefined') {
+                this.localCategory.products.push(newGroup)
             } else {
-                const group = this.localProduct.webProductGroups.find(el => el.id == this.selectCategoryId)
+                const group = this.localCategory.products.find(el => el.id == this.selectProductId)
                 console.log(`ADD TERMINAL ${group}`)
-                if (!group) this.localProduct.webProductGroups.push(newGroup)
+                if (!group) this.localCategory.products.push(newGroup)
             }
         },
         removeProductFromGroup(group) {
             console.log(`Remove product to group handler`);
-            const idx = this.localProduct.webProductGroups.indexOf(group)
-            this.localProduct.webProductGroups.splice(idx, 1);
+            const idx = this.localCategory.products.indexOf(group)
+            this.localCategory.products.splice(idx, 1);
         },
         async loadEntry() {
             console.log(`===> Update form record load`);
-            await this.$axios.get(`api/webproductgroup/find`).then(response => {
-                this.categoryList = response.data
-                this.selectCategoryId = this.categoryList[0]['id']
+            await this.$axios.get(`api/product/find`).then(response => {
+                this.productList = response.data
+                this.selectProductId = this.productList[0]['id']
             }).catch(error => {
                 console.log("Cannot fetch data " + error);
             })

@@ -287,6 +287,7 @@ export default {
             valid: false,
             category: [],
             formData: {
+                productId: null,
                 pro_category: 1001,
                 pro_id: null,
                 pro_name: '',
@@ -447,6 +448,7 @@ export default {
                                 }
                             })
                     this.formData = {
+                        productId: el.id,
                         pro_category: el.pro_category,
                         pro_id: el.pro_id,
                         pro_name: el.pro_name,

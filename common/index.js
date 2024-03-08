@@ -379,7 +379,7 @@ font-family: 'DM Sans';
 
 export const hostName = () => {
   // Create a new Date object with the same year and month as the input date, but with day set to 1
-  // const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
+  // const baseURL = 'http://192.168.1.4:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://192.168.8.112:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://192.168.1.8:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 

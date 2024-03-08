@@ -1,131 +1,303 @@
 <template>
-    <div>
-        <v-container>
-            <v-row>
-                <v-col cols="12" sm="4">
-                    <v-hover v-slot="{ hover }" open-delay="200">
-                        <v-card :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }">
-                            <router-link :to="`/product/${product.id}`">
-                                <v-img :src="'https://nodejsclusters-99563-0.cloudclusters.net/' + product.img_path" alt=""
-                                    class="" />
-                            </router-link>
-                        </v-card>
+    <div class="mr-16 ml-16" style="background-color: white;" v-if="productDetail">
+        <!-- <v-card class="pa-6 rounded-lg"> -->
+        <v-row>
+            <v-breadcrumbs :items="items">
+                <template v-slot:divider>
+                    <v-icon>mdi-forward</v-icon>
+                </template>
+            </v-breadcrumbs>
+        </v-row>
+        <v-row no-gutters class="mt-2">
+            <v-col cols="12" sm="7">
+                <v-row no-gutters>
+                    <v-col cols="12" sm="3">
+                        <v-list>
+                            <v-list-item v-for="(image, index) in productDetail.images" :key="index">
+                                <v-img height="100px" :src="host + '/' + image.img_path" alt="Thumbnail Image"
+                                    aspect-ratio="1" @click="selectedThumbnail = index" :class="{
+        'selected-thumbnail': selectedThumbnail === index,
+    }" />
+                            </v-list-item>
+                        </v-list>
+                    </v-col>
+                    <v-col cols="12" sm="9" class="mt-2">
+                        <v-carousel hide-delimiters v-model="selectedThumbnail" height="100%">
+                            <v-carousel-item v-for="(image, index) in productDetail.images" :key="index" :value="index">
+                                <img :src="host + '/' + image.img_path" width="100%" height="600px" alt="Main Image"
+                                    contain />
+                            </v-carousel-item>
+                        </v-carousel>
+                    </v-col>
+                </v-row>
+            </v-col>
+            <v-col cols="12" sm="5">
+                <div class="ml-2">
+                    <h3 class="">
+                        <!-- Mi Monitor ໜ້າຈໍຄອມ 34 inch Curved Gaming 2K 144Hz Xiaomi -->
+                        {{ productDetail.pro_name }}
+                    </h3>
+                    <div class="price primary--text mt-4 mb-2">
+                        <h3> ລາຄາ: {{ formatPrice(productDetail.pro_price) }}</h3>
+                    </div>
+                    <v-divider class="mb-6 mt-6"></v-divider>
+                    <div class="">
+                        <v-row>
+                            <v-col cols="6">
+                                <v-list>
+                                    <v-subheader>ຂະໜາດ:</v-subheader>
+                                    <v-list-item v-for="(size, index) in sizes" :key="index"
+                                        :class="{ 'active-siz': index === activeSizeIndex }" @click="selectSize(index)">
+                                        {{ size }}
+                                    </v-list-item>
+                                </v-list>
+                            </v-col>
 
-                    </v-hover>
-                </v-col>
-                <v-col cols="12" sm="8">
-                    <h1 class="grey--text text-darken-3 mt-5">{{ this.product.pro_name }}</h1>
-                    <v-row>
-                        <v-col cols="12" sm="2">
-                            <v-rating :value="product.sale_count / 2" color="amber" dense half-increments readonly
-                                size="14">
+                            <v-col cols="6">
+                                <v-list>
+                                    <v-subheader>ສີ:</v-subheader>
+                                    <v-list-item v-for="(color, index) in colors" :key="index"
+                                        :class="{ 'active-col': index === activeColorIndex }"
+                                        @click="selectColor(index)">
+                                        <v-avatar size="20" :class="`color-box ${color}`"></v-avatar>
+                                    </v-list-item>
+                                </v-list>
+                            </v-col>
+                        </v-row>
+                    </div>
+                    <v-divider class="mb-6 mt-6"></v-divider>
+                    <div class="buy-product">
+                        <div class="wrapper">
+                            <button class="btn btn--minus" @click="changeQuantity('-1')" type="button" name="button">
+                                -
+                            </button>
+                            <input class="quantity" type="text" name="name" :value="quantity" />
+                            <button class="btn btn--plus" @click="changeQuantity('1')" type="button" name="button">
+                                +
+                            </button>
+                        </div>
 
-                            </v-rating>
-
+                        <v-col cols="12" sm="6">
+                            <div class="mt-6">
+                                <v-btn block class="ml-n2" color="primary" @click="takeOrder"> ຊື້ເລີຍ</v-btn>
+                            </div>
                         </v-col>
-                        <v-col cols="12" sm="3">
-                            <span class="gray--text ml-n7">
-                                {{ product.sale_count * 10 }}%
-                            </span>
-                        </v-col>
 
-                    </v-row>
-                    <p class="mt-5 grey--text text--darken-3 subheader">{{ product.pro_name }}</p>
-                    <div class="mt-5">
-                        <!-- <h2 class="mt-5 grey--text text--darken-3">Featured Cast</h2> -->
-                        <div class="">
-                            <h3>{{ product.outlet_name }}</h3>
-                            <span class="grey--text">{{ getFormatNum(product.pro_price) }}</span>
+                        <div class="mt-6">
+                            <v-row align="center" class="social-link">
+                                <v-col cols="12">
+                                    <span>ແບ່ງປັນຜ່ານ:</span>
+                                    <v-btn icon x-large color="blue" @click="shareViaFacebook">
+                                        <v-icon>mdi-facebook</v-icon>
+                                    </v-btn>
+                                    <v-btn icon x-large color="green" @click="shareViaWhatsapp">
+                                        <v-icon>mdi-whatsapp</v-icon>
+                                    </v-btn>
+                                    <!-- <v-btn icon x-large color="purple">
+                                        <v-icon>mdi-instagram</v-icon>
+                                    </v-btn> -->
+                                </v-col>
+                            </v-row>
                         </div>
                     </div>
-                    <v-dialog v-model="dialog" persistent max-width="800px">
-                        <v-card>
-                            <v-card-title>
-                                <span class="headline">{{ product.pro_desc }}</span>
-                            </v-card-title>
-                        </v-card>
-                    </v-dialog>
-                    <v-btn tile color="error" class="ml-2">
-                        <v-icon left>mdi-heart</v-icon>Favorite
-                    </v-btn>
-                </v-col>
-            </v-row>
-            <v-divider class="mt-2"></v-divider>
-            <!-- <Cast :casts="product.credits.cast"  ss /> -->
-            <v-divider class="mt-2"></v-divider>
-            <!-- <Images :images="'https://nodejsclusters-99563-0.cloudclusters.net/' +product.pro_image_path" /> -->
-        </v-container>
+                </div>
+            </v-col>
+        </v-row>
+        <v-row no-gutters>
+            <v-col class="mt-4 pa-6" cols="12" sm="6">
+                <v-list-item-title>
+                    <h3>Specification</h3>
+                </v-list-item-title>
+                <span>
+                    <!-- Brand: No <br />
+                        Model: Champion Foosball Table <br />Playfield: 20mm thickness MDF
+                        with HPL on both sides (Two support bars at the back) <br />
+                        Long side aprons: 38mm thickness, 40cm wide MDF with HPL on both
+                        sides <br />
+                        Legs: 100x80mm rectangle shaped hollow Metal legs <br />
+                        Player rods: 3.5mm thickness, Ꝋ15.8mm hollow and Seamless
+                        High-strength steel rods <br />
+                        Balls: 8pcs <br />
+                        Package Dimension: 144 x 75.6 x 90 cm <br />
+                        Product Weight: 99kg Package <br />
+                        Weight: 108kg -->
+                    {{ productDetail.pro_desc }}
+                </span>
+            </v-col>
+            <v-col class="mt-4 pa-6" cols="12" sm="6">
 
-
+                <!-- <v-list-item-title>
+                        <h3>Description</h3>
+                    </v-list-item-title>
+                    <span class="">ໂຕະເຕະບານ ລຸ້ນທີ່ໃຊ້ແຂ່ງຂັນ ສຳລັບຈັດກິດຈະກຳແຂ່ງຂັນ ຫຼື ຜ່ອນຄ່າຍ
+                        ຝຶກທັດສະການຫຼິ້ນບານໃຫ້ຄ່ອງແຄ້ວ ແລະ ມີສະໄຕສ ສາມາດຫຼິ້ນໄດ້ພ້ອມກັນ 4
+                        ຄົນ <br />
+                        ວັດສະດຸເຮັດຈາກໄມ້ທີ່ແຂງແກ່ນທົນທານ <br />
+                        ນ້ຳໜັກ 99 kg <br />
+                        ຂະໜາດ 144 x 75.6 x 90 cm <br />
+                        ລູກບານ 8 ໜ່ວຍ</span> -->
+            </v-col>
+        </v-row>
+        <!-- </v-card> -->
     </div>
 </template>
-<!-- card_count: el.card_count,
-categ_name: el.categ_name,
-cost_price: el.cost_price,
-id: el.id,
-img_name: el.img_name,
-img_path: el.img_path,
-outlet: el.outlet,
-outlet_name: el.outlet_name,
-pro_category: el.pro_category,
-pro_desc: el.pro_desc,
-pro_id: el.pro_id,
-pro_image_path: el.pro_image_path,
-pro_name: el.pro_name,
-pro_price: el.pro_price,
-pro_status: el.pro_status,
-retail_cost_percent: el.retail_cost_percent,
-sale_count: el.sale_count,
-stock_count: el.stock_count, -->
 
-<style>
-.iframe-container {
-    overflow: hidden;
-    padding-top: 56.25%;
-    position: relative;
-}
-
-.iframe-container iframe {
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-</style>
-    
 <script>
+import { hostName, getFormatNum } from '~/common'
 export default {
-    //   middleware: 'auths',
-    layout: "products",
+    layout: "web",
+    // async mounted() {
+    //     // console.log('FORMDATA ID: ' + this.formData.pro_id)
+    //     // this.pro_id = this.$route.params.id
+    //     // this.formData.pro_id = this.$route.params.id
+    //     console.log(`Mounted: ${this.$route.params.id}`)
+    //     await this.loadProductById()
+    //     // this.$route.params.id && this.fetchProId(this.$route.params.id)
+    // },
+    async created() {
+        // this.loadEntry();
+        await this.loadProductById()
+    },
     data() {
         return {
-            product: '',
-            dialog: false,
+            items: [
+                {
+                    text: 'Home',
+                    disabled: false,
+                    href: '/',
+                },
+                // {
+                //     text: 'Category 1',
+                //     disabled: false,
+                //     href: 'breadcrumbs_link_1',
+                // },
+                {
+                    text: 'Product 2',
+                    disabled: true,
+                    href: 'breadcrumbs_link_2',
+                },
+            ],
+            sizes: ['M', 'L', 'XL'],
+            activeSizeIndex: 0, // Set the initial selected size (M)
+            colors: ['yellow', 'pink', 'cyan'],
+            activeColorIndex: 0, // Set the initial selected color (yellow)
+            quantity: 1, // Initial quantity value
+            productImages: [
+                'https://plus.unsplash.com/premium_photo-1675896084254-dcb626387e1e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
+                'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
+                'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
+                'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
+                'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
+                'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2R1Y3R8ZW58MHx8MHx8fDA%3D',
+            ],
+            productDetail: null,
+            selectedThumbnail: 0, // Initially selected thumbnail
         }
     },
-    mounted() {
-        // await this.getData()
-        this.product = this.$store.getters.findSelectedProductDetail;
-        console.log(this.product);
+
+    methods: {
+        whatsappTrigger(productLinkId) {
+            // TODO: Get whatsapp function done
+        },
+        shareViaFacebook() {
+            const urlToShare = encodeURIComponent(`http://www.woody3.la/product/${this.$route.params.id}`);
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${urlToShare}`;
+            window.open(facebookUrl, '_blank');
+        },
+        shareViaWhatsapp() {
+            const urlToShare = encodeURIComponent(`http://www.woody3.la/product/${this.$route.params.id}`);
+            const text = encodeURIComponent("Here's the text I want to share via WhatsApp!");
+            const url = `https://wa.me/?text=${urlToShare}`;
+            window.open(url, '_blank');
+        },
+        takeOrder() {
+            const urlToShare = encodeURIComponent(`http://www.woody3.la/product/${this.$route.params.id}`);
+            const text = encodeURIComponent("ສະບາຍດີ ສົນໃຈສິນຄ້າ");
+            const url = `https://wa.me/?text=ສະບາຍດີ ສົນໃຈສິນຄ້າ\n ${urlToShare}`;
+            window.open(url, '_blank');
+        },
+        formatPrice(price) {
+            console.log(`Price ${getFormatNum(price)}`);
+            return getFormatNum(price)
+        },
+        selectSize(index) {
+            this.activeSizeIndex = index
+            // You can add logic to handle the selected size here
+        },
+        selectColor(index) {
+            this.activeColorIndex = index
+            // You can add logic to handle the selected color here
+        },
+
+        changeQuantity: function (num) {
+            this.quantity += +num
+            console.log(this.quantity)
+            !isNaN(this.quantity) && this.quantity > 0
+                ? this.quantity
+                : (this.quantity = 0)
+        }, async loadProductById() {
+            this.isLoading = true
+            await this.$axios
+                .get(`/product/find/${this.$route.params.id}`)
+                .then((res) => {
+                    this.productDetail = res.data
+                    console.log("all data1: ", this.productDetail);
+                })
+                .catch((er) => {
+                    console.log('Data: ' + er)
+                })
+        },
     },
     computed: {
-        dateNow() {
-            const sqlDatetimeNow = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
-            const fdate = sqlDatetimeNow.substring(0, 11);
-            // const tdate=sqlDatetimeNow.substring(0,11);
-            return fdate;
-        },
-
-    },
-    methods: {
-        getFormatNum(val) {
-            return new Intl.NumberFormat().format(val)
-        },
-
+        mainImage() {
+            return this.productImages[this.selectedThumbnail]
+        }, host() {
+            return hostName()
+        }
     },
 }
 </script>
 
+<style>
+.active-col {
+    background-color: #c0ffec;
+}
 
+.active-siz {
+    background-color: #c0ffec;
+}
+
+/* Product Quantity */
+.wrapper {
+    height: 40px;
+    display: flex;
+}
+
+.quantity {
+    border: none;
+    text-align: center;
+    width: 70px;
+
+    font-size: 16px;
+    color: #43484d;
+    font-weight: 300;
+    border: 1px solid #e1e8ee;
+}
+
+.btn {
+    border: 1px solid #e1e8ee;
+    width: 50px;
+    background-color: #e1e8ee;
+    /*   border-radius: 6px; */
+    cursor: pointer;
+}
+
+button:focus,
+input:focus {
+    outline: 0;
+}
+
+.selected-thumbnail {
+    border: 2px solid #3498db;
+}
+</style>

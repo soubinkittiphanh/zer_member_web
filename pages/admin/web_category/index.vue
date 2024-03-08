@@ -18,6 +18,10 @@
       <category-form :is-create="isCreate" :record-id="entrySelectedId" @close-dialog="handleEvent"
         @reload-data="loadData" :key="componentKey" />
     </v-dialog>
+    <v-dialog v-model="categoryProduct" max-width="600px">
+      <category-product-form :category="selectedCategory" :isCreate="false" @close-dialog="categoryProduct = false"
+        @refresh-data="loadData" :key="componentKey" />
+    </v-dialog>
     <v-dialog v-model="dialog" width="500" persistent>
       <dialog-classic-message :message="message" @closedialog="message = null">
       </dialog-classic-message>
@@ -61,7 +65,16 @@
           </v-btn>
         </template>
 
+        <template v-slot:[`item.addProduct`]="{ item }">
+          <v-btn color="primary" text @click="categoryProductFormAction(true, item)">
+            <i class="fa-solid fa-plus"></i>
+          </v-btn>
+        </template>
+
       </v-data-table>
+      <v-card-text>
+        
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -69,10 +82,14 @@
 <script>
 import { swalSuccess, swalError2 } from '~/util/myUtil'
 import CategoryForm from '@/components/WebCategoryForm.vue';
+import CategoryProductForm from '@/components/WebCategoryProductForm.vue';
+import Draggable from 'vuedraggable'
 export default {
   middleware: 'auths',
   components: {
-    CategoryForm
+    CategoryForm,
+    CategoryProductForm,
+    Draggable
   },
   data: () => ({
     guidelineDialog: false,
@@ -84,9 +101,11 @@ export default {
     componentKey: 1,
     isCreate: false,
     formDialog: false,
+    categoryProduct: false,
     message: '',
     search: '',
     showActive: false,
+    selectedCategory: null,
     headers: [
       {
         text: 'RECID',
@@ -98,9 +117,15 @@ export default {
       { text: 'ຊື່ (ສາກົນ)', align: 'center', value: 'g_name' },
       { text: 'ຫມາຍເຫດ', align: 'center', value: 'remark' },
       {
-        text: 'ຟັງຊັ່ນ',
+        text: 'ແກ້ໄຂ',
         align: 'end',
         value: 'edit',
+        sortable: false,
+      },
+      {
+        text: 'ເພີ່ມສິນຄ້າ',
+        align: 'end',
+        value: 'addProduct',
         sortable: false,
       },
     ],
@@ -118,10 +143,13 @@ export default {
     }
   },
   methods: {
-
+    onEnd(event) {
+      console.log('Drag ended:', event);
+    },
     handleEvent() {
       this.formDialog = false;
     },
+
 
 
     async loadData() {
@@ -144,6 +172,12 @@ export default {
       this.isCreate = true
       this.formDialog = true;
     },
+    categoryProductFormAction(action, category) {
+      this.componentKey += 1;
+      this.selectedCategory = category
+      this.categoryProduct = action
+
+    },
     editItem(item) {
       console.log(`******UPDATE RECORD******`);
       this.componentKey += 1;
@@ -154,3 +188,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.draggable-item {
+  cursor: move;
+
+}
+</style>
