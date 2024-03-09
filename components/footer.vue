@@ -32,7 +32,7 @@
         <v-divider></v-divider>
 
         <v-card-text class="white--text">
-          <strong>Copyright © {{ new Date().getFullYear() }} — Dcommerce. All rights
+          <strong>Copyright © {{ new Date().getFullYear() }} — Woody. All rights
             reserved.
           </strong>
         </v-card-text>

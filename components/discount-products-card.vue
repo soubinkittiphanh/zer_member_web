@@ -47,22 +47,6 @@ import { hostName, getFormatNum } from '~/common'
 export default {
   name: 'discount-products-card',
   props: {
-    // productId: {
-    //   type: Number,
-    //   require: true,
-    // },
-    // productImage: {
-    //   type: String,
-    //   require: true,
-    // },
-    //  productName: {
-    //   type: String,
-    //   require: true,
-    // },
-    // productPrice: {
-    //   type: String,
-    //   require: true,
-    // },
     product: {
       type: Object,
       require: true,

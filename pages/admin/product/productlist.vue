@@ -165,7 +165,7 @@ export default {
       timer: null,
       headers: [
         {
-          text: 'recid',
+          text: 'RECID',
           align: 'center',
           value: 'id',
         },
@@ -174,11 +174,11 @@ export default {
           align: 'center',
           value: 'co_name',
         },
-        {
-          text: 'ໄອດີ',
-          align: 'center',
-          value: 'pro_id',
-        },
+        // {
+        //   text: 'ໄອດີ',
+        //   align: 'center',
+        //   value: 'pro_id',
+        // },
         { text: 'ຊື່ສິນຄ້າ', align: 'center', value: 'pro_name' },
         // { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
         { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },

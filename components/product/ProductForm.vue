@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <v-dialog v-model="isLoading" hide-overlay persistent width="300">
@@ -43,8 +42,9 @@
                             <v-col cols="4" sm="6" md="4">
                                 <v-row>
                                     <v-col cols="6" sm="6" md="6">
-                                        <v-text-field v-model="formData.pro_price" :counter="10" :rules="rules.priceRule"
-                                            label="ລາຄາ*" type="number" required></v-text-field>
+                                        <v-text-field v-model="formData.pro_price" :counter="10"
+                                            :rules="rules.priceRule" label="ລາຄາ*" type="number"
+                                            required></v-text-field>
 
                                     </v-col>
                                     <v-col cols="6" sm="6" md="6">
@@ -76,12 +76,14 @@
                             </v-col>
                             <v-col cols="4" sm="6" md="4">
                                 <v-file-input :rules="rules.imageRule" ref="filesfield" multiple
-                                    accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
-                                    prepend-icon="mdi-camera" label="ຮູບພາບຫລາຍພາບ" @change="onFilesChange"></v-file-input>
+                                    accept="image/png, image/jpeg, image/bmp, image/webp" placeholder="Pick an avatar"
+                                    prepend-icon="mdi-camera" label="ຮູບພາບຫລາຍພາບ"
+                                    @change="onFilesChange"></v-file-input>
+
                             </v-col>
                             <v-col cols="4" sm="6" md="4">
-                                <v-text-field v-model="formData.minStock" :counter="10" type="number" :rules="rules.minRule"
-                                    label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
+                                <v-text-field v-model="formData.minStock" :counter="10" type="number"
+                                    :rules="rules.minRule" label="ສຕັອກຂັ້ນຕ່ຳ*" required></v-text-field>
                             </v-col>
                         </v-row>
                         <!-- Row 4 -->
@@ -95,8 +97,8 @@
 
                             </v-col>
                             <v-col cols="4" sm="6" md="4">
-                                <v-autocomplete item-text="name" item-value="id" :items="unitList" label="ຫົວຫນ່ວຍນັບສາງ*"
-                                    v-model="formData.stockUnitId"></v-autocomplete>
+                                <v-autocomplete item-text="name" item-value="id" :items="unitList"
+                                    label="ຫົວຫນ່ວຍນັບສາງ*" v-model="formData.stockUnitId"></v-autocomplete>
 
                             </v-col>
                         </v-row>
@@ -183,10 +185,10 @@
         </v-card>
     </div>
 </template>
-  
+
 <script>
 // import { swalSuccess, swalError2, toastNotification, confirmSwal } from '~/util/myUtil'
-import { swalSuccess, swalError2,confirmSwal, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
+import { swalSuccess, swalError2, confirmSwal, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 import ImagePreviewMixin from '../../pages/product/index.vue'
 import { hostName } from '../../common/index'
 import { mapActions, mapGetters } from 'vuex'
@@ -337,7 +339,7 @@ export default {
         },
         generateBarcodeImage(barcodeValue) {
             // Get the canvas element using the ref attribute
-            if(!barcodeValue) return;
+            if (!barcodeValue) return;
             const canvas = this.$refs.barcodeCanvas;
             console.log(`.....Canvas logger.....`);
             console.log(canvas);
@@ -467,7 +469,7 @@ export default {
                         pro_image: image,
                         isActive: el.isActive,
                     }
-                    if(!this.formData.barCode){
+                    if (!this.formData.barCode) {
                         // ****** prevent error temporary *****
                         this.formData.barCode = '';
                     }
@@ -585,9 +587,9 @@ export default {
     },
 }
 </script>
+
 <style scoped>
 .my-forn {
     font-weight: bo;
 }
 </style>
-  

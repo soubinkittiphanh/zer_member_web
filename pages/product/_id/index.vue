@@ -1,5 +1,5 @@
 <template>
-    <div class="mr-16 ml-16" style="background-color: white;" v-if="productDetail">
+    <div style="background-color: white;" v-if="productDetail">
         <!-- <v-card class="pa-6 rounded-lg"> -->
         <v-row>
             <v-breadcrumbs :items="items">
@@ -8,23 +8,32 @@
                 </template>
             </v-breadcrumbs>
         </v-row>
-        <v-row no-gutters class="mt-2">
-            <v-col cols="12" sm="7">
-                <v-row no-gutters>
-                    <v-col cols="12" sm="3">
-                        <v-list>
+        <v-row no-gutters class="mt-2" >
+            <v-col cols="12" sm="7" >
+                <v-row no-gutters justify="center">
+                    <v-col cols="12" sm="12" align-self="start">
+                        <!-- <v-list>
                             <v-list-item v-for="(image, index) in productDetail.images" :key="index">
-                                <v-img height="100px" :src="host + '/' + image.img_path" alt="Thumbnail Image"
+                                <v-img height="20px" width="20px" :src="host + '/' + image.img_path" alt="Thumbnail Image"
                                     aspect-ratio="1" @click="selectedThumbnail = index" :class="{
         'selected-thumbnail': selectedThumbnail === index,
     }" />
                             </v-list-item>
-                        </v-list>
+                        </v-list> -->
+                        <v-row no-gutters>
+                            <!-- <v-col v-for="(image, index) in productDetail.images" :key="index"> -->
+                                <v-card v-for="(image, index) in productDetail.images" :key="index">
+                                    <v-img  height="50" width="50"  :src="host + '/' + image.img_path"
+                                    alt="Thumbnail Image" aspect-ratio="1" @click="selectedThumbnail = index"
+                                    :class="{ 'selected-thumbnail': selectedThumbnail === index }" />
+                                </v-card>
+                            <!-- </v-col> -->
+                        </v-row>
                     </v-col>
-                    <v-col cols="12" sm="9" class="mt-2">
-                        <v-carousel hide-delimiters v-model="selectedThumbnail" height="100%">
+                    <v-col cols="10" sm="10" class="mt-2">
+                        <v-carousel hide-delimiters v-model="selectedThumbnail">
                             <v-carousel-item v-for="(image, index) in productDetail.images" :key="index" :value="index">
-                                <img :src="host + '/' + image.img_path" width="100%" height="600px" alt="Main Image"
+                                <img :src="host + '/' + image.img_path" height="100%" alt="Main Image"
                                     contain />
                             </v-carousel-item>
                         </v-carousel>
@@ -162,7 +171,7 @@ export default {
         return {
             items: [
                 {
-                    text: 'Home',
+                    text: 'ຫນ້າຫຼັກ',
                     disabled: false,
                     href: '/',
                 },
@@ -172,7 +181,7 @@ export default {
                 //     href: 'breadcrumbs_link_1',
                 // },
                 {
-                    text: 'Product 2',
+                    text: 'ສິນຄ້າ',
                     disabled: true,
                     href: 'breadcrumbs_link_2',
                 },
@@ -182,14 +191,6 @@ export default {
             colors: ['yellow', 'pink', 'cyan'],
             activeColorIndex: 0, // Set the initial selected color (yellow)
             quantity: 1, // Initial quantity value
-            productImages: [
-                'https://plus.unsplash.com/premium_photo-1675896084254-dcb626387e1e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
-                'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
-                'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
-                'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
-                'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D',
-                'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2R1Y3R8ZW58MHx8MHx8fDA%3D',
-            ],
             productDetail: null,
             selectedThumbnail: 0, // Initially selected thumbnail
         }
@@ -249,9 +250,7 @@ export default {
         },
     },
     computed: {
-        mainImage() {
-            return this.productImages[this.selectedThumbnail]
-        }, host() {
+        host() {
             return hostName()
         }
     },

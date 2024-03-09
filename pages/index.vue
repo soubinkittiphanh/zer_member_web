@@ -2,11 +2,12 @@
     <div>
 
         <div class="brands mb-4 mt-2">
-            <slider></slider>
+            <slider :imageList="imageList"></slider>
+            <!-- COUTN: {{ imageList.length }} -->
         </div>
-        <div class="brands mb-4 mt-2">
+        <!-- <div class="brands mb-4 mt-2">
             <brands></brands>
-        </div>
+        </div> -->
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
@@ -15,8 +16,8 @@
                 <v-row>
                     <v-list class="" style="margin-bottom: -10px">
                         <v-list-item>
-                            <v-avatar tile color="green rounded-pill" size="40" class="mr-2">
-                                <v-icon color="white">mdi-cash-minus</v-icon></v-avatar>
+                            <!-- <v-avatar tile color="green rounded-pill" size="40" class="mr-2">
+                                <v-icon color="white">mdi-cash-minus</v-icon></v-avatar> -->
                             <v-list-item-title>
                                 <h3>{{ `${category.name} ` }}</h3>
                             </v-list-item-title>
@@ -141,6 +142,17 @@ export default {
         host() {
             return hostName()
         },
+        imageList(){
+            const imageList = [];
+            for (const iterator of this.webCategoryList) {
+                for (const product of iterator['products']) {
+                    imageList.push(...product['images'])
+                }
+                
+            }
+            console.log(`Image ${JSON.stringify(imageList)}`);
+            return imageList;
+        }
 
 
     },
@@ -157,6 +169,7 @@ export default {
             // this.$router.push({ name: 'product-details', params: { id: productId } });
             this.$router.push({ path: `product/${productId}`});
         },
+
         async loadCategory() {
             try {
                 // this.isloading = true

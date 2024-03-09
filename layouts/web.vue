@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar app color="primary" dark height="100">
-      <v-toolbar-title class="ml-12" @click="goToHome">DCOMMERCE</v-toolbar-title>
+      <v-toolbar-title class="ml-12" @click="goToHome">WOODY3</v-toolbar-title>
       <v-spacer />
       <v-text-field dark v-model="search" clearable clear-icon="mdi-close" class="mt-6" prepend-inner-icon="mdi-magnify"
         dense outlined label="ຄົ້ນຫາ" placeholder="ຄົ້ນຫາ" solo-inverted />
@@ -13,27 +13,25 @@
     </v-app-bar>
     <!-- Secondary Menu Bar -->
     <!-- Secondary Menu Bar -->
-    <v-container>
-      <div class="brands mb-4 mt-2">
+    <!-- <v-container>
+      <div class="brands mb-4 mt-1">
         <v-row justify="center" style="background-color: #01532B;">
           <v-toolbar-items class="hidden-sm-and-down">
             <v-btn v-for="item in menuList" :key="item.text" text :to="item.path" style="font-size: large; ">
-              <!-- <v-icon left>{{ item.icon }}</v-icon> -->
               {{ item.text }}
             </v-btn>
           </v-toolbar-items>
         </v-row>
       </div>
-    </v-container>
+    </v-container> -->
 
-    <v-main style="background-color: rgb(235, 235, 235)">
-
-      <Nuxt class="py-2 px-3" />
+    <v-main style="background-color: rgb(235, 235, 235)" >
+      <Nuxt/>
     </v-main>
     <Footer />
   </v-app>
 </template>
-  
+
 <script>
 import MyFooter from '@/components/footer'
 import { hostName, getFormatNum } from '~/common'
@@ -84,7 +82,7 @@ export default {
   },
 }
 </script>
-  
+
 <style>
 .flexcol .v-btn__content {
   display: flex;
@@ -95,4 +93,3 @@ span {
   text-transform: capitalize;
 }
 </style>
-  

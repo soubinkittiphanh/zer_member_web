@@ -1,6 +1,5 @@
-
 <template>
-    <div style="background: #EFF2F9" class="ma-0">
+    <div style="background: #EFF2F9;border: 1px solid red;" class="ma-0">
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
@@ -56,7 +55,8 @@
                         <div class="row">
                             <div v-for="(item, index) in menusOverview" :key="index"
                                 class="col-12 col-md-4 col-sm-6 col-xs-6">
-                                <MenuOverview :title="item.title" :icon="item.icon" :path="item.path" :total="item.total">
+                                <MenuOverview :title="item.title" :icon="item.icon" :path="item.path"
+                                    :total="item.total">
                                 </MenuOverview>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
 
     </div>
 </template>
-  
+
 <script>
 import { generateColorShades, firstAndLastDateOfCurrentYear, getFirstDayOfMonth, today, getFormatNum } from '~/common'
 import CardOnTop from '~/components/dashboard/CardOnTop.vue'
@@ -756,4 +756,3 @@ export default {
 
 }
 </script>
-  
