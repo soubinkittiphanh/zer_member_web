@@ -28,8 +28,10 @@
             </v-chip>
             <!-- <v-row align-content="center"> -->
             <!-- <v-spacer></v-spacer> -->
-            <v-chip small label outlined class="ma-0 white--text" :color="product.stock_count > 0 ? 'green' : 'red'">
-              {{ product.stock_count > 0 ? "ພ້ອມສົ່ງ" : "ໝົດ" }}
+            <!-- <v-chip small label outlined class="ma-0 white--text" :color="product.stock_count > 0 ? 'green' : 'red'"> -->
+            <v-chip small label outlined class="ma-0" color="primary">
+              <!-- {{ product.stock_count > 0 ? "ພ້ອມສົ່ງ" : "ໝົດ" }} -->
+              {{  "ພ້ອມສົ່ງ"  }}
             </v-chip>
 
             <!-- </v-row> -->

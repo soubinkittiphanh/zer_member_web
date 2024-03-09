@@ -2,7 +2,7 @@
   <div class="ma-0">
     <v-carousel ref="carousel">
       <v-carousel-item
-        src="https://ae01.alicdn.com/kf/S102093bda41a46399cafbc582e4b4a44E/Training-GYM.jpg_80x80.jpg_.webp">
+        :src="sliderV1">
       </v-carousel-item>
       <v-carousel-item src="https://www.xn--72cfaa3c9df7evc7a4a6gf0c0dm.com/wp-content/uploads/2022/06/bikini.jpg"
         cover>
@@ -39,6 +39,7 @@
 <script>
 import { hostName, getFormatNum } from '~/common'
 import XiaomiImage from '~/assets/img/products/product_1.jpg'
+import SliderV1 from '~/assets/img/slider/SliderV1.jpg'
 export default {
   name: 'slider',
   props: {
@@ -55,6 +56,7 @@ export default {
   data() {
     return {
       xiaomiImage: XiaomiImage,
+      sliderV1: SliderV1,
       // imageList: XiaomiImage,
     }
   },
