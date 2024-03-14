@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="text-center">
         <div>
@@ -17,8 +15,8 @@
             <v-card-title>
                 <v-layout row wrap>
                     <v-col cols="6">
-                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
+                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false"
+                            transition="scale-transition" offset-y max-width="290px" min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format"
                                     persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
@@ -27,8 +25,8 @@
                             <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
                         </v-menu>
 
-                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
+                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false"
+                            transition="scale-transition" offset-y max-width="290px" min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format"
                                     persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
@@ -36,23 +34,52 @@
                             </template>
                             <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
-                        <v-btn @click="triggerDialog" class="primary" size="large" variant="outlined" rounded> ສ້າງລາຍຈ່າຍ </v-btn>
+                        <v-btn @click="triggerDialog" class="primary" size="large" variant="outlined" rounded>
+                            ສ້າງລາຍຈ່າຍ </v-btn>
                     </v-col>
                     <v-col cols="6">
-                        <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
+                        <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line
+                            hide-detailsx />
                         <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line
                             hide-detailsx />
-                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
+                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ
+                        </v-btn>
                     </v-col>
                 </v-layout>
             </v-card-title>
             <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
+            <v-card-text>
+                <table border="1" v-if="paymentCurrencyGrouping.length>0">
+                    <thead>
+                        <tr>
+                            <th>ສະກຸນເງິນ</th>
+                            <th>ລວມຍອດ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="txn in paymentCurrencyGrouping" :key="txn['currency']">
+                            <td>{{ txn.currency }}</td>
+                            <td style="text-align: right;">{{ numberWithFormat(txn.amount) }}</td>
+                        </tr>
+                        <!-- <tr>
+                            <td>February</td>
+                            <td>$1500</td>
+                        </tr> -->
+                        <!-- Add more rows for other months -->
+                        <!-- <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>$2500</strong></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+            </v-card-text>
             <v-data-table v-if="txnList" :headers="headers" :search="search" :items="txnList">
                 <template v-slot:[`item.function`]="{ item }">
 
                     <v-btn color="primary" text @click="editItem(item)
-                    wallet = true
-                        ">
+            wallet = true
+                ">
                         <i class="fa-regular fa-pen-to-square"></i>
                     </v-btn>
                 </template>
@@ -169,6 +196,32 @@ export default {
             this.isloading = false
         }
 
+    },
+    computed: {
+        paymentCurrencyGrouping() {
+            // Object to store the sum of transactions for each currency code
+            const sumByCurrency = {};
+
+            // Loop through each transaction
+            this.txnList.forEach(transaction => {
+                const { totalAmount, currency } = transaction;
+                // If the currency code doesn't exist in the sumByCurrency object, initialize it to 0
+                if (!sumByCurrency[currency]) {
+                    sumByCurrency[currency] = 0;
+                }
+                // Accumulate the total amount for the currency code
+                sumByCurrency[currency] += totalAmount;
+            });
+
+            // Display the sum for each currency code
+            const listOfCurrency = []
+            for (const currencyCode in sumByCurrency) {
+                console.log(`Total for ${currencyCode}: ${sumByCurrency[currencyCode]}`);
+                listOfCurrency.push({ 'currency': currencyCode, 'amount': sumByCurrency[currencyCode] })
+            }
+
+            return listOfCurrency;
+        }
     }
 }
 </script>

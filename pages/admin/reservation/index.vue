@@ -7,10 +7,6 @@
     <v-dialog v-model="isloading" hide-overlay persistent width="300">
       <loading-indicator> </loading-indicator>
     </v-dialog>
-    <!-- <v-dialog v-model="dialogOrderDetail" max-width="1024" >
-      <OrderDetailPos :key="componentKey" :header="selectedOrder" @close-dialog="dialogOrderDetail = false">
-      </OrderDetailPos>
-    </v-dialog> -->
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <ReservationForm @reload="loadData()
       dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
@@ -75,6 +71,15 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
+        <div>
+          <v-row>
+            <v-col cols="12">
+              <div ref="ganttContainer">
+                
+              </div>
+            </v-col>
+          </v-row>
+        </div>
         <v-layout row wrap>
           <v-row>
             <v-col cols="6" lg="6">
@@ -84,27 +89,15 @@
                   'amount': getFormatNum(activeOrderHeaderList.length),
                   // 'sale': getFormatNum(totalSale - totalDiscount),// Old version 
                   'sale': getFormatNum(totalSale), // The total field is already exclude discount
-                  // 'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  // 'gross': getFormatNum(totalSale - totalDiscount)
-
+                  
                 }">
 
               </order-sumary-card-pos>
             </v-col>
-            <!-- <v-col cols="6" lg="6">
-              <order-sumary-card i :orderDetail="this.unpaidCodOrder">
-
-              </order-sumary-card>
-            </v-col> -->
           </v-row>
         </v-layout>
       </v-card-text>
-
-      <!-- <v-divider></v-divider> -->
-
-
-
+      
       <v-data-table v-if="activeOrderHeaderList" :headers="headers" :search="search" :items="activeOrderHeaderList">
         <template v-slot:[`item.checkin_date`]="{ item }">
           {{ item.checkin_date.split('T')[0] }}
@@ -114,80 +107,23 @@
           </h6>
           <!-- </v-chip> -->
         </template>
-        <!-- <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
-            class="ma-2" color="red" text-color="white">
-            {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
-          </v-chip>
-          <v-chip v-else class="ma-2" color="green" text-color="white">
-            {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
-          </v-chip>
-        </template> -->
-        <!-- <template v-slot:[`item.dynamic_customer`]="{ item }">
-          <v-avatar :color="item.dynamic_customer ? 'green' : 'red'" size="10">
-          </v-avatar>
-        </template> -->
+        
         <template v-slot:[`item.discount`]="{ item }">
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
           {{ numberWithCommas(item.total + item.discount) }}
         </template>
-        <!-- <template v-slot:[`item.grandTotal`]="{ item }">
-          {{ numberWithCommas((item.total + item.dynamic_customer.rider_fee) - item.dynamic_customer.cod_fee) }}
-        </template>
-        <template v-slot:[`item.dynamic_customer.cod_fee`]="{ item }">
-          {{ numberWithCommas(item.dynamic_customer.cod_fee) }}
-        </template>
-        <template v-slot:[`item.dynamic_customer.rider_fee`]="{ item }">
-          {{ numberWithCommas(item.dynamic_customer.rider_fee) }}
-        </template> -->
+        
         <template v-slot:[`item.createdAt`]="{ item }">
           {{ item.createdAt.split('.')[0] }}
         </template>
-        <!-- Bae request to remove edit button  -->
-        <!-- <template v-slot:[`item.id`]="{ item }">
-          <v-btn color="primary" text @click="viewItem(item)
-          wallet = true
-            ">
-<i class="fa-regular fa-pen-to-square"></i>
-          </v-btn>
-        </template> -->
-        <!-- <template v-slot:[`item.print`]="{ item }">
-
-          <v-btn @click="generatePrintViewDeliveryCustomer(item)" text color="primary">
-            <span class="mdi mdi-printer"></span>
-          </v-btn>
-
-        </template> -->
-        <!-- <template v-slot:[`item.cancel`]="{ item }">
-          <v-btn  color="warning" text @click="cancelItem(item)
-          wallet = true
-            ">
-            <i class="fas fa-sync"></i>
-          </v-btn>
-          
-        </template> -->
         <template v-slot:[`item.view`]="{ item }">
           <v-btn text @click="viewItem(item)" color="primary">
             <i class="fas fa-eye"></i>
           </v-btn>
 
         </template>
-        <!-- <template v-slot:[`item.dynamic_customer.tel`]="{ item }">
-          <v-row>
-            <v-col cols="12">
-              <v-btn color="blue darken-1" text @click="whatsappLink(item.dynamic_customer.tel)">
-                <a :href="whatsappContactLink" target="_blank">
-                  <span class="mdi mdi-whatsapp"></span>
-                </a>
-              </v-btn>
-              {{ item.dynamic_customer.tel }}
-            </v-col>
-          </v-row>
-
-
-        </template> -->
       </v-data-table>
 
     </v-card>
@@ -200,11 +136,18 @@ import ReservationForm from '~/components/ReservationForm.vue'
 import OrderSumaryCardPos from '~/components/orderSumaryCardPos.vue'
 import MyCalendar from '~/components/calendar/MyCalendar.vue'
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
+// import 'dhtmlx-gantt';
 export default {
   components: { OrderDetailPos, OrderSumaryCardPos, ReservationForm,MyCalendar },
   middleware: 'auths',
   data() {
     return {
+      ganttData: [
+        { id: 1, text: 'Task 1', start_date: '2024-03-15', duration: 3 },
+        { id: 2, text: 'Task 2', start_date: '2024-03-18', duration: 2, parent: 1 },
+        { id: 3, text: 'Task 3', start_date: '2024-03-20', duration: 4 },
+        // Add more tasks as needed
+      ],
       terminalId: 999, //LocationId to filter sale base on current location selected 
       shippingList: [],
       currencyList: [],
@@ -241,35 +184,17 @@ export default {
           value: 'checkin_date',
           sortable: true,
         },
-        // {
-        //   text: 'Offline/Online',
-        //   align: 'center',
-        //   value: 'dynamic_customer',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ລູກຄ້າ',
-        //   align: 'center',
-        //   value: 'dynamic_customer.name',
-        //   sortable: true,
-        // },
         {
-          text: 'ເບີໂທ',
+          text: 'ຫາວັນທີ',
+          align: 'center',
+          value: 'checkout_date',
+          sortable: true,
+        },
+        {
+          text: 'ເບີໂທລູກຄ້າ',
           align: 'center',
           value: 'customer_telephone',
           sortable: true,
-        },
-        // {
-        //   text: 'ບ່ອນສົ່ງ',
-        //   align: 'center',
-        //   value: 'dynamic_customer.address',
-        //   sortable: true,
-        // },
-        {
-          text: 'ລາຄາເຕັມ',
-          align: 'end',
-          value: 'total',
-          sortable: false,
         },
         {
           text: 'ສ່ວນຫລຸດ',
@@ -277,85 +202,18 @@ export default {
           value: 'discount',
           sortable: true,
         },
-
-        // {
-        //   text: 'ຄ່າຂົນສົ່ງ',
-        //   align: 'end',
-        //   value: 'dynamic_customer.rider_fee',
-        //   sortable: false,
-        // },
-        // {
-        //   text: 'COD/Rider Fee',
-        //   align: 'end',
-        //   value: 'dynamic_customer.cod_fee',
-        //   sortable: false,
-        // },
         {
           text: 'ລວມ',
           align: 'end',
-          value: 'grandTotal',
+          value: 'total',
           sortable: false,
         },
-        // {
-        //   text: 'ຂົນສົ່ງ',
-        //   align: 'center',
-        //   value: 'dynamic_customer.shipping.name',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ການຊຳລະ',
-        //   align: 'center',
-        //   value: 'payment.payment_code',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ຮ້ານ',
-        //   align: 'center',
-        //   value: 'location.name',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ໄຣເດີ້',
-        //   align: 'center',
-        //   value: 'dynamic_customer.rider.name',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ເຂດ',
-        //   align: 'center',
-        //   value: 'dynamic_customer.geography.description',
-        //   sortable: true,
-        // },
-        // {
-        //   text: 'ຜູ້ລົງທຸລະກຳ',
-        //   align: 'end',
-        //   value: 'user.cus_name',
-        //   sortable: false,
-        // },
-        // {
-        //   text: 'ເວລາລົງ',
-        //   align: 'end',
-        //   value: 'createdAt',
-        //   sortable: false,
-        // },
-        // {
-        //   text: 'ພິມບິນ',
-        //   align: 'end',
-        //   value: 'print',
-        //   sortable: false,
-        // },
         {
           text: 'ລາຍລະອຽດ',
           align: 'end',
           value: 'view',
           sortable: true,
         },
-        // {
-        //   text: 'ຍົກເລີກບິນ',
-        //   align: 'end',
-        //   value: 'cancel',
-        //   sortable: true,
-        // },
       ],
       // date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       //   .toISOString()
@@ -397,6 +255,10 @@ export default {
       this.dateFormatted2 = this.formatDate(this.date2)
       this.loadData()
     },
+  },
+  mounted() {
+    // this.$gantt.init(this.$refs.ganttContainer);
+    // this.$gantt.parse({ data: this.ganttData });
   },
   computed: {
     customTerminalList() {

@@ -44,6 +44,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   // { src: '~/plugins/chart.js', ssr: false },
   plugins: [
+    
     { src: '~/plugins/jspdf-invoice.js', mode: 'client' },
     { src: '~/plugins/vue-sweetalert2', ssr: false },
     {
@@ -51,6 +52,7 @@ export default {
       mode: 'client',
     },
     // { src: '~/plugins/fontawesome.js', ssr: false },
+    // { src: '~/plugins/gantt-elastic.js', mode: 'client' }, 
     { src: '~/plugins/html2canvas.js', mode: 'client' },
     { src: '@/plugins/echarts.js', ssr: false },
     { src: '~/plugins/xlsx.js', mode: 'client' },

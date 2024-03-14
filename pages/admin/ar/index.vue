@@ -48,6 +48,32 @@
                 </v-layout>
             </v-card-title>
             <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
+                <v-card-text>
+                <table border="1" v-if="paymentCurrencyGrouping.length>0">
+                    <thead>
+                        <tr>
+                            <th>ສະກຸນເງິນ</th>
+                            <th>ລວມຍອດ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="txn in paymentCurrencyGrouping" :key="txn['currency']">
+                            <td>{{ txn.currency }}</td>
+                            <td style="text-align: right;">{{ numberWithFormat(txn.amount) }}</td>
+                        </tr>
+                        <!-- <tr>
+                            <td>February</td>
+                            <td>$1500</td>
+                        </tr> -->
+                        <!-- Add more rows for other months -->
+                        <!-- <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>$2500</strong></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+            </v-card-text>
             <v-data-table v-if="txnList" :headers="headers" :search="search" :items="txnList">
                 <template v-slot:[`item.function`]="{ item }">
 
@@ -167,6 +193,32 @@ export default {
             this.isloading = false
         }
 
+    },
+    computed: {
+        paymentCurrencyGrouping() {
+            // Object to store the sum of transactions for each currency code
+            const sumByCurrency = {};
+
+            // Loop through each transaction
+            this.txnList.forEach(transaction => {
+                const { totalAmount, currency } = transaction;
+                // If the currency code doesn't exist in the sumByCurrency object, initialize it to 0
+                if (!sumByCurrency[currency]) {
+                    sumByCurrency[currency] = 0;
+                }
+                // Accumulate the total amount for the currency code
+                sumByCurrency[currency] += totalAmount;
+            });
+
+            // Display the sum for each currency code
+            const listOfCurrency = []
+            for (const currencyCode in sumByCurrency) {
+                console.log(`Total for ${currencyCode}: ${sumByCurrency[currencyCode]}`);
+                listOfCurrency.push({ 'currency': currencyCode, 'amount': sumByCurrency[currencyCode] })
+            }
+
+            return listOfCurrency;
+        }
     }
 }
 </script>

@@ -52,6 +52,32 @@
                 </v-layout>
             </v-card-title>
             <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
+                <v-card-text>
+                <table border="1" v-if="purchaseCurrencyGrouping.length>0">
+                    <thead>
+                        <tr>
+                            <th>ສະກຸນເງິນ</th>
+                            <th>ລວມຍອດ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="txn in purchaseCurrencyGrouping" :key="txn['currency']">
+                            <td>{{ txn.currency }}</td>
+                            <td style="text-align: right;">{{ numberWithCommas(txn.amount) }}</td>
+                        </tr>
+                        <!-- <tr>
+                            <td>February</td>
+                            <td>$1500</td>
+                        </tr> -->
+                        <!-- Add more rows for other months -->
+                        <!-- <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>$2500</strong></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+            </v-card-text>
             <v-data-table v-if="txnList" :headers="headers" :search="search" :items="txnList">
                 <template v-slot:[`item.function`]="{ item }">
                     <v-btn color="primary" text @click="editItem(item)">
@@ -66,6 +92,9 @@
                 <template v-slot:[`item.total`]="{ item }">
                     {{ numberWithCommas(item.total) }}
 
+                </template>
+                <template v-slot:[`item.exchangeRate`]="{ item }">
+                    {{ numberWithCommas(item.exchangeRate) }}
                 </template>
 
             </v-data-table>
@@ -108,14 +137,11 @@ export default {
                     value: 'bookingDate',
                     sortable: true,
                 },
-                // { text: 'ເລກອ້າງອີງ', align: 'center', value: 'paymentNumber' },
-                { text: 'ຍອດລວມ', align: 'right', value: 'total' },
-                { text: 'ສະກຸນ', align: 'center', value: 'currency.code' },
-                { text: 'ອັດຕາແລກປ່ຽນ', align: 'center', value: 'exchangeRate' },
-                { text: 'ສະຖານະ', align: 'center', value: 'status' },
-                // { text: 'ເບື້ອງຫນີ້', align: 'center', value: 'drAccount' },
-                // { text: 'ເບື້ອງມີ', align: 'center', value: 'crAccount' },
                 { text: 'ເນື້ອໃນ', align: 'center', value: 'notes' },
+                { text: 'ສະກຸນ', align: 'center', value: 'currency.code' },
+                { text: 'ອັດຕາແລກປ່ຽນ', align: 'right', value: 'exchangeRate' },
+                { text: 'ຍອດລວມ', align: 'right', value: 'total' },
+                { text: 'ສະຖານະ', align: 'center', value: 'status' },
                 { text: 'ເວລາສ້າງ', align: 'center', value: 'createdAt' },
                 {
                     text: 'ແກ້ໄຂ',
@@ -152,6 +178,30 @@ export default {
     computed: {
         currentPO() {
             return this.txnList.find(el => el.id == this.selectedId)
+        },
+        purchaseCurrencyGrouping() {
+            // Object to store the sum of transactions for each currency code
+            const sumByCurrency = {};
+
+            // Loop through each transaction
+            this.txnList.forEach(transaction => {
+                const { total, currency } = transaction;
+                // If the currency code doesn't exist in the sumByCurrency object, initialize it to 0
+                if (!sumByCurrency[currency['code']]) {
+                    sumByCurrency[currency['code']] = 0;
+                }
+                // Accumulate the total amount for the currency code
+                sumByCurrency[currency['code']] += total;
+            });
+
+            // Display the sum for each currency code
+            const listOfCurrency = []
+            for (const currencyCode in sumByCurrency) {
+                console.log(`Total for ${currencyCode}: ${sumByCurrency[currencyCode]}`);
+                listOfCurrency.push({ 'currency': currencyCode, 'amount': sumByCurrency[currencyCode] })
+            }
+
+            return listOfCurrency;
         }
     },
     methods: {

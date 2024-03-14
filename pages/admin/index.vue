@@ -1,5 +1,5 @@
 <template>
-    <div style="background: #EFF2F9;border: 1px solid red;" class="ma-0">
+    <div style="background: #EFF2F9;" class="ma-0">
         <v-dialog v-model="isloading" hide-overlay persistent width="300">
             <loading-indicator> </loading-indicator>
         </v-dialog>
