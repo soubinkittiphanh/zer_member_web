@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="text-center">
         <div>
@@ -22,8 +20,8 @@
             <v-card-title>
                 <v-layout row wrap>
                     <v-col cols="6">
-                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
+                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false"
+                            transition="scale-transition" offset-y max-width="290px" min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format"
                                     persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
@@ -32,8 +30,8 @@
                             <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
                         </v-menu>
 
-                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
+                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false"
+                            transition="scale-transition" offset-y max-width="290px" min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format"
                                     persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
@@ -44,16 +42,18 @@
                         <v-btn @click="triggerDialog" class="primary" rounded> ສັ່ງເຄື່ອງ </v-btn>
                     </v-col>
                     <v-col cols="6">
-                        <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
+                        <v-text-field v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line
+                            hide-detailsx />
                         <v-text-field v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line
                             hide-detailsx />
-                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
+                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ
+                        </v-btn>
                     </v-col>
                 </v-layout>
             </v-card-title>
             <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
-                <v-card-text>
-                <table border="1" v-if="purchaseCurrencyGrouping.length>0">
+            <v-card-text>
+                <table border="1" v-if="purchaseCurrencyGrouping.length > 0">
                     <thead>
                         <tr>
                             <th>ສະກຸນເງິນ</th>
@@ -157,16 +157,12 @@ export default {
                 },
 
             ],
-            date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10),
+            date: getFirstDayOfMonth(),
             date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
                 .toISOString()
                 .substr(0, 10),
             dateFormatted: this.formatDate(
-                new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                    .toISOString()
-                    .substr(0, 10)
+                getFirstDayOfMonth()
             ),
             dateFormatted2: this.formatDate(
                 new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -204,13 +200,20 @@ export default {
             return listOfCurrency;
         }
     },
+    watch: {
+
+        date(val) {
+            this.dateFormatted = this.formatDate(this.date)
+            this.loadTxn()
+        },
+        date2(val) {
+            this.dateFormatted2 = this.formatDate(this.date2)
+            this.loadTxn()
+        },
+    },
     methods: {
         numberWithCommas(value) {
             return getFormatNum(value)
-        }, parseDate(date) {
-            if (!date) return null
-            const [month, day, year] = date.split('/')
-            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
         },
         triggerDialog() {
             this.apFormKey += 1;
@@ -234,12 +237,32 @@ export default {
         },
         formatDate(date) {
             if (!date) return null
-            const [year, month, day] = date.split('-')
+            console.log("DATE FORMAT METHOD1: " + date);
+            const formattedDate = this.formatDateToISO(date);
+            const [year, month, day] = formattedDate.split('-')
             return `${month}/${day}/${year}`
+        },
+        parseDate(date) {
+            console.log("DATE PARSE METHOD1: " + date);
+            if (!date) return null
+            const [month, day, year] = date.split('/')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        },
+        formatDateToISO(date) {
+            if (!(date instanceof Date)) date = new Date(date);
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+            const day = `${date.getDate()}`.padStart(2, '0');
+            return `${year}-${month}-${day}`;
         },
         async loadTxn() {
             this.isloading = true
-            await this.$axios.get("/api/purchasing/find").then(response => {
+            // TODO: FIX LOAD TRANSACTION BASE ON DATE SELECTED
+            const date = {
+                startDate: this.date,
+                endDate: this.date2,
+            }
+            await this.$axios.get("/api/purchasing/findByDate", { params: { date } }).then(response => {
                 this.txnList = [];
                 for (const iterator of response.data) {
                     iterator['bookingDate'] = iterator['bookingDate'].split('T')[0]

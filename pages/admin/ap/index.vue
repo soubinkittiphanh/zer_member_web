@@ -49,7 +49,7 @@
             </v-card-title>
             <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
             <v-card-text>
-                <table border="1" v-if="paymentCurrencyGrouping.length>0">
+                <table border="1" v-if="paymentCurrencyGrouping.length > 0">
                     <thead>
                         <tr>
                             <th>ສະກຸນເງິນ</th>
@@ -96,7 +96,7 @@
 </template>
 <script>
 import ApPayment from '~/components/accounting/ApPayment.vue'
-import { getFormatNum } from '~/common'
+import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
     components: { ApPayment },
     mounted() {
@@ -123,9 +123,9 @@ export default {
                 },
                 { text: 'ເລກອ້າງອີງ', align: 'center', value: 'paymentNumber' },
                 { text: 'ຍອດລວມ', align: 'center', value: 'totalAmount' },
-                { text: 'ສະກຸນ', align: 'center', value: 'currency' },
+                { text: 'ສະກຸນ', align: 'center', value: 'currency.code' },
                 { text: 'ອັດຕາແລກປ່ຽນ', align: 'center', value: 'rate' },
-                { text: 'ຊຳລະດ້ວຍ', align: 'center', value: 'paymentMethod' },
+                { text: 'ຊຳລະດ້ວຍ', align: 'center', value: 'payment.payment_code' },
                 { text: 'ເບື້ອງຫນີ້', align: 'center', value: 'drAccount' },
                 { text: 'ເບື້ອງມີ', align: 'center', value: 'crAccount' },
                 { text: 'ເນື້ອໃນ', align: 'center', value: 'notes' },
@@ -138,16 +138,12 @@ export default {
                 },
 
             ],
-            date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10),
+            date: getFirstDayOfMonth(),
             date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
                 .toISOString()
                 .substr(0, 10),
             dateFormatted: this.formatDate(
-                new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                    .toISOString()
-                    .substr(0, 10)
+                getFirstDayOfMonth()
             ),
             dateFormatted2: this.formatDate(
                 new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -156,12 +152,42 @@ export default {
             ),
         }
     },
+    watch: {
+        date(val) {
+            this.dateFormatted = this.formatDate(this.date)
+            this.loadTxn()
+        },
+        date2(val) {
+            this.dateFormatted2 = this.formatDate(this.date2)
+            this.loadTxn()
+        },
+    },
     methods: {
         triggerDialog() {
             this.apFormKey += 1;
             this.selectedId = null;
             this.isEdit = false;
             this.dialog = true
+        },
+        formatDate(date) {
+            if (!date) return null
+            console.log("DATE FORMAT METHOD1: " + date);
+            const formattedDate = this.formatDateToISO(date);
+            const [year, month, day] = formattedDate.split('-')
+            return `${month}/${day}/${year}`
+        },
+        parseDate(date) {
+            console.log("DATE PARSE METHOD1: " + date);
+            if (!date) return null
+            const [month, day, year] = date.split('/')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        },
+        formatDateToISO(date) {
+            if (!(date instanceof Date)) date = new Date(date);
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+            const day = `${date.getDate()}`.padStart(2, '0');
+            return `${year}-${month}-${day}`;
         },
         numberWithFormat(val) {
             return getFormatNum(val)
@@ -172,14 +198,14 @@ export default {
             this.apFormKey += 1;
             this.dialog = true
         },
-        formatDate(date) {
-            if (!date) return null
-            const [year, month, day] = date.split('-')
-            return `${month}/${day}/${year}`
-        },
+
         async loadTxn() {
             this.isloading = true
-            await this.$axios.get("/api/finanicial/ap/header/find").then(response => {
+            const date = {
+                startDate: this.date,
+                endDate: this.date2,
+            }
+            await this.$axios.get("/api/finanicial/ap/header/findByDate", { params: { date } }).then(response => {
                 this.txnList = [];
                 for (const iterator of response.data) {
                     iterator['bookingDate'] = iterator['bookingDate'].split('T')[0]
@@ -204,13 +230,13 @@ export default {
 
             // Loop through each transaction
             this.txnList.forEach(transaction => {
-                const { totalAmount, currency } = transaction;
+                const { totalAmount, currency,currencyId } = transaction;
                 // If the currency code doesn't exist in the sumByCurrency object, initialize it to 0
-                if (!sumByCurrency[currency]) {
-                    sumByCurrency[currency] = 0;
+                if (!sumByCurrency[currency.code]) {
+                    sumByCurrency[currency.code] = 0;
                 }
                 // Accumulate the total amount for the currency code
-                sumByCurrency[currency] += totalAmount;
+                sumByCurrency[currency.code] += totalAmount;
             });
 
             // Display the sum for each currency code

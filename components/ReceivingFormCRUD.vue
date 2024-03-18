@@ -101,7 +101,8 @@
                                         <!-- <v-col cols="12">
                                             <v-text-field v-model="transaction.exchangeRate" disabled label="ອັດຕາແລກປ່ຽນ*"></v-text-field>
                                         </v-col> -->
-                                        <v-col cols="6">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
+                                        <v-col cols="6">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate)
+                                            }}</v-col>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" style="text-align: end;">
@@ -112,7 +113,7 @@
                                         <v-col cols="12" v-if="transaction.user">ຜູ້ລົງ: {{ transaction.user.cus_id }}
                                         </v-col>
                                         <v-col cols="12" v-if="transaction.user">ຊື່: {{ transaction.user.cus_name
-                                        }}</v-col>
+                                            }}</v-col>
                                         <v-col cols="12">
                                             <v-text-field disabled>
                                                 <template v-slot:label>
@@ -141,15 +142,17 @@
                                 {{ transaction.lines.indexOf(item) + 1 }}
                             </td>
                             <td>
-                                <v-autocomplete @input="productChange(item)" item-text="pro_name" item-value="id"
+                                <v-autocomplete
+                                    :disabled="sourceAPLID == 'PO' || transaction.poHeaderId || (item.id != null)"
+                                    @input="productChange(item)" item-text="pro_name" item-value="id"
                                     :items="productList" label="ສິນຄ້າ*" v-model="item.productId"></v-autocomplete>
                             </td>
                             <td> <v-text-field @input="quantityChange(item)" v-model="item.qty" label="ຈຳນວນ"
                                     v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <td>
-                                <v-autocomplete @input="unitChange(item)" item-text="name" item-value="id" :items="unitList"
-                                    label="ຫົວຫນ່ວຍ*" v-model="item.unitId"></v-autocomplete>
+                                <v-autocomplete @input="unitChange(item)" item-text="name" item-value="id"
+                                    :items="unitList" label="ຫົວຫນ່ວຍ*" v-model="item.unitId"></v-autocomplete>
                             </td>
                             <td>
                                 <v-text-field @input="unitRateChange(item)" v-model="item.rate" label="ຈນ ຕໍ່ ຫົວຫນ່ວຍ"
@@ -159,8 +162,8 @@
                                 <!-- <v-chip class="ml-0" color="warning" variant="outlined" @click="pricingLogig(item)">
                                     {{ getFormatNum(item.price) }}
                                 </v-chip> -->
-                                <v-text-field @input="priceChange(item)" v-model="item.price" label="ລາຄາ" v-comma-thousand
-                                    :rules="[numberCommaRule]"></v-text-field>
+                                <v-text-field @input="priceChange(item)" v-model="item.price" label="ລາຄາ"
+                                    v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <!-- <td>
                                 <v-text-field @input="discountChange(item)" :rules="[numberCommaRule]" v-comma-thousand
@@ -251,6 +254,9 @@ export default {
         const today = new Date().toISOString().substr(0, 10);
         console.log(`PO Transaction: ${JSON.stringify(this.POTransaction)}`);
         if (this.sourceAPLID == 'PO') {
+            // 
+            // ********* We need to check if PO already receive be4, we need to load that RECEIVE  *******//
+            // await this.loadTransactionFromPoID(this.POTransaction.id)
             // ********* CHECK IF THIS PO HAS ALREADY RECEIVING ID CREATED *******//
             this.transaction.lines = this.POTransaction.lines
             this.transaction.poHeaderId = this.POTransaction.id
@@ -259,9 +265,7 @@ export default {
             this.transaction.paymentId = 1;
             this.transaction.locationId = this.currentTerminal['locationId']
             this.transaction.currencyId = this.POTransaction.currencyId;
-
             return await this.loadTransactionFromPoID(this.POTransaction.id)
-
         }
         if (this.isUpdate) {
             console.log("View old record");
@@ -269,7 +273,6 @@ export default {
             await this.loadTransaction()
             this.isloading = false
         } else {
-           
             this.transaction.bookingDate = today;
             this.transaction.deliveryDate = today;
             this.transaction.clientId = 1;
@@ -341,6 +344,7 @@ export default {
             console.log(`Rate exchange ${currency['rate']} real value ${this.transaction.exchangeRate}`);
         },
         async deleteItem(item) {
+            // TODO: Delete line not reduct card 
             if (this.transaction.poHeaderId != null) return swalError2(this.$swal, 'Error', `ບໍ່ສາມາດລົບໄດ້ ການຮັບເຄື່ອງຈາກ PO ຕ້ອງອີງຕາມລາຍການຢູ່ໃນ PO ເທົ່ານັ້ນ`)
             if (item.id) {
                 console.log("Line has id");
@@ -436,6 +440,7 @@ export default {
                 "productId": 0,
                 "unitId": 1
             }
+            if (this.transaction.poHeaderId) return swalError2(this.$swal, 'Error', 'ເນື່ອງຈາກ ໃບຮັບເຄື່ອງຜູ້ກັບໃບສັ່ງຊື້, ບໍ່ມາດເພີ່ມ ລາຍການອື່ນ ທີ່ບໍ່ມີໃນໃບສັ່ງຊື້ໄດ້')
             this.transaction.lines.push(defaultLine)
         },
         openCustomerDialog() {
@@ -465,18 +470,35 @@ export default {
         },
         async loadTransactionFromPoID(poHeaderId) {
             console.warn(`Check if this PO already has receiving `)
-            await this.$axios
-                .get(`api/receiving/find/poId/${poHeaderId}`)
-                .then((res) => {
-                    this.transaction = res.data;
-                    console.log("Data ", res.data);
-                    this.isUpdate = true;
-                    this.headerId = this.transaction.id
-                })
-                .catch((er) => {
-                    this.isUpdate = false;
-                    // swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
-                })
+            try {
+                const response = await this.$axios.get(`api/receiving/find/poId/${poHeaderId}`)
+                this.transaction = response.data;
+                console.log("Data ", response.data);
+                this.isUpdate = true;
+                this.headerId = this.transaction.id
+            } catch (error) {
+                console.error(`this poId is not yet recevieved`);
+                // this.transaction.lines = this.POTransaction.lines
+                // this.transaction.poHeaderId = this.POTransaction.id
+                // this.transaction.bookingDate = today;
+                // this.transaction.vendorId = this.POTransaction.vendorId;
+                // this.transaction.paymentId = 1;
+                // this.transaction.locationId = this.currentTerminal['locationId']
+                // this.transaction.currencyId = this.POTransaction.currencyId;
+                // await this.loadTransactionFromPoID(this.POTransaction.id)
+            }
+            // await this.$axios
+            //     .get(`api/receiving/find/poId/${poHeaderId}`)
+            //     .then((res) => {
+            //         this.transaction = res.data;
+            //         console.log("Data ", res.data);
+            //         this.isUpdate = true;
+            //         this.headerId = this.transaction.id
+            //     })
+            //     .catch((er) => {
+            //         this.isUpdate = false;
+            //         // swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
+            //     })
         },
         // post() {
         //     this.errorLineNumber = null
@@ -503,7 +525,7 @@ export default {
             qty = parseInt(qty)
             if (!Number.isFinite(qty) || Number(qty) <= 0) {
                 this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ຈຳນວນ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${qty}********`
-                if(this.sourceAPLID='PO' || this.transaction.poHeaderId) return true
+                if (this.sourceAPLID = 'PO' || this.transaction.poHeaderId) return true
                 return false; // Reach must be a positive number
             }
             if (!Number.isFinite(rate) || Number(rate) <= 0) {
@@ -652,6 +674,7 @@ export default {
                     .put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction)
                     .then((res) => {
                         this.$emit('reload')
+                        this.$emit('close-dialog')
                         swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                     })
                     .catch((er) => {
@@ -673,6 +696,7 @@ export default {
                     .post(`api/${this.apiLine}/create`, this.transaction)
                     .then((res) => {
                         this.$emit('reload')
+                        this.$emit('close-dialog')
                         swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                     })
                     .catch((er) => {
@@ -766,7 +790,7 @@ export default {
                 exchangeRate: 1,
                 total: 0,
                 poHeaderId: null,
-                locationId:null,
+                locationId: null,
                 lines: []
             },
             headers: [

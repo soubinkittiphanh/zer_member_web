@@ -13,7 +13,7 @@
     </v-dialog> -->
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
+    dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
         :updateAllow="false" :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPosCRUD>
     </v-dialog>
@@ -85,14 +85,14 @@
             <v-col cols="6" lg="6">
               <order-sumary-card-pos :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ l',
-                  'amount': getFormatNum(activeOrderHeaderList.length),
-                  'sale': getFormatNum(totalSale),
-                  // 'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  // 'gross': getFormatNum(totalSale - totalDiscount)
+      'title': 'ຍອດບິນ l',
+      'amount': getFormatNum(activeOrderHeaderList.length),
+      'sale': getFormatNum(totalSale),
+      // 'discount': getFormatNum(totalDiscount),
+      // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+      // 'gross': getFormatNum(totalSale - totalDiscount)
 
-                }">
+    }">
 
               </order-sumary-card-pos>
             </v-col>
@@ -119,7 +119,8 @@
           <!-- </v-chip> -->
         </template>
         <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
+          <v-chip
+            v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
             class="ma-2" color="red" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
@@ -135,7 +136,7 @@
           {{ numberWithCommas(item.discount) }}
         </template>
         <template v-slot:[`item.total`]="{ item }">
-          {{ numberWithCommas(item.total +item.discount) }}
+          {{ numberWithCommas(item.total + item.discount) }}
           <!-- {{ numberWithCommas(item.total) }} -->
         </template>
         <template v-slot:[`item.riderFee`]="{ item }">
@@ -146,16 +147,16 @@
         </template>
         <template v-slot:[`item.id`]="{ item }">
           <v-btn color="primary" text @click="settleInvoice(item)
-          wallet = true
-            ">
+    wallet = true
+      ">
             <span class="mdi mdi-wallet-plus-outline"></span>
           </v-btn>
         </template>
         <template v-slot:[`item.grandTotal`]="{ item }">
           <span> {{
-            numberWithCommas((item.total - item.discount) + item.dynamic_customer.rider_fee +
-              item.dynamic_customer.cod_fee)
-          }}</span>
+      numberWithCommas((item.total - item.discount) + item.dynamic_customer.rider_fee +
+        item.dynamic_customer.cod_fee)
+    }}</span>
           <!-- <v-btn text  @click="viewItem(item)" color="primary" >
             {{ `total: ${item.total}` }}
             {{ `disc: ${item.discount}` }}
@@ -599,15 +600,23 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
     async loadShipping() {
       this.$axios

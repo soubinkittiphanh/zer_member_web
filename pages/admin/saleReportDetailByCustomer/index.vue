@@ -86,14 +86,14 @@
               <v-col cols="6" lg="6">
                 <order-sumary-card-pos :showTotal="true"
                   :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                    'title': 'ຍອດບິນ',
-                    'amount': getFormatNum(activeOrderHeaderList.length),
-                    'sale': getFormatNum(totalSale - totalDiscount),
-                    // 'discount': getFormatNum(totalDiscount),
-                    // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                    // 'gross': getFormatNum(totalSale - totalDiscount)
+        'title': 'ຍອດບິນ',
+        'amount': getFormatNum(activeOrderHeaderList.length),
+        'sale': getFormatNum(totalSale - totalDiscount),
+        // 'discount': getFormatNum(totalDiscount),
+        // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+        // 'gross': getFormatNum(totalSale - totalDiscount)
 
-                  }">
+      }">
 
                 </order-sumary-card-pos>
               </v-col>
@@ -421,16 +421,16 @@ export default {
         iterator['customer'] = customer
         iterator['productName'] = product
         const newRow = {
-          'ສິນຄ້າ':iterator['productName'],
-          'ຈຳນວນ':iterator['quantity'],
-          'ລາຄາ':iterator['price'],
-          'ສ່ວນຫຼຸດ':iterator['discount'],
-          'ລວມ':iterator['total'],
-          'ຜູ້ຂາຍ':iterator['userName'],
-          'ລູກຄ້າ':iterator['customer'],
+          'ສິນຄ້າ': iterator['productName'],
+          'ຈຳນວນ': iterator['quantity'],
+          'ລາຄາ': iterator['price'],
+          'ສ່ວນຫຼຸດ': iterator['discount'],
+          'ລວມ': iterator['total'],
+          'ຜູ້ຂາຍ': iterator['userName'],
+          'ລູກຄ້າ': iterator['customer'],
         }
         messageLineExport.push(newRow)
- 
+
       }
       const worksheet = this.$xlsx.utils.json_to_sheet(messageLineExport);
       const workbook = this.$xlsx.utils.book_new();
@@ -513,7 +513,7 @@ export default {
       try {
         const response = await this.$axios.get(apiLine);
         this.customerList = response.data
-        this.customerList.push({id:-1,'name':'ທັງຫມົດ'})
+        this.customerList.push({ id: -1, 'name': 'ທັງຫມົດ' })
       } catch (error) {
         swalError2(this.$swal, 'Error', 'Could no load data ' + JSON.stringify(error))
       }
@@ -521,15 +521,23 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
   },
 }

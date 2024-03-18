@@ -15,7 +15,7 @@
     </v-dialog> -->
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <transfer-form @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
+    dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
         :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </transfer-form>
     </v-dialog>
@@ -74,14 +74,14 @@
             <v-col cols="6" lg="6">
               <order-sumary-card-pos :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ',
-                  'amount': getFormatNum(activeheaderList.length),
-                  'sale': getFormatNum(totalSale),
-                  'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  'gross': getFormatNum(totalSale - totalDiscount)
+      'title': 'ຍອດບິນ',
+      'amount': getFormatNum(activeheaderList.length),
+      'sale': getFormatNum(totalSale),
+      'discount': getFormatNum(totalDiscount),
+      // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+      'gross': getFormatNum(totalSale - totalDiscount)
 
-                }">
+    }">
 
               </order-sumary-card-pos>
             </v-col>
@@ -111,16 +111,16 @@
         </template>
         <template v-slot:[`item.id`]="{ item }">
           <v-btn color="primary" text @click="viewItem(item)
-          wallet = true
-            ">
-<i class="fa-regular fa-pen-to-square"></i>
+    wallet = true
+      ">
+            <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
         </template>
         <template v-slot:[`item.cancel`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="cancelItem(item)
-          wallet = true
-            ">
+    wallet = true
+      ">
             <i class="fas fa-sync"></i>
           </v-btn>
         </template>
@@ -193,7 +193,7 @@ export default {
           value: 'desLocation.name',
           sortable: true,
         },
- 
+
         {
           text: 'ຜູ້ລົງທຸລະກຳ',
           align: 'end',
@@ -379,15 +379,23 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
   },
 }

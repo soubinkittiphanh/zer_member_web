@@ -600,6 +600,7 @@ export default {
                     .put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction)
                     .then((res) => {
                         this.$emit('reload')
+                        this.$emit('close-dialog')
                         swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                     })
                     .catch((er) => {
@@ -620,6 +621,7 @@ export default {
                     .post(`api/${this.apiLine}/create`, this.transaction)
                     .then((res) => {
                         this.$emit('reload')
+                        this.$emit('close-dialog')
                         swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
                     })
                     .catch((er) => {

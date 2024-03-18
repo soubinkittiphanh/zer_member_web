@@ -13,7 +13,7 @@
     </v-dialog> -->
     <v-dialog v-model="dialogOrderDetail" max-width="1024">
       <OrderDetailPosCRUD @reload="loadData()
-      dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
+    dialogOrderDetail = false" :is-quotation="false" :key="componentKey" :is-update="viewTransaction"
         :headerId="selectedOrder" @close-dialog="dialogOrderDetail = false">
       </OrderDetailPosCRUD>
     </v-dialog>
@@ -78,15 +78,15 @@
             <v-col cols="6" lg="6">
               <order-sumary-card-pos :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ',
-                  'amount': getFormatNum(activeOrderHeaderList.length),
-                  // 'sale': getFormatNum(totalSale - totalDiscount),// Old version 
-                  'sale': getFormatNum(totalSale), // The total field is already exclude discount
-                  // 'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                  // 'gross': getFormatNum(totalSale - totalDiscount)
+      'title': 'ຍອດບິນ',
+      'amount': getFormatNum(activeOrderHeaderList.length),
+      // 'sale': getFormatNum(totalSale - totalDiscount),// Old version 
+      'sale': getFormatNum(totalSale), // The total field is already exclude discount
+      // 'discount': getFormatNum(totalDiscount),
+      // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+      // 'gross': getFormatNum(totalSale - totalDiscount)
 
-                }">
+    }">
 
               </order-sumary-card-pos>
             </v-col>
@@ -113,7 +113,8 @@
           <!-- </v-chip> -->
         </template>
         <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
+          <v-chip
+            v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
             class="ma-2" color="red" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
@@ -577,15 +578,23 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
     async loadShipping() {
       this.$axios
@@ -649,7 +658,7 @@ export default {
           totalHtml += `
                                     <div class="ticket">
                                         <div class="product-name"></div>
-                                    <div class="price-total"> <h5>ຍອດລວມ(${saleHeader.payment.payment_code}): ${this.formatNumber(((saleHeader.total + (+saleHeader.dynamic_customer.rider_fee)) ))}  </h5> </div>
+                                    <div class="price-total"> <h5>ຍອດລວມ(${saleHeader.payment.payment_code}): ${this.formatNumber(((saleHeader.total + (+saleHeader.dynamic_customer.rider_fee))))}  </h5> </div>
                                 </div>
                                     `
         }

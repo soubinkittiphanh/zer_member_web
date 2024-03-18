@@ -81,7 +81,7 @@
             <v-col cols="2"></v-col>
             <v-col cols="4" style="font-weight: bold; font-style: italic;">Net sale</v-col>
             <v-col cols="6" style="font-weight: bold; font-style: italic;">{{
-              formatNumber(grandSaleTotal - (grandSaleCancelTotal + grandSaleDiscountTotal)) }}</v-col>
+        formatNumber(grandSaleTotal - (grandSaleCancelTotal + grandSaleDiscountTotal)) }}</v-col>
           </v-row>
         </v-col>
         <!-- Cost of goods sold -->
@@ -110,7 +110,8 @@
           <v-row>
             <v-col cols="2"></v-col>
             <v-col cols="4" style="font-weight: bold; font-style: italic;">Total cost of goods sold</v-col>
-            <v-col cols="6" style="font-weight: bold; font-style: italic;">{{ formatNumber(grandSaleCost+grandCODCost+grandCancellationCost) }}</v-col>
+            <v-col cols="6" style="font-weight: bold; font-style: italic;">{{
+        formatNumber(grandSaleCost + grandCODCost + grandCancellationCost) }}</v-col>
           </v-row>
         </v-col>
         <!-- Accounting expense -->
@@ -320,27 +321,35 @@ export default {
       }
       return totalCancellationFee;
     },
-    netProfit(){
-      return (this.grandSaleTotal - (this.grandSaleCancelTotal + this.grandSaleDiscountTotal)) - (this.grandSaleCost+this.grandCODCost+this.grandCancellationCost)
+    netProfit() {
+      return (this.grandSaleTotal - (this.grandSaleCancelTotal + this.grandSaleDiscountTotal)) - (this.grandSaleCost + this.grandCODCost + this.grandCancellationCost)
     }
-    
+
   },
 
   methods: {
     formatNumber(value) {
       return getFormatNum(value)
     },
-    parseDate(date) {
+    formatDate(date) {
       if (!date) return null
-
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
+      return `${month}/${day}/${year}`
+    },
+    parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
+      if (!date) return null
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
-    formatDate(date) {
-      if (!date) return null
-
-      const [year, month, day] = date.split('-')
-      return `${month}/${day}/${year}`
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
     async fetchData() {
       this.isloading = true

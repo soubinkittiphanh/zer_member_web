@@ -31,30 +31,28 @@
         @reload="cancelForm = false, loadData()"></cancel-ticket-form>
     </v-dialog>
     <div>
-
-
       <v-card>
         <v-card-title>
           <v-layout row wrap>
             <v-col cols="6">
               <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y
                 max-width="290px" min-width="auto">
+                <v-date-picker v-model="fromDate" no-title @input="menu1 = false"></v-date-picker>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
-                    prepend-icon="mdi-calendar" v-bind="attrs" @blur="date = parseDate(dateFormatted)"
+                  <v-text-field v-model="fromDateLabel" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
+                    prepend-icon="mdi-calendar" v-bind="attrs" @blur="fromDate = parseDate(fromDateLabel)"
                     v-on="on"></v-text-field>
                 </template>
-                <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
               </v-menu>
 
               <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y
                 max-width="290px" min-width="auto">
+                <v-date-picker v-model="toDate" no-title @input="menu2 = false"></v-date-picker>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
-                    prepend-icon="mdi-calendar" v-bind="attrs" @blur="date2 = parseDate(dateFormatted2)"
+                  <v-text-field v-model="toDateLabel" label="ຫາວັນທີ:" hint="MM/DD/YYYY format" persistent-hint
+                    prepend-icon="mdi-calendar" v-bind="attrs" @blur="toDate = parseDate(toDateLabel)"
                     v-on="on"></v-text-field>
                 </template>
-                <v-date-picker v-model="date2" no-title @input="menu2 = false"></v-date-picker>
               </v-menu>
 
             </v-col>
@@ -88,14 +86,14 @@
               <v-col cols="6" lg="6">
                 <order-sumary-card-pos :showTotal="true"
                   :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                    'title': 'ຍອດບິນ',
-                    'amount': getFormatNum(activeOrderHeaderList.length),
-                    'sale': getFormatNum(totalSale),
-                    // 'discount': getFormatNum(totalDiscount),
-                    // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                    // 'gross': getFormatNum(totalSale - totalDiscount)
+        'title': 'ຍອດບິນ',
+        'amount': getFormatNum(activeOrderHeaderList.length),
+        'sale': getFormatNum(totalSale),
+        // 'discount': getFormatNum(totalDiscount),
+        // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+        // 'gross': getFormatNum(totalSale - totalDiscount)
 
-                  }">
+      }">
 
                 </order-sumary-card-pos>
               </v-col>
@@ -154,16 +152,16 @@
           </template>
           <template v-slot:[`item.id`]="{ item }">
             <v-btn color="primary" text @click="viewItem(item)
-            wallet = true
-              ">
+      wallet = true
+        ">
               <i class="fa-regular fa-pen-to-square"></i>
             </v-btn>
           </template>
           <template v-slot:[`item.cancel`]="{ item }">
 
             <v-btn color="blue darken-1" text @click="cancelItem(item)
-            wallet = true
-              ">
+      wallet = true
+        ">
               <i class="fas fa-sync"></i>
             </v-btn>
           </template>
@@ -305,14 +303,14 @@ export default {
           sortable: false,
         },
       ],
-      date: getFirstDayOfMonth(),
-      date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      fromDate: getFirstDayOfMonth(),
+      toDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      dateFormatted: this.formatDate(
+      fromDateLabel: this.formatDate(
         getFirstDayOfMonth()
       ),
-      dateFormatted2: this.formatDate(
+      toDateLabel: this.formatDate(
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
           .toISOString()
           .substr(0, 10)
@@ -327,15 +325,14 @@ export default {
     await this.loadData()
   },
   watch: {
-    isedit(v) {
-      if (!v) this.form_data.cus_id = '1XXX'
-    },
-    date(val) {
-      this.dateFormatted = this.formatDate(this.date)
+    fromDate(val) {
+      console.log(`FROM DATE WATCHER VAL ${val}`);
+      this.fromDateLabel = this.formatDate(this.fromDate)
       this.loadData()
     },
-    date2(val) {
-      this.dateFormatted2 = this.formatDate(this.date2)
+    toDate(val) {
+      console.log(`TO DATE WATCHER ${this.toDate}`);
+      this.toDateLabel = this.formatDate(this.toDate)
       this.loadData()
     },
   },
@@ -361,7 +358,7 @@ export default {
       return this.orderHeaderList.filter(el => el['isActive'] == true && el['paymentId'] != 2 && el['locationId'] == terminal['locationId'])
     },
     computedDateFormatted() {
-      return this.formatDate(this.date)
+      return this.formatDate(this.fromDate)
     },
     totalSale() {
       let total = 0
@@ -473,8 +470,8 @@ export default {
     async loadData() {
       this.isloading = true
       const date = {
-        startDate: this.date,
-        endDate: this.date2,
+        startDate: this.fromDate,
+        endDate: this.toDate,
         userId: this.userId
       }
       let apiLine = 'api/sale/findByDate'
@@ -502,16 +499,24 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
   },
 }
 </script>

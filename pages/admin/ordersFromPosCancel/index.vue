@@ -431,18 +431,26 @@ export default {
         })
       this.isloading = false
     },
-    formatDate(date) {
-      if (!date) return null
-
-      const [year, month, day] = date.split('-')
-      return `${month}/${day}/${year}`
-    },
-    parseDate(date) {
-      if (!date) return null
-
-      const [month, day, year] = date.split('/')
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-    },
+        formatDate(date) {
+            if (!date) return null
+            console.log("DATE FORMAT METHOD1: " + date);
+            const formattedDate = this.formatDateToISO(date);
+            const [year, month, day] = formattedDate.split('-')
+            return `${month}/${day}/${year}`
+        },
+        parseDate(date) {
+            console.log("DATE PARSE METHOD1: " + date);
+            if (!date) return null
+            const [month, day, year] = date.split('/')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        },
+        formatDateToISO(date) {
+            if (!(date instanceof Date)) date = new Date(date);
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+            const day = `${date.getDate()}`.padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        },
   },
 }
 </script>

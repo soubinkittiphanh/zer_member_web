@@ -14,7 +14,7 @@
     </v-navigation-drawer> -->
 
     <v-navigation-drawer class="elevation-6" :mini-variant="miniVariant" :clipped="clipped" dark v-model="drawer" fixed
-      color="primary" app>
+      color="#01532B" app>
       <v-layout column align-center>
         <v-flex class="shadow mt-4 mb-4">
           <v-img :src="require('~/assets/image/Dcommerce-Logo.png')" />
@@ -44,7 +44,7 @@
 
           <!-- Group A menu items -->
           <v-list-item v-for="(item, i) in menu.menuLines" :key="i" :to="item.path" router exact
-            :style="{ 'background-color': '#004222' }">
+            :style="{ 'background-color': '#337555' }">
             <v-list-item-action>
               <v-icon color="white">{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -118,7 +118,7 @@
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
-            <v-btn color="primary" rounded variant="text" @click="switchTerminal">
+            <v-btn color="#01532B" rounded variant="text" @click="switchTerminal">
               ເລືອກ
             </v-btn>
           </v-card-actions>

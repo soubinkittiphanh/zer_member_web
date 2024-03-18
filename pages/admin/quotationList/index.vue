@@ -1,11 +1,11 @@
 <template>
   <div class="text-left">
-  <div>
-    <v-chip class="pa-5" color="primary" label text-color="white">
-      <v-icon start>mdi-label</v-icon>
-      <h3>ລາຍການໃບສະເຫນີລາຄາ</h3>
-    </v-chip>
-    <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
+    <div>
+      <v-chip class="pa-5" color="primary" label text-color="white">
+        <v-icon start>mdi-label</v-icon>
+        <h3>ລາຍການໃບສະເຫນີລາຄາ</h3>
+      </v-chip>
+      <v-chip class="pa-5" color="primary" label text-color="white" @click="guidelineDialog = true">
         <v-icon start>mdi mdi-lifebuoy</v-icon>
         <h3>ຄູ່ມືການນຳໃຊ້ </h3>
       </v-chip>
@@ -83,12 +83,12 @@
             <v-col cols="6" lg="6">
               <order-sumary-card-pos :showTotal="true"
                 :gross="getFormatNum(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                  'title': 'ຍອດບິນ',
-                  'amount': getFormatNum(quotationList.length),
-                  'sale': getFormatNum(totalSale - totalDiscount),
-                  // 'discount': getFormatNum(totalDiscount),
-                  // 'gross': getFormatNum(totalSale - totalDiscount)
-                }">
+        'title': 'ຍອດບິນ',
+        'amount': getFormatNum(quotationList.length),
+        'sale': getFormatNum(totalSale - totalDiscount),
+        // 'discount': getFormatNum(totalDiscount),
+        // 'gross': getFormatNum(totalSale - totalDiscount)
+      }">
 
               </order-sumary-card-pos>
             </v-col>
@@ -115,7 +115,8 @@
           <!-- </v-chip> -->
         </template>
         <template v-slot:[`item.client.credit`]="{ item }">
-          <v-chip v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
+          <v-chip
+            v-if="new Date(dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0]) < new Date()"
             class="ma-2" color="red" text-color="white">
             {{ dueDate(item.bookingDate, item.client.credit).toISOString().split('T')[0] }}
           </v-chip>
@@ -142,9 +143,9 @@
             <i class="fas fa-eye"></i>
           </v-btn> -->
           <v-btn color="primary" text @click="viewItem(item)
-          wallet = true
-            ">
-<i class="fa-regular fa-pen-to-square"></i>
+      wallet = true
+        ">
+            <i class="fa-regular fa-pen-to-square"></i>
           </v-btn>
 
 
@@ -152,8 +153,8 @@
         <template v-slot:[`item.cancel`]="{ item }">
 
           <v-btn color="blue darken-1" text @click="cancelItem(item)
-          wallet = true
-            ">
+      wallet = true
+        ">
             <i class="fas fa-sync"></i>
           </v-btn>
         </template>
@@ -304,9 +305,6 @@ export default {
     await this.loadData()
   },
   watch: {
-    isedit(v) {
-      if (!v) this.form_data.cus_id = '1XXX'
-    },
     date(val) {
       this.dateFormatted = this.formatDate(this.date)
       this.loadData()
@@ -462,15 +460,23 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
   },
 }

@@ -494,15 +494,16 @@ export const replaceAll = (str, find, replace) => {
 
 
 export const confirmSwal = (swal, message, callbackFunc) => {
+    // 01532B, D00505
   swal({
     // icon: icon,
     title: 'ກະລຸນາຢືນຢັນ',
     text: message,
     confirmButtonText: 'ຢືນຢັນ',
-    confirmButtonColor: '#d33',
+    confirmButtonColor: '#01532B',
     showCancelButton: true,
     cancelButtonText: 'ອອກ',
-    cancelButtonColor: '#3085d6',
+    cancelButtonColor: '#D00505',
   }).then((result) => {
     if (result.isConfirmed) {
       callbackFunc()

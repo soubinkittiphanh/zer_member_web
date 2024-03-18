@@ -86,14 +86,14 @@
               <v-col cols="6" lg="6">
                 <order-sumary-card-pos :showTotal="true"
                   :gross="numberWithCommas(totalSaleRaw - (+this.unpaidCodOrder.saleRawNumber))" :orderDetail="{
-                    'title': 'ຍອດບິນ',
-                    'amount': numberWithCommas(activeOrderHeaderList.length),
-                    'sale': numberWithCommas(totalSale - totalDiscount),
-                    // 'discount': getFormatNum(totalDiscount),
-                    // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
-                    // 'gross': getFormatNum(totalSale - totalDiscount)
+        'title': 'ຍອດບິນ',
+        'amount': numberWithCommas(activeOrderHeaderList.length),
+        'sale': numberWithCommas(totalSale - totalDiscount),
+        // 'discount': getFormatNum(totalDiscount),
+        // 'gross': getFormatNum(totalSale.replaceAll(',', '') - totalDiscount.replaceAll(',', ''))
+        // 'gross': getFormatNum(totalSale - totalDiscount)
 
-                  }">
+      }">
 
                 </order-sumary-card-pos>
               </v-col>
@@ -475,15 +475,23 @@ export default {
     },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log("DATE FORMAT METHOD1: " + date);
+      const formattedDate = this.formatDateToISO(date);
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log("DATE PARSE METHOD1: " + date);
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      const year = date.getFullYear();
+      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
   },
 }

@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="text-center">
 
@@ -11,8 +9,8 @@
             <v-card-title>
                 <v-layout row wrap>
                     <v-col cols="6">
-                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
+                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false"
+                            transition="scale-transition" offset-y max-width="290px" min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="dateFormatted" label="ຈາກວັນທີ:" hint="MM/DD/YYYY format"
                                     persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
@@ -21,8 +19,8 @@
                             <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
                         </v-menu>
 
-                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" transition="scale-transition"
-                            offset-y max-width="290px" min-width="auto">
+                        <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false"
+                            transition="scale-transition" offset-y max-width="290px" min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="dateFormatted2" label="ຫາວັນທີ:" hint="MM/DD/YYYY format"
                                     persistent-hint prepend-icon="mdi-calendar" v-bind="attrs"
@@ -33,10 +31,12 @@
 
                     </v-col>
                     <v-col cols="6">
-                        <v-text-field disabled v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line hide-detailsx />
-                        <v-text-field disabled v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ" single-line
+                        <v-text-field disabled v-model="search" append-icon="mdi-magnify" label="ຊອກຫາ" single-line
                             hide-detailsx />
-                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
+                        <v-text-field disabled v-model="userId" append-icon="mdi-magnify" label="ລະຫັດຜູ້ຂາຍ"
+                            single-line hide-detailsx />
+                        <v-btn @click="loadTxn" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ
+                        </v-btn>
                     </v-col>
                 </v-layout>
             </v-card-title>
@@ -115,20 +115,31 @@ export default {
         formatAmount(value) {
             return getFormatNum(value)
         },
+
+        formatDate(date) {
+            if (!date) return null
+            console.log("DATE FORMAT METHOD1: " + date);
+            const formattedDate = this.formatDateToISO(date);
+            const [year, month, day] = formattedDate.split('-')
+            return `${month}/${day}/${year}`
+        },
         parseDate(date) {
+            console.log("DATE PARSE METHOD1: " + date);
             if (!date) return null
             const [month, day, year] = date.split('/')
             return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        },
+        formatDateToISO(date) {
+            if (!(date instanceof Date)) date = new Date(date);
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+            const day = `${date.getDate()}`.padStart(2, '0');
+            return `${year}-${month}-${day}`;
         },
         numberWithFormat(val) {
             return getFormatNum(val)
         },
 
-        formatDate(date) {
-            if (!date) return null
-            const [year, month, day] = date.split('-')
-            return `${month}/${day}/${year}`
-        },
         async loadTxn() {
             this.isloading = true
             try {

@@ -2,7 +2,7 @@
     <div class="text-center">
         <div>
             <v-dialog v-model="dialog" width="90%">
-                <ReceivingFormCRUD :is-update="isEdit" :headerId="selectedId" @close="triggerDialog" :key="apFormKey"
+                <ReceivingFormCRUD :is-update="isEdit" :headerId="selectedId" :key="apFormKey"
                     @close-dialog="dialog = false" @reload="loadTxn">
                 </ReceivingFormCRUD>
             </v-dialog>
@@ -70,6 +70,13 @@
                         <i class="fa-regular fa-pen-to-square"></i>
                     </v-btn>
                 </template>
+                <template v-slot:[`item.POST`]="{ item }">
+                    <v-btn color="primary" text @click="postToPayment(item)">
+                        <!-- <i class="fa-regular fa-pen-to-square"></i>
+                         -->
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </v-btn>
+                </template>
                 <template v-slot:[`item.total`]="{ item }">
                     {{ numberWithCommas(item.total) }}
                 </template>
@@ -85,7 +92,7 @@
 import PoForm from '~/components/po/PoForm.vue'
 import PurchasingFormCRUD from '~/components/PurchasingFormCRUD.vue'
 import ReceivingFormCRUD from '~/components/ReceivingFormCRUD.vue'
-import { swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
+import { confirmSwal, swalSuccess, swalError2, dayCount, getNextDate, getFirstDayOfMonth, getFormatNum } from '~/common'
 export default {
     components: { PoForm, PurchasingFormCRUD, ReceivingFormCRUD },
     mounted() {
@@ -137,18 +144,20 @@ export default {
                     value: 'function',
                     sortable: false,
                 },
+                {
+                    text: 'Post to payment',
+                    align: 'end',
+                    value: 'POST',
+                    sortable: false,
+                },
 
             ],
-            date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10),
+            date: getFirstDayOfMonth(),
             date2: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
                 .toISOString()
                 .substr(0, 10),
             dateFormatted: this.formatDate(
-                new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                    .toISOString()
-                    .substr(0, 10)
+                getFirstDayOfMonth()
             ),
             dateFormatted2: this.formatDate(
                 new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -157,15 +166,20 @@ export default {
             ),
         }
     },
+
+    watch: {
+        date(val) {
+            this.dateFormatted = this.formatDate(this.date)
+            this.loadTxn()
+        },
+        date2(val) {
+            this.dateFormatted2 = this.formatDate(this.date2)
+            this.loadTxn()
+        },
+    },
     methods: {
         numberWithCommas(value) {
             return getFormatNum(value)
-        },
-        parseDate(date) {
-            if (!date) return null
-
-            const [month, day, year] = date.split('/')
-            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
         },
         triggerDialog() {
             this.apFormKey += 1;
@@ -182,12 +196,31 @@ export default {
         },
         formatDate(date) {
             if (!date) return null
-            const [year, month, day] = date.split('-')
+            console.log("DATE FORMAT METHOD1: " + date);
+            const formattedDate = this.formatDateToISO(date);
+            const [year, month, day] = formattedDate.split('-')
             return `${month}/${day}/${year}`
+        },
+        parseDate(date) {
+            console.log("DATE PARSE METHOD1: " + date);
+            if (!date) return null
+            const [month, day, year] = date.split('/')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        },
+        formatDateToISO(date) {
+            if (!(date instanceof Date)) date = new Date(date);
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0'); // Months are 0-indexed
+            const day = `${date.getDate()}`.padStart(2, '0');
+            return `${year}-${month}-${day}`;
         },
         async loadTxn() {
             this.isloading = true
-            await this.$axios.get("/api/receiving/find").then(response => {
+            const date = {
+                startDate: this.date,
+                endDate: this.date2,
+            }
+            await this.$axios.get("/api/receiving/findByDate", { params: { date } }).then(response => {
                 this.txnList = [];
                 for (const iterator of response.data) {
                     iterator['bookingDate'] = iterator['bookingDate'].split('T')[0]
@@ -202,7 +235,38 @@ export default {
 
             })
             this.isloading = false
-        }
+        },
+        async postToPayment(recTxn) {
+            const transaction =
+            {
+                receivingId: recTxn.id,
+                bookingDate: recTxn.bookingDate,
+                paymentNumber: `POST FROM REC: ${recTxn.id}`,
+                payee: recTxn.vendor.name,
+                paymentId: null,
+                currencyId: recTxn.currencyId,
+                rate: recTxn.exchangeRate,
+                totalAmount: recTxn.total,
+                notes: recTxn.notes,
+                update_user: 1,
+                drAccount: null,
+                crAccount: 1,
+                isActive: true
+            }
+            confirmSwal(this.$swal, 'You are posting to Payment ?', async () => {
+                this.isloading = true
+                try {
+                    const response = await this.$axios.post(`/api/finanicial/ap/header/api/create`, transaction)
+                    console.log(`Transaction complete ${JSON.stringify(response.data)}`);
+                    swalSuccess(this.$swal, 'Succeed', 'Your transaction completed');
+                } catch (error) {
+                    console.error(`Something went wrong ${error}`);
+                    swalError2(this.$swal, "Error", 'ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃຫມ່ ພາຍຫລັງ ' + error);
+                }
+                this.isloading = false
+            })
+
+        },
 
     },
     computed: {
