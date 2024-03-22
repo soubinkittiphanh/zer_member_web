@@ -420,7 +420,7 @@ export default {
             let index = this.transaction.lines.indexOf(data);
             const currency = this.findCurrency(product['saleCurrencyId'])
             console.log(`$$$$$$ ${currency.id} $$$$$$`);
-            const localPrice = product['pro_price'] * currency['rate']
+            const localPrice = product['cost_price'] * currency['rate']
             // this.transaction.lines[index]['price'] = product['pro_price'] // *** Price original  ***
             this.transaction.lines[index]['price'] = localPrice //  *** Price base on exchange rate  ***
             const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
@@ -532,6 +532,14 @@ export default {
                 this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ອັດຕາຫົວຫນ່ວຍ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${rate}********`
                 return false; // Reach must be a positive number
             }
+            // Assuming price is a string that may contain commas
+            if (typeof price === 'string') {
+                // Remove commas from the price string
+                price = price.replace(/,/g, '');
+            }
+
+            // Convert the cleaned price string to a number
+            price = Number(price);
             console.log("Type of price ", typeof (price), ' [price] ', price);
             if (!Number.isFinite(price) || Number(price) <= 0) {
                 this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ລາຄາ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${price}********`

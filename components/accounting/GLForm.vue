@@ -401,14 +401,17 @@ export default {
         },
         newRow() {
             const defaultLine = {
-                // "id":null,
-                "qty": 0,
+                "bookingDate":null,
+                "postingReference":null,
+                "amount": 0,
+                "currencyId": null,
                 "rate": 1,
-                "price": 0,
-                "total": 0,
+                "drAccountId": null,
+                "crAccountId": null,
+                "description": '',
+                "localAmount": 0,
+                "source": 'GL',
                 "isActive": true,
-                "productId": 0,
-                "unitId": 1
             }
             if (this.transaction.poHeaderId) return swalError2(this.$swal, 'Error', 'ເນື່ອງຈາກ ໃບຮັບເຄື່ອງຜູ້ກັບໃບສັ່ງຊື້, ບໍ່ມາດເພີ່ມ ລາຍການອື່ນ ທີ່ບໍ່ມີໃນໃບສັ່ງຊື້ໄດ້')
             this.transaction.lines.push(defaultLine)

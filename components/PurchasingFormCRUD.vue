@@ -75,8 +75,8 @@
                                                 v-comma-thousand></v-text-field>
                                         </v-col> -->
                                         <v-col cols="12">
-                                            <v-text-field v-model="transaction.referenceNo" label="Q-ReferenceNo" disabled
-                                                v-comma-thousand></v-text-field>
+                                            <v-text-field v-model="transaction.referenceNo" label="Q-ReferenceNo"
+                                                disabled v-comma-thousand></v-text-field>
                                         </v-col>
 
                                     </v-row>
@@ -100,7 +100,8 @@
                                         <!-- <v-col cols="12">
                                             <v-text-field v-model="transaction.exchangeRate" disabled label="ອັດຕາແລກປ່ຽນ*"></v-text-field>
                                         </v-col> -->
-                                        <v-col cols="6">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
+                                        <v-col cols="6">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate)
+                                            }}</v-col>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" style="text-align: end;">
@@ -111,7 +112,7 @@
                                         <v-col cols="12" v-if="transaction.user">ຜູ້ລົງ: {{ transaction.user.cus_id }}
                                         </v-col>
                                         <v-col cols="12" v-if="transaction.user">ຊື່: {{ transaction.user.cus_name
-                                        }}</v-col>
+                                            }}</v-col>
                                         <v-col cols="12">
                                             <v-text-field disabled>
                                                 <template v-slot:label>
@@ -147,8 +148,8 @@
                                     v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <td>
-                                <v-autocomplete @input="unitChange(item)" item-text="name" item-value="id" :items="unitList"
-                                    label="ຫົວຫນ່ວຍ*" v-model="item.unitId"></v-autocomplete>
+                                <v-autocomplete @input="unitChange(item)" item-text="name" item-value="id"
+                                    :items="unitList" label="ຫົວຫນ່ວຍ*" v-model="item.unitId"></v-autocomplete>
                             </td>
                             <td>
                                 <v-text-field @input="unitRateChange(item)" v-model="item.rate" label="ຈນ ຕໍ່ ຫົວຫນ່ວຍ"
@@ -158,8 +159,8 @@
                                 <!-- <v-chip class="ml-0" color="warning" variant="outlined" @click="pricingLogig(item)">
                                     {{ getFormatNum(item.price) }}
                                 </v-chip> -->
-                                <v-text-field @input="priceChange(item)" v-model="item.price" label="ລາຄາ" v-comma-thousand
-                                    :rules="[numberCommaRule]"></v-text-field>
+                                <v-text-field @input="priceChange(item)" v-model="item.price" label="ລາຄາ"
+                                    v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <!-- <td>
                                 <v-text-field @input="discountChange(item)" :rules="[numberCommaRule]" v-comma-thousand
@@ -341,7 +342,7 @@ export default {
             const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
             // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price) 
+            this.transaction.lines[index]['total'] = ((rate * qty) * price)
         },
         unitRateChange(data) {
             console.log("Unit rate change");
@@ -350,15 +351,15 @@ export default {
             const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
             // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price) 
+            this.transaction.lines[index]['total'] = ((rate * qty) * price)
         },
         priceChange(data) {
-            console.log("Price change...");
             let index = this.transaction.lines.indexOf(data);
             const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
             const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
             // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
+            console.log("Price change...",price);
             this.transaction.lines[index]['total'] = ((rate * qty) * price)
         },
         discountChange(data) {
@@ -368,7 +369,7 @@ export default {
             const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
             // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price) 
+            this.transaction.lines[index]['total'] = ((rate * qty) * price)
         },
         unitChange(data) {
             console.log("Unit change");
@@ -379,7 +380,7 @@ export default {
             const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
             // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((unit['rate'] * qty) * price) 
+            this.transaction.lines[index]['total'] = ((unit['rate'] * qty) * price)
         },
         productChange(data) {
             console.log("Product change");
@@ -391,14 +392,14 @@ export default {
             let index = this.transaction.lines.indexOf(data);
             const currency = this.findCurrency(product['saleCurrencyId'])
             console.log(`$$$$$$ ${currency.id} $$$$$$`);
-            const localPrice = product['pro_price'] * currency['rate']
+            const localPrice = product['cost_price'] * currency['rate']
             // this.transaction.lines[index]['price'] = product['pro_price'] // *** Price original  ***
             this.transaction.lines[index]['price'] = localPrice //  *** Price base on exchange rate  ***
             const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
             // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
             const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
             const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price) 
+            this.transaction.lines[index]['total'] = ((rate * qty) * price)
         },
         newRow() {
             const defaultLine = {
@@ -458,6 +459,14 @@ export default {
                 this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ອັດຕາຫົວຫນ່ວຍ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${rate}********`
                 return false; // Reach must be a positive number
             }
+            // Assuming price is a string that may contain commas
+            if (typeof price === 'string') {
+                // Remove commas from the price string
+                price = price.replace(/,/g, '');
+            }
+
+            // Convert the cleaned price string to a number
+            price = Number(price);
             console.log("Type of price ", typeof (price), ' [price] ', price);
             if (!Number.isFinite(price) || Number(price) <= 0) {
                 this.validateErrorMessage = `******** Error ລາຍການທີ #${errorLineNumber} ລາຄາ ຕ້ອງໃຫຍ່ກ່ອນ 0  current value is ${price}********`
@@ -583,6 +592,7 @@ export default {
                 iterator.discount = parseInt(replaceAll(iterator.discount, ',', ''))
                 iterator.qty = parseInt(replaceAll(iterator.qty, ',', ''))
                 iterator.rate = parseInt(replaceAll(iterator.rate, ',', ''))
+                iterator.price = parseInt(replaceAll(iterator.price, ',', ''))
                 // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
             }
             console.log("******** No error found process posting ********");
