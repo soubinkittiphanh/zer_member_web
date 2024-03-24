@@ -7,7 +7,8 @@
             <customer-list @close-dialog="customerDialog = false"></customer-list>
         </v-dialog>
         <v-dialog v-model="cancelConfirmDialog" max-width="1024">
-            <cancel-ticket-form @refresh="$emit('reload')" :id="headerId" :customerId="onlineCustomerId" @close-dialog="cancelConfirmDialog = false"></cancel-ticket-form>
+            <cancel-ticket-form @refresh="$emit('reload')" :id="headerId" :customerId="onlineCustomerId"
+                @close-dialog="cancelConfirmDialog = false"></cancel-ticket-form>
         </v-dialog>
         <v-dialog v-model="pricingDialog" max-width="1024">
             <pricing-option :key="pricingDialogKey" :isBackend="true" @new-price-update="updatePricing"
@@ -35,7 +36,8 @@
                             rounded>
                             <span class="mdi mdi-cancel"></span>Make to invoice
                         </v-btn>
-                        <v-btn :disabled="!isUpdate || !transaction.isActive" size="large" variant="outlined" @click="cancelOrder" class="warning" rounded>
+                        <v-btn :disabled="!isUpdate || !transaction.isActive" size="large" variant="outlined"
+                            @click="cancelOrder" class="warning" rounded>
                             <span class="mdi mdi-printer-outline"></span>ຍົກເລີກບິນ
                         </v-btn>
                         <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
@@ -62,16 +64,17 @@
                                                 hint="ເດຶອນ/ວັນ/ປີ 12/31/2023"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-autocomplete item-text="payment_code" item-value="id" :items="paymentList"
-                                                label="ການຊຳລະ*" v-model="transaction.paymentId"></v-autocomplete>
+                                            <v-autocomplete item-text="payment_code" item-value="id"
+                                                :items="paymentList" label="ການຊຳລະ*"
+                                                v-model="transaction.paymentId"></v-autocomplete>
                                         </v-col>
                                         <v-col cols="12">
                                             <v-text-field v-model="transaction.discount" label="ສ່ວນຫລຸດ*" required
                                                 v-comma-thousand></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="transaction.referenceNo" label="Q-ReferenceNo" disabled
-                                                v-comma-thousand></v-text-field>
+                                            <v-text-field v-model="transaction.referenceNo" label="Q-ReferenceNo"
+                                                disabled v-comma-thousand></v-text-field>
                                         </v-col>
 
                                     </v-row>
@@ -90,7 +93,8 @@
                                         <!-- <v-col cols="12">
                                             <v-text-field v-model="transaction.exchangeRate" disabled label="ອັດຕາແລກປ່ຽນ*"></v-text-field>
                                         </v-col> -->
-                                        <v-col cols="12">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate) }}</v-col>
+                                        <v-col cols="12">ອັດຕາແລກປ່ຽນ: {{ getFormatNum(transaction.exchangeRate)
+                                            }}</v-col>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" style="text-align: end;">
@@ -100,7 +104,7 @@
                                         <v-col cols="12" v-if="transaction.user">ຜູ້ລົງ: {{ transaction.user.cus_id }}
                                         </v-col>
                                         <v-col cols="12" v-if="transaction.user">ຊື່: {{ transaction.user.cus_name
-                                        }}</v-col>
+                                            }}</v-col>
                                         <v-col cols="12">
                                             <v-text-field disabled>
                                                 <template v-slot:label>
@@ -136,11 +140,11 @@
                                     v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <td>
-                                <v-autocomplete @input="unitChange(item)" item-text="name" item-value="id" :items="unitList"
-                                    label="ຫົວຫນ່ວຍ*" v-model="item.unitId"></v-autocomplete>
+                                <v-autocomplete @input="unitChange(item)" item-text="name" item-value="id"
+                                    :items="unitList" label="ຫົວຫນ່ວຍ*" v-model="item.unitId"></v-autocomplete>
                             </td>
-                            <td> <v-text-field @input="unitRateChange(item)" v-model="item.unitRate" label="ຈນ ຕໍ່ ຫົວຫນ່ວຍ"
-                                    v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
+                            <td> <v-text-field @input="unitRateChange(item)" v-model="item.unitRate"
+                                    label="ຈນ ຕໍ່ ຫົວຫນ່ວຍ" v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <td style="text-align: right;">
                                 <v-chip class="ml-0" color="warning" variant="outlined" @click="pricingLogig(item)">
@@ -156,7 +160,8 @@
                                 {{ getFormatNum(item.total) }}
                             </td>
                             <td>
-                                <v-btn :disabled="!transaction.isActive || !updateAllow" color="error" text @click="deleteItem(item)" v-on:keydown="handleKeyDown">
+                                <v-btn :disabled="!transaction.isActive || !updateAllow" color="error" text
+                                    @click="deleteItem(item)" v-on:keydown="handleKeyDown">
 
                                     <i class="fas fa-trash"></i>
                                 </v-btn>
@@ -186,7 +191,8 @@
                 <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <v-btn :disabled="!transaction.isActive || !updateAllow" color="primary" rounded variant="text" @click="postTransaction">
+                <v-btn :disabled="!transaction.isActive || !updateAllow" color="primary" rounded variant="text"
+                    @click="postTransaction">
                     Save
                 </v-btn>
             </v-card-actions>
@@ -242,8 +248,8 @@ export default {
         // TODO: Add pricing option here
     },
     methods: {
-        cancelOrder(){
-            this.onlineCustomerId = this.transaction.dynamic_customer.id;
+        cancelOrder() {
+            if (this.transaction.dynamic_customer) this.onlineCustomerId = this.transaction.dynamic_customer.id;
             this.cancelConfirmDialog = true;
         },
         updatePricing(priceInfo) {
@@ -255,14 +261,14 @@ export default {
             const qty = this.transaction.lines[idx]["quantity"]
             const unitRate = this.transaction.lines[idx]["unitRate"]
             const discount = this.transaction.lines[idx]["discount"]
-            if(priceInfo['type']!='Price') {
+            if (priceInfo['type'] != 'Price') {
                 // ************ Increase price by percentage ************ //
                 let currentPrice = this.transaction.lines[idx]['price']
-                const updatedPrice = (currentPrice * newPrice / 100)+currentPrice;
-                this.transaction.lines[idx]['total'] = (qty * unitRate*(updatedPrice)) - discount;
+                const updatedPrice = (currentPrice * newPrice / 100) + currentPrice;
+                this.transaction.lines[idx]['total'] = (qty * unitRate * (updatedPrice)) - discount;
                 this.transaction.lines[idx]['price'] = updatedPrice;
-            }else{
-                this.transaction.lines[idx]['total'] = (qty * unitRate*(newPrice)) - discount;
+            } else {
+                this.transaction.lines[idx]['total'] = (qty * unitRate * (newPrice)) - discount;
                 this.transaction.lines[idx]['price'] = newPrice;
             }
         },
@@ -653,7 +659,7 @@ export default {
     },
     data() {
         return {
-            cancelConfirmDialog:false,
+            cancelConfirmDialog: false,
             productPricingSelected: null,
             pricingDialogKey: 1,
             pricingDialog: false,
@@ -667,10 +673,10 @@ export default {
             validateErrorMessage: '',
             sheet: false,
             errorLineNumber: null,
-            onlineCustomerId:null,
+            onlineCustomerId: null,
             isloading: false,
             transaction: {
-                isActive:true,
+                isActive: true,
                 exchangeRate: 1,
                 lines: []
             },
