@@ -49,7 +49,7 @@ export default {
     async mounted() {
         await this.loadProduct()
         await this.loadCategory()
-        await this.loadPayment()
+        // await this.loadPayment()
 
         window.addEventListener('keydown', this.handleKeyDown);
     },
@@ -152,21 +152,21 @@ export default {
                 })
             this.isloading = false;
         },
-        async loadPayment() {
-            this.isloading = true;
-            this.paymentList = []
-            await this.$axios
-                .get('/api/paymentMethod/find')
-                .then((res) => {
-                    for (const iterator of res.data) {
-                        this.paymentList.push(iterator);
-                    }
-                })
-                .catch((er) => {
-                    swalError2(this.$swal, "Error", er)
-                })
-            this.isloading = false;
-        },
+        // async loadPayment() {
+        //     this.isloading = true;
+        //     this.paymentList = []
+        //     await this.$axios
+        //         .get('/api/paymentMethod/find')
+        //         .then((res) => {
+        //             for (const iterator of res.data) {
+        //                 this.paymentList.push(iterator);
+        //             }
+        //         })
+        //         .catch((er) => {
+        //             swalError2(this.$swal, "Error", er)
+        //         })
+        //     this.isloading = false;
+        // },
     }
 }
 </script>

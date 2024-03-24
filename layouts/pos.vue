@@ -417,7 +417,7 @@ export default {
         previewTicket() {
             this.tickePreviewDialog = true;
         },
-        ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation', 'clearCustomerFormAction']),
+        ...mapActions(['initiateData', 'setSelectedTerminal', 'setSelectedLocation', 'clearCustomerFormAction','setSelectedPayment']),
         checkAllInitData() {
             // setInterval(() => {
             console.info(`...loading pos layout ${this.findAllTerminal.length}... ${new Date().toLocaleTimeString()}`);
@@ -743,6 +743,7 @@ export default {
                     // console.log('Data: ' + er)
                     swalError2(this.$swal, "Error", er)
                 })
+                this.selectePaymentMethod(this.paymentList[0]['id'])
             this.isloading = false;
         },
         async loadCurrency() {
