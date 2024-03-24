@@ -11,10 +11,6 @@
             <cancel-ticket-form @refresh="$emit('reload')" :id="headerId" :customerId="onlineCustomerId"
                 @close-dialog="cancelConfirmDialog = false"></cancel-ticket-form>
         </v-dialog>
-        <v-dialog v-model="pricingDialog" max-width="1024">
-            <pricing-option :key="pricingDialogKey" :isBackend="true" @new-price-update="updatePricing"
-                @close-dialog="pricingDialog = false" :record-id="productPricingSelected"></pricing-option>
-        </v-dialog>
         <!-- ************ Bottom sheet show error message ************* -->
         <v-bottom-sheet v-model="sheet" inset>
             <v-sheet class="text-center" height="200px">
@@ -33,19 +29,11 @@
                     <v-col cols="6">
                         <v-chip class="pa-5" color="primary" label text-color="white">
                             <v-icon start>mdi-label</v-icon>
-                            <h3>General ledger transaction len :{{ accountList.length }}</h3>
+                            <h3>General ledger</h3>
                         </v-chip>
                     </v-col>
                     <v-col cols="6" style="text-align: right;">
-                        <v-btn v-if="isQuotation" size="large" variant="outlined" @click="postToInvoice" class="primary"
-                            rounded>
-                            <span class="mdi mdi-cancel"></span>Make to invoice
-                        </v-btn>
-                        <v-btn :disabled="!isUpdate || !transaction.isActive" size="large" variant="outlined"
-                            @click="cancelOrder" class="warning" rounded>
-                            <span class="mdi mdi-printer-outline"></span>ຍົກເລີກບິນ
-                        </v-btn>
-                        <v-btn size="large" variant="outlined" @click="quotationPreview" class="primary" rounded>
+                        <v-btn size="large" variant="outlined" @click="null" class="primary" rounded>
                             <span class="mdi mdi-printer-outline"></span>Print
                         </v-btn>
                     </v-col>
@@ -76,7 +64,7 @@
                                 </v-col>
                                 <v-col cols="4">
                                     <v-row>
-                             
+
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" style="text-align: end;">
@@ -88,7 +76,7 @@
                                         <v-col cols="12">
                                             <v-text-field disabled>
                                                 <template v-slot:label>
-                                                    <span style="color: black; font-weight: bold;">{{ `Total Amount:
+                                                    <span style="color: black; font-weight: bold;">{{ `Total Amount LCY:
                                                         ${getFormatNum(grandTotal)}` }}</span>
                                                 </template>
                                             </v-text-field>
@@ -113,42 +101,39 @@
                                 {{ transaction.lines.indexOf(item) + 1 }}
                             </td>
                             <td>
-                                <v-autocomplete
-                                    @input="productChange(item)" item-text="code" item-value="id"
+                                <v-autocomplete @input="currencyChange(item)" item-text="code" item-value="id"
                                     :items="currencyList" label="currency*" v-model="item.currencyId"></v-autocomplete>
                             </td>
-                            <td> <v-text-field @input="quantityChange(item)" v-model="item.qty" label="ຈຳນວນ"
+                            <td> <v-text-field @input="amountChange(item)" v-model="item.amount" label="ຈຳນວນ"
                                     v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
-                            <td> <v-text-field @input="quantityChange(item)" v-model="item.qty" label="XRate"
+                            <td> <v-text-field @input="rateChange(item)" v-model="item.rate" label="XRate"
                                     v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
                             </td>
                             <td>
-                                <v-autocomplete @input="unitChange(item)" item-text="accountNumber" item-value="id"
-                                    :items="accountList" label="DR*" v-model="item.drAccountId">
+                                <v-autocomplete item-text="accountNumber" item-value="id" :items="accountList"
+                                    label="DR*" v-model="item.drAccountId">
                                     <template #item="{ item }">
                                         {{ `${item.accountNumber} - ${item.accountName}` }}
                                     </template>
                                 </v-autocomplete>
                             </td>
                             <td>
-                                <v-autocomplete @input="unitChange(item)" item-text="accountNumber" item-value="id"
-                                    :items="accountList" label="CR*" v-model="item.crAccountId">
+                                <v-autocomplete item-text="accountNumber" item-value="id" :items="accountList"
+                                    label="CR*" v-model="item.crAccountId">
                                     <template #item="{ item }">
                                         {{ `${item.accountNumber} - ${item.accountName}` }}
                                     </template>
                                 </v-autocomplete>
                             </td>
                             <td>
-                                <v-text-field @input="unitRateChange(item)" v-model="item.description" label="ເນື້ອໃນ"
-                                    v-comma-thousand :rules="[numberCommaRule]"></v-text-field>
+                                <v-text-field v-model="item.description" label="ເນື້ອໃນ"></v-text-field>
                             </td>
                             <td style="text-align: right;">
                                 {{ getFormatNum(item.localAmount) }}
                             </td>
                             <td>
-                                <v-btn :disabled="!transaction.isActive || !updateAllow" color="error" text
-                                    @click="deleteItem(item)" v-on:keydown="handleKeyDown">
+                                <v-btn color="error" text @click="deleteItem(item)" v-on:keydown="handleKeyDown">
                                     <i class="fas fa-trash"></i>
                                 </v-btn>
                             </td>
@@ -172,8 +157,7 @@
                 <v-btn color="warning" rounded variant="text" @click="toggleDialog">
                     Close
                 </v-btn>
-                <v-btn :disabled="!transaction.isActive || !updateAllow" color="primary" rounded variant="text"
-                    @click="postTransaction">
+                <v-btn color="primary" rounded variant="text" @click="postTransaction">
                     Save
                 </v-btn>
             </v-card-actions>
@@ -191,29 +175,13 @@ export default {
     name: 'gl-form',
     // components: { PricingOption, CancelTicketForm },
     props: {
-        POTransaction: {
-            type: Object,
-            default: null,
-        },
-        sourceAPLID: {
-            type: String,
-            default: null,
-        },
-        headerId: {
+        GLId: {
             type: Number,
-            default: 0,
-        },
-        isQuotation: {
-            type: Boolean,
-            default: false
+            default: null,
         },
         isUpdate: {
             type: Boolean,
-            default: false
-        },
-        updateAllow: {
-            type: Boolean,
-            default: true
+            default: false,
         },
     },
     directives: {
@@ -223,31 +191,13 @@ export default {
         await this.loadChartOfAccount();
         const today = new Date().toISOString().substr(0, 10);
         console.log(`PO Transaction: ${JSON.stringify(this.POTransaction)}`);
-        if (this.sourceAPLID == 'PO') {
-            // 
-            // ********* We need to check if PO already receive be4, we need to load that RECEIVE  *******//
-            // await this.loadTransactionFromPoID(this.POTransaction.id)
-            // ********* CHECK IF THIS PO HAS ALREADY RECEIVING ID CREATED *******//
-            this.transaction.lines = this.POTransaction.lines
-            this.transaction.poHeaderId = this.POTransaction.id
-            this.transaction.bookingDate = today;
-            this.transaction.vendorId = this.POTransaction.vendorId;
-            this.transaction.paymentId = 1;
-            this.transaction.locationId = this.currentTerminal['locationId']
-            this.transaction.currencyId = this.POTransaction.currencyId;
-            return await this.loadTransactionFromPoID(this.POTransaction.id)
-        }
+        this.transaction.bookingDate = today;
         if (this.isUpdate) {
             console.log("View old record");
             this.isloading = true
             await this.loadTransaction()
             this.isloading = false
         } else {
-            this.transaction.bookingDate = today;
-            this.transaction.deliveryDate = today;
-            this.transaction.clientId = 1;
-            this.transaction.paymentId = 1;
-            this.transaction.currencyId = 1;
             this.newRow();
         }
 
@@ -263,42 +213,8 @@ export default {
             })
             this.isloading = false
         },
-        cancelOrder() {
-            this.onlineCustomerId = this.transaction.dynamic_customer.id;
-            this.cancelConfirmDialog = true;
-        },
-        updatePricing(priceInfo) {
-            let newPrice = priceInfo['amount']
-            console.log(`New pricing ${newPrice}`);
-            console.log(`New pricing ${JSON.stringify(this.transaction.lines[0])}`);
-            const idx = this.transaction.lines.findIndex(el => el['productId'] == this.productPricingSelected)
-            if (idx < 0) return
-            const qty = this.transaction.lines[idx]["qty"]
-            const rate = this.transaction.lines[idx]["rate"]
-            const discount = this.transaction.lines[idx]["discount"]
-            if (priceInfo['type'] != 'Price') {
-                // ************ Increase price by percentage ************ //
-                let currentPrice = this.transaction.lines[idx]['price']
-                const updatedPrice = (currentPrice * newPrice / 100) + currentPrice;
-                this.transaction.lines[idx]['total'] = (qty * rate * (updatedPrice)) - discount;
-                this.transaction.lines[idx]['price'] = updatedPrice;
-            } else {
-                this.transaction.lines[idx]['total'] = (qty * rate * (newPrice)) - discount;
-                this.transaction.lines[idx]['price'] = newPrice;
-            }
-        },
-        pricingLogig(item) {
-            console.log(`PRINCING CLICK....${JSON.stringify(item)}`);
-            this.productPricingSelected = item['productId'];
-            this.pricingDialogKey += 1
-            this.pricingDialog = true;
-        },
         findCurrency(currencyId) {
             return this.findAllCurrency.find(el => el.id == currencyId);
-        },
-        quotationPreview() {
-            const path = this.isQuotation ? 'PDFQuotation' : 'PDFInvoice'
-            window.open(`/admin/${path}/${this.headerId}`, '_blank');
         },
         handleKeyDown(event) {
             if (event.key === 'Tab') {
@@ -307,11 +223,26 @@ export default {
                 this.newRow()
             }
         },
-        currencyChange() {
-            const currency = this.currencyList.find(el => el['id'] == this.transaction.currencyId);
+        currencyChange(item) {
+            const currency = this.currencyList.find(el => el['id'] == item.currencyId);
+            let index = this.transaction.lines.indexOf(item);
             if (!currency) return
-            this.transaction.exchangeRate = currency['rate'];
-            console.log(`Rate exchange ${currency['rate']} real value ${this.transaction.exchangeRate}`);
+            this.transaction.lines[index]['rate'] = currency['rate'];
+            const amount = replaceAll(this.transaction.lines[index]['amount'], ',', '');
+            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
+            this.transaction.lines[index]['localAmount'] = amount * rate
+        },
+        amountChange(item) {
+            let index = this.transaction.lines.indexOf(item);
+            const amount = replaceAll(this.transaction.lines[index]['amount'], ',', '');
+            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
+            this.transaction.lines[index]['localAmount'] = amount * rate
+        },
+        rateChange(item) {
+            let index = this.transaction.lines.indexOf(item);
+            const amount = replaceAll(this.transaction.lines[index]['amount'], ',', '');
+            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
+            this.transaction.lines[index]['localAmount'] = amount * rate
         },
         async deleteItem(item) {
             // TODO: Delete line not reduct card 
@@ -333,76 +264,11 @@ export default {
                 console.log("Line has no id");
             }
         },
-        quantityChange(data) {
-            console.log("Qty change");
-            let index = this.transaction.lines.indexOf(data);
-            const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
-            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
-            // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
-            const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price)
-        },
-        unitRateChange(data) {
-            console.log("Unit rate change");
-            let index = this.transaction.lines.indexOf(data);
-            const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
-            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
-            // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
-            const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price)
-        },
-        priceChange(data) {
-            console.log("Price change...");
-            let index = this.transaction.lines.indexOf(data);
-            const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
-            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
-            // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
-            const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price)
-        },
-        discountChange(data) {
-            console.log("Discount change");
-            let index = this.transaction.lines.indexOf(data);
-            const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
-            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
-            // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
-            const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price)
-        },
-        unitChange(data) {
-            console.log("Unit change");
-            const unit = this.unitList.find(el => el['id'] == data['unitId']);
-            if (unit == undefined) return
-            let index = this.transaction.lines.indexOf(data);
-            this.transaction.lines[index]['rate'] = unit['rate']
-            const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
-            // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
-            const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            this.transaction.lines[index]['total'] = ((unit['rate'] * qty) * price)
-        },
-        productChange(data) {
-            console.log("Product change");
-            const product = this.productList.find(el => el['id'] == data['productId']);
-            if (product == undefined) {
-                console.log("Product is not define");
-                return
-            }
-            let index = this.transaction.lines.indexOf(data);
-            const currency = this.findCurrency(product['saleCurrencyId'])
-            console.log(`$$$$$$ ${currency.id} $$$$$$`);
-            const localPrice = product['pro_price'] * currency['rate']
-            // this.transaction.lines[index]['price'] = product['pro_price'] // *** Price original  ***
-            this.transaction.lines[index]['price'] = localPrice //  *** Price base on exchange rate  ***
-            const qty = replaceAll(this.transaction.lines[index]['qty'], ',', '');
-            // const discount = replaceAll(this.transaction.lines[index]['discount'], ',', '');
-            const price = replaceAll(this.transaction.lines[index]['price'], ',', '');
-            const rate = replaceAll(this.transaction.lines[index]['rate'], ',', '');
-            this.transaction.lines[index]['total'] = ((rate * qty) * price)
-        },
         newRow() {
+            if (this.isUpdate) return swalError2(this.$swal, 'Error', 'Operation fail ບໍ່ສາມາດເພີ່ມໄດ້ເນື່ອງຈາກ ເປັນລາຍການແກ້ໄຂ')
             const defaultLine = {
-                "bookingDate":null,
-                "postingReference":null,
+                "postingReference": 'DUMMY',
+                "bookingDate": null,
                 "amount": 0,
                 "currencyId": null,
                 "rate": 1,
@@ -413,45 +279,29 @@ export default {
                 "source": 'GL',
                 "isActive": true,
             }
-            if (this.transaction.poHeaderId) return swalError2(this.$swal, 'Error', 'ເນື່ອງຈາກ ໃບຮັບເຄື່ອງຜູ້ກັບໃບສັ່ງຊື້, ບໍ່ມາດເພີ່ມ ລາຍການອື່ນ ທີ່ບໍ່ມີໃນໃບສັ່ງຊື້ໄດ້')
             this.transaction.lines.push(defaultLine)
         },
         openCustomerDialog() {
             this.customerDialog = true;
         },
         clearLineIdForCreateFunction() {
-            let linesWithNoId = [];
+            // let linesWithNoId = [];
             for (const iterator of this.transaction.lines) {
-                if (this.sourceAPLID == 'PO') {
-                    iterator['poLineId'] = iterator.id
-                }
                 iterator.id = null
-                linesWithNoId.push(iterator)
+                iterator.bookingDate = this.transaction.bookingDate
             }
-            this.transaction.lines = linesWithNoId;
+            // this.transaction.lines = linesWithNoId;
         },
         async loadTransaction() {
             await this.$axios
-                .get(`api/${this.apiLine}/find/${this.headerId}`)
+                .get(`api/${this.apiLine}/find/${this.GLId}`)
                 .then((res) => {
-                    this.transaction = res.data;
-                    console.log("Data ", res.data);
+                    this.transaction.bookingDate = res.data.bookingDate;
+                    this.transaction.lines.push(res.data);
                 })
                 .catch((er) => {
                     swalError2(this.$swal, 'Error', 'Could no load data ' + er.Error)
                 })
-        },
-        async loadTransactionFromPoID(poHeaderId) {
-            console.warn(`Check if this PO already has receiving `)
-            try {
-                const response = await this.$axios.get(`api/receiving/find/poId/${poHeaderId}`)
-                this.transaction = response.data;
-                console.log("Data ", response.data);
-                this.isUpdate = true;
-                this.headerId = this.transaction.id
-            } catch (error) {
-                console.error(`this poId is not yet recevieved`);
-            }
         },
         validateLine(obj, errorLineNumber) {
             // Check if the object has all required properties
@@ -524,90 +374,22 @@ export default {
         toggleDialog() {
             this.$emit('close-dialog')
         },
-        async postToInvoice() {
-            if (this.isloading || !this.validateHeader()) return;
-            this.isloading = true
-            this.errorLineNumber = null
-            const draftInvoiceLine = []
-            for (const iterator of this.transaction.lines) {
-                this.errorLineNumber = this.transaction.lines.indexOf(iterator)
-                if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
-                    this.sheet = true
-                    this.isloading = false
-                    return
-                }
-                // iterator.id = null
-                iterator.discount = parseInt(replaceAll(iterator.discount, ',', ''))
-                iterator.qty = parseInt(replaceAll(iterator.qty, ',', ''))
-                iterator.rate = parseInt(replaceAll(iterator.rate, ',', ''))
-                draftInvoiceLine.push(iterator)
-                // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
-            }
-            // Remove Line id for insert as new in Invoice //
-            for (const iterator of draftInvoiceLine) {
-                iterator.id = null
-            }
-            console.log("******** No error found process posting ********");
-            this.errorLineNumber = null
-            this.transaction.userId = this.user.id
-            this.transaction.total = this.grandTotal
-            // this.transaction.poId = this.headerId
-            this.transaction.lines = draftInvoiceLine
-            // this.transaction.discount = replaceAll(this.transaction.discount, ',', '')
-            this.transaction.locationId = this.currentTerminal['locationId']
-            console.log(`Amount total ${this.transaction.total}`);
-            // ********** If header has data, that means we go for update API ********** //
-            await this.$axios
-                .post(`api/sale/create`, this.transaction)
-                .then((res) => {
-                    this.$emit('reload')
-                    swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
-                })
-                .catch((er) => {
-                    console.error(er)
-                    swalError2(this.$swal, 'Error', er.response.data)
-                    const outOfStockProductId = er.response.data.split("#")[1]
-                    if (outOfStockProductId != undefined) {
-                        this.validateErrorMessage = `********  ສິນຄ້າໃນສ້າງບໍ່ພຽງພໍ ********`
-                        this.errorLineNumber = this.transaction.lines.indexOf(this.transaction.lines.find(el => el.productId == outOfStockProductId))
-                        this.sheet = true
-                    }
-                    console.log('Error ===>: ' + er)
-                })
-
-
-            this.isloading = false
-        },
         async postTransaction() {
-            if (this.isloading || !this.validateHeader()) return;
+            // if (this.isloading || !this.validateHeader()) return;
+            if (this.isloading) return;
             this.isloading = true
 
             this.errorLineNumber = null
             for (const iterator of this.transaction.lines) {
-                this.errorLineNumber = this.transaction.lines.indexOf(iterator)
-                if (!this.validateLine(iterator, this.errorLineNumber + 1)) {
-                    this.sheet = true
-                    this.isloading = false
-                    return
-                }
-                iterator.discount = parseInt(replaceAll(iterator.discount, ',', ''))
-                iterator.qty = parseInt(replaceAll(iterator.qty, ',', ''))
+                iterator.amount = parseInt(replaceAll(iterator.amount, ',', ''))
+                iterator.localAmount = parseInt(replaceAll(iterator.localAmount, ',', ''))
                 iterator.rate = parseInt(replaceAll(iterator.rate, ',', ''))
-                // iterator['total'] = ((iterator['quantity'] * iterator['unitRate']) * iterator['price']) - iterator['discount']
             }
-            console.log("******** No error found process posting ********");
-            this.errorLineNumber = null
-            this.transaction.userId = this.user.id
-            this.transaction.total = this.grandTotal
-            // this.transaction.discount = replaceAll(this.transaction.discount, ',', '')
-            // this.transaction.locationId = this.currentTerminal['locationId']
-            console.log(`Amount total ${this.transaction.total}`);
-
-
             if (this.isUpdate) {
                 // ********** If header has data, that means we go for update API ********** //
+                this.transaction.lines[0]['bookingDate'] = this.transaction.bookingDate;
                 await this.$axios
-                    .put(`api/${this.apiLine}/update/${this.headerId}`, this.transaction)
+                    .put(`api/${this.apiLine}/update/${this.GLId}`, this.transaction.lines[0])
                     .then((res) => {
                         this.$emit('reload')
                         this.$emit('close-dialog')
@@ -629,7 +411,7 @@ export default {
                 // ********** Go for create API ********** //
                 this.clearLineIdForCreateFunction()
                 await this.$axios
-                    .post(`api/${this.apiLine}/create`, this.transaction)
+                    .post(`api/${this.apiLine}/createMulti`, this.transaction)
                     .then((res) => {
                         this.$emit('reload')
                         this.$emit('close-dialog')
@@ -647,7 +429,6 @@ export default {
                         console.log('Error ===>: ' + er)
                     })
             }
-
             this.isloading = false
         }
     },
@@ -665,7 +446,7 @@ export default {
             return this.$auth.user || ''
         },
         apiLine() {
-            return 'receiving';
+            return 'gl';
         },
         productList() {
             return this.findAllProduct
@@ -687,7 +468,7 @@ export default {
         },
         grandTotal() {
             let total = this.transaction.lines.reduce((total, item) => {
-                return total + item.total;
+                return total + item.localAmount;
             }, 0);
             return total
             // return total;
@@ -697,18 +478,12 @@ export default {
     },
     data() {
         return {
-            poStatus: [
-                { name: 'PENDING' },
-                { name: 'PARTIAL' },
-                { name: 'COMPLETED' },
-            ],
             accountList: [],
             cancelConfirmDialog: false,
             productPricingSelected: null,
             pricingDialogKey: 1,
             pricingDialog: false,
             search: '',
-            vendorList: [],
             numberCommaRule: (value) => {
                 const regex = /^[0-9,]*$/;
                 return regex.test(value) || 'Only numbers and commas are allowed';
@@ -732,37 +507,36 @@ export default {
             },
             headers: [
                 { text: '#', align: 'start', value: '' },
-                { text: 'Currency', align: 'end', value: 'product.pro_name' },
-                { text: 'ຈຳນວນ', align: 'end', value: 'qty' },
-
+                { text: 'ຈຳນວນ', align: 'end', value: 'amount' },
+                { text: 'Currency', align: 'end', value: 'currencyId' },
                 {
                     text: 'ອັດຕາແລກປ່ຽນ',
-                    align: 'end',
-                    value: 'unitId',
-                    sortable: true,
-                },
-                {
-                    text: 'DR',
                     align: 'end',
                     value: 'rate',
                     sortable: true,
                 },
                 {
+                    text: 'DR',
+                    align: 'end',
+                    value: 'drAccountId',
+                    sortable: true,
+                },
+                {
                     text: 'CR',
                     align: 'end',
-                    value: 'price',
+                    value: 'crAccountId',
                     sortable: true,
                 },
                 {
                     text: 'ເນື້ອໃນ',
                     align: 'end',
-                    value: 'total',
+                    value: 'description',
                     sortable: false,
                 },
                 {
                     text: 'LCY Total',
                     align: 'end',
-                    value: 'total',
+                    value: 'localAmount',
                     sortable: false,
                 },
                 {

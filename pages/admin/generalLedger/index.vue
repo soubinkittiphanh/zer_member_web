@@ -2,7 +2,7 @@
     <div class="text-center">
         <div>
             <v-dialog v-model="dialog" width="90%">
-                <GLForm :is-update="isEdit" :headerId="selectedId" :key="apFormKey"
+                <GLForm :isUpdate="isEdit" :GLId="selectedId" :key="apFormKey"
                     @close-dialog="dialog = false" @reload="loadTxn">
                 </GLForm>
             </v-dialog>
@@ -48,7 +48,7 @@
             </v-card-title>
             <!-- <v-data-table v-if="orderHeaderList" :headers="headers" :search="search" :items="orderHeaderList"> -->
             <v-card-text>
-                <table border="1" v-if="purchaseCurrencyGrouping.length > 0">
+                <table border="1" v-if="GLCurrencyGrouping.length > 0">
                     <thead>
                         <tr>
                             <th>ສະກຸນເງິນ</th>
@@ -56,9 +56,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="txn in purchaseCurrencyGrouping" :key="txn['currency']">
+                        <tr v-for="txn in GLCurrencyGrouping" :key="txn['currency']">
                             <td>{{ txn.currency }}</td>
                             <td style="text-align: right;">{{ numberWithCommas(txn.amount) }}</td>
+                        </tr>
+                        <tr>
+                            <td>ຍອດລວມສະກຸນ LCY</td>
+                            <td style="text-align: right;">{{ numberWithCommas(totalLCYAmount) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,11 +81,17 @@
                         <i class="fa-solid fa-file-invoice-dollar"></i>
                     </v-btn>
                 </template>
-                <template v-slot:[`item.total`]="{ item }">
-                    {{ numberWithCommas(item.total) }}
+                <template v-slot:[`item.amount`]="{ item }">
+                    {{ numberWithCommas(item.amount) }}
                 </template>
-                <template v-slot:[`item.exchangeRate`]="{ item }">
-                    {{ numberWithCommas(item.exchangeRate) }}
+                <template v-slot:[`item.localAmount`]="{ item }">
+                    {{ numberWithCommas(item.localAmount) }}
+                </template>
+                <template v-slot:[`item.rate`]="{ item }">
+                    {{ numberWithCommas(item.rate) }}
+                </template>
+                <template v-slot:[`item.createdAt`]="{ item }">
+                    {{ item.createdAt.split('.')[0] }}
                 </template>
 
             </v-data-table>
@@ -130,11 +140,11 @@ export default {
                     value: 'source',
                     sortable: true,
                 },
-                { text: 'ຈຳນວນ', align: 'center', value: 'debit' },
-                { text: 'DR', align: 'center', value: 'drAccount.accountName' },
-                { text: 'CR', align: 'center', value: 'crAccount.accountName' },
+                { text: 'ຈຳນວນ', align: 'center', value: 'amount' },
                 { text: 'ສະກຸນ', align: 'center', value: 'currency.code' },
                 { text: 'ອັດຕາແລກປ່ຽນ', align: 'right', value: 'rate' },
+                { text: 'DR', align: 'center', value: 'drAccount.accountNumber' },
+                { text: 'CR', align: 'center', value: 'crAccount.accountNumber' },
                 { text: 'Local amount', align: 'right', value: 'localAmount' },
                 { text: 'ເນື້ອໃນ', align: 'center', value: 'description' },
                 { text: 'ເວລາສ້າງ', align: 'center', value: 'createdAt' },
@@ -257,19 +267,19 @@ export default {
     },
     computed: {
 
-        purchaseCurrencyGrouping() {
+        GLCurrencyGrouping() {
             // Object to store the sum of transactions for each currency code
             const sumByCurrency = {};
 
             // Loop through each transaction
             this.txnList.forEach(transaction => {
-                const { total, currency } = transaction;
+                const { amount, currency } = transaction;
                 // If the currency code doesn't exist in the sumByCurrency object, initialize it to 0
                 if (!sumByCurrency[currency['code']]) {
                     sumByCurrency[currency['code']] = 0;
                 }
                 // Accumulate the total amount for the currency code
-                sumByCurrency[currency['code']] += total;
+                sumByCurrency[currency['code']] += amount;
             });
 
             // Display the sum for each currency code
@@ -280,6 +290,13 @@ export default {
             }
 
             return listOfCurrency;
+        },
+        totalLCYAmount() {
+            // Loop through each transaction
+            let total = this.txnList.reduce((total, item) => {
+                return total + item.localAmount;
+            }, 0);
+            return total;
         }
     }
 }
