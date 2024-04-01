@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar app color="primary" dark height="100">
-      <v-toolbar-title class="ml-12" @click="goToHome">WOODY3</v-toolbar-title>
+      <v-toolbar-title class="ml-12" @click="goToHome">PEEAIR</v-toolbar-title>
       <v-spacer />
       <v-text-field dark v-model="search" clearable clear-icon="mdi-close" class="mt-6" prepend-inner-icon="mdi-magnify"
         dense outlined label="ຄົ້ນຫາ" placeholder="ຄົ້ນຫາ" solo-inverted />

@@ -32,7 +32,7 @@
         <v-divider></v-divider>
 
         <v-card-text class="white--text">
-          <strong>Copyright © {{ new Date().getFullYear() }} — Woody. All rights
+          <strong>Copyright © {{ new Date().getFullYear() }} — DCOMMERCE. All rights
             reserved.
           </strong>
         </v-card-text>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { hostName, getFormatNum,mainCompanyInfo } from '~/common'
 export default {
   name: 'MyFooter',
   data() {
@@ -131,19 +132,19 @@ export default {
       }
     },
     visitFacebookPage() {
-      const facebookPageUrl = 'https://www.facebook.com/woody3.la/'; // Replace with your actual Facebook Page URL or username
+      const facebookPageUrl = 'https://www.facebook.com/dcommerce.la/'; // Replace with your actual Facebook Page URL or username
       window.open(facebookPageUrl, '_blank');
     },
     contactUsViaMessenger() {
       console.log(`Messenger box`);
-      const pageUsername = 'woody3.la'; // Your Facebook Page's username
+      const pageUsername = 'dcommerce.la'; // Your Facebook Page's username
       const messengerUrl = `https://m.me/${pageUsername}`;
       window.open(messengerUrl, '_blank');
     },
     contactUsViaWhatsApp() {
       console.log(`Whatsapp box`);
-      const phoneNumber = '+8562029809752'; // Replace with your phone number
-      const message = encodeURIComponent('ສະບາຍດີ Woody3'); // Your default message
+      const phoneNumber = mainCompanyInfo().whatsapp; // Replace with your phone number
+      const message = encodeURIComponent('ສະບາຍດີ dcommerce'); // Your default message
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
       window.open(whatsappURL, '_blank'); // Open WhatsApp chat in new tab/window
     },

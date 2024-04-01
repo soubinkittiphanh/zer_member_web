@@ -201,18 +201,18 @@ export default {
             // TODO: Get whatsapp function done
         },
         shareViaFacebook() {
-            const urlToShare = encodeURIComponent(`http://www.woody3.la/product/${this.$route.params.id}`);
+            const urlToShare = encodeURIComponent(`http://www.dcommerce.la/product/${this.$route.params.id}`);
             const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${urlToShare}`;
             window.open(facebookUrl, '_blank');
         },
         shareViaWhatsapp() {
-            const urlToShare = encodeURIComponent(`http://www.woody3.la/product/${this.$route.params.id}`);
+            const urlToShare = encodeURIComponent(`http://www.dcommerce.la/product/${this.$route.params.id}`);
             const text = encodeURIComponent("Here's the text I want to share via WhatsApp!");
             const url = `https://wa.me/?text=${urlToShare}`;
             window.open(url, '_blank');
         },
         takeOrder() {
-            const urlToShare = encodeURIComponent(`http://www.woody3.la/product/${this.$route.params.id}`);
+            const urlToShare = encodeURIComponent(`http://www.dcommerce.la/product/${this.$route.params.id}`);
             const text = encodeURIComponent("ສະບາຍດີ ສົນໃຈສິນຄ້າ");
             const url = `https://wa.me/?text=ສະບາຍດີ ສົນໃຈສິນຄ້າ\n ${urlToShare}`;
             window.open(url, '_blank');

@@ -90,13 +90,13 @@
                             <v-text-field v-model="customerForm.name" label="ຊືລູກຄ້າ"></v-text-field>
                         </v-col>
                         <v-col cols="4">
-                            <v-text-field v-model="customerForm.tel" label="ເບີໂທລູກຄ້າ"></v-text-field>
+                            <v-text-field v-model="customerForm.tel" label="*ເບີໂທລູກຄ້າ"></v-text-field>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="4">
-                            <v-text-field v-model="customerForm.address" label="ບ່ອນສົ່ງ"></v-text-field>
+                            <v-text-field v-model="customerForm.address" label="*ບ່ອນສົ່ງ"></v-text-field>
                         </v-col>
                         <v-col cols="4">
                             <v-autocomplete item-text="abbr" item-value="id" :items="geographyList" label="ແຂວງ*"
@@ -148,7 +148,7 @@
   
 <script>
 import { mapMutations, mapState, mapGetters, mapActions } from 'vuex'
-import { getFormatNum } from '~/common'
+import { getFormatNum,swalError2 } from '~/common'
 export default {
     name: 'delivery-form',
 
@@ -265,6 +265,8 @@ export default {
             return getFormatNum(val)
         },
         previewTicket() {
+            if(! this.customerForm.tel) return   swalError2(this.$swal, "ກະລຸນາໃສ່ເບີໂທ")
+            if(! this.customerForm.address) return   swalError2(this.$swal, "ກະລຸນາໃສ່ທີ່ຢູ່")
             this.previewDialogKey += 1;
             this.ticketPreviewDialog = true
 

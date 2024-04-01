@@ -200,7 +200,7 @@ export default {
             // TODO: Get whatsapp function done
         },
         shareViaFacebook() {
-            const urlToShare = encodeURIComponent("http://www.woody3.la/");
+            const urlToShare = encodeURIComponent("http://www.dcommerce.la/");
             const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${urlToShare}`;
             window.open(facebookUrl, '_blank');
         },
