@@ -525,10 +525,10 @@ export default {
                 // txnListHtml += `<div style="font-size: 14px;">${product.pro_name} x${quantity} - ${this.formatNumber(total)}</div>`
                 txnListHtml +=
                     `<div class="ticket">
-                    <div class="product-name">${product.pro_name} </div>
-                    <div class="price">  ${this.formatNumber(total)}</div>
+                    <div class="product-name" >${product.pro_name} </div>
+                    <div class="price" >  ${this.formatNumber(total)}</div>
                 </div>
-                <div class="product-name">${quantity} X ${this.formatNumber(iterator.localPrice)}</div>
+                <div class="product-name" >${quantity} X ${this.formatNumber(iterator.localPrice)}</div>
                 <br>
                     `
             }

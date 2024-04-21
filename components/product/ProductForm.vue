@@ -181,28 +181,28 @@
                 </v-card>
                 <v-row no-gutters justify="center" align="center">
                   <!-- <v-col cols="12"> -->
-                    <v-btn
-                      :disabled="formData.barCode.length > 0"
-                      color="primary"
-                      rounded
-                      @click.prevent="generateBarcode"
-                    >
-                      <i class="mdi mdi-barcode"></i>
-                      Generate
-                    </v-btn>
-                    <v-checkbox
-                      v-model.number="threeColPaper"
-                      label="3Col? "
-                    ></v-checkbox>
-                    <v-btn
-                      :disabled="formData.barCode.length == 0"
-                      color="primary"
-                      rounded
-                      @click.prevent="printBarcode"
-                    >
-                      <i class="mdi mdi-barcode"></i>
-                      print
-                    </v-btn>
+                  <v-btn
+                    :disabled="formData.barCode.length > 0"
+                    color="primary"
+                    rounded
+                    @click.prevent="generateBarcode"
+                  >
+                    <i class="mdi mdi-barcode"></i>
+                    Generate
+                  </v-btn>
+                  <v-checkbox
+                    v-model.number="threeColPaper"
+                    label="3Col? "
+                  ></v-checkbox>
+                  <v-btn
+                    :disabled="formData.barCode.length == 0"
+                    color="primary"
+                    rounded
+                    @click.prevent="printBarcode"
+                  >
+                    <i class="mdi mdi-barcode"></i>
+                    print
+                  </v-btn>
                   <!-- </v-col> -->
                 </v-row>
               </v-col>
@@ -351,7 +351,7 @@ export default {
           @font-face {
             font-family: 'DM Sans';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 200;
             font-display: swap;
             src: url('/notosan/NotoSansLao-Bold.ttf') format('truetype');
         }
@@ -362,19 +362,20 @@ export default {
             </head>
             <body>
               <div style="text-align: center;">
-      <table style="width: 288px; text-align: center;" >
+      <table style="width: 200px; text-align: center;" >
   <tr>
-    <td style="width: 96px; height: 192px">
+    <td style="width: 50px; height: 20px;font-size:9px;">
+        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
       <img src="${this.barcodeImage}">
-     ${this.formatNumber(this.formData.pro_price)}
     </td>
-      <td style="width: 96px; height: 192px">
+    <td style="width: 50px; height: 20px;font-size:9px;">
+        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
         <img src="${this.barcodeImage}">
-      ${this.formatNumber(this.formData.pro_price)}
     </td>
-      <td style="width: 96px; height: 192px">
+    <td style="width: 50px; height: 20px;font-size:9px;">
+        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
         <img src="${this.barcodeImage}">
-       ${this.formatNumber(this.formData.pro_price)}
+       
     </td>
   
   </tr>
@@ -532,16 +533,19 @@ export default {
     },
     generateBarcode() {
       // Generate a random 12-digit number as the barcode value
-      const barcodeValue =
-        Math.floor(Math.random() * 900000000000) + 100000000000
+      const barcodeValue = Math.floor(Math.random() * 900000000000) + 1000000000
       // Use jsbarcode library to generate the barcode SVG image
       // Get the canvas element
-      const canvas = document.createElement('canvas')
+      let canvas = document.createElement('canvas')
+      // canvas.width = 20 // Approximation for 3cm at 96dpi
+      // canvas.height = 20 // Approximation for 2cm at 96dpi
       JsBarcode(canvas, barcodeValue.toString(), {
         format: 'code128',
         displayValue: true,
-        fontSize: 20,
-        margin: 10,
+        fontSize: 10,
+        margin: 5,
+        // width: 30, // Match canvas width
+        // height: 20, // Match canvas height
       })
       this.formData.barCode = barcodeValue.toString()
       this.generateBarcodeImage(barcodeValue)
@@ -549,19 +553,21 @@ export default {
     generateBarcodeImage(barcodeValue) {
       // Get the canvas element using the ref attribute
       if (!barcodeValue) return
-      const canvas = this.$refs.barcodeCanvas
+      let canvas = this.$refs.barcodeCanvas
       console.log(`.....Canvas logger.....`)
       console.log(canvas)
       console.log(canvas.width, canvas.height)
       // Set the canvas width and height to match the paper size
-      canvas.width = 40
-      canvas.height = 20
+      // canvas.width = 20
+      // canvas.height = 10
       // Generate the barcode image using JsBarcode
       JsBarcode(canvas, barcodeValue, {
         format: 'code128',
         displayValue: true,
-        fontSize: 20,
+        fontSize: 12,
         // margin: 10
+        width: 1, // Match canvas width
+        height: 13, // Match canvas height 35
       })
 
       // Convert the canvas to a data URL and set it as the barcodeImage data property

@@ -87,7 +87,15 @@
               single-line
               hide-detailsx
             />
-            <v-btn @click="fetchData" class="primary" size="large" variant="outlined" rounded> ດຶງລາຍງານ </v-btn>
+            <v-btn
+              @click="fetchData"
+              class="primary"
+              size="large"
+              variant="outlined"
+              rounded
+            >
+              ດຶງລາຍງານ
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-title>
@@ -118,8 +126,7 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.function`]="{ item }">
-          
-          <v-btn v-if="item.status==='ພ້ອມໃຊ້'" @click="delCard(item)">
+          <v-btn v-if="item.status === 'ພ້ອມໃຊ້'" @click="delCard(item)">
             <i class="fas fa-trash"></i>
           </v-btn>
         </template>
@@ -204,27 +211,28 @@ export default {
           .toISOString()
           .substr(0, 10)
       ),
-  
     }
   },
   mounted() {
     this.fetchData()
   },
-  computed:{
-      computedDateFormatted() {
+  computed: {
+    computedDateFormatted() {
       return this.formatDate(this.date)
     },
   },
-  
+
   methods: {
     async fetchData() {
       this.isloading = true
       const prodId = this.$route.params.id
       console.log('product_id: ' + prodId)
       await this.$axios
-        .get(`card_f/?pro_id=${prodId}&fDate=
+        .get(
+          `card_f/?pro_id=${prodId}&fDate=
             ${this.date} 
-            &tDate=${this.date2}&userId=${this.userId}`)
+            &tDate=${this.date2}&userId=${this.userId}`
+        )
         .then((res) => {
           this.loaddata = res.data.map((el) => {
             console.log(el.id)
@@ -232,8 +240,7 @@ export default {
               card_id: el.id,
               pro_id: el.product_id,
               card_number: el.card_number,
-              inputter:
-                el.inputter + ' ' + el.user_name ,
+              inputter: el.inputter + ' ' + el.user_name,
               status:
                 el.card_isused === 1
                   ? 'ໃຊ້ງານແລ້ວ'
@@ -253,17 +260,37 @@ export default {
         })
       this.isloading = false
     },
+    // formatDate(date) {
+    //   if (!date) return null
+
+    //   const [year, month, day] = date.split('-')
+    //   return `${month}/${day}/${year}`
+    // },
+    // parseDate(date) {
+    //   if (!date) return null
+
+    //   const [month, day, year] = date.split('/')
+    //   return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    // },
     formatDate(date) {
       if (!date) return null
-
-      const [year, month, day] = date.split('-')
+      console.log('DATE FORMAT METHOD1: ' + date)
+      const formattedDate = this.formatDateToISO(date)
+      const [year, month, day] = formattedDate.split('-')
       return `${month}/${day}/${year}`
     },
     parseDate(date) {
+      console.log('DATE PARSE METHOD1: ' + date)
       if (!date) return null
-
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDateToISO(date) {
+      if (!(date instanceof Date)) date = new Date(date)
+      const year = date.getFullYear()
+      const month = `${date.getMonth() + 1}`.padStart(2, '0') // Months are 0-indexed
+      const day = `${date.getDate()}`.padStart(2, '0')
+      return `${year}-${month}-${day}`
     },
     async delCard(id) {
       this.isloading = true

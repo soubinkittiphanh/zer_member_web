@@ -435,7 +435,7 @@ export default {
           @font-face {
             font-family: 'DM Sans';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 200;
             font-display: swap;
             src: url('/notosan/NotoSansLao-Bold.ttf') format('truetype');
         }
@@ -446,19 +446,20 @@ export default {
             </head>
             <body>
               <div style="text-align: center;">
-      <table style="width: 288px; text-align: center;" >
+      <table style="width: 200px; text-align: center;" >
   <tr>
-    <td style="width: 96px; height: 192px">
-      <img  src="${this.barcodeImage}">
-     ${this.formatNumber(this.formData.pro_price)}
+    <td style="width: 50px; height: 20px;font-size:9px;">
+        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+      <img src="${this.barcodeImage}">
     </td>
-      <td style="width: 96px; height: 192px">
-        <img  src="${this.barcodeImage}">
-      ${this.formatNumber(this.formData.pro_price)}
+    <td style="width: 50px; height: 20px;font-size:9px;">
+        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+        <img src="${this.barcodeImage}">
     </td>
-      <td style="width: 96px; height: 192px">
-        <img  src="${this.barcodeImage}">
-       ${this.formatNumber(this.formData.pro_price)}
+    <td style="width: 50px; height: 20px;font-size:9px;">
+        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+        <img src="${this.barcodeImage}">
+       
     </td>
   
   </tr>
@@ -533,14 +534,16 @@ export default {
       console.log(canvas)
       console.log(canvas.width, canvas.height)
       // Set the canvas width and height to match the paper size
-      canvas.width = 40
-      canvas.height = 20
+      // canvas.width = 40
+      // canvas.height = 20
       // Generate the barcode image using JsBarcode
       JsBarcode(canvas, barcode, {
         format: 'code128',
         displayValue: true,
-        fontSize: 20,
-        // margin: 10
+        fontSize: 12,
+        // margin: 10,
+        width: 1, // Match canvas width
+        height: 13, // Match canvas height 35
       })
 
       // Convert the canvas to a data URL and set it as the barcodeImage data property

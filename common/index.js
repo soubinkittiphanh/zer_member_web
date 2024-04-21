@@ -357,12 +357,12 @@ margin: 0px;
 
 .product-name {
 float: left;
-font-size: 10px;
+font-size: 12px;
 }
 
 .price {
 float: right;
-font-size: 10px;
+font-size: 12px;
 }
 .price-total {
 float: right;
@@ -382,7 +382,7 @@ export const hostName = () => {
   // const baseURL = 'http://localhost:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://192.168.8.112:8888' // ***LOCAL UAT*** 
   // const baseURL = 'http://192.168.1.8:8888' // ***LOCAL UAT*** 
-  // const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
+  const baseURL = 'http://150.95.31.23:8003' // ***PRODUCTION CHITHANH*** 
   // const baseURL = 'http://150.95.31.23:8006' // ***PRODUCTION laofriend*** 
   // const baseURL = 'http://150.95.31.23:8012' // ***DEMO*** 
   // const baseURL = 'http://150.95.31.23:8005' // ***PRODUCTION OBEE*** 
@@ -391,7 +391,7 @@ export const hostName = () => {
   // const baseURL = 'http://150.95.31.23:8011' // ***PRODUCTION Little boutique2024*** 
   // const baseURL = 'http://150.95.31.23:8013' // ***PRODUCTION Tonoo*** 
   // const baseURL = 'http://150.95.31.23:8101' // ***PRODUCTION Woody*** 
-  const baseURL = 'http://150.95.31.23:8004' // ***ONLINE UAT*** 
+  // const baseURL = 'http://150.95.31.23:8004' // ***ONLINE UAT*** 
   // return baseURL;
   // let baseURL = `http://150.95.31.23:${process.env.API_PORT}`;
 
@@ -419,8 +419,12 @@ export const mainCompanyInfo = () => {
     // tel: '02091993749',
     // whatsapp: '+8562091993749',
 
-    // name: 'CHITHANH',
-    // tel: '02023378899',
+    name: 'CHITHANH',
+    tel: '02023378899',
+    whatsapp: '+8562023378899',
+    imageUrl: '',
+    imageName: '',
+    env: ''
 
     // name: 'Tonoo',
     // tel: '02023378899',
@@ -432,12 +436,12 @@ export const mainCompanyInfo = () => {
     // name: 'Woody3',
     // tel: '020 29809752',
     
-    name: 'DEMO',
-    tel: '020 9999999',
-    whatsapp: '+8562023378899',
-    imageUrl: '',
-    imageName: '',
-    env: ''
+    // name: 'DEMO',
+    // tel: '020 9999999',
+    // whatsapp: '+8562023378899',
+    // imageUrl: '',
+    // imageName: '',
+    // env: ''
   }
   return info;
 }
