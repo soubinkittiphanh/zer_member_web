@@ -492,11 +492,16 @@ export default {
         </style>
             </head>
             <body>
-                <div style="text-align: center;">
-                    <div style="text-align: center;">
-                        ລາຄາ:${this.formatNumber(this.formData.pro_price)}
-                        </div>
-                        <img src="${this.barcodeImage}">
+              <div style="text-align: center;">
+                    <table style="width: 200px; text-align: center;" >
+                        <tr>
+                          <td style="width: 500px; height: 15px;font-size:8px;">
+                            ລາຄາ:${this.formatNumber(this.formData.pro_price)}
+                            </br>
+                            <img src="${this.barcodeImage}">
+                          </td>               
+                        </tr>
+                      </table>
                 </div>
             </body>
             </html>
@@ -553,6 +558,9 @@ export default {
       const windowContent = this.threeColPaper
         ? this.barcode3by2cm
         : this.barcodeNormal
+
+
+        //*********** No story 20240502 ********* */
       // const windowContent = `
       //     <!DOCTYPE html>
       //     <html>
@@ -585,6 +593,7 @@ export default {
       //       </body>
       //       </html>
       //   `
+      
       const printWin = window.open(
         '',
         '',

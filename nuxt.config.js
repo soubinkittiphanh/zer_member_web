@@ -59,7 +59,8 @@ export default {
     { src: '~/plugins/vue-youtube.js', ssr: false },
     { src: '~/plugins/barcode.js', ssr: false },
     { src: '~/plugins/v-calendar.js', ssr: false },
-    { src: '~/plugins/draggable.js', ssr: false }
+    { src: '~/plugins/draggable.js', ssr: false },
+    { src: '~/plugins/gantt-schedule-timeline-calendar.js', mode: 'client' }
     // { src: '~/plugins/vuelidate.js', mode: 'client' }
     // { src: '~/plugins/comma-thousand.js', mode: 'client' }
   ],

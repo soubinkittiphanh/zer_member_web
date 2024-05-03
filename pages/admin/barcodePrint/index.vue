@@ -70,7 +70,7 @@
               hide-detailsx
             />
           </v-col>
-          <v-col cols="6" class="text-right"> 
+          <v-col cols="6" class="text-right">
             <canvas ref="barcodeCanvas"></canvas>
           </v-col>
         </v-row>
@@ -93,7 +93,7 @@
             <v-btn
               size="large"
               variant="outlined"
-              @click.prevent="generateBarcode"
+              @click.prevent="printBarcode"
               class="primary"
               rounded
             >
@@ -103,9 +103,23 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.functionEdit`]="{ item }">
-          <v-checkbox v-model.number="item.isSelect" label="ເລືອກ"></v-checkbox>
+          <v-checkbox
+            :disabled="!item.barCode"
+            v-model.number="item.isSelect"
+            label="ເລືອກ"
+          ></v-checkbox>
         </template>
-      
+        <template v-slot:[`item.printCount`]="{ item }">
+          <v-text-field
+            v-model="item.printCount"
+            :counter="10"
+            type="number"
+            :rules="rules.minRule"
+            label=""
+            required
+          ></v-text-field>
+        </template>
+
         <template v-slot:[`item.pro_cost_price`]="{ item }">
           {{ formatNumber(item.pro_cost_price) }}
         </template>
@@ -155,9 +169,55 @@ export default {
   middleware: 'auths',
   data() {
     return {
-      formData:{
-        pro_price:0,
-        barCode:'',
+      formData: {
+        pro_price: 0,
+        barCode: '',
+      },
+      rules: {
+        nameRule: [
+          (v) => !!v || 'ກະລຸນາ ໃສ່ຊື່ສິນຄ້າ ',
+          (v) => (v && v.length <= 150) || 'ຊື່ສິນຄ້າ ຍາວເກີນໄປ ກຳນົດ 150 ຕົວ',
+        ],
+        priceRule: [
+          // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
+          (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວນ > 0',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+        ],
+        minRule: [
+          // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາ',
+          // (v) => +v >= 0 || 'ກະລຸນ ໃສ່ຈຳນວ > 0',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ຈຳນວນ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+        ],
+        costPrice: [
+          // (v) => !!v || 'ກະລຸນາໃສ່ລາຄາຕົ້ນທຶນ',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+        ],
+        retailRule: [
+          // (v) => !!v || 'ກະລຸນາໃສ່ເປີເຊັນ ສ່ວນຫລຸດ ສຳລັບຂາຍສົ່ງ',
+          (v) => +v >= 0 || 'ກະລຸນ ໃສ່ເປີເຊັນ > 0',
+          (v) => !!/^\d+$/.test(v) || 'ກະລຸນສາໃສ່ ເປັນຕົວເລກ ເທົ່ານັ້ນ',
+        ],
+        imageRule: [
+          (files) => {
+            let fileSize = 0
+            let totalSize = 0
+            if (files) {
+              files.forEach((el) => {
+                fileSize += el.size
+                console.log('Size: ' + el.size)
+              })
+              totalSize = fileSize / files.length
+              console.log(
+                'File size: aaa' + files.length + ' Each: ' + totalSize || 0
+              )
+            } else {
+              console.log('File: ' + files)
+            }
+
+            console.log('Total: ' + totalSize)
+            return totalSize < 2000000 || 'ຂະຫນາດເກີນ'
+          },
+        ],
       },
       barcodeImage: '',
       priceListDialog: false,
@@ -192,18 +252,18 @@ export default {
           value: 'id',
         },
         {
-          text: 'Company',
+          text: 'barcode',
           align: 'center',
-          value: 'co_name',
+          value: 'barCode',
         },
-        
+
         { text: 'ຊື່ສິນຄ້າ', align: 'center', value: 'pro_name' },
         // { text: 'ຮ້ານ', align: 'center', value: 'pro_outlet_name' },
-        { text: 'ຫມວດສິນຄ້າ', align: 'center', value: 'pro_category_desc' },
+        { text: 'ຈຳນວນພິມ', align: 'center', value: 'printCount' },
         { text: 'ລາຄາ', align: 'center', value: 'pro_price' },
-        
+
         { text: 'Status', align: 'center', value: 'status' },
-       
+
         {
           text: 'ແກ້ໄຂ',
           align: 'center',
@@ -232,15 +292,19 @@ export default {
     barcodeNormal() {
       let labelsHTML = ''
 
-      for (let i = 0; i < 10; i++) {
-        labelsHTML += `
-      <div style="text-align: center; margin-bottom: 20px;"> <!-- Adjust bottom margin as needed -->
-        <div style="font-size: 12px; margin-bottom: 5px;">ລາຄາ: ${this.formatNumber(
-          this.formData.pro_price
-        )}</div>
-        <img src="${this.barcodeImage}" style="width: 3cm; height: 2cm;">
-      </div>
+      for (const product of this.productSelectedList) {
+        for (let i = 0; i < product.printCount; i++) {
+          this.generateBarcode(product.barCode)
+          labelsHTML += `
+        <tr>
+                          <td style="width: 500px; height: 15px;font-size:8px;">
+                            ລາຄາ:${this.formatNumber(product.pro_price)}
+                            </br>
+                            <img src="${this.barcodeImage}">
+                          </td>               
+                        </tr>
     `
+        }
       }
 
       const html = `
@@ -262,23 +326,37 @@ export default {
       </style>
     </head>
     <body>
-      ${labelsHTML}
+
+      <div style="text-align: center;">
+                    <table style="width: 200px; text-align: center;" >
+                      ${labelsHTML}
+       
+                      </table>
+                </div>
+
     </body>
     </html>
   `
 
       return html
     },
+    productSelectedList() {
+      return this.loaddata.filter((el) => el['isSelect'] == true) || []
+    },
   },
   methods: {
     verifyStockStatus(minStock, CurStock) {
-      let statusStock = '';
-      CurStock == 0 ? statusStock = 'Out of stock' : minStock < CurStock ? statusStock = 'In stock' : statusStock = 'Low stock'
-      return statusStock;
+      let statusStock = ''
+      CurStock == 0
+        ? (statusStock = 'Out of stock')
+        : minStock < CurStock
+        ? (statusStock = 'In stock')
+        : (statusStock = 'Low stock')
+      return statusStock
     },
-    generateBarcode() {
+    generateBarcode(barcodeValue) {
       // Generate a random 12-digit number as the barcode value
-      const barcodeValue = Math.floor(Math.random() * 900000000000) + 1000000000
+      // const barcodeValue = Math.floor(Math.random() * 900000000000) + 1000000000
       // Use jsbarcode library to generate the barcode SVG image
       // Get the canvas element
       let canvas = document.createElement('canvas')
@@ -317,7 +395,7 @@ export default {
 
       // Convert the canvas to a data URL and set it as the barcodeImage data property
       this.barcodeImage = canvas.toDataURL()
-      this.printBarcode()
+      // this.printBarcode()
     },
     formatNumber(value) {
       return getFormatNum(value)
@@ -337,7 +415,7 @@ export default {
               pro_name: el.pro_name,
               pro_price: el.pro_price,
               pro_desc: el.pro_desc,
-              pro_status: el.pro_status,
+              barCode: el.barCode,
               pro_category: el.pro_category,
               pro_category_desc: el.pro_category + ' - ' + el.categ_name,
               pro_card_count: el.card_count,
@@ -351,6 +429,7 @@ export default {
               functionStockView: el.pro_id,
               status: el.pro_id,
               isSelect: false,
+              printCount: 1,
             }
           })
         })
@@ -384,7 +463,9 @@ export default {
     },
 
     printBarcode() {
-      const threeColPaper = false;
+      if (this.productSelectedList.length < 1)
+        return swalError2(this.$swal, 'Error', 'ກະລຸນາເລືອກ ລາຍການທີຈະພິມ')
+      const threeColPaper = false
       const windowContent = threeColPaper
         ? this.barcode3by2cm
         : this.barcodeNormal

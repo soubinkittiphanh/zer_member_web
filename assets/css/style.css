@@ -1,3 +1,6 @@
+/* Import GSTC styles */
+@import 'node_modules/gantt-schedule-timeline-calendar/dist/style.css';
+
 /* app font */
 #app {
   font-family: NotoSansLaoUI-Regular, Roboto-Regular;

@@ -28,6 +28,7 @@
     "core-js": "^3.20.0",
     "echarts": "^5.4.3",
     "gantt-elastic": "^1.0.12",
+    "gantt-schedule-timeline-calendar": "^3.35.2",
     "html2canvas": "^1.4.1",
     "jsbarcode": "^3.11.5",
     "jspdf-invoice-template": "^1.4.3",
