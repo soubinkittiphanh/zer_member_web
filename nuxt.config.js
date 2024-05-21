@@ -110,7 +110,7 @@ export default {
         endpoints: {
           login: { url: '/api/auth/member', method: 'post' },
           refresh: { url: '/api/auth/refresh', method: 'post' },
-          logout: { url: 'logout', method: 'get' },
+          logout: { url: '/api/logout', method: 'get' },
           user: { url: 'me', method: 'get' },
         }
       }

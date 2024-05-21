@@ -8,7 +8,8 @@
         <loading-indicator> </loading-indicator>
       </v-dialog>
       <v-dialog v-model="topupForm" hide-overlay width="300">
-        <user-topup :key="txnKey" :txnType="txnType" @close="topupForm=false;"> </user-topup>
+        <user-topup :key="txnKey" :txnType="txnType" @close="topupForm = false">
+        </user-topup>
       </v-dialog>
       <v-row class="ma-1" justify="center">
         <v-card class="ma-1 custom-card" @click="addAccount">
@@ -58,11 +59,17 @@
             <img :src="playSvg" height="80" style="text-align: center" />
           </v-card-text>
         </v-card>
+        <v-card class="ma-1 custom-card" @click="logoff">
+          <v-card-text style="color: white; text-align: center">
+            ອອກຈາກລະບົບ
+            <br />
+            <img :src="logoffSvg" height="80" style="text-align: center" />
+          </v-card-text>
+        </v-card>
       </v-row>
     </div>
     <!-- Bottom navigation bar -->
     <!-- Bottom navigation bar -->
-    
   </v-app>
 </template>
   
@@ -73,7 +80,7 @@ export default {
   components: { UserTopup },
   layout: 'user',
   middleware: 'auths',
-  name:'home',
+  name: 'home',
   data() {
     return {
       playSvg: require('~/assets/icons/usergradient/play.svg'),
@@ -82,6 +89,7 @@ export default {
       wallou: require('~/assets/icons/usergradient/walletout.svg'),
       cardSvg: require('~/assets/icons/usergradient/card.svg'),
       passwordSvg: require('~/assets/icons/usergradient/password.svg'),
+      logoffSvg: require('~/assets/icons/usergradient/logoff.svg'),
       activeTab: null,
       isLoading: false,
       topupForm: false,
@@ -94,14 +102,18 @@ export default {
   computed: {},
   methods: {
     postTransaction() {},
+    async logoff() {
+      await this.$auth.logout()
+      this.$router.push('/member')
+    },
     async statement() {
-      this.$router.push('/member/statement') 
+      this.$router.push('/member/statement')
     },
     async resetpassword() {
-      this.$router.push('/member/password') 
+      this.$router.push('/member/password')
     },
     async addAccount() {
-      this.$router.push('/member/account') 
+      this.$router.push('/member/account')
     },
     navigateTo(routeName) {
       this.$router.push({ name: routeName })
@@ -114,9 +126,9 @@ export default {
       // }
       console.log(`TEST TAP`)
     },
-    playGame(){
-      window.location.href='https://www.royal558.com/'
-    }
+    playGame() {
+      window.location.href = 'https://www.royal558.com/'
+    },
   },
 }
 </script>

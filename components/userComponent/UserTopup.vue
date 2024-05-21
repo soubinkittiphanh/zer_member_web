@@ -112,6 +112,8 @@ export default {
     },
     async commitRecord() {
       if (this.isloading) return
+      if (this.transaction.accountId)
+        return swalError2(this.$swal, 'Error', 'ກະລຸນາ ເລືອກບັນຊີ')
       const api = `api/ft/create`
       this.isloading = true
       try {

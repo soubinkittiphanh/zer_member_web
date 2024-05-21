@@ -42,9 +42,7 @@
         <span style="color: white"> ຍັງບໍ່ທັນມີບັນຊີ? </span>
         <a
           class="text-blue text-decoration-none"
-          href="#"
-          rel="noopener noreferrer"
-          target="_blank"
+          @click="registerRoute"
         >
           ສະໝັກສະມາຊິກ ><v-icon icon="mdi-chevron-right"></v-icon>
         </a>
@@ -67,6 +65,10 @@ export default {
     }
   },
   methods: {
+    registerRoute() {
+      // Assuming you have a defined route for the next page (e.g., '/about')
+      this.$router.push('/member/register');
+    },
     async submitLogin() {
       console.log('Submitting:', this.email, this.password)
       // Here you would typically handle the login logic, possibly calling an API

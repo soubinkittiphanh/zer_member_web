@@ -56,6 +56,7 @@ import {
 } from '~/common'
 export default {
   layout: 'user',
+  middleware: 'auths',
   data() {
     return {
       isLoading: false,
