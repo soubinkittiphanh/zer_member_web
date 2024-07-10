@@ -63,6 +63,39 @@
               </h4>
             </v-btn>
           </div>
+          <h2 style="color: #b48811">ທະນາຄານ*</h2>
+          <v-autocomplete
+            item-text="name"
+            item-value="id"
+            :items="bankList"
+            v-model="accountInfo.bankId"
+          >
+            <!-- Slot for customizing the selected value -->
+            <template v-slot:selection="data">
+              <v-chip
+                :input-value="data.selected"
+                :close="data.select"
+                @click="data.select"
+                class="my-chip"
+                color="#b48811"
+              >
+                <span :style="{ color: getColor(data.item) }">
+                  {{ data.item.name }}
+                </span>
+              </v-chip>
+            </template>
+
+            <!-- Slot for customizing items in the dropdown -->
+            <template v-slot:item="data">
+              <template v-if="data.item && data.item.name">
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ data.item.name }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </template>
+          </v-autocomplete>
           <h2 style="color: #b48811">ເລກບັນຊີ*</h2>
           <v-text-field
             v-model="accountInfo.accountNumber"
@@ -108,6 +141,7 @@ export default {
       update: false,
       passwordSvg: require('~/assets/icons/usergradient/password.svg'),
       isLoading: false,
+      bankList: [],
       accountInfo: {
         id: null,
         accountNumber: '',
@@ -126,9 +160,29 @@ export default {
     },
   },
   async created() {
+    await this.loadBank()
     await this.loadEntry()
   },
   methods: {
+    getColor(item) {
+      return item.color || 'white' // Default color if not specified
+    },
+    async loadBank() {
+      // Simulate API call
+      if (this.isLoading) return
+      const api = `api/noauth/bank`
+      this.isLoading = true
+      try {
+        const response = await this.$axios.get(api)
+        this.bankList = response.data
+        // this.account.bankId = this.bankList[0]['id']
+        // swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
+      } catch (error) {
+        console.log('Error: ', error)
+        swalError2(this.$swal, 'Error', 'ເກີດຂໍ້ຜິດພາດ ໃນການດຶງຂໍ້ມູນບັນຊີ')
+      }
+      this.isLoading = false
+    },
     async deleteAccount(account) {
       this.update = true
       this.accountInfo.id = account.id
@@ -158,6 +212,7 @@ export default {
     touchAccount(account) {
       this.update = true
       this.accountInfo.id = account.id
+      this.accountInfo.bankId = account.bankId
       this.accountInfo.accountName = account.accountName
       this.accountInfo.accountNumber = account.accountNumber
     },
@@ -203,7 +258,7 @@ export default {
         }
       } else {
         try {
-          this.accountInfo.memberId =  this.user.id
+          this.accountInfo.memberId = this.user.id
           const response = await this.$axios.post(api, this.accountInfo)
           await this.loadEntry()
           swalSuccess(this.$swal, 'Succeed', 'ດຳເນີນການສຳເລັດ')
@@ -268,6 +323,10 @@ export default {
 .custom-button {
   margin-bottom: 20px; /* Add spacing above the button */
   background: -moz-linear-gradient(top, #b48811 0%, #bb9b49 100%);
+}
+.my-chip {
+  background-color: transparent;
+  border: none;
 }
 </style>
   

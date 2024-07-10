@@ -11,64 +11,85 @@
         <user-topup :key="txnKey" :txnType="txnType" @close="topupForm = false">
         </user-topup>
       </v-dialog>
-      <v-row class="ma-1" justify="center">
-        <v-card class="ma-1 custom-card" @click="addAccount">
-          <v-card-text style="color: white; text-align: center">
-            ບັນຊີ
-            <br />
-            <img :src="cardSvg" height="80" style="text-align: center" />
-          </v-card-text>
-        </v-card>
-        <v-card class="ma-1 custom-card" @click="menuTap('CR')">
-          <v-card-text style="color: white; text-align: center">
-            ເຕີມເງິນ
-            <br />
-            <img :src="wallin" height="80" style="text-align: center" />
-          </v-card-text>
-        </v-card>
-        <v-card class="ma-1 custom-card" @click="menuTap('DR')">
-          <v-card-text style="color: white; text-align: center">
-            ຖອນເງິນ
-            <br />
-            <img
-              :src="wallou"
-              height="80"
-              style="text-align: center"
-              @click="menuTap('DR')"
-            />
-          </v-card-text>
-        </v-card>
+      <v-row class="ma-1" justify="center" no-gutters>
+        ຝາກ-ຖອນອໍໂຕ້ JFill 1688
+      </v-row>
+      <v-row class="ma-1" justify="center" no-gutters>
+        <img
+          height="200"
+          :src="require('~/assets/image/header.png')"
+          alt="headerlogo"
+          style="text-align: center"
+        />
+        <!-- <br />
+        <h4 style="color: white">ຝາກ-ຖອນອໍໂຕ້ JFill 1688</h4> -->
+      </v-row>
+
+      <v-row class="ma-1" justify="left">
         <v-card class="ma-1 custom-card" @click="statement">
-          <v-card-text style="color: white; text-align: center">
-            ການເຄື່ອນໄຫວບັນຊີ
-            <br />
-            <img :src="stmtSvg" height="80" style="text-align: center" />
-          </v-card-text>
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img :src="stmtSvg" height="50" style="text-align: center" />
+          <br />
+          <h6>ປະຫວັດ</h6>
+          <!-- </v-card-text> -->
         </v-card>
         <v-card class="ma-1 custom-card" @click="resetpassword">
-          <v-card-text style="color: white; text-align: center">
-            ລະຫັດຜ່ານ
-            <br />
-            <img :src="passwordSvg" height="80" style="text-align: center" />
-          </v-card-text>
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img :src="passwordSvg" height="50" style="text-align: center" />
+          <br />
+          <h6>ລະຫັດຜ່ານ</h6>
+          <!-- </v-card-text> -->
         </v-card>
         <v-card class="ma-1 custom-card" @click="playGame">
-          <v-card-text style="color: white; text-align: center">
-            ເຂົ້າຫລິ້ນເກມ
-            <br />
-            <img :src="playSvg" height="80" style="text-align: center" />
-          </v-card-text>
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img :src="playSvg" height="50" style="text-align: center" />
+          <br />
+          <h6>ເຂົ້າຫລິ້ນເກມ</h6>
+          <!-- </v-card-text> -->
+        </v-card>
+        <!-- </v-row>
+      <v-row class="ma-1" justify="left"> -->
+        <v-card class="ma-1 custom-card" @click="addAccount">
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img :src="cardSvg" height="50" style="text-align: center" />
+          <br />
+          <h6>ບັນຊີ</h6>
+          <!-- </v-card-text> -->
+        </v-card>
+        <v-card class="ma-1 custom-card" @click="menuTap('CR')">
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img :src="wallin" height="50" style="text-align: center" />
+          <br />
+          <h6>ເຕີມເງິນ</h6>
+          <!-- </v-card-text> -->
+        </v-card>
+        <v-card class="ma-1 custom-card" @click="menuTap('DR')">
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img
+            :src="wallou"
+            height="50"
+            style="text-align: center"
+            @click="menuTap('DR')"
+          />
+          <br />
+          <h6>ຖອນເງິນ</h6>
+          <!-- </v-card-text> -->
         </v-card>
         <v-card class="ma-1 custom-card" @click="logoff">
-          <v-card-text style="color: white; text-align: center">
-            ອອກຈາກລະບົບ
-            <br />
-            <img :src="logoffSvg" height="80" style="text-align: center" />
-          </v-card-text>
+          <!-- <v-card-text style="color: white; text-align: center"> -->
+          <img :src="logoffSvg" height="50" style="text-align: center" />
+          <br />
+          <h6>ອອກຈາກລະບົບ</h6>
+          <!-- </v-card-text> -->
         </v-card>
       </v-row>
+
+      <!-- <v-row class="ma-1" justify="left">
+
+      </v-row> -->
     </div>
     <!-- Bottom navigation bar -->
+    
     <!-- Bottom navigation bar -->
   </v-app>
 </template>
@@ -143,23 +164,29 @@ export default {
   background-color: #f0f0f0;
   padding: 20px;
 }
+.custom-card-null {
+}
 .custom-card {
   align-content: center;
-  width: 200px;
-  height: 200px;
-  border: 1px solid transparent; /* Set initial border to transparent */
-  border-image: linear-gradient(
-    to right,
-    #b48811,
-    #ebd197
-  ); /* Gradient border */
-  border-image-slice: 1; /* Ensure the entire border is covered by the gradient */
-  background-color: transparent; /* Set background color to transparent if needed */
+  width: 120px;
+  height: 80px;
+  text-align: center;
   color: white;
+  box-shadow: none !important;
+  border: none !important;
+  /* border: 0.1px solid transparent; */
+  /* Set initial border to transparent */
+  /* border-image: linear-gradient(to right, #b48811, #ebd197); */
+  /* Gradient border */
+  /* border-image-slice: 1;  */
+  /* Ensure the entire border is covered by the gradient */
+  background-color: transparent; /* Set background color to transparent if needed */
+  /* color: white; */
+  /* margin-right: 2000px; */
 }
 .gradient-background {
   height: 50px;
-  background: -moz-linear-gradient(top, #1b222c 0%, #531516 100%);
+  background: -moz-linear-gradient(top, #1b222c 0%, #141414 100%);
 }
 </style>
   

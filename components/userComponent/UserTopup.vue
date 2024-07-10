@@ -7,15 +7,17 @@
     <v-card class="pa-4">
       <v-card-title style="color: #b48811">
         <img :src="txnSvg" height="60" style="text-align: center" />
+        
         <!-- <v-chip class="ma-0" color="primary" label text-color="white"> -->
         <!-- <v-icon start>mdi-label</v-icon> -->
         ຮ້ອງຂໍ
-        <h1>
+        <h3>
           {{ txnType == 'CR' ? 'ຝາກເງິນ' : 'ຖອນເງິນ' }}
-        </h1>
+        </h3>
         <!-- </v-chip> -->
       </v-card-title>
       <v-card-text>
+        <img v-if="txnType == 'CR'" :src="bankInfo" height="250" style="text-align: center" />
         <v-autocomplete
           item-text="accountNumber"
           item-value="id"
@@ -67,6 +69,7 @@ export default {
   },
   data() {
     return {
+      bankInfo: require('~/assets/img/bank_info.jpeg'),
       txnSvg: require('~/assets/icons/usergradient/txnicon.svg'),
       transaction: {
         code: this.txnType,
@@ -112,8 +115,7 @@ export default {
     },
     async commitRecord() {
       if (this.isloading) return
-      if (this.transaction.accountId)
-        return swalError2(this.$swal, 'Error', 'ກະລຸນາ ເລືອກບັນຊີ')
+      if (!this.transaction.accountId) return swalError2(this.$swal, 'Error', 'ກະລຸນາ ເລືອກບັນຊີ')
       const api = `api/ft/create`
       this.isloading = true
       try {

@@ -14,7 +14,7 @@
   .black-gradient {
     /* Example of a black to dark gray gradient */
     /* background-image: linear-gradient(to bottom right, #000000, #333333); */
-    background: -moz-linear-gradient(top, #1b222c 0%, #531516 100%);
+    background: -moz-linear-gradient(top, #1b222c 0%, #141414 100%);
     /* Full viewport height */
     height: 100vh;
   }

@@ -118,7 +118,7 @@ export default {
   align-items: center;
   min-height: 100vh; /* Makes the container take at least the full height of the viewport */
   width: 100%; /* Full width */
-  background: -moz-linear-gradient(top, #1b222c 0%, #531516 100%);
+  background: -moz-linear-gradient(top, #1b222c 0%, #141414 100%);
   /* background: transparent; */
   /* Full viewport height */
   height: 100vh;
